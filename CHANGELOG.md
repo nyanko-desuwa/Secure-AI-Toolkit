@@ -4,6 +4,15 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+### Changed
+
+- Root `README.md` — the two-line "copy one skill" note becomes a full
+  `## Installing as Claude Code skills` section: personal vs project scope, why the four
+  category directories have to be flattened, install-a-few / install-all-39 / symlink /
+  committed-per-project variants, how to confirm with `/skills`, and the startup context cost
+  of installing the whole set. Verified against <https://code.claude.com/docs/en/skills> on
+  2026-07-28. The clone URL now points at the real repository instead of `<your-org>`.
+
 ## [1.0.1] - 2026-07-28
 
 ### Added

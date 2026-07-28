@@ -83,23 +83,115 @@ less than it appears to.
 
 ## Quick start
 
-Nothing to install. Two ways to wire it up.
-
-**Copy one skill into Claude Code:**
+Nothing to build and nothing to install. Clone it and point your assistant at
+`AI_INSTRUCTIONS.md`:
 
 ```bash
-git clone https://github.com/<your-org>/secure-ai-toolkit.git
-cp -r secure-ai-toolkit/skills/core/owasp ~/.claude/skills/owasp-security
+git clone https://github.com/nyanko-desuwa/Secure-AI-Toolkit.git
 ```
 
-**Or keep the repository in your project** and let the assistant read
-`skills/core/owasp/SKILL.md` in place. Add `AI_INSTRUCTIONS.md` to whatever your assistant
-loads at startup and it will route itself.
+Keep the repository in your project, or beside it, and the assistant reads
+`skills/core/owasp/SKILL.md` in place. That is the whole setup for most tools.
 
-Other assistants — Cursor, Copilot, Codex CLI, Gemini CLI, Continue, Cline, Roo Code, Kiro —
-read Markdown from their own rules or context directories. The skill files work anywhere a
-Markdown instruction file is accepted. Only the YAML frontmatter in `SKILL.md` is Claude Code
-specific, and it is inert elsewhere.
+To get `/owasp`-style invocation and automatic routing in Claude Code, install the skills
+properly — see below.
+
+## Installing as Claude Code skills
+
+Claude Code discovers a skill as a directory containing `SKILL.md`, one level under a
+`skills` directory. It does not recurse into category folders, so the four categories in this
+repository have to be flattened on the way in. The directory name becomes the command you
+type.
+
+| Scope | Path | Applies to |
+|---|---|---|
+| Personal | `~/.claude/skills/<name>/SKILL.md` | every project on your machine |
+| Project | `.claude/skills/<name>/SKILL.md` | that repository, and anyone who clones it |
+
+Verified against the Claude Code skills documentation on 2026-07-28:
+<https://code.claude.com/docs/en/skills>
+
+### Install a few skills
+
+Recommended. Pick what the project actually needs.
+
+```bash
+mkdir -p ~/.claude/skills
+cp -r Secure-AI-Toolkit/skills/core/owasp           ~/.claude/skills/owasp
+cp -r Secure-AI-Toolkit/skills/core/common-pitfalls ~/.claude/skills/common-pitfalls
+cp -r Secure-AI-Toolkit/skills/core/publish-safety  ~/.claude/skills/publish-safety
+```
+
+Then `/owasp`, `/common-pitfalls`, `/publish-safety`. Each skill's `description` frontmatter
+also lets Claude load it on its own when the work matches — writing a query, adding an upload
+endpoint, pushing a branch.
+
+### Install all 39
+
+```bash
+mkdir -p ~/.claude/skills
+for d in Secure-AI-Toolkit/skills/{core,advanced,enterprise,architecture}/*/; do
+  cp -r "$d" ~/.claude/skills/
+done
+```
+
+`skills/shared/` is excluded deliberately: it holds cross-cutting checklists, prompts, and
+references, not skills, and its only `SKILL.md` is the authoring scaffold.
+
+Directory names are unique across all four categories, so flattening needs no renaming. Check
+for collisions with skills you already have — same name means the personal copy wins over a
+project one, and any of them override a bundled skill of that name.
+
+### Symlink instead of copy
+
+Keeps one checkout as the source of truth, so `git pull` updates every installed skill:
+
+```bash
+ln -s "$PWD/Secure-AI-Toolkit/skills/core/owasp" ~/.claude/skills/owasp
+```
+
+Claude Code follows the symlink and reads `SKILL.md` from the target. This also preserves the
+handful of cross-skill relative links — `publish-safety/SKILL.md` points at
+`../common-pitfalls/references/secret-exposure.md`, which resolves inside the checkout but
+dangles after a flat copy of only one of the two.
+
+### Per-project, committed
+
+```bash
+mkdir -p .claude/skills
+cp -r ../Secure-AI-Toolkit/skills/core/api-security .claude/skills/api-security
+git add .claude/skills/api-security
+```
+
+Committing the skill is how teammates and cloud sessions get it. Personal skills under
+`~/.claude/skills/` are local to your machine and are not read by Cowork or cloud sessions.
+A project skill's `allowed-tools` only takes effect after you accept the workspace trust
+dialog, which is the point at which you should have read what you are trusting.
+
+### Confirm it worked
+
+Run `/skills` in Claude Code and look for the names you installed. Adding or editing a skill
+inside an existing `skills` directory is picked up mid-session; creating the top-level
+`~/.claude/skills/` or `.claude/skills/` directory for the first time needs a restart before
+it is watched.
+
+### Worth knowing before you install all of them
+
+- **Every installed skill costs context at startup.** Only the description is loaded until a
+  skill is used, but 39 descriptions is roughly 14 KB of every session. Installing the three
+  or four that match the project beats installing the set.
+- **The frontmatter is Claude Code specific and inert elsewhere.** `allowed-tools` in these
+  skills is deliberately narrow — read, search, and web lookups, with `Bash` limited to `ls`
+  and `cat` where it appears at all. Nothing here needs write access to do its job.
+- **This is guidance, not a scanner.** Installing 39 skills does not add a security gate. See
+  [Limitations](#limitations).
+
+### Other assistants
+
+Cursor, Copilot, Codex CLI, Gemini CLI, Continue, Cline, Roo Code, and Kiro read Markdown from
+their own rules or context directories. Point the tool at `AI_INSTRUCTIONS.md` and copy or
+reference the skill directories from wherever it loads context. The Markdown works anywhere;
+only the YAML frontmatter is Claude Code specific, and it is ignored elsewhere.
 
 ## Using it
 
