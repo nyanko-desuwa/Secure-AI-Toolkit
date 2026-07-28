@@ -1,7 +1,7 @@
 ---
 name: incident-response
 description: 'Respond to a security incident in a software system without destroying evidence or widening the breach. Frames work with NIST SP 800-61r3 and CSF 2.0. Triggers: "incident response", "breach", "leaked key", "compromised token", "forensics", "sự cố bảo mật", "rò rỉ khoá".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Incident Response

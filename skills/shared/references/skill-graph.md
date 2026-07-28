@@ -34,30 +34,36 @@ prevent.
 | `common-pitfalls` | — | `secrets-management`, `frontend-security`, `api-security`, `database-security`, `logging-audit`, `architecture/performance` | own `references/secret-exposure.md`, `references/resource-limits.md` |
 | `owasp` | — | `secure-code-review`, `api-security`, `authentication` | `shared/references/README.md` |
 | `secure-code-review` | `owasp` | `api-security`, `authentication`, `devsecops` | `shared/checklists/README.md` |
-| `api-security` | `owasp` | `authentication`, `logging-audit`, `secure-code-review`, `brute-force-defense`, `architecture/performance` | own `references/api-top10-2023.md` |
-| `mvc-security` | `owasp` | `api-security`, `frontend-security`, `database-security`, `secure-code-review` | — |
-| `database-security` | `owasp` | `secrets-management`, `logging-audit`, `api-security` | — |
-| `authentication` | `owasp` | `api-security`, `secure-code-review`, `secrets-management`, `brute-force-defense` | own `references/nist-800-63b.md` |
-| `brute-force-defense` | `authentication` | `api-security`, `logging-audit`, `advanced/cryptography`, `advanced/incident-response`, `ssh-server` | — |
-| `secrets-management` | — | `devsecops`, `cloud-security`, `docker-security`, `enterprise/kubernetes-security`, `advanced/incident-response`, `logging-audit`, `publish-safety` | own `references/exposure-response.md`, `references/secret-manager-comparison.md` |
-| `publish-safety` | `secrets-management` | `common-pitfalls`, `devsecops`, `docker-security`, `advanced/supply-chain-security`, `advanced/incident-response` | `secrets-management/references/exposure-response.md`, `common-pitfalls/references/secret-exposure.md` |
-| `logging-audit` | `owasp` | `secrets-management`, `advanced/incident-response`, `secure-code-review`, `devsecops`, `api-security`, `cloud-security` | — |
-| `frontend-security` | `owasp` | `api-security`, `authentication`, `advanced/supply-chain-security`, `common-pitfalls` | — |
-| `file-upload-security` | `owasp` | `cloud-security`, `frontend-security`, `api-security` | — |
-| `docker-security` | `secrets-management` | `devsecops`, `cloud-security`, `owasp`, `enterprise/kubernetes-security` | — |
-| `cloud-security` | `secrets-management` | `owasp`, `docker-security`, `devsecops`, `logging-audit` | — |
+| `api-security` | `owasp` | `authentication`, `logging-audit`, `secure-code-review`, `brute-force-defense`, `architecture/performance`, `http-edge-security`, `realtime-security`, `sso-federation`, `deserialization-security`, `browser-platform-security` | own `references/api-top10-2023.md` |
+| `mvc-security` | `owasp` | `api-security`, `frontend-security`, `database-security`, `secure-code-review`, `deserialization-security` | — |
+| `database-security` | `owasp` | `secrets-management`, `logging-audit`, `api-security`, `redis-security` | — |
+| `authentication` | `owasp` | `api-security`, `secure-code-review`, `secrets-management`, `brute-force-defense`, `realtime-security`, `sso-federation`, `redis-security` | own `references/nist-800-63b.md` |
+| `brute-force-defense` | `authentication` | `api-security`, `logging-audit`, `advanced/cryptography`, `advanced/incident-response`, `ssh-server`, `redis-security` | — |
+| `secrets-management` | — | `devsecops`, `cloud-security`, `docker-security`, `enterprise/kubernetes-security`, `advanced/incident-response`, `logging-audit`, `publish-safety`, `redis-security` | own `references/exposure-response.md`, `references/secret-manager-comparison.md` |
+| `publish-safety` | `secrets-management` | `common-pitfalls`, `devsecops`, `docker-security`, `advanced/supply-chain-security`, `advanced/incident-response`, `browser-platform-security` | `secrets-management/references/exposure-response.md`, `common-pitfalls/references/secret-exposure.md` |
+| `logging-audit` | `owasp` | `secrets-management`, `advanced/incident-response`, `secure-code-review`, `devsecops`, `api-security`, `cloud-security`, `redis-security` | — |
+| `frontend-security` | `owasp` | `api-security`, `authentication`, `advanced/supply-chain-security`, `common-pitfalls`, `http-edge-security`, `realtime-security`, `browser-platform-security` | — |
+| `file-upload-security` | `owasp` | `cloud-security`, `frontend-security`, `api-security`, `deserialization-security` | — |
+| `docker-security` | `secrets-management` | `devsecops`, `cloud-security`, `owasp`, `enterprise/kubernetes-security`, `redis-security` | — |
+| `cloud-security` | `secrets-management` | `owasp`, `docker-security`, `devsecops`, `logging-audit`, `redis-security` | — |
 | `ssh-server` | `secrets-management` | `docker-security`, `devsecops`, `cloud-security`, `logging-audit` | — |
 | `devsecops` | `secrets-management` | `advanced/supply-chain-security`, `docker-security`, `cloud-security`, `owasp`, `publish-safety` | own `references/tooling-matrix.md`, `references/slsa-levels.md` |
 | `ai-security` | `owasp` | `api-security`, `secrets-management`, `advanced/supply-chain-security` | own `references/llm-top10.md`, `references/mcp-security.md` |
+| `http-edge-security` | `owasp` | `api-security`, `frontend-security`, `ssh-server` | own `references/owasp-edge.md`, `references/asvs-edge.md` |
+| `redis-security` | — | `authentication`, `brute-force-defense`, `secrets-management`, `logging-audit`, `database-security`, `docker-security`, `cloud-security`, `advanced/network-security`, `advanced/incident-response`, `scalability`, `event-driven` | own `references/redis-valkey.md`, `references/owasp-asvs-cwe.md` |
+| `realtime-security` | `owasp` | `api-security`, `authentication`, `frontend-security`, `logging-audit` | own `references/realtime-threats.md`, `references/asvs-realtime.md` |
+| `sso-federation` | `authentication` | `api-security`, `deserialization-security`, `logging-audit` | own `references/saml-controls.md`, `references/asvs-sso.md` |
+| `browser-platform-security` | `owasp` | `frontend-security`, `publish-safety`, `api-security` | own `references/service-workers.md`, `references/extensions-pwa.md` |
+| `deserialization-security` | `owasp` | `api-security`, `file-upload-security`, `mvc-security`, `sso-federation` | own `references/cwe-502.md`, `references/xxe-and-yaml.md` |
 
 ## Advanced
 
 | Skill | depends_on | related | loads |
 |---|---|---|---|
 | `cryptography` | — | `core/secrets-management`, `core/authentication`, `core/api-security`, `core/cloud-security`, `core/ssh-server` | own `references/` (FIPS, SP 800-57) |
-| `network-security` | `core/owasp` | `cryptography`, `core/cloud-security`, `secure-architecture` | — |
+| `network-security` | `core/owasp` | `cryptography`, `core/cloud-security`, `secure-architecture`, `core/redis-security` | — |
 | `security-testing` | `core/secure-code-review` | `core/devsecops`, `core/api-security`, `incident-response` | — |
-| `incident-response` | `core/logging-audit` | `enterprise/compliance`, `core/secrets-management`, `supply-chain-security`, `core/owasp` | `secrets-management/references/exposure-response.md` |
+| `incident-response` | `core/logging-audit` | `enterprise/compliance`, `core/secrets-management`, `supply-chain-security`, `core/owasp`, `core/redis-security` | `secrets-management/references/exposure-response.md` |
 | `supply-chain-security` | `core/devsecops` | `core/owasp`, `core/secrets-management`, `core/docker-security`, `core/cloud-security`, `incident-response`, `core/publish-safety` | — |
 | `secure-architecture` | `core/owasp` | `core/devsecops`, `supply-chain-security`, `core/cloud-security`, `core/authentication` | — |
 
@@ -79,12 +85,12 @@ prevent.
 | `hexagonal` | `clean-architecture` | `core/owasp`, `core/api-security`, `core/database-security`, `performance`, `scalability` | — |
 | `ddd` | — | `core/owasp`, `advanced/secure-architecture`, `cqrs`, `performance`, `core/database-security`, `event-driven` | — |
 | `cqrs` | `ddd` | `core/owasp`, `core/api-security`, `core/database-security`, `performance`, `scalability`, `event-driven` | — |
-| `event-driven` | — | `core/owasp`, `core/api-security`, `performance`, `scalability`, `advanced/secure-architecture` | — |
+| `event-driven` | — | `core/owasp`, `core/api-security`, `performance`, `scalability`, `advanced/secure-architecture`, `core/redis-security` | — |
 | `modular-monolith` | — | `clean-architecture`, `ddd`, `microservices`, `core/owasp` | — |
 | `microservices` | — | `modular-monolith`, `core/api-security`, `advanced/secure-architecture`, `scalability`, `event-driven` | — |
 | `design-patterns` | — | `clean-architecture`, `performance`, `core/owasp` | — |
 | `performance` | — | `core/owasp`, `core/database-security`, `scalability`, `core/api-security`, `core/common-pitfalls` | own `references/` limits tables |
-| `scalability` | `performance` | `event-driven`, `core/api-security`, `core/database-security` | — |
+| `scalability` | `performance` | `event-driven`, `core/api-security`, `core/database-security`, `core/redis-security` | — |
 
 ## Reading the graph in practice
 

@@ -1,7 +1,7 @@
 ---
 name: cqrs
 description: 'Separate commands from queries without opening a second, unguarded path to the data. Use when adding a read model, a projection, a command handler, or an event store, or when a dashboard query bypasses the rules the aggregate enforces. Triggers: "CQRS", "command handler", "read model", "projection", "event sourcing", "materialized view", "outbox", "eventual consistency", "tách đọc ghi", "mô hình đọc".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # CQRS

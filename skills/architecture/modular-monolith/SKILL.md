@@ -1,7 +1,7 @@
 ---
 name: modular-monolith
 description: 'Design a modular monolith with enforceable module boundaries, module-owned data, actor-scoped contracts, transactions, outbox delivery, and resource-safe runtime lifetimes. Triggers: "modular monolith", "module boundary", "module-owned data", "outbox", "cross-module access", "kiến trúc mô-đun", "đơn khối mô-đun".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Modular Monolith

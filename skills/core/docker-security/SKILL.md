@@ -1,7 +1,7 @@
 ---
 name: docker-security
 description: 'Harden container images and runtime. Covers Dockerfile hygiene, digest pinning, capability dropping, the docker socket, secrets, scanning, SBOM, and signing. Maps to OWASP Top 10 2025 A02/A03, ASVS 5.0 V13/V15, and the CIS Docker Benchmark. Triggers: "Dockerfile", "docker", "container", "compose", "image scan", "docker socket", "bảo mật Docker", "container".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Docker Security
@@ -98,6 +98,7 @@ whether the vulnerable code path is reachable. See
 - `devsecops` — pipeline controls, gating, and policy as code
 - `cloud-security` — orchestrator-level controls, IAM for registries
 - `secrets-management` — where the secret comes from before it reaches the container
+- `redis-security` — Redis/Valkey listener, ACL, TLS, mounted data, and persistence controls inside the container
 - `owasp-security` — the standards this maps to
 
 ## Supporting Files

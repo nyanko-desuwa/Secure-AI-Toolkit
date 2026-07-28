@@ -133,7 +133,7 @@ allows — I could not determine whether the subnet is internet-reachable, so se
 pending that check, Critical if it is public."
 
 That is useful. "Critical: exposed Redis" without checking the routing is the kind of noise
-that gets a report ignored.
+that gets a report ignored. Use `core/redis-security` for ACL, TLS, persistence, command, and service-boundary remediation once reachability is established.
 
 ## The standard has moved on
 

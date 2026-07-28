@@ -1,7 +1,7 @@
 ---
 name: event-driven
 description: 'Events, queues, and brokers with the trust boundary intact. Use when designing or reviewing publishers, consumers, message schemas, retries, or dead-letter handling. Triggers: "event-driven", "message queue", "Kafka", "RabbitMQ", "SQS", "consumer", "idempotency", "dead-letter queue", "backpressure", "kiến trúc hướng sự kiện", "hàng đợi tin nhắn".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Event-Driven Architecture
@@ -170,6 +170,7 @@ minutes later without anyone being lied to.
 - `performance` — heap and goroutine-level detail for E9 leaks
 - `scalability` — load shedding, partition sizing, consumer autoscaling
 - `secure-architecture` — trust zones and threat modelling across services
+- `redis-security` — Redis/Valkey ACLs, TLS, key/channel namespaces, Streams/Pub/Sub retention, and broker service boundaries
 
 ## Supporting Files
 

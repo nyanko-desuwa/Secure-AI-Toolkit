@@ -1,7 +1,7 @@
 ---
 name: design-patterns
 description: 'Choose design patterns only when they create a real boundary or remove measured coupling, and review their security and resource lifetime costs. Use for factories, strategies, adapters, decorators, observers, singletons, facades, repositories, or patterns that hide authorization and cleanup. Triggers: "design pattern", "factory", "strategy", "adapter", "decorator", "observer", "singleton", "repository", "mẫu thiết kế", "mẫu kiến trúc".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Design Patterns

@@ -1,7 +1,7 @@
 ---
 name: authentication
 description: 'Design and review identity: password storage, login flows, sessions, JWT, OAuth2/OIDC, MFA, and authorization models. Maps to OWASP Top 10 2025 A07 and A01, ASVS 5.0 V6-V10, and NIST SP 800-63B-4. Triggers: "login", "session", "JWT", "OAuth", "password reset", "MFA", "RBAC", "đăng nhập", "xác thực", "phân quyền".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Authentication and Authorization
@@ -107,6 +107,7 @@ assumption you are pricing in.
 - `api-security` — token handling at API boundaries, scopes, machine-to-machine auth
 - `secure-code-review` — reviewing an existing auth implementation in depth
 - `secrets-management` — where the signing keys and peppers actually live
+- `redis-security` — ACLs, TLS, persistence, eviction, and failure behavior when sessions or revocation state use Redis/Valkey
 
 ## Supporting Files
 

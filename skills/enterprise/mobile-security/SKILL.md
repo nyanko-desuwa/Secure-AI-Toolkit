@@ -1,7 +1,7 @@
 ---
 name: mobile-security
 description: 'Apply mobile security controls when writing or reviewing iOS, Android, React Native, or Flutter code. Maps findings to OWASP MASVS 2.1.0, MASTG, Mobile Top 10 2024, OWASP Top 10 2025, and ASVS 5.0. Triggers: "mobile app security", "Keychain", "Keystore", "certificate pinning", "deep link", "exported activity", "jailbreak", "React Native", "Flutter", "bảo mật ứng dụng di động", "lỗ hổng".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Mobile Security

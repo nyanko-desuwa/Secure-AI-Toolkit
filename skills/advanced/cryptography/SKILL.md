@@ -1,7 +1,7 @@
 ---
 name: cryptography
 description: 'Choose and apply cryptography correctly: password hashing, AEAD, nonces, key lifecycle, KMS and envelope encryption, TLS, signatures, JWT, and constant-time comparison. Maps to OWASP Top 10 2025 A04, ASVS 5.0 V11/V12/V14, and NIST FIPS/SP guidance. Triggers: "encrypt", "hash password", "AES", "AEAD", "key rotation", "KMS", "JWT signature", "TLS", "mã hoá", "băm mật khẩu".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Cryptography

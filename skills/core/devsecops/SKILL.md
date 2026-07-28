@@ -1,7 +1,7 @@
 ---
 name: devsecops
 description: 'Design and review security in the CI/CD pipeline — what scanners run, when they run, and what blocks a merge. Covers SAST, DAST, SCA, secret and IaC scanning, SBOM, SLSA provenance, GitHub Actions hardening, and vulnerability SLAs. Triggers: "CI/CD security", "pipeline", "GitHub Actions", "SBOM", "supply chain", "pre-commit", "SLSA", "bảo mật CI", "chuỗi cung ứng".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # DevSecOps

@@ -1,7 +1,7 @@
 ---
 name: blockchain-security
 description: 'Apply smart contract and web3 integration security when writing, reviewing, or deploying Solidity and the off-chain services around it. Maps findings to OWASP Smart Contract Top 10 2026, OWASP Top 10 2025, and ASVS 5.0. Triggers: "smart contract", "Solidity", "reentrancy", "web3", "DeFi", "oracle", "proxy upgrade", "hợp đồng thông minh", "bảo mật blockchain".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Blockchain Security

@@ -1,7 +1,7 @@
 ---
 name: common-pitfalls
 description: 'Find the mistakes that AI-generated code ships by default: secrets in the browser bundle, security decisions made in the client, missing limits, leaks, and cost traps. Triggers: "hardcoded", "API key in frontend", "NEXT_PUBLIC", "memory leak", "app is slow", "bill jumped", "lộ key", "rò rỉ bộ nhớ".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Common Pitfalls

@@ -1,7 +1,7 @@
 ---
 name: security-testing
 description: 'Write and run security tests that fail when the vulnerability is present: threat-derived cases, authorization matrices, property and fuzz tests, DAST in CI, and triage of false positives. Maps to OWASP WSTG v4.2 and ASVS 5.0. Triggers: "security test", "pentest", "fuzzing", "DAST", "authorization matrix", "abuse case", "kiểm thử bảo mật", "kiểm tra lỗ hổng".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Security Testing

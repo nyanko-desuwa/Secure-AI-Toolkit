@@ -4,11 +4,25 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+### Added
+
+- `core/redis-security` skill — Redis OSS 7.x/8.x and Valkey 8.x service-boundary hardening: private reachability, ACLs, TLS, persistence and backups, Redis 8 integrated modules, Sentinel/Cluster, eviction, Redis-backed session/cache/queue/limiter roles, framework integration, real incident lessons, and operations telemetry. Grounded in official Redis/Valkey documentation, OWASP Top 10 2025, ASVS 5.0.0, and CWE mappings.
+- Canonical `catalog/skills.json` and schema, repository validator, cross-platform skill installer
+  and release helpers, GitHub Actions validation/secret-scan/release workflows, Dependabot, and
+  Gitleaks configuration. The tag workflow creates a GitHub Release from the matching changelog
+  section after validation succeeds.
+- Least-privilege `research-only` frontmatter for every production skill and the scaffold.
+- `SECURITY.md`, `MAINTENANCE.md`, `CONTRIBUTING.md`, and `docs/ADOPTION.md`; durable release rules
+  now live there and in `scripts/README.md`.
+- Five core skills: `http-edge-security`, `realtime-security`, `sso-federation`,
+  `browser-platform-security`, and `deserialization-security`. They cover HTTP edge trust,
+  WebSocket/SSE/WebRTC, SAML federation, browser platform capabilities, and unsafe parsing.
+
 ### Changed
 
 - Root `README.md` — the two-line "copy one skill" note becomes a full
   `## Installing as Claude Code skills` section: personal vs project scope, why the four
-  category directories have to be flattened, install-a-few / install-all-39 / symlink /
+  category directories have to be flattened, install-a-few / install-all-45 / symlink /
   committed-per-project variants, how to confirm with `/skills`, and the startup context cost
   of installing the whole set. Verified against <https://code.claude.com/docs/en/skills> on
   2026-07-28. The clone URL now points at the real repository instead of `<your-org>`.
@@ -41,7 +55,8 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
   four prompt tiers, a `When NOT to Use` routing table, named framework coverage, and the
   reference and deprecation rules.
 - `RELEASING.md` — version rules for a documentation repository, the tag and release sequence,
-  and the rule that a standards pin moves in three places together.
+  and the rule that a standards pin moves in three places together. Superseded by
+  `MAINTENANCE.md`, `CONTRIBUTING.md`, and `scripts/README.md` in Unreleased.
 
 ### Changed
 

@@ -1,0 +1,2391 @@
+{
+  "version": 1,
+  "generated_note": "Canonical production skill catalog. Scaffold is excluded.",
+  "profiles": {
+    "research-only": "Read, Glob, Grep, WebSearch, WebFetch",
+    "repository-inspection": "Read, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch"
+  },
+  "skills": [
+    {
+      "name": "ai-security",
+      "category": "core",
+      "path": "skills/core/ai-security",
+      "status": "Ready",
+      "description": "Secure applications that use LLMs — agents, tool calling, MCP servers, and RAG. Maps findings to OWASP Top 10 for LLM Applications 2025, OWASP Top 10 2025, and ASVS 5.0. Triggers: \"prompt injection\", \"AI agent\", \"tool calling\", \"MCP server\", \"RAG\", \"LLM security\", \"bảo mật AI\", \"tiêm lệnh\".",
+      "triggers": [
+        "prompt injection",
+        "AI agent",
+        "tool calling",
+        "MCP server",
+        "RAG",
+        "LLM security",
+        "bảo mật AI",
+        "tiêm lệnh"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "api-security",
+        "secrets-management",
+        "supply-chain-security"
+      ],
+      "loads": [
+        "own `references/llm-top10.md`",
+        "`references/mcp-security.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "all ten"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V1",
+          "V2",
+          "V5",
+          "V8",
+          "V10",
+          "V11",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "OWASP LLM Top 10",
+          "NIST AI RMF",
+          "EU AI Act"
+        ]
+      },
+      "routing_hints": [
+        "Passes untrusted text to a model or tool"
+      ]
+    },
+    {
+      "name": "api-security",
+      "category": "core",
+      "path": "skills/core/api-security",
+      "status": "Ready",
+      "description": "Secure API surfaces — REST, GraphQL, gRPC, and webhooks — against the OWASP API Security Top 10 2023 and ASVS 5.0 V4. Triggers: \"API security\", \"REST\", \"GraphQL\", \"gRPC\", \"webhook\", \"BOLA\", \"mass assignment\", \"rate limit\", \"idempotency\", \"bảo mật API\", \"xác thực webhook\".",
+      "triggers": [
+        "API security",
+        "REST",
+        "GraphQL",
+        "gRPC",
+        "webhook",
+        "BOLA",
+        "mass assignment",
+        "rate limit",
+        "idempotency",
+        "bảo mật API",
+        "xác thực webhook"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "authentication",
+        "logging-audit",
+        "secure-code-review",
+        "brute-force-defense",
+        "performance"
+      ],
+      "loads": [
+        "own `references/api-top10-2023.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [],
+        "owasp_api_top10_2023": [
+          "API1–API7",
+          "API9",
+          "API10"
+        ],
+        "asvs_5_0": [
+          "V1",
+          "V2",
+          "V4",
+          "V5",
+          "V6",
+          "V7",
+          "V8",
+          "V9",
+          "V10",
+          "V12",
+          "V13",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "Loads an object by ID from a request",
+        "Fetches a user-supplied URL"
+      ]
+    },
+    {
+      "name": "authentication",
+      "category": "core",
+      "path": "skills/core/authentication",
+      "status": "Ready",
+      "description": "Design and review identity: password storage, login flows, sessions, JWT, OAuth2/OIDC, MFA, and authorization models. Maps to OWASP Top 10 2025 A07 and A01, ASVS 5.0 V6-V10, and NIST SP 800-63B-4. Triggers: \"login\", \"session\", \"JWT\", \"OAuth\", \"password reset\", \"MFA\", \"RBAC\", \"đăng nhập\", \"xác thực\", \"phân quyền\".",
+      "triggers": [
+        "login",
+        "session",
+        "JWT",
+        "OAuth",
+        "password reset",
+        "MFA",
+        "RBAC",
+        "đăng nhập",
+        "xác thực",
+        "phân quyền"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "api-security",
+        "secure-code-review",
+        "secrets-management",
+        "brute-force-defense"
+      ],
+      "loads": [
+        "own `references/nist-800-63b.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A07"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V3",
+          "V6",
+          "V7",
+          "V8",
+          "V9",
+          "V10",
+          "V11",
+          "V14",
+          "V16"
+        ],
+        "other": [
+          "NIST SP 800-63",
+          "800-63B"
+        ]
+      },
+      "routing_hints": [
+        "Issues, verifies, or stores a token"
+      ]
+    },
+    {
+      "name": "browser-platform-security",
+      "category": "core",
+      "path": "skills/core/browser-platform-security",
+      "status": "Ready",
+      "description": "Service workers, extensions, and PWAs — update/cache attacks, permission least privilege, web accessible resources, SW scope. Triggers: \"service worker\", \"browser extension\", \"PWA\", \"chrome.runtime\", \"web_accessible_resources\", \"bảo mật extension\", \"service worker\".",
+      "triggers": [
+        "service worker",
+        "browser extension",
+        "PWA",
+        "chrome.runtime",
+        "web_accessible_resources",
+        "bảo mật extension"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "frontend-security",
+        "publish-safety",
+        "api-security"
+      ],
+      "loads": [
+        "own `references/service-workers.md`",
+        "own `references/extensions-pwa.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A06",
+          "A08"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V1",
+          "V3",
+          "V13",
+          "V14"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "Service worker, PWA, browser extension, manifest, or runtime message"
+      ]
+    },
+    {
+      "name": "brute-force-defense",
+      "category": "core",
+      "path": "skills/core/brute-force-defense",
+      "status": "Ready",
+      "description": "Defend against guessing attacks: login brute force, credential stuffing, password spraying, OTP and token guessing, and the limiters that are supposed to stop them. Maps to OWASP Top 10 2025 A07, A06, A09 and ASVS 5.0 V6/V16. Triggers: \"brute force\", \"credential stuffing\", \"password spraying\", \"rate limit\", \"lockout\", \"OTP\", \"throttling\", \"dò mật khẩu\", \"giới hạn đăng nhập\".",
+      "triggers": [
+        "brute force",
+        "credential stuffing",
+        "password spraying",
+        "rate limit",
+        "lockout",
+        "OTP",
+        "throttling",
+        "dò mật khẩu",
+        "giới hạn đăng nhập"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "authentication"
+      ],
+      "related": [
+        "api-security",
+        "logging-audit",
+        "cryptography",
+        "incident-response",
+        "ssh-server"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A04",
+          "A06",
+          "A07",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [
+          "API4",
+          "API6"
+        ],
+        "asvs_5_0": [
+          "V2",
+          "V4",
+          "V6",
+          "V7",
+          "V8",
+          "V11",
+          "V16"
+        ],
+        "other": [
+          "NIST SP 800-63B"
+        ]
+      },
+      "routing_hints": [
+        "Accepts a guessable secret: password, OTP, reset token, invite or coupon code"
+      ]
+    },
+    {
+      "name": "cloud-security",
+      "category": "core",
+      "path": "skills/core/cloud-security",
+      "status": "Ready",
+      "description": "Secure AWS, Azure, and GCP infrastructure: IAM least privilege, workload identity, object storage exposure, network boundaries, instance metadata, encryption, logging, secrets, serverless, and Terraform review. Triggers: \"AWS\", \"Azure\", \"GCP\", \"IAM\", \"S3 bucket\", \"Terraform\", \"cloud misconfiguration\", \"IMDS\", \"bảo mật đám mây\", \"quyền truy cập\".",
+      "triggers": [
+        "AWS",
+        "Azure",
+        "GCP",
+        "IAM",
+        "S3 bucket",
+        "Terraform",
+        "cloud misconfiguration",
+        "IMDS",
+        "bảo mật đám mây",
+        "quyền truy cập"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "secrets-management"
+      ],
+      "related": [
+        "owasp",
+        "docker-security",
+        "devsecops",
+        "logging-audit"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A04",
+          "A06",
+          "A08",
+          "A09"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V8",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "Provisions cloud infrastructure or IAM"
+      ]
+    },
+    {
+      "name": "common-pitfalls",
+      "category": "core",
+      "path": "skills/core/common-pitfalls",
+      "status": "Ready",
+      "description": "Find the mistakes that AI-generated code ships by default: secrets in the browser bundle, security decisions made in the client, missing limits, leaks, and cost traps. Triggers: \"hardcoded\", \"API key in frontend\", \"NEXT_PUBLIC\", \"memory leak\", \"app is slow\", \"bill jumped\", \"lộ key\", \"rò rỉ bộ nhớ\".",
+      "triggers": [
+        "hardcoded",
+        "API key in frontend",
+        "NEXT_PUBLIC",
+        "memory leak",
+        "app is slow",
+        "bill jumped",
+        "lộ key",
+        "rò rỉ bộ nhớ"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "secrets-management",
+        "frontend-security",
+        "api-security",
+        "database-security",
+        "logging-audit",
+        "performance"
+      ],
+      "loads": [
+        "own `references/secret-exposure.md`",
+        "`references/resource-limits.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "all ten"
+        ],
+        "owasp_api_top10_2023": [
+          "API3",
+          "API4"
+        ],
+        "asvs_5_0": [
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V6",
+          "V8",
+          "V9",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "database-security",
+      "category": "core",
+      "path": "skills/core/database-security",
+      "status": "Ready",
+      "description": "Secure the data layer when writing queries, ORM code, migrations, or database configuration. Covers injection, tenant isolation, least privilege, encryption, and audit. Triggers: \"SQL injection\", \"NoSQL injection\", \"ORM\", \"parameterized query\", \"row-level security\", \"multi-tenant\", \"migration\", \"truy vấn\", \"cơ sở dữ liệu\".",
+      "triggers": [
+        "SQL injection",
+        "NoSQL injection",
+        "ORM",
+        "parameterized query",
+        "row-level security",
+        "multi-tenant",
+        "migration",
+        "truy vấn",
+        "cơ sở dữ liệu"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "secrets-management",
+        "logging-audit",
+        "api-security"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A04",
+          "A05",
+          "A06",
+          "A08",
+          "A09"
+        ],
+        "owasp_api_top10_2023": [
+          "API4"
+        ],
+        "asvs_5_0": [
+          "V1",
+          "V2",
+          "V8",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "Builds a database query"
+      ]
+    },
+    {
+      "name": "deserialization-security",
+      "category": "core",
+      "path": "skills/core/deserialization-security",
+      "status": "Ready",
+      "description": "Unsafe deserialization and parsers — pickle, Java/.NET binary, YAML load, XML XXE/expansion. Triggers: \"deserialization\", \"pickle\", \"ObjectInputStream\", \"BinaryFormatter\", \"YAML load\", \"XXE\", \"unserialize\", \"giải tuần tự hóa\", \"XML external entity\".",
+      "triggers": [
+        "deserialization",
+        "pickle",
+        "ObjectInputStream",
+        "BinaryFormatter",
+        "YAML load",
+        "XXE",
+        "unserialize",
+        "giải tuần tự hóa",
+        "XML external entity"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "api-security",
+        "file-upload-security",
+        "mvc-security"
+      ],
+      "loads": [
+        "own `references/cwe-502.md`",
+        "own `references/xxe-and-yaml.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A05",
+          "A06",
+          "A08"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V5",
+          "V13"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "pickle, ObjectInputStream, BinaryFormatter, unsafe YAML/XML, or unserialize"
+      ]
+    },
+    {
+      "name": "devsecops",
+      "category": "core",
+      "path": "skills/core/devsecops",
+      "status": "Ready",
+      "description": "Design and review security in the CI/CD pipeline — what scanners run, when they run, and what blocks a merge. Covers SAST, DAST, SCA, secret and IaC scanning, SBOM, SLSA provenance, GitHub Actions hardening, and vulnerability SLAs. Triggers: \"CI/CD security\", \"pipeline\", \"GitHub Actions\", \"SBOM\", \"supply chain\", \"pre-commit\", \"SLSA\", \"bảo mật CI\", \"chuỗi cung ứng\".",
+      "triggers": [
+        "CI/CD security",
+        "pipeline",
+        "GitHub Actions",
+        "SBOM",
+        "supply chain",
+        "pre-commit",
+        "SLSA",
+        "bảo mật CI",
+        "chuỗi cung ứng"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "secrets-management"
+      ],
+      "related": [
+        "supply-chain-security",
+        "docker-security",
+        "cloud-security",
+        "owasp",
+        "publish-safety"
+      ],
+      "loads": [
+        "own `references/tooling-matrix.md`",
+        "`references/slsa-levels.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A03",
+          "A08"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V13",
+          "V15"
+        ],
+        "other": [
+          "SLSA",
+          "NIST SP 800-218"
+        ]
+      },
+      "routing_hints": [
+        "Adds or bumps a dependency"
+      ]
+    },
+    {
+      "name": "docker-security",
+      "category": "core",
+      "path": "skills/core/docker-security",
+      "status": "Ready",
+      "description": "Harden container images and runtime. Covers Dockerfile hygiene, digest pinning, capability dropping, the docker socket, secrets, scanning, SBOM, and signing. Maps to OWASP Top 10 2025 A02/A03, ASVS 5.0 V13/V15, and the CIS Docker Benchmark. Triggers: \"Dockerfile\", \"docker\", \"container\", \"compose\", \"image scan\", \"docker socket\", \"bảo mật Docker\", \"container\".",
+      "triggers": [
+        "Dockerfile",
+        "docker",
+        "container",
+        "compose",
+        "image scan",
+        "docker socket",
+        "bảo mật Docker",
+        "container"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "secrets-management"
+      ],
+      "related": [
+        "devsecops",
+        "cloud-security",
+        "owasp",
+        "kubernetes-security"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A02",
+          "A03",
+          "A04",
+          "A08"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "CIS Docker Benchmark",
+          "CIS Kubernetes Benchmark"
+        ]
+      },
+      "routing_hints": [
+        "Builds or runs a container"
+      ]
+    },
+    {
+      "name": "file-upload-security",
+      "category": "core",
+      "path": "skills/core/file-upload-security",
+      "status": "Ready",
+      "description": "Decide how to accept files from users and serve them back without handing over code execution, stored XSS, or the filesystem. Triggers: \"file upload\", \"multipart\", \"avatar\", \"attachment\", \"presigned URL\", \"zip slip\", \"SVG upload\", \"tải tệp lên\", \"kiểm tra tệp\".",
+      "triggers": [
+        "file upload",
+        "multipart",
+        "avatar",
+        "attachment",
+        "presigned URL",
+        "zip slip",
+        "SVG upload",
+        "tải tệp lên",
+        "kiểm tra tệp"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "cloud-security",
+        "frontend-security",
+        "api-security"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A05",
+          "A06",
+          "A08",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V1",
+          "V2",
+          "V3",
+          "V4",
+          "V5",
+          "V8",
+          "V12",
+          "V13",
+          "V14",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "Accepts a file path or upload"
+      ]
+    },
+    {
+      "name": "frontend-security",
+      "category": "core",
+      "path": "skills/core/frontend-security",
+      "status": "Ready",
+      "description": "Apply browser-side security controls when writing, reviewing, or hardening client code. Covers XSS and DOM sinks, framework escape hatches, sanitization, CSP, Trusted Types, CSRF, token storage, clickjacking, postMessage, and security headers. Maps to OWASP Top 10 2025 A05/A02 and ASVS 5.0 V1/V3. Triggers: \"XSS\", \"CSP\", \"innerHTML\", \"dangerouslySetInnerHTML\", \"postMessage\", \"CSRF\", \"security headers\", \"clickjacking\", \"bảo mật frontend\", \"lỗ hổng trình duyệt\".",
+      "triggers": [
+        "XSS",
+        "CSP",
+        "innerHTML",
+        "dangerouslySetInnerHTML",
+        "postMessage",
+        "CSRF",
+        "security headers",
+        "clickjacking",
+        "bảo mật frontend",
+        "lỗ hổng trình duyệt"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "api-security",
+        "authentication",
+        "supply-chain-security",
+        "common-pitfalls"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A03",
+          "A05",
+          "A07"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "all seventeen"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "Renders untrusted data into a page"
+      ]
+    },
+    {
+      "name": "http-edge-security",
+      "category": "core",
+      "path": "skills/core/http-edge-security",
+      "status": "Ready",
+      "description": "HTTP edge trust — reverse proxies, forwarded headers, Host validation, request desync, and cache poisoning. Triggers: \"reverse proxy\", \"X-Forwarded-For\", \"Host header\", \"request smuggling\", \"HTTP desync\", \"cache poisoning\", \"CDN\", \"bảo mật reverse proxy\", \"đầu HTTP\".",
+      "triggers": [
+        "reverse proxy",
+        "X-Forwarded-For",
+        "Host header",
+        "request smuggling",
+        "HTTP desync",
+        "cache poisoning",
+        "CDN",
+        "bảo mật reverse proxy",
+        "đầu HTTP"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "api-security",
+        "frontend-security",
+        "ssh-server"
+      ],
+      "loads": [
+        "own `references/owasp-edge.md`",
+        "own `references/asvs-edge.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A02",
+          "A04",
+          "A05",
+          "A06"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V4",
+          "V11",
+          "V13",
+          "V14"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "Reverse proxy, CDN, forwarded headers, Host, cache keys, or HTTP framing"
+      ]
+    },
+    {
+      "name": "logging-audit",
+      "category": "core",
+      "path": "skills/core/logging-audit",
+      "status": "Ready",
+      "description": "Decide what to log, what never to log, and what to alert on. Covers security event taxonomy, masking, log injection, audit trails, SIEM integration, and detection rules. Triggers: \"logging\", \"audit log\", \"log injection\", \"SIEM\", \"alerting\", \"detection rule\", \"ghi log\", \"nhật ký kiểm toán\".",
+      "triggers": [
+        "logging",
+        "audit log",
+        "log injection",
+        "SIEM",
+        "alerting",
+        "detection rule",
+        "ghi log",
+        "nhật ký kiểm toán"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "secrets-management",
+        "incident-response",
+        "secure-code-review",
+        "devsecops",
+        "api-security",
+        "cloud-security"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A05",
+          "A06",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V7",
+          "V16"
+        ],
+        "other": [
+          "GDPR",
+          "HIPAA",
+          "PCI DSS",
+          "ISO 27001",
+          "SOC 2"
+        ]
+      },
+      "routing_hints": [
+        "Writes a log line containing user data"
+      ]
+    },
+    {
+      "name": "mvc-security",
+      "category": "core",
+      "path": "skills/core/mvc-security",
+      "status": "Ready",
+      "description": "Place security controls in the correct MVC layer when writing or reviewing Laravel, Django, Rails, ASP.NET Core, or Spring MVC code. Covers mass assignment, template escaping, controller guards, and debug exposure. Triggers: \"MVC\", \"mass assignment\", \"strong parameters\", \"fillable\", \"Blade\", \"Thymeleaf\", \"controller\", \"bảo mật MVC\", \"gán hàng loạt\".",
+      "triggers": [
+        "MVC",
+        "mass assignment",
+        "strong parameters",
+        "fillable",
+        "Blade",
+        "Thymeleaf",
+        "controller",
+        "bảo mật MVC",
+        "gán hàng loạt"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "api-security",
+        "frontend-security",
+        "database-security",
+        "secure-code-review"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A05",
+          "A06"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V1",
+          "V2",
+          "V3",
+          "V8",
+          "V13",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "Binds request data onto a model",
+        "Renders untrusted data into a page"
+      ]
+    },
+    {
+      "name": "owasp",
+      "category": "core",
+      "path": "skills/core/owasp",
+      "status": "Ready",
+      "description": "Apply OWASP standards when writing, reviewing, or designing code. Maps work to OWASP Top 10 2025, API Security Top 10 2023, and ASVS 5.0. Triggers: \"OWASP\", \"secure code\", \"vulnerability\", \"threat model\", \"ASVS\", \"security review\", \"bảo mật\", \"lỗ hổng\".",
+      "triggers": [
+        "OWASP",
+        "secure code",
+        "vulnerability",
+        "threat model",
+        "ASVS",
+        "security review",
+        "bảo mật",
+        "lỗ hổng"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "secure-code-review",
+        "api-security",
+        "authentication"
+      ],
+      "loads": [
+        "`shared/references/README.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "all ten"
+        ],
+        "owasp_api_top10_2023": [
+          "all ten"
+        ],
+        "asvs_5_0": [
+          "all seventeen"
+        ],
+        "other": [
+          "ISO 27001",
+          "PCI DSS",
+          "SOC 2"
+        ]
+      },
+      "routing_hints": [
+        "Loads an object by ID from a request",
+        "Handles an error inside a security check"
+      ]
+    },
+    {
+      "name": "publish-safety",
+      "category": "core",
+      "path": "skills/core/publish-safety",
+      "status": "Ready",
+      "description": "Prove nothing sensitive ships before you push, publish, or make anything public. Covers git history, repository visibility, package and image registries, build output, and shared diffs. Triggers: \"push to git\", \"make repo public\", \"npm publish\", \"docker push\", \"deploy\", \"leaked .env\", \"push lên git\", \"lộ .env\".",
+      "triggers": [
+        "push to git",
+        "make repo public",
+        "npm publish",
+        "docker push",
+        "deploy",
+        "leaked .env",
+        "push lên git",
+        "lộ .env"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "secrets-management"
+      ],
+      "related": [
+        "common-pitfalls",
+        "devsecops",
+        "docker-security",
+        "supply-chain-security",
+        "incident-response"
+      ],
+      "loads": [
+        "`secrets-management/references/exposure-response.md`",
+        "`common-pitfalls/references/secret-exposure.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A02",
+          "A03",
+          "A04",
+          "A08"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V3",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "SLSA"
+        ]
+      },
+      "routing_hints": [
+        "Pushes, publishes, deploys, or changes repository visibility"
+      ]
+    },
+    {
+      "name": "redis-security",
+      "category": "core",
+      "path": "skills/core/redis-security",
+      "status": "Ready",
+      "description": "Secure Redis OSS 7.x/8.x and Valkey 8.x at the service boundary: private reachability, ACLs, TLS, persistence, modules, replication, eviction, and observability. Triggers: \"Redis\", \"Valkey\", \"redis.conf\", \"Redis ACL\", \"requirepass\", \"rediss\", \"ElastiCache\", \"Memorystore\", \"bảo mật Redis\".",
+      "triggers": [
+        "Redis",
+        "Valkey",
+        "redis.conf",
+        "Redis ACL",
+        "requirepass",
+        "rediss",
+        "ElastiCache",
+        "Memorystore",
+        "RedisJSON",
+        "Redis Search",
+        "RedisBloom",
+        "RedisTimeSeries",
+        "bảo mật Redis",
+        "Redis ACL"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "authentication",
+        "brute-force-defense",
+        "secrets-management",
+        "logging-audit",
+        "database-security",
+        "docker-security",
+        "cloud-security",
+        "network-security",
+        "incident-response",
+        "scalability",
+        "event-driven"
+      ],
+      "loads": [
+        "own `references/redis-valkey.md`",
+        "own `references/owasp-asvs-cwe.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A03",
+          "A04",
+          "A06",
+          "A08",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [
+          "API4"
+        ],
+        "asvs_5_0": [
+          "V2",
+          "V6",
+          "V7",
+          "V8",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "Redis OSS security and ACL documentation",
+          "Valkey security documentation"
+        ]
+      },
+      "routing_hints": [
+        "Configures Redis/Valkey listener, ACL, TLS, persistence, Sentinel, Cluster, or module",
+        "Uses Redis/Valkey for sessions, cache, queue, Streams, rate limits, OTPs, token revocation, or idempotency"
+      ]
+    },
+    {
+      "name": "realtime-security",
+      "category": "core",
+      "path": "skills/core/realtime-security",
+      "status": "Ready",
+      "description": "Secure WebSocket, SSE, and WebRTC signaling — connect authz, Origin checks, message injection, fan-out abuse, reconnect binding. Triggers: \"WebSocket security\", \"SSE\", \"WebRTC\", \"realtime\", \"socket.io\", \"Origin check\", \"bảo mật WebSocket\", \"thời gian thực\".",
+      "triggers": [
+        "WebSocket security",
+        "SSE",
+        "WebRTC",
+        "realtime",
+        "socket.io",
+        "Origin check",
+        "bảo mật WebSocket",
+        "thời gian thực"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "api-security",
+        "authentication",
+        "frontend-security",
+        "logging-audit"
+      ],
+      "loads": [
+        "own `references/realtime-threats.md`",
+        "own `references/asvs-realtime.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A04",
+          "A05",
+          "A07"
+        ],
+        "owasp_api_top10_2023": [
+          "API1",
+          "API2",
+          "API4",
+          "API5"
+        ],
+        "asvs_5_0": [
+          "V4",
+          "V6",
+          "V7",
+          "V8",
+          "V13"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "WebSocket, SSE, Socket.IO, or WebRTC signaling handler"
+      ]
+    },
+    {
+      "name": "secrets-management",
+      "category": "core",
+      "path": "skills/core/secrets-management",
+      "status": "Ready",
+      "description": "Decide how secrets are stored, delivered, rotated, and revoked. Covers the storage hierarchy, secret managers, workload identity, rotation windows, and leaked-secret response. Triggers: \"secret\", \"API key\", \"credentials\", \"Vault\", \"rotation\", \"leaked token\", \"bí mật\", \"khoá API\".",
+      "triggers": [
+        "secret",
+        "API key",
+        "credentials",
+        "Vault",
+        "rotation",
+        "leaked token",
+        "bí mật",
+        "khoá API"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "devsecops",
+        "cloud-security",
+        "docker-security",
+        "kubernetes-security",
+        "incident-response",
+        "logging-audit",
+        "publish-safety"
+      ],
+      "loads": [
+        "own `references/exposure-response.md`",
+        "`references/secret-manager-comparison.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A02",
+          "A04"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V6",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "NIST SP 800-57"
+        ]
+      },
+      "routing_hints": [
+        "Reads a credential or config value"
+      ]
+    },
+    {
+      "name": "secure-code-review",
+      "category": "core",
+      "path": "skills/core/secure-code-review",
+      "status": "Ready",
+      "description": "Review existing code for security as a repeatable process: scope the diff, map trust boundaries, hunt by sink, assign a CWE, disprove the finding before reporting it. Triggers: \"code review\", \"security review\", \"audit this code\", \"CWE\", \"is this exploitable\", \"đánh giá mã nguồn\", \"lỗ hổng bảo mật\".",
+      "triggers": [
+        "code review",
+        "security review",
+        "audit this code",
+        "CWE",
+        "is this exploitable",
+        "đánh giá mã nguồn",
+        "lỗ hổng bảo mật"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "api-security",
+        "authentication",
+        "devsecops"
+      ],
+      "loads": [
+        "`shared/checklists/README.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A03",
+          "A05",
+          "A06",
+          "A08",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [
+          "API1",
+          "API3"
+        ],
+        "asvs_5_0": [
+          "all seventeen"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "ssh-server",
+      "category": "core",
+      "path": "skills/core/ssh-server",
+      "status": "Ready",
+      "description": "Operate a Linux server safely: SSH access, sshd hardening, systemd sandboxing, nginx/Apache TLS and headers, firewalls, and deployments that roll back. Maps to OWASP Top 10 2025 A02/A07, ASVS 5.0 V12/V13, and CIS Benchmarks. Triggers: \"ssh\", \"sshd_config\", \"nginx\", \"systemd\", \"deploy\", \"server hardening\", \"bastion\", \"máy chủ\", \"triển khai\".",
+      "triggers": [
+        "ssh",
+        "sshd_config",
+        "nginx",
+        "systemd",
+        "deploy",
+        "server hardening",
+        "bastion",
+        "máy chủ",
+        "triển khai"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "secrets-management"
+      ],
+      "related": [
+        "docker-security",
+        "devsecops",
+        "cloud-security",
+        "logging-audit"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A02",
+          "A04",
+          "A07",
+          "A08",
+          "A09"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V6",
+          "V7",
+          "V8",
+          "V12",
+          "V13",
+          "V16"
+        ],
+        "other": [
+          "CIS NGINX Benchmark"
+        ]
+      },
+      "routing_hints": [
+        "Configures a server, TLS, or a deploy"
+      ]
+    },
+    {
+      "name": "sso-federation",
+      "category": "core",
+      "path": "skills/core/sso-federation",
+      "status": "Ready",
+      "description": "Enterprise SSO federation — SAML assertion validation, ACS/Audience/Recipient, metadata trust, IdP mix-up, signature wrapping. Triggers: \"SAML\", \"SSO\", \"IdP\", \"SP metadata\", \"ACS\", \"federation\", \"đăng nhập doanh nghiệp\", \"liên kết IdP\".",
+      "triggers": [
+        "SAML",
+        "SSO",
+        "IdP",
+        "SP metadata",
+        "ACS",
+        "federation",
+        "đăng nhập doanh nghiệp",
+        "liên kết IdP"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "authentication"
+      ],
+      "related": [
+        "api-security",
+        "deserialization-security",
+        "logging-audit"
+      ],
+      "loads": [
+        "own `references/saml-controls.md`",
+        "own `references/asvs-sso.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A07",
+          "A08"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V3",
+          "V6",
+          "V7",
+          "V8"
+        ],
+        "other": []
+      },
+      "routing_hints": [
+        "SAML, IdP, service provider metadata, ACS, or assertion validation"
+      ]
+    },
+    {
+      "name": "cryptography",
+      "category": "advanced",
+      "path": "skills/advanced/cryptography",
+      "status": "Ready",
+      "description": "Choose and apply cryptography correctly: password hashing, AEAD, nonces, key lifecycle, KMS and envelope encryption, TLS, signatures, JWT, and constant-time comparison. Maps to OWASP Top 10 2025 A04, ASVS 5.0 V11/V12/V14, and NIST FIPS/SP guidance. Triggers: \"encrypt\", \"hash password\", \"AES\", \"AEAD\", \"key rotation\", \"KMS\", \"JWT signature\", \"TLS\", \"mã hoá\", \"băm mật khẩu\".",
+      "triggers": [
+        "encrypt",
+        "hash password",
+        "AES",
+        "AEAD",
+        "key rotation",
+        "KMS",
+        "JWT signature",
+        "TLS",
+        "mã hoá",
+        "băm mật khẩu"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "secrets-management",
+        "authentication",
+        "api-security",
+        "cloud-security",
+        "ssh-server"
+      ],
+      "loads": [
+        "own `references/` (FIPS",
+        "SP 800-57)"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A02",
+          "A04",
+          "A07",
+          "A08",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V6",
+          "V9",
+          "V11",
+          "V12",
+          "V14",
+          "V16"
+        ],
+        "other": [
+          "FIPS 140",
+          "203",
+          "204",
+          "205; NIST SP 800-38",
+          "800-56A",
+          "800-57",
+          "800-77",
+          "800-90A",
+          "800-131A"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "incident-response",
+      "category": "advanced",
+      "path": "skills/advanced/incident-response",
+      "status": "Ready",
+      "description": "Respond to a security incident in a software system without destroying evidence or widening the breach. Frames work with NIST SP 800-61r3 and CSF 2.0. Triggers: \"incident response\", \"breach\", \"leaked key\", \"compromised token\", \"forensics\", \"sự cố bảo mật\", \"rò rỉ khoá\".",
+      "triggers": [
+        "incident response",
+        "breach",
+        "leaked key",
+        "compromised token",
+        "forensics",
+        "sự cố bảo mật",
+        "rò rỉ khoá"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "logging-audit"
+      ],
+      "related": [
+        "compliance",
+        "secrets-management",
+        "supply-chain-security",
+        "owasp"
+      ],
+      "loads": [
+        "`secrets-management/references/exposure-response.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A07",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V6",
+          "V7",
+          "V10",
+          "V16"
+        ],
+        "other": [
+          "NIST SP 800-61",
+          "800-86",
+          "800-92",
+          "800-184; NIST CSF; OWASP LLM Top 10"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "network-security",
+      "category": "advanced",
+      "path": "skills/advanced/network-security",
+      "status": "Ready",
+      "description": "Design and review network controls: segmentation, firewall and egress policy, DNS, TLS and mTLS, reverse proxies, VPN and bastion access, and traffic observability. Triggers: \"firewall\", \"segmentation\", \"egress\", \"mTLS\", \"TLS config\", \"nginx\", \"nftables\", \"WAF\", \"bastion\", \"tường lửa\", \"mạng\".",
+      "triggers": [
+        "firewall",
+        "segmentation",
+        "egress",
+        "mTLS",
+        "TLS config",
+        "nginx",
+        "nftables",
+        "WAF",
+        "bastion",
+        "tường lửa",
+        "mạng"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "cryptography",
+        "cloud-security",
+        "secure-architecture"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A04",
+          "A06",
+          "A09"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V1",
+          "V2",
+          "V6",
+          "V12",
+          "V13",
+          "V16",
+          "V17"
+        ],
+        "other": [
+          "NIST SP 800-207"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "secure-architecture",
+      "category": "advanced",
+      "path": "skills/advanced/secure-architecture",
+      "status": "Ready",
+      "description": "Design and review system architecture for security: trust boundaries, threat models, tenant isolation, least privilege, secure defaults, failure modes, and security ADRs. Triggers: \"architecture review\", \"threat model\", \"trust boundary\", \"zero trust\", \"multi-tenant\", \"kiến trúc\", \"phân quyền\".",
+      "triggers": [
+        "architecture review",
+        "threat model",
+        "trust boundary",
+        "zero trust",
+        "multi-tenant",
+        "kiến trúc",
+        "phân quyền"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "devsecops",
+        "supply-chain-security",
+        "cloud-security",
+        "authentication"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A06",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "all seventeen"
+        ],
+        "other": [
+          "NIST SP 800-207",
+          "800-218",
+          "800-218A; SLSA; STRIDE; ISO 27001; SOC 2; GDPR"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "security-testing",
+      "category": "advanced",
+      "path": "skills/advanced/security-testing",
+      "status": "Ready",
+      "description": "Write and run security tests that fail when the vulnerability is present: threat-derived cases, authorization matrices, property and fuzz tests, DAST in CI, and triage of false positives. Maps to OWASP WSTG v4.2 and ASVS 5.0. Triggers: \"security test\", \"pentest\", \"fuzzing\", \"DAST\", \"authorization matrix\", \"abuse case\", \"kiểm thử bảo mật\", \"kiểm tra lỗ hổng\".",
+      "triggers": [
+        "security test",
+        "pentest",
+        "fuzzing",
+        "DAST",
+        "authorization matrix",
+        "abuse case",
+        "kiểm thử bảo mật",
+        "kiểm tra lỗ hổng"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "secure-code-review"
+      ],
+      "related": [
+        "devsecops",
+        "api-security",
+        "incident-response"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "all ten"
+        ],
+        "owasp_api_top10_2023": [
+          "API1"
+        ],
+        "asvs_5_0": [
+          "all seventeen"
+        ],
+        "other": [
+          "OWASP MASTG"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "supply-chain-security",
+      "category": "advanced",
+      "path": "skills/advanced/supply-chain-security",
+      "status": "Ready",
+      "description": "Decide how dependencies, builds, and artifacts are trusted. Covers dependency confusion, lockfiles, lifecycle scripts, SLSA provenance, SBOM, signing, CI trust, artifact promotion, and malicious-update response. Triggers: \"supply chain\", \"dependency confusion\", \"typosquatting\", \"lockfile\", \"SBOM\", \"SLSA\", \"provenance\", \"sigstore\", \"cosign\", \"chuỗi cung ứng\", \"phụ thuộc\".",
+      "triggers": [
+        "supply chain",
+        "dependency confusion",
+        "typosquatting",
+        "lockfile",
+        "SBOM",
+        "SLSA",
+        "provenance",
+        "sigstore",
+        "cosign",
+        "chuỗi cung ứng",
+        "phụ thuộc"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "devsecops"
+      ],
+      "related": [
+        "owasp",
+        "secrets-management",
+        "docker-security",
+        "cloud-security",
+        "incident-response",
+        "publish-safety"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A03",
+          "A08"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V13",
+          "V14",
+          "V15"
+        ],
+        "other": [
+          "SLSA",
+          "NIST SP 800-218",
+          "800-218A"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "blockchain-security",
+      "category": "enterprise",
+      "path": "skills/enterprise/blockchain-security",
+      "status": "Ready",
+      "description": "Apply smart contract and web3 integration security when writing, reviewing, or deploying Solidity and the off-chain services around it. Maps findings to OWASP Smart Contract Top 10 2026, OWASP Top 10 2025, and ASVS 5.0. Triggers: \"smart contract\", \"Solidity\", \"reentrancy\", \"web3\", \"DeFi\", \"oracle\", \"proxy upgrade\", \"hợp đồng thông minh\", \"bảo mật blockchain\".",
+      "triggers": [
+        "smart contract",
+        "Solidity",
+        "reentrancy",
+        "web3",
+        "DeFi",
+        "oracle",
+        "proxy upgrade",
+        "hợp đồng thông minh",
+        "bảo mật blockchain"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "api-security",
+        "secrets-management"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A04",
+          "A06",
+          "A08",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V1",
+          "V2",
+          "V4",
+          "V8",
+          "V11",
+          "V13",
+          "V14",
+          "V15",
+          "V16",
+          "V17"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "compliance",
+      "category": "enterprise",
+      "path": "skills/enterprise/compliance",
+      "status": "Ready",
+      "description": "Implement privacy and compliance controls in code — GDPR data subject rights, retention and deletion jobs, consent records, data inventory, audit evidence, PCI scope reduction, HIPAA safeguards. Triggers: \"GDPR\", \"compliance\", \"data retention\", \"right to erasure\", \"consent\", \"PII\", \"PCI DSS\", \"HIPAA\", \"SOC 2\", \"ISO 27001\", \"audit evidence\", \"tuân thủ\", \"quyền xóa dữ liệu\".",
+      "triggers": [
+        "GDPR",
+        "compliance",
+        "data retention",
+        "right to erasure",
+        "consent",
+        "PII",
+        "PCI DSS",
+        "HIPAA",
+        "SOC 2",
+        "ISO 27001",
+        "audit evidence",
+        "tuân thủ",
+        "quyền xóa dữ liệu"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "logging-audit"
+      ],
+      "related": [
+        "incident-response",
+        "secrets-management",
+        "database-security",
+        "cloud-security",
+        "owasp",
+        "ai-security"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "all ten"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V8",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "GDPR",
+          "HIPAA",
+          "PCI DSS",
+          "ISO/IEC 27001",
+          "SOC 2"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "kubernetes-security",
+      "category": "enterprise",
+      "path": "skills/enterprise/kubernetes-security",
+      "status": "Ready",
+      "description": "Harden Kubernetes workloads and clusters when writing or reviewing manifests, RBAC, and cluster config. Covers Pod Security Admission, securityContext, RBAC least privilege, NetworkPolicy, Secrets, and admission control. Triggers: \"Kubernetes\", \"k8s\", \"pod security\", \"RBAC\", \"NetworkPolicy\", \"securityContext\", \"Helm\", \"cluster hardening\", \"bảo mật Kubernetes\", \"phân quyền\".",
+      "triggers": [
+        "Kubernetes",
+        "k8s",
+        "pod security",
+        "RBAC",
+        "NetworkPolicy",
+        "securityContext",
+        "Helm",
+        "cluster hardening",
+        "bảo mật Kubernetes",
+        "phân quyền"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "docker-security",
+        "secrets-management"
+      ],
+      "related": [
+        "owasp",
+        "compliance",
+        "cloud-security"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A03",
+          "A09"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "CIS Kubernetes Benchmark"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "mobile-security",
+      "category": "enterprise",
+      "path": "skills/enterprise/mobile-security",
+      "status": "Ready",
+      "description": "Apply mobile security controls when writing or reviewing iOS, Android, React Native, or Flutter code. Maps findings to OWASP MASVS 2.1.0, MASTG, Mobile Top 10 2024, OWASP Top 10 2025, and ASVS 5.0. Triggers: \"mobile app security\", \"Keychain\", \"Keystore\", \"certificate pinning\", \"deep link\", \"exported activity\", \"jailbreak\", \"React Native\", \"Flutter\", \"bảo mật ứng dụng di động\", \"lỗ hổng\".",
+      "triggers": [
+        "mobile app security",
+        "Keychain",
+        "Keystore",
+        "certificate pinning",
+        "deep link",
+        "exported activity",
+        "jailbreak",
+        "React Native",
+        "Flutter",
+        "bảo mật ứng dụng di động",
+        "lỗ hổng"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "authentication",
+        "api-security",
+        "publish-safety"
+      ],
+      "loads": [
+        "own MASVS reference"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A03",
+          "A04",
+          "A06",
+          "A07"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V1",
+          "V2",
+          "V4",
+          "V5",
+          "V6",
+          "V7",
+          "V8",
+          "V9",
+          "V10",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "OWASP MASVS",
+          "MASTG"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "windows-security",
+      "category": "enterprise",
+      "path": "skills/enterprise/windows-security",
+      "status": "Ready",
+      "description": "Harden Windows Server and deploy .NET applications without handing out domain admin. Covers service accounts, gMSA, Kerberos delegation, LSASS and credential theft, ACL privilege escalation, PowerShell/JEA, WinRM/RDP, IIS and ASP.NET Core configuration, auditing, and AppLocker/WDAC. Maps to OWASP Top 10 2025 A01/A02/A04/A09, ASVS 5.0 V13/V14/V16, and CIS Windows Server Benchmarks. Triggers: \"Windows Server\", \"IIS\", \"gMSA\", \"service account\", \"Kerberos\", \"PowerShell hardening\", \"web.config\", \"appsettings.json\", \"Active Directory\", \"bảo mật Windows\", \"máy chủ Windows\".",
+      "triggers": [
+        "Windows Server",
+        "IIS",
+        "gMSA",
+        "service account",
+        "Kerberos",
+        "PowerShell hardening",
+        "web.config",
+        "appsettings.json",
+        "Active Directory",
+        "bảo mật Windows",
+        "máy chủ Windows"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "ssh-server",
+        "logging-audit",
+        "secrets-management",
+        "mvc-security",
+        "network-security",
+        "compliance"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A04",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V1",
+          "V12",
+          "V13",
+          "V14",
+          "V16",
+          "V17"
+        ],
+        "other": [
+          "NIST SP 800-53"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "clean-architecture",
+      "category": "architecture",
+      "path": "skills/architecture/clean-architecture",
+      "status": "Ready",
+      "description": "Apply the dependency rule so authorization, invariants, and response shape each have exactly one enforcement point. Covers entities, use cases, ports and adapters, output DTOs, DI lifetimes, and mapping cost. Triggers: \"clean architecture\", \"dependency rule\", \"use case\", \"ports and adapters\", \"layered architecture\", \"DTO mapping\", \"kiến trúc sạch\", \"phân lớp\".",
+      "triggers": [
+        "clean architecture",
+        "dependency rule",
+        "use case",
+        "ports and adapters",
+        "layered architecture",
+        "DTO mapping",
+        "kiến trúc sạch",
+        "phân lớp"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "owasp",
+        "api-security",
+        "secure-architecture",
+        "performance",
+        "hexagonal",
+        "ddd",
+        "cqrs"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A05",
+          "A06",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [
+          "API1",
+          "API3",
+          "API4"
+        ],
+        "asvs_5_0": [
+          "V2",
+          "V7",
+          "V8",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "cqrs",
+      "category": "architecture",
+      "path": "skills/architecture/cqrs",
+      "status": "Ready",
+      "description": "Separate commands from queries without opening a second, unguarded path to the data. Use when adding a read model, a projection, a command handler, or an event store, or when a dashboard query bypasses the rules the aggregate enforces. Triggers: \"CQRS\", \"command handler\", \"read model\", \"projection\", \"event sourcing\", \"materialized view\", \"outbox\", \"eventual consistency\", \"tách đọc ghi\", \"mô hình đọc\".",
+      "triggers": [
+        "CQRS",
+        "command handler",
+        "read model",
+        "projection",
+        "event sourcing",
+        "materialized view",
+        "outbox",
+        "eventual consistency",
+        "tách đọc ghi",
+        "mô hình đọc"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "ddd"
+      ],
+      "related": [
+        "owasp",
+        "api-security",
+        "database-security",
+        "performance",
+        "scalability",
+        "event-driven"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A04",
+          "A06",
+          "A08"
+        ],
+        "owasp_api_top10_2023": [
+          "API1",
+          "API3",
+          "API4"
+        ],
+        "asvs_5_0": [
+          "V1",
+          "V2",
+          "V8",
+          "V11",
+          "V14",
+          "V15"
+        ],
+        "other": [
+          "GDPR"
+        ]
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "ddd",
+      "category": "architecture",
+      "path": "skills/architecture/ddd",
+      "status": "Ready",
+      "description": "Domain-Driven Design where the boundary is a security boundary: bounded contexts as trust boundaries, aggregates as authorization units, value objects that cannot hold invalid state, and event contracts that do not grant capability. Triggers: \"DDD\", \"bounded context\", \"aggregate root\", \"value object\", \"domain event\", \"anti-corruption layer\", \"ubiquitous language\", \"miền nghiệp vụ\", \"thiết kế theo miền\".",
+      "triggers": [
+        "DDD",
+        "bounded context",
+        "aggregate root",
+        "value object",
+        "domain event",
+        "anti-corruption layer",
+        "ubiquitous language",
+        "miền nghiệp vụ",
+        "thiết kế theo miền"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "owasp",
+        "secure-architecture",
+        "cqrs",
+        "performance",
+        "database-security",
+        "event-driven"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A09"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V4",
+          "V8",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "design-patterns",
+      "category": "architecture",
+      "path": "skills/architecture/design-patterns",
+      "status": "Ready",
+      "description": "Choose design patterns only when they create a real boundary or remove measured coupling, and review their security and resource lifetime costs. Use for factories, strategies, adapters, decorators, observers, singletons, facades, repositories, or patterns that hide authorization and cleanup. Triggers: \"design pattern\", \"factory\", \"strategy\", \"adapter\", \"decorator\", \"observer\", \"singleton\", \"repository\", \"mẫu thiết kế\", \"mẫu kiến trúc\".",
+      "triggers": [
+        "design pattern",
+        "factory",
+        "strategy",
+        "adapter",
+        "decorator",
+        "observer",
+        "singleton",
+        "repository",
+        "mẫu thiết kế",
+        "mẫu kiến trúc"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "clean-architecture",
+        "performance",
+        "owasp"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A05",
+          "A06",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V8",
+          "V15",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "event-driven",
+      "category": "architecture",
+      "path": "skills/architecture/event-driven",
+      "status": "Ready",
+      "description": "Events, queues, and brokers with the trust boundary intact. Use when designing or reviewing publishers, consumers, message schemas, retries, or dead-letter handling. Triggers: \"event-driven\", \"message queue\", \"Kafka\", \"RabbitMQ\", \"SQS\", \"consumer\", \"idempotency\", \"dead-letter queue\", \"backpressure\", \"kiến trúc hướng sự kiện\", \"hàng đợi tin nhắn\".",
+      "triggers": [
+        "event-driven",
+        "message queue",
+        "Kafka",
+        "RabbitMQ",
+        "SQS",
+        "consumer",
+        "idempotency",
+        "dead-letter queue",
+        "backpressure",
+        "kiến trúc hướng sự kiện",
+        "hàng đợi tin nhắn"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "owasp",
+        "api-security",
+        "performance",
+        "scalability",
+        "secure-architecture"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A04",
+          "A06",
+          "A07",
+          "A08",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V6",
+          "V8",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "hexagonal",
+      "category": "architecture",
+      "path": "skills/architecture/hexagonal",
+      "status": "Ready",
+      "description": "Ports and adapters as trust boundaries. Use when a use case is reachable from HTTP, a queue, a CLI, and a cron job and only one of them checks authorization, when an adapter leaks its transport type into the core, or when adapter clients and subscriptions are never released. Triggers: \"hexagonal\", \"ports and adapters\", \"port\", \"adapter\", \"driving port\", \"driven port\", \"kiến trúc lục giác\", \"cổng và bộ chuyển đổi\".",
+      "triggers": [
+        "hexagonal",
+        "ports and adapters",
+        "port",
+        "adapter",
+        "driving port",
+        "driven port",
+        "kiến trúc lục giác",
+        "cổng và bộ chuyển đổi"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "clean-architecture"
+      ],
+      "related": [
+        "owasp",
+        "api-security",
+        "database-security",
+        "performance",
+        "scalability"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "all ten"
+        ],
+        "owasp_api_top10_2023": [
+          "all ten"
+        ],
+        "asvs_5_0": [
+          "all seventeen"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "microservices",
+      "category": "architecture",
+      "path": "skills/architecture/microservices",
+      "status": "Ready",
+      "description": "Microservice boundaries that preserve authorization and runtime budgets. Use when splitting services, reviewing service calls, identity, discovery, API inventory, or migration. Triggers: \"microservices\", \"service boundary\", \"mTLS\", \"service mesh\", \"confused deputy\", \"kiến trúc microservice\", \"ranh giới dịch vụ\".",
+      "triggers": [
+        "microservices",
+        "service boundary",
+        "mTLS",
+        "service mesh",
+        "confused deputy",
+        "kiến trúc microservice",
+        "ranh giới dịch vụ"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "modular-monolith",
+        "api-security",
+        "secure-architecture",
+        "scalability",
+        "event-driven"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A06"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V4",
+          "V6",
+          "V8",
+          "V9",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "modular-monolith",
+      "category": "architecture",
+      "path": "skills/architecture/modular-monolith",
+      "status": "Ready",
+      "description": "Design a modular monolith with enforceable module boundaries, module-owned data, actor-scoped contracts, transactions, outbox delivery, and resource-safe runtime lifetimes. Triggers: \"modular monolith\", \"module boundary\", \"module-owned data\", \"outbox\", \"cross-module access\", \"kiến trúc mô-đun\", \"đơn khối mô-đun\".",
+      "triggers": [
+        "modular monolith",
+        "module boundary",
+        "module-owned data",
+        "outbox",
+        "cross-module access",
+        "kiến trúc mô-đun",
+        "đơn khối mô-đun"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "clean-architecture",
+        "ddd",
+        "microservices",
+        "owasp"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A05",
+          "A06",
+          "A08",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [],
+        "asvs_5_0": [
+          "V2",
+          "V4",
+          "V8",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    },
+    {
+      "name": "performance",
+      "category": "architecture",
+      "path": "skills/architecture/performance",
+      "status": "Ready",
+      "description": "Resource lifetime, memory leaks, and limits. Use when a process grows until it is killed, a cache or queue is unbounded, connections or listeners accumulate, or throughput needs measuring. Triggers: \"memory leak\", \"OOM\", \"OOMKilled\", \"profiling\", \"cache\", \"backpressure\", \"goroutine leak\", \"rò rỉ bộ nhớ\", \"hiệu năng\", \"tối ưu\".",
+      "triggers": [
+        "memory leak",
+        "OOM",
+        "OOMKilled",
+        "profiling",
+        "cache",
+        "backpressure",
+        "goroutine leak",
+        "rò rỉ bộ nhớ",
+        "hiệu năng",
+        "tối ưu"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [],
+      "related": [
+        "owasp",
+        "database-security",
+        "scalability",
+        "api-security",
+        "common-pitfalls"
+      ],
+      "loads": [
+        "own `references/` limits tables"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A06",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [
+          "API1",
+          "API4",
+          "API6"
+        ],
+        "asvs_5_0": [
+          "V2",
+          "V4",
+          "V5",
+          "V8",
+          "V13",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "ISO 27001",
+          "PCI DSS",
+          "SOC 2"
+        ]
+      },
+      "routing_hints": [
+        "Allocates, caches, subscribes, or opens a handle"
+      ]
+    },
+    {
+      "name": "scalability",
+      "category": "architecture",
+      "path": "skills/architecture/scalability",
+      "status": "Ready",
+      "description": "Secure capacity, load shedding, backpressure, caching, rate limiting, database fan-out, and autoscaling. Use when reviewing growth, replicas, queues, caches, pools, or dependency protection. Triggers: \"scalability\", \"autoscaling\", \"rate limit\", \"backpressure\", \"connection pool\", \"cache stampede\", \"horizontal scaling\", \"khả năng mở rộng\", \"giới hạn tải\".",
+      "triggers": [
+        "scalability",
+        "autoscaling",
+        "rate limit",
+        "backpressure",
+        "connection pool",
+        "cache stampede",
+        "horizontal scaling",
+        "khả năng mở rộng",
+        "giới hạn tải"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "performance"
+      ],
+      "related": [
+        "event-driven",
+        "api-security",
+        "database-security"
+      ],
+      "loads": [],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A06",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [
+          "API4"
+        ],
+        "asvs_5_0": [
+          "V4",
+          "V8",
+          "V13",
+          "V15",
+          "V16"
+        ],
+        "other": []
+      },
+      "routing_hints": []
+    }
+  ]
+}

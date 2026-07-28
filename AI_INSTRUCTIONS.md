@@ -27,6 +27,7 @@ Reading eleven files when the task needs two wastes context that the actual code
 | API Security | `skills/core/api-security/` | Ready | REST, GraphQL, gRPC, webhooks, BOLA, rate limits, idempotency |
 | MVC Security | `skills/core/mvc-security/` | Ready | Controllers, models, views, ORM, templates, mass assignment |
 | Database Security | `skills/core/database-security/` | Ready | Queries, ORM, privileges, tenant isolation, encryption at rest |
+| Redis Security | `skills/core/redis-security/` | Ready | Redis OSS/Valkey listeners, ACLs, TLS, persistence, modules, Sentinel/Cluster, sessions, cache, queues, and rate-limit stores |
 | Secrets Management | `skills/core/secrets-management/` | Ready | Env vars, vaults, rotation, workload identity, leak response |
 | Logging & Audit | `skills/core/logging-audit/` | Ready | Audit trails, SIEM, masking, log injection, detection rules |
 | Docker Security | `skills/core/docker-security/` | Ready | Dockerfiles, images, runtime flags, socket exposure, SBOM |
@@ -40,6 +41,11 @@ Reading eleven files when the task needs two wastes context that the actual code
 | Performance & Resource Lifetime | `skills/architecture/performance/` | Ready | Memory leaks, unbounded caches/queues, listener or connection leaks, OOM, profiling, backpressure |
 | Frontend Security | `skills/core/frontend-security/` | Ready | CSP, XSS, CSRF, cookies, iframes, postMessage |
 | Publish Safety | `skills/core/publish-safety/` | Ready | Pushing, making a repo public, publishing a package or image, deploying build output, sharing a diff, log, or screenshot |
+| HTTP Edge Security | `skills/core/http-edge-security/` | Ready | Reverse proxies, forwarded headers, Host validation, request smuggling, cache keys, CDN |
+| Realtime Security | `skills/core/realtime-security/` | Ready | WebSocket, SSE, Socket.IO, WebRTC signaling, channels, reconnects |
+| SSO Federation | `skills/core/sso-federation/` | Ready | SAML, IdP/SP metadata, ACS, assertions, enterprise SSO |
+| Browser Platform Security | `skills/core/browser-platform-security/` | Ready | Service workers, PWAs, browser extensions, manifests, runtime messages |
+| Deserialization Security | `skills/core/deserialization-security/` | Ready | pickle, ObjectInputStream, BinaryFormatter, unsafe YAML/XML, XXE |
 
 All skills under `advanced/`, `enterprise/`, and `architecture/` are Ready. Check the full
 file set and the skill's checklist before relying on a future addition.
@@ -58,6 +64,7 @@ row — take every row that applies.
 | The code… | Load | Category |
 |---|---|---|
 | Builds a database query | `database-security` | A05 Injection |
+| Configures Redis/Valkey or uses it for session, cache, limiter, queue, Stream, OTP, revocation, or idempotency state | `redis-security` plus the role owner | A01, A02, A04, A06, A09, A10 |
 | Loads an object by ID from a request | `api-security`, `owasp` | A01, API1 BOLA |
 | Binds request data onto a model | `mvc-security` | A01, API3 |
 | Accepts a file path or upload | `file-upload-security` | A01 + A08 |
@@ -75,6 +82,11 @@ row — take every row that applies.
 | Handles an error inside a security check | `owasp` | A10 |
 | Allocates, caches, subscribes, or opens a handle | `performance` | A06, API4, CWE-401/770 |
 | Pushes, publishes, deploys, or changes repository visibility | `publish-safety` | A02, A04, CWE-527 |
+| Runs behind a reverse proxy, reads forwarded headers, uses CDN cache keys, or handles HTTP framing | `http-edge-security` | A02, A05, CWE-444 |
+| Handles WebSocket, SSE, Socket.IO, or WebRTC signaling | `realtime-security` | API1/API2/API4/API5 |
+| Uses SAML, IdP/SP metadata, ACS, or federation assertions | `sso-federation`, `authentication` | A07, CWE-347 |
+| Uses a service worker, PWA shell, browser extension, or runtime message | `browser-platform-security` | A02, A08 |
+| Uses pickle, ObjectInputStream, BinaryFormatter, unsafe YAML/XML, XXE, or unserialize | `deserialization-security` | A08, CWE-502/CWE-611 |
 
 A single file-upload endpoint typically lands on four rows: upload validation, object
 authorization, storage configuration, and audit logging. Stopping at the first match is how
@@ -325,8 +337,9 @@ A05. Guidance recalled from 2021 will mis-map. Details in
 Documentation is part of the change. Before finishing:
 
 - New or modified skill → update its `README.md`, `checklist.md`, and `examples/`
-- New skill → add a row to the registry above, the routing table, the `README.md` status table,
-  `skills/shared/references/skill-graph.md`, and `skills/shared/references/standards-matrix.md`
+- New skill → update `catalog/skills.json`, then add a row to the registry above, the routing table,
+  the `README.md` status table, `skills/shared/references/skill-graph.md`, and
+  `skills/shared/references/standards-matrix.md`; run `python scripts/validate_repository.py`
 - New skill → add the reverse edge in the graph, too. A one-directional `related` is an oversight
 - Any change → add a `CHANGELOG.md` entry under Unreleased
 - Standard re-verified → update the version and date in the reference file, the table above,

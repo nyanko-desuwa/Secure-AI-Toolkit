@@ -1,7 +1,7 @@
 ---
 name: frontend-security
 description: 'Apply browser-side security controls when writing, reviewing, or hardening client code. Covers XSS and DOM sinks, framework escape hatches, sanitization, CSP, Trusted Types, CSRF, token storage, clickjacking, postMessage, and security headers. Maps to OWASP Top 10 2025 A05/A02 and ASVS 5.0 V1/V3. Triggers: "XSS", "CSP", "innerHTML", "dangerouslySetInnerHTML", "postMessage", "CSRF", "security headers", "clickjacking", "bảo mật frontend", "lỗ hổng trình duyệt".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Frontend Security

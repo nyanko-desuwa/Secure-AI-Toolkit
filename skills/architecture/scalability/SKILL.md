@@ -1,7 +1,7 @@
 ---
 name: scalability
 description: 'Secure capacity, load shedding, backpressure, caching, rate limiting, database fan-out, and autoscaling. Use when reviewing growth, replicas, queues, caches, pools, or dependency protection. Triggers: "scalability", "autoscaling", "rate limit", "backpressure", "connection pool", "cache stampede", "horizontal scaling", "khả năng mở rộng", "giới hạn tải".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Secure Scalability
@@ -146,6 +146,7 @@ Use one precise CWE per finding where possible. Details: [references/standards-m
 - `event-driven` — broker trust, delivery, and consumer lifecycle
 - `api-security` — API4, actor limits, GraphQL, and gateway headers
 - `database-security` — query plans, tenant scoping, and database controls
+- `redis-security` — Redis/Valkey ACLs, transport, persistence, eviction, and service boundaries for cache/limiter stores
 
 ## Supporting Files
 

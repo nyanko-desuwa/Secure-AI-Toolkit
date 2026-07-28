@@ -1,7 +1,7 @@
 ---
 name: publish-safety
 description: 'Prove nothing sensitive ships before you push, publish, or make anything public. Covers git history, repository visibility, package and image registries, build output, and shared diffs. Triggers: "push to git", "make repo public", "npm publish", "docker push", "deploy", "leaked .env", "push lên git", "lộ .env".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Publish Safety

@@ -1,7 +1,7 @@
 ---
 name: <skill-name>
 description: '<One line on what this skill decides. Triggers: "keyword", "keyword", "từ khoá".>'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # <Skill Name>

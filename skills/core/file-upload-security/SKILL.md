@@ -1,7 +1,7 @@
 ---
 name: file-upload-security
 description: 'Decide how to accept files from users and serve them back without handing over code execution, stored XSS, or the filesystem. Triggers: "file upload", "multipart", "avatar", "attachment", "presigned URL", "zip slip", "SVG upload", "tải tệp lên", "kiểm tra tệp".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # File Upload Security

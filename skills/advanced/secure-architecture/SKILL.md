@@ -1,7 +1,7 @@
 ---
 name: secure-architecture
 description: 'Design and review system architecture for security: trust boundaries, threat models, tenant isolation, least privilege, secure defaults, failure modes, and security ADRs. Triggers: "architecture review", "threat model", "trust boundary", "zero trust", "multi-tenant", "kiến trúc", "phân quyền".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Secure Architecture

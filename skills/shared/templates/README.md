@@ -128,12 +128,14 @@ path.
 ---
 name: skill-name
 description: 'One line on when to use this. Triggers: "keyword", "keyword", "từ khoá".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 ```
 
-Keep `allowed-tools` tight. These skills read and advise; none of them need to run arbitrary
-commands. Include Vietnamese trigger words alongside English ones.
+Keep `allowed-tools` on the `research-only` profile from `catalog/skills.json`. These skills
+read and advise; they must not request `Write`, `Edit`, or arbitrary shell. Include Vietnamese
+trigger words alongside English ones. After editing frontmatter, run
+`python scripts/validate_repository.py --write-frontmatter`.
 
 ## Checklist for a new skill
 

@@ -1,7 +1,7 @@
 ---
 name: clean-architecture
 description: 'Apply the dependency rule so authorization, invariants, and response shape each have exactly one enforcement point. Covers entities, use cases, ports and adapters, output DTOs, DI lifetimes, and mapping cost. Triggers: "clean architecture", "dependency rule", "use case", "ports and adapters", "layered architecture", "DTO mapping", "kiến trúc sạch", "phân lớp".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Clean Architecture

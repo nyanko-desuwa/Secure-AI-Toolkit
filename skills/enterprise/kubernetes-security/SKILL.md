@@ -1,7 +1,7 @@
 ---
 name: kubernetes-security
 description: 'Harden Kubernetes workloads and clusters when writing or reviewing manifests, RBAC, and cluster config. Covers Pod Security Admission, securityContext, RBAC least privilege, NetworkPolicy, Secrets, and admission control. Triggers: "Kubernetes", "k8s", "pod security", "RBAC", "NetworkPolicy", "securityContext", "Helm", "cluster hardening", "bảo mật Kubernetes", "phân quyền".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Kubernetes Security

@@ -1,7 +1,7 @@
 ---
 name: ddd
 description: 'Domain-Driven Design where the boundary is a security boundary: bounded contexts as trust boundaries, aggregates as authorization units, value objects that cannot hold invalid state, and event contracts that do not grant capability. Triggers: "DDD", "bounded context", "aggregate root", "value object", "domain event", "anti-corruption layer", "ubiquitous language", "miền nghiệp vụ", "thiết kế theo miền".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Domain-Driven Design

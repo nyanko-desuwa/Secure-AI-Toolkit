@@ -64,12 +64,12 @@ into "here is some code, and here is what I checked and what I could not."
 
 ## Status
 
-All 39 skills are written end to end. Every skill includes its workflow, checklist, real
+All 45 skills are written end to end. Every skill includes its workflow, checklist, real
 vulnerable/fixed code, limitations, and version-pinned references.
 
 | Area | State |
 |---|---|
-| `core/*` (18) | Complete |
+| `core/*` (24) | Complete |
 | `advanced/*` (6) | Complete |
 | `enterprise/*` (5) | Complete |
 | `architecture/*` (10) | Complete |
@@ -126,7 +126,7 @@ Then `/owasp`, `/common-pitfalls`, `/publish-safety`. Each skill's `description`
 also lets Claude load it on its own when the work matches — writing a query, adding an upload
 endpoint, pushing a branch.
 
-### Install all 39
+### Install all 45
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -178,12 +178,12 @@ it is watched.
 ### Worth knowing before you install all of them
 
 - **Every installed skill costs context at startup.** Only the description is loaded until a
-  skill is used, but 39 descriptions is roughly 14 KB of every session. Installing the three
+  skill is used, but 45 descriptions is roughly 16 KB of every session. Installing the three
   or four that match the project beats installing the set.
-- **The frontmatter is Claude Code specific and inert elsewhere.** `allowed-tools` in these
-  skills is deliberately narrow — read, search, and web lookups, with `Bash` limited to `ls`
-  and `cat` where it appears at all. Nothing here needs write access to do its job.
-- **This is guidance, not a scanner.** Installing 39 skills does not add a security gate. See
+- **The frontmatter is Claude Code specific and inert elsewhere.** `allowed-tools` is deliberately
+  narrow: read, search, and web lookup only. Nothing here needs write access or arbitrary shell
+  access to do its job.
+- **This is guidance, not a scanner.** Installing 45 skills does not add a security gate. See
   [Limitations](#limitations).
 
 ### Other assistants
@@ -237,6 +237,8 @@ More, including the anti-patterns worth avoiding, in
     │                     secrets-management · file-upload-security · logging-audit
     │                     frontend-security · docker-security · cloud-security
     │                     ssh-server · devsecops · ai-security · publish-safety
+    │                     http-edge-security · realtime-security · sso-federation
+    │                     browser-platform-security · deserialization-security · redis-security
     ├── advanced/         security-testing · incident-response · network-security
     │                     supply-chain-security · cryptography · secure-architecture
     ├── enterprise/       kubernetes-security · compliance · windows-security
@@ -315,9 +317,10 @@ A new skill matches the file shape above and clears the bar `core/owasp` sets:
 
 Start from [skills/shared/templates/](skills/shared/templates/) and read
 [skills/core/owasp/](skills/core/owasp/) first — the shape is easier to match than to
-describe. When you add a skill, add its row to the registry in
-[AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md), update the status table above, and add a
-`CHANGELOG.md` entry.
+describe. Update [catalog/skills.json](catalog/skills.json), run
+`python scripts/validate_repository.py`, then update the registry, graph, matrix, status table,
+and `CHANGELOG.md`. See [CONTRIBUTING.md](CONTRIBUTING.md), [MAINTENANCE.md](MAINTENANCE.md),
+[SECURITY.md](SECURITY.md), and [docs/ADOPTION.md](docs/ADOPTION.md).
 
 ## References
 

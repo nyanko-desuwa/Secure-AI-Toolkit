@@ -1,7 +1,7 @@
 ---
 name: secrets-management
 description: 'Decide how secrets are stored, delivered, rotated, and revoked. Covers the storage hierarchy, secret managers, workload identity, rotation windows, and leaked-secret response. Triggers: "secret", "API key", "credentials", "Vault", "rotation", "leaked token", "bí mật", "khoá API".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Secrets Management

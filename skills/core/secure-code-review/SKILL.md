@@ -1,7 +1,7 @@
 ---
 name: secure-code-review
 description: 'Review existing code for security as a repeatable process: scope the diff, map trust boundaries, hunt by sink, assign a CWE, disprove the finding before reporting it. Triggers: "code review", "security review", "audit this code", "CWE", "is this exploitable", "đánh giá mã nguồn", "lỗ hổng bảo mật".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Secure Code Review

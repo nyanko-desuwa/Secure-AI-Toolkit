@@ -1,7 +1,7 @@
 ---
 name: network-security
 description: 'Design and review network controls: segmentation, firewall and egress policy, DNS, TLS and mTLS, reverse proxies, VPN and bastion access, and traffic observability. Triggers: "firewall", "segmentation", "egress", "mTLS", "TLS config", "nginx", "nftables", "WAF", "bastion", "tường lửa", "mạng".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Network Security

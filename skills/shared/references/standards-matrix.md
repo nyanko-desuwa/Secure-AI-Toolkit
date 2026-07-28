@@ -44,6 +44,12 @@ before you use this as a coverage claim:
 | `ssh-server` | A02, A04, A07, A08, A09 | — | V6, V7, V8, V12, V13, V16 | CIS NGINX Benchmark |
 | `devsecops` | A03, A08 | — | V13, V15 | SLSA, NIST SP 800-218 |
 | `ai-security` | all ten | — | V1, V2, V5, V8, V10, V11, V13, V14, V15, V16 | OWASP LLM Top 10, NIST AI RMF, EU AI Act |
+| `http-edge-security` | A02, A04, A05, A06 | — | V4, V11, V13, V14 | HTTP RFC 9110–9114 |
+| `realtime-security` | A01, A04, A05, A07 | API1, API2, API4, API5 | V4, V6, V7, V8, V13 | RFC 6455, WebRTC |
+| `redis-security` | A01, A02, A03, A04, A06, A08, A09, A10 | API4 | V2, V6, V7, V8, V11, V12, V13, V14, V15, V16 | Redis OSS, Valkey, MITRE CWE |
+| `sso-federation` | A01, A07, A08 | — | V2, V3, V6, V7, V8 | SAML 2.0 |
+| `browser-platform-security` | A01, A02, A06, A08 | — | V1, V3, V13, V14 | Service Worker, WebExtensions |
+| `deserialization-security` | A05, A06, A08 | — | V2, V5, V13 | CWE-502, CWE-611, CWE-776 |
 
 ## Advanced
 

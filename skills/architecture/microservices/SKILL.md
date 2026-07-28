@@ -1,7 +1,7 @@
 ---
 name: microservices
 description: 'Microservice boundaries that preserve authorization and runtime budgets. Use when splitting services, reviewing service calls, identity, discovery, API inventory, or migration. Triggers: "microservices", "service boundary", "mTLS", "service mesh", "confused deputy", "kiến trúc microservice", "ranh giới dịch vụ".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Microservices Architecture

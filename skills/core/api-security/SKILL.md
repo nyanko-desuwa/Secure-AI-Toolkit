@@ -1,7 +1,7 @@
 ---
 name: api-security
 description: 'Secure API surfaces — REST, GraphQL, gRPC, and webhooks — against the OWASP API Security Top 10 2023 and ASVS 5.0 V4. Triggers: "API security", "REST", "GraphQL", "gRPC", "webhook", "BOLA", "mass assignment", "rate limit", "idempotency", "bảo mật API", "xác thực webhook".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # API Security

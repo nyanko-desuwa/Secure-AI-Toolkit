@@ -1,7 +1,7 @@
 ---
 name: mvc-security
 description: 'Place security controls in the correct MVC layer when writing or reviewing Laravel, Django, Rails, ASP.NET Core, or Spring MVC code. Covers mass assignment, template escaping, controller guards, and debug exposure. Triggers: "MVC", "mass assignment", "strong parameters", "fillable", "Blade", "Thymeleaf", "controller", "bảo mật MVC", "gán hàng loạt".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # MVC Security

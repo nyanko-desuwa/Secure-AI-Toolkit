@@ -1,7 +1,7 @@
 ---
 name: compliance
 description: 'Implement privacy and compliance controls in code — GDPR data subject rights, retention and deletion jobs, consent records, data inventory, audit evidence, PCI scope reduction, HIPAA safeguards. Triggers: "GDPR", "compliance", "data retention", "right to erasure", "consent", "PII", "PCI DSS", "HIPAA", "SOC 2", "ISO 27001", "audit evidence", "tuân thủ", "quyền xóa dữ liệu".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Compliance and Privacy Engineering

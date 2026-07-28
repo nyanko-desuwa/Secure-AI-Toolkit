@@ -31,7 +31,7 @@ application handler safe.
 - [ ] All application instances use the same counter store
 - [ ] Increment and first expiry are atomic; there is no GET-then-SET race
 - [ ] Counter failure denies or adds safe friction; it never becomes unlimited attempts
-- [ ] Counter-store timeout is short and the failure is alerted
+- [ ] Counter-store timeout is short and the failure is alerted; Redis/Valkey ACL, TLS, persistence, eviction, and service configuration are checked with `redis-security`
 - [ ] Identifier key uses the same Unicode, whitespace, case, and alias normalisation as account lookup
 - [ ] Proxy-derived IP uses a trusted-proxy configuration, not arbitrary `X-Forwarded-For`
 - [ ] Every credential check increments the attempt counter, including malformed and batch-carried attempts

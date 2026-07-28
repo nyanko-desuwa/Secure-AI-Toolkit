@@ -1,7 +1,7 @@
 ---
 name: owasp
 description: 'Apply OWASP standards when writing, reviewing, or designing code. Maps work to OWASP Top 10 2025, API Security Top 10 2023, and ASVS 5.0. Triggers: "OWASP", "secure code", "vulnerability", "threat model", "ASVS", "security review", "bảo mật", "lỗ hổng".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # OWASP Security

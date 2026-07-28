@@ -1,7 +1,7 @@
 ---
 name: ssh-server
 description: 'Operate a Linux server safely: SSH access, sshd hardening, systemd sandboxing, nginx/Apache TLS and headers, firewalls, and deployments that roll back. Maps to OWASP Top 10 2025 A02/A07, ASVS 5.0 V12/V13, and CIS Benchmarks. Triggers: "ssh", "sshd_config", "nginx", "systemd", "deploy", "server hardening", "bastion", "máy chủ", "triển khai".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # SSH and Server Operations

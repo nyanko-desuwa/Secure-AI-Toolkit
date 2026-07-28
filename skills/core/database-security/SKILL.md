@@ -1,7 +1,7 @@
 ---
 name: database-security
 description: 'Secure the data layer when writing queries, ORM code, migrations, or database configuration. Covers injection, tenant isolation, least privilege, encryption, and audit. Triggers: "SQL injection", "NoSQL injection", "ORM", "parameterized query", "row-level security", "multi-tenant", "migration", "truy vấn", "cơ sở dữ liệu".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Database Security
@@ -95,6 +95,7 @@ An `ORDER BY` interpolation on an admin-only endpoint is not critical. Say why.
 - `secrets-management` — where the connection string lives and how it rotates
 - `logging-audit` — what audit records go to, and who watches them
 - `api-security` — the layer above, where the tenant is established
+- `redis-security` — Redis/Valkey ACLs, transport, persistence, and command/key authorization
 
 ## Supporting Files
 

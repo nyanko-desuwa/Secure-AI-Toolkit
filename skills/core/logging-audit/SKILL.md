@@ -1,7 +1,7 @@
 ---
 name: logging-audit
 description: 'Decide what to log, what never to log, and what to alert on. Covers security event taxonomy, masking, log injection, audit trails, SIEM integration, and detection rules. Triggers: "logging", "audit log", "log injection", "SIEM", "alerting", "detection rule", "ghi log", "nhật ký kiểm toán".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Logging and Audit
@@ -106,6 +106,7 @@ Missing logs on the admin role-grant endpoint is high. Say which and why.
 - `devsecops` — pipeline configuration, log shipping, alert delivery
 - `api-security` — per-endpoint event coverage
 - `cloud-security` — log sink IAM, retention policy, WORM storage
+- `redis-security` — redact Redis URLs, credentials, command arguments, `MONITOR`, and slow-log data; monitor ACL and persistence events
 
 ## Supporting Files
 

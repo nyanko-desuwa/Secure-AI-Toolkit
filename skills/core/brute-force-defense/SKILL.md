@@ -1,7 +1,7 @@
 ---
 name: brute-force-defense
 description: 'Defend against guessing attacks: login brute force, credential stuffing, password spraying, OTP and token guessing, and the limiters that are supposed to stop them. Maps to OWASP Top 10 2025 A07, A06, A09 and ASVS 5.0 V6/V16. Triggers: "brute force", "credential stuffing", "password spraying", "rate limit", "lockout", "OTP", "throttling", "dò mật khẩu", "giới hạn đăng nhập".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Brute Force Defense
@@ -110,6 +110,7 @@ security win. Say which side of the tradeoff you are reporting.
 - `logging-audit` — what to log, and what must never reach a log
 - `advanced/incident-response` — the response path once guessing succeeded
 - `ssh-server` — `MaxAuthTries`, `LoginGraceTime`, `PerSourcePenalties` for SSH specifically
+- `redis-security` — ACL, TLS, persistence, eviction, and outage behavior of Redis/Valkey limiter stores
 
 ## Supporting Files
 

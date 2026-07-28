@@ -1,7 +1,7 @@
 ---
 name: performance
 description: 'Resource lifetime, memory leaks, and limits. Use when a process grows until it is killed, a cache or queue is unbounded, connections or listeners accumulate, or throughput needs measuring. Triggers: "memory leak", "OOM", "OOMKilled", "profiling", "cache", "backpressure", "goroutine leak", "rò rỉ bộ nhớ", "hiệu năng", "tối ưu".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Performance and Resource Lifetime

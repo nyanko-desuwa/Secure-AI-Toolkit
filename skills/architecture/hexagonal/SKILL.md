@@ -1,7 +1,7 @@
 ---
 name: hexagonal
 description: 'Ports and adapters as trust boundaries. Use when a use case is reachable from HTTP, a queue, a CLI, and a cron job and only one of them checks authorization, when an adapter leaks its transport type into the core, or when adapter clients and subscriptions are never released. Triggers: "hexagonal", "ports and adapters", "port", "adapter", "driving port", "driven port", "kiến trúc lục giác", "cổng và bộ chuyển đổi".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Hexagonal Architecture (Ports and Adapters)

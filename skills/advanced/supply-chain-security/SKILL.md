@@ -1,7 +1,7 @@
 ---
 name: supply-chain-security
 description: 'Decide how dependencies, builds, and artifacts are trusted. Covers dependency confusion, lockfiles, lifecycle scripts, SLSA provenance, SBOM, signing, CI trust, artifact promotion, and malicious-update response. Triggers: "supply chain", "dependency confusion", "typosquatting", "lockfile", "SBOM", "SLSA", "provenance", "sigstore", "cosign", "chuỗi cung ứng", "phụ thuộc".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Supply Chain Security

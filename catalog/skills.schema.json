@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/nyanko-desuwa/Secure-AI-Toolkit/catalog/skills.schema.json",
+  "title": "Secure AI Toolkit skill catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "profiles", "skills"],
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "generated_note": { "type": "string" },
+    "profiles": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/skill" }
+    }
+  },
+  "$defs": {
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "category",
+        "path",
+        "status",
+        "description",
+        "triggers",
+        "allowed_tools_profile",
+        "depends_on",
+        "related",
+        "loads",
+        "standards",
+        "routing_hints"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["core", "advanced", "enterprise", "architecture"]
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^skills/(core|advanced|enterprise|architecture)/[a-z0-9-]+$"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Ready", "Planned", "Deprecated"]
+        },
+        "description": { "type": "string", "minLength": 20 },
+        "triggers": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "allowed_tools_profile": {
+          "type": "string",
+          "enum": ["research-only", "repository-inspection"]
+        },
+        "depends_on": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "related": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "loads": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "standards": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "owasp_top10_2025",
+            "owasp_api_top10_2023",
+            "asvs_5_0",
+            "other"
+          ],
+          "properties": {
+            "owasp_top10_2025": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "owasp_api_top10_2023": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "asvs_5_0": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "other": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "routing_hints": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

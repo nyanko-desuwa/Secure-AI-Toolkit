@@ -1,7 +1,7 @@
 ---
 name: ai-security
 description: 'Secure applications that use LLMs — agents, tool calling, MCP servers, and RAG. Maps findings to OWASP Top 10 for LLM Applications 2025, OWASP Top 10 2025, and ASVS 5.0. Triggers: "prompt injection", "AI agent", "tool calling", "MCP server", "RAG", "LLM security", "bảo mật AI", "tiêm lệnh".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # AI Security

@@ -1,0 +1,26 @@
+# Gitleaks configuration for Secure AI Toolkit.
+# This repository intentionally contains labelled Vulnerable: examples with
+# synthetic credential-shaped strings. Prefer fixing examples to use obviously
+# fake values; allowlist only the smallest possible match with a rationale.
+
+title = "Secure AI Toolkit"
+
+[extend]
+useDefault = true
+
+# Global path ignores that never hold live secrets in this pack.
+[allowlist]
+description = "Non-secret path noise"
+paths = [
+  '''(?i)\.git/''',
+  '''(?i)LICENSE$''',
+]
+
+# Add didactic allowlist entries below only after review.
+# Example shape (disabled until needed):
+#
+# [[allowlists]]
+# description = "Synthetic AWS example key in labelled Vulnerable block"
+# paths = ['''skills/core/secrets-management/examples/''']
+# regexTarget = "match"
+# regexes = ['''AKIAEXAMPLEONLY0000''']

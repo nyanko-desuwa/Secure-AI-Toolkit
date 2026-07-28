@@ -1,7 +1,7 @@
 ---
 name: cloud-security
 description: 'Secure AWS, Azure, and GCP infrastructure: IAM least privilege, workload identity, object storage exposure, network boundaries, instance metadata, encryption, logging, secrets, serverless, and Terraform review. Triggers: "AWS", "Azure", "GCP", "IAM", "S3 bucket", "Terraform", "cloud misconfiguration", "IMDS", "bảo mật đám mây", "quyền truy cập".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Cloud Security
@@ -108,6 +108,7 @@ control number you have not read — the numbering shifts between major versions
 - `docker-security` — container image and runtime hardening under the cloud layer
 - `devsecops` — wiring policy-as-code into CI
 - `logging-audit` — SIEM pipelines downstream of the audit trail
+- `redis-security` — managed Redis/Valkey access, ACLs, TLS, persistence, eviction, and service telemetry
 
 ## Supporting Files
 

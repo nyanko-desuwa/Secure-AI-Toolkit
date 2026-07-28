@@ -1,7 +1,7 @@
 ---
 name: windows-security
 description: 'Harden Windows Server and deploy .NET applications without handing out domain admin. Covers service accounts, gMSA, Kerberos delegation, LSASS and credential theft, ACL privilege escalation, PowerShell/JEA, WinRM/RDP, IIS and ASP.NET Core configuration, auditing, and AppLocker/WDAC. Maps to OWASP Top 10 2025 A01/A02/A04/A09, ASVS 5.0 V13/V14/V16, and CIS Windows Server Benchmarks. Triggers: "Windows Server", "IIS", "gMSA", "service account", "Kerberos", "PowerShell hardening", "web.config", "appsettings.json", "Active Directory", "bảo mật Windows", "máy chủ Windows".'
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash(ls:*), Bash(cat:*), WebSearch, WebFetch
+allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
 # Windows Server and .NET Hardening

@@ -63,8 +63,8 @@ None. No build step, no dependency, no environment variable.
 
 To use in Claude Code, keep this repository in the working directory so
 `skills/core/publish-safety/SKILL.md` is readable, or copy the `publish-safety` directory into
-`~/.claude/skills/`. The frontmatter `allowed-tools` allows read, search, and web lookup plus
-`ls`/`cat`; it cannot run `git push`, `npm publish`, or any other publishing command itself.
+`~/.claude/skills/`. The frontmatter `allowed-tools` is research-only (read, search, web lookup);
+it cannot run `git push`, `npm publish`, or any other publishing command itself.
 
 ## Example Usage
 
@@ -117,11 +117,10 @@ More, including the anti-patterns worth avoiding, in [prompts.md](prompts.md).
 - **Ecosystem coverage is partial.** Git, npm, PyPI, Docker, and static hosting are covered in
   depth. Cargo, Go modules, Maven, NuGet, RubyGems, and Composer appear only by analogy; the
   allowlist-over-denylist reasoning transfers, the manifest field names do not.
-- **This repository does not eat its own dog food completely.** The skill tells readers to install
-  pre-commit hooks and CI secret scanning; this repository has neither, and its own `.gitignore`
-  is minimal. That is a deliberate scope decision — this is a content repository with no
-  credentials of its own — but it is an inconsistency, and stating it is better than leaving a
-  reader to notice it.
+- **This repository now runs its own publish-shaped gates.** Pull requests and tags run
+  catalog/structure validation and Gitleaks (see `.github/workflows/` and `.gitleaks.toml`).
+  That does not replace provider push protection or a consumer application's own CI — it only
+  means the pack no longer documents a gate it refuses to run on itself.
 
 ## Security Notes
 
