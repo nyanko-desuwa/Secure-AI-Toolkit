@@ -1,0 +1,39 @@
+# Semgrep rule for a high-risk GitHub Actions pattern.
+# Test against examples/vulnerable-pr-target.yml and examples/hardened-pr.yml before gating.
+rules:
+  - id: github-actions-pr-target-checkout-pr-head
+    message: >-
+      pull_request_target checks out the pull request head. This runs fork-controlled code in a
+      context that can receive repository secrets and a write-capable GITHUB_TOKEN. Use
+      pull_request for untrusted code, or keep pull_request_target limited to passive metadata.
+    severity: CRITICAL
+    languages: [yaml]
+    metadata:
+      category: security
+      technology: [github-actions]
+      owasp: [A08:2025]
+      asvs: [V13, V15]
+      cwe: CWE-829
+      confidence: HIGH
+    paths:
+      include:
+        - .github/workflows/*.yml
+        - .github/workflows/*.yaml
+    patterns:
+      - pattern-inside: |
+          on: pull_request_target
+          ...
+      - pattern-either:
+          - pattern: |
+              uses: actions/checkout@$VERSION
+              with:
+                ref: ${{ github.event.pull_request.head.sha }}
+          - pattern: |
+              uses: actions/checkout@$VERSION
+              with:
+                ref: ${{ github.event.pull_request.head.ref }}
+          - pattern: |
+              uses: actions/checkout@$VERSION
+              with:
+                repository: ${{ github.event.pull_request.head.repo.full_name }}
+                ...

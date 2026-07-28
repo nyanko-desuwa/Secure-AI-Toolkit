@@ -1,0 +1,169 @@
+# Service-to-service identity and reachability in Kubernetes.
+# Pairs with examples/README.md#network-position-used-as-identity
+# A01:2025 · CWE-602, CWE-653 · ASVS V8, V13
+#
+# The claim being fixed: "it is on the internal network, so it is us."
+# Placeholders: namespace `shop`, cluster domain `cluster.local`.
+
+---
+# ============================================================
+# Vulnerable: the orders service trusts a header set by the caller.
+# ============================================================
+# Anything that can reach port 8080 inside the cluster can send
+#   X-Internal-User: 42
+#   X-Internal-Role: admin
+# and be believed. A compromised sidecar, a mispointed job, or a
+# pod in another namespace all qualify. There is no NetworkPolicy,
+# so in a default cluster every pod can reach every pod.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orders-config-vulnerable
+  namespace: shop
+data:
+  # The service reads identity from request headers and does no verification.
+  AUTH_MODE: "trusted-header"
+  TRUSTED_USER_HEADER: "X-Internal-User"
+  TRUSTED_ROLE_HEADER: "X-Internal-Role"
+  # Nothing else in the cluster restricts who may connect.
+
+---
+# ============================================================
+# Fixed, part 1: default-deny ingress and egress for the namespace.
+# ============================================================
+# An empty podSelector selects every pod in the namespace. With both
+# policyTypes listed and no rules, nothing is allowed until a later
+# policy allows it. Reachability becomes opt-in.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: shop
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+
+---
+# Fixed, part 2: allow only the one caller that needs orders, on one port.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: orders-allow-from-api
+  namespace: shop
+spec:
+  podSelector:
+    matchLabels:
+      app: orders
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: public-api
+      ports:
+        - protocol: TCP
+          port: 8080
+
+---
+# Fixed, part 3: DNS and the database are the only egress orders needs.
+# Omitting this rule while default-deny is in place breaks DNS, which is
+# the usual reason people delete the default-deny policy instead.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: orders-egress
+  namespace: shop
+spec:
+  podSelector:
+    matchLabels:
+      app: orders
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    - to:
+        - podSelector:
+            matchLabels:
+              app: postgres
+      ports:
+        - protocol: TCP
+          port: 5432
+
+---
+# ============================================================
+# Fixed, part 4: cryptographic identity, not IP address.
+# ============================================================
+# NetworkPolicy answers "who can connect". It does not answer "who is this".
+# STRICT mTLS makes the peer identity a certificate the caller cannot forge
+# by relabelling a pod or spoofing a source address.
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: shop-mtls-strict
+  namespace: shop
+spec:
+  mtls:
+    mode: STRICT
+
+---
+# Fixed, part 5: authorize the verified principal, per method and path.
+# principals matches the SPIFFE identity from the mTLS certificate.
+# An AuthorizationPolicy with rules is allow-list: requests that match no
+# rule are denied for the selected workloads.
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: orders-allow-public-api
+  namespace: shop
+spec:
+  selector:
+    matchLabels:
+      app: orders
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals:
+              - "cluster.local/ns/shop/sa/public-api"
+      to:
+        - operation:
+            methods: ["GET", "POST"]
+            paths: ["/v1/orders", "/v1/orders/*"]
+
+---
+# Fixed, part 6: the application still authorizes the end user.
+# The mesh proves which service called. It does not prove which customer
+# the call is for. The row-level check stays next to the data
+# (see tenant-isolation.sql).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: orders-config
+  namespace: shop
+data:
+  # End-user identity comes from a verified token, not a header.
+  AUTH_MODE: "jwt"
+  JWT_ISSUER: "https://auth.example.com"
+  JWT_AUDIENCE: "https://orders.example.com"
+  # Missing or unverifiable token means deny, not anonymous.
+  ON_AUTH_UNAVAILABLE: "deny"
+
+# Known gaps:
+#   - NetworkPolicy needs a CNI that enforces it. Flannel without a policy
+#     plugin accepts these objects and enforces nothing. Verify in the
+#     cluster; a policy in git proves nothing.
+#   - STRICT mTLS applies to sidecar-injected traffic. A pod without a
+#     sidecar, or a port declared as passthrough, is outside it.
+#   - Service identity is per service account. Two workloads sharing a
+#     service account are one principal, and the policy cannot tell them apart.

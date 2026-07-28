@@ -1,0 +1,136 @@
+# Secure defaults, before and after.
+# Companion to examples/README.md#a-default-that-fails-open
+# A02:2025 · ASVS V13 · CWE-1188
+#
+# Placeholders only. No real hostnames, keys, or account identifiers.
+
+# ---------------------------------------------------------------------------
+# VULNERABLE: every unset value resolves to the permissive option.
+# Do not copy this block.
+# ---------------------------------------------------------------------------
+vulnerable:
+  auth:
+    # Absent in staging, so staging runs unauthenticated and nobody notices
+    # until the same manifest ships to production.
+    require_authentication: false
+    require_mfa_for_admin: false
+    session_timeout_minutes: 0        # 0 read as "no timeout"
+
+  cors:
+    allowed_origins: ["*"]            # wildcard with credentials below
+    allow_credentials: true
+
+  authorization:
+    # The dangerous one: an action absent from the policy map is allowed.
+    default_effect: allow
+    policies:
+      "orders:read": ["customer", "support", "admin"]
+      "orders:refund": ["admin"]
+      # "orders:delete" was never added, so every role can call it.
+
+  tenancy:
+    # New tenants inherit the permissive template.
+    new_tenant_data_sharing: enabled
+    new_tenant_public_api: enabled
+
+  transport:
+    tls_min_version: ""               # empty read as "any"
+    verify_upstream_certificates: false
+
+  storage:
+    bucket_public_read: true
+    encryption_at_rest: false
+
+  audit:
+    enabled: false                    # off unless someone turns it on
+
+# ---------------------------------------------------------------------------
+# FIXED: the safe value is the default, the unsafe path is named, and a
+# missing required value stops the process instead of resolving to permissive.
+# ---------------------------------------------------------------------------
+fixed:
+  # Values the loader treats as required. Absent -> refuse to start, with the
+  # missing key named in the error. A crash at deploy beats an open CORS policy.
+  required:
+    - cors.allowed_origins
+    - transport.tls_min_version
+    - database.tenant_isolation_role
+
+  auth:
+    require_authentication: true
+    require_mfa_for_admin: true
+    session_timeout_minutes: 30
+    # Opt-out is spelled so it cannot be enabled by accident, and the loader
+    # logs mfa_disabled_by_configuration at WARN when it is set. Grep prod logs
+    # for that string; if it appears outside a local run, that is an incident.
+    insecure_disable_mfa: false
+
+  cors:
+    allowed_origins: []               # no default. Required above.
+    allow_credentials: true           # only meaningful with explicit origins
+
+  authorization:
+    # An action missing from the map is denied. A new endpoint is unreachable
+    # until someone adds a policy line, which is the point.
+    default_effect: deny
+    policies:
+      "orders:read": ["customer", "support", "admin"]
+      "orders:refund": ["admin"]
+
+  tenancy:
+    new_tenant_data_sharing: disabled
+    new_tenant_public_api: disabled
+
+  transport:
+    tls_min_version: ""               # required above; "1.2" or "1.3"
+    verify_upstream_certificates: true
+
+  storage:
+    bucket_public_read: false
+    encryption_at_rest: true
+
+  audit:
+    enabled: true
+    # Refuse to serve if the audit sink is unreachable at startup, for the
+    # operations listed. See the failure-mode table: a money movement with no
+    # record is worse than a 503.
+    fail_closed_operations:
+      - "orders:refund"
+      - "users:role_change"
+      - "tenants:export"
+
+  # Per-dependency answer to "what happens when this is down". A single global
+  # fail-open or fail-closed policy produces either outages or bypasses.
+  failure_modes:
+    identity_provider:
+      on_unavailable: deny            # no new sessions
+      existing_sessions: honour_until_expiry
+    authorization_service:
+      on_unavailable: deny
+      cache_ttl_seconds: 30           # bounded staleness, not unbounded
+    audit_sink:
+      on_unavailable: deny_listed_operations
+    feature_flag_service:
+      on_unavailable: use_compiled_defaults   # defaults are the safe values
+
+# ---------------------------------------------------------------------------
+# Enforcing this rather than documenting it.
+#
+# 1. Config schema test: assert every boolean security flag defaults to the
+#    restrictive value when the key is absent. This catches the next flag
+#    someone adds with a permissive default.
+#
+# 2. Startup assertion: the process refuses to start when a `required` key is
+#    missing or empty, and names the key. No inferred wildcard, no empty
+#    string treated as "any".
+#
+# 3. Loud opt-out: every insecure_* flag logs at WARN on activation with a
+#    stable event name, so its presence in production is detectable rather
+#    than archaeological.
+#
+# Why this closes the hole: the vulnerable version fails toward availability,
+# so a typo, a missing staging value, or a forgotten policy line all resolve to
+# "allow" with no signal. The fixed version has exactly two outcomes for a
+# missing value -- the safe default, or a refusal to start. Neither is silently
+# permissive, which is the only property that survives a rushed deploy.
+# ---------------------------------------------------------------------------

@@ -1,0 +1,30 @@
+# Fast local checks only. Server-side CI repeats security checks because hooks are bypassable.
+minimum_pre_commit_version: '4.0.0'
+fail_fast: true
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: cef0300fd0fc4d2a87a85fa2093c6b283ea36f4b # v5.0.0
+    hooks:
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e # v8.30.1
+    hooks:
+      - id: gitleaks
+        args: [--redact]
+
+  - repo: local
+    hooks:
+      - id: semgrep-fast
+        name: Semgrep fast project rules
+        language: system
+        entry: semgrep scan --config .semgrep/fast --error
+        types_or: [python, javascript, ts, yaml]
+        pass_filenames: true
+        require_serial: true

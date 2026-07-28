@@ -1,0 +1,94 @@
+name: PR security gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+# No ambient token authority. Jobs opt in below.
+permissions: {}
+
+jobs:
+  fast-security:
+    name: Fast security checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    timeout-minutes: 10
+    steps:
+      - name: Check out without persisting credentials
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install without lifecycle scripts
+        run: npm ci --ignore-scripts
+
+      - name: Run tests
+        run: npm test -- --runInBand
+
+      - name: Install pinned Semgrep
+        run: python -m pip install --disable-pip-version-check semgrep==1.135.0
+
+      - name: Semgrep changed-code gate
+        run: |
+          semgrep scan \
+            --config .semgrep \
+            --error \
+            --baseline-commit "${{ github.event.pull_request.base.sha }}"
+
+      - name: Dependency audit from lockfile
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: IaC scan
+        uses: bridgecrewio/checkov-action@eeb2992d61cccc8dc52f587fa05d017f714146da # v12.1232.0
+        with:
+          directory: .
+          framework: terraform,kubernetes,cloudformation
+          soft_fail: false
+          quiet: true
+
+  secret-scan:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Scan changed history
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  container:
+    name: Build and scan image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Build local image
+        run: docker build --tag local/app:${{ github.sha }} .
+      - name: Scan image
+        uses: aquasecurity/trivy-action@61815dcd50bd041e203e49132bacad1fd04d2708 # v5.1.1
+        with:
+          image-ref: local/app:${{ github.sha }}
+          format: table
+          ignore-unfixed: true
+          vuln-type: os,library
+          severity: CRITICAL,HIGH
+          exit-code: '1'

@@ -1,0 +1,21 @@
+name: Vulnerable fork workflow
+
+# DO NOT ENABLE. This fixture demonstrates CWE-829.
+on:
+  pull_request_target:
+    types: [opened, synchronize]
+
+permissions: write-all
+
+jobs:
+  test-untrusted-code:
+    runs-on: ubuntu-latest
+    steps:
+      # Vulnerable: this checks out attacker-controlled PR code in a privileged context.
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      # Vulnerable: install hooks and tests execute fork-controlled code with a write token.
+      - run: npm ci && npm test
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
