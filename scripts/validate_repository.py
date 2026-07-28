@@ -40,6 +40,106 @@ PLACEHOLDER_RE = re.compile(
 FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
 MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
 FORBIDDEN_TOOLS = re.compile(r"\b(Write|Edit)\b")
+PILOT_OWNERSHIP_SKILLS = {
+    "redis-security",
+    "api-security",
+    "authentication",
+    "ai-security",
+    "email-security",
+    "http-client-security",
+}
+OWNERSHIP_HEADING = "## Ownership Boundary"
+GRAPH_START = "<!-- GENERATED SKILL GRAPH: START -->"
+GRAPH_END = "<!-- GENERATED SKILL GRAPH: END -->"
+
+
+def catalog_ref(ref: str) -> str:
+    """Return the canonical catalog name from a human-readable graph reference."""
+    return bare_name(ref)
+
+
+def normalized_refs(refs: list[str]) -> list[str]:
+    return [catalog_ref(ref) for ref in refs]
+
+
+def section_after_heading(text: str, heading: str) -> str:
+    match = re.search(
+        rf"^{re.escape(heading)}\s*$\n(.*?)(?=^##\s|\Z)",
+        text,
+        re.MULTILINE | re.DOTALL,
+    )
+    return match.group(1) if match else ""
+
+
+def ownership_owner_ids(section: str) -> set[str]:
+    return set(re.findall(r"`([a-z0-9]+(?:-[a-z0-9]+)*)`", section))
+
+
+def render_graph(catalog: dict[str, Any]) -> str:
+    """Render the catalog-owned relationship tables deterministically."""
+    lines = [GRAPH_START, ""]
+    for category in CATEGORIES:
+        title = category.title() if category != "architecture" else "Architecture"
+        lines.extend([f"## {title}", "", "| Skill | depends_on | related | loads |", "|---|---|---|---|"])
+        for skill in (s for s in catalog["skills"] if s["category"] == category):
+            def cell(values: list[str]) -> str:
+                return ", ".join(f"`{value}`" for value in values) if values else "—"
+            lines.append(
+                f"| `{skill['name']}` | {cell(skill['depends_on'])} | "
+                f"{cell(skill['related'])} | {', '.join(skill['loads']) or '—'} |"
+            )
+        lines.extend([""])
+    lines.append(GRAPH_END)
+    return "\n".join(lines)
+
+
+def graph_with_generated_region(text: str, catalog: dict[str, Any]) -> str:
+    generated = render_graph(catalog)
+    pattern = re.compile(
+        rf"{re.escape(GRAPH_START)}.*?{re.escape(GRAPH_END)}",
+        re.DOTALL,
+    )
+    if not pattern.search(text):
+        raise ValueError("skill graph has no generated-region markers")
+    return pattern.sub(generated, text, count=1)
+
+
+def validate_skill_graph(catalog: dict[str, Any], report: Report, write: bool = False) -> None:
+    path = ROOT / "skills" / "shared" / "references" / "skill-graph.md"
+    if not path.is_file():
+        report.err("missing skills/shared/references/skill-graph.md")
+        return
+    text = path.read_text(encoding="utf-8")
+    try:
+        expected = graph_with_generated_region(text, catalog)
+    except ValueError as exc:
+        report.err(str(exc))
+        return
+    if write:
+        if expected != text:
+            path.write_text(expected, encoding="utf-8", newline="\n")
+        return
+    if expected != text:
+        report.err("skill graph generated region is stale; run --write-skill-graph")
+
+
+def report_boundaries(skills: dict[str, dict[str, Any]]) -> None:
+    print("ownership boundaries:")
+    for name in sorted(skills):
+        ownership = skills[name].get("ownership")
+        if not ownership:
+            continue
+        assets = "; ".join(ownership["protected_assets"])
+        handoffs = ", ".join(
+            f"{item['owner']} ({item['concern']})" for item in ownership["non_goals"]
+        )
+        related = ", ".join(skills[name]["related"]) or "—"
+        print(f"  {name}: {ownership['owner_boundary']}")
+        print(f"    assets: {assets}")
+        print(f"    hand-offs: {handoffs}")
+        print(f"    related: {related}")
+
+
 
 
 class Report:
@@ -127,6 +227,44 @@ def validate_schema_lite(catalog: dict[str, Any], report: Report) -> None:
             ):
                 if key not in standards or not isinstance(standards[key], list):
                     report.err(f"{name}: standards.{key} must be an array")
+        ownership = skill.get("ownership")
+        if ownership is None:
+            if name in PILOT_OWNERSHIP_SKILLS:
+                report.err(f"{name}: pilot skill must define ownership metadata")
+            elif skill.get("status") == "Ready":
+                report.warn(f"{name}: Ready legacy skill has no ownership metadata")
+            continue
+        if not isinstance(ownership, dict):
+            report.err(f"{name}: ownership must be an object")
+            continue
+        expected = {"owner_boundary", "protected_assets", "non_goals"}
+        missing_ownership = expected - set(ownership)
+        extras = set(ownership) - expected
+        if missing_ownership:
+            report.err(f"{name}: ownership missing fields: {sorted(missing_ownership)}")
+        if extras:
+            report.err(f"{name}: ownership has unsupported fields: {sorted(extras)}")
+        boundary = ownership.get("owner_boundary")
+        if not isinstance(boundary, str) or len(boundary.strip()) < 20:
+            report.err(f"{name}: ownership.owner_boundary must be a specific non-empty statement")
+        assets = ownership.get("protected_assets")
+        if not isinstance(assets, list) or not assets or any(
+            not isinstance(asset, str) or not asset.strip() for asset in assets
+        ):
+            report.err(f"{name}: ownership.protected_assets must be a non-empty string array")
+        non_goals = ownership.get("non_goals")
+        if not isinstance(non_goals, list) or not non_goals:
+            report.err(f"{name}: ownership.non_goals must be a non-empty array")
+        elif any(
+            not isinstance(item, dict)
+            or set(item) != {"concern", "owner"}
+            or not isinstance(item.get("concern"), str)
+            or not item["concern"].strip()
+            or not isinstance(item.get("owner"), str)
+            or not item["owner"].strip()
+            for item in non_goals
+        ):
+            report.err(f"{name}: each ownership.non_goals item needs only non-empty concern and owner")
 
 
 def discover_production_dirs() -> dict[str, Path]:
@@ -246,6 +384,63 @@ def validate_graph_edges(skills: dict[str, dict[str, Any]], report: Report) -> N
                 report.err(f"{name}: related unknown skill {rel!r}")
             if b == name:
                 report.err(f"{name}: related self")
+
+        ownership = skill.get("ownership")
+        if isinstance(ownership, dict):
+            for item in ownership.get("non_goals", []):
+                if not isinstance(item, dict) or not isinstance(item.get("owner"), str):
+                    continue
+                owner = item["owner"]
+                if owner not in names:
+                    report.err(f"{name}: non-goal hand-off references unknown skill {owner!r}")
+                elif owner == name:
+                    report.err(f"{name}: non-goal hand-off must not route to itself")
+
+    visited: set[str] = set()
+    active: set[str] = set()
+
+    def visit(name: str) -> None:
+        if name in active:
+            report.err(f"depends_on cycle detected at {name}")
+            return
+        if name in visited:
+            return
+        active.add(name)
+        for dependency in skills[name].get("depends_on", []):
+            target = bare_name(dependency)
+            if target in skills:
+                visit(target)
+        active.remove(name)
+        visited.add(name)
+
+    for name in skills:
+        visit(name)
+
+    for name, skill in skills.items():
+        ownership = skill.get("ownership")
+        if not isinstance(ownership, dict):
+            continue
+        handoff_owners = {
+            item["owner"]
+            for item in ownership.get("non_goals", [])
+            if isinstance(item, dict) and isinstance(item.get("owner"), str)
+        }
+        if name in PILOT_OWNERSHIP_SKILLS:
+            skill_md = ROOT / skill["path"] / "SKILL.md"
+            section = section_after_heading(skill_md.read_text(encoding="utf-8"), OWNERSHIP_HEADING)
+            if not section:
+                report.err(f"{name}: SKILL.md missing {OWNERSHIP_HEADING}")
+                continue
+            if "| Concern | Route to |" not in section:
+                report.err(f"{name}: ownership section must contain '| Concern | Route to |' table")
+            documented = ownership_owner_ids(section)
+            missing = handoff_owners - documented
+            if missing:
+                report.err(
+                    f"{name}: ownership table does not route to catalog non-goal owners: {sorted(missing)}"
+                )
+        elif handoff_owners:
+            report.warn(f"{name}: ownership metadata is present but SKILL.md ownership section is not yet required")
 
 
 def validate_counts_in_docs(catalog: dict[str, Any], report: Report) -> None:
@@ -418,6 +613,16 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="Skip internal markdown link checks",
     )
+    parser.add_argument(
+        "--write-skill-graph",
+        action="store_true",
+        help="Regenerate the marked skill-graph region from catalog relationships",
+    )
+    parser.add_argument(
+        "--report-boundaries",
+        action="store_true",
+        help="Print ownership-boundary metadata after validation",
+    )
     args = parser.parse_args(argv)
 
     if args.extract_changelog:
@@ -441,15 +646,25 @@ def main(argv: list[str] | None = None) -> int:
     if args.write_frontmatter:
         apply_frontmatter_profiles(catalog, report, write=True)
         print("Wrote allowed-tools frontmatter from catalog profiles")
+    if args.write_skill_graph:
+        validate_skill_graph(catalog, report, write=True)
+        if report.errors:
+            for e in report.errors:
+                print(f"ERROR: {e}", file=sys.stderr)
+            return 1
+        print("Wrote generated skill graph from catalog relationships")
 
     skills = validate_filesystem(catalog, report)
     validate_graph_edges(skills, report)
+    validate_skill_graph(catalog, report)
     validate_counts_in_docs(catalog, report)
     validate_scaffold_tools(catalog, report)
     if not args.skip_links:
         validate_internal_links(report)
 
     print_summary(catalog)
+    if args.report_boundaries:
+        report_boundaries(skills)
     for w in report.warnings:
         print(f"WARNING: {w}", file=sys.stderr)
     for e in report.errors:

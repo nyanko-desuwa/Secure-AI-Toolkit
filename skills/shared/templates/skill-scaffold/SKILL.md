@@ -15,6 +15,18 @@ allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 - <Designing ...>
 - <Mapping a finding to a standard>
 
+## Ownership Boundary
+
+**Owns:** <The trust or service boundary this skill is the primary owner for.>
+
+**Does not own:**
+
+| Concern | Route to |
+|---|---|
+| <Adjacent decision this skill must not duplicate> | `<canonical-skill-name>` |
+
+The catalog `ownership` object is canonical. Keep this table aligned with its `non_goals` owners.
+
 ## Standards This Skill Maps To
 
 | Standard | Use it for | Version here |

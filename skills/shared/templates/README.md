@@ -63,7 +63,7 @@ Two habits worth copying:
 ## Content policy for new skills
 
 These apply to any skill added or substantially rewritten from now on. Existing skills are not
-being retrofitted — a sweep across 39 skills would produce a large diff and no new guidance, and
+being retrofitted — a sweep across 47 skills would produce a large diff and no new guidance, and
 the ones already written meet the bar above. So this section describes the shape of the next skill,
 not a debt against the current ones.
 
@@ -87,11 +87,21 @@ not implied.
 Plus the anti-pattern table: the prompt that produces a reassuring non-answer (`"is this secure?"`)
 next to the one that produces a finding.
 
-### `SKILL.md` — a `When NOT to Use` routing table
+### `SKILL.md` — routing and ownership boundaries
 
-Two columns: the request shape that looks like this skill, and the skill that actually owns it.
-This is the highest-value paragraph in the file. A skill that cannot say what it does not cover
-gets loaded for everything, which is how the loading budget in `AI_INSTRUCTIONS.md` gets blown.
+`When NOT to Use` has two columns: the request shape that looks like this skill, and the skill
+that actually owns it. This is the highest-value paragraph in the file. A skill that cannot say
+what it does not cover gets loaded for everything, which is how the loading budget in
+`AI_INSTRUCTIONS.md` gets blown.
+
+Also complete `## Ownership Boundary`: one specific boundary the skill owns, then the standard
+`Does not own` table. The catalog is canonical: its `ownership.owner_boundary`,
+`protected_assets`, and `non_goals` fields must match the owner IDs in the table. Do not repeat
+`related` or `loads` as new metadata; they already describe the canonical graph.
+
+A new skill needs all three mandatory conditions — a clear owner boundary, routing path, and
+non-goals — plus at least three of: distinct assets, attack surface, verifiable workflow, primary
+standards, or lifecycle. Otherwise expand an existing owner skill instead of adding a directory.
 
 ### Framework and platform coverage, named
 
@@ -145,12 +155,13 @@ trigger words alongside English ones. After editing frontmatter, run
 - [ ] `examples/README.md` has at least three vulnerable/fixed pairs, one of them a real-world shape
 - [ ] Every vulnerable block labelled `Vulnerable:` and paired with a fix
 - [ ] `prompts.md` covers all four tiers: beginner, developer, review, audit — plus anti-patterns
-- [ ] `SKILL.md` has a `When NOT to Use` section routing to the skill that does own it
+- [ ] `SKILL.md` has `When NOT to Use` and `Ownership Boundary` sections routing to the skill that does own it
+- [ ] Catalog `ownership` states the owner boundary, protected assets, and every non-goal hand-off
 - [ ] Framework and ecosystem coverage stated by name, with the gaps named too
 - [ ] Reference files carry a version and the date verified
 - [ ] Limitations section is specific, not boilerplate
 - [ ] No real credentials, hostnames, or personal data anywhere
-- [ ] Row added to `skills/shared/references/skill-graph.md`, with the reverse edge
+- [ ] Catalog relationships updated and `python scripts/validate_repository.py --write-skill-graph` run
 - [ ] Row added to `skills/shared/references/standards-matrix.md`
 - [ ] `AI_INSTRUCTIONS.md` registry and routing rows added
 - [ ] Root `README.md` status table and skill count updated

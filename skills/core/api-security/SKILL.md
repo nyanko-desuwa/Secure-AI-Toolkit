@@ -18,6 +18,20 @@ API Security Top 10 2023 in depth.
 - Verifying a webhook receiver or an outbound delivery pipeline
 - Choosing between API keys, bearer tokens, and mTLS
 
+## Ownership Boundary
+
+**Owns:** The server-facing API boundary: request/response contracts, object/function/field
+authorization, webhook handlers, and API resource controls.
+
+**Does not own:**
+
+| Concern | Route to |
+|---|---|
+| Credential, session, token, and OAuth lifecycle policy | `authentication` |
+| Reverse-proxy trust, HTTP framing, and shared cache configuration | `http-edge-security` |
+| Secret lifecycle and signing-key storage | `secrets-management` |
+| Application-wide audit retention and detection operations | `logging-audit` |
+
 ## The Standard
 
 OWASP API Security Top 10 2023 is the primary list here. ASVS 5.0 V4 (API and Web Service)

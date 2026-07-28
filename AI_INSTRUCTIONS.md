@@ -9,9 +9,11 @@ Entry point for AI coding assistants. Read this first, before touching any skill
 Do not load the whole repository. Load in this order and stop when you have enough:
 
 1. **This file** — routing, rules, output contract.
-2. **The registry below** — pick the skill that matches the task.
-3. **That skill's `SKILL.md`** — workflow and severity rules.
-4. **Only the supporting files the workflow points you at.** `checklist.md` before returning
+2. **The registry below** — pick the skill that owns the primary boundary.
+3. **That skill's `SKILL.md`** — workflow, severity rules, and explicit hand-offs.
+4. **Only the directly relevant related skills or hand-off owners.** Do not load duplicates of
+   the same policy just because a keyword appears in several skills.
+5. **Only the supporting files the workflow points you at.** `checklist.md` before returning
    code, `references/` when you need a category ID or requirement number, `examples/` when
    you need the shape of a fix.
 
@@ -46,6 +48,8 @@ Reading eleven files when the task needs two wastes context that the actual code
 | SSO Federation | `skills/core/sso-federation/` | Ready | SAML, IdP/SP metadata, ACS, assertions, enterprise SSO |
 | Browser Platform Security | `skills/core/browser-platform-security/` | Ready | Service workers, PWAs, browser extensions, manifests, runtime messages |
 | Deserialization Security | `skills/core/deserialization-security/` | Ready | pickle, ObjectInputStream, BinaryFormatter, unsafe YAML/XML, XXE |
+| Email Security | `skills/core/email-security/` | Ready | SMTP, sender domains, SPF/DKIM/DMARC, reset/verification mail, provider events |
+| HTTP Client Security | `skills/core/http-client-security/` | Ready | Outbound HTTP, SSRF, redirects, proxies, client TLS, timeouts, retries |
 
 All skills under `advanced/`, `enterprise/`, and `architecture/` are Ready. Check the full
 file set and the skill's checklist before relying on a future addition.
@@ -68,7 +72,9 @@ row — take every row that applies.
 | Loads an object by ID from a request | `api-security`, `owasp` | A01, API1 BOLA |
 | Binds request data onto a model | `mvc-security` | A01, API3 |
 | Accepts a file path or upload | `file-upload-security` | A01 + A08 |
-| Fetches a user-supplied URL | `api-security` | A06, API7 SSRF |
+| Fetches a user-supplied URL | `api-security`, `http-client-security` | A06, API7 SSRF |
+| Sends transactional mail, reset/verification links, or handles mail-provider events | `email-security` plus the role owner | A01, A02, A04, A08 |
+| Creates outbound HTTP calls or configures redirects, proxy, TLS client, timeout, retry, or response limits | `http-client-security` | A01, A02, A04, A06 |
 | Issues, verifies, or stores a token | `authentication` | A07, ASVS V9/V10 |
 | Accepts a guessable secret: password, OTP, reset token, invite or coupon code | `brute-force-defense` | A07, API4, CWE-307/799 |
 | Renders untrusted data into a page | `frontend-security`, `mvc-security` | A05, ASVS V1/V3 |

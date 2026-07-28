@@ -3,7 +3,7 @@
 Which skill cites which standard. Read it in either direction: pick a skill and see what it will
 cite at you, or pick a category and find the skill that owns it.
 
-Extracted from the 39 `SKILL.md` files on 2026-07-28. The versions are the repository-wide pins in
+Derived from the 47 production skills on 2026-07-29. The versions are the repository-wide pins in
 [README.md](README.md): OWASP Top 10 **2025**, OWASP API Security Top 10 **2023**, OWASP ASVS
 **5.0.0**.
 
@@ -50,6 +50,8 @@ before you use this as a coverage claim:
 | `sso-federation` | A01, A07, A08 | — | V2, V3, V6, V7, V8 | SAML 2.0 |
 | `browser-platform-security` | A01, A02, A06, A08 | — | V1, V3, V13, V14 | Service Worker, WebExtensions |
 | `deserialization-security` | A05, A06, A08 | — | V2, V5, V13 | CWE-502, CWE-611, CWE-776 |
+| `email-security` | A01, A02, A04, A05, A06, A08, A09, A10 | API4, API8, API10 | V2, V4, V6, V7, V8, V11, V12, V13, V14, V15, V16 | RFC 5321, 5322, 6376, 7208, 7489 |
+| `http-client-security` | A01, A02, A04, A06, A08, A09, A10 | API4, API7, API8, API10 | V4, V7, V8, V11, V12, V13, V14, V15, V16 | RFC 3986, 9110, 9325; OWASP SSRF Cheat Sheet |
 
 ## Advanced
 

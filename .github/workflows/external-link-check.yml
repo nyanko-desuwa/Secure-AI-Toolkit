@@ -1,0 +1,90 @@
+name: External link monitor
+
+on:
+  schedule:
+    # Weekly Monday 06:19 UTC, off the hour. Advisory only: upstream outages do not block releases.
+    - cron: "19 6 * * 1"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  monitor:
+    name: External reference monitor
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    timeout-minutes: 20
+    steps:
+      - name: Check out default branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Check external Markdown links
+        run: python scripts/check_external_links.py --output external-link-report.json
+
+      - name: Upload advisory report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: external-link-report
+          path: external-link-report.json
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Upsert stable-failure issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh label create external-links --repo "$REPOSITORY" --color "fbca04" --description "Advisory external documentation links" --force
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          report = json.loads(Path("external-link-report.json").read_text(encoding="utf-8"))
+          def lines(items):
+              if not items:
+                  return "- None"
+              return "\n".join(
+                  f"- `{item['url']}` — {item['state']}: {item.get('status', item.get('detail', 'unknown'))} (sources: {', '.join(item['sources'])})"
+                  for item in items
+              )
+          body = """# External link monitor
+
+<!-- actionable-fingerprint: %s -->
+
+This is an advisory maintenance signal. It lists stable 404/410 failures and blocked unsafe targets. Transient 429, 5xx, timeout, DNS, and bot-protection results remain in the workflow artifact for human review and do not create issue churn.
+
+## Actionable failures
+%s
+
+## Last observed transient results
+%s
+
+Checked %s links. [Workflow run](%s).
+""" % (
+              report["actionable_fingerprint"], lines(report["broken"] + report["blocked"]),
+              lines(report["transient"]), report["checked"], os.environ["RUN_URL"],
+          )
+          Path("external-link-issue.md").write_text(body, encoding="utf-8")
+          Path("has-actionable-failures").write_text("yes" if report["broken"] or report["blocked"] else "no", encoding="utf-8")
+          Path("fingerprint").write_text(report["actionable_fingerprint"], encoding="utf-8")
+          PY
+          issue_number="$(gh issue list --repo "$REPOSITORY" --state open --label external-links --search 'in:title "External link monitor"' --json number,body --jq '.[0].number')"
+          if [ "$(cat has-actionable-failures)" = yes ]; then
+            if [ -n "$issue_number" ]; then
+              existing="$(gh issue view "$issue_number" --repo "$REPOSITORY" --json body --jq .body)"
+              if ! printf '%s' "$existing" | grep -Fq "<!-- actionable-fingerprint: $(cat fingerprint) -->"; then
+                gh issue edit "$issue_number" --repo "$REPOSITORY" --body-file external-link-issue.md
+              fi
+            else
+              gh issue create --repo "$REPOSITORY" --title "External link monitor" --label external-links --body-file external-link-issue.md
+            fi
+          elif [ -n "$issue_number" ]; then
+            gh issue comment "$issue_number" --repo "$REPOSITORY" --body "External link monitor recovered: no stable broken or unsafe targets. [Workflow run]($RUN_URL)."
+            gh issue close "$issue_number" --repo "$REPOSITORY"
+          fi

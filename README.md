@@ -64,12 +64,12 @@ into "here is some code, and here is what I checked and what I could not."
 
 ## Status
 
-All 45 skills are written end to end. Every skill includes its workflow, checklist, real
+All 47 skills are written end to end. Every skill includes its workflow, checklist, real
 vulnerable/fixed code, limitations, and version-pinned references.
 
 | Area | State |
 |---|---|
-| `core/*` (24) | Complete |
+| `core/*` (26) | Complete |
 | `advanced/*` (6) | Complete |
 | `enterprise/*` (5) | Complete |
 | `architecture/*` (10) | Complete |
@@ -126,7 +126,7 @@ Then `/owasp`, `/common-pitfalls`, `/publish-safety`. Each skill's `description`
 also lets Claude load it on its own when the work matches — writing a query, adding an upload
 endpoint, pushing a branch.
 
-### Install all 45
+### Install all 47
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -178,12 +178,12 @@ it is watched.
 ### Worth knowing before you install all of them
 
 - **Every installed skill costs context at startup.** Only the description is loaded until a
-  skill is used, but 45 descriptions is roughly 16 KB of every session. Installing the three
+  skill is used, but 47 descriptions is roughly 17 KB of every session. Installing the three
   or four that match the project beats installing the set.
 - **The frontmatter is Claude Code specific and inert elsewhere.** `allowed-tools` is deliberately
   narrow: read, search, and web lookup only. Nothing here needs write access or arbitrary shell
   access to do its job.
-- **This is guidance, not a scanner.** Installing 45 skills does not add a security gate. See
+- **This is guidance, not a scanner.** Installing 47 skills does not add a security gate. See
   [Limitations](#limitations).
 
 ### Other assistants
@@ -239,6 +239,7 @@ More, including the anti-patterns worth avoiding, in
     │                     ssh-server · devsecops · ai-security · publish-safety
     │                     http-edge-security · realtime-security · sso-federation
     │                     browser-platform-security · deserialization-security · redis-security
+    │                     email-security · http-client-security
     ├── advanced/         security-testing · incident-response · network-security
     │                     supply-chain-security · cryptography · secure-architecture
     ├── enterprise/       kubernetes-security · compliance · windows-security
@@ -320,7 +321,10 @@ Start from [skills/shared/templates/](skills/shared/templates/) and read
 describe. Update [catalog/skills.json](catalog/skills.json), run
 `python scripts/validate_repository.py`, then update the registry, graph, matrix, status table,
 and `CHANGELOG.md`. See [CONTRIBUTING.md](CONTRIBUTING.md), [MAINTENANCE.md](MAINTENANCE.md),
-[SECURITY.md](SECURITY.md), and [docs/ADOPTION.md](docs/ADOPTION.md).
+[SECURITY.md](SECURITY.md), and [docs/ADOPTION.md](docs/ADOPTION.md). The adoption guide also
+lists companion controls the toolkit does not replace and provides
+[threat-model](docs/templates/threat-model.md) and
+[security-design-review](docs/templates/security-design-review.md) templates.
 
 ## References
 

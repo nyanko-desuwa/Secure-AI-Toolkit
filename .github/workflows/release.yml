@@ -26,6 +26,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Run script tests
+        run: python -m unittest discover -s tests -t . -v
+
       - name: Validate repository
         run: python scripts/validate_repository.py
 

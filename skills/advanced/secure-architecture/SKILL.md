@@ -126,3 +126,5 @@ namespace and Critical when the same cluster hosts an untrusted workload.
 - [prompts.md](prompts.md) — prompts that produce findings, and anti-patterns
 - [references/](references/) — standards, version-pinned with check dates
 - [examples/](examples/) — seven vulnerable/fixed architecture pairs
+- [Threat model template](../../../docs/templates/threat-model.md) — reviewable boundary and residual-risk record
+- [Security design review template](../../../docs/templates/security-design-review.md) — architecture-change decision and evidence record

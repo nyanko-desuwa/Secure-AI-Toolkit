@@ -22,16 +22,49 @@ directory, put a replacement pointer at the top of `SKILL.md`, and note it in
 ## Canonical catalog
 
 [`catalog/skills.json`](catalog/skills.json) is the source of truth for production
-skill identity, category, graph edges, standards cells, tool profile, and routing
-hints. The scaffold under `skills/shared/templates/` is **not** a production skill.
+skill identity, category, graph edges, standards cells, tool profile, routing hints, and ownership
+metadata. The scaffold under `skills/shared/templates/` is **not** a production skill.
+
+`ownership` identifies a skill's owner boundary, protected assets, and explicit non-goal hand-offs.
+It is required for new skills and the current pilot skills; legacy skills receive warnings until
+changed substantively. The human-readable `## Ownership Boundary` table mirrors owner IDs only.
+
+`depends_on` must remain acyclic because it means “load this first.” Reciprocal `related`, `loads`,
+or non-goal hand-offs can be valid for task-specific co-loading; treat them as a context-budget
+review signal, not an automatic error.
 
 After any skill add/rename/edge change:
 
-1. Edit the catalog (or regenerate edges carefully)
-2. Run `python scripts/validate_repository.py`
-3. Run `python scripts/validate_repository.py --write-frontmatter` if profiles changed
-4. Update free-prose docs that the validator does not generate
-5. Add a `CHANGELOG.md` entry under Unreleased
+1. Edit the catalog
+2. Run `python scripts/validate_repository.py --write-skill-graph`
+3. Run `python scripts/validate_repository.py`
+4. Run `python scripts/validate_repository.py --write-frontmatter` if profiles changed
+5. Update free-prose docs that the validator does not generate
+6. Add a `CHANGELOG.md` entry under Unreleased
+
+Use `python scripts/validate_repository.py --report-boundaries` to review the current ownership
+and hand-off map without creating another generated document.
+
+## Ownership touch policy
+
+Ownership migration is incremental. A typo-only correction does not require a metadata sweep. A
+substantive edit to a legacy skill — workflow, standards, routing, examples, limitations, or its
+boundary — must add its catalog `ownership` object and `## Ownership Boundary` hand-off table in
+the same change.
+
+| Change | Required companion work |
+|---|---|
+| New or renamed skill | Complete tree, catalog ownership/edges, generated graph, standards matrix, AI routing, README counts, changelog, tests for validator behavior |
+| Standards re-pin | Owning reference, central pins, catalog standards, matrix, changelog, owner review |
+| Routing or graph edge | Catalog first, intentional reverse `related` edge, generated graph, AI routing if discovery changes |
+| Validator or workflow behavior | Offline tests, CI workflow, scripts docs, maintenance/contributor guidance |
+| Template/content policy | Scaffold, templates README, contributor guidance, owner review |
+| Example-only correction | Local skill content and owner review; central updates only if scope, routing, or standards changed |
+
+CODEOWNERS and branch protection provide review routing. Catalog ownership identifies the subject
+boundary and hand-offs; it does not grant exclusive authority or replace independent review.
+
+## Standards pins
 
 ## Standards pins
 
@@ -51,7 +84,7 @@ Cadence:
 | Full standards re-verify | at least annually, and after major upstream releases |
 | GitHub Actions SHA refresh | when Dependabot opens PRs; review diffs |
 | Gitleaks allowlist review | whenever an entry is added; re-read quarterly |
-| External link sanity | quarterly (manual or future checker) |
+| External link sanity | weekly advisory monitor; review its deduplicated GitHub issue |
 
 ## Release sequence
 
@@ -73,8 +106,16 @@ revoke first ([skills/core/secrets-management/references/exposure-response.md](s
 | `.github/workflows/validate.yml` | PR/main structure gate |
 | `.github/workflows/secret-scan.yml` | Gitleaks |
 | `.github/workflows/release.yml` | Tag validation + GitHub Release |
+| `.github/workflows/external-link-check.yml` | Weekly advisory external-reference monitor and deduplicated issue lifecycle |
+| `.github/CODEOWNERS` | Path review assignments; enforce with a GitHub ruleset/branch protection |
 | `.github/dependabot.yml` | Actions update PRs |
 | `.gitleaks.toml` | Scanner config + narrow didactic allowlist |
+
+The external-link monitor is deliberately outside the release path. A 404/410 is a maintenance
+signal; a 429, 5xx, timeout, or bot challenge is not proof that a pinned source disappeared.
+Review the single `external-links` issue, correct stable failures, and close it only after a clean
+run. CODEOWNERS requests review but does not enforce it unless the repository requires code-owner
+review in its GitHub ruleset or branch protection.
 
 ## Deprecation
 

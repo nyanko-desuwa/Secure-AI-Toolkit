@@ -5,7 +5,8 @@ validation, install, and release orchestration.
 
 | Script | Purpose |
 |---|---|
-| `validate_repository.py` | Canonical validator (catalog, skill shape, frontmatter, links, changelog extract) |
+| `validate_repository.py` | Canonical validator (catalog, ownership, generated graph, skill shape, frontmatter, internal links, changelog extract) |
+| `check_external_links.py` | Advisory external Markdown-link monitor for scheduled CI; never a release gate |
 | `validate-repository.sh` / `Validate-Repository.ps1` | Launchers |
 | `install-skills.sh` / `Install-Skills.ps1` | Install production skills into Claude Code dirs |
 | `release.sh` / `Release.ps1` | Maintainer release guard (validate → scan → optional tag/push) |
@@ -15,7 +16,13 @@ validation, install, and release orchestration.
 ```bash
 python scripts/validate_repository.py
 python scripts/validate_repository.py --write-frontmatter   # align allowed-tools
+python scripts/validate_repository.py --write-skill-graph   # regenerate catalog-derived graph tables
+python scripts/validate_repository.py --report-boundaries   # print ownership and hand-offs
 python scripts/validate_repository.py --extract-changelog 1.0.1
+python -m unittest discover -s tests -t . -v
+
+# Advisory external-reference report; it always exits zero for link reachability.
+python scripts/check_external_links.py --output external-link-report.json
 ```
 
 PowerShell:

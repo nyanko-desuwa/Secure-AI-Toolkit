@@ -7,6 +7,9 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 ### Added
 
 - `core/redis-security` skill — Redis OSS 7.x/8.x and Valkey 8.x service-boundary hardening: private reachability, ACLs, TLS, persistence and backups, Redis 8 integrated modules, Sentinel/Cluster, eviction, Redis-backed session/cache/queue/limiter roles, framework integration, real incident lessons, and operations telemetry. Grounded in official Redis/Valkey documentation, OWASP Top 10 2025, ASVS 5.0.0, and CWE mappings.
+- `core/email-security` skill — transactional email and mailbox-boundary security: sender identity, SPF/DKIM/DMARC evidence, reset/verification delivery, headers/templates, provider events, bounces, privacy, and role-specific hand-offs.
+- `core/http-client-security` skill — application outbound HTTP(S) security: SSRF/destination policy, redirects, DNS/private targets, TLS verification, proxies, deadlines, response bounds, retries, credentials, and telemetry.
+- Offline `unittest` coverage for the catalog validator and external-link checker, plus a completed Redis-backed authentication/limiter threat model and security design review.
 - Canonical `catalog/skills.json` and schema, repository validator, cross-platform skill installer
   and release helpers, GitHub Actions validation/secret-scan/release workflows, Dependabot, and
   Gitleaks configuration. The tag workflow creates a GitHub Release from the matching changelog
@@ -17,9 +20,17 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 - Five core skills: `http-edge-security`, `realtime-security`, `sso-federation`,
   `browser-platform-security`, and `deserialization-security`. They cover HTTP edge trust,
   WebSocket/SSE/WebRTC, SAML federation, browser platform capabilities, and unsafe parsing.
+- Validated ownership-boundary catalog metadata for the Redis, API, Authentication, and AI pilots;
+  a catalog-derived skill graph; `CODEOWNERS`; a weekly advisory external-link monitor; and
+  threat-model and security-design-review templates.
 
 ### Changed
 
+- Catalog ownership is now the routing source for pilot boundaries: each states protected assets
+  and explicit hand-offs. The validator reports legacy coverage as warnings, blocks malformed pilot
+  metadata and stale generated graph tables, and preserves only `depends_on` as an acyclic relation.
+- `docs/ADOPTION.md` — adds boundary-first loading, Redis and AI starter packs, and companion
+  control evidence/limitations; it now links reusable design-review artifacts.
 - Root `README.md` — the two-line "copy one skill" note becomes a full
   `## Installing as Claude Code skills` section: personal vs project scope, why the four
   category directories have to be flattened, install-a-few / install-all-45 / symlink /

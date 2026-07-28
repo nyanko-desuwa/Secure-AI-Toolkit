@@ -1,6 +1,6 @@
 # Redis Security Examples
 
-Eight defensive pairs. Each vulnerable block is labelled and paired with a fix. Hosts, identities, and values are synthetic.
+Eight defensive pairs. Each vulnerable block is labelled and paired with a fix. Hosts, identities, and values are synthetic. A completed [Redis-backed authentication/limiter threat model and security design review](redis-auth-limiter-design-review.md) shows how Redis, authentication, limiter, secrets, logging, and architecture ownership work together.
 
 ## Exposed Docker listener
 

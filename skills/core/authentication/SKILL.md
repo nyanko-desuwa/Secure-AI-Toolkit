@@ -18,6 +18,20 @@ is one line and gives away every account.
 - Designing an authorization model, or auditing one nobody can explain any more
 - Reviewing anything that mints, verifies, or stores a token
 
+## Ownership Boundary
+
+**Owns:** Identity proof, credential and recovery flows, sessions, tokens, delegated access, and
+the authorization model across an account lifecycle.
+
+**Does not own:**
+
+| Concern | Route to |
+|---|---|
+| API endpoint and object-level authorization enforcement | `api-security` |
+| Credential, signing-key, and pepper storage or rotation | `secrets-management` |
+| Guessing policy, throttling, and lockout controls | `brute-force-defense` |
+| Redis/Valkey infrastructure for session and revocation stores | `redis-security` |
+
 ## The Two Questions
 
 Every finding in this skill answers one of these:

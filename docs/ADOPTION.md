@@ -43,6 +43,10 @@ Claude Code discovers flat skill directories. Prefer 3–5 skills over all of th
 | CI / containers | `devsecops`, `docker-security`, `secrets-management`, `publish-safety`, `supply-chain-security` |
 | Browser extension / PWA | `browser-platform-security`, `frontend-security`, `publish-safety` |
 | Parsers / import pipelines | `deserialization-security`, `file-upload-security`, `api-security` |
+| Redis-backed sessions / limiters | `redis-security`, `authentication`, `brute-force-defense`, `secrets-management`, `logging-audit` |
+| AI agents / tool calling | `ai-security`, `api-security`, `secrets-management`, `authentication`, `publish-safety` |
+| Transactional email / provider events | `email-security`, `authentication`, `api-security`, `secrets-management`, `logging-audit` |
+| Third-party HTTP integrations | `http-client-security`, `api-security`, `network-security`, `secrets-management`, `logging-audit` |
 
 Install helpers:
 
@@ -87,15 +91,39 @@ when the task matches the routing table — do not paste the entire repository.
 4. Require the output contract in PR templates (category, location, exploit path, fix).
 5. Keep **owners** for standards re-pins (see [MAINTENANCE.md](../MAINTENANCE.md)).
 
+### Load by boundary, not by keyword
+
+Start with the skill that owns the trust or service boundary, then add only direct related skills
+that the change actually touches. Follow an ownership section's `Does not own` hand-off rather
+than loading several skills that repeat the same policy. The catalog graph and the loading budget
+are designed to keep this reviewable.
+
 ### Complementary controls (not replaced by this pack)
 
-| Control | Why |
-|---|---|
-| SAST | Cross-file taint and injection the model will miss |
-| SCA / lockfile audit | Dependency risk (A03) |
-| Secret scanning (history-aware) | Publish boundary |
-| DAST / authz matrix tests | Runtime and BOLA evidence |
-| IaC + container scan | Cloud/K8s/Docker reality |
+| Control | Evidence it produces | What the toolkit cannot prove |
+|---|---|---|
+| SAST (for example Semgrep or CodeQL) | Cross-file taint and pattern findings | Runtime reachability and deployment configuration |
+| SCA / lockfile audit (Dependabot or OSV) | Known dependency and licence inventory | Whether a vulnerable dependency is exploitable in this service |
+| Secret scanning (Gitleaks) | Credentials in diff or history | Rotation, revocation, and downstream exposure impact |
+| DAST / authz matrix tests | Runtime behavior and BOLA evidence | Unexercised paths and business decisions not encoded in tests |
+| IaC + container scan (Checkov or Trivy) | Deployed-config and image findings | Live cloud state not represented in source |
+| SBOM (Syft) | Component inventory for releases | Vulnerability triage or provenance enforcement by itself |
+| Threat model / design review | Control placement, boundary decisions, accepted risks | That the decision was implemented or deployed |
+| External-link monitor | Stale-reference maintenance signals | That an upstream transient outage invalidates a source |
+
+The examples name tool classes, not mandatory vendors. This toolkit supplies security reasoning,
+routing, and review checklists; it does not replace scanners, runtime tests, branch protection, or
+production verification.
+
+### Design review artifacts
+
+Use the [threat model template](templates/threat-model.md) before a material boundary change, and
+the [security design review template](templates/security-design-review.md) to record the decision,
+evidence, rollback path, and accepted residual risks. Both build on
+[`advanced/secure-architecture`](../skills/advanced/secure-architecture/SKILL.md).
+
+CODEOWNERS requests the relevant review only when consumer repositories enable “Require review from
+Code Owners” in a GitHub ruleset or branch protection; the file alone does not block a merge.
 
 ## 5. Public vs private consumer repos
 

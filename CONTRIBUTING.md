@@ -5,7 +5,9 @@
 - Read [`AI_INSTRUCTIONS.md`](AI_INSTRUCTIONS.md) for routing and the output contract
 - Read [`skills/shared/templates/README.md`](skills/shared/templates/README.md) for the finished-skill bar
 - Read [`MAINTENANCE.md`](MAINTENANCE.md) for versioning and catalog rules
-- Run `python scripts/validate_repository.py` on a clean tree so you know the baseline
+- Run `python scripts/validate_repository.py` and `python -m unittest discover -s tests -t . -v`
+  on a clean tree so you know the baseline
+- Use [threat-model](docs/templates/threat-model.md) and [security-design-review](docs/templates/security-design-review.md) templates for a material boundary change
 
 ## Adding or changing a skill
 
@@ -19,29 +21,38 @@
    seven example pairs, four prompt tiers, `When NOT to Use`, named framework coverage,
    pinned references, no placeholder text.
 
-3. Add a row to [`catalog/skills.json`](catalog/skills.json) with:
-   - `name` matching the directory
-   - `category` / `path`
+3. Prove the new skill should exist before copying the scaffold. It must have all three:
+   - a specific owner/trust/service boundary;
+   - a routing path that lets an assistant select it; and
+   - explicit non-goals with a hand-off to the existing owner.
+
+   It must also have at least three of five distinguishing signals: protected assets, attack
+   surface/threat model, a verifiable workflow, primary standards, or an operational lifecycle.
+   If it does not clear that bar, extend the existing owner skill instead.
+
+4. Add a row to [`catalog/skills.json`](catalog/skills.json) with:
+   - `name` matching the directory and `category` / `path`
    - `depends_on` / `related` / `loads` (canonical directory names only — no `owasp-security` aliases)
-   - `standards` cells
-   - `allowed_tools_profile` (almost always `research-only`)
-   - `routing_hints` for code-surface matching
+   - `standards`, `allowed_tools_profile` (almost always `research-only`), and `routing_hints`
+   - `ownership`: `owner_boundary`, protected assets, and non-goals with canonical owner IDs
 
-4. Mirror graph edges in free-prose docs if you edit them by hand:
-   [`skills/shared/references/skill-graph.md`](skills/shared/references/skill-graph.md),
-   [`skills/shared/references/standards-matrix.md`](skills/shared/references/standards-matrix.md),
-   registry/routing in `AI_INSTRUCTIONS.md`, counts/layout in `README.md`.
+5. Update the standards matrix and registry/routing/count prose where applicable, then regenerate
+   the catalog-derived graph:
 
-5. Apply tool profile:
+   ```bash
+   python scripts/validate_repository.py --write-skill-graph
+   ```
+
+6. Apply tool profile:
 
    ```bash
    python scripts/validate_repository.py --write-frontmatter
    python scripts/validate_repository.py
    ```
 
-6. Add `CHANGELOG.md` under Unreleased.
+7. Add `CHANGELOG.md` under Unreleased.
 
-7. Stage **named paths** only. Never `git add -A`.
+8. Stage **named paths** only. Never `git add -A`.
 
 ## Permissions
 
@@ -59,12 +70,13 @@ Do not grant `Write` or `Edit` in skill frontmatter. Publish-boundary writes to 
 
 CI runs:
 
-- structure/catalog/frontmatter/link validation
+- structure/catalog/frontmatter/ownership/graph/internal-link validation
 - gitleaks
 
-PRs should keep the tree green on both. If a didactic example trips gitleaks,
-prefer making the literal obviously fake; only then add a minimal allowlist entry
-in `.gitleaks.toml` with rationale.
+External links are checked by a separate scheduled/advisory workflow. They do not
+block PR merge or release. PRs should keep the tree green on the blocking checks.
+If a didactic example trips gitleaks, prefer making the literal obviously fake;
+only then add a minimal allowlist entry in `.gitleaks.toml` with rationale.
 
 ## Code of conduct for security content
 

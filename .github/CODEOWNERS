@@ -1,0 +1,22 @@
+# CODEOWNERS assigns review requests. Enforce these rules with a GitHub ruleset or branch
+# protection that requires code-owner review.
+
+* @nyanko-desuwa
+
+/.github/workflows/ @nyanko-desuwa
+/.github/CODEOWNERS @nyanko-desuwa
+/scripts/ @nyanko-desuwa
+/catalog/ @nyanko-desuwa
+/.gitleaks.toml @nyanko-desuwa
+/AI_INSTRUCTIONS.md @nyanko-desuwa
+/README.md @nyanko-desuwa
+/CHANGELOG.md @nyanko-desuwa
+/CONTRIBUTING.md @nyanko-desuwa
+/MAINTENANCE.md @nyanko-desuwa
+/SECURITY.md @nyanko-desuwa
+/docs/templates/ @nyanko-desuwa
+/skills/shared/ @nyanko-desuwa
+/skills/core/ @nyanko-desuwa
+/skills/advanced/ @nyanko-desuwa
+/skills/enterprise/ @nyanko-desuwa
+/skills/architecture/ @nyanko-desuwa

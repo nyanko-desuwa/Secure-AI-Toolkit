@@ -29,7 +29,9 @@
       "related": [
         "api-security",
         "secrets-management",
-        "supply-chain-security"
+        "supply-chain-security",
+        "email-security",
+        "http-client-security"
       ],
       "loads": [
         "own `references/llm-top10.md`",
@@ -60,7 +62,33 @@
       },
       "routing_hints": [
         "Passes untrusted text to a model or tool"
-      ]
+      ],
+      "ownership": {
+        "owner_boundary": "Untrusted model input, agent authority, tool execution, and AI data-exfiltration boundary.",
+        "protected_assets": [
+          "Private data and credentials exposed to model contexts",
+          "Tool authority, side effects, and outbound channels available to agents",
+          "Retrieval content, model instructions, and AI workflow availability budget"
+        ],
+        "non_goals": [
+          {
+            "concern": "General API endpoint and object authorization",
+            "owner": "api-security"
+          },
+          {
+            "concern": "Credential storage, rotation, and exposure response",
+            "owner": "secrets-management"
+          },
+          {
+            "concern": "Dependency, model artifact, and build-pipeline integrity",
+            "owner": "supply-chain-security"
+          },
+          {
+            "concern": "Identity, session, and delegated authorization lifecycle",
+            "owner": "authentication"
+          }
+        ]
+      }
     },
     {
       "name": "api-security",
@@ -90,7 +118,9 @@
         "logging-audit",
         "secure-code-review",
         "brute-force-defense",
-        "performance"
+        "performance",
+        "email-security",
+        "http-client-security"
       ],
       "loads": [
         "own `references/api-top10-2023.md`"
@@ -121,7 +151,33 @@
       "routing_hints": [
         "Loads an object by ID from a request",
         "Fetches a user-supplied URL"
-      ]
+      ],
+      "ownership": {
+        "owner_boundary": "Server-facing API request, object, function, field, and webhook authorization boundary.",
+        "protected_assets": [
+          "API-exposed objects, functions, fields, and tenant-scoped data",
+          "Webhook events and idempotent API state transitions",
+          "API availability budget and response data"
+        ],
+        "non_goals": [
+          {
+            "concern": "Credential, session, token, and OAuth lifecycle policy",
+            "owner": "authentication"
+          },
+          {
+            "concern": "Reverse-proxy trust, HTTP framing, and shared cache configuration",
+            "owner": "http-edge-security"
+          },
+          {
+            "concern": "Secret lifecycle and signing-key storage",
+            "owner": "secrets-management"
+          },
+          {
+            "concern": "Application-wide audit retention and detection operations",
+            "owner": "logging-audit"
+          }
+        ]
+      }
     },
     {
       "name": "authentication",
@@ -149,7 +205,8 @@
         "api-security",
         "secure-code-review",
         "secrets-management",
-        "brute-force-defense"
+        "brute-force-defense",
+        "email-security"
       ],
       "loads": [
         "own `references/nist-800-63b.md`"
@@ -179,7 +236,33 @@
       },
       "routing_hints": [
         "Issues, verifies, or stores a token"
-      ]
+      ],
+      "ownership": {
+        "owner_boundary": "Identity proof, session, token, credential, and authorization-lifecycle boundary.",
+        "protected_assets": [
+          "Account identities, credentials, second factors, and recovery state",
+          "Session identifiers, access tokens, refresh tokens, and authorization grants",
+          "Authorization roles, relationships, and privilege transitions"
+        ],
+        "non_goals": [
+          {
+            "concern": "API endpoint and object-level authorization enforcement",
+            "owner": "api-security"
+          },
+          {
+            "concern": "Credential, signing-key, and pepper storage or rotation",
+            "owner": "secrets-management"
+          },
+          {
+            "concern": "Guessing policy, throttling, and lockout controls",
+            "owner": "brute-force-defense"
+          },
+          {
+            "concern": "Redis/Valkey infrastructure for session and revocation stores",
+            "owner": "redis-security"
+          }
+        ]
+      }
     },
     {
       "name": "browser-platform-security",
@@ -254,7 +337,8 @@
         "logging-audit",
         "cryptography",
         "incident-response",
-        "ssh-server"
+        "ssh-server",
+        "email-security"
       ],
       "loads": [],
       "standards": {
@@ -313,7 +397,8 @@
         "owasp",
         "docker-security",
         "devsecops",
-        "logging-audit"
+        "logging-audit",
+        "http-client-security"
       ],
       "loads": [],
       "standards": {
@@ -480,7 +565,9 @@
       "related": [
         "api-security",
         "file-upload-security",
-        "mvc-security"
+        "mvc-security",
+        "email-security",
+        "http-client-security"
       ],
       "loads": [
         "own `references/cwe-502.md`",
@@ -630,7 +717,8 @@
       "related": [
         "cloud-security",
         "frontend-security",
-        "api-security"
+        "api-security",
+        "email-security"
       ],
       "loads": [],
       "standards": {
@@ -732,7 +820,9 @@
       "related": [
         "api-security",
         "frontend-security",
-        "ssh-server"
+        "ssh-server",
+        "email-security",
+        "http-client-security"
       ],
       "loads": [
         "own `references/owasp-edge.md`",
@@ -784,7 +874,9 @@
         "secure-code-review",
         "devsecops",
         "api-security",
-        "cloud-security"
+        "cloud-security",
+        "email-security",
+        "http-client-security"
       ],
       "loads": [],
       "standards": {
@@ -1041,7 +1133,33 @@
       "routing_hints": [
         "Configures Redis/Valkey listener, ACL, TLS, persistence, Sentinel, Cluster, or module",
         "Uses Redis/Valkey for sessions, cache, queue, Streams, rate limits, OTPs, token revocation, or idempotency"
-      ]
+      ],
+      "ownership": {
+        "owner_boundary": "Redis/Valkey service configuration, data protection, and operational-state boundary.",
+        "protected_assets": [
+          "Redis/Valkey data, ACL identities, and transport credentials",
+          "Session, revocation, limiter, queue, and cache state stored in Redis/Valkey",
+          "Persistence files, replicas, backups, and administrative control surfaces"
+        ],
+        "non_goals": [
+          {
+            "concern": "Session, token, and OAuth lifecycle policy",
+            "owner": "authentication"
+          },
+          {
+            "concern": "Guessing policy, lockout thresholds, and limiter dimensions",
+            "owner": "brute-force-defense"
+          },
+          {
+            "concern": "Secret lifecycle and incident exposure response",
+            "owner": "secrets-management"
+          },
+          {
+            "concern": "Cache and event-delivery semantics",
+            "owner": "scalability"
+          }
+        ]
+      }
     },
     {
       "name": "realtime-security",
@@ -1124,7 +1242,9 @@
         "kubernetes-security",
         "incident-response",
         "logging-audit",
-        "publish-safety"
+        "publish-safety",
+        "email-security",
+        "http-client-security"
       ],
       "loads": [
         "own `references/exposure-response.md`",
@@ -1329,7 +1449,8 @@
         "authentication",
         "api-security",
         "cloud-security",
-        "ssh-server"
+        "ssh-server",
+        "http-client-security"
       ],
       "loads": [
         "own `references/` (FIPS",
@@ -1443,7 +1564,8 @@
       "related": [
         "cryptography",
         "cloud-security",
-        "secure-architecture"
+        "secure-architecture",
+        "http-client-security"
       ],
       "loads": [],
       "standards": {
@@ -2111,7 +2233,9 @@
         "api-security",
         "performance",
         "scalability",
-        "secure-architecture"
+        "secure-architecture",
+        "email-security",
+        "http-client-security"
       ],
       "loads": [],
       "standards": {
@@ -2205,7 +2329,8 @@
         "api-security",
         "secure-architecture",
         "scalability",
-        "event-driven"
+        "event-driven",
+        "http-client-security"
       ],
       "loads": [],
       "standards": {
@@ -2301,7 +2426,8 @@
         "database-security",
         "scalability",
         "api-security",
-        "common-pitfalls"
+        "common-pitfalls",
+        "http-client-security"
       ],
       "loads": [
         "own `references/` limits tables"
@@ -2386,6 +2512,229 @@
         "other": []
       },
       "routing_hints": []
+    },
+    {
+      "name": "email-security",
+      "category": "core",
+      "path": "skills/core/email-security",
+      "status": "Ready",
+      "description": "Secure transactional email and mail providers — sender identity, SPF/DKIM/DMARC, reset/verification delivery, templates, provider events, bounces, and privacy. Triggers: \"SMTP\", \"DKIM\", \"DMARC\", \"magic link\", \"email webhook\", \"bảo mật email\".",
+      "triggers": [
+        "email security",
+        "SMTP",
+        "SPF",
+        "DKIM",
+        "DMARC",
+        "password reset email",
+        "magic link",
+        "email webhook",
+        "mailer",
+        "bảo mật email",
+        "gửi email"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "authentication",
+        "brute-force-defense",
+        "api-security",
+        "http-client-security",
+        "http-edge-security",
+        "secrets-management",
+        "logging-audit",
+        "file-upload-security",
+        "deserialization-security",
+        "event-driven",
+        "ai-security"
+      ],
+      "loads": [
+        "own `references/email-standards.md`",
+        "own `references/owasp-asvs.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A04",
+          "A05",
+          "A06",
+          "A08",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [
+          "API4",
+          "API8",
+          "API10"
+        ],
+        "asvs_5_0": [
+          "V2",
+          "V4",
+          "V6",
+          "V7",
+          "V8",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "RFC 5321",
+          "RFC 5322",
+          "RFC 6376",
+          "RFC 7208",
+          "RFC 7489"
+        ]
+      },
+      "routing_hints": [
+        "Sends transactional email, reset/verification/invite links, or mail-provider events",
+        "Configures SMTP/provider API, sender domain, SPF, DKIM, or DMARC"
+      ],
+      "ownership": {
+        "owner_boundary": "Application-to-mail-provider and recipient-mailbox delivery, sender identity, and message safety boundary.",
+        "protected_assets": [
+          "Sender-domain identity and reputation",
+          "Recipient addresses, message content, and security links",
+          "Provider delivery events, bounce state, and message privacy"
+        ],
+        "non_goals": [
+          {
+            "concern": "Reset token, session, and account recovery lifecycle",
+            "owner": "authentication"
+          },
+          {
+            "concern": "Resend and guessing thresholds",
+            "owner": "brute-force-defense"
+          },
+          {
+            "concern": "SMTP/API credentials and DKIM private-key lifecycle",
+            "owner": "secrets-management"
+          },
+          {
+            "concern": "Outbound provider HTTP transport behavior",
+            "owner": "http-client-security"
+          },
+          {
+            "concern": "Provider webhook endpoint authorization",
+            "owner": "api-security"
+          }
+        ]
+      }
+    },
+    {
+      "name": "http-client-security",
+      "category": "core",
+      "path": "skills/core/http-client-security",
+      "status": "Ready",
+      "description": "Secure outbound HTTP(S) clients — SSRF, URL parsing, redirects, DNS/private targets, TLS verification, proxies, timeouts, retries, credentials, and response limits. Triggers: \"HTTP client\", \"outbound HTTP\", \"SSRF\", \"fetch URL\", \"redirect\", \"HttpClient\", \"bảo mật HTTP client\".",
+      "triggers": [
+        "HTTP client",
+        "outbound HTTP",
+        "SSRF",
+        "fetch URL",
+        "redirect",
+        "HttpClient",
+        "requests",
+        "httpx",
+        "proxy",
+        "TLS verification",
+        "bảo mật HTTP client"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "api-security",
+        "http-edge-security",
+        "network-security",
+        "cloud-security",
+        "cryptography",
+        "secrets-management",
+        "logging-audit",
+        "performance",
+        "microservices",
+        "event-driven",
+        "ai-security",
+        "deserialization-security",
+        "email-security"
+      ],
+      "loads": [
+        "own `references/owasp-asvs.md`",
+        "own `references/http-uri-tls.md`"
+      ],
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A04",
+          "A06",
+          "A08",
+          "A09",
+          "A10"
+        ],
+        "owasp_api_top10_2023": [
+          "API4",
+          "API7",
+          "API8",
+          "API10"
+        ],
+        "asvs_5_0": [
+          "V4",
+          "V7",
+          "V8",
+          "V11",
+          "V12",
+          "V13",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "RFC 3986",
+          "RFC 9110",
+          "RFC 9325",
+          "OWASP SSRF Prevention Cheat Sheet"
+        ]
+      },
+      "routing_hints": [
+        "Creates an outbound HTTP client or fetches a URL",
+        "Configures redirects, proxy, TLS verification, timeout, retry, connection pool, or response limit"
+      ],
+      "ownership": {
+        "owner_boundary": "Application workload to DNS, proxy, network, and outbound HTTP(S) destination transport boundary.",
+        "protected_assets": [
+          "Cloud and workload credentials reachable through outbound paths",
+          "Internal and metadata-service reachability",
+          "Outbound availability budget, response data, and per-origin credentials"
+        ],
+        "non_goals": [
+          {
+            "concern": "Inbound API authorization and destination-registration policy",
+            "owner": "api-security"
+          },
+          {
+            "concern": "Reverse-proxy and Host/header trust",
+            "owner": "http-edge-security"
+          },
+          {
+            "concern": "Egress network deployment and segmentation",
+            "owner": "network-security"
+          },
+          {
+            "concern": "Client-secret lifecycle",
+            "owner": "secrets-management"
+          },
+          {
+            "concern": "Agent authority over HTTP tools",
+            "owner": "ai-security"
+          }
+        ]
+      }
     }
   ]
 }

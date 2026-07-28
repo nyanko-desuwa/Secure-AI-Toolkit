@@ -9,6 +9,20 @@ allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 Securing the application around the model, not the model. Applies when you are building
 agents, tool-calling loops, MCP servers or clients, or retrieval pipelines.
 
+## Ownership Boundary
+
+**Owns:** The boundary between untrusted model input, agent authority, tool execution, and
+outbound data or side effects.
+
+**Does not own:**
+
+| Concern | Route to |
+|---|---|
+| General API endpoint and object authorization | `api-security` |
+| Credential storage, rotation, and exposure response | `secrets-management` |
+| Dependency, model artifact, and build-pipeline integrity | `supply-chain-security` |
+| Identity, session, and delegated authorization lifecycle | `authentication` |
+
 ## Start Here: Prompt Injection Is Not Solved
 
 Prompt injection is the central problem in this space, and it cannot be fixed with

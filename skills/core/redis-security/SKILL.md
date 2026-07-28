@@ -29,6 +29,20 @@ Redis is trusted infrastructure, not a public API. A listener that accepts an un
 | Secret storage, rotation, or leak response | `secrets-management` |
 | Log retention/SIEM design | `logging-audit` |
 
+## Ownership Boundary
+
+**Owns:** Redis/Valkey listener reachability, ACLs, TLS, persistence, replication, modules,
+resource limits, and operational telemetry for the state store.
+
+**Does not own:**
+
+| Concern | Route to |
+|---|---|
+| Session, token, and OAuth lifecycle policy | `authentication` |
+| Guessing policy, lockout thresholds, and limiter dimensions | `brute-force-defense` |
+| Secret lifecycle and incident exposure response | `secrets-management` |
+| Cache and event-delivery semantics | `scalability` |
+
 ## Standards This Skill Maps To
 
 | Standard | Use it for | Version here |
@@ -94,4 +108,4 @@ Exploitability and blast radius override the ladder. A loopback-only cache witho
 - [troubleshooting.md](troubleshooting.md) — migration and operational tradeoffs
 - [prompts.md](prompts.md) — scoped prompts and anti-patterns
 - [references/](references/) — source summaries and version pins
-- [examples/README.md](examples/README.md) — eight vulnerable/fixed pairs and incidents
+- [examples/README.md](examples/README.md) — eight vulnerable/fixed pairs, incidents, and a completed Redis auth/limiter design review
