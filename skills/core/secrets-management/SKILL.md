@@ -114,6 +114,7 @@ the customer database is a breach.
 - `kubernetes-security` — RBAC, encryption at rest, CSI secret drivers
 - `incident-response` — the wider process around the revoke/rotate/investigate loop
 - `logging-audit` — redaction pipelines and what belongs in an audit trail
+- `publish-safety` — the check before a push, a package, or a visibility flip makes a value public
 
 ## Supporting Files
 

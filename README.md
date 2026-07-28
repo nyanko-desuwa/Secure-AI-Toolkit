@@ -64,12 +64,12 @@ into "here is some code, and here is what I checked and what I could not."
 
 ## Status
 
-All 38 skills are written end to end. Every skill includes its workflow, checklist, real
+All 39 skills are written end to end. Every skill includes its workflow, checklist, real
 vulnerable/fixed code, limitations, and version-pinned references.
 
 | Area | State |
 |---|---|
-| `core/*` (17) | Complete |
+| `core/*` (18) | Complete |
 | `advanced/*` (6) | Complete |
 | `enterprise/*` (5) | Complete |
 | `architecture/*` (10) | Complete |
@@ -144,7 +144,7 @@ More, including the anti-patterns worth avoiding, in
     │                     mvc-security · authentication · database-security
     │                     secrets-management · file-upload-security · logging-audit
     │                     frontend-security · docker-security · cloud-security
-    │                     ssh-server · devsecops · ai-security
+    │                     ssh-server · devsecops · ai-security · publish-safety
     ├── advanced/         security-testing · incident-response · network-security
     │                     supply-chain-security · cryptography · secure-architecture
     ├── enterprise/       kubernetes-security · compliance · windows-security

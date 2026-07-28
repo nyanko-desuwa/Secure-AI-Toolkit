@@ -119,6 +119,7 @@ be reading nothing or writing to the wrong place.
 - `api-security` — object-level authorization and rate limiting in depth
 - `database-security` — RLS, query safety, index and connection concerns
 - `logging-audit` — what to log when you stop swallowing errors
+- `publish-safety` — the same leaks at the moment they become public: push, package, image, bundle
 
 ## Supporting Files
 

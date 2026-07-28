@@ -24,6 +24,11 @@ skills/<category>/<skill-name>/
 └── examples/             vulnerable and fixed code side by side
 ```
 
+Eleven is the floor, not the target. `references/` holds one file per standard plus its own
+`README.md` index, so a skill citing four sources has more files than one citing two —
+`core/publish-safety/` has thirteen. What matters is that every entry in the tree above exists and
+none of them is a stub.
+
 `skills/core/owasp/` is the worked example. Read it before starting — it is easier to match
 than to describe.
 
@@ -55,6 +60,66 @@ Two habits worth copying:
 - Explain why the wrong fix is wrong. Readers reach for UUIDs and regex denylists on their
   own; a skill earns its keep by heading that off.
 
+## Content policy for new skills
+
+These apply to any skill added or substantially rewritten from now on. Existing skills are not
+being retrofitted — a sweep across 39 skills would produce a large diff and no new guidance, and
+the ones already written meet the bar above. So this section describes the shape of the next skill,
+not a debt against the current ones.
+
+### `examples/README.md` — at least seven pairs
+
+Three that are vulnerable in a way a reader would plausibly write, three that are secure by
+construction rather than by remembering a check, and one drawn from a real failure mode with the
+cost stated. Every pair carries its category and CWE on the heading line. Every vulnerable block is
+labelled `Vulnerable:` on its first line, and the fix is in the same section — not in another file,
+not implied.
+
+### `prompts.md` — four tiers
+
+| Tier | Written for | Shape |
+|---|---|---|
+| Beginner | Someone who cannot audit the answer | Names the outcome in plain language, asks for the reasoning back in the same |
+| Developer | Someone building the thing | Names the file, the framework, and the constraint |
+| Review | Someone checking finished work | Asks for findings in the output contract, with severity reasoning |
+| Audit | Someone answering to an auditor | Asks for the standard, the requirement, and the evidence per control |
+
+Plus the anti-pattern table: the prompt that produces a reassuring non-answer (`"is this secure?"`)
+next to the one that produces a finding.
+
+### `SKILL.md` — a `When NOT to Use` routing table
+
+Two columns: the request shape that looks like this skill, and the skill that actually owns it.
+This is the highest-value paragraph in the file. A skill that cannot say what it does not cover
+gets loaded for everything, which is how the loading budget in `AI_INSTRUCTIONS.md` gets blown.
+
+### Framework and platform coverage, named
+
+State which stacks the guidance was written against and which it only reaches by analogy. A reader
+whose framework is in the second group needs to know that the reasoning transfers and the exact
+field names do not. Vague coverage claims are worse than narrow ones.
+
+### `references/` — one file per source
+
+Standard name, version, release date if published, the URL you fetched, and the date you checked
+it. Only what the skill uses; a reference file is not a mirror of the standard. What you could not
+verify is named, not filled in from memory — a document behind a registration wall is a stated gap,
+and the gap is the honest output.
+
+New skills also add their row to `skills/shared/references/skill-graph.md` and
+`skills/shared/references/standards-matrix.md`. Both are central tables, so the skill's own
+frontmatter carries no dependency metadata.
+
+### Versioning and deprecation
+
+A skill's guidance is dated by its `references/` check dates, not by a version number of its own —
+the repository version in `CHANGELOG.md` covers the pack. If a skill's advice becomes wrong because
+a standard moved, update the reference file and the pin in all three places
+(`references/`, `AI_INSTRUCTIONS.md`, root `README.md`) in the same change. If a skill is
+superseded, leave the directory in place with a pointer at the top of `SKILL.md` naming the
+replacement, and say so in `CHANGELOG.md`. Deleting a skill breaks every prompt that names its
+path.
+
 ## Frontmatter
 
 `SKILL.md` needs YAML frontmatter for Claude Code. Other assistants ignore it.
@@ -75,9 +140,16 @@ commands. Include Vietnamese trigger words alongside English ones.
 - [ ] All eleven files present, no placeholder text left behind
 - [ ] Frontmatter `name` matches the directory name
 - [ ] Every control names a standard and, where applicable, a CWE
+- [ ] `examples/README.md` has at least three vulnerable/fixed pairs, one of them a real-world shape
 - [ ] Every vulnerable block labelled `Vulnerable:` and paired with a fix
+- [ ] `prompts.md` covers all four tiers: beginner, developer, review, audit — plus anti-patterns
+- [ ] `SKILL.md` has a `When NOT to Use` section routing to the skill that does own it
+- [ ] Framework and ecosystem coverage stated by name, with the gaps named too
 - [ ] Reference files carry a version and the date verified
 - [ ] Limitations section is specific, not boilerplate
 - [ ] No real credentials, hostnames, or personal data anywhere
-- [ ] Root `README.md` status table updated
+- [ ] Row added to `skills/shared/references/skill-graph.md`, with the reverse edge
+- [ ] Row added to `skills/shared/references/standards-matrix.md`
+- [ ] `AI_INSTRUCTIONS.md` registry and routing rows added
+- [ ] Root `README.md` status table and skill count updated
 - [ ] `CHANGELOG.md` entry added

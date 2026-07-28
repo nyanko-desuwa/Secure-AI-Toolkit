@@ -7,6 +7,19 @@ Per-skill `references/` directories hold the summaries. This file exists so you 
 "which edition are we on, and when was that last true" without opening fifteen skills — and so
 that a stale pin is visible rather than invisible.
 
+## Two maps live here as well
+
+Standards pins answer "which edition". Two sibling files answer the other two questions a reader
+arrives with:
+
+| File | Answers |
+|---|---|
+| [skill-graph.md](skill-graph.md) | Which skills load together, and in what order. `depends_on` is the column that matters — a skill that assumes another's guidance produces a partial review without it. |
+| [standards-matrix.md](standards-matrix.md) | Which skill owns a given standard, category, or CWE. Read backwards from "A03:2025 appeared in this diff" to the skill that covers it. |
+
+Both are generated from the skills themselves and are the authoritative list of skill names. A
+name that does not appear in their left-hand column does not exist as a directory.
+
 ## Why the dates are here
 
 Category IDs move between editions. An assistant citing "A03 Injection" is working from the

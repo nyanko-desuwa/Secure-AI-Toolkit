@@ -30,6 +30,7 @@ Read the diff, not the ticket title. Take every row that matches.
 | Passes untrusted text to a model, tool, or agent | `core/ai-security` |
 | Allocates, caches, subscribes, or opens a handle | `architecture/performance` |
 | Handles an error inside a security decision | `core/owasp` |
+| Is about to be pushed, published, deployed, or made public | `core/publish-safety` |
 
 A single authenticated file-upload endpoint lands on four rows. Stopping at the first match is
 how real vulnerabilities survive review.
@@ -93,6 +94,9 @@ category-specific, which is exactly why it gets skipped.
 - [ ] Which skills and checklists were used is named in the reply.
 - [ ] What could not be verified is named, including why. "The build did not run because the
       test runner is not installed" is a useful sentence.
+- [ ] If anything is about to be committed, pushed, published, deployed, or pasted somewhere
+      public, `core/publish-safety/checklist.md` has been run for that surface and its result
+      reported. Staging is by named path, never `git add -A` (`A02`, `CWE-527`).
 
 ## Using these with an assistant
 

@@ -39,6 +39,7 @@ Reading eleven files when the task needs two wastes context that the actual code
 | File Upload Security | `skills/core/file-upload-security/` | Ready | Uploads, magic numbers, re-encoding, storage isolation, presigned URLs |
 | Performance & Resource Lifetime | `skills/architecture/performance/` | Ready | Memory leaks, unbounded caches/queues, listener or connection leaks, OOM, profiling, backpressure |
 | Frontend Security | `skills/core/frontend-security/` | Ready | CSP, XSS, CSRF, cookies, iframes, postMessage |
+| Publish Safety | `skills/core/publish-safety/` | Ready | Pushing, making a repo public, publishing a package or image, deploying build output, sharing a diff, log, or screenshot |
 
 All skills under `advanced/`, `enterprise/`, and `architecture/` are Ready. Check the full
 file set and the skill's checklist before relying on a future addition.
@@ -73,6 +74,7 @@ row — take every row that applies.
 | Passes untrusted text to a model or tool | `ai-security` | A05, LLM01 |
 | Handles an error inside a security check | `owasp` | A10 |
 | Allocates, caches, subscribes, or opens a handle | `performance` | A06, API4, CWE-401/770 |
+| Pushes, publishes, deploys, or changes repository visibility | `publish-safety` | A02, A04, CWE-527 |
 
 A single file-upload endpoint typically lands on four rows: upload validation, object
 authorization, storage configuration, and audit logging. Stopping at the first match is how
@@ -169,6 +171,41 @@ sense to someone who does not read code, and say what it would have cost if it h
 using your account" lands where "moved key to server-side env" does not. `architecture/performance`
 holds the leak, limit, and resource-lifecycle detail; the relevant core skill holds the rest.
 
+## Before you publish anything
+
+This is a blocking gate, not advice. It applies whenever you are about to make something in the
+user's project readable by someone who cannot read it today: `git commit`, `git push`,
+`npm publish`, `pip upload` / `twine upload`, `docker push`, a deploy command, a repository
+visibility change, or pasting a diff, log, or screenshot into a public place.
+
+Publishing is a one-way door. Once a credential is public, no commit, force-push, unpublish, or
+deleted repository takes it back — the only remediation is revocation at the provider. So the
+check happens before, because afterwards there is nothing left to check.
+
+Run `skills/core/publish-safety/checklist.md` for the surface you are about to touch, and report
+the result. Then:
+
+1. **Do not run the publishing command until the checklist has been run and reported.** If you
+   cannot run it — no shell access, no repository — say so and hand the commands to the user
+   rather than proceeding as if it passed.
+2. **Stage named paths. Never `git add -A` or `git add .`.** Blanket staging is how an untracked
+   local file becomes a tracked one, and the commit that adds it is what puts it in history.
+3. **Any hit stops the sequence.** Report what would leak, what it would cost in language the
+   user can act on, and wait. Do not publish and then mention it.
+4. **`git status` is the present tense; a public repository exposes the whole history.** Scan
+   history before any visibility change, and scan the built artifact rather than the source.
+5. **You may create or edit the user's `.gitignore`, `.dockerignore`, `.npmignore`, and the
+   `files` field, and you may generate `.env.example` by stripping values — never by copying
+   `.env`.** Report exactly what you added, line by line. This is the only write authority this
+   gate grants you at the publish boundary.
+6. **Do not rewrite history, force-push, or delete remote refs to clean up a leak.** Those are
+   the user's call, they break every existing clone, and they are not the remediation anyway.
+   Revoke first — `skills/core/secrets-management/references/exposure-response.md` has the order.
+7. **Gitignored and local-only files stay out.** Private notes, personal instruction files,
+   scratch directories, editor state: never staged, never quoted in a commit message, never cited
+   in a file that will be committed. A file being in the repository root does not make it part of
+   the project.
+
 ## Rules
 
 These hold regardless of which skill is loaded.
@@ -195,6 +232,40 @@ These hold regardless of which skill is loaded.
    Allocation Without Limits).
 10. **Do not expand scope.** Fix the file you are in. Note inconsistencies elsewhere without
     sweeping them up.
+11. **Check before you publish.** Nothing becomes readable by a wider audience — a push, a
+    commit, a package, an image, a deploy, a visibility flip, a shared screenshot — until the
+    gate above has been run and its result reported. Stage named paths only. See
+    `skills/core/publish-safety/`.
+
+## Loading budget
+
+Skills cost context. A task that loads twelve of them has less room left for the code than a task
+that loaded three, and the review gets worse, not better.
+
+Per task, load at most: **five** `core/` skills, **two** `advanced/`, **one** `enterprise/`, and
+**one** `architecture/`. Dependencies count against the budget.
+
+`skills/shared/references/skill-graph.md` says which skills assume another's guidance
+(`depends_on`) and which cover an adjacent boundary (`related`). Load a skill's direct
+`depends_on`, and theirs, and stop — depth two. Transitive closure on that graph reaches most of
+the repository, which is what the budget exists to prevent.
+
+If the chain would exceed the budget, load the primary skill plus its direct `depends_on`, then
+name what you did not load and why. A stated omission is reviewable; a silent one is not.
+
+## Before you return
+
+In this order, because each step can invalidate the one before it:
+
+1. **Re-read the diff you are about to hand over**, not your memory of writing it.
+2. **Run every applicable `checklist.md`.** An unchecked box is a fix or a stated limitation with
+   a reason.
+3. **Try to disprove each finding.** An unverified precondition lowers confidence; it does not
+   get rounded up to certainty.
+4. **Check the publish gate** if anything is about to be committed, pushed, or shared.
+5. **Report what you could not verify.** Which skills and checklists you used, which commands you
+   actually ran versus handed over, and what remains unknown. "The build did not run, so the fix
+   is unverified" is a complete sentence and a useful one.
 
 ## Output contract
 
@@ -254,7 +325,9 @@ A05. Guidance recalled from 2021 will mis-map. Details in
 Documentation is part of the change. Before finishing:
 
 - New or modified skill → update its `README.md`, `checklist.md`, and `examples/`
-- New skill → add a row to the registry above and to the `README.md` status table
+- New skill → add a row to the registry above, the routing table, the `README.md` status table,
+  `skills/shared/references/skill-graph.md`, and `skills/shared/references/standards-matrix.md`
+- New skill → add the reverse edge in the graph, too. A one-directional `related` is an oversight
 - Any change → add a `CHANGELOG.md` entry under Unreleased
 - Standard re-verified → update the version and date in the reference file, the table above,
   and `README.md` together

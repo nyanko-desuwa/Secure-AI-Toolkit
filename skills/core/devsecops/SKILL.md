@@ -116,6 +116,7 @@ backlog reaches four thousand items nobody reads. State which way you called it 
 - `docker-security` — container image and runtime hardening
 - `cloud-security` — the IAM side of OIDC federation
 - `owasp` — the application-level controls this pipeline is checking for
+- `publish-safety` — the manual gate at the publish boundary, where no pipeline is watching
 
 ## Supporting Files
 
