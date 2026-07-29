@@ -1,0 +1,33 @@
+# Local authoring notes — not part of the published toolkit
+huongdan.md
+
+# Claude Code local state
+.claude/settings.local.json
+.claude/local/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# Python cache, environments, and local test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+.coverage
+coverage.xml
+htmlcov/
+
+# Scratch
+.authoring/
+tmp/
+*.tmp
+*.log
+
+yêu cầu mới.md

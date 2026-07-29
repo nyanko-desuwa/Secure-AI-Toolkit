@@ -6,10 +6,18 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ### Added
 
+- `requirements.txt` documents that repository Python validation and maintenance scripts currently use only the standard library, while giving Dependabot a Python dependency surface to monitor.
+- `scripts/render_link_issue.py` — renders the advisory external-link issue body and its state files
+  from the link report, replacing the inline workflow heredoc.
+- `.gitignore` is now tracked, and covers Python environments and coverage artifacts.
+- `python scripts/validate_repository.py --latest-changelog-version` prints the first released
+  changelog version, which the release workflow uses to decide the tag to create.
 - `core/redis-security` skill — Redis OSS 7.x/8.x and Valkey 8.x service-boundary hardening: private reachability, ACLs, TLS, persistence and backups, Redis 8 integrated modules, Sentinel/Cluster, eviction, Redis-backed session/cache/queue/limiter roles, framework integration, real incident lessons, and operations telemetry. Grounded in official Redis/Valkey documentation, OWASP Top 10 2025, ASVS 5.0.0, and CWE mappings.
 - `core/email-security` skill — transactional email and mailbox-boundary security: sender identity, SPF/DKIM/DMARC evidence, reset/verification delivery, headers/templates, provider events, bounces, privacy, and role-specific hand-offs.
 - `core/http-client-security` skill — application outbound HTTP(S) security: SSRF/destination policy, redirects, DNS/private targets, TLS verification, proxies, deadlines, response bounds, retries, credentials, and telemetry.
-- Offline `unittest` coverage for the catalog validator and external-link checker, plus a completed Redis-backed authentication/limiter threat model and security design review.
+- Offline `unittest` coverage for the catalog validator, external-link checker, and link-issue
+  renderer, plus a completed Redis-backed authentication/limiter threat model and security design
+  review.
 - Canonical `catalog/skills.json` and schema, repository validator, cross-platform skill installer
   and release helpers, GitHub Actions validation/secret-scan/release workflows, Dependabot, and
   Gitleaks configuration. The tag workflow creates a GitHub Release from the matching changelog
@@ -26,6 +34,16 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ### Changed
 
+- `.github/workflows/release.yml` now releases automatically. It runs on pushes to `main` (and still
+  on `v*` tags plus manual dispatch); after validation and the secret scan pass it creates the
+  missing `vX.Y.Z` tag for the latest released changelog section and publishes the GitHub Release
+  from that section. It is idempotent: if the tag already exists on the remote, the job skips.
+  `scripts/release.sh` / `Release.ps1` remain the manual fallback.
+- `.github/workflows/external-link-check.yml` parses as YAML again. Its inline Python heredoc
+  contained a triple-quoted string starting at column 0, which terminated the block scalar and
+  made the whole workflow file invalid — GitHub reported the run by file path instead of workflow
+  name and every run failed. The body rendering now lives in `scripts/render_link_issue.py`.
+- `.github/dependabot.yml` adds a weekly `pip` ecosystem alongside `github-actions`.
 - Catalog ownership is now the routing source for pilot boundaries: each states protected assets
   and explicit hand-offs. The validator reports legacy coverage as warnings, blocks malformed pilot
   metadata and stale generated graph tables, and preserves only `depends_on` as an acyclic relation.

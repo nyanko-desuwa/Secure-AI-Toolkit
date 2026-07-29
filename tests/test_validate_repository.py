@@ -112,6 +112,14 @@ class ValidateRepositoryTests(unittest.TestCase):
         section = self.validator.section_after_heading(text, "## Ownership Boundary")
         self.assertEqual(self.validator.ownership_owner_ids(section), {"api-security"})
 
+    def test_latest_changelog_version_uses_first_released_section(self):
+        original = self.validator.changelog_text
+        self.validator.changelog_text = lambda: "# Changelog\n\n## [Unreleased]\n\n## [1.2.3] - 2026-07-29\n"
+        try:
+            self.assertEqual(self.validator.latest_changelog_version(), "1.2.3")
+        finally:
+            self.validator.changelog_text = original
+
 
 if __name__ == "__main__":
     unittest.main()

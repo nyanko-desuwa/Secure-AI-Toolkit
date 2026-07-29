@@ -7,6 +7,7 @@ validation, install, and release orchestration.
 |---|---|
 | `validate_repository.py` | Canonical validator (catalog, ownership, generated graph, skill shape, frontmatter, internal links, changelog extract) |
 | `check_external_links.py` | Advisory external Markdown-link monitor for scheduled CI; never a release gate |
+| `render_link_issue.py` | Renders the advisory external-link issue body and state files for CI |
 | `validate-repository.sh` / `Validate-Repository.ps1` | Launchers |
 | `install-skills.sh` / `Install-Skills.ps1` | Install production skills into Claude Code dirs |
 | `release.sh` / `Release.ps1` | Maintainer release guard (validate → scan → optional tag/push) |
@@ -23,6 +24,7 @@ python -m unittest discover -s tests -t . -v
 
 # Advisory external-reference report; it always exits zero for link reachability.
 python scripts/check_external_links.py --output external-link-report.json
+python scripts/render_link_issue.py --report external-link-report.json --run-url "$RUN_URL"
 ```
 
 PowerShell:
@@ -60,9 +62,15 @@ Rules:
 Preferred path:
 
 1. Land changes on `main` with a `CHANGELOG.md` section for the version
-2. `./scripts/release.sh --version X.Y.Z --tag --push`
-3. GitHub Actions `.github/workflows/release.yml` validates, secret-scans, and
-   creates the GitHub Release from the changelog section
+2. Push or merge to `main`
+3. GitHub Actions `.github/workflows/release.yml` validates, secret-scans, creates the missing
+   `vX.Y.Z` tag from the latest released changelog section, and creates the GitHub Release
+
+Manual fallback:
+
+```bash
+./scripts/release.sh --version X.Y.Z --tag --push
+```
 
 Local-only tag without push:
 

@@ -1,0 +1,2 @@
+# Runtime and validation scripts use only the Python standard library.
+# Keep this file so pip/Dependabot can detect the repository's Python dependency surface.

@@ -92,9 +92,10 @@ Cadence:
 2. `CHANGELOG.md` has `## [X.Y.Z] - YYYY-MM-DD` (move from Unreleased)
 3. `python scripts/validate_repository.py`
 4. Secret scan (CI and/or local gitleaks)
-5. `./scripts/release.sh --version X.Y.Z --tag --push`
+5. Push or merge to `main`; `.github/workflows/release.yml` creates missing tag `vX.Y.Z` from the
+   latest released changelog section and publishes the GitHub Release from that section
+6. Manual fallback remains `./scripts/release.sh --version X.Y.Z --tag --push`
    or PowerShell `.\scripts\Release.ps1 -Version X.Y.Z -Tag -Push`
-6. Tag workflow `.github/workflows/release.yml` creates the GitHub Release from the changelog section
 
 Never `git add -A`. Stage named paths only. Never force-push to clean a leak —
 revoke first ([skills/core/secrets-management/references/exposure-response.md](skills/core/secrets-management/references/exposure-response.md)).
@@ -105,10 +106,11 @@ revoke first ([skills/core/secrets-management/references/exposure-response.md](s
 |---|---|
 | `.github/workflows/validate.yml` | PR/main structure gate |
 | `.github/workflows/secret-scan.yml` | Gitleaks |
-| `.github/workflows/release.yml` | Tag validation + GitHub Release |
+| `.github/workflows/release.yml` | Validation, then automatic tag + GitHub Release from the latest released changelog section on `main` |
 | `.github/workflows/external-link-check.yml` | Weekly advisory external-reference monitor and deduplicated issue lifecycle |
 | `.github/CODEOWNERS` | Path review assignments; enforce with a GitHub ruleset/branch protection |
-| `.github/dependabot.yml` | Actions update PRs |
+| `.github/dependabot.yml` | Actions and pip update PRs |
+| `requirements.txt` | Python dependency surface for Dependabot; stdlib-only today |
 | `.gitleaks.toml` | Scanner config + narrow didactic allowlist |
 
 The external-link monitor is deliberately outside the release path. A 404/410 is a maintenance

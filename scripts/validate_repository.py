@@ -536,9 +536,21 @@ def validate_scaffold_tools(catalog: dict[str, Any], report: Report) -> None:
         )
 
 
+def changelog_text() -> str:
+    return (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+
+
+def latest_changelog_version() -> str:
+    """Return the first released CHANGELOG version after Unreleased."""
+    text = changelog_text()
+    for match in re.finditer(r"^## \[v?(\d+\.\d+\.\d+)\].*?$", text, re.MULTILINE):
+        return match.group(1)
+    raise SystemExit("CHANGELOG.md has no released version section")
+
+
 def extract_changelog_section(version: str) -> str:
     """Return the CHANGELOG body for version X.Y.Z (without the heading)."""
-    text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    text = changelog_text()
     # Accept ## [1.0.1] or ## [v1.0.1]
     ver = version.lstrip("v")
     pattern = re.compile(
@@ -609,6 +621,11 @@ def main(argv: list[str] | None = None) -> int:
         help="Print CHANGELOG section for VERSION (e.g. 1.0.1 or v1.0.1) and exit",
     )
     parser.add_argument(
+        "--latest-changelog-version",
+        action="store_true",
+        help="Print the first released CHANGELOG version after Unreleased and exit",
+    )
+    parser.add_argument(
         "--skip-links",
         action="store_true",
         help="Skip internal markdown link checks",
@@ -627,6 +644,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.extract_changelog:
         sys.stdout.write(extract_changelog_section(args.extract_changelog))
+        return 0
+    if args.latest_changelog_version:
+        sys.stdout.write(latest_changelog_version() + "\n")
         return 0
 
     report = Report()

@@ -39,41 +39,9 @@ jobs:
           REPOSITORY: ${{ github.repository }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
+          set -euo pipefail
           gh label create external-links --repo "$REPOSITORY" --color "fbca04" --description "Advisory external documentation links" --force
-          python - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-
-          report = json.loads(Path("external-link-report.json").read_text(encoding="utf-8"))
-          def lines(items):
-              if not items:
-                  return "- None"
-              return "\n".join(
-                  f"- `{item['url']}` — {item['state']}: {item.get('status', item.get('detail', 'unknown'))} (sources: {', '.join(item['sources'])})"
-                  for item in items
-              )
-          body = """# External link monitor
-
-<!-- actionable-fingerprint: %s -->
-
-This is an advisory maintenance signal. It lists stable 404/410 failures and blocked unsafe targets. Transient 429, 5xx, timeout, DNS, and bot-protection results remain in the workflow artifact for human review and do not create issue churn.
-
-## Actionable failures
-%s
-
-## Last observed transient results
-%s
-
-Checked %s links. [Workflow run](%s).
-""" % (
-              report["actionable_fingerprint"], lines(report["broken"] + report["blocked"]),
-              lines(report["transient"]), report["checked"], os.environ["RUN_URL"],
-          )
-          Path("external-link-issue.md").write_text(body, encoding="utf-8")
-          Path("has-actionable-failures").write_text("yes" if report["broken"] or report["blocked"] else "no", encoding="utf-8")
-          Path("fingerprint").write_text(report["actionable_fingerprint"], encoding="utf-8")
-          PY
+          python scripts/render_link_issue.py --report external-link-report.json --run-url "$RUN_URL"
           issue_number="$(gh issue list --repo "$REPOSITORY" --state open --label external-links --search 'in:title "External link monitor"' --json number,body --jq '.[0].number')"
           if [ "$(cat has-actionable-failures)" = yes ]; then
             if [ -n "$issue_number" ]; then
