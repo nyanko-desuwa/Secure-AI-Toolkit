@@ -1,7 +1,7 @@
 # Cloud Network Controls
 
 The same control under three names, plus the defaults each provider ships. Read this before
-applying guidance written for one provider to another — the roles match, the semantics do not.
+applying guidance written for one provider to another - the roles match, the semantics do not.
 
 Verified 2026-07-28 against the provider documentation linked at the bottom.
 
@@ -37,7 +37,7 @@ Read the row for your provider before writing a rule.
 
 Two consequences people trip over.
 
-AWS security groups have no deny. You cannot write "allow the subnet except this host" — you
+AWS security groups have no deny. You cannot write "allow the subnet except this host" - you
 express it by narrowing the allow, or you move up to a Network ACL, which is stateless and
 therefore needs the ephemeral-port return range opened explicitly.
 
@@ -61,7 +61,7 @@ So a security group cannot block the metadata service. On AWS the control is
 `http_tokens = "required"` (IMDSv2) plus `http_put_response_hop_limit = 1`, or
 `http_endpoint = "disabled"` where the workload needs no metadata. On a Linux host you can drop
 it in the host firewall, which is outside the provider's exemption. On Azure and GCP the metadata
-service requires a non-forwardable header, so a plain URL-controlling SSRF cannot read it — but a
+service requires a non-forwardable header, so a plain URL-controlling SSRF cannot read it - but a
 request-header-controlling SSRF can.
 
 ## Hostname-based egress: read the limits before you rely on it
@@ -95,7 +95,7 @@ more.
   every policy that selects the pod, so evaluation order does not exist.
 - Isolation is per-direction. A pod is unrestricted until some policy selects it and names that
   direction in `policyTypes`. `podSelector: {}` with a direction and no rules is the default-deny
-  idiom, and it is namespace-scoped — you need one per namespace.
+  idiom, and it is namespace-scoped - you need one per namespace.
 - Enforcement comes from the CNI. A policy on a plugin that does not implement NetworkPolicy is
   a YAML file with no effect. Verify the plugin, not the object.
 - Traffic from the node a pod runs on is always allowed, and a pod cannot block access to itself.
@@ -119,14 +119,14 @@ the plugin. Do not assume applying a policy stops traffic already in flight.
 
 ## Sources
 
-- AWS security groups — <https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html>
-- AWS instance metadata options — <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html>
-- Azure network security groups overview — <https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview>
-- Azure service tags — <https://learn.microsoft.com/azure/virtual-network/service-tags-overview>
-- GCP firewall FQDN objects — <https://cloud.google.com/firewall/docs/fqdn-objects-overview>
-- Kubernetes NetworkPolicy — <https://kubernetes.io/docs/concepts/services-networking/network-policies/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
+- AWS security groups - <https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html>
+- AWS instance metadata options - <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html>
+- Azure network security groups overview - <https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview>
+- Azure service tags - <https://learn.microsoft.com/azure/virtual-network/service-tags-overview>
+- GCP firewall FQDN objects - <https://cloud.google.com/firewall/docs/fqdn-objects-overview>
+- Kubernetes NetworkPolicy - <https://kubernetes.io/docs/concepts/services-networking/network-policies/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
 
 All URLs checked 2026-07-28. Azure NSG flow logs are being retired on 2027-09-30 and new ones
 could not be created after 2025-06-30; the current control is VNet flow logs.

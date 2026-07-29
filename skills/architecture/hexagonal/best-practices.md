@@ -13,7 +13,7 @@ adapter.
 
 ```go
 // Vulnerable: the port cannot express who is asking, so the HTTP adapter
-// is the only place ownership can be checked — and it is the only adapter that does.
+// is the only place ownership can be checked - and it is the only adapter that does.
 package app
 
 type DocumentService interface {
@@ -68,8 +68,8 @@ func (s *service) Publish(ctx context.Context, actor Actor, cmd PublishCommand) 
 ```
 
 Why the signature matters more than the check: a check can be forgotten, a parameter cannot
-be omitted. Every new adapter — a queue consumer written next quarter, a CLI written for a
-migration — has to produce an `Actor` before it can compile. That is the difference between a
+be omitted. Every new adapter - a queue consumer written next quarter, a CLI written for a
+migration - has to produce an `Actor` before it can compile. That is the difference between a
 boundary and a convention.
 
 Do not reach for `context.Value` to carry the actor. It compiles when empty, so the compiler
@@ -84,7 +84,7 @@ enters memory unauthorized.
 `A01:2025` · ASVS V4, V8
 
 The same use case, three driving adapters. Notice that not one of them makes an authorization
-decision — they each construct an `Actor` from whatever credential their transport carries,
+decision - they each construct an `Actor` from whatever credential their transport carries,
 and hand it over.
 
 ```go
@@ -143,11 +143,11 @@ func (j *ScheduledPublisher) run(ctx context.Context) error {
 
 A job that invents a superuser actor to get past the check has reintroduced the hole with
 extra steps. If the job legitimately acts without a user, give it a distinct role and let the
-core policy decide what that role may do — `CWE-1220` is what you get when "system" means
+core policy decide what that role may do - `CWE-1220` is what you get when "system" means
 everything.
 
 Cost: none structurally. Three adapters is three files that must each be reviewed for
-credential verification, which is real work — but it is work you were doing anyway, now
+credential verification, which is real work - but it is work you were doing anyway, now
 visible.
 
 ## Mapping Belongs in the Adapter
@@ -184,7 +184,7 @@ export interface DocumentService {
   publish(actor: Actor, cmd: PublishCommand): Promise<void>;
 }
 
-// adapters/http/documents.ts — mapping and rejection live here
+// adapters/http/documents.ts - mapping and rejection live here
 import { z } from "zod";
 
 const Body = z.object({ documentId: z.string().uuid() }).strict();
@@ -215,7 +215,7 @@ something the client controls.
 
 Cost: one mapping per direction per adapter, and a DTO type that duplicates some fields of a
 core type. That duplication is the price of the boundary. Reusing the core type as the wire
-type is how mass-assignment bugs get in — the wire schema must be explicit about what a
+type is how mass-assignment bugs get in - the wire schema must be explicit about what a
 client may set.
 
 ## Driven Ports Define What the Core Expects
@@ -226,7 +226,7 @@ A driven port is a promise stated by the core. The adapter is where the outside 
 forced to keep it, including by refusing it.
 
 ```typescript
-// core/ports.ts — the core asks for a document, not for an HTTP response
+// core/ports.ts - the core asks for a document, not for an HTTP response
 export interface LinkPreview {
   readonly title: string;
   readonly contentType: string;
@@ -319,7 +319,7 @@ Honest limitation: resolve-then-connect leaves a DNS rebinding window, because `
 resolves again for the connection. Closing it means pinning the checked address into the
 connection, or putting an allowlisting egress proxy in front. Say which one you did.
 
-Never deserialize a third-party response with a format that can instantiate types —
+Never deserialize a third-party response with a format that can instantiate types -
 `pickle`, Java native serialization, `yaml.load` without a safe loader. `CWE-502`. Parse into
 a schema, then construct the domain object yourself.
 
@@ -381,7 +381,7 @@ Subscriptions are worse, because the adapter registers a closure that captures t
 
 ```typescript
 // Vulnerable: subscribes on start, never unsubscribes. On a hot reload or a
-// reconnect, handlers accumulate — each retaining the service and its dependencies.
+// reconnect, handlers accumulate - each retaining the service and its dependencies.
 export class BrokerConsumer {
   start(): void {
     this.broker.subscribe("documents.publish", (m) => this.handle(m));
@@ -485,8 +485,8 @@ func (in *Ingress) Close() { close(in.work); in.wg.Wait() }
 ```
 
 The actor travels with the job. Losing it on the way into the queue is how "process
-asynchronously" turns into "process as root". Backpressure strategy — block, drop, or reject,
-and how to size `depth` — is `skills/architecture/scalability/`.
+asynchronously" turns into "process as root". Backpressure strategy - block, drop, or reject,
+and how to size `depth` - is `skills/architecture/scalability/`.
 
 ## Configuration and Secrets Enter Through an Adapter
 
@@ -534,7 +534,7 @@ public final class InvoiceService {
     }
 }
 
-// adapters/config/EnvSettings.java — parsing, defaults, and failure live here
+// adapters/config/EnvSettings.java - parsing, defaults, and failure live here
 public final class EnvSettings implements SettingsPort {
     private final InvoiceSettings invoice;
 
@@ -553,7 +553,7 @@ public final class EnvSettings implements SettingsPort {
 ```
 
 Two wins beyond testability. Misconfiguration fails at boot instead of at 3am on the first
-request that reads the variable — that is `A02:2025` moved from runtime to deploy time. And
+request that reads the variable - that is `A02:2025` moved from runtime to deploy time. And
 the secret stays inside the mailer adapter, so no core object, log line, or exception message
 can carry it.
 

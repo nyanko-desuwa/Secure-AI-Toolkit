@@ -4,7 +4,7 @@ Standards index. One row per standard, with the version, the date it was checked
 source, and where the detail lives.
 
 Per-skill `references/` directories hold the summaries. This file exists so you can answer
-"which edition are we on, and when was that last true" without opening fifteen skills — and so
+"which edition are we on, and when was that last true" without opening fifteen skills - and so
 that a stale pin is visible rather than invisible.
 
 ## Two maps live here as well
@@ -14,7 +14,7 @@ arrives with:
 
 | File | Answers |
 |---|---|
-| [skill-graph.md](skill-graph.md) | Which skills load together, and in what order. `depends_on` is the column that matters — a skill that assumes another's guidance produces a partial review without it. |
+| [skill-graph.md](skill-graph.md) | Which skills load together, and in what order. `depends_on` is the column that matters - a skill that assumes another's guidance produces a partial review without it. |
 | [standards-matrix.md](standards-matrix.md) | Which skill owns a given standard, category, or CWE. Read backwards from "A03:2025 appeared in this diff" to the skill that covers it. |
 
 Both are generated from the skills themselves and are the authoritative list of skill names. A
@@ -28,7 +28,7 @@ mis-mapping survives review because both strings look plausible.
 
 So: every version claim in this repository carries a source URL and a check date. If the date is
 old, the claim is suspect. Re-fetch before relying on it, and update the pin in three places
-together — the reference file, the table in `AI_INSTRUCTIONS.md`, and the one in the root
+together - the reference file, the table in `AI_INSTRUCTIONS.md`, and the one in the root
 `README.md`.
 
 ## Primary standards
@@ -69,7 +69,7 @@ V12 Secure Communication · V13 Configuration · V14 Data Protection ·
 V15 Secure Coding and Architecture · V16 Security Logging and Error Handling · V17 WebRTC
 
 Cite at chapter level. Individual requirement IDs are only used where a skill verified them
-against the official source — 5.0.0 renumbered heavily from 4.0.3, so a recalled ID is a guess.
+against the official source - 5.0.0 renumbered heavily from 4.0.3, so a recalled ID is a guess.
 Formal verification needs the official CSV, not this repository.
 
 ## Which one to reach for
@@ -95,7 +95,7 @@ disagree they do not: implement the ASVS requirement, report with the Top 10 cat
 
 A CWE names the weakness; a Top 10 category names the risk class. Give both when they add
 information, and skip the CWE when no specific one fits rather than reaching for a vague parent.
-Some CWE entries are marked DISCOURAGED for mapping — CWE-284 and CWE-285 among them — because
+Some CWE entries are marked DISCOURAGED for mapping - CWE-284 and CWE-285 among them - because
 they are too abstract to act on. Prefer the specific child.
 
 Severity in this repository is exploitability plus blast radius, not category name. SQL injection
@@ -123,7 +123,7 @@ list, not a second copy of the pins.
 | OWASP LLM Top 10 | `core/ai-security` |
 
 Some of these are deliberately incomplete. Where a document sits behind registration or returned
-an error, the skill says what it could not extract instead of filling the gap from memory —
+an error, the skill says what it could not extract instead of filling the gap from memory -
 `enterprise/kubernetes-security` omits CIS recommendation IDs for exactly this reason. That gap
 is the honest output, not a defect.
 

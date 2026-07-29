@@ -1,9 +1,9 @@
-# OWASP Top 10 2025 — for review reporting
+# OWASP Top 10 2025 - for review reporting
 
 Current released version. Verified against <https://owasp.org/Top10/2025/> on 2026-07-28.
 
 This file is the reporting view: given a sink you found, which category do you write on the
-finding. For the design view — what each category implies when writing new code — see
+finding. For the design view - what each category implies when writing new code - see
 `skills/core/owasp/references/owasp-top10-2025.md`.
 
 ## What the category is for
@@ -38,7 +38,7 @@ finding is now wrong rather than merely dated. When you inherit a finding list, 
 edition it was written against before renumbering.
 
 SSRF lost its standalone slot (it was A10:2021). It did not become less common. Report it under
-A01 or A06 with `CWE-918`, which is rank 22 on the 2025 CWE Top 25 — the CWE carries the weight
+A01 or A06 with `CWE-918`, which is rank 22 on the 2025 CWE Top 25 - the CWE carries the weight
 the category no longer does.
 
 ## Mapping from 2021

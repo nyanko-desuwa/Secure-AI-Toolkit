@@ -94,7 +94,7 @@ The controls, in order of effect:
 4. Put privileged accounts in Protected Users, which stops DES and RC4 in preauthentication
    outright.
 
-Inventory SPNs on user accounts — machine and gMSA accounts are fine, user accounts are the risk:
+Inventory SPNs on user accounts - machine and gMSA accounts are fine, user accounts are the risk:
 
 ```powershell
 Get-ADUser -LDAPFilter '(servicePrincipalName=*)' -Properties servicePrincipalName, PasswordLastSet |
@@ -136,7 +136,7 @@ GPO path: Computer Configuration > Windows Settings > Security Settings > Local 
 Security Options, "Microsoft network client/server: Digitally sign communications (always)".
 
 `EnableSecuritySignature` is ignored for SMB2 and later. Setting it and believing you are done is
-a common mistake — signing for SMB 2.02+ is controlled solely by whether it is required.
+a common mistake - signing for SMB 2.02+ is controlled solely by whether it is required.
 
 Signing happens when either side requires it. It is skipped only when both sides have
 `RequireSecuritySignature` set to 0.
@@ -170,15 +170,15 @@ author thinks.
 
 ## Sources
 
-- Kerberos constrained delegation overview —
+- Kerberos constrained delegation overview -
   <https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-constrained-delegation-overview>,
   checked 2026-07-28
-- Kerberos authentication overview —
+- Kerberos authentication overview -
   <https://learn.microsoft.com/en-us/windows-server/security/kerberos/kerberos-authentication-overview>,
   checked 2026-07-28
-- SMB signing overview —
+- SMB signing overview -
   <https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview>,
   checked 2026-07-28
-- `New-ADServiceAccount` (delegation parameters) —
+- `New-ADServiceAccount` (delegation parameters) -
   <https://learn.microsoft.com/en-us/powershell/module/activedirectory/new-adserviceaccount>,
   checked 2026-07-28

@@ -8,14 +8,14 @@ Blocks labelled Vulnerable contain deliberately unsafe code. Do not copy them.
 
 ## Contents
 
-- [The request DTO crosses the port](#the-request-dto-crosses-the-port) — A01, CWE-602, CWE-1220
-- [The repository port takes a filter built from query params](#the-repository-port-takes-a-filter-built-from-query-params) — A01, A05, CWE-89, CWE-653
-- [Four ports, four implementations, no boundary](#four-ports-four-implementations-no-boundary) — cost only
-- [The adapter holds a connection for its own lifetime](#the-adapter-holds-a-connection-for-its-own-lifetime) — CWE-772, CWE-400
-- [A singleton adapter captured the first request's tenant](#a-singleton-adapter-captured-the-first-requests-tenant) — A01, CWE-488
-- [The in-memory test double reached production](#the-in-memory-test-double-reached-production) — A02, CWE-770
-- [A listener is registered per instantiation](#a-listener-is-registered-per-instantiation) — CWE-401, CWE-400
-- [The fake adapter skips what the real one enforces](#the-fake-adapter-skips-what-the-real-one-enforces) — A06, A01
+- [The request DTO crosses the port](#the-request-dto-crosses-the-port) - A01, CWE-602, CWE-1220
+- [The repository port takes a filter built from query params](#the-repository-port-takes-a-filter-built-from-query-params) - A01, A05, CWE-89, CWE-653
+- [Four ports, four implementations, no boundary](#four-ports-four-implementations-no-boundary) - cost only
+- [The adapter holds a connection for its own lifetime](#the-adapter-holds-a-connection-for-its-own-lifetime) - CWE-772, CWE-400
+- [A singleton adapter captured the first request's tenant](#a-singleton-adapter-captured-the-first-requests-tenant) - A01, CWE-488
+- [The in-memory test double reached production](#the-in-memory-test-double-reached-production) - A02, CWE-770
+- [A listener is registered per instantiation](#a-listener-is-registered-per-instantiation) - CWE-401, CWE-400
+- [The fake adapter skips what the real one enforces](#the-fake-adapter-skips-what-the-real-one-enforces) - A06, A01
 
 ---
 
@@ -24,7 +24,7 @@ Blocks labelled Vulnerable contain deliberately unsafe code. Do not copy them.
 `A01:2025` · `CWE-602`, `CWE-1220` · ASVS V8
 
 The driving adapter does no mapping. It forwards the parsed body, so the trust boundary is now
-inside the use case — and the use case authorizes against fields the client wrote.
+inside the use case - and the use case authorizes against fields the client wrote.
 
 ```typescript
 // Vulnerable
@@ -56,7 +56,7 @@ in its purest form: the server delegated the decision to data the client supplie
 
 ```typescript
 // Fixed
-// core/ports.ts — the command carries no identity, ever
+// core/ports.ts - the command carries no identity, ever
 export interface ApproveInvoiceCommand {
   readonly invoiceId: string;
 }
@@ -89,7 +89,7 @@ async approve(actor: Actor, cmd: ApproveInvoiceCommand): Promise<void> {
   this.audit.record(actor, "invoice.approve", invoice.id, "allowed");
 }
 
-// adapters/inbound/http/routes.ts — mapping and rejection live here
+// adapters/inbound/http/routes.ts - mapping and rejection live here
 const Body = z.object({ invoiceId: z.string().uuid() }).strict();
 
 router.post("/invoices/approve", async (req, res) => {
@@ -147,12 +147,12 @@ def find(self, filters: dict) -> list[Order]:
 
 Three holes from one design decision. `setdefault` means `?tenant_id=9` reads another tenant.
 `?tenant_id=9' OR '1'='1` reads all of them. And there is no `LIMIT`, so one request can pull the
-table into memory. The port promised a repository and delivered a SQL console — `CWE-653`, the
+table into memory. The port promised a repository and delivered a SQL console - `CWE-653`, the
 compartment boundary is gone.
 
 ```python
 # Fixed
-# core/ports.py — tenant is a separate required argument, criteria are typed
+# core/ports.py - tenant is a separate required argument, criteria are typed
 from dataclasses import dataclass
 from datetime import date
 from enum import Enum
@@ -199,7 +199,7 @@ def find(self, tenant_id: str, criteria: OrderCriteria) -> list[Order]:
         cur.execute(" ".join(sql), params)
         return [to_order(r) for r in cur.fetchall()]
 
-# adapters/inbound/http/orders.py — query params become criteria through an allowlist
+# adapters/inbound/http/orders.py - query params become criteria through an allowlist
 @app.get("/orders")
 def list_orders(request):
     actor = actor_from(verify_session(request))
@@ -258,7 +258,7 @@ public interface InvoiceRepository {
 // Port kept: the wall clock cannot be driven from a test.
 public interface Clock { Instant now(); }
 
-// core/domain/InvoiceNumber.java — was a port, now a value object
+// core/domain/InvoiceNumber.java - was a port, now a value object
 public record InvoiceNumber(String value) {
     public static InvoiceNumber of(int year, long sequence) {
         return new InvoiceNumber("INV-%d-%06d".formatted(year, sequence));
@@ -269,7 +269,7 @@ public record InvoiceNumber(String value) {
 ```
 
 Why it works: the two surviving interfaces each answer "name the second implementation, or name
-the security property" — a test double for `Clock`, a tenant predicate for the repository. The
+the security property" - a test double for `Clock`, a tenant predicate for the repository. The
 others answered neither, so they were indirection charged to every future reader.
 
 The comment on a single-adapter port is load-bearing. Without it, the next contributor runs the
@@ -348,7 +348,7 @@ and a `defer`. The core sees `InTx(ctx, fn)` and cannot hold the transaction pas
 even by accident.
 
 Composition owns the pool: build it once with `MaxConns`, `MaxConnIdleTime`, and
-`MaxConnLifetime` set, and call `pool.Close()` last in the shutdown sequence — after the HTTP
+`MaxConnLifetime` set, and call `pool.Close()` last in the shutdown sequence - after the HTTP
 server stopped accepting and in-flight work drained.
 
 ---
@@ -379,7 +379,7 @@ services.AddSingleton<IReportExporter, ReportExportAdapter>();   // captive depe
 The singleton is constructed once, from whichever scope resolved it first. Its `_tenant` is that
 request's tenant, for the lifetime of the process. Every subsequent export reads tenant one's
 files. The same shape with a `DbContext` also pins the connection and the change tracker for the
-process lifetime, so one request's result set is retained forever — `CWE-772` on top of the
+process lifetime, so one request's result set is retained forever - `CWE-772` on top of the
 authorization failure.
 
 ```csharp
@@ -428,7 +428,7 @@ Why it works: the adapter's fields are all process-lifetime and immutable, so th
 for two requests to share. `ValidateOnBuild` turns the remaining risk into a startup failure.
 
 Limitation: scope validation sees constructor injection. A factory delegate, a static, or a
-service locator call inside a method is invisible to it — grep adapter constructors and method
+service locator call inside a method is invisible to it - grep adapter constructors and method
 bodies for actor, tenant, session, connection, and cursor types by hand.
 
 ---
@@ -459,14 +459,14 @@ const idempotency: IdempotencyStore = process.env.REDIS_URL
 ```
 
 Two failures compound. The map is keyed by a client-supplied `Idempotency-Key` header, so its
-growth rate is attacker-controlled and the process dies by heap exhaustion — `CWE-770`. And the
+growth rate is attacker-controlled and the process dies by heap exhaustion - `CWE-770`. And the
 store is per-process, so with three replicas the same payment request retried against a different
 replica is charged twice. A missing environment variable turned a correctness guarantee off
 without a log line: `A02:2025`, fail-open configuration.
 
 ```typescript
 // Fixed
-// composition/container.ts — required config fails at boot
+// composition/container.ts - required config fails at boot
 function requireEnv(name: string): string {
   const v = process.env[name];
   if (!v) throw new Error(`missing required configuration: ${name}`);
@@ -477,7 +477,7 @@ const idempotency: IdempotencyStore = new RedisIdempotencyStore(requireEnv("REDI
 ```
 
 ```typescript
-// adapters/memory/idempotency-store.ts — bounded even in tests, and labelled
+// adapters/memory/idempotency-store.ts - bounded even in tests, and labelled
 /**
  * Test double. Not exported from the production entry point; see package.json "exports".
  * Bounded anyway: an unbounded map in a test suite hides the growth it would cause in prod.
@@ -586,7 +586,7 @@ Why it works: registration and removal belong to the same object, and the object
 where the process lifetime is decided. The `AbortSignal` ties removal to a single call, so there
 is no way to add the listener and forget the matching `off`.
 
-Route handlers receive the adapter as a parameter or from the container — they never construct
+Route handlers receive the adapter as a parameter or from the container - they never construct
 one. Any `new SomethingAdapter(...)` inside a request handler is worth a second look; the handler
 is not where lifetimes are decided.
 
@@ -608,7 +608,7 @@ func (f *fakeOrders) FindInTenant(_ context.Context, _, id string) (*app.Order, 
 ```
 
 ```go
-// adapters/postgres/orders.go — nobody noticed the missing predicate
+// adapters/postgres/orders.go - nobody noticed the missing predicate
 func (r *OrderRepo) FindInTenant(ctx context.Context, tenant, id string) (*app.Order, error) {
     row := r.pool.QueryRow(ctx, `SELECT id, status FROM orders WHERE id = $1`, id) // no tenant
     // ...
@@ -617,8 +617,8 @@ func (r *OrderRepo) FindInTenant(ctx context.Context, tenant, id string) (*app.O
 
 The abuse test passes, because the use case also compares `order.TenantID` to the actor's tenant
 after loading. So the boundary looks tested. It is not: the fake never exercised the predicate,
-the real adapter never had one, and every other caller of `FindInTenant` — a list endpoint, an
-export job, an audit log line that prints the order number before the check — reads across
+the real adapter never had one, and every other caller of `FindInTenant` - a list endpoint, an
+export job, an audit log line that prints the order number before the check - reads across
 tenants. The redundant in-core check is what hid it.
 
 ```go
@@ -687,7 +687,7 @@ func TestPostgresOrderRepo_Contract(t *testing.T) {
 ```
 
 ```go
-// adapters/memory/orders.go — the fake now has to enforce the same thing
+// adapters/memory/orders.go - the fake now has to enforce the same thing
 func (r *OrderRepo) FindInTenant(_ context.Context, tenant, id string) (*app.Order, error) {
     o := r.byID[id]
     if o == nil || o.TenantID != tenant {
@@ -703,7 +703,7 @@ contract, not as a use-case test, so it holds for every caller of the port rathe
 one path that happened to have a second check.
 
 The `t.Skip` is deliberate and it must be loud. A skipped contract run means the real adapter is
-unverified in that pipeline — report it that way rather than counting the fake's pass. Make the
+unverified in that pipeline - report it that way rather than counting the fake's pass. Make the
 DSN required in CI and optional only for local runs.
 
 Keep the redundant in-core check. Defence in depth is fine; relying on it to cover a missing

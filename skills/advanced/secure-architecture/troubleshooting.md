@@ -57,7 +57,7 @@ before access, not about transport encryption.
 
 ## Two standards point different ways
 
-ASVS and the Top 10 rarely conflict — one is requirements, the other is a risk ranking. Real
+ASVS and the Top 10 rarely conflict - one is requirements, the other is a risk ranking. Real
 conflicts are usually between a security standard and an availability requirement, and they resolve
 by naming the failure mode explicitly rather than by picking a side.
 
@@ -69,7 +69,7 @@ policy is what produces both outages and bypasses.
 ## The design is not written down anywhere
 
 Reconstruct it from what exists, and label the reconstruction. Read the IaC tree, the service
-manifests, the ingress rules, and the database grants — in that order, because each constrains the
+manifests, the ingress rules, and the database grants - in that order, because each constrains the
 next. Then write the boundary table and mark every row you inferred rather than read.
 
 Do not ask for a design document first. It will not arrive. A wrong boundary table gets corrected in
@@ -78,7 +78,7 @@ five minutes by someone who knows the system; an absent one gets nothing.
 ## The codebase has no layering, so you cannot find the boundary
 
 Follow the data, not the code. Layering is a property of the source tree; a trust boundary is a
-property of the data path. Start from the stores — tables, buckets, queues, caches — and ask which
+property of the data path. Start from the stores - tables, buckets, queues, caches - and ask which
 process holds a credential to each one. Every process with a credential is inside that boundary,
 whatever directory its code lives in.
 
@@ -92,7 +92,7 @@ This is the Manifesto's Admiration for the Problem anti-pattern, and it is the n
 threat modelling session that ends with a document. The fix is structural: a threat with no named
 response is not a finding, it is a note.
 
-Convert each threat into one of four rows — mitigate, eliminate, transfer, accept — with an owner and
+Convert each threat into one of four rows - mitigate, eliminate, transfer, accept - with an owner and
 a ticket or an ADR link. Then throw away the threats you cannot assign. A five-item list where every
 item has an owner changes the system. A forty-item list changes nothing and teaches the team that
 threat modelling is paperwork.
@@ -114,7 +114,7 @@ useful:
 4. Separate schemas, then instances, only if the blast radius still justifies it.
 
 Step 1 alone converts CWE-1220 (over-broad grant) into a bounded one. Do not let "we cannot do step 4"
-prevent step 1 — that trade is the most common way a shared database stays fully shared for years.
+prevent step 1 - that trade is the most common way a shared database stays fully shared for years.
 
 ## A service already violates the boundary you are adding
 
@@ -127,7 +127,7 @@ callers, then flip to enforce. Kubernetes `NetworkPolicy` has no dry-run, so thi
 enforcing at the application layer first and at the network layer once the log is clean.
 
 Two rules keep this honest. The report-only phase has an expiry date written into the ADR, and the
-log is watched — an unwatched report-only policy is an off policy with extra steps.
+log is watched - an unwatched report-only policy is an off policy with extra steps.
 
 ## Legacy authentication you have to interoperate with
 
@@ -147,16 +147,16 @@ long-lived and unrotatable, that is CWE-522 and it stays open until the credenti
 
 Both look the same in a document. The difference is testable, and three questions separate them.
 
-1. Name the attack step it removes. Not the class of attack — the specific step in this system's
+1. Name the attack step it removes. Not the class of attack - the specific step in this system's
    path. "Blocks the enumeration because the ID is not in the request" is an answer. "Adds a layer of
    defence" is not.
 2. Say what still gets through. A control whose gap you cannot describe has not been analysed.
 3. Say how you would notice it failing. A control with no signal is unfalsifiable, and unfalsifiable
    controls are the ones found switched off during an incident.
 
-Honest examples: a repository layer as the only path to tenant tables while RLS is pending — removes
+Honest examples: a repository layer as the only path to tenant tables while RLS is pending - removes
 the forgotten-`WHERE` step, does not cover code that opens its own connection, and the per-endpoint
-cross-tenant test tells you when it breaks. A WAF rule in front of an unfixed injection — buys time,
+cross-tenant test tells you when it breaks. A WAF rule in front of an unfixed injection - buys time,
 bypassable by encoding, and the signal is the rule firing.
 
 Theatre: a rate limit on the login page while the token endpoint is open. A denylist of payload

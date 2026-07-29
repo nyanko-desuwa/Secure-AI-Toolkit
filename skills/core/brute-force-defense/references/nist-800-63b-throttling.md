@@ -1,4 +1,4 @@
-# NIST SP 800-63B-4 — throttling, blocklists, and OTP limits
+# NIST SP 800-63B-4 - throttling, blocklists, and OTP limits
 
 Digital Identity Guidelines: Authentication and Authenticator Management, Revision 4.
 Only the sections relevant to guessing attacks are summarised here. For password length,
@@ -8,7 +8,7 @@ Source: <https://pages.nist.gov/800-63-4/sp800-63b.html>
 Publication record: <https://csrc.nist.gov/pubs/sp/800/63/b/4/final>
 Verified: 2026-07-28, section text fetched from the NIST HTML edition.
 
-## Section 3.2.2 — Rate limiting (throttling)
+## Section 3.2.2 - Rate limiting (throttling)
 
 The normative core: a verifier limits consecutive failed authentication attempts using a
 specific authenticator on a single subscriber account to no more than 100, by disabling that
@@ -27,7 +27,7 @@ Mitigations the section lists so the limit does not lock out legitimate users:
   timing, and browser metadata
 
 On a successful authentication the verifier should disregard previous failed attempts and reset
-the retry count for the authenticators used — with the caveat that the reset authenticator's
+the retry count for the authenticators used - with the caveat that the reset authenticator's
 maximum AAL cannot exceed the AAL of the session that performed the reset. Otherwise account
 recovery under Section 4.2 applies.
 
@@ -36,7 +36,7 @@ nothing about one attempt each against a million accounts from a rotating addres
 is what credential stuffing and spraying actually look like. Treat it as a floor and add
 per-IP, per-ASN, and global-failure-rate controls above it.
 
-## Section 3.1.1.2 — Password blocklist
+## Section 3.1.1.2 - Password blocklist
 
 Verifiers compare a prospective password against a blocklist of known commonly used, expected,
 or compromised passwords, at establishment and at change. The entire password is compared, not
@@ -74,7 +74,7 @@ Two details from 3.1.3.2 are the ones that get skipped in practice:
 - Single use within the validity period. Accepting the same code twice inside the same time
   step turns an observed code into a replayable one.
 
-## Section 3.2.5 — Phishing resistance
+## Section 3.2.5 - Phishing resistance
 
 Relevant here for one reason: none of the manually entered authenticator types above are
 phishing-resistant, because manual entry does not bind the authenticator output to the session

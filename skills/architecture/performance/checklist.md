@@ -1,7 +1,7 @@
 # Resource Lifetime Checklist
 
 Run before returning code. Mark each item pass, fail, or not applicable. "Not applicable"
-needs a one-line reason — an unexplained skip reads the same as an oversight.
+needs a one-line reason - an unexplained skip reads the same as an oversight.
 
 Only the sections the change touches need running. A CSS change needs none of this.
 
@@ -12,7 +12,7 @@ Only the sections the change touches need running. A CSS change needs none of th
 - [ ] Nothing new is stored at module or class level unless it is process-lifetime by design
 - [ ] Anything process-lifetime is created once at startup, not lazily inside a handler
 
-## L1 — Caches
+## L1 - Caches
 
 - [ ] Every cache has a maximum entry count or a maximum byte size
 - [ ] Every cache has a TTL, or a documented reason it never goes stale
@@ -21,7 +21,7 @@ Only the sections the change touches need running. A CSS change needs none of th
 - [ ] `lru_cache(maxsize=None)` and bare `Map`/`dict` caches are not used as caches
 - [ ] Stampede on an expensive key is handled with a bounded lock, not a longer TTL
 
-## L2 — Listeners and Subscriptions
+## L2 - Listeners and Subscriptions
 
 - [ ] Every `addEventListener`, `.on()`, and `subscribe()` has a matching removal
 - [ ] Removal happens on error and cancellation, not only on normal completion
@@ -31,29 +31,29 @@ Only the sections the change touches need running. A CSS change needs none of th
 - [ ] `AbortError` is filtered out of error reporting
 - [ ] No `MaxListenersExceededWarning` appears in test or dev logs
 
-## L3 — Connections and Handles
+## L3 - Connections and Handles
 
 - [ ] Connection pools are created once per process, never per request
 - [ ] Pool maximum size is set explicitly, not left at the library default
 - [ ] Pool acquire has a timeout, so saturation fails fast instead of hanging
 - [ ] Files, sockets, cursors, and locks are released with `with`, `try/finally`, `defer`,
-      or `using` — not by a call at the end of the happy path
+      or `using` - not by a call at the end of the happy path
 - [ ] `defer close` is placed after the error check, not before it
 - [ ] Go: `SetMaxOpenConns`, `SetMaxIdleConns`, and `SetConnMaxLifetime` are set
 - [ ] Shutdown closes the pool and drains in-flight work
 
-## L4 — Timers and Background Tasks
+## L4 - Timers and Background Tasks
 
 - [ ] Every `setInterval` and `setTimeout` handle is stored and cleared by its owner
 - [ ] Long-lived timers call `unref()` where the process should still be able to exit
 - [ ] No `create_task` result is dropped; a scope owns it, or a strong reference is held
       with `add_done_callback(set.discard)`
 - [ ] Structured concurrency (`TaskGroup`, `errgroup`, `WaitGroup`) is used for fan-out
-- [ ] Fan-out concurrency is bounded — `SetLimit`, a semaphore, or a worker count
+- [ ] Fan-out concurrency is bounded - `SetLimit`, a semaphore, or a worker count
 - [ ] Every goroutine has a guaranteed exit: context cancellation or a closed channel
 - [ ] Background task failures surface somewhere. Nothing is silently swallowed
 
-## L5 — Retention
+## L5 - Retention
 
 - [ ] No closure captures a large object graph it does not use
 - [ ] Removed DOM nodes have no remaining listener or reference holding them
@@ -61,7 +61,7 @@ Only the sections the change touches need running. A CSS change needs none of th
 - [ ] Cleanup uses an explicit `close()` or context manager, not `__del__`
 - [ ] `WeakMap`/`WeakRef` is used for key-lifetime metadata, not as a leak workaround
 
-## L6 — Request-Scoped State
+## L6 - Request-Scoped State
 
 - [ ] No request or session data is written to a module-level or static variable
 - [ ] `contextvars` values are set with a token and reset in `finally`
@@ -69,15 +69,15 @@ Only the sections the change touches need running. A CSS change needs none of th
 - [ ] Reading request context outside a request raises rather than returning stale data
 - [ ] Cross-request contamination is treated as a data leak, `A01:2025`, not a slow leak
 
-## L7 — Payload and Result-Set Size
+## L7 - Payload and Result-Set Size
 
 - [ ] Request bodies have a byte cap enforced on bytes received, not on `Content-Length`
 - [ ] The same cap exists at the proxy or gateway, not only in the application
 - [ ] Uploads and large responses stream; nothing calls `read()` on an unbounded source
-- [ ] Result sets use a cursor, generator, or batch loop — no `.all()` on an unbounded query
+- [ ] Result sets use a cursor, generator, or batch loop - no `.all()` on an unbounded query
 - [ ] Decompression has an output size limit, so a small archive cannot expand without bound
 
-## L8 — Queues and Backpressure
+## L8 - Queues and Backpressure
 
 - [ ] Every queue, channel, and buffer has a maximum depth
 - [ ] The full behaviour is chosen and written down: block, drop, or reject
@@ -115,5 +115,5 @@ Only the sections the change touches need running. A CSS change needs none of th
 - [ ] Relevant tests run, with output reported honestly
 - [ ] Any leak reported without a reproduction is labelled as unconfirmed
 - [ ] Restart schedules and raised limits are described as mitigations, never as fixes
-- [ ] Temporary heap dumps and profiles deleted — they contain live secrets
+- [ ] Temporary heap dumps and profiles deleted - they contain live secrets
 - [ ] Anything unverifiable stated plainly, not implied to be fine

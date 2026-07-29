@@ -17,7 +17,7 @@ No CVE is cited anywhere in this skill, and no CWE version number is asserted.
 
 CWE-602 is the second-adapter failure. The name says client-side, and the weakness is broader: a
 security decision delegated to a component the server cannot vouch for. An HTTP handler that owns
-the ownership check while a queue consumer calls the same use case is the same shape — the
+the ownership check while a queue consumer calls the same use case is the same shape - the
 enforcement lives somewhere the other callers are not.
 
 CWE-653 is what a transport type in a core signature costs you. Once the core reads a header, the
@@ -80,7 +80,7 @@ discourages it because it is also used for memory disclosure. Prefer the full ti
 CWE-770 is the in-memory adapter used as a cache with no bound or eviction, and the unbounded
 queue between an inbound adapter and the core.
 
-CWE-400 is the Class-level parent — resource exhaustion. Use it when the specific mechanism is not
+CWE-400 is the Class-level parent - resource exhaustion. Use it when the specific mechanism is not
 one of the above, and prefer the Base-level entry when it is.
 
 Heap-level diagnosis for all four is `skills/architecture/performance/`, which owns memory-leak

@@ -40,8 +40,8 @@ Hand off to `incident-response` for the process; this skill only covers the orde
 
 ## The ecosystem has no hash-pinning mechanism
 
-Some ecosystems and some sources — a git dependency, a private wheel served from a bucket, an
-internal Maven repository without checksum enforcement — will not give you verified bytes.
+Some ecosystems and some sources - a git dependency, a private wheel served from a bucket, an
+internal Maven repository without checksum enforcement - will not give you verified bytes.
 
 State that plainly rather than implying the lockfile covers it. Then buy back what you can:
 
@@ -55,13 +55,13 @@ dependencies" is a useful sentence. "Dependencies are pinned" is not.
 
 ## Disabling install scripts breaks the build
 
-Expected — a handful of packages genuinely need a native compilation step. Do not respond by
+Expected - a handful of packages genuinely need a native compilation step. Do not respond by
 re-enabling scripts globally.
 
 1. Run the install with scripts off and read which package failed
 2. Verify that the package legitimately needs a build step, rather than assuming it
 3. Allowlist that package by name
-4. Prefer the prebuilt artefact where one exists — many packages publish platform wheels or
+4. Prefer the prebuilt artefact where one exists - many packages publish platform wheels or
    prebuilt binaries specifically to avoid this
 
 If the allowlist grows past a handful of entries, the finding is the size of the list, not the
@@ -74,8 +74,8 @@ provenance signing key is out of reach of user-defined build steps. Self-hosted 
 build machines, and most on-premise CI cannot claim it, and no amount of workflow YAML changes
 that.
 
-Say which level you reach and what blocks the next one. L2 — hosted platform, platform-signed
-provenance, consumer-verified — is a real improvement and often the honest ceiling. Claiming L3
+Say which level you reach and what blocks the next one. L2 - hosted platform, platform-signed
+provenance, consumer-verified - is a real improvement and often the honest ceiling. Claiming L3
 because the workflow looks careful is worse than claiming L1, because a consumer will act on
 the claim.
 
@@ -86,7 +86,7 @@ steps that do not share a dependency graph.
 
 Produce one per component and state the boundaries, rather than producing one incomplete
 document that reads as complete. A CycloneDX BOM with an explicit note that the Go binaries are
-covered by a separate BOM is defensible. A BOM silently missing them is not — a consumer will
+covered by a separate BOM is defensible. A BOM silently missing them is not - a consumer will
 assume absence means the component is not present.
 
 If the requester wants a single file, aggregate at delivery time and keep the per-component
@@ -98,7 +98,7 @@ ASVS asks for documented, risk-based remediation windows. A customer contract as
 on everything. A regulator asks for something else.
 
 Meet the strictest applicable requirement and document why, or negotiate the contract. Do not
-maintain two sets of windows — the one nobody enforces becomes the one everyone cites.
+maintain two sets of windows - the one nobody enforces becomes the one everyone cites.
 
 Where the conflict is between speed and safety, name it: a 24-hour patch mandate is in direct
 tension with a release cooldown, and both are real controls. The usual resolution is a fast
@@ -113,12 +113,12 @@ An exception needs four things, or it is a silent acceptance:
 
 - The specific component and version, not "the reporting library"
 - Why remediation is not possible now, and what would make it possible
-- The compensating control, if any — network isolation, feature flag off, input constrained
+- The compensating control, if any - network isolation, feature flag off, input constrained
 - An expiry date and a named owner
 
 "Until we upgrade" is not an expiry date. ASVS 15.2.5 points at sandboxing, encapsulation,
 containerisation, and network isolation as the compensating controls for a component you must
-keep — reach for those rather than accepting the risk bare.
+keep - reach for those rather than accepting the risk bare.
 
 ## The vulnerability has no patch
 
@@ -138,7 +138,7 @@ The identity in a Sigstore certificate includes the workflow path and the ref. R
 verification correctly rejects the new artefact.
 
 Update the expected identity deliberately, as a reviewed change. Do not widen the regex to make
-the failure go away — that converts a working control into a check that Sigstore is up. Keep
+the failure go away - that converts a working control into a check that Sigstore is up. Keep
 the previous identity accepted for as long as artefacts signed by it are still deployed, then
 remove it.
 
@@ -147,7 +147,7 @@ remove it.
 Common, and fine to say so. Report the finding with the uncertainty attached and the
 precondition you could not confirm.
 
-"`lodash` prototype pollution, reachable only if untrusted input reaches `merge` — I found
+"`lodash` prototype pollution, reachable only if untrusted input reaches `merge` - I found
 three call sites and could not trace the input source for one of them" is actionable. "Not
 exploitable in our usage" with no reasoning is a deferral wearing a triage costume.
 

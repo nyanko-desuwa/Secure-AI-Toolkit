@@ -35,4 +35,4 @@ authorization. Categories describe demonstrated risk, not keywords.
 
 ## Source
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>

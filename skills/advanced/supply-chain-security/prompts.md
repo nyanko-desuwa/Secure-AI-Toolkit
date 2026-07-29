@@ -68,7 +68,7 @@ reach today, what is the single change that would raise it, and is there any pat
 fork PR reaches a secret or a write token? Cite the requirement, not just the level number.
 ```
 
-Naming the version matters — SLSA renumbered between 0.1 and 1.0. Asking for the single next
+Naming the version matters - SLSA renumbered between 0.1 and 1.0. Asking for the single next
 change produces a plan instead of a wish list.
 
 ## Find the dependency confusion exposure

@@ -4,7 +4,7 @@ Prompts that produce findings instead of reassurance. Four tiers: beginner, deve
 audit. They differ in what the reader is assumed to be able to check afterwards, not in how strict
 they are.
 
-Under each, one or two lines on why the phrasing works — that reasoning is what you adapt, not the
+Under each, one or two lines on why the phrasing works - that reasoning is what you adapt, not the
 wording.
 
 ## Beginner
@@ -24,7 +24,7 @@ lands where "credential present in commit `a3f9c1`" does not.
 
 ```
 This repo is private right now and I want to make it public. Is there anything in the whole
-history that would leak? If yes, do not tell me how to delete the commit — tell me which keys I
+history that would leak? If yes, do not tell me how to delete the commit - tell me which keys I
 need to change at the provider and in what order.
 ```
 
@@ -47,7 +47,7 @@ not match. Asking what was added makes the change reviewable.
 
 ```
 This project has a .env that was committed six months ago. Walk me through untracking it,
-keeping it on disk, and fixing the ignore rules — then tell me plainly what that does and does
+keeping it on disk, and fixing the ignore rules - then tell me plainly what that does and does
 not solve, and which credentials need rotating regardless.
 ```
 
@@ -65,7 +65,7 @@ with no recognisable shape, which pattern matching misses.
 
 ## Review
 
-For checking a change someone else — or an assistant — already made.
+For checking a change someone else - or an assistant - already made.
 
 ```
 Review the staged diff for anything that should not be published. For each finding give the
@@ -73,7 +73,7 @@ file:line, the Top 10 2025 category and CWE, who would be able to read it after 
 the fix. Quote the actual line. Skip anything with no exploitation path and say you skipped it.
 ```
 
-Asking who can read it afterwards is what makes severity honest here — audience reach is the
+Asking who can read it afterwards is what makes severity honest here - audience reach is the
 variable, not the category name.
 
 ```
@@ -106,7 +106,7 @@ what you could not verify from the repo alone.
 ```
 
 Requiring the command and its output per section is what stops a wall of checkmarks. The last
-sentence is what surfaces the real limits — repository visibility, whether a key is still live,
+sentence is what surfaces the real limits - repository visibility, whether a key is still live,
 whether a tarball was downloaded.
 
 ```
@@ -115,7 +115,7 @@ since. Give me the ordered response. Be explicit about what happens first and wh
 commit is not it. Then tell me what to check in the Stripe dashboard and over what window.
 ```
 
-Stating the elapsed time and the public visibility changes the answer — it moves the assumption
+Stating the elapsed time and the public visibility changes the answer - it moves the assumption
 from "readable" to "already used".
 
 ```
@@ -136,7 +136,7 @@ correct today is still a denylist.
 | "Remove the secret from git history" | Wrong first action, and it is not remediation. Ask for the revocation order first |
 | "Add a .gitignore" | Does nothing for files already tracked, which is the actual failure. Ask for the untracking step too |
 | "Scan for secrets" | An assistant is a poor entropy scanner. Run `gitleaks` or `trufflehog`, then ask what to do with the hits |
-| "Clean up before I push" | Ambiguous — invites formatting changes and deleted files. Say what must not ship |
+| "Clean up before I push" | Ambiguous - invites formatting changes and deleted files. Say what must not ship |
 | "Force push to fix it" | Rewrites hashes, strips signatures, breaks closed-PR diffs, and leaves the value in forks and caches |
 | Pasting a real key to ask whether it is exposed | The paste is now an exposure, retained by the model provider. Describe the shape instead |
 | "It is a private repo so this is fine" | Not a question, and not true. Private means a smaller audience, not a safe one |

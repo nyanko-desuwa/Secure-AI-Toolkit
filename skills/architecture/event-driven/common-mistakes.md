@@ -1,7 +1,7 @@
 # Event-Driven Common Mistakes
 
 What goes wrong, why it goes wrong, the fix, and why the fix holds. Several entries are the wrong
-fix somebody reached for after hitting an earlier one — those are the expensive ones, because they
+fix somebody reached for after hitting an earlier one - those are the expensive ones, because they
 look like progress.
 
 ## Trusting the payload because it came from the internal bus
@@ -9,7 +9,7 @@ look like progress.
 The mistake: the handler reads `event.userId`, `event.role`, or `event.tenantId` and acts on it.
 
 Why it happens: the broker is inside the VPC, so it feels like a trusted channel. It is a channel,
-not a trust level. The message has no session, no token, and no caller context — the only thing
+not a trust level. The message has no session, no token, and no caller context - the only thing
 inside it is what some publisher wrote.
 
 The fix: resolve the actor from the consumer's own store, check the entitlement there, and load the
@@ -26,7 +26,7 @@ then trusts `role` inside the signed payload.
 
 Why it happens: signing is real work and it does close a real gap, so it feels like the job is done.
 
-The fix: keep the signature — it establishes integrity and producer identity. Then still re-check
+The fix: keep the signature - it establishes integrity and producer identity. Then still re-check
 the entitlement in the consumer.
 
 Why that works: a signature answers "did this producer send this". Authorization answers "was this
@@ -92,7 +92,7 @@ Why it happens: retention is invisible until it is a page. Nothing fails when th
 
 The fix: a scheduled delete by `processed_at`, with an index on that column, and a retention window
 longer than the broker's maximum redelivery window. Verify that window against your own broker
-config — SQS message retention is configurable and defaults to 4 days, quorum queue behaviour
+config - SQS message retention is configurable and defaults to 4 days, quorum queue behaviour
 depends on the delivery limit and DLX you set.
 
 Why that works: the bound becomes a number someone chose, not an accident. `CWE-401`, `CWE-770`.
@@ -136,11 +136,11 @@ no matching `off`.
 Why it happens: registration is one line and teardown is three, on paths that include errors and
 aborts.
 
-The fix: pair every registration with teardown on every exit path — `close`, `error`, `aborted`,
+The fix: pair every registration with teardown on every exit path - `close`, `error`, `aborted`,
 and the normal completion. Prefer an `AbortSignal` or a disposable so the pairing is structural.
 
 Why that works: the emitter holds a strong reference to the closure, and the closure retains
-everything it captured — the request, the response, the socket. Growth is per request, not per load
+everything it captured - the request, the response, the socket. Growth is per request, not per load
 spike, so it looks like a slow leak and gets blamed on the runtime. `CWE-401`. Heap-level diagnosis
 is in `skills/architecture/performance/`.
 
@@ -152,7 +152,7 @@ a background worker.
 Why it happens: the default is unbounded in most libraries, and under normal load the queue is
 empty, so the bound never seems to matter.
 
-The fix: a `maxsize`, and an explicit decision about full behaviour — block the producer, drop with
+The fix: a `maxsize`, and an explicit decision about full behaviour - block the producer, drop with
 a metric, or reject the request.
 
 Why that works: an unbounded queue converts a throughput problem into an out-of-memory kill, and it
@@ -181,7 +181,7 @@ in order.
 Why it happens: with one producer, one partition, and no retries, ordering does hold. The first
 redelivery or the second partition breaks it.
 
-The fix: a monotonic version on the event and a conditional update — `WHERE source_version < $new`.
+The fix: a monotonic version on the event and a conditional update - `WHERE source_version < $new`.
 Zero rows updated means stale; ack it.
 
 Why that works: the guard makes ordering irrelevant instead of assumed. It also makes duplicates
@@ -189,7 +189,7 @@ harmless for state updates. `CWE-841`.
 
 ## Polymorphic deserialization for "extensibility"
 
-The mistake: a type discriminator in the payload that selects a class —
+The mistake: a type discriminator in the payload that selects a class -
 `activateDefaultTyping`, `pickle.loads`, `yaml.load`, a `Class.forName` on a payload field.
 
 Why it happens: it makes one event type handle many shapes with no branching, and the framework
@@ -199,7 +199,7 @@ The fix: one explicit schema per event type, a version field, and a `switch` on 
 Unknown types fail closed.
 
 Why that works: the payload can no longer choose what code runs. With polymorphic typing the
-attacker picks the constructor and only needs one gadget on the classpath — in a worker that often
+attacker picks the constructor and only needs one gadget on the classpath - in a worker that often
 has more network reach than the web tier. `A08:2025`, `CWE-502`.
 
 ## Using an event for something that must succeed now
@@ -255,6 +255,6 @@ than as answers to a problem.
 The fix: one service, one in-process call, one transaction. Keep the broker where a consumer is
 genuinely independent.
 
-Why that works: the broker cost — at-least-once, dedupe, DLQ, tracing, replay tooling — is paid
+Why that works: the broker cost - at-least-once, dedupe, DLQ, tracing, replay tooling - is paid
 whether or not the decoupling is real. If the two sides cannot deploy independently, none of that
 cost bought anything.

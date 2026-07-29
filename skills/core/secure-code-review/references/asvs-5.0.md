@@ -1,4 +1,4 @@
-# OWASP ASVS 5.0.0 — for citing a review finding
+# OWASP ASVS 5.0.0 - for citing a review finding
 
 Application Security Verification Standard, version 5.0.0, released 30 May 2025. Verified
 against <https://owasp.org/www-project-application-security-verification-standard/> on
@@ -18,7 +18,7 @@ point at.
 
 | Chapter | Title | Cite it when the finding is about |
 |---|---|---|
-| V1 | Encoding and Sanitization | Data reaching an interpreter — SQL, HTML, shell, LDAP, XPath |
+| V1 | Encoding and Sanitization | Data reaching an interpreter - SQL, HTML, shell, LDAP, XPath |
 | V2 | Validation and Business Logic | Input parsing, allowlists, business rule enforcement |
 | V3 | Web Frontend Security | CSP, headers, cookie flags, clickjacking, browser storage |
 | V4 | API and Web Service | REST, GraphQL, gRPC surface behaviour |
@@ -26,7 +26,7 @@ point at.
 | V6 | Authentication | Passwords, MFA, recovery, lockout |
 | V7 | Session Management | Lifecycle, rotation, timeout, logout |
 | V8 | Authorization | Access control decisions and where they are enforced |
-| V9 | Self-contained Tokens | JWT and similar — signature, claims, expiry, algorithm |
+| V9 | Self-contained Tokens | JWT and similar - signature, claims, expiry, algorithm |
 | V10 | OAuth and OIDC | Delegated auth, PKCE, redirect URI handling |
 | V11 | Cryptography | Algorithm choice, key management, randomness |
 | V12 | Secure Communication | TLS configuration, certificate validation |
@@ -41,7 +41,7 @@ point at.
 Chapter-level is a correct citation: `ASVS V8 (Authorization)`. Requirement-level is better,
 but only if you read the requirement.
 
-Two reasons not to write a requirement number from memory. First, 5.0 renumbered everything —
+Two reasons not to write a requirement number from memory. First, 5.0 renumbered everything -
 a `V4.1.3` you remember from a 4.x report points somewhere else now, or nowhere. Second, a
 wrong ID is worse than no ID: the author looks it up, finds it says something unrelated, and
 stops trusting the rest of the review.

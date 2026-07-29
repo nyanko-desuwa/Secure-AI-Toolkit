@@ -1,6 +1,6 @@
 ---
 name: sso-federation
-description: 'Enterprise SSO federation — SAML assertion validation, ACS/Audience/Recipient, metadata trust, IdP mix-up, signature wrapping. Triggers: "SAML", "SSO", "IdP", "SP metadata", "ACS", "federation", "đăng nhập doanh nghiệp", "liên kết IdP".'
+description: 'Enterprise SSO federation - SAML assertion validation, ACS/Audience/Recipient, metadata trust, IdP mix-up, signature wrapping. Triggers: "SAML", "SSO", "IdP", "SP metadata", "ACS", "federation", "đăng nhập doanh nghiệp", "liên kết IdP".'
 allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
@@ -52,17 +52,17 @@ OWASP Top 10 2025 A07, ASVS 5.0 V2/V3/V6/V7/V8, and CWE provide the mapping. Rea
 
 ## Severity
 
-- Critical — arbitrary assertion or unsigned metadata grants an account or administrator role
-- High — wrong audience/recipient, IdP mix-up, or privileged role mapping across tenants
-- Medium — weak logout/session binding, replay window, or excessive attribute exposure
-- Low — verbose federation errors without a demonstrated bypass
+- Critical - arbitrary assertion or unsigned metadata grants an account or administrator role
+- High - wrong audience/recipient, IdP mix-up, or privileged role mapping across tenants
+- Medium - weak logout/session binding, replay window, or excessive attribute exposure
+- Low - verbose federation errors without a demonstrated bypass
 
 ## Related Skills
 
-- `authentication` — sessions and OAuth/OIDC flows after federation
-- `api-security` — downstream authorization
-- `deserialization-security` — generic XML parser boundaries
-- `logging-audit` — federation events and denial evidence
+- `authentication` - sessions and OAuth/OIDC flows after federation
+- `api-security` - downstream authorization
+- `deserialization-security` - generic XML parser boundaries
+- `logging-audit` - federation events and denial evidence
 
 ## Supporting Files
 

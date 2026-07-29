@@ -1,7 +1,7 @@
 # Examples
 
 Twelve pairs. Every `Vulnerable:` block is code an AI plausibly produces from a reasonable
-request — not a caricature. Each pair leads with what it costs in plain words, because that is
+request - not a caricature. Each pair leads with what it costs in plain words, because that is
 the part worth understanding if you only read one line.
 
 Do not copy a `Vulnerable:` block into a project.
@@ -18,7 +18,7 @@ The bundler copies any `NEXT_PUBLIC_*` value into the JavaScript it sends to eve
 Vulnerable:
 
 ```tsx
-// app/weather/page.tsx  — runs in the browser
+// app/weather/page.tsx  - runs in the browser
 "use client";
 
 export default function Weather() {
@@ -35,10 +35,10 @@ export default function Weather() {
 
 The key is in `.next/static/chunks/*.js`. View source finds it in about ten seconds.
 
-Fixed — the key stays on the server and the browser calls your own route:
+Fixed - the key stays on the server and the browser calls your own route:
 
 ```ts
-// app/api/weather/route.ts — server only, never bundled
+// app/api/weather/route.ts - server only, never bundled
 export async function GET(req: Request) {
   const city = new URL(req.url).searchParams.get("city") ?? "";
   if (!/^[a-zA-Z\s-]{1,64}$/.test(city)) {
@@ -65,7 +65,7 @@ inline it, and referencing `process.env.WEATHER_API_KEY` from a client component
 `undefined` rather than silently working. The mistake now fails visibly in development.
 
 If the key was ever deployed with the public prefix, rotate it. Removing the line does not
-un-leak it — it is in every visitor's cache and in your build artifacts.
+un-leak it - it is in every visitor's cache and in your build artifacts.
 
 ---
 
@@ -79,7 +79,7 @@ the charges are yours.
 Vulnerable:
 
 ```ts
-// src/chat.ts — shipped to the browser
+// src/chat.ts - shipped to the browser
 const ANTHROPIC_API_KEY = "sk-ant-api03-EXAMPLE-PLACEHOLDER-NOT-REAL";
 
 export async function ask(question: string) {
@@ -100,7 +100,7 @@ export async function ask(question: string) {
 }
 ```
 
-Fixed — one server endpoint holds the key and owns the limits:
+Fixed - one server endpoint holds the key and owns the limits:
 
 ```ts
 // server/routes/ask.ts (Express)
@@ -129,7 +129,7 @@ askRouter.post("/ask", requireSession, perUserRateLimit, async (req, res) => {
 ```
 
 Why it cannot recur: the browser has no credential to leak. The server route is also where the
-spend ceiling lives — `requireSession` stops anonymous use and `perUserRateLimit` stops one
+spend ceiling lives - `requireSession` stops anonymous use and `perUserRateLimit` stops one
 account draining the account budget. A key in client code has neither.
 
 If you have no backend, the smallest version that works is a single serverless function. That is
@@ -141,11 +141,11 @@ enough; it does not need to be a service.
 
 Two true statements at once. The anon key is designed to be public, so seeing it in your bundle
 is not the problem. The problem is that without row-level security, that public key can read
-and write every row in the table — every user's data, from a browser console.
+and write every row in the table - every user's data, from a browser console.
 
 `A01:2025` · `ASVS V8` · `CWE-862`
 
-Vulnerable — the table has RLS disabled, which is the default state after `create table`:
+Vulnerable - the table has RLS disabled, which is the default state after `create table`:
 
 ```ts
 // src/notes.ts
@@ -165,7 +165,7 @@ export const myNotes = (userId: string) =>
 The filter is in the client. Anyone can open the console and send the same query with no filter
 at all.
 
-Fixed — the database enforces it, so the client filter becomes a convenience rather than a
+Fixed - the database enforces it, so the client filter becomes a convenience rather than a
 control:
 
 ```sql
@@ -189,8 +189,8 @@ Why it cannot recur: `auth.uid()` comes from the verified JWT on the connection,
 anything the caller typed. A request with no filter now returns only that user's rows. A request
 forging `user_id` fails the `with check`.
 
-Never put the `service_role` key in client code. It bypasses RLS by design — that is its whole
-purpose — so it belongs only in server code.
+Never put the `service_role` key in client code. It bypasses RLS by design - that is its whole
+purpose - so it belongs only in server code.
 
 ---
 
@@ -218,7 +218,7 @@ export function requireAdmin(req, res, next) {
 `jwtDecode` only base64-decodes. It has no key and cannot verify anything. A hand-written token
 with `alg: none` and `role: admin` passes.
 
-Fixed — verify the signature, pin the algorithm, and read the role from your own store:
+Fixed - verify the signature, pin the algorithm, and read the role from your own store:
 
 ```ts
 import jwt from "jsonwebtoken";
@@ -254,7 +254,7 @@ export async function requireAdmin(req, res, next) {
 
 Why it cannot recur: forging the claim no longer helps, because the signature check rejects the
 token before the role is read, and the role is then looked up server-side anyway. Pinning
-`algorithms` closes the `alg` substitution path. The `catch` denies rather than continuing —
+`algorithms` closes the `alg` substitution path. The `catch` denies rather than continuing -
 an error inside a security decision must not fall through.
 
 ---
@@ -285,7 +285,7 @@ app.get("/api/admin/users", async (_req, res) => {
 
 `curl https://app.example/api/admin/users` returns every user. The React guard never ran.
 
-Fixed — authorize at the data layer, and scope the query to the actor:
+Fixed - authorize at the data layer, and scope the query to the actor:
 
 ```ts
 app.get("/api/admin/users", requireAdmin, async (req, res) => {
@@ -298,7 +298,7 @@ app.get("/api/admin/users", requireAdmin, async (req, res) => {
 });
 ```
 
-Keep the React guard. It is a good UX detail — it stops users landing on a page that will only
+Keep the React guard. It is a good UX detail - it stops users landing on a page that will only
 error. Just do not count it as a control.
 
 Why it cannot recur: the check now sits on the path the data actually travels. There is no route
@@ -320,7 +320,7 @@ Vulnerable:
 ```ts
 import https from "node:https";
 
-// "self signed certificate in certificate chain" — this made it go away
+// "self signed certificate in certificate chain" - this made it go away
 const agent = new https.Agent({ rejectUnauthorized: false });
 
 export const api = axios.create({
@@ -332,7 +332,7 @@ export const api = axios.create({
 Worse variants that show up for the same reason: `NODE_TLS_REJECT_UNAUTHORIZED=0` in `.env`,
 `verify=False` in Python `requests`, `curl --insecure` copied into a script.
 
-Fixed — trust the certificate authority that signed it, rather than trusting nothing:
+Fixed - trust the certificate authority that signed it, rather than trusting nothing:
 
 ```ts
 import fs from "node:fs";
@@ -371,7 +371,7 @@ other case.
 ## 7. Module-level `Map` cache keyed by user input
 
 Two problems in one line. Memory grows until the process is killed, and a stranger controls how
-fast — they send requests with new values until it dies. No login required.
+fast - they send requests with new values until it dies. No login required.
 
 `A06:2025` · `API4:2023` · `CWE-401`, `CWE-770`
 
@@ -392,7 +392,7 @@ export async function getProfile(handle: string): Promise<Profile> {
 `GET /profile/aaaa1`, `aaaa2`, `aaaa3`… each one adds an entry forever. Caching the `null` result
 means invalid handles are the cheapest way to fill it.
 
-Fixed — bounded size, TTL, and do not cache misses:
+Fixed - bounded size, TTL, and do not cache misses:
 
 ```ts
 import { LRUCache } from "lru-cache";
@@ -418,7 +418,7 @@ Why it cannot recur: memory has a ceiling that does not depend on traffic. At `m
 oldest is dropped, so the worst case is a lower hit rate, not an out-of-memory kill. Validating
 the key first means most junk never reaches the cache at all.
 
-A bounded cache is the fix. A bigger server is not — it only moves the deadline.
+A bounded cache is the fix. A bigger server is not - it only moves the deadline.
 
 ---
 
@@ -449,7 +449,7 @@ function Messages({ roomId }: { roomId: string }) {
 
 The `messages` array also only ever grows, which is a second leak in the same component.
 
-Fixed — return a cleanup function, and bound the state:
+Fixed - return a cleanup function, and bound the state:
 
 ```tsx
 const MAX_RENDERED = 500;
@@ -496,7 +496,7 @@ target older runtimes, remove each listener by reference instead.
 
 ## 9. `setInterval` retry with no backoff and no ceiling
 
-When the dependency goes down, this hammers it every two seconds forever — from every running
+When the dependency goes down, this hammers it every two seconds forever - from every running
 instance. It turns someone else's brief outage into a self-inflicted flood, and if that
 dependency is metered, into a bill.
 
@@ -516,7 +516,7 @@ function startSync() {
 }
 ```
 
-Fixed — exponential backoff, jitter, a ceiling on the delay, and a cap on attempts:
+Fixed - exponential backoff, jitter, a ceiling on the delay, and a cap on attempts:
 
 ```ts
 const BASE_DELAY_MS = 1_000;
@@ -570,7 +570,7 @@ for (const order of orders) {
 
 500 orders is 1,001 queries, run one after another.
 
-Fixed — let the database do the join:
+Fixed - let the database do the join:
 
 ```ts
 const orders = await db.order.findMany({
@@ -589,7 +589,7 @@ const byId = new Map(customers.map((c) => [c.id, c]));
 for (const order of orders) order.customer = byId.get(order.customerId);
 ```
 
-Python, same shape with `asyncio` — note that independent calls should run concurrently, but
+Python, same shape with `asyncio` - note that independent calls should run concurrently, but
 with a bound:
 
 ```python
@@ -629,7 +629,7 @@ app.get("/api/orders", requireSession, async (req, res) => {
 });
 ```
 
-Fixed — cursor pagination with a maximum the client cannot raise:
+Fixed - cursor pagination with a maximum the client cannot raise:
 
 ```ts
 const DEFAULT_PAGE_SIZE = 50;
@@ -696,7 +696,7 @@ except Exception:
 return {"ok": True}
 ```
 
-Fixed — fail loudly, log with context, and return an honest status:
+Fixed - fail loudly, log with context, and return an honest status:
 
 ```ts
 app.post("/api/profile", requireSession, async (req, res) => {
@@ -725,7 +725,7 @@ reference id links the user's report to the log line without leaking anything.
 Two details worth keeping:
 
 The schema replaces `data: req.body`. Passing the request body straight into an update lets a
-caller set fields you never intended — `role`, `emailVerified`, `credits`. That is a separate
+caller set fields you never intended - `role`, `emailVerified`, `credits`. That is a separate
 finding (`A01:2025`, `API3:2023`) that lives in the same line of code.
 
 Returning the raw error to the client is the opposite mistake and just as common. A stack trace

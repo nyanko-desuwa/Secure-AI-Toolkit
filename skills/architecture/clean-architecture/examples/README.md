@@ -9,14 +9,14 @@ not.
 
 ## Contents
 
-- [Entity serialized straight to JSON](#entity-serialized-straight-to-json) — A01, API3:2023, CWE-213
-- [Authorization only in the controller](#authorization-only-in-the-controller) — A01, CWE-602
-- [Use case with an ID and no actor](#use-case-with-an-id-and-no-actor) — A01, CWE-1220
-- [Singleton capturing a request-scoped user](#singleton-capturing-a-request-scoped-user) — A01, CWE-488
-- [Invariant in a boundary validator, not the entity](#invariant-in-a-boundary-validator-not-the-entity) — A06, CWE-20
-- [Repository returning IQueryable](#repository-returning-iqueryable) — A01, CWE-653
-- [Domain importing the ORM, tenant filter in infrastructure](#domain-importing-the-orm-tenant-filter-in-infrastructure) — A01, CWE-653
-- [Port with no timeout or cancellation](#port-with-no-timeout-or-cancellation) — A06, API4:2023, CWE-770
+- [Entity serialized straight to JSON](#entity-serialized-straight-to-json) - A01, API3:2023, CWE-213
+- [Authorization only in the controller](#authorization-only-in-the-controller) - A01, CWE-602
+- [Use case with an ID and no actor](#use-case-with-an-id-and-no-actor) - A01, CWE-1220
+- [Singleton capturing a request-scoped user](#singleton-capturing-a-request-scoped-user) - A01, CWE-488
+- [Invariant in a boundary validator, not the entity](#invariant-in-a-boundary-validator-not-the-entity) - A06, CWE-20
+- [Repository returning IQueryable](#repository-returning-iqueryable) - A01, CWE-653
+- [Domain importing the ORM, tenant filter in infrastructure](#domain-importing-the-orm-tenant-filter-in-infrastructure) - A01, CWE-653
+- [Port with no timeout or cancellation](#port-with-no-timeout-or-cancellation) - A06, API4:2023, CWE-770
 
 ---
 
@@ -24,8 +24,8 @@ not.
 
 `A01:2025` · `API3:2023` · `CWE-213` · ASVS V8, V14
 
-The use case returns the ORM entity, so every column on the table — including
-`passwordHash` and internal flags — is serialized into the response.
+The use case returns the ORM entity, so every column on the table - including
+`passwordHash` and internal flags - is serialized into the response.
 
 ```typescript
 // Vulnerable: the response shape is whatever the table has today
@@ -79,13 +79,13 @@ export class GetMember {
 ```
 
 Why it removes the option: adding a column to the table cannot change the response, because
-nothing copies unnamed fields. The alternative — a deny list, `omit: { passwordHash: true }` or
-`@Exclude()` — inverts the default, so the next sensitive column is public until someone
+nothing copies unnamed fields. The alternative - a deny list, `omit: { passwordHash: true }` or
+`@Exclude()` - inverts the default, so the next sensitive column is public until someone
 remembers it.
 
 Residual gap: the DTO is a compile-time allowlist, not a runtime guarantee about nesting. If
 `MemberView` later carries a nested object built by spreading an entity, the leak returns. Assert
-the response shape in a test — snapshot the JSON keys, not just the status code.
+the response shape in a test - snapshot the JSON keys, not just the status code.
 
 ---
 
@@ -118,7 +118,7 @@ public sealed class PayoutService
     }
 }
 
-// Jobs/StuckPayoutRetryJob.cs — added six months later, by someone else
+// Jobs/StuckPayoutRetryJob.cs - added six months later, by someone else
 foreach (var id in stuckIds)
     await _payouts.ReleaseAsync(id, ct);     // no claim, no tenant, no audit actor
 ```
@@ -155,7 +155,7 @@ public sealed class ReleasePayout
     }
 }
 
-// Jobs/StuckPayoutRetryJob.cs — must now name a principal
+// Jobs/StuckPayoutRetryJob.cs - must now name a principal
 var actor = Actor.System(tenantId, permissions: new[] { "payout:release" });
 foreach (var id in stuckIds)
     await _releasePayout.ExecuteAsync(actor, id, ct);
@@ -166,8 +166,8 @@ the operation without producing an `Actor`, and `Actor.System(...)` is a greppab
 auditable decision instead of an invisible omission. The audit entry now has a subject for every
 release, including automated ones.
 
-Residual gap: `Actor.System` is a legitimate elevation path. Restrict who can construct it —
-`internal` to the job assembly, or a factory that requires a configured job identity — and alert
+Residual gap: `Actor.System` is a legitimate elevation path. Restrict who can construct it -
+`internal` to the job assembly, or a factory that requires a configured job identity - and alert
 on its use. Without that, you have moved the bypass rather than closed it.
 
 ---
@@ -281,7 +281,7 @@ builder.Services.AddScoped<ICurrentUser, HttpCurrentUser>();
 ```
 
 Three failures from one registration. Tenant A's ID is baked in, so tenant B receives tenant A's
-sales — a cross-tenant data leak, not a caching quirk. The captured `AppDbContext` outlives its
+sales - a cross-tenant data leak, not a caching quirk. The captured `AppDbContext` outlives its
 scope, so a connection and the change tracker's entity graph are pinned for the process lifetime
 and concurrent requests corrupt its state. `_labelCache` has no tenant in the key, no maximum
 size, and no TTL, so it grows until the container is OOMKilled.
@@ -313,7 +313,7 @@ builder.Services.AddSingleton<IProductLabelCache>(
     _ => new BoundedLabelCache(maxEntries: 50_000, ttl: TimeSpan.FromMinutes(10)));
 ```
 
-For a hosted service or worker — a singleton by nature — inject `IServiceScopeFactory`, open a
+For a hosted service or worker - a singleton by nature - inject `IServiceScopeFactory`, open a
 scope per unit of work, resolve inside it, and dispose it:
 
 ```csharp
@@ -324,7 +324,7 @@ await builderForRun.BuildAsync(Actor.System(tenantId), ct);
 
 Why it removes the option: the actor is a parameter, so there is nothing request-scoped left to
 capture, and the only long-lived state is a cache whose key includes the tenant. The container
-also catches this class of bug for you — .NET's default provider performs scope validation in
+also catches this class of bug for you - .NET's default provider performs scope validation in
 Development, verifying that scoped services are not resolved from the root provider and not
 injected into singletons, and throws when `BuildServiceProvider` is called. Enable it in CI so
 the failure is a red build, not a support ticket.
@@ -352,7 +352,7 @@ const CreateOrderBody = z.object({
   message: "discount_exceeds_subtotal",
 });
 
-// domain/order.ts — accepts anything
+// domain/order.ts - accepts anything
 export class Order {
   constructor(
     public readonly id: string,
@@ -362,7 +362,7 @@ export class Order {
   totalCents(): number { return this.subtotalCents - this.discountCents; }
 }
 
-// jobs/import-orders.ts — second entry point, no zod schema in sight
+// jobs/import-orders.ts - second entry point, no zod schema in sight
 for (const row of parseCsv(file)) {
   await orderRepo.save(new Order(newId(), row.subtotal, row.discount));
 }
@@ -405,7 +405,7 @@ The importer's bad rows now fail loudly at construction instead of persisting si
 
 Residual gap: the rehydration path. Loading from the database must not re-run rules that older
 rows already violate, so it needs its own factory (`Order.rehydrate`) that trusts persistence.
-That factory is a hole by design — keep it out of the application layer's reach, and remember
+That factory is a hole by design - keep it out of the application layer's reach, and remember
 that pre-existing invalid rows stay invalid until you migrate them.
 
 ---
@@ -440,7 +440,7 @@ public async Task<List<Order>> RecentAsync(CancellationToken ct)
 
 Two problems compound. The tenant predicate is optional because composition is the caller's job,
 and `Order.Customer` is a lazy navigation, so serializing the result issues one query per row
-after the use case has returned — outside the transaction, outside any timeout the use case set,
+after the use case has returned - outside the transaction, outside any timeout the use case set,
 and against a context that may already be disposed.
 
 ```csharp
@@ -472,14 +472,14 @@ public sealed class EfOrderRepository : IOrderRepository
 
 Why it removes the option: there is no method that returns something a caller can extend, so
 there is no way to compose a query without the predicate. `ToListAsync` inside the repository
-means every database call happens within the repository's transaction and timeout — nothing
+means every database call happens within the repository's transaction and timeout - nothing
 lazily executes past the boundary. The clamped limit turns an unbounded result set into a
 bounded one (`API4:2023`).
 
 Residual gap: each new method needs the predicate written again, so the guarantee is per-method,
 not global. Push it below the code with database row-level security, or add an EF Core global
 query filter, and keep a test that asserts a cross-tenant read returns zero rows. `AsNoTracking`
-is right for reads and wrong for the write path — do not copy it there.
+is right for reads and wrong for the write path - do not copy it there.
 
 ---
 
@@ -512,7 +512,7 @@ class SendDunningEmails:                       # lives in the domain, but import
 ```
 
 The repository is correct and irrelevant. Because the ORM session is importable from the domain,
-a use case could take the shortcut, and it did — so every tenant's customers receive dunning
+a use case could take the shortcut, and it did - so every tenant's customers receive dunning
 mail, and the mailer is called with addresses the caller was never authorized to see.
 
 ```python
@@ -526,7 +526,7 @@ class InvoicePort(Protocol):
 class MailPort(Protocol):
     def send_dunning(self, to: str, invoice: Invoice, timeout_s: float) -> None: ...
 
-# domain/send_dunning_emails.py — no infrastructure import anywhere in this file
+# domain/send_dunning_emails.py - no infrastructure import anywhere in this file
 class SendDunningEmails:
     def __init__(self, invoices: InvoicePort, mail: MailPort) -> None:
         self._invoices = invoices
@@ -543,14 +543,14 @@ class SendDunningEmails:
 
 Why it removes the option: the shortcut is not reachable. Nothing in the domain package can name
 `session` or `InvoiceRow`, so the only way to read invoices is through a port whose signature
-demands a tenant. In Python this is a convention the interpreter will not enforce on its own —
+demands a tenant. In Python this is a convention the interpreter will not enforce on its own -
 back it with an import-linter contract in CI (`domain` may not import `infrastructure`) so a
 reintroduced import fails the build. In C#, Java, or a TypeScript project with enforced project
 references, the compiler does this for free.
 
 Residual gap: `limit=500` bounds one run and silently drops the rest. Decide whether the
 remainder is processed in the next batch or lost, and record which. A layering lint rule also
-does not stop a port implementation from ignoring its `tenant_id` argument — test the adapter.
+does not stop a port implementation from ignoring its `tenant_id` argument - test the adapter.
 
 ---
 
@@ -646,14 +646,14 @@ public Task<IActionResult> Post(OnboardBody body, CancellationToken ct)   // bou
 ```
 
 Why it removes the option: the token is in the interface, so no implementation can quietly omit
-it and no caller can forget to pass one — the compiler asks. The adapter's own `CancelAfter` means
+it and no caller can forget to pass one - the compiler asks. The adapter's own `CancelAfter` means
 the deadline exists even when the caller passes `CancellationToken.None`, and the linked source
 means either side can end the call. `ResponseHeadersRead` plus the length check bounds the
 allocation rather than trusting the dependency.
 
 Residual gap: `ContentLength` is a claim, absent on chunked responses. For a hard guarantee, read
 through a length-limiting stream instead of trusting the header. Cancellation also does not
-guarantee the remote side stopped work — for non-idempotent calls, pair the timeout with an
+guarantee the remote side stopped work - for non-idempotent calls, pair the timeout with an
 idempotency key so a retry after a timeout does not double-submit.
 
 ---

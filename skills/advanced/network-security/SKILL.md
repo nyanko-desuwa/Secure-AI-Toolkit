@@ -39,7 +39,7 @@ See [references/](references/).
 
 Answer three questions before changing a rule:
 
-- What can reach this listener today, and from where? Not what is documented — what the rules
+- What can reach this listener today, and from where? Not what is documented - what the rules
   actually allow.
 - If this host is compromised, what can it open a connection to?
 - Which control is doing the work: the network rule, the application check, or neither?
@@ -51,11 +51,11 @@ the half attackers use.
 
 Network findings usually land in three categories:
 
-- A01:2025 — a service reachable by a party that should not reach it, including SSRF against
+- A01:2025 - a service reachable by a party that should not reach it, including SSRF against
   an internal listener. Network-level access control is still access control.
-- A02:2025 — a default left in place: `0.0.0.0/0`, an admin port on a public interface, a
+- A02:2025 - a default left in place: `0.0.0.0/0`, an admin port on a public interface, a
   permissive security group, TLS verification disabled.
-- A06:2025 — the design assumes the network is trusted, so nothing authenticates inside it.
+- A06:2025 - the design assumes the network is trusted, so nothing authenticates inside it.
 
 Common miscategorisation: filing weak TLS under A05 because it involves protocol data. It is
 A04 (Cryptographic Failures) with ASVS V12, and CWE-326 or CWE-757 depending on the flaw.
@@ -68,7 +68,7 @@ Ordered by what fails hardest when missing:
    forget. See [best-practices.md](best-practices.md#default-deny-both-directions).
 2. Egress control with an explicit destination list. This is what turns an SSRF or a
    compromised dependency from a breach into a blocked connection.
-3. Authenticated identity between services — mTLS or a signed token — so a foothold on the
+3. Authenticated identity between services - mTLS or a signed token - so a foothold on the
    network is not authorisation.
 4. TLS configured to BCP 195, with verification on and hostname checking on.
 5. Segmentation with a policy per segment pair, not a flat VPC with a firewall at the edge.
@@ -78,7 +78,7 @@ Ordered by what fails hardest when missing:
 ### 4. Verify
 
 Run [checklist.md](checklist.md) before returning a config. Every unchecked box is a fix or a
-stated limitation. Reading a config file cannot confirm the runtime state — say so when that
+stated limitation. Reading a config file cannot confirm the runtime state - say so when that
 is the case.
 
 ### 5. Report
@@ -90,13 +90,13 @@ environment variable" is a finding.
 
 ## Severity
 
-- **Critical** — a datastore, admin interface, or orchestrator API reachable from the internet;
+- **Critical** - a datastore, admin interface, or orchestrator API reachable from the internet;
   unauthenticated internal API reachable from a compromised low-trust workload
-- **High** — unrestricted egress from a workload that handles untrusted input; TLS
+- **High** - unrestricted egress from a workload that handles untrusted input; TLS
   verification disabled; flat network with no policy between tiers
-- **Medium** — TLS 1.2 with a weak suite where 1.3 is available; missing flow logs; a bastion
+- **Medium** - TLS 1.2 with a weak suite where 1.3 is available; missing flow logs; a bastion
   with shared credentials
-- **Low** — defence in depth missing where an authenticated control still holds
+- **Low** - defence in depth missing where an authenticated control still holds
 
 An open port on a listener bound to loopback is not the same as one bound to `0.0.0.0`. Check
 which it is before assigning severity.
@@ -116,20 +116,20 @@ This skill reads configuration and describes tests. It does not scan.
 
 ## Related Skills
 
-- `owasp` — the standards this skill maps to
-- `cryptography` — key management and algorithm choice behind the TLS settings here
-- `cloud-security` — security groups, VPC design, and provider-specific controls
-- `secure-architecture` — trust boundaries at the design level
+- `owasp` - the standards this skill maps to
+- `cryptography` - key management and algorithm choice behind the TLS settings here
+- `cloud-security` - security groups, VPC design, and provider-specific controls
+- `secure-architecture` - trust boundaries at the design level
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns, with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/tls-versions.md](references/tls-versions.md) — BCP 195, cipher profiles, certificate lifetime
-- [references/segmentation-patterns.md](references/segmentation-patterns.md) — zones, egress, zero trust
-- [references/cloud-network-controls.md](references/cloud-network-controls.md) — AWS, Azure, GCP, Kubernetes
-- [examples/README.md](examples/README.md) — eight vulnerable/fixed configuration pairs
+- [README.md](README.md) - purpose, standards table, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns, with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/tls-versions.md](references/tls-versions.md) - BCP 195, cipher profiles, certificate lifetime
+- [references/segmentation-patterns.md](references/segmentation-patterns.md) - zones, egress, zero trust
+- [references/cloud-network-controls.md](references/cloud-network-controls.md) - AWS, Azure, GCP, Kubernetes
+- [examples/README.md](examples/README.md) - eight vulnerable/fixed configuration pairs

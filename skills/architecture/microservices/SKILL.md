@@ -87,11 +87,11 @@ For every boundary, report location, attacker capability, impact, fix, cost, res
 
 ## Supporting files
 
-- [README.md](README.md) — purpose, layout, configuration, limits, references.
-- [best-practices.md](best-practices.md) — boundary, identity, authorization, discovery, and cost patterns with runnable code.
-- [checklist.md](checklist.md) — actionable pre-return verification.
-- [common-mistakes.md](common-mistakes.md) — failure, cause, fix, and why it works.
-- [troubleshooting.md](troubleshooting.md) — conflicts, migration, rollback, and unverified runtime controls.
-- [prompts.md](prompts.md) — scoped review prompts and anti-patterns.
-- [references/](references/) — pinned standards and verified CWE entries.
-- [examples/README.md](examples/README.md) — before/after code pairs.
+- [README.md](README.md) - purpose, layout, configuration, limits, references.
+- [best-practices.md](best-practices.md) - boundary, identity, authorization, discovery, and cost patterns with runnable code.
+- [checklist.md](checklist.md) - actionable pre-return verification.
+- [common-mistakes.md](common-mistakes.md) - failure, cause, fix, and why it works.
+- [troubleshooting.md](troubleshooting.md) - conflicts, migration, rollback, and unverified runtime controls.
+- [prompts.md](prompts.md) - scoped review prompts and anti-patterns.
+- [references/](references/) - pinned standards and verified CWE entries.
+- [examples/README.md](examples/README.md) - before/after code pairs.

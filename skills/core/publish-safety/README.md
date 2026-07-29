@@ -1,7 +1,7 @@
 # Publish Safety Skill
 
 What must be true before a private thing becomes a public thing. Covers the push, the visibility
-flip, the package, the image, the deployed bundle, the store build, and the screenshot — and the
+flip, the package, the image, the deployed bundle, the store build, and the screenshot - and the
 files that were never meant to leave the machine.
 
 ## Purpose
@@ -12,14 +12,14 @@ the publish boundary a distinct control point with its own failure modes, which 
 skill rather than a section of another one.
 
 The material either side of the door already has owners. `secrets-management` owns the credential
-lifecycle — storage, delivery, rotation, and the revoke/rotate/investigate order.
+lifecycle - storage, delivery, rotation, and the revoke/rotate/investigate order.
 `common-pitfalls` owns the build-output greps and the per-framework public env prefixes.
 `devsecops` owns scanners as enforced pipeline gates. None of them owns the moment itself: the
 gap between the files you edited and the files you are about to publish, and the fact that
 `git status` describes the present tense while a public repository exposes the whole history.
 
 Grounded in OWASP Top 10 2025 (A02, A03, A04), ASVS 5.0 (V13, V14), and CWE-527, CWE-540,
-CWE-538, CWE-798, CWE-615, CWE-532 — each verified against its source, with the date recorded.
+CWE-538, CWE-798, CWE-615, CWE-532 - each verified against its source, with the date recorded.
 
 ## How It Works
 
@@ -49,8 +49,8 @@ examples/
 
 | Standard | Version | Verified |
 |---|---|---|
-| OWASP Top 10 | 2025 — A02 Security Misconfiguration, A03 Software Supply Chain Failures, A04 Cryptographic Failures, A08 Software or Data Integrity Failures | 2026-07-28, against `owasp.org/Top10/2025/` |
-| OWASP ASVS | 5.0.0 (released 2025-05-30) — V13 Configuration, V14 Data Protection, V15 Secure Coding and Architecture | 2026-07-28, against the ASVS project page |
+| OWASP Top 10 | 2025 - A02 Security Misconfiguration, A03 Software Supply Chain Failures, A04 Cryptographic Failures, A08 Software or Data Integrity Failures | 2026-07-28, against `owasp.org/Top10/2025/` |
+| OWASP ASVS | 5.0.0 (released 2025-05-30) - V13 Configuration, V14 Data Protection, V15 Secure Coding and Architecture | 2026-07-28, against the ASVS project page |
 | CWE | CWE-527, CWE-540, CWE-538, CWE-798, CWE-615, CWE-532 | 2026-07-28, each entry fetched from `cwe.mitre.org` |
 | Platform behaviour | GitHub secret scanning and push protection, GitHub sensitive-data removal guidance, GitLab secret push protection, npm `files`/`.npmignore` precedence | 2026-07-28, against vendor documentation |
 
@@ -107,7 +107,7 @@ More, including the anti-patterns worth avoiding, in [prompts.md](prompts.md).
   A skill that claims otherwise is guessing.
 - **Cannot see what already left.** Forks, clones, mirrors, CDN caches, code-search indexes, CI
   logs, and notification emails are outside the repository. The skill says to assume they hold a
-  copy, because that assumption is the only safe one — it cannot enumerate them.
+  copy, because that assumption is the only safe one - it cannot enumerate them.
 - **Pattern matching misses unshaped secrets.** `AKIA...` and `sk_live_...` are recognisable; a
   bare 32-character database password is not. The reliable check is grepping for the literal
   value of each credential you own, which requires knowing the value.
@@ -119,7 +119,7 @@ More, including the anti-patterns worth avoiding, in [prompts.md](prompts.md).
   allowlist-over-denylist reasoning transfers, the manifest field names do not.
 - **This repository now runs its own publish-shaped gates.** Pull requests and tags run
   catalog/structure validation and Gitleaks (see `.github/workflows/` and `.gitleaks.toml`).
-  That does not replace provider push protection or a consumer application's own CI — it only
+  That does not replace provider push protection or a consumer application's own CI - it only
   means the pack no longer documents a gate it refuses to run on itself.
 
 ## Security Notes
@@ -129,8 +129,8 @@ This skill contains deliberately unsafe configuration and commands in `best-prac
 first line and paired with a fixed version. Do not copy a labelled-vulnerable block into a
 project.
 
-The destructive commands in `troubleshooting.md` and `common-mistakes.md` — `git filter-repo`,
-`git push --force`, `git rm --cached` — are shown because readers reach for them anyway, and the
+The destructive commands in `troubleshooting.md` and `common-mistakes.md` - `git filter-repo`,
+`git push --force`, `git rm --cached` - are shown because readers reach for them anyway, and the
 point being made is usually that they are not the fix. Read the surrounding paragraph before
 running one.
 
@@ -144,10 +144,10 @@ Model providers log requests.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Secrets Management Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html>
-- CWE-527 Exposure of Version-Control Repository to an Unauthorized Control Sphere — <https://cwe.mitre.org/data/definitions/527.html>
-- CWE-540 Inclusion of Sensitive Information in Source Code — <https://cwe.mitre.org/data/definitions/540.html>
-- GitHub, removing sensitive data from a repository — <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository>
-- npm `files` field and `.npmignore` — <https://docs.npmjs.com/cli/v11/configuring-npm/package-json#files>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Secrets Management Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html>
+- CWE-527 Exposure of Version-Control Repository to an Unauthorized Control Sphere - <https://cwe.mitre.org/data/definitions/527.html>
+- CWE-540 Inclusion of Sensitive Information in Source Code - <https://cwe.mitre.org/data/definitions/540.html>
+- GitHub, removing sensitive data from a repository - <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository>
+- npm `files` field and `.npmignore` - <https://docs.npmjs.com/cli/v11/configuring-npm/package-json#files>

@@ -69,22 +69,22 @@ an exploitation path is a code smell, not a vulnerability. Say which it is.
 
 Rank by exploitability and blast radius, not by category name.
 
-- **Critical** — <...>
-- **High** — <...>
-- **Medium** — <...>
-- **Low** — <...>
+- **Critical** - <...>
+- **High** - <...>
+- **Medium** - <...>
+- **Low** - <...>
 
 ## Related Skills
 
-- `<skill>` — <when to reach for it instead>
+- `<skill>` - <when to reach for it instead>
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, configuration, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns that hold up
-- [common-mistakes.md](common-mistakes.md) — what goes wrong, with fixes
-- [troubleshooting.md](troubleshooting.md) — when the guidance conflicts
-- [prompts.md](prompts.md) — prompt examples
-- [references/](references/) — standard summaries with source links
-- [examples/](examples/) — vulnerable and fixed code side by side
+- [README.md](README.md) - purpose, configuration, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns that hold up
+- [common-mistakes.md](common-mistakes.md) - what goes wrong, with fixes
+- [troubleshooting.md](troubleshooting.md) - when the guidance conflicts
+- [prompts.md](prompts.md) - prompt examples
+- [references/](references/) - standard summaries with source links
+- [examples/](examples/) - vulnerable and fixed code side by side

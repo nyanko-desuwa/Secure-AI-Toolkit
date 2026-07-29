@@ -3,18 +3,18 @@
 Seven design flaws, each with the failure first and the redesign second. These are architectural:
 in every case, fixing the symptom in one file leaves the same problem reachable by another path.
 
-Read them as designs. The syntax is incidental. Every fix ends with the gap it does not close —
+Read them as designs. The syntax is incidental. Every fix ends with the gap it does not close -
 a design that claims to close everything has not been thought about.
 
 ## Contents
 
-- [Authorization only at the gateway](#authorization-only-at-the-gateway) — A01, CWE-602
-- [An internal service trusts a caller-supplied user ID](#an-internal-service-trusts-a-caller-supplied-user-id) — A01, CWE-290
-- [One database role, every service's tables](#one-database-role-every-services-tables) — A01, CWE-1220
-- [A shared secret passed down the call chain](#a-shared-secret-passed-down-the-call-chain) — A04, CWE-522
-- [A synchronous chain with no timeout](#a-synchronous-chain-with-no-timeout) — A10, CWE-770
-- [An event consumer that trusts the payload](#an-event-consumer-that-trusts-the-payload) — A01, CWE-863
-- [A "private" service reachable from the internet](#a-private-service-reachable-from-the-internet) — A02, CWE-1327
+- [Authorization only at the gateway](#authorization-only-at-the-gateway) - A01, CWE-602
+- [An internal service trusts a caller-supplied user ID](#an-internal-service-trusts-a-caller-supplied-user-id) - A01, CWE-290
+- [One database role, every service's tables](#one-database-role-every-services-tables) - A01, CWE-1220
+- [A shared secret passed down the call chain](#a-shared-secret-passed-down-the-call-chain) - A04, CWE-522
+- [A synchronous chain with no timeout](#a-synchronous-chain-with-no-timeout) - A10, CWE-770
+- [An event consumer that trusts the payload](#an-event-consumer-that-trusts-the-payload) - A01, CWE-863
+- [A "private" service reachable from the internet](#a-private-service-reachable-from-the-internet) - A02, CWE-1327
 
 ---
 
@@ -86,8 +86,8 @@ def get_invoice(invoice_id: str, actor: Principal = Depends(principal)):
 
 Why this removes the path rather than moving it: the batch job, the admin tool and the resizer now
 have to present a token for audience `invoices`, and the tenant in that token scopes the query. The
-gateway keeps its checks — as defence in depth, and because rate limiting and schema validation
-belong at the edge — but it is no longer the only place a decision happens.
+gateway keeps its checks - as defence in depth, and because rate limiting and schema validation
+belong at the edge - but it is no longer the only place a decision happens.
 
 Residual gap: this depends entirely on `verify_service_token` being real (see the next example). It
 also does nothing about a caller that reaches the database directly instead of the service; that is
@@ -119,7 +119,7 @@ flowchart LR
 The header is set by the gateway on the legitimate path, which is why it looks safe. It is also
 settable by anything else that can open a TCP connection to port 8080. One deserialization bug in a
 pod that processes uploads and the attacker is every user, including the admin, with no credential
-theft involved. Authentication is being asserted rather than verified — CWE-290.
+theft involved. Authentication is being asserted rather than verified - CWE-290.
 
 The fix is a verified token plus a header the edge strips unconditionally:
 
@@ -144,7 +144,7 @@ request_headers_to_remove: [x-user-id, x-tenant-id, x-user-role]
 ```
 
 Why this removes the path: forging identity now requires the issuer's signing key rather than a
-`curl -H`. Pinning `audience` matters as much as the signature — without it, a token valid for any
+`curl -H`. Pinning `audience` matters as much as the signature - without it, a token valid for any
 service in the estate is valid for this one, and per-service identity collapses back into a single
 trust zone.
 
@@ -152,7 +152,7 @@ Do not do the tempting middle version: HMAC the headers with a shared secret. Th
 gateway, not the user, so any service holding the secret can still mint any user.
 
 Residual gap: a stolen token works until it expires, and a self-contained token cannot be revoked
-mid-life — keep lifetimes short and re-check high-value operations against the source of truth. Where
+mid-life - keep lifetimes short and re-check high-value operations against the source of truth. Where
 mTLS terminates in a sidecar, every container in that pod inherits the workload identity. Network
 policy still matters, because reaching the port at all should not be free
 ([service-authz.yaml](service-authz.yaml)).
@@ -176,8 +176,8 @@ env:
     valueFrom: { secretKeyRef: { name: db, key: url } }   # shipping, orders, and billing
 ```
 
-The services were separated. The failure domain was not. A compromise of the shipping service — the
-one with the most third-party code and the least attention — reads `billing.payment_methods` and
+The services were separated. The failure domain was not. A compromise of the shipping service - the
+one with the most third-party code and the least attention - reads `billing.payment_methods` and
 writes `orders.orders`, because the credential it holds is the credential everything holds. This is
 also how a "microservices migration" ends up with a larger blast radius than the monolith it
 replaced: same grants, more processes holding them.
@@ -209,13 +209,13 @@ API chooses to return. The cross-schema `SELECT` that "is only for a dashboard" 
 removed, because it is an interface nobody versions and everybody depends on.
 
 Why this removes the path: the grant no longer exists. A missing grant is a hard failure at the
-database, not a convention someone can forget — the same reason row-level security beats a repository
+database, not a convention someone can forget - the same reason row-level security beats a repository
 base class ([tenant-isolation.sql](tenant-isolation.sql)).
 
 Residual gap: one instance is still one availability domain, and a leaked superuser or a Postgres
 privilege-escalation bug reaches everything regardless of grants. `ALTER DEFAULT PRIVILEGES` only
 applies to tables created by the role that ran it, so a new table created by a different migrator
-identity silently has no grants — that surfaces as a runtime error, which is the safe direction but
+identity silently has no grants - that surfaces as a runtime error, which is the safe direction but
 still an outage.
 
 ---
@@ -262,8 +262,8 @@ def reserve_stock(order, user_token: str):
     )
 ```
 
-The workload certificate comes from the platform — SPIFFE/SPIRE, a mesh, or the cloud's instance
-identity — so no service holds a long-lived secret that identifies it. The same reasoning applies to
+The workload certificate comes from the platform - SPIFFE/SPIRE, a mesh, or the cloud's instance
+identity - so no service holds a long-lived secret that identifies it. The same reasoning applies to
 cloud credentials: a per-service role assumed at runtime rather than an access key in an environment
 variable ([iam-least-privilege.tf](iam-least-privilege.tf)).
 
@@ -272,7 +272,7 @@ from the inventory service buys stock reservations for that user and nothing els
 a single secret whose disclosure is estate-wide.
 
 Residual gap: the token exchange is a new synchronous dependency on the authorization server, and its
-outage behaviour has to be decided per operation — see the next example. The exchanged token is still
+outage behaviour has to be decided per operation - see the next example. The exchanged token is still
 a bearer token: whoever holds it can use it, so lifetimes are minutes, not hours. And audience
 validation only helps if every callee actually enforces it; one service that ignores `aud` re-opens
 the replay path for everyone.
@@ -302,7 +302,7 @@ def get_tax(order):
             continue
 ```
 
-The tax vendor gets slow — not down, slow. Every request in `pricing` holds a worker for 30 seconds,
+The tax vendor gets slow - not down, slow. Every request in `pricing` holds a worker for 30 seconds,
 `pricing`'s pool fills, `inventory` blocks, `orders` blocks, and the public API stops answering. One
 third party's bad afternoon is a full outage, and the retries make it worse by multiplying load
 against a service that is already struggling. Availability is a security property (STRIDE Denial of
@@ -347,7 +347,7 @@ matter how many hops it has, the semaphore means one slow dependency cannot cons
 the breaker stops the retry amplification. The security content is in the last block: the answer to
 "dependency unavailable" is written down per operation instead of being improvised.
 
-Residual gap: timeouts bound time, not bytes — a slow, enormous response still needs a size limit.
+Residual gap: timeouts bound time, not bytes - a slow, enormous response still needs a size limit.
 Breaker thresholds are guesses until load-tested, and a breaker that opens on the authorization path
 is exactly where someone will later add a permissive default. Retry budgets have to be global to
 work; a per-call retry limit in five services still multiplies to 5^n at the leaf.
@@ -370,8 +370,8 @@ def on_message(msg):
 ```
 
 The producer checked authorization before publishing. The consumer did not, and the consumer is where
-the privilege change actually lands. Anything that can write to the topic — a compromised producer, a
-misconfigured test harness, a service with broad broker credentials, a replayed message — grants
+the privilege change actually lands. Anything that can write to the topic - a compromised producer, a
+misconfigured test harness, a service with broad broker credentials, a replayed message - grants
 itself `owner` in any tenant. The authorization decision was made in a different component from the
 one performing the action, which is CWE-863 in the same shape as the gateway example, one transport
 along.
@@ -407,7 +407,7 @@ def on_message(msg):
 ```
 
 Why this removes the path: the event carries an ID, not an instruction. Everything that decides the
-outcome — actor, tenant, role — is read from the consumer's own source of truth and re-authorized
+outcome - actor, tenant, role - is read from the consumer's own source of truth and re-authorized
 locally, so a forged or replayed message cannot supply its own facts. The signature check means an
 unknown producer cannot enqueue work at all, and the idempotency record means at-least-once delivery
 does not become at-least-once privilege escalation.
@@ -415,7 +415,7 @@ does not become at-least-once privilege escalation.
 Residual gap: re-reading the source of truth couples the consumer to a database it might rather not
 call, and adds a dependency whose outage behaviour needs the treatment from the previous example.
 Envelope signing needs key distribution and rotation. Broker topic ACLs are the boundary that keeps
-strangers out, and they are runtime state — reading this code tells you nothing about whether they
+strangers out, and they are runtime state - reading this code tells you nothing about whether they
 are applied.
 
 ---
@@ -498,12 +498,12 @@ deny[msg] {
 
 Why this removes the path: exposure now requires an explicit annotation that a policy check rejects,
 rather than requiring someone to remember that `LoadBalancer` means public. The default-deny policy
-means a future manifest that forgets its own rules is unreachable instead of open — the same
+means a future manifest that forgets its own rules is unreachable instead of open - the same
 fail-closed default reasoning as [secure-defaults.yaml](secure-defaults.yaml).
 
 Residual gap: this is git, not the cluster. NetworkPolicy is only enforced if the CNI implements it,
 `hostNetwork: true` pods ignore it, and a mesh sidecar can carry traffic a policy would have dropped.
-Verify from outside — scan your own ranges and confirm what answers — because every artifact here can
+Verify from outside - scan your own ranges and confirm what answers - because every artifact here can
 be correct while the running system is exposed. Network reachability is also not authorization: the
 admin API still needs the identity checks from the second example, since "only the bastion can reach
 it" is a statement about the network, not about who is asking.

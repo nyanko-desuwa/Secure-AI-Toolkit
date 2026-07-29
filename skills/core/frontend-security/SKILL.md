@@ -22,7 +22,7 @@ what the client is trusted with.
 
 Nothing the client enforces is a security control. Validation, role checks, price
 calculation, and rate limiting all run again on the server. Frontend security is about
-protecting the user's browser session from injected code — not about protecting the server
+protecting the user's browser session from injected code - not about protecting the server
 from the user.
 
 Two failure classes follow:
@@ -91,40 +91,40 @@ See [references/csp-guide.md](references/csp-guide.md).
 
 ### 5. Verify
 
-Run [checklist.md](checklist.md). Headers cannot be confirmed from source alone — if you
+Run [checklist.md](checklist.md). Headers cannot be confirmed from source alone - if you
 only read the code, say the deployed configuration is unverified.
 
 ## Severity
 
 Rank by what the attacker can reach, not by the sink's name.
 
-- Critical — stored XSS on an authenticated page, or XSS on the login/session origin.
+- Critical - stored XSS on an authenticated page, or XSS on the login/session origin.
   One visit, full account takeover, no interaction needed.
-- High — reflected or DOM XSS reachable by a link. Needs a click, but the payload is in the
+- High - reflected or DOM XSS reachable by a link. Needs a click, but the payload is in the
   attacker's URL. CSRF on a state-changing endpoint with real impact.
-- Medium — self-XSS requiring the victim to paste a payload. Clickjacking with a plausible
+- Medium - self-XSS requiring the victim to paste a payload. Clickjacking with a plausible
   UI redress path. Missing SRI on a script from a controlled CDN.
-- Low — a missing defence-in-depth header with no reachable sink behind it.
+- Low - a missing defence-in-depth header with no reachable sink behind it.
 
 A missing CSP is not a vulnerability on its own. It is a missing mitigation. Report it as
 one, with the XSS finding it would have contained, or it gets ignored.
 
 ## Related Skills
 
-- `owasp-security` — the standards map these controls trace to
-- `api-security` — the server side of CSRF, CORS, and token validation
-- `authentication` — session and token lifecycle
-- `supply-chain-security` — dependency and third-party script risk in depth
+- `owasp-security` - the standards map these controls trace to
+- `api-security` - the server side of CSRF, CORS, and token validation
+- `authentication` - session and token lifecycle
+- `supply-chain-security` - dependency and third-party script risk in depth
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, configuration, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns, with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when a control cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/csp-guide.md](references/csp-guide.md) — CSP Level 3, Trusted Types
-- [references/security-headers.md](references/security-headers.md) — header set, what each blocks
-- [references/asvs-v3-web-frontend.md](references/asvs-v3-web-frontend.md) — ASVS 5.0 V3 scope and overlap
-- [examples/README.md](examples/README.md) — eight vulnerable/fixed pairs
+- [README.md](README.md) - purpose, configuration, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns, with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when a control cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/csp-guide.md](references/csp-guide.md) - CSP Level 3, Trusted Types
+- [references/security-headers.md](references/security-headers.md) - header set, what each blocks
+- [references/asvs-v3-web-frontend.md](references/asvs-v3-web-frontend.md) - ASVS 5.0 V3 scope and overlap
+- [examples/README.md](examples/README.md) - eight vulnerable/fixed pairs

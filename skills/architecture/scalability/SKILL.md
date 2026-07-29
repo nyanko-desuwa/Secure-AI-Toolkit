@@ -142,19 +142,19 @@ Use one precise CWE per finding where possible. Details: [references/standards-m
 
 ## Related Skills
 
-- `performance` — resource lifetime and heap diagnosis
-- `event-driven` — broker trust, delivery, and consumer lifecycle
-- `api-security` — API4, actor limits, GraphQL, and gateway headers
-- `database-security` — query plans, tenant scoping, and database controls
-- `redis-security` — Redis/Valkey ACLs, transport, persistence, eviction, and service boundaries for cache/limiter stores
+- `performance` - resource lifetime and heap diagnosis
+- `event-driven` - broker trust, delivery, and consumer lifecycle
+- `api-security` - API4, actor limits, GraphQL, and gateway headers
+- `database-security` - query plans, tenant scoping, and database controls
+- `redis-security` - Redis/Valkey ACLs, transport, persistence, eviction, and service boundaries for cache/limiter stores
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, use, limitations
-- [checklist.md](checklist.md) — actionable pre-return checks
-- [best-practices.md](best-practices.md) — S1-S8 patterns and code
-- [common-mistakes.md](common-mistakes.md) — failure, cause, fix, reason
-- [troubleshooting.md](troubleshooting.md) — diagnosis and conflicts
-- [prompts.md](prompts.md) — prompts and anti-patterns
-- [references/](references/) — concise verified standards and sizing notes
-- [examples/README.md](examples/README.md) — runnable vulnerable/fixed pairs
+- [README.md](README.md) - purpose, layout, use, limitations
+- [checklist.md](checklist.md) - actionable pre-return checks
+- [best-practices.md](best-practices.md) - S1-S8 patterns and code
+- [common-mistakes.md](common-mistakes.md) - failure, cause, fix, reason
+- [troubleshooting.md](troubleshooting.md) - diagnosis and conflicts
+- [prompts.md](prompts.md) - prompts and anti-patterns
+- [references/](references/) - concise verified standards and sizing notes
+- [examples/README.md](examples/README.md) - runnable vulnerable/fixed pairs

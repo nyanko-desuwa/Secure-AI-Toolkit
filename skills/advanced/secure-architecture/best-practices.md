@@ -8,7 +8,7 @@ a fixed one, because an architecture diagram with no failure written on it is a 
 `A01:2025` · ASVS V8 · `CWE-668`
 
 A trust boundary is where two components trust each other differently. The failure is not "we
-forgot a boundary" — it is that a boundary exists in the deployment topology and nothing enforces
+forgot a boundary" - it is that a boundary exists in the deployment topology and nothing enforces
 it, so the whole interior becomes one privilege level.
 
 Vulnerable: the gateway authenticates, then everything behind it trusts a header.
@@ -61,7 +61,7 @@ Why it works: the claim is now bound to a signature the caller cannot produce an
 that stops a token minted for `billing` being replayed at `orders`. Network position proves
 nothing, which is NIST SP 800-207 tenet 2.
 
-The tempting wrong fix is a shared secret header — `X-Internal-Key`. It proves the caller is
+The tempting wrong fix is a shared secret header - `X-Internal-Key`. It proves the caller is
 inside the perimeter, which is exactly the property you should stop trusting. It carries no
 principal, so `orders` still cannot tell user 4192 from user 4193.
 
@@ -307,7 +307,7 @@ def can_approve(actor, request_id) -> bool:
 ```
 
 Why it works: a short cache absorbs a blip without turning an outage into a permanent grant. The
-bound is what makes it safe — an unbounded "last known" value means an attacker who can keep the
+bound is what makes it safe - an unbounded "last known" value means an attacker who can keep the
 policy service down keeps their access forever.
 
 Bulkheads matter here too. A shared connection pool means one slow tenant's queries exhaust the
@@ -319,7 +319,7 @@ saturation is contained.
 `A06:2025`
 
 Use cases describe a cooperative user. Abuse cases start from the attacker's goal and work
-backwards. Write them in the same document as the requirements — a separate security document does
+backwards. Write them in the same document as the requirements - a separate security document does
 not get read.
 
 | Feature | Use case | Abuse case | Control |
@@ -445,9 +445,9 @@ A missing tenant predicate in any query path leaks one tenant's rows to another.
 Assumed attacker: an authenticated user of tenant A with no special access.
 
 ## Options
-1. Database per tenant — strongest isolation, migration cost scales with tenant count.
-2. Shared tables, application-level filtering — cheapest, one forgotten WHERE leaks data.
-3. Shared tables, PostgreSQL RLS with FORCE — one enforcement point, needs a non-superuser
+1. Database per tenant - strongest isolation, migration cost scales with tenant count.
+2. Shared tables, application-level filtering - cheapest, one forgotten WHERE leaks data.
+3. Shared tables, PostgreSQL RLS with FORCE - one enforcement point, needs a non-superuser
    application role and a per-connection tenant setting.
 
 ## Decision

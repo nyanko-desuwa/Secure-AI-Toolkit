@@ -138,11 +138,11 @@ tradeoff, not as equivalent to randomized encryption.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP SQL Injection Prevention Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html>
-- OWASP Query Parameterization Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html>
-- OWASP Database Security Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Database_Security_Cheat_Sheet.html>
-- CWE-89 — <https://cwe.mitre.org/data/definitions/89.html>
-- CWE-943 — <https://cwe.mitre.org/data/definitions/943.html>
-- CWE-564 — <https://cwe.mitre.org/data/definitions/564.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP SQL Injection Prevention Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html>
+- OWASP Query Parameterization Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html>
+- OWASP Database Security Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Database_Security_Cheat_Sheet.html>
+- CWE-89 - <https://cwe.mitre.org/data/definitions/89.html>
+- CWE-943 - <https://cwe.mitre.org/data/definitions/943.html>
+- CWE-564 - <https://cwe.mitre.org/data/definitions/564.html>

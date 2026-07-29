@@ -3,7 +3,7 @@
 Verified 2026-07-28 against the MITRE CWE entries linked below. CWE is a weakness taxonomy, not a
 severity score. Rank the demonstrated outcome.
 
-## CWE-915 — Improperly Controlled Modification of Dynamically-Determined Object Attributes
+## CWE-915 - Improperly Controlled Modification of Dynamically-Determined Object Attributes
 
 Source: <https://cwe.mitre.org/data/definitions/915.html>
 
@@ -23,7 +23,7 @@ Controls:
 The presence of `$fillable`, `permit`, or `[Bind]` is not proof. Trace the exact narrowed object into
 the persistence call.
 
-## CWE-79 — Improper Neutralization of Input During Web Page Generation
+## CWE-79 - Improper Neutralization of Input During Web Page Generation
 
 Source: <https://cwe.mitre.org/data/definitions/79.html>
 
@@ -41,7 +41,7 @@ Controls:
 
 A CSP is defence in depth. It does not make raw output safe.
 
-## CWE-639 — Authorization Bypass Through User-Controlled Key
+## CWE-639 - Authorization Bypass Through User-Controlled Key
 
 Source: <https://cwe.mitre.org/data/definitions/639.html>
 
@@ -59,7 +59,7 @@ Controls:
 
 UUIDs reduce guessability and do not enforce authorization.
 
-## CWE-489 — Active Debug Code
+## CWE-489 - Active Debug Code
 
 Source: <https://cwe.mitre.org/data/definitions/489.html>
 

@@ -8,9 +8,9 @@ Entry point for AI coding assistants. Read this first, before touching any skill
 
 Do not load the whole repository. Load in this order and stop when you have enough:
 
-1. **This file** — routing, rules, output contract.
-2. **The registry below** — pick the skill that owns the primary boundary.
-3. **That skill's `SKILL.md`** — workflow, severity rules, and explicit hand-offs.
+1. **This file** - routing, rules, output contract.
+2. **The registry below** - pick the skill that owns the primary boundary.
+3. **That skill's `SKILL.md`** - workflow, severity rules, and explicit hand-offs.
 4. **Only the directly relevant related skills or hand-off owners.** Do not load duplicates of
    the same policy just because a keyword appears in several skills.
 5. **Only the supporting files the workflow points you at.** `checklist.md` before returning
@@ -63,7 +63,7 @@ exist yet.
 ## Routing
 
 Match on what the code touches, not on what the user called it. Most changes hit more than one
-row — take every row that applies.
+row - take every row that applies.
 
 | The code… | Load | Category |
 |---|---|---|
@@ -105,7 +105,7 @@ Do not choose one skill and stop looking. Before writing or changing security-se
 1. Identify the primary skill from the registry.
 2. Search the registry and the repository for related skills that cover adjacent boundaries.
    For example, an API file-upload endpoint needs API Security, File Upload Security, and
-   often Authentication or Secrets Management — not just one of them.
+   often Authentication or Secrets Management - not just one of them.
 3. Read each related skill's `SKILL.md` and load only the supporting files relevant to the
    change.
 4. If a related skill is marked Planned or its directory is empty, say so and use the closest
@@ -146,7 +146,7 @@ The failures below are the ones that reach production this way. They are not exo
 what shipping fast without a security reviewer looks like.
 
 **Secrets on the client.** An API key in JavaScript, a token in a `NEXT_PUBLIC_` variable, a
-service key in a mobile app, a credential in a public repository. Bundling is not hiding — view
+service key in a mobile app, a credential in a public repository. Bundling is not hiding - view
 source, unminify, read the network tab. Anything the browser can read, the visitor can read. If
 a call needs a secret, the call belongs on a server. Say this plainly rather than obscuring the
 key and moving on.
@@ -160,7 +160,7 @@ buried where nobody will find it.
 
 **Missing limits, because the happy path never hit one.** No pagination on a list endpoint, no
 upload size cap, no rate limit on login or on an expensive query, no timeout on an outbound
-call, no bound on a cache or a queue or a retry loop. Unbounded is not neutral — it is a
+call, no bound on a cache or a queue or a retry loop. Unbounded is not neutral - it is a
 resource-exhaustion vector (`API4:2023`, `CWE-770`, `CWE-400`) and the same code path that
 leaks memory under load is the one that takes the process down. Performance and security are
 the same finding here.
@@ -197,14 +197,14 @@ user's project readable by someone who cannot read it today: `git commit`, `git 
 visibility change, or pasting a diff, log, or screenshot into a public place.
 
 Publishing is a one-way door. Once a credential is public, no commit, force-push, unpublish, or
-deleted repository takes it back — the only remediation is revocation at the provider. So the
+deleted repository takes it back - the only remediation is revocation at the provider. So the
 check happens before, because afterwards there is nothing left to check.
 
 Run `skills/core/publish-safety/checklist.md` for the surface you are about to touch, and report
 the result. Then:
 
 1. **Do not run the publishing command until the checklist has been run and reported.** If you
-   cannot run it — no shell access, no repository — say so and hand the commands to the user
+   cannot run it - no shell access, no repository - say so and hand the commands to the user
    rather than proceeding as if it passed.
 2. **Stage named paths. Never `git add -A` or `git add .`.** Blanket staging is how an untracked
    local file becomes a tracked one, and the commit that adds it is what puts it in history.
@@ -213,12 +213,12 @@ the result. Then:
 4. **`git status` is the present tense; a public repository exposes the whole history.** Scan
    history before any visibility change, and scan the built artifact rather than the source.
 5. **You may create or edit the user's `.gitignore`, `.dockerignore`, `.npmignore`, and the
-   `files` field, and you may generate `.env.example` by stripping values — never by copying
+   `files` field, and you may generate `.env.example` by stripping values - never by copying
    `.env`.** Report exactly what you added, line by line. This is the only write authority this
    gate grants you at the publish boundary.
 6. **Do not rewrite history, force-push, or delete remote refs to clean up a leak.** Those are
    the user's call, they break every existing clone, and they are not the remediation anyway.
-   Revoke first — `skills/core/secrets-management/references/exposure-response.md` has the order.
+   Revoke first - `skills/core/secrets-management/references/exposure-response.md` has the order.
 7. **Gitignored and local-only files stay out.** Private notes, personal instruction files,
    scratch directories, editor state: never staged, never quoted in a commit message, never cited
    in a file that will be committed. A file being in the repository root does not make it part of
@@ -245,13 +245,13 @@ These hold regardless of which skill is loaded.
    Editions renumber.
 9. **Release what you acquire.** Every allocation, connection, file handle, subscription,
    listener, timer, and cache entry needs a defined owner and a defined end. Unbounded growth
-   is a denial-of-service path, not just a performance bug — see `architecture/performance`
+   is a denial-of-service path, not just a performance bug - see `architecture/performance`
    (CWE-401 Missing Release of Memory, CWE-772 Missing Release of Resource, CWE-770
    Allocation Without Limits).
 10. **Do not expand scope.** Fix the file you are in. Note inconsistencies elsewhere without
     sweeping them up.
-11. **Check before you publish.** Nothing becomes readable by a wider audience — a push, a
-    commit, a package, an image, a deploy, a visibility flip, a shared screenshot — until the
+11. **Check before you publish.** Nothing becomes readable by a wider audience - a push, a
+    commit, a package, an image, a deploy, a visibility flip, a shared screenshot - until the
     gate above has been run and its result reported. Stage named paths only. See
     `skills/core/publish-safety/`.
 
@@ -265,7 +265,7 @@ Per task, load at most: **five** `core/` skills, **two** `advanced/`, **one** `e
 
 `skills/shared/references/skill-graph.md` says which skills assume another's guidance
 (`depends_on`) and which cover an adjacent boundary (`related`). Load a skill's direct
-`depends_on`, and theirs, and stop — depth two. Transitive closure on that graph reaches most of
+`depends_on`, and theirs, and stop - depth two. Transitive closure on that graph reaches most of
 the repository, which is what the budget exists to prevent.
 
 If the chain would exceed the budget, load the primary skill plus its direct `depends_on`, then
@@ -289,21 +289,21 @@ In this order, because each step can invalidate the one before it:
 
 For each finding, give exactly this:
 
-- **Category** — Top 10 ID, ASVS chapter, CWE where applicable
-- **Location** — `file:line`
-- **Exploitation path** — concrete inputs or state, and what the attacker gets
-- **Fix** — the change, and why it closes the hole rather than just looking safer
-- **Severity** — with reasoning
+- **Category** - Top 10 ID, ASVS chapter, CWE where applicable
+- **Location** - `file:line`
+- **Exploitation path** - concrete inputs or state, and what the attacker gets
+- **Fix** - the change, and why it closes the hole rather than just looking safer
+- **Severity** - with reasoning
 
 A finding with no exploitation path is a code smell. Label it as one. Ranking by category
 name is wrong: SQL injection on an integer cast in an admin-only route is not critical.
 
 Severity is exploitability plus blast radius:
 
-- **Critical** — unauthenticated access to other users' data, or code execution
-- **High** — authenticated privilege escalation, injection behind auth
-- **Medium** — needs an unlikely precondition, or leaks non-sensitive detail
-- **Low** — defence in depth missing, no direct path
+- **Critical** - unauthenticated access to other users' data, or code execution
+- **High** - authenticated privilege escalation, injection behind auth
+- **Medium** - needs an unlikely precondition, or leaks non-sensitive detail
+- **Low** - defence in depth missing, no direct path
 
 ## Conflicts
 
@@ -320,7 +320,7 @@ See `skills/core/owasp/troubleshooting.md` for the longer list.
 ## Honesty
 
 State what you checked and what you could not. "Exploitable if `sort` reaches the query
-unvalidated — I could not find the caller" is useful. "Critical SQL injection" without
+unvalidated - I could not find the caller" is useful. "Critical SQL injection" without
 checking is noise, and noise gets checklists ignored.
 
 Never claim a fix is verified if the build or tests did not run. Say why they did not.

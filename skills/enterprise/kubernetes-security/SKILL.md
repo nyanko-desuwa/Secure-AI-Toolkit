@@ -106,7 +106,7 @@ implying the manifest is sufficient.
 
 For each finding: object and name, what an attacker with a foothold in the cluster gains,
 the field to change, and whether admission would have stopped it. A `securityContext` gap in
-a namespace enforcing `restricted` is not exploitable — the pod never starts. Say which case
+a namespace enforcing `restricted` is not exploitable - the pod never starts. Say which case
 you are in.
 
 ## Severity
@@ -114,33 +114,33 @@ you are in.
 Rank by what the finding gives an attacker who already has code execution in one pod, which
 is the realistic starting point.
 
-- **Critical** — path to node root or control plane credentials: privileged pod, `hostPath`
+- **Critical** - path to node root or control plane credentials: privileged pod, `hostPath`
   on a sensitive path, `hostPID`, `cluster-admin` on a workload ServiceAccount, `escalate`
   or `bind` or `impersonate` granted broadly, `get` on `nodes/proxy`
-- **High** — cross-namespace or cross-tenant reach: no NetworkPolicy in a multi-tenant
+- **High** - cross-namespace or cross-tenant reach: no NetworkPolicy in a multi-tenant
   cluster, `list` on Secrets cluster-wide, wildcard verbs on a wildcard resource
-- **Medium** — missing defence in depth with no direct path: no `readOnlyRootFilesystem`,
+- **Medium** - missing defence in depth with no direct path: no `readOnlyRootFilesystem`,
   token automounted but the token is narrow, Secret in env vars
-- **Low** — hygiene: mutable image tag in a non-production namespace, missing resource limits
+- **Low** - hygiene: mutable image tag in a non-production namespace, missing resource limits
 
 State the reasoning. "Runs as root, therefore critical" is wrong if the namespace enforces
 `restricted` and the pod is rejected at admission.
 
 ## Related Skills
 
-- `docker-security` — the image itself: base image choice, build-time users, layer secrets,
+- `docker-security` - the image itself: base image choice, build-time users, layer secrets,
   multi-stage builds. This skill covers how the image runs, not what is in it. Do not
   duplicate image scanning guidance here.
-- `owasp-security` — the application inside the container
-- `compliance` — CIS Benchmark and control-framework mapping
+- `owasp-security` - the application inside the container
+- `compliance` - CIS Benchmark and control-framework mapping
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns, with vulnerable/fixed manifests
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when a control cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — version-pinned standard and API summaries
-- [examples/](examples/) — eight vulnerable/fixed manifest pairs
+- [README.md](README.md) - purpose, standards table, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns, with vulnerable/fixed manifests
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when a control cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - version-pinned standard and API summaries
+- [examples/](examples/) - eight vulnerable/fixed manifest pairs

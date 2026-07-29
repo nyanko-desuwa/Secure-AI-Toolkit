@@ -6,14 +6,14 @@ not pull.
 
 ## Contents
 
-- [Root container and unpinned base](#root-container-and-unpinned-base) — A02/A03, CWE-250/1104
-- [Secret baked into a layer](#secret-baked-into-a-layer) — A03, CWE-798
-- [Build toolchain shipped to production](#build-toolchain-shipped-to-production) — A03, CWE-1104
-- [Docker socket mounted into CI](#docker-socket-mounted-into-ci) — A02, CWE-269
-- [Privileged container with host namespaces](#privileged-container-with-host-namespaces) — A02, CWE-250
-- [Writable runtime with every default capability](#writable-runtime-with-every-default-capability) — A02, CWE-269
-- [Compose startup and network exposure](#compose-startup-and-network-exposure) — A02, CWE-668
-- [Unsigned, unscanned mutable release](#unsigned-unscanned-mutable-release) — A03/A08, CWE-345
+- [Root container and unpinned base](#root-container-and-unpinned-base) - A02/A03, CWE-250/1104
+- [Secret baked into a layer](#secret-baked-into-a-layer) - A03, CWE-798
+- [Build toolchain shipped to production](#build-toolchain-shipped-to-production) - A03, CWE-1104
+- [Docker socket mounted into CI](#docker-socket-mounted-into-ci) - A02, CWE-269
+- [Privileged container with host namespaces](#privileged-container-with-host-namespaces) - A02, CWE-250
+- [Writable runtime with every default capability](#writable-runtime-with-every-default-capability) - A02, CWE-269
+- [Compose startup and network exposure](#compose-startup-and-network-exposure) - A02, CWE-668
+- [Unsigned, unscanned mutable release](#unsigned-unscanned-mutable-release) - A03/A08, CWE-345
 
 ---
 

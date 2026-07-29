@@ -31,8 +31,8 @@ overly permissive", which the author already suspected.
 ```
 Search this repo for cloud credentials that never expire: aws_iam_access_key resources, service
 account JSON keys, Azure client secrets, and any hardcoded key IDs in code or CI config. For
-each, say what should replace it — instance identity, workload identity federation, or
-impersonation — and what breaks in the migration.
+each, say what should replace it - instance identity, workload identity federation, or
+impersonation - and what breaks in the migration.
 ```
 
 The migration question matters. A finding the team cannot act on gets closed as won't-fix.
@@ -57,7 +57,7 @@ versioning on, and is access logging going somewhere the workload cannot write? 
 against those seven, then the fixes.
 ```
 
-Naming all seven checks prevents the answer stopping at "public access is blocked" — the common
+Naming all seven checks prevents the answer stopping at "public access is blocked" - the common
 failure is a bucket policy with `"Principal": "*"` on an account where Block Public Access is on
 but was scoped per-bucket and missed one.
 
@@ -87,7 +87,7 @@ suspicious activity" is not a rule.
 ## Blast radius of one compromised identity
 
 ```
-Assume the role at aws/roles/etl-worker.tf is compromised — the attacker has its credentials and
+Assume the role at aws/roles/etl-worker.tf is compromised - the attacker has its credentials and
 nothing else. What can they read, write, delete, and escalate to? Include what it can reach
 cross-account. Then tell me the smallest change that most reduces that.
 ```

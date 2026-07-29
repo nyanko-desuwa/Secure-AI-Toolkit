@@ -6,9 +6,9 @@ shape of the answer. Vague prompts about performance get a lecture on caching.
 ## Inventory acquisitions in a diff
 
 ```
-Review my staged changes with skills/architecture/performance. For every acquisition —
+Review my staged changes with skills/architecture/performance. For every acquisition -
 allocation that outlives the call, cache entry, socket, file handle, cursor, subscription,
-timer, task, goroutine — list the owner and the release point. Report anything with no bound
+timer, task, goroutine - list the owner and the release point. Report anything with no bound
 or no release on the error path. Classify each as L1 to L8.
 ```
 
@@ -45,14 +45,14 @@ Tell me what would distinguish a leak from a large working set here, and which m
 would settle it.
 ```
 
-Asks for the discriminator rather than a verdict. Stable is the key word — a leak that has
+Asks for the discriminator rather than a verdict. Stable is the key word - a leak that has
 stopped growing is not a leak.
 
 ## Choose limits with reasoning
 
 ```
 This endpoint accepts a JSON array of IDs and fetches each one from an upstream API. Give me
-the bounds it needs — array length, body size, concurrency, per-call timeout, total budget —
+the bounds it needs - array length, body size, concurrency, per-call timeout, total budget -
 with the reasoning for each number and what breaks if it is set too low.
 ```
 
@@ -74,8 +74,8 @@ and no policy.
 
 ```
 Read src/components/JobStream.tsx. For each useEffect: does it return a cleanup function,
-does the dependency array match what it captures, and does anything it starts — fetch,
-subscription, interval — survive unmount?
+does the dependency array match what it captures, and does anything it starts - fetch,
+subscription, interval - survive unmount?
 ```
 
 ## Cross-request contamination
@@ -102,7 +102,7 @@ A teammate wants to fix our growing RSS by calling gc.collect() every 60 seconds
 what that does and does not do, and what I should ask for instead.
 ```
 
-See [common-mistakes.md](common-mistakes.md#the-wrong-fixes) — the wrong fixes are worth
+See [common-mistakes.md](common-mistakes.md#the-wrong-fixes) - the wrong fixes are worth
 naming explicitly, because they look like action.
 
 ## Anti-patterns

@@ -1,4 +1,4 @@
-# NIST SSDF — SP 800-218 Version 1.1
+# NIST SSDF - SP 800-218 Version 1.1
 
 > SP 800-218 Version 1.1, published February 2022 (final release dated 2022-02-03). Verified
 > 2026-07-28 against <https://csrc.nist.gov/pubs/sp/800/218/final> and
@@ -33,18 +33,18 @@ Example, and Reference.
 ## IDs read from the source
 
 Only these. SSDF IDs are short and easy to transpose, and the framework grew between the 2020
-white paper and 1.1 — do not cite one from memory.
+white paper and 1.1 - do not cite one from memory.
 
 | ID | What it covers |
 |---|---|
 | PO.1.2 | Document the security requirements that organization-developed software must satisfy |
-| PO.5 | "Implement and Maintain Secure Environments for Software Development" — a practice added in version 1.1 |
+| PO.5 | "Implement and Maintain Secure Environments for Software Development" - a practice added in version 1.1 |
 | PS.3.2 | Collect and share provenance data for all components of software releases |
 | PW.1.2 | Track security requirements, risks, and design decisions |
 
 PS.3.2 is the SBOM and provenance hook, and note its wording: provenance for all components
 of a release, not just your own build output. A build-time SBOM satisfies it. A scan of a
-running container does not — that produces an observation, not provenance.
+running container does not - that produces an observation, not provenance.
 
 PO.5 is build-environment hardening stated as an organizational practice. It is the same
 argument SLSA Build L3 makes about isolation, which is why "our pipeline is less hardened than
@@ -54,12 +54,12 @@ the application it builds" is an SSDF gap as well as an A03 exposure condition.
 
 | Concern | OWASP | ASVS 5.0 | SSDF | SLSA |
 |---|---|---|---|---|
-| Component inventory | A03 | 15.1.2 | PS.3.2 | — |
-| Trusted source, no confusion | A03 | 15.2.4 | PW group | — |
+| Component inventory | A03 | 15.1.2 | PS.3.2 | - |
+| Trusted source, no confusion | A03 | 15.2.4 | PW group | - |
 | Build environment integrity | A03 | V13 configuration | PO.5 | Build L3 |
-| Provenance generation | A08 | — | PS.3.2 | Build L1–L3 |
-| Signature verification on consume | A08 | — | PS group | Verifying artifacts |
-| Remediation windows | A03 | 15.1.1, 15.2.1 | RV group | — |
+| Provenance generation | A08 | - | PS.3.2 | Build L1–L3 |
+| Signature verification on consume | A08 | - | PS group | Verifying artifacts |
+| Remediation windows | A03 | 15.1.1, 15.2.1 | RV group | - |
 
 Cells naming a group rather than an ID are where the mapping is real but the task number was
 not read from the source. Cite the group, not a number you have not opened.
@@ -70,7 +70,7 @@ not read from the source. Cite the group, not a number you have not opened.
   can attest to the framework and still deploy an unsigned build from an unauthenticated
   registry. Ask for the provenance, not the attestation.
 - Task IDs beyond the four above were not verified during this check: the CSRC landing page
-  does not enumerate them. The SSDF table (Excel) linked from the publication page does — fetch
+  does not enumerate them. The SSDF table (Excel) linked from the publication page does - fetch
   it before quoting another ID.
 - SP 800-218A extends SSDF to generative AI and dual-use foundation models. Separate document,
   not covered here.

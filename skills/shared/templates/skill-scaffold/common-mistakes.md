@@ -1,7 +1,7 @@
 # Common Mistakes
 
 What goes wrong in practice, and why the fix works. These are mistakes made by people who
-already know the rule — the interesting cases are where the wrong version looks right.
+already know the rule - the interesting cases are where the wrong version looks right.
 
 ## <Mistake, phrased as the thing someone actually does>
 

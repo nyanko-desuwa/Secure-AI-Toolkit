@@ -1,4 +1,4 @@
-# OWASP for architecture — Top 10 2025 and ASVS 5.0
+# OWASP for architecture - Top 10 2025 and ASVS 5.0
 
 Verified 2026-07-28 against:
 
@@ -12,7 +12,7 @@ different here.
 
 ## The three categories that are architectural
 
-Most Top 10 categories are implementation findings. Three are design findings — you cannot fix
+Most Top 10 categories are implementation findings. Three are design findings - you cannot fix
 them in a diff.
 
 ### A01:2025 Broken Access Control
@@ -38,7 +38,7 @@ platform.
 
 Design questions:
 
-- What is the default when a field is absent — deny or allow?
+- What is the default when a field is absent - deny or allow?
 - If a new service is deployed with no security config, what can it reach?
 - Which controls are enforced by the platform, and which by developer discipline?
 
@@ -52,7 +52,7 @@ Design questions:
 
 - What is the abuse case, not the use case?
 - Which flows are expensive, and what meters them?
-- What happens when a dependency is unavailable — deny, allow, or queue?
+- What happens when a dependency is unavailable - deny, allow, or queue?
 
 The other categories still land on architecture indirectly. A03 (Software Supply Chain
 Failures) is a build-system design problem; A08 (Software or Data Integrity Failures) covers
@@ -62,7 +62,7 @@ Alerting Failures) is a design question about whether the audit path can be bypa
 ## ASVS 5.0 chapters used in this skill
 
 Citations here are at chapter level. The 5.0 numbering is new enough that recalled requirement
-IDs are unreliable — pull specific requirement text from <https://github.com/OWASP/ASVS> before
+IDs are unreliable - pull specific requirement text from <https://github.com/OWASP/ASVS> before
 quoting an ID.
 
 | Chapter | Title | Architectural use |
@@ -80,7 +80,7 @@ modes.
 ## ASVS levels
 
 Level 1 is a black-box-testable floor. Level 2 is the right default for applications handling
-sensitive data. Level 3 is for systems where failure is severe — health, finance, safety,
+sensitive data. Level 3 is for systems where failure is severe - health, finance, safety,
 critical infrastructure.
 
 State the level you targeted. "We followed ASVS V8 guidance" is honest. "We are ASVS Level 2"

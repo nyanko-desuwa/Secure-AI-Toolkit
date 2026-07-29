@@ -31,7 +31,7 @@ start.
 | WebP | `52 49 46 46` at 0, `57 45 42 50` at 8 |
 
 Two things the table shows on its own. Detecting `PK\x03\x04` does not tell you whether the
-file is a spreadsheet or a JAR — you must inspect the container. And SVG has no magic
+file is a spreadsheet or a JAR - you must inspect the container. And SVG has no magic
 number at all, because it is text; a leading `<?xml` or `<svg` is not a signature.
 
 ## Libraries
@@ -50,7 +50,7 @@ through an allowlist and derive the extension from your own table, never from th
 
 A polyglot file is valid to more than one parser at once. A GIF header followed by PHP
 source is still a GIF to a signature check and still executable to a PHP handler. The same
-trick works with JPEG comment segments, PDF, and ZIP — ZIP is especially easy because its
+trick works with JPEG comment segments, PDF, and ZIP - ZIP is especially easy because its
 central directory sits at the end of the file, so arbitrary bytes can precede it.
 
 Magic-number detection is a necessary filter, not a sufficient one. What closes the gap
@@ -87,7 +87,7 @@ Options, strongest first:
    handwritten regex or tag denylist is not sanitisation.
 
 If the server parses SVG or an Office part, disable DTD loading and external entity
-resolution. In Python, use `defusedxml` or verify the Expat version — the 3.14 standard
+resolution. In Python, use `defusedxml` or verify the Expat version - the 3.14 standard
 library docs state that Expat below 2.7.2 may be vulnerable to billion laughs, quadratic
 blowup, and large-token attacks, and point at `pyexpat.EXPAT_VERSION` to check what your
 interpreter bundles.
@@ -100,7 +100,7 @@ Detection tells you the format. It says nothing about what the format expands to
 
 - Pillow raises `DecompressionBombWarning` above `Image.MAX_IMAGE_PIXELS` and
   `DecompressionBombError` above twice that value. The default in Pillow 12.1.0 is
-  89,478,485 pixels — verified locally against `PIL.Image.MAX_IMAGE_PIXELS`. That default is
+  89,478,485 pixels - verified locally against `PIL.Image.MAX_IMAGE_PIXELS`. That default is
   a crash guard, not an application limit; set your own well below it.
 - ZIP: check entry count and the sum of declared uncompressed sizes before extracting, and
   still count real bytes while streaming. Declared sizes are attacker-controlled.

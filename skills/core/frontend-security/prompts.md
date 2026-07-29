@@ -36,7 +36,7 @@ Here is our Content-Security-Policy header:
 
   <paste header>
 
-Tell me whether it stops reflected XSS. If it does not, give me the concrete bypass — the exact
+Tell me whether it stops reflected XSS. If it does not, give me the concrete bypass - the exact
 payload or the exact host on the allowlist that hosts a JSONP endpoint or an unsafe framework
 build. Then give me the nonce-based replacement with strict-dynamic, object-src, and base-uri.
 ```

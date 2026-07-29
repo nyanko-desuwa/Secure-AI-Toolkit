@@ -1,4 +1,4 @@
-# OWASP Top 10 2025 — the categories that carry publish findings
+# OWASP Top 10 2025 - the categories that carry publish findings
 
 Source: <https://owasp.org/Top10/2025/> · verified 2026-07-28
 
@@ -8,7 +8,7 @@ The full category list and the 2021 → 2025 mapping live in
 [owasp/references/owasp-top10-2025.md](../../owasp/references/owasp-top10-2025.md); this file only
 covers the four categories a publish decision lands on.
 
-## A02:2025 — Security Misconfiguration
+## A02:2025 - Security Misconfiguration
 
 The packaging and visibility settings that decide what ships. Almost every publish finding starts
 here, because the leak is usually a configuration that included more than intended.
@@ -27,7 +27,7 @@ Applies when:
 Ask: what does this configuration include that nobody listed? An allowlist answers that question by
 construction; a denylist answers it only for the cases someone thought of.
 
-## A04:2025 — Cryptographic Failures
+## A04:2025 - Cryptographic Failures
 
 The credential itself, once it has been exposed. A02 is why it shipped; A04 is what shipping it
 costs.
@@ -43,7 +43,7 @@ Applies when:
 The category to cite when you are explaining impact rather than cause. Pair it with the CWE from
 [cwe-publishing.md](cwe-publishing.md).
 
-## A03:2025 — Software Supply Chain Failures
+## A03:2025 - Software Supply Chain Failures
 
 New in 2025. It applies in the direction people forget: what you publish becomes someone else's
 dependency, and their build trusts it.
@@ -60,7 +60,7 @@ Applies when:
 Depth on signing, provenance, and SLSA belongs to `advanced/supply-chain-security`. This skill stops
 at the question of what is inside the artifact.
 
-## A08:2025 — Software or Data Integrity Failures
+## A08:2025 - Software or Data Integrity Failures
 
 Applies to the artifact-integrity side of publishing:
 
@@ -85,4 +85,4 @@ categories on one finding reads as padding.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>

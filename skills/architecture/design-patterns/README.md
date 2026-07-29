@@ -130,10 +130,10 @@ real hostnames, personal data, or attack tooling.
 
 ## References
 
-- Refactoring.Guru, Design Patterns Catalog — <https://refactoring.guru/design-patterns/catalog>
-- Python `functools` — <https://docs.python.org/3/library/functools.html>
-- Python `queue` — <https://docs.python.org/3/library/queue.html>
-- Node.js Events — <https://nodejs.org/api/events.html>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE entries — <https://cwe.mitre.org/>
+- Refactoring.Guru, Design Patterns Catalog - <https://refactoring.guru/design-patterns/catalog>
+- Python `functools` - <https://docs.python.org/3/library/functools.html>
+- Python `queue` - <https://docs.python.org/3/library/queue.html>
+- Node.js Events - <https://nodejs.org/api/events.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE entries - <https://cwe.mitre.org/>

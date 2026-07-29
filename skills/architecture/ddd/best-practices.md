@@ -13,15 +13,15 @@ Cost: none at runtime. Renaming costs review time and merge conflicts. Do it dur
 This is the security spine. A context owns its tables. Another context reads them through a published contract or not at all. Two contexts sharing a table share a blast radius: a migration in one changes the meaning of a column the other filters on, and the filter still compiles (`CWE-653` Improper Isolation or Compartmentalization, `CWE-1220` Insufficient Granularity of Access Control, `A01:2025`).
 ```mermaid
 graph LR
-  subgraph Sales["Sales context — owns sales.* "]
+  subgraph Sales["Sales context - owns sales.* "]
     SO[Order]
     SC[Customer = buyer]
   end
-  subgraph Support["Support context — owns support.*"]
+  subgraph Support["Support context - owns support.*"]
     ST[Ticket]
     SU[Customer = person who calls]
   end
-  subgraph Billing["Billing context — owns billing.*"]
+  subgraph Billing["Billing context - owns billing.*"]
     BI[Invoice]
     BA[Account]
   end
@@ -53,15 +53,15 @@ Cost: cross-context reads become a call or a copy. That is latency and staleness
 Draw the aggregate from the invariant, not from the data shape. The question is not "what belongs together in a form" but "what must be true in one transaction". An aggregate root is the right place to enforce an invariant because it is the only object that can see the whole invariant. A service can see it too, until a second service is written.
 ```mermaid
 graph TB
-  subgraph AGG["Order aggregate — one transaction, one lock"]
+  subgraph AGG["Order aggregate - one transaction, one lock"]
     R[Order · root<br/>enforces: total ≤ creditLimit<br/>enforces: no lines after submit]
     L1[OrderLine]
     L2[OrderLine]
     R --> L1
     R --> L2
   end
-  R -->|"CustomerId — by ID only"| C[(Customer aggregate)]
-  R -->|"WarehouseId — by ID only"| W[(Inventory aggregate)]
+  R -->|"CustomerId - by ID only"| C[(Customer aggregate)]
+  R -->|"WarehouseId - by ID only"| W[(Inventory aggregate)]
   Repo[OrderRepository] -->|"loads and saves<br/>the whole aggregate"| R
 ```
 ### Invariants live inside the boundary
@@ -132,7 +132,7 @@ class Order:
         return sum((l.unit_price * l.quantity for l in self._lines), Money.zero("USD"))
 ```
 Why the fix holds: there is no public mutator. The import job cannot append to `_lines` without going through `add_line`, so it cannot skip the status check. The rule is not enforced by discipline; the alternative was removed.
-Cost: the whole aggregate loads on every write. Keep it small. An `Order` with 20 000 lines means 20 000 rows loaded to change one quantity — that is the read/write split argument, see `skills/architecture/cqrs/`.
+Cost: the whole aggregate loads on every write. Keep it small. An `Order` with 20 000 lines means 20 000 rows loaded to change one quantity - that is the read/write split argument, see `skills/architecture/cqrs/`.
 ### Reference other aggregates by ID
 ```typescript
 // Vulnerable: the object graph pulls in three aggregates and two of them are now mutable here
@@ -165,9 +165,9 @@ class Order {
   }
 }
 ```
-Why: the boundary is now visible in the type. To change a customer's credit limit you must load the `Customer` aggregate and call its method, which is where that invariant lives. Cost of the ID reference: one extra load when you genuinely need the other aggregate, and N+1 if you do it in a loop. Batch the loads or project a read model. Cost of copying `creditLimit` in: it can be stale. That is the honest trade — decide whether a stale limit for the length of a transaction is acceptable, and write the answer down.
+Why: the boundary is now visible in the type. To change a customer's credit limit you must load the `Customer` aggregate and call its method, which is where that invariant lives. Cost of the ID reference: one extra load when you genuinely need the other aggregate, and N+1 if you do it in a loop. Batch the loads or project a read model. Cost of copying `creditLimit` in: it can be stale. That is the honest trade - decide whether a stale limit for the length of a transaction is acceptable, and write the answer down.
 ## Value Objects Instead of Validated Primitives
-An `Email` type that validates in its constructor removes the bug where validation exists and someone forgot to call it. A `TenantId` type removes the bug where a `userId` is passed where a `tenantId` was expected — which is not a type error when both are `string`, and is a cross-tenant read at runtime (`A01:2025`, `CWE-1220`).
+An `Email` type that validates in its constructor removes the bug where validation exists and someone forgot to call it. A `TenantId` type removes the bug where a `userId` is passed where a `tenantId` was expected - which is not a type error when both are `string`, and is a cross-tenant read at runtime (`A01:2025`, `CWE-1220`).
 ```typescript
 // Vulnerable: every parameter is a string, and the compiler is fine with any order
 function findInvoice(tenantId: string, userId: string, invoiceId: string) { /* ... */ }
@@ -229,7 +229,7 @@ class Money:
 ```
 Cost: one immutable object per value, and `slots=True` to keep it small. On a hot loop that constructs millions of them, this shows up in allocation profiles. Measure before reaching for a primitive; do not assume.
 ## Repository per Aggregate Root
-The repository is the aggregate boundary in persistence: whole aggregates in, whole aggregates out. One repository per root, not per table. A repository that returns a query object has no boundary. Filtering — including the tenant filter — now happens in whatever code holds the query, and there is no single place to enforce it.
+The repository is the aggregate boundary in persistence: whole aggregates in, whole aggregates out. One repository per root, not per table. A repository that returns a query object has no boundary. Filtering - including the tenant filter - now happens in whatever code holds the query, and there is no single place to enforce it.
 ```csharp
 // Vulnerable: the boundary leaks. The caller composes the filter, so the caller can omit it.
 public interface IOrderRepository
@@ -273,7 +273,7 @@ public sealed class OrderRepository : IOrderRepository
 Why the fix holds: `TenantId` is a required parameter of every method. A caller cannot construct a query that omits it, because callers cannot construct queries. Cost, stated plainly:
 - `Include` on a collection is one query with row multiplication, or N+1 if the ORM splits it. Check the generated SQL rather than trusting the mapping.
 - Every method needs an explicit limit. `ListSubmitted` without `Take` is an unbounded read and a memory finding (`CWE-770`).
-- A long-lived `DbContext` retains every entity it has tracked. Scope it per request or per unit of work, never as a singleton — see the resource lifecycle section. If a screen needs three joined tables and no invariant, do not force it through a repository. Query it directly on the read side. That is `skills/architecture/cqrs/`, and it is the correct answer, not a compromise.
+- A long-lived `DbContext` retains every entity it has tracked. Scope it per request or per unit of work, never as a singleton - see the resource lifecycle section. If a screen needs three joined tables and no invariant, do not force it through a repository. Query it directly on the read side. That is `skills/architecture/cqrs/`, and it is the correct answer, not a compromise.
 ## Domain Events: Payload and Commit Ordering
 Two independent rules, both commonly broken.
 ### The payload is a contract, not a dump
@@ -336,7 +336,7 @@ public async Task<Result> Handle(SubmitOrder cmd, CancellationToken ct)
     return Result.Ok();                           // a separate worker drains the outbox
 }
 ```
-Cost and consequence: the outbox gives at-least-once delivery, so every consumer must be idempotent — key on the event ID and skip a repeat. The outbox table also grows, so it needs a retention job. Both of those are real work, not footnotes. In-process dispatch has a different cost: no bound and no backpressure. One slow handler extends the publishing request by its latency, and a handler that fans out to ten more grows the call stack and the transaction window. If handlers do I/O, they belong behind the outbox, not on an in-process bus.
+Cost and consequence: the outbox gives at-least-once delivery, so every consumer must be idempotent - key on the event ID and skip a repeat. The outbox table also grows, so it needs a retention job. Both of those are real work, not footnotes. In-process dispatch has a different cost: no bound and no backpressure. One slow handler extends the publishing request by its latency, and a handler that fans out to ten more grows the call stack and the transaction window. If handlers do I/O, they belong behind the outbox, not on an in-process bus.
 ## Anti-Corruption Layer
 The ACL is where an external model becomes your model. It is also where you stop trusting external data (`CWE-501` Trust Boundary Violation).
 ```typescript
@@ -359,7 +359,7 @@ export function toCustomer(raw: unknown, tenant: TenantId): Customer {
   });
 }
 ```
-Two details carry the security weight. `.strict()` stops an unknown vendor field from reaching a downstream mass-assignment. And `tenant` is supplied by the caller from the authenticated context — if the vendor payload could set it, the integration would be a cross-tenant write.
+Two details carry the security weight. `.strict()` stops an unknown vendor field from reaching a downstream mass-assignment. And `tenant` is supplied by the caller from the authenticated context - if the vendor payload could set it, the integration would be a cross-tenant write.
 Cost: a translation layer per integration, and a second place to change when the vendor adds a field. That is the point. Skipping the ACL saves that maintenance and buys you a domain model shaped by someone else's schema.
 ## Resource Lifecycle
 Three hazards DDD introduces. `skills/architecture/performance/` owns the heap-level detail; this is what to look for in a DDD codebase specifically.

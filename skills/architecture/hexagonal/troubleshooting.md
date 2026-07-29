@@ -71,7 +71,7 @@ for a page in a single query. The read port must still scope by tenant. Query-co
 ## Two driving ports need the same check
 
 Extract a domain policy object that both use cases call with the actor and intent-specific facts.
-Do not create `Authorizer.can(actor, action, resource)` with string actions — reviewers lose the
+Do not create `Authorizer.can(actor, action, resource)` with string actions - reviewers lose the
 ability to see what a use case requires, and granularity drifts until "document:*" is somebody's
 role. `CWE-1220`.
 
@@ -106,7 +106,7 @@ reminder. `CWE-772`.
 
 ## The DI container rejects the adapter registration
 
-Believe it. A captive dependency — a singleton adapter holding something request-scoped — is
+Believe it. A captive dependency - a singleton adapter holding something request-scoped - is
 usually a cross-tenant correctness bug before it is a leak.
 
 - Make the adapter scoped if it holds an actor, a tenant, a connection, or a cursor.
@@ -135,7 +135,7 @@ add one tag lookup and it is 201. The port did not cause this, but it made it in
 
 Options: batch the child IDs into one call, eager-load one bounded relation, or add a read port
 that returns a projection in a single query. Assert the count in a test. Returning a query builder
-from the port is not a fix — it moves query construction past the boundary and makes the tenant
+from the port is not a fix - it moves query construction past the boundary and makes the tenant
 predicate optional. `A01:2025`, `CWE-653`.
 
 ## The core needs the current time, a random value, or an ID

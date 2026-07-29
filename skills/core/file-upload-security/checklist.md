@@ -3,7 +3,7 @@
 Mark pass, fail, or not applicable. An N/A needs a reason. A control is not a pass because a
 framework probably enables it; verify the version and runtime configuration.
 
-## Authorization and Names — A01 · ASVS V5, V8 · CWE-22
+## Authorization and Names - A01 · ASVS V5, V8 · CWE-22
 
 - [ ] Upload permission is enforced server-side for the authenticated actor and tenant.
 - [ ] Download permission checks the stored object owner or explicit capability.
@@ -13,7 +13,7 @@ framework probably enables it; verify the version and runtime configuration.
 - [ ] Download paths are resolved before checking they are inside the permitted root.
 - [ ] A missing object and an object the actor cannot access do not disclose its existence.
 
-## Type and Content — A08 · A05 · ASVS V1, V2, V5 · CWE-434
+## Type and Content - A08 · A05 · ASVS V1, V2, V5 · CWE-434
 
 - [ ] Extension and declared `Content-Type` are treated as untrusted hints, not validation.
 - [ ] The server checks magic bytes and parses the format with a bounded decoder.
@@ -23,7 +23,7 @@ framework probably enables it; verify the version and runtime configuration.
 - [ ] Uploaded content is not deserialized with a code-capable deserializer.
 - [ ] Image EXIF and other privacy-sensitive metadata are stripped before publication.
 
-## Storage and Serving — A02 · A01 · ASVS V3, V5 · CWE-434
+## Storage and Serving - A02 · A01 · ASVS V3, V5 · CWE-434
 
 - [ ] Files are stored outside the document root, or in object storage with no execute semantics.
 - [ ] No web server maps an upload directory to PHP, JSP, CGI, or another code handler.
@@ -35,7 +35,7 @@ framework probably enables it; verify the version and runtime configuration.
 - [ ] File responses come from a separate cookie-free origin; no session cookies are sent there.
 - [ ] Object storage policies constrain keys and do not make the whole bucket public.
 
-## Resource Limits — A06 · A10 · ASVS V2, V5 · CWE-409
+## Resource Limits - A06 · A10 · ASVS V2, V5 · CWE-409
 
 - [ ] Edge and application enforce maximum request bytes, file bytes, file count, and upload rate.
 - [ ] Limits use observed bytes, not only a client-supplied `Content-Length`.
@@ -46,7 +46,7 @@ framework probably enables it; verify the version and runtime configuration.
 - [ ] Processing runs with CPU, memory, filesystem, and network limits in a sandbox.
 - [ ] Oversize, timeout, parse, or scan failures fail closed and leave no approved file.
 
-## Scanning and Operations — A08 · A09 · A10 · ASVS V5, V16
+## Scanning and Operations - A08 · A09 · A10 · ASVS V5, V16
 
 - [ ] Malware scanning happens before release to a user-visible location.
 - [ ] ClamAV or equivalent is treated as a low-bar detection layer, not proof of safety.
@@ -55,7 +55,7 @@ framework probably enables it; verify the version and runtime configuration.
 - [ ] Logs contain actor, object ID, outcome, and correlation ID, but not file contents or secrets.
 - [ ] Quarantine retention and cleanup are bounded.
 
-## Direct-to-Object-Storage Uploads — A01 · A06 · A08 · ASVS V4, V5
+## Direct-to-Object-Storage Uploads - A01 · A06 · A08 · ASVS V4, V5
 
 - [ ] Presigned URLs are short-lived, scoped to one server-generated key and actor.
 - [ ] POST policy conditions constrain exact or allowed `Content-Type` and `content-length-range`.

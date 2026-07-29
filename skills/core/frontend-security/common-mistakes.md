@@ -17,8 +17,8 @@ it and `" onmouseover=alert(1) x="` executes. Quote and backtick are missing, an
 not escaped first so double-encoding bugs follow.
 
 Fix: `textContent` for text, `setAttribute` for attributes, and no HTML string. Why it works: there
-is no parser to escape for. A correct escaper needs a different rule per context — body, attribute,
-URL, CSS, JS — and picking the right one at every call site is the failure mode.
+is no parser to escape for. A correct escaper needs a different rule per context - body, attribute,
+URL, CSS, JS - and picking the right one at every call site is the failure mode.
 
 ## `.includes()` or `.startsWith()` for origin and URL checks
 
@@ -31,7 +31,7 @@ if (target.startsWith("https://app.example.com")) location.assign(target);
 starts with it. Both checks pass and both hand control to the attacker.
 
 Fix: exact string equality for `event.origin`, and `new URL(...).origin` comparison for URLs. Why it
-works: the origin is a normalized, canonical value — scheme, host, port — so there is no substring
+works: the origin is a normalized, canonical value - scheme, host, port - so there is no substring
 ambiguity left to exploit. Substring checks test for a name appearing somewhere in a string an
 attacker fully controls.
 
@@ -41,8 +41,8 @@ attacker fully controls.
 await db.comments.insert({ body: DOMPurify.sanitize(req.body.body) });
 ```
 
-The stored value is now trusted by everyone. A second consumer with a different renderer — an
-email template, a mobile client, an export to PDF — gets HTML that was sanitized for a config it
+The stored value is now trusted by everyone. A second consumer with a different renderer - an
+email template, a mobile client, an export to PDF - gets HTML that was sanitized for a config it
 does not share. Worse, sanitizer updates that fix a bypass do not reach rows already written.
 
 Fix: store the original, sanitize at each render boundary with a config for that context. Why it
@@ -57,12 +57,12 @@ add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsaf
 
 Two problems compound. `unsafe-inline` permits the injected script the policy was added to stop, so
 the header is decorative. And treating CSP as the fix leaves the `innerHTML` sink in place, so any
-gap in the policy — a JSONP endpoint on an allowed host, a browser that ignores a directive — is a
+gap in the policy - a JSONP endpoint on an allowed host, a browser that ignores a directive - is a
 live vulnerability again.
 
 Fix: fix the sink, then add a nonce-based CSP as a second layer. Why it works: the sink fix stops
 the injection and the CSP contains whatever the next sink misses. Report a missing CSP as a missing
-mitigation paired with the XSS it would have contained, not as a finding on its own — otherwise it
+mitigation paired with the XSS it would have contained, not as a finding on its own - otherwise it
 gets deprioritized and ignored.
 
 ## `unsafe-eval` added to make a library work
@@ -73,7 +73,7 @@ the build turns green.
 That re-enables `eval`, `new Function`, and string timers for the whole origin, which is most of the
 DOM XSS escalation path the policy was meant to block.
 
-Fix: check whether the library ships a CSP-safe or pre-compiled build — most template engines do,
+Fix: check whether the library ships a CSP-safe or pre-compiled build - most template engines do,
 Vue and Angular both have runtime-only versions that need no `eval`. If none exists, isolate the
 library in a sandboxed iframe with its own policy and a narrow `postMessage` contract. Why it works:
 the relaxation is scoped to a document that holds no session and no DOM you care about, instead of
@@ -91,7 +91,7 @@ not a security one.
 
 Fix: an `HttpOnly`, `Secure` cookie with an intentional `SameSite`, plus CSRF protection on
 state-changing requests. Why it works: `HttpOnly` removes the value from the DOM API surface
-entirely, so script running in the origin cannot read it. State the tradeoff honestly — this bounds
+entirely, so script running in the origin cannot read it. State the tradeoff honestly - this bounds
 credential theft, it does not stop XSS from acting as the user while the page is open.
 
 ## Route guards treated as authorization
@@ -101,7 +101,7 @@ if (!user.isAdmin) return <Navigate to="/" />;
 ```
 
 The check runs in code the user controls. Bypassing it takes a devtools breakpoint, a modified
-bundle, or simply calling the API directly — the endpoint is in the network tab.
+bundle, or simply calling the API directly - the endpoint is in the network tab.
 
 Fix: enforce on the server for every endpoint; keep the guard for navigation only. Why it works: the
 server is the only place where the decision cannot be edited by the person it applies to. Hiding a
@@ -156,7 +156,7 @@ add_header X-Frame-Options "ALLOW-FROM https://partner.example.com";
 ```
 
 `ALLOW-FROM` was never implemented by Chrome or Safari and is obsolete. Setting it means those
-browsers see an unrecognized value and apply no framing restriction at all — the page is fully
+browsers see an unrecognized value and apply no framing restriction at all - the page is fully
 frameable, which is the opposite of the intent.
 
 Fix: `Content-Security-Policy: frame-ancestors https://partner.example.com`, with
@@ -171,7 +171,7 @@ A cross-origin flow fails, someone sets `SameSite=None` on the session cookie, a
 `None` re-enables the exact cross-site attachment that CSRF depends on, on every request from every
 site.
 
-Fix: confirm the flow actually needs cross-site cookie delivery. Most do not — an OAuth redirect
+Fix: confirm the flow actually needs cross-site cookie delivery. Most do not - an OAuth redirect
 lands on your own origin, so `Lax` is enough. Where `None` is genuinely required, it demands
 `Secure`, and every state-changing endpoint needs an explicit CSRF token. Why it works: the cookie
 attribute is a mitigation, so removing it means the primary control has to be present.
@@ -198,14 +198,14 @@ const NONCE = "abc123";   // module scope, one value for the process lifetime
 A nonce that appears in more than one response is guessable from any earlier response. An attacker
 fetches a page, reads the nonce, and includes it in the injected script tag.
 
-Fix: generate per response from a CSPRNG — `crypto.randomBytes(16).toString("base64")`. Why it works:
+Fix: generate per response from a CSPRNG - `crypto.randomBytes(16).toString("base64")`. Why it works:
 unpredictability is the entire mechanism. Also avoid deriving it from a timestamp, a request
 counter, or a session ID for the same reason.
 
 ## Source maps shipped to production without checking contents
 
-`npm run build` emits `.map` files, they get uploaded, and the original TypeScript — including
-comments, internal endpoint names, and any value inlined at build time — is publicly readable.
+`npm run build` emits `.map` files, they get uploaded, and the original TypeScript - including
+comments, internal endpoint names, and any value inlined at build time - is publicly readable.
 
 Fix: either do not publish maps, or upload them to the error tracker with authentication and exclude
 them from the public bundle. Separately, treat anything inlined by the bundler as public: a

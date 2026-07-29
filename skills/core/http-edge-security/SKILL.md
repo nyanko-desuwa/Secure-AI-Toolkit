@@ -1,6 +1,6 @@
 ---
 name: http-edge-security
-description: 'HTTP edge trust — reverse proxies, Host/X-Forwarded-*, request smuggling/desync, cache poisoning, header normalization. Triggers: "reverse proxy", "X-Forwarded-For", "Host header", "request smuggling", "HTTP desync", "cache poisoning", "CDN", "bảo mật reverse proxy", "đầu HTTP".'
+description: 'HTTP edge trust - reverse proxies, Host/X-Forwarded-*, request smuggling/desync, cache poisoning, header normalization. Triggers: "reverse proxy", "X-Forwarded-For", "Host header", "request smuggling", "HTTP desync", "cache poisoning", "CDN", "bảo mật reverse proxy", "đầu HTTP".'
 allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
@@ -84,7 +84,7 @@ An app that reads `X-Forwarded-For` without a trusted-proxy allowlist has no cli
 
 ### 4. Verify
 
-Run [checklist.md](checklist.md). Edge and CDN config often lives outside the repo — mark
+Run [checklist.md](checklist.md). Edge and CDN config often lives outside the repo - mark
 those items not verifiable from application code, never silently pass.
 
 ### 5. Report
@@ -97,31 +97,31 @@ request line over "possible desync".
 
 Rank by who can forge identity or poison shared state.
 
-- Critical — unauthenticated auth bypass via forged forwarded identity; cross-user cache
+- Critical - unauthenticated auth bypass via forged forwarded identity; cross-user cache
   poison of private responses; confirmed request smuggling to internal routes
-- High — Host-driven open redirect or password-reset poisoning; rate-limit or geo bypass via
+- High - Host-driven open redirect or password-reset poisoning; rate-limit or geo bypass via
   spoofed client IP; cache deception of session pages
-- Medium — unkeyed header affects non-sensitive cache; missing normalization with no proven path
-- Low — defence-in-depth header hygiene; verbose proxy errors with no direct exploit
+- Medium - unkeyed header affects non-sensitive cache; missing normalization with no proven path
+- Low - defence-in-depth header hygiene; verbose proxy errors with no direct exploit
 
 A forged `X-Forwarded-For` used only for access logs is Low. The same header used as the
 sole MFA step-up or admin allowlist is Critical.
 
 ## Related Skills
 
-- `api-security` — object/function authorization, webhook trust, app-layer rate limits
-- `frontend-security` — CSP, XSS, cookie scope in the browser
-- `ssh-server` — SSH edge, not HTTP
-- `owasp` — Top 10 2025 and ASVS chapter map
-- `secure-code-review` — full-codebase review process
+- `api-security` - object/function authorization, webhook trust, app-layer rate limits
+- `frontend-security` - CSP, XSS, cookie scope in the browser
+- `ssh-server` - SSH edge, not HTTP
+- `owasp` - Top 10 2025 and ASVS chapter map
+- `secure-code-review` - full-codebase review process
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations
-- [checklist.md](checklist.md) — pre-return verification by surface
-- [best-practices.md](best-practices.md) — patterns with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — wrong fixes and why they fail
-- [troubleshooting.md](troubleshooting.md) — conflicting requirements
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — OWASP, ASVS, CWE pins
-- [examples/README.md](examples/README.md) — seven vulnerable/fixed pairs
+- [README.md](README.md) - purpose, standards table, limitations
+- [checklist.md](checklist.md) - pre-return verification by surface
+- [best-practices.md](best-practices.md) - patterns with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - wrong fixes and why they fail
+- [troubleshooting.md](troubleshooting.md) - conflicting requirements
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - OWASP, ASVS, CWE pins
+- [examples/README.md](examples/README.md) - seven vulnerable/fixed pairs

@@ -12,7 +12,7 @@ file is not proof of runtime behavior.
 - [ ] Measurements include p50 and p99 input shapes and name workload duration and offered rate
 - [ ] Every stated limit has a unit, owner, source, alert, and saturation behavior
 
-## S1 — Concurrency
+## S1 - Concurrency
 
 - [ ] Every fan-out loop has a semaphore, worker count, or equivalent hard ceiling
 - [ ] Concurrency is bounded before tasks or promises are created, not after
@@ -21,7 +21,7 @@ file is not proof of runtime behavior.
 - [ ] The bound is derived from downstream capacity and maximum replicas, not CPU count alone
 - [ ] In-flight count, wait duration, rejection, and timeout are metrics
 
-## S2 — Backpressure and Load Shedding
+## S2 - Backpressure and Load Shedding
 
 - [ ] Every queue, channel, stream buffer, and batch has a maximum depth or bytes
 - [ ] Full behavior is explicit: block briefly, reject, degrade, or drop disposable work
@@ -30,7 +30,7 @@ file is not proof of runtime behavior.
 - [ ] Admission happens before expensive parsing, allocation, database work, or downstream calls
 - [ ] Load tests show queue and memory stabilize above sustainable throughput
 
-## S3/S4 — Shared Cache Integrity and Tenant Isolation
+## S3/S4 - Shared Cache Integrity and Tenant Isolation
 
 - [ ] Cache keys include tenant or authorization scope for every private representation
 - [ ] Keys include representation version and every response-varying input
@@ -42,7 +42,7 @@ file is not proof of runtime behavior.
 - [ ] Two-tenant tests prove identical resource IDs never share values
 - [ ] Hit rate, evictions, fill errors, entry bytes, and rejected oversized entries are metrics
 
-## S5 — Rate Limits Across Replicas
+## S5 - Rate Limits Across Replicas
 
 - [ ] Authenticated limits key on verified actor/client identity, not a caller-supplied header
 - [ ] Pre-auth IP comes only from a trusted proxy chain that strips client copies
@@ -53,7 +53,7 @@ file is not proof of runtime behavior.
 - [ ] Limiter failure behavior is explicit and differs for critical and low-risk operations
 - [ ] Decision count, store latency, 429 count, bypass/fallback count, and key cardinality are metrics
 
-## S6 — Database Query and Pool Budget
+## S6 - Database Query and Pool Budget
 
 - [ ] List endpoints assert a maximum query count independent of returned row count
 - [ ] Relationships are joined, eager-loaded, or batch-loaded; no query inside an unbounded row loop
@@ -64,7 +64,7 @@ file is not proof of runtime behavior.
 - [ ] Statement timeout and maximum result rows/bytes are set where supported
 - [ ] Queries/request, pool wait, active/idle connections, timeouts, and transaction age are metrics
 
-## S7 — Autoscaling Safety
+## S7 - Autoscaling Safety
 
 - [ ] Maximum replicas are limited by the tightest downstream connection or request quota
 - [ ] Scaling metrics represent useful throughput, queue age, or saturation, not CPU alone
@@ -74,7 +74,7 @@ file is not proof of runtime behavior.
 - [ ] Scale-down drains requests, queues, leases, and subscriptions before termination
 - [ ] A slow-dependency test proves replicas, connection totals, and downstream QPS stay bounded
 
-## S8 — Retry and Stampede Protection
+## S8 - Retry and Stampede Protection
 
 - [ ] Retries have capped attempts, exponential backoff, jitter, and a total deadline
 - [ ] Retries occur only for classified transient failures and safe/idempotent operations

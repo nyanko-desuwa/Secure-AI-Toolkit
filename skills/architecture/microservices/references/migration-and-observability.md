@@ -42,7 +42,7 @@ Record protocol, method/path/topic, version, owner, audience, workload authentic
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/> (A06, A09, A10; pinned 2026-07-28).
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/> (V4, V13, V15, V16; pinned 2026-07-28).
-- Resource-lifecycle depth — `skills/architecture/performance/`.
-- Event migration and queue detail — `skills/architecture/event-driven/`.
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/> (A06, A09, A10; pinned 2026-07-28).
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/> (V4, V13, V15, V16; pinned 2026-07-28).
+- Resource-lifecycle depth - `skills/architecture/performance/`.
+- Event migration and queue detail - `skills/architecture/event-driven/`.

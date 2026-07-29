@@ -1,7 +1,7 @@
 # CQRS Best Practices
 
 Each pattern names the security implication and the runtime cost. A pattern with no cost note is
-incomplete — every indirection here buys something and charges for it.
+incomplete - every indirection here buys something and charges for it.
 
 ## Start at the cheap version
 
@@ -141,8 +141,8 @@ Why this removes the option: the claim and the effect commit together. A check-t
 (`SELECT` then `INSERT`) has a window where two concurrent deliveries both see nothing and both
 apply. `CWE-367`.
 
-For HTTP-level idempotency keys on the edge — header handling, response replay, key reuse with a
-different body — use `skills/core/api-security/` rather than reimplementing it here. The two are
+For HTTP-level idempotency keys on the edge - header handling, response replay, key reuse with a
+different body - use `skills/core/api-security/` rather than reimplementing it here. The two are
 different layers: the API key protects the client's retry, the command ID protects the broker's
 redelivery.
 
@@ -209,7 +209,7 @@ across tenants.
 
 Cost: the composite key widens every index. On a 50-million-row projection a `uuid` prefix on
 each index is real storage and slightly worse cache locality. Measure it; do not skip it. RLS
-adds a predicate to every plan — usually negligible with the matching index, occasionally
+adds a predicate to every plan - usually negligible with the matching index, occasionally
 enough to change a plan choice. Check `EXPLAIN` after enabling it.
 
 Also include `owner_id` even when the current screens do not display it. The next screen will
@@ -253,12 +253,12 @@ const detail = await db.invoiceDetailView.findUnique({
 ```
 
 Security: adding `fraud_score` to the invoice table cannot leak, because the projection does not
-project it and the response type does not contain it. The alternative — a view plus a serializer
-that strips fields — fails the first time somebody adds a column and forgets the strip list.
+project it and the response type does not contain it. The alternative - a view plus a serializer
+that strips fields - fails the first time somebody adds a column and forgets the strip list.
 
 Cost: one projection per read shape means write amplification. Five projections mean five
 upserts per event. That is the trade: query cost moves to write time. Budget it, and do not
-build a projection for a screen that runs twice a month — run the join for that one.
+build a projection for a screen that runs twice a month - run the join for that one.
 
 ## Eventual consistency is a hazard
 
@@ -318,7 +318,7 @@ await withTransaction(async (tx) => {
 });
 ```
 
-The read model is still useful — it renders "3 seats left" on the page. It just cannot be the
+The read model is still useful - it renders "3 seats left" on the page. It just cannot be the
 gate. Use the projection to inform the UI and the authoritative store to decide.
 
 ### Reading your own write
@@ -332,7 +332,7 @@ preference:
 3. Have the command return a version, and let the client poll the read model until it reports
    that version or later.
 
-Do not fix it by making the projector synchronous — that reintroduces the coupling the split was
+Do not fix it by making the projector synchronous - that reintroduces the coupling the split was
 meant to remove, and it means a projector failure fails the command.
 
 ## Projector resource lifetime
@@ -342,7 +342,7 @@ retained forever.
 
 ```typescript
 // Vulnerable: an in-memory map keyed by entity id, one entry per entity ever seen.
-// This is L1 in skills/architecture/performance — unbounded cache. CWE-401.
+// This is L1 in skills/architecture/performance - unbounded cache. CWE-401.
 const totals = new Map<string, number>();
 
 export async function onOrderLine(ev: OrderLineAdded) {
@@ -385,7 +385,7 @@ const hot = new LRUCache<string, number>({ max: 20_000, ttl: 5 * 60_000 });
 ```
 
 A cache miss then reads from the projection. Correctness does not depend on the cache being
-present — that is the test for whether a cache is safe to add.
+present - that is the test for whether a cache is safe to add.
 
 Detail on bounds, backpressure, and diagnosis belongs to
 `skills/architecture/performance/`. Do not duplicate it; link to it.
@@ -405,7 +405,7 @@ var channel = Channel.CreateBounded<ProjectionEvent>(new BoundedChannelOptions(1
 ```
 
 Choose block, drop, or reject and write down which. Blocking means the command side slows when
-the projector does — usually correct, and it is a decision, not an accident. Emit projection lag
+the projector does - usually correct, and it is a decision, not an accident. Emit projection lag
 as a metric: `now() - max(event_time)` per projection. Lag is the number that tells you whether
 a stale read is a millisecond or an hour.
 
@@ -414,7 +414,7 @@ a stale read is a millisecond or an hour.
 Rebuilding a projection in production is not a background task. It reads the entire event
 history and writes the entire projection.
 
-- Build into a new table, then swap. Never `TRUNCATE` the live projection and refill it — that
+- Build into a new table, then swap. Never `TRUNCATE` the live projection and refill it - that
   is a read outage measured in however long the replay takes.
 - Version the projection name (`invoice_list_view_v3`) and switch readers at the repository, so
   rollback is a config change.
@@ -480,7 +480,7 @@ sequence guard shown above. Say this rather than implying exactly-once.
 
 Cost: one table that grows at the rate of your writes. Delete published rows on a schedule with
 an index on `published_at`, or the outbox becomes the largest table in the database. Ordering is
-per-aggregate at best — a single relay with `ORDER BY occurred_at` gives global order and a
+per-aggregate at best - a single relay with `ORDER BY occurred_at` gives global order and a
 throughput ceiling; partitioning by aggregate gives throughput and only per-aggregate order.
 Pick one deliberately.
 
@@ -527,7 +527,7 @@ Honest limitations, all of which must be stated to whoever signs off on the desi
 - Backups still hold the key until the backup retention window expires. Say what that window is.
 - Replay after shredding must tolerate an undecryptable payload. The handler needs a "subject
   erased" path, not an exception.
-- Structural data — that customer `X` existed, and when — usually remains, because the sequence
+- Structural data - that customer `X` existed, and when - usually remains, because the sequence
   is the source of truth. Decide whether that residue is acceptable.
 - A projection built before erasure may still hold plaintext. Erasure must rebuild or purge
   affected projections too.

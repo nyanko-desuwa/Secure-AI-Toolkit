@@ -7,7 +7,7 @@ what an attacker reaches after the first thing goes wrong.
 
 Application controls fail. When they do, the network decides whether the result is one
 compromised process or the whole estate. This skill turns that into concrete configuration
-decisions — firewall policy, egress control, TLS and mTLS, DNS, proxy trust, remote access —
+decisions - firewall policy, egress control, TLS and mTLS, DNS, proxy trust, remote access -
 each traceable to a published standard rather than to habit.
 
 It also draws the line around what a network control cannot do. A WAF does not fix an injection
@@ -40,8 +40,8 @@ examples/
 |---|---|---|
 | OWASP Top 10 | 2025 | 2026-07-28, against `owasp.org/Top10/2025/` |
 | OWASP ASVS | 5.0.0 (released 2025-05-30) | 2026-07-28, against the ASVS project page |
-| BCP 195 — RFC 9325 | November 2022 (obsoletes RFC 7525) | 2026-07-28, against `rfc-editor.org` |
-| BCP 195 — RFC 8996 | March 2021 | 2026-07-28, against `rfc-editor.org` |
+| BCP 195 - RFC 9325 | November 2022 (obsoletes RFC 7525) | 2026-07-28, against `rfc-editor.org` |
+| BCP 195 - RFC 8996 | March 2021 | 2026-07-28, against `rfc-editor.org` |
 | RFC 8446 (TLS 1.3) | August 2018 | 2026-07-28, against `rfc-editor.org` |
 | RFC 6797 (HSTS) | November 2012 | 2026-07-28, against `rfc-editor.org` |
 | RFC 8659 (CAA) | November 2019 (obsoletes RFC 6844) | 2026-07-28, against `rfc-editor.org` |
@@ -93,7 +93,7 @@ More in [prompts.md](prompts.md).
   traffic, a cloud NACL layered under a security group, or a service mesh sidecar that bypasses
   host rules all change the answer and none of them are visible in one file.
 - Examples are nftables, nginx, OpenSSH, and cloud-neutral policy pseudo-config. Provider
-  specifics — AWS security group semantics, Azure NSG priority ordering, GCP firewall targets —
+  specifics - AWS security group semantics, Azure NSG priority ordering, GCP firewall targets -
   are `cloud-security` territory. The reasoning transfers; the syntax does not.
 - No coverage of the physical and link layer: 802.1X, VLAN hopping, ARP and NDP spoofing,
   wireless, or BGP hijacking. Nor of DDoS capacity planning.
@@ -118,12 +118,12 @@ likely to be made under pressure and left in place.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- RFC 9325, Recommendations for Secure Use of TLS and DTLS — <https://www.rfc-editor.org/rfc/rfc9325.html>
-- RFC 8996, Deprecating TLS 1.0 and TLS 1.1 — <https://www.rfc-editor.org/rfc/rfc8996.html>
-- RFC 8446, TLS 1.3 — <https://www.rfc-editor.org/rfc/rfc8446.html>
-- RFC 6890, Special-Purpose IP Address Registries — <https://www.rfc-editor.org/rfc/rfc6890.html>
-- NIST SP 800-207, Zero Trust Architecture — <https://csrc.nist.gov/pubs/sp/800/207/final>
-- OWASP Transport Layer Security Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html>
-- CWE — <https://cwe.mitre.org/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- RFC 9325, Recommendations for Secure Use of TLS and DTLS - <https://www.rfc-editor.org/rfc/rfc9325.html>
+- RFC 8996, Deprecating TLS 1.0 and TLS 1.1 - <https://www.rfc-editor.org/rfc/rfc8996.html>
+- RFC 8446, TLS 1.3 - <https://www.rfc-editor.org/rfc/rfc8446.html>
+- RFC 6890, Special-Purpose IP Address Registries - <https://www.rfc-editor.org/rfc/rfc6890.html>
+- NIST SP 800-207, Zero Trust Architecture - <https://csrc.nist.gov/pubs/sp/800/207/final>
+- OWASP Transport Layer Security Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html>
+- CWE - <https://cwe.mitre.org/>

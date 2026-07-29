@@ -6,13 +6,13 @@ and Python with Python 3.11+ where `ContextVar` examples are used.
 
 ## Contents
 
-- [Untrusted strategy selection](#untrusted-strategy-selection) — A01/A06, CWE-602
-- [Repository without tenant scope](#repository-without-tenant-scope) — A01, CWE-1220
-- [Decorator bypass](#decorator-bypass) — A01/A06, CWE-653
-- [Adapter swallowing failures](#adapter-swallowing-failures) — A10
-- [Observer listener leak](#observer-listener-leak) — A06/A10, CWE-401/772
-- [Singleton request state](#singleton-request-state) — A01/A06, CWE-401
-- [Pool and queue growth](#pool-and-queue-growth) — A06/A10, CWE-770/772
+- [Untrusted strategy selection](#untrusted-strategy-selection) - A01/A06, CWE-602
+- [Repository without tenant scope](#repository-without-tenant-scope) - A01, CWE-1220
+- [Decorator bypass](#decorator-bypass) - A01/A06, CWE-653
+- [Adapter swallowing failures](#adapter-swallowing-failures) - A10
+- [Observer listener leak](#observer-listener-leak) - A06/A10, CWE-401/772
+- [Singleton request state](#singleton-request-state) - A01/A06, CWE-401
+- [Pool and queue growth](#pool-and-queue-growth) - A06/A10, CWE-770/772
 
 ---
 

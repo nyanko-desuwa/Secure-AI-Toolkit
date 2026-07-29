@@ -117,7 +117,7 @@ when it genuinely applies.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE list — <https://cwe.mitre.org/data/index.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE list - <https://cwe.mitre.org/data/index.html>

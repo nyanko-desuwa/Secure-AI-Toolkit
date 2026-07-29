@@ -1,6 +1,6 @@
 # Realtime Security Best Practices
 
-## Authenticate and authorize the upgrade — API2 · CWE-306
+## Authenticate and authorize the upgrade - API2 · CWE-306
 
 ```typescript
 // Vulnerable: anyone opens a privileged socket
@@ -16,7 +16,7 @@ wss.on("connection", (socket, request) => {
 });
 ```
 
-## Enforce an Origin allowlist — CWE-352
+## Enforce an Origin allowlist - CWE-352
 
 ```typescript
 // Vulnerable: cookies make a cross-site WebSocket possible
@@ -28,7 +28,7 @@ if (request.headers.origin) accept();
 if (request.headers.origin !== "https://app.example.com") reject();
 ```
 
-## Authorize every subscription — API1 · CWE-639
+## Authorize every subscription - API1 · CWE-639
 
 ```typescript
 // Vulnerable: room name is the capability
@@ -43,7 +43,7 @@ socket.on("subscribe", ({ orderId }) => {
 });
 ```
 
-## Use strict message schemas — CWE-915
+## Use strict message schemas - CWE-915
 
 ```typescript
 // Vulnerable: arbitrary event reaches internal dispatch
@@ -55,7 +55,7 @@ socket.on("message", frame => handlers[frame.type](frame));
 socket.on("message", frame => dispatch(MessageSchema.parse(frame), actor));
 ```
 
-## Bound fan-out and reconnects — API4 · CWE-770
+## Bound fan-out and reconnects - API4 · CWE-770
 
 ```typescript
 // Vulnerable: client chooses audience and reconnect ticket never expires

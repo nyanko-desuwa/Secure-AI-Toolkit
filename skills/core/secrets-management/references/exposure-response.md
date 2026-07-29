@@ -5,7 +5,7 @@ wrong.
 
 Checked against OWASP Top 10 2025 (A02, A04), ASVS 5.0 V13/V14, and the OWASP Secrets
 Management Cheat Sheet on 2026-07-28. This is the credential-specific slice of incident
-response, not the whole process — see the `incident-response` skill for the wider loop.
+response, not the whole process - see the `incident-response` skill for the wider loop.
 
 ## The order
 
@@ -18,7 +18,7 @@ commit is a minute the credential still works.
 
 ### 1. Revoke
 
-Make the old value useless at the provider. Not "remove it from the repo" — invalidate it at
+Make the old value useless at the provider. Not "remove it from the repo" - invalidate it at
 the system that honours it.
 
 | Credential | Revocation |
@@ -27,17 +27,17 @@ the system that honours it.
 | Cloud service account key | Delete the key resource, not just the local file |
 | Database password | Change it, or drop the role if it was per-service |
 | API key from a SaaS provider | Delete or roll it in the provider console; most have a one-click roll |
-| OAuth client secret | Add a new secret, remove the old — most providers allow two |
+| OAuth client secret | Add a new secret, remove the old - most providers allow two |
 | Signing key (JWT, webhook) | Remove from the verifier's accepted set. Existing signed artefacts remain valid until expiry |
 | SSH key | Remove from `authorized_keys` on every host and from the provider's deploy keys |
-| Vault token or lease | `vault token revoke` / `vault lease revoke` — this also invalidates dynamic credentials issued under it |
+| Vault token or lease | `vault token revoke` / `vault lease revoke` - this also invalidates dynamic credentials issued under it |
 
 Two things that are not revocation: deleting the file, and rotating without disabling the old
 value. A rotation that leaves the previous secret in the accepted set has changed nothing about
 the leaked credential.
 
 If revoking immediately breaks production, revoke anyway for anything with write or admin scope.
-For a read-scoped credential you may have room to sequence revoke-after-deploy — decide that
+For a read-scoped credential you may have room to sequence revoke-after-deploy - decide that
 explicitly and write down the window, do not let it become "later".
 
 ### 2. Rotate
@@ -55,7 +55,7 @@ now and open a follow-up to do it properly.
 Now find out what happened. The credential is already dead, so there is no clock pressure.
 
 - Read the provider's audit log for use of the credential between first exposure and revocation.
-  First exposure is the commit timestamp, the image push, or the log write — not when you noticed.
+  First exposure is the commit timestamp, the image push, or the log write - not when you noticed.
 - Look for use from unfamiliar IPs, user agents, regions, or at unusual times.
 - Check for durable artefacts the credential could have created: new IAM users, new keys, new
   OAuth grants, forwarding rules, scheduled jobs, webhooks. An attacker who used a key for two
@@ -134,8 +134,8 @@ Ranked by effect: removing the stored value beats detecting the stored value.
 
 ## Sources
 
-- OWASP Secrets Management Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- CWE-798 Use of Hard-coded Credentials — <https://cwe.mitre.org/data/definitions/798.html>
-- CWE-522 Insufficiently Protected Credentials — <https://cwe.mitre.org/data/definitions/522.html>
-- GitHub, removing sensitive data from a repository — <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository>
+- OWASP Secrets Management Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- CWE-798 Use of Hard-coded Credentials - <https://cwe.mitre.org/data/definitions/798.html>
+- CWE-522 Insufficiently Protected Credentials - <https://cwe.mitre.org/data/definitions/522.html>
+- GitHub, removing sensitive data from a repository - <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository>

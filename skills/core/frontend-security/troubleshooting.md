@@ -47,7 +47,7 @@ difference, and it is not protection.
 
 ## CSRF tokens are impossible in this architecture
 
-If the client cannot obtain a token — a third-party embed, a legacy form, a device with no session —
+If the client cannot obtain a token - a third-party embed, a legacy form, a device with no session -
 fall back in this order:
 
 1. `SameSite=Lax` or `Strict` on the session cookie, plus an `Origin`/`Sec-Fetch-Site` check on
@@ -106,7 +106,7 @@ places where only some are sanitized.
 ## Two standards or two reviewers disagree
 
 Implement the more restrictive option and say you did. ASVS gives testable requirements; the Top 10
-gives a risk ranking for reporting — they rarely conflict once you separate those roles.
+gives a risk ranking for reporting - they rarely conflict once you separate those roles.
 
 Where a project constraint genuinely conflicts with a control, report the conflict rather than
 resolving it silently: current behaviour, what the secure version changes, who breaks, and the
@@ -137,7 +137,7 @@ You cannot patch it in place. In order:
 
 1. Update. Check the changelog for the sink, not just the version number.
 2. Constrain it with CSP and Trusted Types so the sink throws rather than executes.
-3. Stop passing untrusted data into it — validate at your own boundary before the call.
+3. Stop passing untrusted data into it - validate at your own boundary before the call.
 4. Replace or fork it, and say what the temporary exposure is until then.
 
 Record the exposure window. "Mitigated by CSP, dependency upgrade pending" is an honest state.

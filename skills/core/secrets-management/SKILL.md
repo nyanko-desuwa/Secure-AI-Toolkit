@@ -43,7 +43,7 @@ List every credential the change touches and answer three questions for each:
 
 - Where does the value come from at runtime?
 - Who and what can read it today?
-- What happens if it is disclosed right now — can you revoke it in one action?
+- What happens if it is disclosed right now - can you revoke it in one action?
 
 If you cannot answer the third, there is no rotation story and that is the finding.
 
@@ -64,7 +64,7 @@ Cache with a TTL shorter than the credential's lifetime. Never cache to disk.
 ### 4. Design rotation before you need it
 
 Rotation is a dual-secret window, not a swap. The verifier accepts old and new
-simultaneously for one overlap period. Build that in on day one — retrofitting it during an
+simultaneously for one overlap period. Build that in on day one - retrofitting it during an
 incident is how rotation becomes an outage. See
 [best-practices.md](best-practices.md#rotation).
 
@@ -93,36 +93,36 @@ Deleting the commit is not step zero and is not remediation. See
 
 Rank by what the credential can do and how long it stays valid, not by where it was found.
 
-- **Critical** — a live production credential with write or admin scope, no expiry, in a
+- **Critical** - a live production credential with write or admin scope, no expiry, in a
   place outside your control (public repo, public image, third-party log sink)
-- **High** — a live production credential in a place with broad internal read (private repo
+- **High** - a live production credential in a place with broad internal read (private repo
   history, CI log, shared Kubernetes namespace)
-- **Medium** — a scoped or short-lived credential exposed internally, or a production
+- **Medium** - a scoped or short-lived credential exposed internally, or a production
   credential in a place only a few principals read
-- **Low** — a development-only credential with no production reach, or a missing
+- **Low** - a development-only credential with no production reach, or a missing
   defence-in-depth control with no current exposure
 
 A hardcoded key is not automatically critical. A hardcoded test key for a sandbox tenant is
-low. Say which and why. Conversely a "read-only" key is not automatically medium — read on
+low. Say which and why. Conversely a "read-only" key is not automatically medium - read on
 the customer database is a breach.
 
 ## Related Skills
 
-- `devsecops` — pre-commit hooks, CI secret scanning, pipeline configuration
-- `cloud-security` — IAM policy shape, trust policies, KMS
-- `docker-security` — image layers, build context, runtime configuration
-- `kubernetes-security` — RBAC, encryption at rest, CSI secret drivers
-- `incident-response` — the wider process around the revoke/rotate/investigate loop
-- `logging-audit` — redaction pipelines and what belongs in an audit trail
-- `publish-safety` — the check before a push, a package, or a visibility flip makes a value public
+- `devsecops` - pre-commit hooks, CI secret scanning, pipeline configuration
+- `cloud-security` - IAM policy shape, trust policies, KMS
+- `docker-security` - image layers, build context, runtime configuration
+- `kubernetes-security` - RBAC, encryption at rest, CSI secret drivers
+- `incident-response` - the wider process around the revoke/rotate/investigate loop
+- `logging-audit` - redaction pipelines and what belongs in an audit trail
+- `publish-safety` - the check before a push, a package, or a visibility flip makes a value public
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, configuration, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — standards, manager comparison, exposure response
-- [examples/](examples/) — eight vulnerable/fixed pairs
+- [README.md](README.md) - purpose, configuration, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - standards, manager comparison, exposure response
+- [examples/](examples/) - eight vulnerable/fixed pairs

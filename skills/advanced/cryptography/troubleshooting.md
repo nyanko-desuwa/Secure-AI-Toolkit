@@ -14,7 +14,7 @@ after the constraint disappears.
 ## FIPS mode forbids the algorithm you recommended
 
 FIPS-validated modules exclude Argon2, scrypt, and ChaCha20-Poly1305. Inside a FIPS boundary you get
-PBKDF2-HMAC-SHA256 and AES-GCM, and that is the correct answer there — a non-validated algorithm in
+PBKDF2-HMAC-SHA256 and AES-GCM, and that is the correct answer there - a non-validated algorithm in
 a FIPS environment is a compliance failure regardless of its strength.
 
 Note the tradeoff honestly: PBKDF2 has no memory hardness, so it is weaker against GPU cracking than
@@ -59,7 +59,7 @@ The unwrap-on-login upgrade is what actually removes it.
 ## Decryption fails after a deploy and you do not know which key
 
 If ciphertexts do not carry a key ID, you are guessing. Try each candidate key and see which
-authenticates — with an AEAD this is safe, because a wrong key fails the tag rather than returning
+authenticates - with an AEAD this is safe, because a wrong key fails the tag rather than returning
 garbage that looks plausible.
 
 Then fix the cause: add `key_id` and `alg` to the stored envelope before the next rotation.
@@ -70,7 +70,7 @@ Symptoms: multiple writers, a counter that resets on restart, or a queue that re
 
 Use random 96-bit nonces and rotate the key on message count rather than trying to coordinate a
 counter. If your library offers XChaCha20-Poly1305, its 192-bit nonce makes random generation
-comfortable at any realistic volume — that is the cleanest escape from the counting problem.
+comfortable at any realistic volume - that is the cleanest escape from the counting problem.
 
 Do not mix random and counter nonces under one key. That combination reuses values by construction.
 
@@ -137,7 +137,7 @@ plaintext key file as a fallback recreates exactly the risk the KMS removed.
 ## The library API you were told to use does not exist
 
 Version drift. Check the installed version and read its documentation rather than adapting the code
-until it compiles — a call that compiles is not evidence it is used correctly.
+until it compiles - a call that compiles is not evidence it is used correctly.
 
 If you cannot confirm the correct usage for the pinned version, say so instead of guessing. A crypto
 API misused compiles cleanly and fails silently, which is why "it runs" proves nothing here.
@@ -147,7 +147,7 @@ API misused compiles cleanly and fails silently, which is why "it runs" proves n
 Report it with the uncertainty attached, naming the precondition you could not check.
 
 "HMAC compared with `==` in `verify_webhook`; exploitability depends on whether the endpoint is
-rate-limited and how much timing noise the network adds — I could not measure either" is useful.
+rate-limited and how much timing noise the network adds - I could not measure either" is useful.
 "Critical timing attack" without that is noise, and noise gets checklists ignored.
 
 ## A checklist item genuinely does not apply

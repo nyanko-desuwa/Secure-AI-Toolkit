@@ -78,7 +78,7 @@ Each one turns "any local user" into SYSTEM. The ACL that closes each is in
 
 ### 4. Fix the authentication path
 
-Unconstrained delegation on a server means every caller's TGT is cached there — the server
+Unconstrained delegation on a server means every caller's TGT is cached there - the server
 can impersonate them anywhere. Replace it with resource-based constrained delegation, which
 puts the decision on the resource owner. NTLM relay works because the protocol does not bind
 the authentication to the channel; SMB signing and LDAP channel binding are the mitigations.
@@ -108,18 +108,18 @@ on the host. State what you could not confirm.
 
 Rank by what the attacker gains, not by which setting is missing.
 
-- **Critical** — a service or task running as a Domain Admin or Enterprise Admin; unconstrained
+- **Critical** - a service or task running as a Domain Admin or Enterprise Admin; unconstrained
   delegation on a member server; a tier-0 credential used to log into a tier-1 host; a
   production connection string with a password committed to source; an unquoted service path
   with a writable parent directory
-- **High** — service account in local Administrators without justification; Credential Guard
+- **High** - service account in local Administrators without justification; Credential Guard
   and LSA protection both off on a domain-joined server; SMB signing not required; a writable
   service binary path; WinRM listener on HTTP across an untrusted segment; IIS returning a full
   stack trace; Data Protection keys unshared behind a load balancer, or shared world-readable
-- **Medium** — no advanced audit policy; no command-line capture in process creation; RDP
+- **Medium** - no advanced audit policy; no command-line capture in process creation; RDP
   without NLA; Defender exclusion covering a writable application directory; app pools sharing
   an identity; no drift detection against a baseline
-- **Low** — server version header present; PowerShell execution policy not set to
+- **Low** - server version header present; PowerShell execution policy not set to
   `RemoteSigned`; local password policy weaker than the domain's on a domain-joined box
 
 Execution policy reported as a high finding is how a report gets ignored. Microsoft's own
@@ -133,7 +133,7 @@ be out of scope for the skill rather than a gap in it.
 
 Destructive operations are marked where they appear. Three that end badly:
 
-- Changing a service account without granting `Log on as a service` first — the service does
+- Changing a service account without granting `Log on as a service` first - the service does
   not restart
 - Enabling `RequireSecuritySignature` on a fleet with a non-Microsoft SMB client that does not
   support it
@@ -142,21 +142,21 @@ Destructive operations are marked where they appear. Three that end badly:
 
 ## Related Skills
 
-- `core/ssh-server` — the same reasoning for remote access, service confinement, and reversible
+- `core/ssh-server` - the same reasoning for remote access, service confinement, and reversible
   deploys on Linux. Read it for the general shape; this skill is the Windows specialisation
-- `core/logging-audit` — what to do with the events once they reach a collector
-- `core/secrets-management` — where the connection string actually lives
-- `core/mvc-security` — ASP.NET MVC application-layer controls
-- `advanced/network-security` — segmentation that makes tiering enforceable
-- `enterprise/compliance` — mapping baselines to an audit
+- `core/logging-audit` - what to do with the events once they reach a collector
+- `core/secrets-management` - where the connection string actually lives
+- `core/mvc-security` - ASP.NET MVC application-layer controls
+- `advanced/network-security` - segmentation that makes tiering enforceable
+- `enterprise/compliance` - mapping baselines to an audit
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations, security notes
-- [checklist.md](checklist.md) — pre-return verification, grouped by surface
-- [best-practices.md](best-practices.md) — real PowerShell, XML, JSON, and C#
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the hardening breaks the application
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — version-pinned standard summaries with check dates
-- [examples/](examples/) — eight vulnerable/fixed pairs
+- [README.md](README.md) - purpose, standards table, limitations, security notes
+- [checklist.md](checklist.md) - pre-return verification, grouped by surface
+- [best-practices.md](best-practices.md) - real PowerShell, XML, JSON, and C#
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the hardening breaks the application
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - version-pinned standard summaries with check dates
+- [examples/](examples/) - eight vulnerable/fixed pairs

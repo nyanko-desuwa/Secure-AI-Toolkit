@@ -10,7 +10,7 @@ what your code does rather than a list of what is wrong with it.
 Build this project, then search the build output for credentials. Check dist/, build/, and
 .next/static/. For every hit tell me: the file, which key it is, and whether that file is
 downloaded by browsers. Then check git history for any .env file that was ever committed. Do
-not search only the source — the build inlines env vars.
+not search only the source - the build inlines env vars.
 ```
 
 Why it works: it names the build output. "Scan for hardcoded secrets" makes the model read your
@@ -67,7 +67,7 @@ Ranking by blast radius stops the answer from leading with the trivial ones.
 ## Price the loops
 
 ```
-Find every call to a paid API in this project — LLM, email, SMS, maps, storage. For each: is it
+Find every call to a paid API in this project - LLM, email, SMS, maps, storage. For each: is it
 inside a loop, a retry, or a polling interval? Multiply the worst case out to a monthly figure
 using the interval in the code and 1,000 users. Show the arithmetic.
 ```

@@ -1,11 +1,11 @@
-# SBOM formats — CycloneDX and SPDX
+# SBOM formats - CycloneDX and SPDX
 
 > Verified 2026-07-28 against <https://cyclonedx.org/specification/overview/>,
 > <https://spdx.dev/use/specifications/> and <https://spdx.github.io/spdx-spec/>.
 
 Two formats, both a list of components with identity and relationships. CycloneDX grew out of
 security use cases, SPDX out of licence compliance. Both now cover both. Pick one per
-organisation and hold to it — a consumer that parses one format and is handed the other has no
+organisation and hold to it - a consumer that parses one format and is handed the other has no
 inventory, only a file.
 
 ## Versions
@@ -51,7 +51,7 @@ than the schema.
 
 This is the distinction that decides whether an SBOM is worth generating.
 
-A scan-time SBOM is produced by pointing a scanner at a finished artefact — a container image,
+A scan-time SBOM is produced by pointing a scanner at a finished artefact - a container image,
 a directory, a released tarball. It reports what it can recognise from what survived the build:
 package manager databases, vendored manifests, filenames it has fingerprints for.
 
@@ -60,13 +60,13 @@ What it misses, structurally:
 - Statically linked or vendored native libraries with no manifest left behind
 - Dependencies fetched, compiled, and deleted inside the build
 - Anything installed by `curl | tar` into `/usr/local`, because no package database records it
-- Build-time-only components — the compiler, the code generator, the test runner — which are
+- Build-time-only components - the compiler, the code generator, the test runner - which are
   exactly the components a build-tampering attack targets
 - Which of two candidate versions was actually linked, when both are present on disk
 
 A build-time SBOM is emitted by the build from its own resolved dependency graph. It has the
 exact versions and hashes the build used, it includes development and test scopes, and it can
-be signed as part of the same attestation that covers the artefact — so the SBOM is bound to a
+be signed as part of the same attestation that covers the artefact - so the SBOM is bound to a
 digest rather than floating beside it.
 
 Run both. Build-time for accuracy and attestation, scan-time against the deployed artefact to
@@ -80,7 +80,7 @@ time:
 
 1. Store every SBOM keyed by artefact digest, not by version string. Two builds of `v1.4.2`
    are two artefacts.
-2. Feed SBOMs into a component inventory that re-evaluates them as advisories land — OWASP
+2. Feed SBOMs into a component inventory that re-evaluates them as advisories land - OWASP
    Dependency-Track is the tool the A03 prevention text names for this.
 3. Correlate against OSV, NVD, and ecosystem advisories continuously, not on release day. The
    value is answering "which running builds contain the bad version" in minutes.
@@ -89,7 +89,7 @@ time:
 
 ASVS 15.1.2 (L2) is the requirement: maintain an inventory catalog, such as an SBOM, of all
 third-party libraries in use, and verify components come from pre-defined, trusted, and
-continually maintained repositories. Note the second clause — the inventory alone does not
+continually maintained repositories. Note the second clause - the inventory alone does not
 satisfy it.
 
 ## Generating and gating
@@ -140,4 +140,4 @@ lockfile. Generate from the graph and scan the artefact; neither view alone is c
 - <https://spdx.dev/use/specifications/>
 - <https://spdx.github.io/spdx-spec/>
 - <https://owasp.org/Top10/2025/A03_2025-Software_Supply_Chain_Failures/>
-- OWASP Dependency-Track — <https://dependencytrack.org/>
+- OWASP Dependency-Track - <https://dependencytrack.org/>

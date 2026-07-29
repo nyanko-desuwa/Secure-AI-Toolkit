@@ -22,7 +22,7 @@ stops the adapter from constructing an HTTP client per call.
 
 ```text
 Read src/core and src/adapters. List every driving port with each adapter that calls it, and
-every driven port with each adapter that implements it. Do not use folder names — use the import
+every driven port with each adapter that implements it. Do not use folder names - use the import
 graph. Flag any port with exactly one adapter and no security or testability reason to exist, and
 any core file that imports a transport, ORM, or broker package.
 ```
@@ -110,8 +110,8 @@ justify migrating later.
 ```text
 Run skills/architecture/hexagonal/checklist.md against this change. Mark each applicable item
 pass or fail with file:line evidence, and give one sentence for anything not applicable. Report
-unverified runtime behaviour — client timeouts, container scope validation, query counts, real
-adapter tests — as unverified rather than pass.
+unverified runtime behaviour - client timeouts, container scope validation, query counts, real
+adapter tests - as unverified rather than pass.
 ```
 
 ## Anti-Pattern Table

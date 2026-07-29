@@ -7,14 +7,14 @@ Verified 2026-07-28 against <https://owasp.org/Top10/2025/> and
 
 ## Top 10 2025
 
-`A04:2025 — Cryptographic Failures` is the primary category: data not encrypted where it should be,
+`A04:2025 - Cryptographic Failures` is the primary category: data not encrypted where it should be,
 or encrypted badly. Weak algorithms, reused IVs, hardcoded keys, homegrown constructions.
 
 Two adjacent categories catch crypto findings that are not really about the maths:
 
-- `A02:2025 — Security Misconfiguration` for TLS configuration, disabled certificate verification,
+- `A02:2025 - Security Misconfiguration` for TLS configuration, disabled certificate verification,
   and default keys left in place
-- `A07:2025 — Authentication Failures` for password storage and token verification, because the
+- `A07:2025 - Authentication Failures` for password storage and token verification, because the
   impact lands on authentication
 
 Note the 2025 renumbering. Cryptographic Failures was A02 in 2021 and is A04 in 2025. A finding
@@ -22,7 +22,7 @@ copied forward with its old ID is wrong.
 
 ## ASVS 5.0.0 chapters
 
-ASVS 5.0.0 was released 2025-05-30. Requirement IDs do not carry over from 4.x — a `V2.1.1`
+ASVS 5.0.0 was released 2025-05-30. Requirement IDs do not carry over from 4.x - a `V2.1.1`
 citation from a 4.x report means something different now.
 
 | Chapter | Title | Cite it for |
@@ -35,7 +35,7 @@ citation from a 4.x report means something different now.
 | V16 | Security Logging and Error Handling | Fail-closed on a decrypt or verify error |
 
 Cite the chapter, not an invented requirement number. `ASVS V11 (Cryptography)` is a correct and
-useful citation. A precise requirement ID you have not read is worse than no ID at all — pull it
+useful citation. A precise requirement ID you have not read is worse than no ID at all - pull it
 from <https://github.com/OWASP/ASVS> if you need one.
 
 Levels: state which you targeted. Level 1 is a black-box floor, Level 2 the right default for
@@ -82,9 +82,9 @@ cracking speed; it does nothing about a weak password policy or a phished creden
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/> (checked 2026-07-28)
-- OWASP ASVS 5.0.0 —
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/> (checked 2026-07-28)
+- OWASP ASVS 5.0.0 -
   <https://owasp.org/www-project-application-security-verification-standard/> (checked 2026-07-28)
-- OWASP Cryptographic Storage Cheat Sheet —
+- OWASP Cryptographic Storage Cheat Sheet -
   <https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html>
-- CWE — <https://cwe.mitre.org/>
+- CWE - <https://cwe.mitre.org/>

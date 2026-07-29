@@ -92,8 +92,8 @@ v1.2 assessment; the model and requirements changed.
 
 ## Sources
 
-- SLSA v1.2 specification — <https://slsa.dev/spec/>
-- Build track basics — <https://slsa.dev/spec/v1.2/build-track-basics>
-- Build requirements — <https://slsa.dev/spec/v1.2/build-requirements>
-- Verifying artifacts — <https://slsa.dev/spec/v1.2/verifying-artifacts>
-- Sigstore cosign — <https://docs.sigstore.dev/cosign/>
+- SLSA v1.2 specification - <https://slsa.dev/spec/>
+- Build track basics - <https://slsa.dev/spec/v1.2/build-track-basics>
+- Build requirements - <https://slsa.dev/spec/v1.2/build-requirements>
+- Verifying artifacts - <https://slsa.dev/spec/v1.2/verifying-artifacts>
+- Sigstore cosign - <https://docs.sigstore.dev/cosign/>

@@ -2,14 +2,14 @@
 
 Concrete parameters for password hashing. Copy the numbers, not the vibe.
 
-Source: OWASP Password Storage Cheat Sheet —
+Source: OWASP Password Storage Cheat Sheet -
 <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html>
 (checked 2026-07-28).
 
 `A04:2025` · ASVS V11 (Cryptography), V6 (Authentication) · CWE-916 (Use of Password Hash With
 Insufficient Computational Effort), CWE-759 (Use of a One-Way Hash without a Salt).
 
-## Argon2id — first choice
+## Argon2id - first choice
 
 Use the `id` variant. Not `i`, not `d`.
 
@@ -28,7 +28,7 @@ These configurations are treated as equivalent by OWASP; they trade CPU against 
 The 46 MiB and 19 MiB rows carry an explicit caveat: do not use them with Argon2i. Argon2id is
 what balances side-channel and GPU resistance.
 
-## scrypt — when Argon2id is unavailable
+## scrypt - when Argon2id is unavailable
 
 Baseline minimum: N = 2^17, r = 8, p = 1.
 
@@ -40,7 +40,7 @@ Baseline minimum: N = 2^17, r = 8, p = 1.
 | 2^14 (16 MiB) | 8 | 5 |
 | 2^13 (8 MiB) | 8 | 10 |
 
-## bcrypt — legacy systems only
+## bcrypt - legacy systems only
 
 Work factor 10 minimum, and as large as verification server performance allows.
 
@@ -66,7 +66,7 @@ bcrypt(base64(hmac-sha384(data: $password, key: $pepper)), $salt, $cost)
 
 with the pepper stored outside the database.
 
-## PBKDF2 — when FIPS-140 compliance is required
+## PBKDF2 - when FIPS-140 compliance is required
 
 Internal PRF: HMAC-SHA-256.
 
@@ -74,13 +74,13 @@ Internal PRF: HMAC-SHA-256.
 |---|---|
 | PBKDF2-HMAC-SHA256 | 600,000 |
 | PBKDF2-HMAC-SHA512 | 220,000 |
-| PBKDF2-HMAC-SHA1 | 1,400,000 — legacy only, do not select for new systems |
+| PBKDF2-HMAC-SHA1 | 1,400,000 - legacy only, do not select for new systems |
 
 Parallel PBKDF2 equivalents: PPBKDF2-SHA512 cost 2, PPBKDF2-SHA256 cost 5, PPBKDF2-SHA1 cost 10.
 
 Long-input note: HMAC pre-hashes passwords exceeding the block size (64 bytes for SHA-256)
 automatically. Some implementations redo that conversion every iteration, which turns a long
-password into a denial-of-service vector — the 2013 Django advisory is the cited example. Manual
+password into a denial-of-service vector - the 2013 Django advisory is the cited example. Manual
 pre-hashing helps but needs its own salt.
 
 ## Cross-cutting rules
@@ -112,11 +112,11 @@ cannot re-hash a hash into a stronger one.
 
 MD5, SHA-1, SHA-256, SHA-512, SHA-3 on their own, HMAC alone, a "salted SHA-256", a hash repeated
 in a loop you wrote, or encryption instead of hashing. A fast hash is fast for the attacker too,
-and a salt only defeats precomputation — it does nothing against a GPU working one hash at a time.
+and a salt only defeats precomputation - it does nothing against a GPU working one hash at a time.
 
 ## Sources
 
-- OWASP Password Storage Cheat Sheet —
+- OWASP Password Storage Cheat Sheet -
   <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html> (2026-07-28)
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE-916 — <https://cwe.mitre.org/data/definitions/916.html>
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE-916 - <https://cwe.mitre.org/data/definitions/916.html>

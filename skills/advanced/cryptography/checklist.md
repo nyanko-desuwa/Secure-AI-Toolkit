@@ -1,7 +1,7 @@
 # Cryptography Verification Checklist
 
 Run before returning code. Mark each item pass, fail, or not applicable. "Not applicable" needs a
-one-line reason — an unexplained skip is a gap.
+one-line reason - an unexplained skip is a gap.
 
 Only the sections the change touches need running. A password-hashing change does not need the
 certificate section.
@@ -42,7 +42,7 @@ certificate section.
 - [ ] Nonce is unique per message under the key, and the uniqueness argument is written down
 - [ ] Nonce is not a constant, not zero, not a hash of the plaintext, not reused after a restart
 - [ ] Message count per key is bounded, or the nonce is wide enough (192-bit) that it does not matter
-- [ ] AAD binds the context that must not be swapped — record ID, tenant, field name, version
+- [ ] AAD binds the context that must not be swapped - record ID, tenant, field name, version
 - [ ] Algorithm identifier and key ID stored alongside the ciphertext
 - [ ] Decryption failure raises. It does not return null, empty, or the ciphertext
 
@@ -50,7 +50,7 @@ certificate section.
 
 - [ ] No key literal in source, config committed to git, test fixture, or container image layer
 - [ ] Key material comes from a KMS, HSM, or secret manager at runtime
-- [ ] Data keys are per-record or per-tenant, wrapped by a KEK — envelope encryption
+- [ ] Data keys are per-record or per-tenant, wrapped by a KEK - envelope encryption
 - [ ] Rotation is possible without re-encrypting every row, and the procedure is written
 - [ ] Old key versions retained for decrypt only, with a defined retirement date
 - [ ] Revocation path exists and has been exercised at least once outside an incident
@@ -65,7 +65,7 @@ certificate section.
 - [ ] Hostname checked, not just the chain
 - [ ] TLS 1.2 minimum, TLS 1.3 preferred; TLS 1.0 and 1.1 refused
 - [ ] Internal service-to-service traffic is TLS too, or the exception is documented
-- [ ] Pinning, if used, has a rotation plan and a backup pin — otherwise it is an outage waiting
+- [ ] Pinning, if used, has a rotation plan and a backup pin - otherwise it is an outage waiting
 - [ ] Certificate expiry monitored with alerting before, not after
 
 ## Signatures and Tokens (A07, A08 · ASVS V9, V11 · CWE-347, CWE-696)
@@ -91,7 +91,7 @@ certificate section.
 - [ ] Deterministic encryption used only where equality search is a stated requirement, with the
       frequency-analysis leak documented
 - [ ] Blind index, if present, is HMAC-based with a key, not a plain hash
-- [ ] Data classified before the algorithm was chosen — what is sensitive, and why
+- [ ] Data classified before the algorithm was chosen - what is sensitive, and why
 - [ ] Plaintext not written to logs, traces, metrics labels, error messages, or debug dumps
 - [ ] Sensitive plaintext zeroed or scoped tightly where the language allows it
 

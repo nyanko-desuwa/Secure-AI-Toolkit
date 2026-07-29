@@ -4,12 +4,12 @@
 
 ## Sources
 
-- Redis security — <https://redis.io/docs/latest/operate/oss_and_stack/management/security/>
-- Redis ACL — <https://redis.io/docs/latest/operate/oss_and_stack/management/security/acl/>
-- Redis persistence — <https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/>
-- Redis replication — <https://redis.io/docs/latest/operate/oss_and_stack/management/replication/>
-- Redis OSS 8.0 release notes — <https://redis.io/docs/latest/operate/oss_and_stack/stack-with-enterprise/release-notes/redisce/redisos-8.0-release-notes/>
-- Valkey security — <https://valkey.io/topics/security/>
+- Redis security - <https://redis.io/docs/latest/operate/oss_and_stack/management/security/>
+- Redis ACL - <https://redis.io/docs/latest/operate/oss_and_stack/management/security/acl/>
+- Redis persistence - <https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/>
+- Redis replication - <https://redis.io/docs/latest/operate/oss_and_stack/management/replication/>
+- Redis OSS 8.0 release notes - <https://redis.io/docs/latest/operate/oss_and_stack/stack-with-enterprise/release-notes/redisce/redisos-8.0-release-notes/>
+- Valkey security - <https://valkey.io/topics/security/>
 
 ## Reachability, authentication, and TLS
 

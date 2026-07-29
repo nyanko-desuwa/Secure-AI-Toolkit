@@ -28,10 +28,10 @@ one is worse than no citation at all.
 | E6 Poison message with no DLQ, partition stalls | A10 | V16 Logging and Error Handling | 400 |
 | E6 DLQ nobody drains or alerts on | A09, A10 | V16 | 772 |
 | E6 Poison handler logging the whole payload | A09 | V16, V14 | 532 |
-| E7 Producer adds a required field, consumers crash | A08, A10 | V15 | — |
+| E7 Producer adds a required field, consumers crash | A08, A10 | V15 | - |
 | E8 One shared broker credential across services | A02, A07 | V13 Configuration | 522 |
 | E8 No topic-level authorization | A01, A02 | V8, V13 | 1220 |
-| E8 Plaintext transport to the broker | A04 | V12 Secure Communication | — |
+| E8 Plaintext transport to the broker | A04 | V12 Secure Communication | - |
 | E9 Handler subscribed and never removed | A06 | V15 | 401 |
 | E9 In-memory bus with no backpressure | A06 | V15 | 770, 400 |
 | E9 Uncapped retry against a failing dependency | A10 | V15 | 400, 799 |
@@ -62,7 +62,7 @@ leaks. Both live in the same handler, usually three lines apart.
 
 A10 Mishandling of Exceptional Conditions is new in 2025 and it is the natural home for the
 failure path. A handler that catches everything and acks, a retry with no ceiling, a poison
-message that stalls a partition — all are exceptional conditions handled by pretending they did
+message that stalls a partition - all are exceptional conditions handled by pretending they did
 not happen.
 
 A02 Security Misconfiguration and A07 Authentication Failures cover E8. A shared broker username
@@ -79,26 +79,26 @@ scope here, named so it is not assumed forgotten.
 
 ## ASVS chapters used here
 
-- V2 Validation and Business Logic — schema validation of the payload, idempotency and
+- V2 Validation and Business Logic - schema validation of the payload, idempotency and
   duplicate-submission control, business-logic limits.
-- V8 Authorization — the consumer-side decision, and the topic-level decision.
-- V11 Cryptography — signing an event or encrypting a field within it.
-- V12 Secure Communication — TLS to the broker, certificate verification.
-- V13 Configuration — per-service credentials, secret handling, broker settings.
-- V14 Data Protection — payload minimisation, retention, personal data in a replayable log.
-- V15 Secure Coding and Architecture — deserialization, resource lifecycle, integrity of
+- V8 Authorization - the consumer-side decision, and the topic-level decision.
+- V11 Cryptography - signing an event or encrypting a field within it.
+- V12 Secure Communication - TLS to the broker, certificate verification.
+- V13 Configuration - per-service credentials, secret handling, broker settings.
+- V14 Data Protection - payload minimisation, retention, personal data in a replayable log.
+- V15 Secure Coding and Architecture - deserialization, resource lifecycle, integrity of
   inter-service messages.
-- V16 Security Logging and Error Handling — what the poison-message path records and what it
+- V16 Security Logging and Error Handling - what the poison-message path records and what it
   must not.
 
 ## Reporting a finding
 
 Name the side, because the fix differs by side:
 
-- Producer — the event carries too much, or claims authority it cannot prove. Fix the contract.
-- Broker — no topic authorization, one shared credential, no TLS, no retention policy. Fix the
+- Producer - the event carries too much, or claims authority it cannot prove. Fix the contract.
+- Broker - no topic authorization, one shared credential, no TLS, no retention policy. Fix the
   configuration, and say plainly that you could not verify the live setting from source.
-- Consumer — trusts the payload, is not idempotent, has no failure path, leaks resources. Fix the
+- Consumer - trusts the payload, is not idempotent, has no failure path, leaks resources. Fix the
   handler.
 
 Then state whether the fix removes the option or relies on discipline. "Do not read `role` from
@@ -110,9 +110,9 @@ generated rather than investigated.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/> (categories pinned by the repository brief,
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/> (categories pinned by the repository brief,
   verified 2026-07-28)
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
   (5.0.0, released 2025-05-30; chapter list pinned by the repository brief, verified 2026-07-28)
-- CWE — <https://cwe.mitre.org/> (individual entries and verification dates in
+- CWE - <https://cwe.mitre.org/> (individual entries and verification dates in
   [cwe-event-driven.md](cwe-event-driven.md))

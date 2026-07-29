@@ -40,10 +40,10 @@ examples/
 
 | Standard | Version | Verified |
 |---|---|---|
-| OWASP API Security Top 10 | 2023 | 2026-07-28 — API1, API2, API4, API5 applied to realtime |
-| OWASP ASVS | 5.0.0 (released May 2025) | 2026-07-28 — V4, V6, V7, V8, V13 chapters cited |
+| OWASP API Security Top 10 | 2023 | 2026-07-28 - API1, API2, API4, API5 applied to realtime |
+| OWASP ASVS | 5.0.0 (released May 2025) | 2026-07-28 - V4, V6, V7, V8, V13 chapters cited |
 | OWASP Top 10 | 2025 | Cross-reporting only (A01, A04, A05, A07) |
-| CWE | MITRE | 2026-07-28 — CWE-306, CWE-352, CWE-384, CWE-639, CWE-770, CWE-285, CWE-74, CWE-915 |
+| CWE | MITRE | 2026-07-28 - CWE-306, CWE-352, CWE-384, CWE-639, CWE-770, CWE-285, CWE-74, CWE-915 |
 
 ASVS requirement IDs were read against the 5.0 chapter structure used elsewhere in this pack, not
 recalled from ASVS 4.0.3. A `4.1.1` from an old report is a different requirement.
@@ -109,11 +109,11 @@ All hostnames, tokens, and identifiers are placeholders. `wss://realtime.example
 
 ## References
 
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- HTML Living Standard — WebSocket and EventSource
-- RFC 6455 — The WebSocket Protocol
-- RFC 8441 — Bootstrapping WebSockets with HTTP/2 (where applicable)
-- W3C WebRTC — <https://www.w3.org/TR/webrtc/>
-- OWASP HTML5 Security Cheat Sheet (WebSocket section) — <https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- HTML Living Standard - WebSocket and EventSource
+- RFC 6455 - The WebSocket Protocol
+- RFC 8441 - Bootstrapping WebSockets with HTTP/2 (where applicable)
+- W3C WebRTC - <https://www.w3.org/TR/webrtc/>
+- OWASP HTML5 Security Cheat Sheet (WebSocket section) - <https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html>
 - Cross-Site WebSocket Hijacking discussions (CWE-352-class Origin failures)

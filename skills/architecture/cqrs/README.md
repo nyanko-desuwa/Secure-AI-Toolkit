@@ -103,7 +103,7 @@ More in [prompts.md](prompts.md).
 - Cannot measure your read/write asymmetry. The skill insists you have a measurement before
   moving past level 1; it does not supply one.
 - Languages are C# and TypeScript, with SQL for projections and one Java example for event
-  schema evolution. Nothing here is Go, Rust, or PHP specific. The SQL is PostgreSQL flavour —
+  schema evolution. Nothing here is Go, Rust, or PHP specific. The SQL is PostgreSQL flavour -
   `FOR UPDATE SKIP LOCKED`, `ON CONFLICT`, and row-level security syntax differ elsewhere.
 - Resource-lifetime detail is deliberately thin. Bounds, leak shapes, backpressure, and heap
   diagnosis belong to `skills/architecture/performance/`; this skill names the projector
@@ -112,7 +112,7 @@ More in [prompts.md](prompts.md).
   and response replay. This skill covers command-ID dedup inside the transaction, which is a
   different layer.
 - Event sourcing coverage is intentionally partial. It covers replay semantics, PII erasure,
-  and schema evolution — the parts that bite. It does not cover snapshot strategy in depth,
+  and schema evolution - the parts that bite. It does not cover snapshot strategy in depth,
   event store product selection, or saga orchestration.
 - Whether crypto-shredding satisfies a legal erasure obligation is a legal question. The skill
   describes the technique and says to get it reviewed. It is not legal advice.
@@ -143,11 +143,11 @@ this skill.
 
 ## References
 
-- Martin Fowler, CQRS — <https://martinfowler.com/bliki/CQRS.html>
-- Azure Architecture Center, CQRS pattern — <https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs>
-- microservices.io, Transactional Outbox — <https://microservices.io/patterns/data/transactional-outbox.html>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- GDPR Article 17, right to erasure — <https://gdpr-info.eu/art-17-gdpr/>
-- CWE-1220 — <https://cwe.mitre.org/data/definitions/1220.html>
+- Martin Fowler, CQRS - <https://martinfowler.com/bliki/CQRS.html>
+- Azure Architecture Center, CQRS pattern - <https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs>
+- microservices.io, Transactional Outbox - <https://microservices.io/patterns/data/transactional-outbox.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- GDPR Article 17, right to erasure - <https://gdpr-info.eu/art-17-gdpr/>
+- CWE-1220 - <https://cwe.mitre.org/data/definitions/1220.html>

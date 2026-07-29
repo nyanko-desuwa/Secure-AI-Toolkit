@@ -1,7 +1,7 @@
 # OWASP ASVS 5.0.0
 
 Application Security Verification Standard, version 5.0.0, released 30 May 2025 at Global
-AppSec EU Barcelona. This is a significant restructure from 4.0.3 — chapter numbers and
+AppSec EU Barcelona. This is a significant restructure from 4.0.3 - chapter numbers and
 requirement IDs do not carry over, so a `V2.1.1` citation from a 4.x report means something
 different in 5.0.
 
@@ -17,7 +17,7 @@ Top 10 to decide what to look at, ASVS to decide whether it is correct.
 
 | Chapter | Title | Reach for it when |
 |---|---|---|
-| V1 | Encoding and Sanitization | Anything reaching an interpreter — SQL, HTML, shell, LDAP |
+| V1 | Encoding and Sanitization | Anything reaching an interpreter - SQL, HTML, shell, LDAP |
 | V2 | Validation and Business Logic | Input parsing, business rule enforcement, workflow order |
 | V3 | Web Frontend Security | CSP, headers, cookies, clickjacking, browser storage |
 | V4 | API and Web Service | REST, GraphQL, gRPC surfaces |
@@ -55,11 +55,11 @@ Worth knowing if you are carrying over old findings or tooling:
 ASVS defines verification levels. Pick one and say which you targeted, because "ASVS compliant"
 means nothing on its own.
 
-- **Level 1** — the baseline. Achievable by black-box testing. Appropriate for applications with
+- **Level 1** - the baseline. Achievable by black-box testing. Appropriate for applications with
   no sensitive data. Treat this as a floor, not a goal
-- **Level 2** — for applications handling sensitive data. This is the right default for most
+- **Level 2** - for applications handling sensitive data. This is the right default for most
   business applications
-- **Level 3** — for applications where failure is severe: health, finance, safety, critical
+- **Level 3** - for applications where failure is severe: health, finance, safety, critical
   infrastructure
 
 Do not claim a level you have not verified requirement by requirement. Stating "we followed
@@ -72,7 +72,7 @@ statement. `ASVS V8 (Authorization)` is a correct and useful citation. Inventing
 requirement number you have not read is worse than citing the chapter.
 
 For anything beyond a chapter-level citation, pull the current requirement text from the
-official repository rather than from memory — the 5.0 numbering is new enough that recalled IDs
+official repository rather than from memory - the 5.0 numbering is new enough that recalled IDs
 are unreliable:
 
 <https://github.com/OWASP/ASVS>

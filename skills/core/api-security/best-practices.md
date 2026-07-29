@@ -30,7 +30,7 @@ def get_order(order_id: int, actor: User = Depends(current_user)):
 ```
 
 Direct ownership only covers direct ownership. Shared documents, team-owned records, and
-delegated access need a policy call — OWASP says this explicitly, because comparing the session
+delegated access need a policy call - OWASP says this explicitly, because comparing the session
 user ID to a request ID is the fix people stop at.
 
 ```python
@@ -46,7 +46,7 @@ Return 404 for someone else's object. A 403 confirms the ID exists, which is the
 enumeration was after.
 
 Nested routes need both levels. `/orgs/1/members/999` must confirm the actor may act on org 1 and
-that member 999 belongs to org 1 — otherwise the parent check passes and the child leaks.
+that member 999 belongs to org 1 - otherwise the parent check passes and the child leaks.
 
 The tempting wrong fix is a UUID primary key. OWASP does list unpredictable IDs as a preventive
 measure and they do raise the cost of enumeration, but an ID that leaks through a CSV export, a
@@ -107,7 +107,7 @@ Denylisting forbidden keys is the tempting wrong fix. It fails the day someone a
 `is_verified`, and it fails on nested paths like `{"owner": {"id": 7}}`.
 
 Field permissions can depend on object state. `status: "PENDING"` in the query above is a control,
-not a convenience — price is editable while a booking is draft and not after approval.
+not a convenience - price is editable while a booking is draft and not after approval.
 
 ## Property level authorization, read side
 
@@ -186,8 +186,8 @@ Why this works: registration and authorization happen in one place, so a new rou
 permission is a missing property rather than a silent public endpoint. Reviewing the table is
 cheaper than reviewing every handler.
 
-Find admin capability by grepping for what it does — `export`, `impersonate`, `bulk`, `refund`,
-`recalculate`, `sync` — not for `/admin`.
+Find admin capability by grepping for what it does - `export`, `impersonate`, `bulk`, `refund`,
+`recalculate`, `sync` - not for `/admin`.
 
 ## Credential choice
 
@@ -220,7 +220,7 @@ credentials. Give each key a prefix so it is identifiable in a secret scanner, a
 constant-time function.
 
 A self-contained token cannot be revoked before expiry. Short TTL narrows the window. If immediate
-logout is required, hold server-side state and say so — ASVS 8.3.2 makes the same point about
+logout is required, hold server-side state and say so - ASVS 8.3.2 makes the same point about
 authorization data inside tokens.
 
 ## Resource consumption
@@ -272,7 +272,7 @@ key = f"rl:user:{actor.id}" if actor else f"rl:ip:{client_ip(request)}"
 
 Per-IP is a pre-auth fallback, not the primary key. It punishes offices behind one NAT and does
 nothing to an attacker with a proxy pool. Where the client IP comes from `X-Forwarded-For`, the
-edge must strip a client-supplied copy — ASVS 4.1.3 — or the limit is bypassed by setting the
+edge must strip a client-supplied copy - ASVS 4.1.3 - or the limit is bypassed by setting the
 header.
 
 Cap the body at the proxy, not in the handler. By the time your code checks `len(body)`, the bytes
@@ -319,7 +319,7 @@ stop it: device fingerprinting, human detection, non-human pattern analysis such
 and checkout under a second apart, and blocking Tor exit nodes and known proxies.
 
 Two design questions that catch this class before code exists. Which flow, run perfectly and at
-scale, harms us? And which action is free for the attacker to reverse but costly for us — the
+scale, harms us? And which action is free for the attacker to reverse but costly for us - the
 airline case, where the damage was cancellation, not booking.
 
 Machine-facing APIs need the same protections. Developer and B2B surfaces usually skip them.
@@ -365,7 +365,7 @@ private, loopback, link-local, and reserved ranges in one predicate instead of a
 list, and redirects are off so an allowed host cannot forward to `169.254.169.254`.
 
 Honest gap: this is still open to DNS rebinding. The name is resolved once for the check and again
-by `requests` for the connection. Closing it means pinning the validated IP into the connection —
+by `requests` for the connection. Closing it means pinning the validated IP into the connection -
 a custom adapter, or in production an egress proxy with a destination allowlist. Do not present
 the code above as complete.
 
@@ -414,7 +414,7 @@ const resolvers = {
 };
 ```
 
-Any query that reaches a `User` — through `post.author`, `team.members`, `report.reportedUser` —
+Any query that reaches a `User` - through `post.author`, `team.members`, `report.reportedUser` -
 gets the email. OWASP's dating-app scenario is exactly this: `reportUser` returns the reported
 user's `fullName` and `recentLocation`.
 
@@ -495,8 +495,8 @@ permission entry fails closed. Identity comes from the verified certificate, so 
 by the caller.
 
 Metadata is client-controlled. A `user-id` or `tenant-id` header in gRPC metadata is exactly as
-trustworthy as a query parameter. If a gateway injects identity, it must strip the client's copy —
-ASVS 4.1.3 — and the backend should prefer a signed token it can verify itself.
+trustworthy as a query parameter. If a gateway injects identity, it must strip the client's copy -
+ASVS 4.1.3 - and the backend should prefer a signed token it can verify itself.
 
 Reflection is a service catalogue. Leaving it on in production is API9 with extra convenience for
 the attacker.
@@ -548,7 +548,7 @@ app.post("/webhooks/psp", express.raw({ type: "*/*", limit: "128kb" }), async (r
 ```
 
 Why this works, point by point. The HMAC is computed over the exact bytes received, so
-re-serializing cannot change the signed content — key order and unicode escaping differ between
+re-serializing cannot change the signed content - key order and unicode escaping differ between
 JSON encoders, and a signature over the re-encoded body will not match. The timestamp is inside
 the signed string, so it cannot be edited to defeat the window. `timingSafeEqual` removes the
 byte-by-byte timing leak, with a length check first because it throws on mismatched lengths.
@@ -654,7 +654,7 @@ def create_payment(
 ```
 
 Why this works, and why it is security rather than plumbing. The uniqueness is enforced by the
-database, so two concurrent requests cannot both pass a "does this key exist" check — a
+database, so two concurrent requests cannot both pass a "does this key exist" check - a
 read-then-write in application code is a race, and the race is the exploit. The key is scoped to
 the actor, so one caller cannot occupy or read another's key. The body fingerprint means a
 replayed key with a modified amount is rejected rather than silently returning the old result,

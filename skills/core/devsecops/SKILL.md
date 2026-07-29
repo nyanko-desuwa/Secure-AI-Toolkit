@@ -1,6 +1,6 @@
 ---
 name: devsecops
-description: 'Design and review security in the CI/CD pipeline — what scanners run, when they run, and what blocks a merge. Covers SAST, DAST, SCA, secret and IaC scanning, SBOM, SLSA provenance, GitHub Actions hardening, and vulnerability SLAs. Triggers: "CI/CD security", "pipeline", "GitHub Actions", "SBOM", "supply chain", "pre-commit", "SLSA", "bảo mật CI", "chuỗi cung ứng".'
+description: 'Design and review security in the CI/CD pipeline - what scanners run, when they run, and what blocks a merge. Covers SAST, DAST, SCA, secret and IaC scanning, SBOM, SLSA provenance, GitHub Actions hardening, and vulnerability SLAs. Triggers: "CI/CD security", "pipeline", "GitHub Actions", "SBOM", "supply chain", "pre-commit", "SLSA", "bảo mật CI", "chuỗi cung ứng".'
 allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
@@ -41,7 +41,7 @@ signal is gone along with the noise. Choose what blocks deliberately and keep th
 
 Read the workflow files before proposing anything. Check `.github/workflows/`, `.gitlab-ci.yml`,
 `.pre-commit-config.yaml`, `renovate.json`, `.github/dependabot.yml`. Note which jobs carry
-`continue-on-error`, `|| true`, or a soft-fail flag — those are checks someone already gave up on,
+`continue-on-error`, `|| true`, or a soft-fail flag - those are checks someone already gave up on,
 and the reason matters more than adding a new tool.
 
 ### 2. Match tool class to what you actually need found
@@ -83,13 +83,13 @@ recorded. See [best-practices.md](best-practices.md#vulnerability-management).
 
 Rank by exploitability in this deployment, not by the CVSS number the scanner printed.
 
-- Critical — pipeline compromise (secret exfiltration from a fork PR, unpinned action in a job
+- Critical - pipeline compromise (secret exfiltration from a fork PR, unpinned action in a job
   with a write token), or an RCE in a reachable dependency on an internet-facing service
-- High — a stored long-lived cloud credential, a write-scoped `GITHUB_TOKEN` on a job that runs
+- High - a stored long-lived cloud credential, a write-scoped `GITHUB_TOKEN` on a job that runs
   untrusted code, an exploitable CVE in code that executes
-- Medium — a CVE in a dependency that is present but not reachable, a missing SBOM, an unsigned
+- Medium - a CVE in a dependency that is present but not reachable, a missing SBOM, an unsigned
   artifact where verification is not yet enforced
-- Low — defence in depth missing with no path: unpinned first-party action, missing licence scan
+- Low - defence in depth missing with no path: unpinned first-party action, missing licence scan
 
 Reachability changes the answer more than anything else. A critical CVSS in a transitive
 dependency that no code path calls is not a critical finding, and saying otherwise is how a
@@ -111,21 +111,21 @@ backlog reaches four thousand items nobody reads. State which way you called it 
 
 ## Related Skills
 
-- `supply-chain-security` — dependency provenance and registry trust in depth
-- `secrets-management` — storage, rotation, and detection of credentials
-- `docker-security` — container image and runtime hardening
-- `cloud-security` — the IAM side of OIDC federation
-- `owasp` — the application-level controls this pipeline is checking for
-- `publish-safety` — the manual gate at the publish boundary, where no pipeline is watching
+- `supply-chain-security` - dependency provenance and registry trust in depth
+- `secrets-management` - storage, rotation, and detection of credentials
+- `docker-security` - container image and runtime hardening
+- `cloud-security` - the IAM side of OIDC federation
+- `owasp` - the application-level controls this pipeline is checking for
+- `publish-safety` - the manual gate at the publish boundary, where no pipeline is watching
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, limitations, security notes
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns, with vulnerable and hardened workflows
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — tooling matrix, SLSA levels, SSDF, OWASP mapping
-- [examples/](examples/) — eight vulnerable/fixed pairs, plus runnable workflow, pre-commit,
+- [README.md](README.md) - purpose, layout, limitations, security notes
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns, with vulnerable and hardened workflows
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - tooling matrix, SLSA levels, SSDF, OWASP mapping
+- [examples/](examples/) - eight vulnerable/fixed pairs, plus runnable workflow, pre-commit,
   and Semgrep files

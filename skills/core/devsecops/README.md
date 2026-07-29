@@ -137,11 +137,11 @@ untrusted code in that step.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- NIST SP 800-218 — <https://csrc.nist.gov/pubs/sp/800/218/final>
-- SLSA v1.2 — <https://slsa.dev/spec/>
-- GitHub Actions security — <https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions>
-- CycloneDX — <https://cyclonedx.org/specification/overview/>
-- SPDX — <https://spdx.dev/use/specifications/>
-- Sigstore cosign — <https://docs.sigstore.dev/cosign/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- NIST SP 800-218 - <https://csrc.nist.gov/pubs/sp/800/218/final>
+- SLSA v1.2 - <https://slsa.dev/spec/>
+- GitHub Actions security - <https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions>
+- CycloneDX - <https://cyclonedx.org/specification/overview/>
+- SPDX - <https://spdx.dev/use/specifications/>
+- Sigstore cosign - <https://docs.sigstore.dev/cosign/>

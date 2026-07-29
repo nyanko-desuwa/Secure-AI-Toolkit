@@ -3,14 +3,14 @@
 Fill this in before you need it. A runbook written during an incident is a set of guesses.
 
 NIST SP 800-61r3 `ID.IM-04` covers this outcome: incident response plans are established,
-communicated, maintained, and improved. r3 gives no template — it deliberately stopped
-publishing procedure-level content — so this is a working structure, not a quoted one.
+communicated, maintained, and improved. r3 gives no template - it deliberately stopped
+publishing procedure-level content - so this is a working structure, not a quoted one.
 Verified 2026-07-28.
 
 ## Per-organization: fill once, review quarterly
 
 ```markdown
-# Incident Response — Contacts and Authority
+# Incident Response - Contacts and Authority
 
 ## Roles
 Incident lead rotation:      <link to on-call schedule>
@@ -18,7 +18,7 @@ Security escalation:         <name/alias, phone, out-of-band channel>
 Legal contact:               <name, phone>          # required before any law enforcement contact
 Comms / public affairs:      <name, phone>
 Cloud provider support:      <account ID, support plan tier, case URL>
-Retained IR firm:            <firm, contract number, 24/7 number>   # or "none — decide at SEV1"
+Retained IR firm:            <firm, contract number, 24/7 number>   # or "none - decide at SEV1"
 Cyber insurance:             <policy number, notification requirement, deadline>
 
 ## Out-of-band comms
@@ -44,7 +44,7 @@ Append-only. Timestamps in UTC with an offset marker, because half the responder
 another timezone and relative times ("20 minutes ago") are worthless in a post-mortem.
 
 ```markdown
-# INC-YYYY-NNN — <short description>
+# INC-YYYY-NNN - <short description>
 
 Declared:      2026-07-28T14:03Z  by <name>
 Severity:      SEV2               (see severity-classification.md)
@@ -89,7 +89,7 @@ Record decisions separately from actions. A post-mortem needs to know why, and t
 never in a command history.
 
 ## Open questions
-- [ ] <question> — owner, due
+- [ ] <question> - owner, due
 ```
 
 ## Detection-to-declaration checklist
@@ -102,7 +102,7 @@ defined incident criteria) and `RS.MA-02` (incident reports are triaged and vali
 - [ ] Severity assigned, worst plausible interpretation first
 - [ ] Incident lead named
 - [ ] Working record created from this template
-- [ ] Comms channel chosen — fallback if IdP or chat may be involved
+- [ ] Comms channel chosen - fallback if IdP or chat may be involved
 - [ ] Volatile evidence capture started before any containment
 - [ ] Log retention extended on relevant systems     # before the window rolls off
 - [ ] Legal notified if personal data or prosecution is plausible
@@ -132,6 +132,6 @@ response and recovery actions taken, and lessons learned.
 
 ## Sources
 
-- <https://doi.org/10.6028/NIST.SP.800-61r3> — `ID.IM-04`, `DE.AE-08`, `RS.MA-02`, `RC.RP-05`, `RC.RP-06`
-- <https://csrc.nist.gov/pubs/sp/800/184/final> — recovery planning
-- <https://www.cisa.gov/sites/default/files/publications/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf> — playbook structure, US federal scope
+- <https://doi.org/10.6028/NIST.SP.800-61r3> - `ID.IM-04`, `DE.AE-08`, `RS.MA-02`, `RC.RP-05`, `RC.RP-06`
+- <https://csrc.nist.gov/pubs/sp/800/184/final> - recovery planning
+- <https://www.cisa.gov/sites/default/files/publications/Federal_Government_Cybersecurity_Incident_and_Vulnerability_Response_Playbooks_508C.pdf> - playbook structure, US federal scope

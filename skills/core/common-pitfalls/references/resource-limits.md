@@ -15,7 +15,7 @@ request take the whole app down.
 | Deep offset limit | reject offset above ~10000 | `OFFSET 500000` scans and discards half a million rows |
 | Ordering | always explicit, on an indexed column | Without it, pages overlap and skip rows |
 
-Cursor pagination — keyset, based on the last row's sort value — stays fast at any depth because
+Cursor pagination - keyset, based on the last row's sort value - stays fast at any depth because
 the database seeks instead of counting. Offset pagination gets slower the further in you go.
 
 Clamp, do not reject, when the client asks for too much:
@@ -102,7 +102,7 @@ call needs a limit even if it is not security-sensitive.
 | Unauthenticated API | 20-60 per minute per IP |
 | LLM or metered API call | 20 per hour per user, and a spend ceiling |
 
-Rate limits keyed only on IP are weak — one office shares an address, one attacker rents
+Rate limits keyed only on IP are weak - one office shares an address, one attacker rents
 thousands. Depth on this is in `api-security` and `brute-force-defense`.
 
 ## Concurrency

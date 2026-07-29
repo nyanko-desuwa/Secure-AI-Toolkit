@@ -42,7 +42,7 @@ resource-based policy is reachable from outside it.
 ### 2. Grant the identity
 
 Start from zero and add the specific actions the code calls. If you cannot name the actions,
-read the code — do not paste a managed admin policy as a placeholder. See
+read the code - do not paste a managed admin policy as a placeholder. See
 [best-practices.md](best-practices.md#iam-least-privilege) and
 [references/iam-antipatterns.md](references/iam-antipatterns.md).
 
@@ -64,7 +64,7 @@ write to.
 ### 5. Verify
 
 Run [checklist.md](checklist.md). Then run policy-as-code against the plan, not against the
-deployed state — the plan is the last point where a change is free to reject.
+deployed state - the plan is the last point where a change is free to reject.
 
 ### 6. Report
 
@@ -76,12 +76,12 @@ suggestion. Label it as one.
 
 Rank by reachability and blast radius, not by service name.
 
-- **Critical** — unauthenticated access to data from the internet, or a path to credentials
+- **Critical** - unauthenticated access to data from the internet, or a path to credentials
   that can escalate to account administrator
-- **High** — an authenticated principal can escalate privileges, read another tenant's data,
+- **High** - an authenticated principal can escalate privileges, read another tenant's data,
   or reach the metadata service from an application input
-- **Medium** — needs an existing foothold, or exposes non-sensitive configuration
-- **Low** — missing defence in depth with no current path
+- **Medium** - needs an existing foothold, or exposes non-sensitive configuration
+- **Low** - missing defence in depth with no current path
 
 "S3 bucket not encrypted" is not critical if it is also not public and holds build artefacts.
 "IAM role with `AdministratorAccess`" is critical if a public Lambda assumes it, and medium
@@ -99,28 +99,28 @@ if only a break-glass human can.
 | Provider well-architected security pillars | current | Design-time trade-offs |
 
 Details and source URLs in [references/](references/). Cite CIS by section title, not by a
-control number you have not read — the numbering shifts between major versions.
+control number you have not read - the numbering shifts between major versions.
 
 ## Related Skills
 
-- `owasp` — the general security baseline, and the entry point when this skill does not fit
-- `secrets-management` — vault patterns, rotation mechanics
-- `docker-security` — container image and runtime hardening under the cloud layer
-- `devsecops` — wiring policy-as-code into CI
-- `logging-audit` — SIEM pipelines downstream of the audit trail
-- `redis-security` — managed Redis/Valkey access, ACLs, TLS, persistence, eviction, and service telemetry
+- `owasp` - the general security baseline, and the entry point when this skill does not fit
+- `secrets-management` - vault patterns, rotation mechanics
+- `docker-security` - container image and runtime hardening under the cloud layer
+- `devsecops` - wiring policy-as-code into CI
+- `logging-audit` - SIEM pipelines downstream of the audit trail
+- `redis-security` - managed Redis/Valkey access, ACLs, TLS, persistence, eviction, and service telemetry
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, limitations, security notes
-- [checklist.md](checklist.md) — pre-return verification, grouped by concern
-- [best-practices.md](best-practices.md) — patterns with vulnerable and fixed Terraform
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the control cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/provider-mapping.md](references/provider-mapping.md) — concern to service table
-- [references/iam-antipatterns.md](references/iam-antipatterns.md) — policy shapes to reject
-- [references/cis-benchmarks.md](references/cis-benchmarks.md) — versions and scope
-- [references/owasp-cloud-mapping.md](references/owasp-cloud-mapping.md) — Top 10 and ASVS
-- [references/well-architected.md](references/well-architected.md) — provider design guidance
-- [examples/README.md](examples/README.md) — eight vulnerable and fixed pairs
+- [README.md](README.md) - purpose, layout, limitations, security notes
+- [checklist.md](checklist.md) - pre-return verification, grouped by concern
+- [best-practices.md](best-practices.md) - patterns with vulnerable and fixed Terraform
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the control cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/provider-mapping.md](references/provider-mapping.md) - concern to service table
+- [references/iam-antipatterns.md](references/iam-antipatterns.md) - policy shapes to reject
+- [references/cis-benchmarks.md](references/cis-benchmarks.md) - versions and scope
+- [references/owasp-cloud-mapping.md](references/owasp-cloud-mapping.md) - Top 10 and ASVS
+- [references/well-architected.md](references/well-architected.md) - provider design guidance
+- [examples/README.md](examples/README.md) - eight vulnerable and fixed pairs

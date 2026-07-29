@@ -26,7 +26,7 @@ to A05. If you see `A03:2025` used for injection anywhere, it is a stale mapping
 
 The category this skill is mostly about. A driving port whose signature has no actor cannot
 enforce ownership, so the check lands in whichever adapter its author remembered. The second
-adapter — a queue consumer, a CLI, a scheduled job — is then an unauthenticated path to the same
+adapter - a queue consumer, a CLI, a scheduled job - is then an unauthenticated path to the same
 mutation.
 
 Also A01: a tenant taken from a request header instead of a verified credential; a driven port
@@ -71,8 +71,8 @@ which turns an outage into a grant.
 ## Not used by this skill
 
 A03 Software Supply Chain Failures, A07 Authentication Failures, A08 Software or Data Integrity
-Failures, and A09 Security Logging and Alerting Failures are real concerns for an adapter — a
-vendor SDK, a token verifier, a webhook signature, an audit trail — but they are not consequences
+Failures, and A09 Security Logging and Alerting Failures are real concerns for an adapter - a
+vendor SDK, a token verifier, a webhook signature, an audit trail - but they are not consequences
 of the port structure. They belong to `skills/core/` skills, and this skill links rather than
 restates.
 

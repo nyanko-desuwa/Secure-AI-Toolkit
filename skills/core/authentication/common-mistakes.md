@@ -9,7 +9,7 @@ looks like, why it fails, and the fix that closes it rather than hiding it.
 digest = hashlib.sha256(salt + password.encode()).hexdigest()
 ```
 
-The salt does its job — no rainbow table, no shared record between two users with the same
+The salt does its job - no rainbow table, no shared record between two users with the same
 password. It does nothing about speed. A consumer GPU runs SHA-256 at billions of guesses per
 second, so a stolen table is cracked at the rate of the password distribution, not the hash.
 
@@ -44,7 +44,7 @@ Credential stuffing is one attempt per account from thousands of addresses. Noth
 failures per IP, so nothing trips. Meanwhile a corporate NAT or mobile carrier gateway hits the
 limit with legitimate users behind it.
 
-Fix: limit on several dimensions — account, IP, device signal, and global failure rate — and
+Fix: limit on several dimensions - account, IP, device signal, and global failure rate - and
 alert on the aggregate. NIST SP 800-63B-4 §3.2.2 caps consecutive per-account failures; treat
 that as a floor, not the control. Check submitted passwords against a breached-password list at
 registration and change, since stuffing only works with known credentials.
@@ -56,8 +56,8 @@ $_SESSION['user_id'] = $user->id;
 ```
 
 The identifier the browser held before authentication still works after it. An attacker who set
-that value first — a link with a session parameter, a cookie written from a sibling subdomain,
-an XSS on any page in scope — is now inside the victim's account. Session fixation, CWE-384.
+that value first - a link with a session parameter, a cookie written from a sibling subdomain,
+an XSS on any page in scope - is now inside the victim's account. Session fixation, CWE-384.
 
 Fix: `session_regenerate_id(true)` (or the framework equivalent) before writing the identity,
 which destroys the old record instead of leaving it valid. Rotate again on password change and
@@ -70,8 +70,8 @@ res.clearCookie("sid");
 res.redirect("/");
 ```
 
-The server-side session, or the still-valid JWT, survives. Anyone holding a copy of the token —
-from a shared machine, a proxy log, a stolen backup — keeps the account. Same class of bug:
+The server-side session, or the still-valid JWT, survives. Anyone holding a copy of the token -
+from a shared machine, a proxy log, a stolen backup - keeps the account. Same class of bug:
 changing a password without terminating other sessions, which is exactly the action a user takes
 after suspecting compromise.
 
@@ -133,8 +133,8 @@ if token_valid: login_user(user); return redirect("/settings")
 ```
 
 The reset link becomes a bearer credential. It sits in mail archives, forwarded threads, and
-provider logs, and it usually predates any MFA check. Anyone reading the mailbox — or a shared
-inbox, or a support ticket attachment — gets an authenticated session without knowing the
+provider logs, and it usually predates any MFA check. Anyone reading the mailbox - or a shared
+inbox, or a support ticket attachment - gets an authenticated session without knowing the
 password or the second factor.
 
 Fix: the token authorises exactly one action, setting a new password. Then require a normal
@@ -177,7 +177,7 @@ except Exception:
 ```
 
 Written to survive an outage. The cheapest way to bypass authentication is now to make the IdP
-unreachable — or just to send a token that raises during parsing, since the bare `except`
+unreachable - or just to send a token that raises during parsing, since the bare `except`
 swallows the failure too.
 
 Fix: return 401 or 503 and log it. Cache the JWKS with a sensible TTL so a brief provider blip
@@ -203,7 +203,7 @@ port exception for native apps only. Keep redirect hosts free of open redirector
 localStorage.setItem("access_token", tokens.access_token);
 ```
 
-Any script running on the origin reads it — including one arriving through a compromised
+Any script running on the origin reads it - including one arriving through a compromised
 dependency. Persisted in the browser profile, it also survives long past the tab.
 
 Fix: for browser sessions, a `__Host-` prefixed `HttpOnly`, `Secure` cookie plus CSRF defence,
@@ -230,6 +230,6 @@ Password change, email change, MFA enrolment and removal, API key creation, and 
 all accept a session that authenticated hours ago. A stolen session cookie converts into
 permanent access by removing MFA and swapping the recovery email.
 
-Fix: step-up on sensitive actions — require authentication within a recent window, and re-prompt
+Fix: step-up on sensitive actions - require authentication within a recent window, and re-prompt
 for a second factor. Notify the user on every authenticator or contact-address change, and send
 that notice to the previous address as well.

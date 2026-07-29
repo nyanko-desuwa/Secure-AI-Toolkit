@@ -3,7 +3,7 @@
 Prompts that get useful output from this skill. Each one states the scope, the standard, and
 the shape of the expected answer. Vague prompts produce category recitals instead of findings.
 
-Write four to seven of these. Under each, one or two lines on why it works — that reasoning
+Write four to seven of these. Under each, one or two lines on why it works - that reasoning
 is what a reader adapts, not the wording.
 
 ## Review a diff
@@ -39,7 +39,7 @@ kind of feature usually needs.>
 ## <Domain-specific task>
 
 ```
-<A prompt only this skill answers well. This is the one worth getting right — the generic
+<A prompt only this skill answers well. This is the one worth getting right - the generic
 review prompts are interchangeable across skills.>
 ```
 

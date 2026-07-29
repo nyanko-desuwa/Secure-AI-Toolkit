@@ -17,7 +17,7 @@ One snapshot cannot distinguish them. If you only have one, report a hypothesis.
 
 Separate RSS from heap first. RSS is what the OS charges. Heap is what the runtime tracks.
 Rising RSS with a flat heap points to native allocations, thread stacks, mapped files, or an
-allocator retaining free pages — not necessarily live objects.
+allocator retaining free pages - not necessarily live objects.
 
 ## Python
 

@@ -114,8 +114,8 @@ blast-radius boundary.
 
 ## References
 
-- Provider mapping — [references/provider-mapping.md](references/provider-mapping.md)
-- IAM anti-patterns — [references/iam-antipatterns.md](references/iam-antipatterns.md)
-- CIS benchmarks — [references/cis-benchmarks.md](references/cis-benchmarks.md)
-- OWASP cloud mapping — [references/owasp-cloud-mapping.md](references/owasp-cloud-mapping.md)
-- Well-Architected pillars — [references/well-architected.md](references/well-architected.md)
+- Provider mapping - [references/provider-mapping.md](references/provider-mapping.md)
+- IAM anti-patterns - [references/iam-antipatterns.md](references/iam-antipatterns.md)
+- CIS benchmarks - [references/cis-benchmarks.md](references/cis-benchmarks.md)
+- OWASP cloud mapping - [references/owasp-cloud-mapping.md](references/owasp-cloud-mapping.md)
+- Well-Architected pillars - [references/well-architected.md](references/well-architected.md)

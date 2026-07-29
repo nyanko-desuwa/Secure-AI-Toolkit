@@ -6,12 +6,12 @@ What to do when the hardening breaks the container, or when the guidance cannot 
 
 Read the error before changing anything. Three distinct causes look the same.
 
-- `Permission denied` on a path under the app directory — the files are owned by root. Fix with
+- `Permission denied` on a path under the app directory - the files are owned by root. Fix with
   `COPY --chown=10001:10001`, not by reverting `USER`.
-- `Permission denied` binding a port — the port is below 1024. Listen on 8080 and map it with
+- `Permission denied` binding a port - the port is below 1024. Listen on 8080 and map it with
   `-p 80:8080`. Adding `NET_BIND_SERVICE` back also works and is the weaker option, because it keeps
   a capability you do not need.
-- `unable to find user app` — `USER` used a name that does not exist in the base image's
+- `unable to find user app` - `USER` used a name that does not exist in the base image's
   `/etc/passwd`. Use the numeric UID.
 
 If a writable path is genuinely required, mount a volume owned by that UID rather than widening
@@ -82,7 +82,7 @@ than the bridge, some storage drivers are unavailable, cgroup v2 with delegation
 ## The container genuinely needs the docker socket
 
 Almost always this is a CI runner or a container-management UI. Work through the alternatives in
-[best-practices.md](best-practices.md#the-docker-socket) first — a dedicated build host, rootless
+[best-practices.md](best-practices.md#the-docker-socket) first - a dedicated build host, rootless
 BuildKit, Kaniko, or a DinD sidecar on a private network.
 
 If none is possible, the position to take is: this container is a host-root-equivalent trust zone.
@@ -108,12 +108,12 @@ distro patches.
 
 Do not average them. Pick one as the gate so the pipeline behaviour is predictable, and treat the
 second as a cross-check at release time. When they disagree on a specific package, read the upstream
-advisory and the distro's changelog — the distro backport is usually the reason.
+advisory and the distro's changelog - the distro backport is usually the reason.
 
 ## Digest pinning conflicts with a multi-arch build
 
 Pinning a platform-specific digest breaks `--platform` for other architectures. Pin the digest of the
-manifest list instead — `docker buildx imagetools inspect <tag> --format '{{.Manifest.Digest}}'`
+manifest list instead - `docker buildx imagetools inspect <tag> --format '{{.Manifest.Digest}}'`
 returns the list digest when the tag is multi-arch.
 
 If your registry or mirror does not preserve manifest lists, digest pinning per architecture with

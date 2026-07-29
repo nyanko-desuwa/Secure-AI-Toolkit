@@ -48,8 +48,8 @@ examples/
 | NIST SP 800-57 Part 1 | Revision 5, May 2020 | 2026-07-28, `csrc.nist.gov` |
 | NIST IR 8547 (PQC transition) | Initial Public Draft, 2024-11-12 | 2026-07-28, `csrc.nist.gov` |
 
-Where a number lives inside a PDF that could not be read from the landing page — GCM invocation
-limits, SP 800-57 cryptoperiod tables, the IR 8547 deprecation years — the reference file says so
+Where a number lives inside a PDF that could not be read from the landing page - GCM invocation
+limits, SP 800-57 cryptoperiod tables, the IR 8547 deprecation years - the reference file says so
 rather than quoting a plausible figure. Check those in the source before writing them into policy.
 
 ## Configuration
@@ -107,18 +107,18 @@ This skill contains deliberately vulnerable code in `best-practices.md`, `common
 labelled-vulnerable block into a project.
 
 All keys, tokens, and hashes in examples are placeholders. There are no real credentials, and no
-key material in this skill is safe to use — anything appearing in a public repository is public.
+key material in this skill is safe to use - anything appearing in a public repository is public.
 
 Rotating a key is cheap; discovering you cannot rotate it is not. If a pattern here has no rotation
 path, that is a finding about the pattern.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Cryptographic Storage Cheat Sheet —
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Cryptographic Storage Cheat Sheet -
   <https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html>
-- OWASP Password Storage Cheat Sheet —
+- OWASP Password Storage Cheat Sheet -
   <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html>
-- NIST CSRC publications — <https://csrc.nist.gov/publications>
-- CWE — <https://cwe.mitre.org/>
+- NIST CSRC publications - <https://csrc.nist.gov/publications>
+- CWE - <https://cwe.mitre.org/>

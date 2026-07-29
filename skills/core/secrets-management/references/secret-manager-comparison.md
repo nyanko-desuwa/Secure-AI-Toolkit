@@ -18,13 +18,13 @@ credentials across more than one cloud, or a credential type the cloud managers 
 |---|---|---|---|---|
 | You run it | Yes, unless HCP Vault | No | No | No |
 | Workload auth | Kubernetes, JWT/OIDC, AWS/Azure/GCP IAM, AppRole | IAM role, IRSA, instance profile | Managed identity, workload identity | Service account, workload identity |
-| Dynamic credentials | Yes — databases, cloud IAM, SSH, PKI | Only via a rotation function you write or a supported managed rotation | No | No |
-| Built-in rotation | Yes, per secrets engine | Yes, Lambda-based; managed for RDS and some AWS services | No — bring your own automation | No — bring your own automation |
+| Dynamic credentials | Yes - databases, cloud IAM, SSH, PKI | Only via a rotation function you write or a supported managed rotation | No | No |
+| Built-in rotation | Yes, per secrets engine | Yes, Lambda-based; managed for RDS and some AWS services | No - bring your own automation | No - bring your own automation |
 | Versioning | KV v2 keeps versions | Version IDs plus staging labels | Versioned secrets | Versioned, addressed by number or `latest` |
 | Rotation labels | Lease, renew, revoke | `AWSCURRENT`, `AWSPENDING`, `AWSPREVIOUS` | Enabled/disabled per version | Enabled/disabled/destroyed per version |
 | Encryption key control | Vault's own barrier, or auto-unseal via cloud KMS | KMS key, customer-managed available | Software or HSM-backed, managed HSM tier | Google-managed or CMEK |
 | Audit | Audit devices, request-level | CloudTrail | Azure Monitor diagnostic logs | Cloud Audit Logs |
-| Also stores keys/certs | Yes — PKI, transit, SSH engines | Secrets only; KMS is separate | Yes — keys, secrets, certificates in one service | Secrets only; Cloud KMS is separate |
+| Also stores keys/certs | Yes - PKI, transit, SSH engines | Secrets only; KMS is separate | Yes - keys, secrets, certificates in one service | Secrets only; Cloud KMS is separate |
 
 ## What actually differs in practice
 
@@ -54,7 +54,7 @@ This is the design decision people make by accident.
 
 `latest` is right for a credential your rotation automation tests before promoting. A pin is
 right when a bad value must not reach every replica simultaneously. Pick one on purpose and say
-which in a comment — the default is `latest` and the failure mode is a fleet-wide outage from a
+which in a comment - the default is `latest` and the failure mode is a fleet-wide outage from a
 single bad rotation.
 
 ## Caching and TTL
@@ -107,11 +107,11 @@ equivalent to the CSI driver's tmpfs mount. Say which one a design uses.
 
 ## Sources
 
-- Vault documentation — <https://developer.hashicorp.com/vault/docs>
-- Vault database secrets engine — <https://developer.hashicorp.com/vault/docs/secrets/databases>
-- AWS Secrets Manager user guide — <https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html>
-- AWS Secrets Manager rotation — <https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html>
-- Azure Key Vault documentation — <https://learn.microsoft.com/en-us/azure/key-vault/>
-- GCP Secret Manager documentation — <https://cloud.google.com/secret-manager/docs>
-- Secrets Store CSI Driver — <https://secrets-store-csi-driver.sigs.k8s.io/>
-- OWASP Secrets Management Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html>
+- Vault documentation - <https://developer.hashicorp.com/vault/docs>
+- Vault database secrets engine - <https://developer.hashicorp.com/vault/docs/secrets/databases>
+- AWS Secrets Manager user guide - <https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html>
+- AWS Secrets Manager rotation - <https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html>
+- Azure Key Vault documentation - <https://learn.microsoft.com/en-us/azure/key-vault/>
+- GCP Secret Manager documentation - <https://cloud.google.com/secret-manager/docs>
+- Secrets Store CSI Driver - <https://secrets-store-csi-driver.sigs.k8s.io/>
+- OWASP Secrets Management Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html>

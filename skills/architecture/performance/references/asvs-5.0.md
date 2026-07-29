@@ -7,7 +7,7 @@ Citations in this skill are chapter-level only. ASVS 5.0 substantially reorganiz
 standard; do not copy requirement IDs from 4.x. For a requirement-level assessment, use the
 official 5.0 source at <https://github.com/OWASP/ASVS>.
 
-## V2 — Validation and Business Logic
+## V2 - Validation and Business Logic
 
 Use V2 for input-derived work and allocation:
 
@@ -24,7 +24,7 @@ attacker's request. Reject unknown fields where they can introduce an unbudgeted
 A limit needs a unit. "Maximum upload 10" is incomplete; 10 bytes, MiB, files, and entries are
 different controls. Enforce bytes actually consumed rather than trusting a declared length.
 
-## V13 — Configuration
+## V13 - Configuration
 
 Use V13 where the platform exposes the resource policy:
 
@@ -43,7 +43,7 @@ printed, not guessed. JVM heap must leave room for non-heap memory.
 Configuration belongs in source-controlled deployment manifests where possible. A production
 hotfix made only in a console is not a durable control.
 
-## V16 — Security Logging and Error Handling
+## V16 - Security Logging and Error Handling
 
 Use V16 for release and observability:
 
@@ -55,7 +55,7 @@ Use V16 for release and observability:
 - Client errors do not expose heap contents or internal paths
 
 The success path is not enough. Verify malformed input, client disconnect, dependency timeout,
-and process shutdown. Scope guards — `with`, `try/finally`, `defer`, `using` — attach release to
+and process shutdown. Scope guards - `with`, `try/finally`, `defer`, `using` - attach release to
 all exits.
 
 Heap dumps and profiles contain live secrets. Protect them as sensitive production data, limit
@@ -99,6 +99,6 @@ cgroup limit, pool settings, and timeouts.
 
 ## Source
 
-- OWASP ASVS project —
+- OWASP ASVS project -
   <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP ASVS repository — <https://github.com/OWASP/ASVS>
+- OWASP ASVS repository - <https://github.com/OWASP/ASVS>

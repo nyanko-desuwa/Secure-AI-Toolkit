@@ -176,6 +176,6 @@ resource "aws_s3_bucket_policy" "invoices" {
 //     Scoping one role is not an account-level guarantee. Use an SCP or a
 //     permissions boundary if you need that.
 //   - The ViaService condition assumes the key is only used through S3. If a
-//     future feature calls kms:Decrypt directly, this breaks loudly — which is
+//     future feature calls kms:Decrypt directly, this breaks loudly - which is
 //     the intended behaviour, but somebody will be tempted to widen the condition
 //     instead of asking why.

@@ -8,7 +8,7 @@ actual hole.
 `A07/A06:2025` · ASVS V6 · CWE-307
 
 A sprayer tries three common passwords against every account. A five-failure account threshold
-never fires. Reverse brute force — one leaked password, many usernames — has the same shape.
+never fires. Reverse brute force - one leaked password, many usernames - has the same shape.
 
 Fix: keep the account counter for brute force, and add global failure-rate, account-breadth by
 source/network, and common-password cluster detection. Why it works: the attack cannot stay low
@@ -42,7 +42,7 @@ Separate `INCR` and `EXPIRE` calls carry their own race: process death between t
 with no expiry. Fix: a shared transactional store, `INCR` and first-expiry assignment in one Lua
 script. Why
 it works: every instance reads one counter and Redis serialises the update, so each attempt spends
-exactly one unit. Sticky sessions are the tempting wrong fix — routing is not storage, it fails
+exactly one unit. Sticky sessions are the tempting wrong fix - routing is not storage, it fails
 over, and it does not survive a restart. See
 [best-practices.md](best-practices.md#atomic-distributed-counters).
 
@@ -164,8 +164,8 @@ central plaintext corpus, and logging the first six token characters still shrin
 space. Meanwhile a single "100 global failures" alert fires on every release and sleeps through a
 quiet tenant compromise.
 
-Fix: log explicit event fields only — HMACed canonical account ID, outcome, route, source/network,
-device risk, limiter action, correlation ID — and pair any hard threshold with a same-hour baseline,
+Fix: log explicit event fields only - HMACed canonical account ID, outcome, route, source/network,
+device risk, limiter action, correlation ID - and pair any hard threshold with a same-hour baseline,
 failure ratio, and source/account cardinality. Why it works: defenders correlate the attack without
 retaining the secret, and both bursts and low-and-slow patterns stay visible while expected peaks
 explain themselves. Redaction after ingestion is too late; the value already reached collectors.

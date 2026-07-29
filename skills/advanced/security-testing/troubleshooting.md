@@ -64,8 +64,8 @@ flakiness rather than the tolerance.
 | Random fuzz input | Fixed seed in CI, corpus committed, unbounded runs nightly only |
 
 Timing-based tests for constant-time comparison are inherently noisy on shared CI runners.
-Assert the code path instead — that `secrets.compare_digest` or `crypto.timingSafeEqual` is what
-runs — and keep statistical timing work out of the build gate.
+Assert the code path instead - that `secrets.compare_digest` or `crypto.timingSafeEqual` is what
+runs - and keep statistical timing work out of the build gate.
 
 ## The vulnerability is real but the test would be destructive
 
@@ -75,7 +75,7 @@ run in. Options, in order of preference:
 1. Test the control, not the failure. Assert the rate limiter returns 429 at the configured
    threshold; do not send a million requests.
 2. Assert the bound exists. A test that a 200 MB upload is rejected at 10 MB does not need to
-   send 200 MB — send 10 MB + 1 byte.
+   send 200 MB - send 10 MB + 1 byte.
 3. Run the destructive version in an isolated, disposable environment, in an authorized window,
    with the owner informed.
 
@@ -120,8 +120,8 @@ one during an audit.
 
 ## No test framework exists
 
-Set up the standard choice for the language — pytest for Python, Jest or Vitest for
-JavaScript/TypeScript — write the security test, and say what you added. If the environment
+Set up the standard choice for the language - pytest for Python, Jest or Vitest for
+JavaScript/TypeScript - write the security test, and say what you added. If the environment
 blocks installation, write the test anyway, mark it as unrun, and say so plainly rather than
 implying it passed.
 

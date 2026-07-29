@@ -21,14 +21,14 @@ What the skill covers:
 - outbound adapters as the SSRF choke point (`A06:2025`, `API7:2023`, `CWE-918`);
 - error translation at the adapter, so a domain exception does not reach a client verbatim
   (`A10:2025`, `CWE-209`);
-- adapter resource lifetime — clients, subscriptions, cursors, and queues (`CWE-772`, `CWE-401`,
+- adapter resource lifetime - clients, subscriptions, cursors, and queues (`CWE-772`, `CWE-401`,
   `CWE-400`, `CWE-770`);
 - the cost of every interface, mapping step, and hidden query the pattern adds;
 - when the pattern is the wrong choice, which is most of the time.
 
 ## How It Works
 
-The skill is Markdown. Nothing executes. Read `SKILL.md` first — it holds the driving/driven
+The skill is Markdown. Nothing executes. Read `SKILL.md` first - it holds the driving/driven
 table, the workflow, the cost table, and the "when NOT to use this" section. Then open the file
 that matches the decision in front of you.
 
@@ -59,14 +59,14 @@ src/
     ports/         driving port interfaces + driven port interfaces, both owned here
     app/           use cases implementing driving ports, authorization policy
   adapters/
-    inbound/       http/, queue/, cli/, cron/ — credential to Actor, payload to command
+    inbound/       http/, queue/, cli/, cron/ - credential to Actor, payload to command
     outbound/      postgres/, egress-http/, secrets/, mail/
   composition/     the only place that knows both sides; wires and owns lifetimes
 ```
 
 Rules that make it real: `core/` imports nothing from `adapters/`; `adapters/` may import `core/`;
 `composition/` imports both and is the only package allowed to construct an adapter. Enforce it
-with project references, Go internal packages, an import-linter contract, or ArchUnit — not with
+with project references, Go internal packages, an import-linter contract, or ArchUnit - not with
 a folder name. A `core/` package that imports `net/http` is not a core.
 
 ## Configuration
@@ -111,7 +111,7 @@ enforcement points. Recommend the simpler option unless a concrete second adapte
   cross-tenant read against the real adapter, not the fake.
 - Fake adapters can drift from real ones. A green suite against a fake proves the core's logic,
   not the adapter's behaviour. Run one contract suite against both.
-- DI container behaviour — captive-dependency detection, disposal ownership, scope bubbling —
+- DI container behaviour - captive-dependency detection, disposal ownership, scope bubbling -
   varies by container and version. Verify against your container's documentation before relying
   on it to catch a singleton holding request state.
 - SSRF defence by resolve-then-connect leaves a DNS rebinding window unless the checked address
@@ -131,8 +131,8 @@ unsubscribed handlers, and raw exception rendering. Do not copy them.
 Mappings used: `A01:2025` Broken Access Control, `A02:2025` Security Misconfiguration,
 `A04:2025` Cryptographic Failures, `A05:2025` Injection, `A06:2025` Insecure Design,
 `A10:2025` Mishandling of Exceptional Conditions. API risks: `API1:2023`, `API3:2023`,
-`API4:2023`, `API7:2023`, `API10:2023`. ASVS 5.0 is cited at chapter level only — V2, V4, V8,
-V13, V14, V15, V16 — and no requirement ID is inferred from a chapter citation.
+`API4:2023`, `API7:2023`, `API10:2023`. ASVS 5.0 is cited at chapter level only - V2, V4, V8,
+V13, V14, V15, V16 - and no requirement ID is inferred from a chapter citation.
 
 CWE identifiers used in this skill were checked against `cwe.mitre.org` on 2026-07-28; the
 titles are listed in [references/cwe-adapter-weaknesses.md](references/cwe-adapter-weaknesses.md).

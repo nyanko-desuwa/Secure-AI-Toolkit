@@ -57,7 +57,7 @@ None. No build step, no dependency, no environment variable.
 To use it in Claude Code, keep this repository in the working directory so
 `skills/advanced/incident-response/SKILL.md` is readable, or copy the `incident-response`
 directory into `~/.claude/skills/`. The frontmatter `allowed-tools` restricts it to read,
-search, and web lookup plus `ls`/`cat` — it cannot run containment commands on your behalf,
+search, and web lookup plus `ls`/`cat` - it cannot run containment commands on your behalf,
 which is deliberate.
 
 ## Example Usage
@@ -85,7 +85,7 @@ More in [prompts.md](prompts.md).
 - Not a forensics course. Real disk and memory forensics needs trained examiners and tooling;
   this skill covers capture and handoff, and says where the line is. See SP 800-86.
 - No legal or notification deadlines. Breach notification is jurisdictional and changes
-  often — r3 says so itself. Deadlines belong to `compliance` and your legal team.
+  often - r3 says so itself. Deadlines belong to `compliance` and your legal team.
 - Commands are illustrative, in Bash, Python, and cloud CLIs. Yours will differ by platform,
   and a command that works on Linux will not work on a managed database.
 - No attribution guidance. Naming a threat actor from log evidence is beyond what a
@@ -104,7 +104,7 @@ and paired with a corrected version. Do not lift a labelled-wrong block into a r
 
 Everything here is defensive and assumes you are responding on systems you own or are
 authorized to defend. There is no offensive tooling, no guidance on attacking a third party,
-and nothing about "counter-hacking" — which is illegal in most jurisdictions regardless of
+and nothing about "counter-hacking" - which is illegal in most jurisdictions regardless of
 who started it. Ransom payment decisions are a business and legal matter, not an engineering
 one; this skill does not advise on them.
 
@@ -113,11 +113,11 @@ All hostnames, keys, account IDs, and identifiers are placeholders. `ghp_EXAMPLE
 
 ## References
 
-- NIST SP 800-61r3 — <https://doi.org/10.6028/NIST.SP.800-61r3>
-- NIST CSF 2.0 — <https://doi.org/10.6028/NIST.CSWP.29>
-- NIST SP 800-86 — <https://csrc.nist.gov/pubs/sp/800/86/final>
-- NIST SP 800-184 — <https://csrc.nist.gov/pubs/sp/800/184/final>
-- RFC 3227 — <https://www.rfc-editor.org/rfc/rfc3227.html>
-- MITRE ATT&CK — <https://attack.mitre.org/>
-- OWASP Top 10 for LLM Applications 2025 — <https://genai.owasp.org/llm-top-10/>
-- CISA Incident & Vulnerability Response Playbooks — <https://www.cisa.gov/resources-tools/resources/federal-government-cybersecurity-incident-and-vulnerability-response-playbooks>
+- NIST SP 800-61r3 - <https://doi.org/10.6028/NIST.SP.800-61r3>
+- NIST CSF 2.0 - <https://doi.org/10.6028/NIST.CSWP.29>
+- NIST SP 800-86 - <https://csrc.nist.gov/pubs/sp/800/86/final>
+- NIST SP 800-184 - <https://csrc.nist.gov/pubs/sp/800/184/final>
+- RFC 3227 - <https://www.rfc-editor.org/rfc/rfc3227.html>
+- MITRE ATT&CK - <https://attack.mitre.org/>
+- OWASP Top 10 for LLM Applications 2025 - <https://genai.owasp.org/llm-top-10/>
+- CISA Incident & Vulnerability Response Playbooks - <https://www.cisa.gov/resources-tools/resources/federal-government-cybersecurity-incident-and-vulnerability-response-playbooks>

@@ -14,7 +14,7 @@ checkable, and a disagreement resolvable by reading the standard rather than by 
 instinct.
 
 > **Using this with an AI assistant?** Point it at
-> [AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md) — that is the machine-facing entry point, with the
+> [AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md) - that is the machine-facing entry point, with the
 > skill registry, routing rules, and output contract. This README is the human introduction.
 
 ## Why this exists
@@ -58,7 +58,7 @@ skills/core/owasp/
 └── examples/             vulnerable and fixed code side by side
 ```
 
-The workflow inside `SKILL.md` is five steps — scope, map, apply, verify, report — and the
+The workflow inside `SKILL.md` is five steps - scope, map, apply, verify, report - and the
 verify step is the one that matters most in practice. It is what turns "here is some code"
 into "here is some code, and here is what I checked and what I could not."
 
@@ -94,7 +94,7 @@ Keep the repository in your project, or beside it, and the assistant reads
 `skills/core/owasp/SKILL.md` in place. That is the whole setup for most tools.
 
 To get `/owasp`-style invocation and automatic routing in Claude Code, install the skills
-properly — see below.
+properly - see below.
 
 ## Installing as Claude Code skills
 
@@ -123,7 +123,7 @@ cp -r Secure-AI-Toolkit/skills/core/publish-safety  ~/.claude/skills/publish-saf
 ```
 
 Then `/owasp`, `/common-pitfalls`, `/publish-safety`. Each skill's `description` frontmatter
-also lets Claude load it on its own when the work matches — writing a query, adding an upload
+also lets Claude load it on its own when the work matches - writing a query, adding an upload
 endpoint, pushing a branch.
 
 ### Install all 47
@@ -139,7 +139,7 @@ done
 references, not skills, and its only `SKILL.md` is the authoring scaffold.
 
 Directory names are unique across all four categories, so flattening needs no renaming. Check
-for collisions with skills you already have — same name means the personal copy wins over a
+for collisions with skills you already have - same name means the personal copy wins over a
 project one, and any of them override a bundled skill of that name.
 
 ### Symlink instead of copy
@@ -151,7 +151,7 @@ ln -s "$PWD/Secure-AI-Toolkit/skills/core/owasp" ~/.claude/skills/owasp
 ```
 
 Claude Code follows the symlink and reads `SKILL.md` from the target. This also preserves the
-handful of cross-skill relative links — `publish-safety/SKILL.md` points at
+handful of cross-skill relative links - `publish-safety/SKILL.md` points at
 `../common-pitfalls/references/secret-exposure.md`, which resolves inside the checkout but
 dangles after a flat copy of only one of the two.
 
@@ -268,10 +268,10 @@ editions and a stale ID is worse than no ID.
 
 Each serves a different purpose, and the skill says which to reach for:
 
-- **Top 10** — risk triage, and talking to people who are not security specialists
-- **API Security Top 10** — anything with an API surface, where object-level authorization
+- **Top 10** - risk triage, and talking to people who are not security specialists
+- **API Security Top 10** - anything with an API surface, where object-level authorization
   dominates
-- **ASVS** — verification. Concrete, testable requirements, organised in chapters V1–V17
+- **ASVS** - verification. Concrete, testable requirements, organised in chapters V1–V17
 
 Top 10 tells you what usually goes wrong. ASVS tells you what to check.
 
@@ -309,7 +309,7 @@ anywhere in this repository.
 
 A new skill matches the file shape above and clears the bar `core/owasp` sets:
 
-- Every control cites a standard — Top 10 category, ASVS chapter, and CWE where one applies
+- Every control cites a standard - Top 10 category, ASVS chapter, and CWE where one applies
 - Every pattern shows vulnerable and fixed code, and explains why the fix closes the hole
   rather than just looking safer
 - Limitations are stated. A control with a known gap says so
@@ -317,7 +317,7 @@ A new skill matches the file shape above and clears the bar `core/owasp` sets:
 - Nothing is invented. An unverifiable requirement number is left out, not guessed
 
 Start from [skills/shared/templates/](skills/shared/templates/) and read
-[skills/core/owasp/](skills/core/owasp/) first — the shape is easier to match than to
+[skills/core/owasp/](skills/core/owasp/) first - the shape is easier to match than to
 describe. Update [catalog/skills.json](catalog/skills.json), run
 `python scripts/validate_repository.py`, then update the registry, graph, matrix, status table,
 and `CHANGELOG.md`. See [CONTRIBUTING.md](CONTRIBUTING.md), [MAINTENANCE.md](MAINTENANCE.md),
@@ -328,12 +328,12 @@ lists companion controls the toolkit does not replace and provides
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Cheat Sheet Series — <https://cheatsheetseries.owasp.org/>
-- CWE Top 25 — <https://cwe.mitre.org/top25/>
-- NIST SSDF (SP 800-218) — <https://csrc.nist.gov/publications/detail/sp/800-218/final>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Cheat Sheet Series - <https://cheatsheetseries.owasp.org/>
+- CWE Top 25 - <https://cwe.mitre.org/top25/>
+- NIST SSDF (SP 800-218) - <https://csrc.nist.gov/publications/detail/sp/800-218/final>
 
 ## License
 

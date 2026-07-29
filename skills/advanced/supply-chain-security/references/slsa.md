@@ -16,7 +16,7 @@ levels; that is what this file covers.
 | Level | Name | Requires | Threat it addresses |
 |---|---|---|---|
 | Build L0 | No guarantees | Nothing. "The lack of SLSA." Local dev and test builds | None |
-| Build L1 | Provenance exists | Consistent build process on an L1 platform; platform auto-generates provenance covering builder, process, and top-level inputs; provenance distributed to consumers | Nothing reliably — provenance may be unsigned and incomplete, described as "trivial to bypass or forge" |
+| Build L1 | Provenance exists | Consistent build process on an L1 platform; platform auto-generates provenance covering builder, process, and top-level inputs; provenance distributed to consumers | Nothing reliably - provenance may be unsigned and incomplete, described as "trivial to bypass or forge" |
 | Build L2 | Hosted build platform | L1, plus a hosted platform that generates and signs the provenance itself, and consumers validate its authenticity | Tampering after the build |
 | Build L3 | Hardened builds | L2, plus platform controls so runs cannot influence one another, and provenance signing keys are unreachable from user-defined build steps | Tampering during the build, by insiders, stolen credentials, or co-tenants |
 
@@ -40,7 +40,7 @@ There is no L4 in v1.2. If someone reports "SLSA Level 4", ask which version the
 ### Claiming a level
 
 State the track: "Build L2", not "SLSA Level 2". A claim covers a specific artefact produced
-by a specific pipeline, not an organisation. And the consumer half matters — L2 requires that
+by a specific pipeline, not an organisation. And the consumer half matters - L2 requires that
 consumers validate provenance authenticity. A pipeline that produces signed provenance nobody
 checks is not L2 in effect, whatever the builder supports.
 
@@ -49,8 +49,8 @@ checks is not L2 in effect, whatever the builder supports.
 Provenance is a recommended attestation format, not mandatory. It binds a subject (an
 artefact name plus its digest) to a predicate using the in-toto attestation format.
 
-- in-toto attestation spec — <https://github.com/in-toto/attestation/tree/main/spec/v1>
-- SLSA provenance predicate — <https://slsa.dev/spec/v1.0/provenance>
+- in-toto attestation spec - <https://github.com/in-toto/attestation/tree/main/spec/v1>
+- SLSA provenance predicate - <https://slsa.dev/spec/v1.0/provenance>
 
 Verification Summary Attestations (VSA) let one party assert that it verified an artefact, so
 downstream consumers can trust the verifier instead of re-running the whole check.
@@ -71,7 +71,7 @@ go-cloud style URIs for managed keys: `awskms://`, `gcpkms://`, `azurekms://`,
 
 Signatures use the OCI 1.1 referrer specification. Inspect with `cosign tree "$IMAGE"`.
 
-### Verification — the part that is usually wrong
+### Verification - the part that is usually wrong
 
 ```bash
 cosign verify "$IMAGE" \
@@ -105,8 +105,8 @@ verification cheat sheet:
 | Buildkite | `https://agent.buildkite.com` | `https://buildkite.com/ORGANIZATION/APP_ID` |
 
 Note the GitHub identity includes the workflow file and the ref. Pinning it to the release
-workflow on the release branch is what stops a signature minted by an unrelated workflow —
-or by a branch an attacker pushed — from passing verification. A verify step that omits the
+workflow on the release branch is what stops a signature minted by an unrelated workflow -
+or by a branch an attacker pushed - from passing verification. A verify step that omits the
 workflow path accepts any workflow in that repository.
 
 ## GitHub-native provenance
@@ -135,8 +135,8 @@ Enterprise Server.
 - Provenance says how an artefact was built, not whether the source was good. A backdoor
   committed by a compromised maintainer produces perfect L3 provenance.
 - Keyless signing moves trust to the OIDC issuer and the certificate transparency log. If an
-  attacker controls the identity — a compromised GitHub account with write access to the
-  release workflow — signatures verify correctly.
+  attacker controls the identity - a compromised GitHub account with write access to the
+  release workflow - signatures verify correctly.
 - The `--certificate-identity` value is the whole control. Getting it wrong, or using a broad
   regexp variant, silently widens what you accept.
 

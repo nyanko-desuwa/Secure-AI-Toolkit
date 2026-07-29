@@ -46,7 +46,7 @@ Use an evidence ladder:
 3. User-facing wording and support runbooks
 4. Tests that express business outcomes
 5. Audit logs showing real transitions
-6. Names in current code, last — they may already be wrong
+6. Names in current code, last - they may already be wrong
 
 Write hypotheses as hypotheses:
 
@@ -151,7 +151,7 @@ diagnosis belongs in `skills/architecture/performance/`.
 ## The Aggregate Needs Data from Another Aggregate
 
 Do not pass a mutable `Customer` into `Order` and make both part of one graph by convenience.
-Pass an immutable value the rule needs — for example `CreditLimit` — or let the application
+Pass an immutable value the rule needs - for example `CreditLimit` - or let the application
 service load both roots and pass the decision input into one root's method.
 
 State the staleness window. A copied credit limit can change after it is read. If that is
@@ -164,7 +164,7 @@ That is a read-side query, not a repository method.
 
 Keep command repositories narrow: `find(tenant, id)`, `save(aggregate)`. Put sorting,
 faceting, joins, and report filters into a query service that returns an immutable DTO and
-requires tenant scope. Do not return `IQueryable` merely to avoid writing methods — that
+requires tenant scope. Do not return `IQueryable` merely to avoid writing methods - that
 moves the authorization boundary to every caller.
 
 ## Events Are Slow or Handlers Accumulate

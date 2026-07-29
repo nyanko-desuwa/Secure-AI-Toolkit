@@ -49,7 +49,7 @@ The matrix makes verb guessing visible. `GET /users/:id` and `DELETE /users/:id`
 ```text
 Review src/api for API4:2023. Find unbounded page size, offset pagination, body and upload size,
 array length, outbound response size, timeouts, GraphQL depth/complexity/batching, stream duration,
-and paid third-party calls. For every rate limit, tell me its key — actor, client, or IP — and why
+and paid third-party calls. For every rate limit, tell me its key - actor, client, or IP - and why
 that key survives proxy rotation.
 ```
 

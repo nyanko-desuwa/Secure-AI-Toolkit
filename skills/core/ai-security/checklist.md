@@ -19,7 +19,7 @@ supply chain section.
 - [ ] No shell-exec, arbitrary-eval, or arbitrary-SQL tool exists
 - [ ] Each tool answers one question or performs one action; none accepts a free-form command
 - [ ] Every parameter is validated in the tool function, not only in `input_schema`
-- [ ] Actor identity comes from the session — never a user ID, tenant ID, or role from the model
+- [ ] Actor identity comes from the session - never a user ID, tenant ID, or role from the model
 - [ ] Every object access is scoped by the actor inside the query
 - [ ] Outward destinations (hosts, recipients, paths) come from an allowlist the model cannot extend
 - [ ] Irreversible and outward-facing actions require human approval showing real arguments
@@ -99,6 +99,6 @@ supply chain section.
 
 - [ ] Build or type-check run
 - [ ] Relevant tests run, with output reported honestly
-- [ ] Each control stated as either removing capability or reducing rate — not conflated
+- [ ] Each control stated as either removing capability or reducing rate - not conflated
 - [ ] Anything unverifiable stated plainly rather than implied to be fine
 - [ ] No claim that prompt injection has been prevented

@@ -1,6 +1,6 @@
 ---
 name: compliance
-description: 'Implement privacy and compliance controls in code — GDPR data subject rights, retention and deletion jobs, consent records, data inventory, audit evidence, PCI scope reduction, HIPAA safeguards. Triggers: "GDPR", "compliance", "data retention", "right to erasure", "consent", "PII", "PCI DSS", "HIPAA", "SOC 2", "ISO 27001", "audit evidence", "tuân thủ", "quyền xóa dữ liệu".'
+description: 'Implement privacy and compliance controls in code - GDPR data subject rights, retention and deletion jobs, consent records, data inventory, audit evidence, PCI scope reduction, HIPAA safeguards. Triggers: "GDPR", "compliance", "data retention", "right to erasure", "consent", "PII", "PCI DSS", "HIPAA", "SOC 2", "ISO 27001", "audit evidence", "tuân thủ", "quyền xóa dữ liệu".'
 allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
@@ -9,7 +9,7 @@ allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 Compliance is not security. A control can pass an audit and still be exploitable: a
 quarterly access review signed off in a spreadsheet says nothing about the service account
 with a wildcard IAM policy that nobody reviewed. The reverse is also true and less often
-admitted — a genuinely secure system with no evidence trail fails the audit, because the
+admitted - a genuinely secure system with no evidence trail fails the audit, because the
 auditor cannot test a control they cannot observe.
 
 This skill covers the half of compliance that is code: deletion that actually deletes,
@@ -18,7 +18,7 @@ breach question inside 72 hours.
 
 ## When to Use
 
-- Building or reviewing a data subject request path — access, erasure, portability, rectification
+- Building or reviewing a data subject request path - access, erasure, portability, rectification
 - Writing a deletion or retention job, or discovering there is none
 - Storing consent, preferences, or an opt-out signal
 - Adding a field that holds personal data, or a new analytics event
@@ -31,7 +31,7 @@ breach question inside 72 hours.
 
 It is engineering guidance for implementing controls. Scope determination, lawful basis
 assessment, breach notifiability decisions, and certification readiness need qualified
-counsel and a real auditor. See [README.md](README.md#limitations) — that section is not
+counsel and a real auditor. See [README.md](README.md#limitations) - that section is not
 boilerplate, read it before quoting anything here to a regulator.
 
 ## Workflow
@@ -49,14 +49,14 @@ processing) is the paperwork; the machine-readable map is what makes it true.
 ### 2. Name the basis and the purpose
 
 Every field answers: why do we hold this, under what lawful basis (Art 6), for what purpose
-(Art 5(1)(b)), and for how long (Art 5(1)(e)). A field with no answer is a finding — it is
+(Art 5(1)(b)), and for how long (Art 5(1)(e)). A field with no answer is a finding - it is
 either data minimisation (Art 5(1)(c)) failure or an undocumented purpose.
 
 ### 3. Implement the rights
 
 Access (Art 15), rectification (Art 16), erasure (Art 17), portability (Art 20). Each is an
-endpoint or a job, not a policy document. Erasure is the hard one: enumerate every copy —
-replicas, backups, logs, caches, search indexes, warehouse, processors — and state for each
+endpoint or a job, not a policy document. Erasure is the hard one: enumerate every copy -
+replicas, backups, logs, caches, search indexes, warehouse, processors - and state for each
 whether it is deleted, expires, or is crypto-shredded. See
 [best-practices.md](best-practices.md#erasure-across-every-copy).
 
@@ -70,8 +70,8 @@ fails loudly. See [best-practices.md](best-practices.md#retention-enforced-by-a-
 Logs, metrics, traces, analytics, crash reports, support tickets, LLM prompts. This is the
 most common privacy finding in production systems and the hardest to unwind, because those
 sinks are usually append-only and shipped to a third party. Masking mechanics live in
-`core/logging-audit`; the consequence — a new processor, a new inventory entry, and a
-deletion obligation you cannot honour — lives here.
+`core/logging-audit`; the consequence - a new processor, a new inventory entry, and a
+deletion obligation you cannot honour - lives here.
 
 ### 6. Produce the evidence
 
@@ -90,14 +90,14 @@ Rank by how many people are affected, how sensitive the data is, and whether the
 reversible. Personal data leaves a system permanently; unlike a session token, it cannot be
 rotated.
 
-- **Critical** — special-category or payment data exposed or stored in cleartext; PII shipped
+- **Critical** - special-category or payment data exposed or stored in cleartext; PII shipped
   to a third party with no contract; erasure demonstrably not performed on live systems
-- **High** — PII in logs or analytics with no masking; no retention limit on a table of
+- **High** - PII in logs or analytics with no masking; no retention limit on a table of
   personal data; consent unrecorded so no lawful basis can be evidenced; no audit trail on a
   privileged path, so a breach question cannot be answered at all
-- **Medium** — soft delete presented as erasure with replicas out of scope; consent stored
+- **Medium** - soft delete presented as erasure with replicas out of scope; consent stored
   without timestamp or version; access review performed but not evidenced
-- **Low** — inventory incomplete for non-personal fields; retention documented but the job
+- **Low** - inventory incomplete for non-personal fields; retention documented but the job
   lacks alerting
 
 Do not inflate. "GDPR violation" is a legal conclusion. Report the technical fact: the field
@@ -105,21 +105,21 @@ is unencrypted, the job does not exist, the log contains the email address.
 
 ## Related Skills
 
-- `core/logging-audit` — masking mechanics, append-only trails, log injection, alerting
-- `advanced/incident-response` — the process that meets the 72-hour clock
-- `core/secrets-management` — key custody for crypto-shredding
-- `core/database-security` — column encryption, row-level security, backup handling
-- `core/cloud-security` — bucket retention policy, object lock, data residency
-- `core/owasp-security` — the wider Top 10 and ASVS mapping
-- `core/ai-security` — prompts and training data as a new PII sink
+- `core/logging-audit` - masking mechanics, append-only trails, log injection, alerting
+- `advanced/incident-response` - the process that meets the 72-hour clock
+- `core/secrets-management` - key custody for crypto-shredding
+- `core/database-security` - column encryption, row-level security, backup handling
+- `core/cloud-security` - bucket retention policy, object lock, data residency
+- `core/owasp-security` - the wider Top 10 and ASVS mapping
+- `core/ai-security` - prompts and training data as a new PII sink
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — one file per standard, version-pinned with a check date
-- [examples/](examples/) — seven vulnerable/fixed pairs
+- [README.md](README.md) - purpose, standards table, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - one file per standard, version-pinned with a check date
+- [examples/](examples/) - seven vulnerable/fixed pairs

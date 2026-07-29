@@ -5,7 +5,7 @@
 
 # iOS platform reference
 
-Keychain classes, App Transport Security, deep linking, and the privacy manifest — the parts a
+Keychain classes, App Transport Security, deep linking, and the privacy manifest - the parts a
 reviewer needs to be exact about.
 
 ## Keychain accessibility classes
@@ -58,8 +58,8 @@ enforceable.
 ## App Transport Security
 
 ATS lives under the `NSAppTransportSecurity` dictionary in `Info.plist`. From the documentation:
-ATS "requires that all HTTP connections made with the url-loading-system — typically using the
-`URLSession` class — use HTTPS", imposes extended checks on top of default TLS server trust
+ATS "requires that all HTTP connections made with the url-loading-system - typically using the
+`URLSession` class - use HTTPS", imposes extended checks on top of default TLS server trust
 evaluation, and "blocks connections that fail to meet minimum security specifications".
 
 Two behaviours that decide reviews:
@@ -105,7 +105,7 @@ NSPinnedDomains : Dictionary {
 ```
 
 For each domain you must supply one or more CA/sub-CA certificates under
-`NSPinnedCAIdentities`, one or more leaf certificates under `NSPinnedLeafIdentities`, or both —
+`NSPinnedCAIdentities`, one or more leaf certificates under `NSPinnedLeafIdentities`, or both -
 and if you specify both, ATS requires a match in each category. Pinning does not change any other
 security requirement: pinning a CA certificate "doesn't change the way the system evaluates that
 certificate's suitability as an anchor certificate".
@@ -118,7 +118,7 @@ verification entirely.
 
 Apple's own guidance on custom URL schemes: "While custom URL schemes are an acceptable form of
 deep linking, universal links are strongly recommended." The reason it gives for the
-recommendation is registration collision — the identifier you supply with your scheme
+recommendation is registration collision - the identifier you supply with your scheme
 distinguishes your app from others declaring the same scheme, but "it doesn't prevent other apps
 from registering the same scheme and handling the associated links."
 
@@ -141,7 +141,7 @@ control of the HTTPS origin, so hijacking it means compromising the domain.
 
 `ASWebAuthenticationSession` is the supported way to run a web auth flow. Its documentation
 states that it "ensures that only the calling app's session receives the authentication callback,
-even when more than one app registers the same callback URL scheme" — which is the specific
+even when more than one app registers the same callback URL scheme" - which is the specific
 attack a bare custom-scheme redirect is open to.
 
 Relevant configuration: `prefersEphemeralWebBrowserSession` runs the flow without existing
@@ -162,7 +162,7 @@ level keys documented: `NSPrivacyTracking`, `NSPrivacyTrackingDomains`,
 Placement, from the documentation: root of the bundle for iOS, iPadOS, tvOS, visionOS, and
 watchOS apps and frameworks; `Contents/Resources/` for macOS and Mac Catalyst apps;
 `Versions/A/Resources/` for macOS frameworks. Swift packages need the file declared explicitly as
-a resource — Xcode does not treat it as one by default. A static `.a` library cannot carry a
+a resource - Xcode does not treat it as one by default. A static `.a` library cannot carry a
 privacy manifest at all; it has to become a static framework first.
 
 Two consequences for a review:
@@ -174,12 +174,12 @@ Two consequences for a review:
 
 ## Sources
 
-- Keychain accessibility constants — <https://developer.apple.com/documentation/security/ksecattraccessiblewhenunlockedthisdeviceonly>
-- `SecAccessControlCreateFlags` — <https://developer.apple.com/documentation/security/secaccesscontrolcreateflags>
-- `LAContext` — <https://developer.apple.com/documentation/localauthentication/lacontext>
-- `NSAppTransportSecurity` — <https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity>
-- `NSPinnedDomains` — <https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity/nspinneddomains>
-- Custom URL schemes — <https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app>
-- Associated domains — <https://developer.apple.com/documentation/xcode/supporting-associated-domains>
-- `ASWebAuthenticationSession` — <https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession>
-- Privacy manifest files — <https://developer.apple.com/documentation/bundleresources/privacy-manifest-files>
+- Keychain accessibility constants - <https://developer.apple.com/documentation/security/ksecattraccessiblewhenunlockedthisdeviceonly>
+- `SecAccessControlCreateFlags` - <https://developer.apple.com/documentation/security/secaccesscontrolcreateflags>
+- `LAContext` - <https://developer.apple.com/documentation/localauthentication/lacontext>
+- `NSAppTransportSecurity` - <https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity>
+- `NSPinnedDomains` - <https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity/nspinneddomains>
+- Custom URL schemes - <https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app>
+- Associated domains - <https://developer.apple.com/documentation/xcode/supporting-associated-domains>
+- `ASWebAuthenticationSession` - <https://developer.apple.com/documentation/authenticationservices/aswebauthenticationsession>
+- Privacy manifest files - <https://developer.apple.com/documentation/bundleresources/privacy-manifest-files>

@@ -23,7 +23,7 @@ and IIS Application Pool Identities
 
 Virtual accounts and `ApplicationPoolIdentity` have no password anywhere, so there is nothing for
 an attacker to dump or replay. They still authenticate outbound as the machine account, which is
-why "the service needs to read a file share" is not by itself a reason to create a domain user —
+why "the service needs to read a file share" is not by itself a reason to create a domain user -
 ACL the share to the computer account or to a group containing it.
 
 ## gMSA setup
@@ -107,7 +107,7 @@ Then check whether any of those accounts is privileged in the domain:
 
 Any result containing Domain Admins, Enterprise Admins, Schema Admins, Account Operators, or
 Backup Operators is a critical finding (A01:2025, CWE-250). Backup Operators is on the list
-because `SeBackupPrivilege` and `SeRestorePrivilege` bypass file ACLs entirely — Microsoft's own
+because `SeBackupPrivilege` and `SeRestorePrivilege` bypass file ACLs entirely - Microsoft's own
 description of `SeBackupPrivilege` says it "causes the system to grant all read access control to
 any file, regardless of the access control list".
 
@@ -126,7 +126,7 @@ Verified against the event 4672 privilege table
 | `SeEnableDelegationPrivilege` | Enable accounts to be trusted for delegation | Can mark an account trusted for delegation |
 
 `SeImpersonatePrivilege` is held by `LocalSystem`, `NetworkService`, `LocalService`, and members
-of Administrators and IIS_IUSRS by default. That is expected for a web worker process — it needs
+of Administrators and IIS_IUSRS by default. That is expected for a web worker process - it needs
 to impersonate the authenticated caller. It is not expected on an arbitrary domain user you
 created for a batch job. Check with:
 
@@ -139,14 +139,14 @@ identity) rather than assuming from the account's group membership.
 
 ## Sources
 
-- `New-ADServiceAccount` —
+- `New-ADServiceAccount` -
   <https://learn.microsoft.com/en-us/powershell/module/activedirectory/new-adserviceaccount>,
   checked 2026-07-28
-- `Add-KdsRootKey` — <https://learn.microsoft.com/en-us/powershell/module/kds/add-kdsrootkey>,
+- `Add-KdsRootKey` - <https://learn.microsoft.com/en-us/powershell/module/kds/add-kdsrootkey>,
   checked 2026-07-28
-- IIS Application Pool Identities —
+- IIS Application Pool Identities -
   <https://learn.microsoft.com/en-us/iis/manage/configuring-security/application-pool-identities>,
   checked 2026-07-28
-- Event 4672 privilege table —
+- Event 4672 privilege table -
   <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4672>,
   checked 2026-07-28

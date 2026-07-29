@@ -35,7 +35,7 @@ Fix: interpolate the resource from the Terraform reference rather than hardcodin
 wildcarding. `resources = ["${aws_s3_bucket.data.arn}/tenant/${var.tenant_id}/*"]` cannot drift
 from the bucket it refers to.
 
-Some APIs genuinely require `Resource: "*"` — `cloudwatch:PutMetricData`, `ec2:DescribeInstances`,
+Some APIs genuinely require `Resource: "*"` - `cloudwatch:PutMetricData`, `ec2:DescribeInstances`,
 most list operations. Constrain those with a condition key instead and leave a comment saying
 which API forced it.
 
@@ -80,7 +80,7 @@ Why the fix works: the capability's lifetime is short enough that leaking it aft
 uninteresting, and the ownership check is enforced by your code rather than by the URL's
 existence.
 
-Signing with a role that can read the whole bucket does not widen the URL — the URL is scoped
+Signing with a role that can read the whole bucket does not widen the URL - the URL is scoped
 to its key. But it does mean a bug in key construction can sign a URL for someone else's
 object, so validate the key against the actor before signing.
 
@@ -120,7 +120,7 @@ metadata_options {
 }
 ```
 
-`optional` means v1 still answers. An SSRF that only controls a URL — no headers, no method —
+`optional` means v1 still answers. An SSRF that only controls a URL - no headers, no method -
 reads the instance role's credentials from
 `http://169.254.169.254/latest/meta-data/iam/security-credentials/`. This is the exact shape of
 several well-known cloud breaches.
@@ -133,7 +133,7 @@ Why the fix works: v2 requires a PUT to obtain a token and a custom header to us
 URL-only SSRF can do neither.
 
 Do not treat this as a substitute for fixing the SSRF. The metadata service is one target among
-many — internal admin panels and other services on the private network are still reachable.
+many - internal admin panels and other services on the private network are still reachable.
 
 ## Secrets in Terraform variables, then in state
 
@@ -149,8 +149,8 @@ resource "aws_db_instance" "orders" {
 Anyone with read access to the state bucket has the password, and state is often readable by the
 whole platform team.
 
-Fix: let the provider generate and store the secret — `manage_master_user_password = true` on RDS
-puts it in Secrets Manager — or create an empty secret in Terraform and populate the value out
+Fix: let the provider generate and store the secret - `manage_master_user_password = true` on RDS
+puts it in Secrets Manager - or create an empty secret in Terraform and populate the value out
 of band. Encrypt the state backend with a customer-managed key and restrict it as production
 data.
 
@@ -165,7 +165,7 @@ accumulate integrations and nobody removes the grants for the integration that w
 Fix: one role per function, granted the actions that function calls. Review the role when the
 function changes, not on a schedule.
 
-Why the fix works: a function is the easiest thing in the account to invoke — sometimes from an
+Why the fix works: a function is the easiest thing in the account to invoke - sometimes from an
 unauthenticated URL, an API Gateway route, or an S3 event that a user can trigger by uploading.
 Its role is the blast radius of any bug in its handler.
 
@@ -178,7 +178,7 @@ Related: the event source is a trust boundary. `aws_lambda_permission` with a pr
 SECRET = get_secret("db-password")   # module scope, cached until the sandbox dies
 ```
 
-Cold-start caching is the right instinct — calling the secret manager on every invocation costs
+Cold-start caching is the right instinct - calling the secret manager on every invocation costs
 latency and money. The failure is caching with no expiry, so a rotated secret is not picked up
 until the execution environment is recycled, which can be hours.
 
@@ -198,14 +198,14 @@ sink. Enable log file validation so tampering is detectable, and send the logs t
 workload cannot write to.
 
 Why the fix works: new accounts inherit the trail. The attacker's first move after gaining
-admin — disabling the trail — now requires access to a different account, and an SCP can deny it
+admin - disabling the trail - now requires access to a different account, and an SCP can deny it
 outright.
 
 ## Alerting on everything, so alerting on nothing
 
 A rule per CIS recommendation produces hundreds of alerts, all of which get muted within a month.
 
-Fix: start with the small set that indicates compromise rather than untidiness — root account
+Fix: start with the small set that indicates compromise rather than untidiness - root account
 use, CloudTrail or Activity Log disabled, IAM policy or role-assignment change, storage made
 public, new region activity, unusual `AssumeRole` or service-account impersonation, mass object
 deletion, cost anomaly. Add rules only when someone owns the response.

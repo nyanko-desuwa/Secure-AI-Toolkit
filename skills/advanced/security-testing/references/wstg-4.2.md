@@ -11,7 +11,7 @@ newest content and therefore moves; cite a versioned URL (`/v42/`) so a report s
 ## What WSTG is for
 
 WSTG is a catalogue of tests. ASVS says what must be true; WSTG says how to check it. Neither
-is a risk ranking — that is the Top 10.
+is a risk ranking - that is the Top 10.
 
 In a test suite, a WSTG ID is the most useful citation available, because it names a procedure
 rather than a property. `test_orders_idor` says nothing; `test_idor_orders__WSTG_ATHZ_04` tells
@@ -118,6 +118,6 @@ rg -o 'WSTG-[A-Z]{4}-\d{2}' tests/ | sort -u
 
 ## Sources
 
-- WSTG project page — <https://owasp.org/www-project-web-security-testing-guide/>
-- WSTG v4.2 contents — <https://owasp.org/www-project-web-security-testing-guide/v42/>
-- WSTG GitHub — <https://github.com/OWASP/wstg>
+- WSTG project page - <https://owasp.org/www-project-web-security-testing-guide/>
+- WSTG v4.2 contents - <https://owasp.org/www-project-web-security-testing-guide/v42/>
+- WSTG GitHub - <https://github.com/OWASP/wstg>

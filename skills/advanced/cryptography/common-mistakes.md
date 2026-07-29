@@ -5,7 +5,7 @@ What goes wrong in crypto code, why it goes wrong, and why the fix actually clos
 ## The threat model was never written down
 
 Data encrypted in the application, key read from an environment variable in the same container,
-attacker gets application-level RCE. The encryption stopped nothing — the attacker has the key.
+attacker gets application-level RCE. The encryption stopped nothing - the attacker has the key.
 
 This is the most common crypto failure and it has no algorithm in it. Encryption at rest defends
 against stolen disks, stolen backups, and cloned snapshots. It does not defend against an attacker
@@ -13,7 +13,7 @@ who is inside the process that decrypts.
 
 Fix: name the attacker before choosing the primitive. If the answer is "a stolen backup", the
 platform's disk or database encryption is usually sufficient and adds no key management risk. If it
-is "a malicious operator", the key must be somewhere the operator cannot reach — a KMS with an IAM
+is "a malicious operator", the key must be somewhere the operator cannot reach - a KMS with an IAM
 policy they lack, or an HSM.
 
 ## Password hashed with a fast hash
@@ -23,7 +23,7 @@ hashlib.sha256(password.encode()).hexdigest()
 ```
 
 SHA-256 is designed to be fast, which is exactly the wrong property. A commodity GPU tries billions
-per second. Adding a salt defeats precomputed tables and does nothing about throughput — the
+per second. Adding a salt defeats precomputed tables and does nothing about throughput - the
 attacker just works one account at a time.
 
 Fix: Argon2id at the OWASP baseline. See
@@ -61,7 +61,7 @@ CBC with no MAC means an attacker can modify the ciphertext and you will decrypt
 distinguishable padding error you have a padding oracle and full plaintext recovery; without one you
 still have malleability.
 
-Fix: an AEAD mode — AES-GCM or ChaCha20-Poly1305. It authenticates as part of decryption, so
+Fix: an AEAD mode - AES-GCM or ChaCha20-Poly1305. It authenticates as part of decryption, so
 tampering surfaces as an exception.
 
 Wrong fix: bolting on an HMAC yourself. Order matters, the MAC must cover the IV, the comparison
@@ -77,7 +77,7 @@ The TODO does not stop the commit. Once in git history the key is exposed even a
 deleted, and a key baked into a container layer is readable by anyone who can pull the image.
 
 Fix: key from a KMS or secret manager, fetched at runtime. If a key has already been committed,
-rotate it and re-encrypt — deleting the line is not remediation. See `secrets-management`.
+rotate it and re-encrypt - deleting the line is not remediation. See `secrets-management`.
 
 ## No key rotation path
 
@@ -99,7 +99,7 @@ tls.Config{InsecureSkipVerify: true}
 ```
 
 This removes the only thing that distinguishes the real server from an attacker on the path. TLS
-still encrypts — to whoever answered.
+still encrypts - to whoever answered.
 
 Fix: point the client at the CA bundle that signed the certificate (`verify="/path/ca.pem"`,
 `RootCAs: pool`). For a self-signed development certificate, add that certificate to the trust
@@ -143,8 +143,8 @@ raw body.
 if token == expected_token:
 ```
 
-`==` returns at the first differing byte, leaking a prefix oracle. Practicality varies enormously —
-locally exploitable, hard over a noisy network — so rank it honestly rather than reflexively as
+`==` returns at the first differing byte, leaking a prefix oracle. Practicality varies enormously -
+locally exploitable, hard over a noisy network - so rank it honestly rather than reflexively as
 critical.
 
 Fix: `hmac.compare_digest`. Better: look the credential up by an indexed prefix and compare a digest,
@@ -159,7 +159,7 @@ stored = base64.b64encode(ssn.encode())
 base64 is reversible by anyone. It appears in code review because the output looks opaque. The same
 error appears as "encrypted" JWT payloads and gzip'd blobs.
 
-Fix: AEAD with a managed key. And check whether you need to store the value at all — the strongest
+Fix: AEAD with a managed key. And check whether you need to store the value at all - the strongest
 control on a sensitive field is not collecting it.
 
 ## Deterministic encryption used by default
@@ -169,8 +169,8 @@ the ciphertext column reveals the frequency distribution. For a `status` or `cou
 effectively plaintext.
 
 Fix: randomized AEAD for storage, plus a keyed blind index for lookup. See
-[best-practices.md](best-practices.md#deterministic-encryption). Note the residual leak — equal
-values still share an index — rather than claiming the problem is solved.
+[best-practices.md](best-practices.md#deterministic-encryption). Note the residual leak - equal
+values still share an index - rather than claiming the problem is solved.
 
 ## Decryption failure swallowed
 
@@ -193,7 +193,7 @@ storage, or the KMS key is deleted while backups that depend on it are still in 
 
 Fix: decide explicitly whether backups hold ciphertext or plaintext, encrypt the backup with a key
 that has its own lifecycle, and never schedule KEK deletion before every backup that needs it has
-aged out. Test a restore — an unrestorable encrypted backup is a data loss event waiting for a
+aged out. Test a restore - an unrestorable encrypted backup is a data loss event waiting for a
 trigger.
 
 ## Rolling your own because the library "does not fit"
@@ -202,6 +202,6 @@ XOR with a repeating key, a cipher plus a hash assembled by hand, a custom paddi
 standard reimplemented from its specification. The result compiles, round-trips in tests, and fails
 against an adversary.
 
-Fix: use a maintained library's highest-level interface — libsodium, Go's AEAD interface, Python's
+Fix: use a maintained library's highest-level interface - libsodium, Go's AEAD interface, Python's
 `cryptography`. If a requirement seems to demand a novel construction, challenge the requirement
 first; it is usually a design problem wearing a crypto costume.

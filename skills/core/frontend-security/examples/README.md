@@ -8,14 +8,14 @@ control fails.
 
 ## Contents
 
-- [DOM XSS from the URL hash](#dom-xss-from-the-url-hash) — A05, CWE-79
-- [React `dangerouslySetInnerHTML` on API data](#react-dangerouslysetinnerhtml-on-api-data) — A05, CWE-79
-- [Vue `v-html` in a comment feed](#vue-v-html-in-a-comment-feed) — A05, CWE-79
-- [Open redirect after login](#open-redirect-after-login) — A01, CWE-601
-- [`postMessage` handler with no origin check](#postmessage-handler-with-no-origin-check) — A05, CWE-346
-- [Access token in `localStorage`](#access-token-in-localstorage) — A02, CWE-1004
-- [CSP that does not stop XSS](#csp-that-does-not-stop-xss) — A02, CWE-79
-- [Third-party script with no integrity check](#third-party-script-with-no-integrity-check) — A03, CWE-353
+- [DOM XSS from the URL hash](#dom-xss-from-the-url-hash) - A05, CWE-79
+- [React `dangerouslySetInnerHTML` on API data](#react-dangerouslysetinnerhtml-on-api-data) - A05, CWE-79
+- [Vue `v-html` in a comment feed](#vue-v-html-in-a-comment-feed) - A05, CWE-79
+- [Open redirect after login](#open-redirect-after-login) - A01, CWE-601
+- [`postMessage` handler with no origin check](#postmessage-handler-with-no-origin-check) - A05, CWE-346
+- [Access token in `localStorage`](#access-token-in-localstorage) - A02, CWE-1004
+- [CSP that does not stop XSS](#csp-that-does-not-stop-xss) - A02, CWE-79
+- [Third-party script with no integrity check](#third-party-script-with-no-integrity-check) - A03, CWE-353
 
 ---
 
@@ -41,7 +41,7 @@ https://app.example.com/dashboard#<img src=x onerror=alert(document.domain)>
 ```
 
 The victim clicks a normal-looking link to your real domain. The payload runs in your origin, with
-the user's session, and the hash is never transmitted in the HTTP request — so it does not appear in
+the user's session, and the hash is never transmitted in the HTTP request - so it does not appear in
 server logs, a WAF, or an access audit. The bug is invisible from the server side.
 
 ```javascript
@@ -64,7 +64,7 @@ handler();
 
 Why this works: `textContent` assigns a string to a text node. There is no HTML parse step, so
 there is no context in which `<img>` becomes an element. The allowlist version never uses the input
-as data at all — it uses it as a key, and an unmatched key falls back to a known-safe default.
+as data at all - it uses it as a key, and an unmatched key falls back to a known-safe default.
 
 The tempting wrong fix is escaping `<` and `>` before the `innerHTML` assignment. That handles the
 element-injection case and misses the attribute case entirely: the same helper used in
@@ -88,7 +88,7 @@ function ArticleBody({ article }) {
 ```
 
 "It comes from our own API" is the usual reasoning, and it is wrong twice. The API stores what a
-user submitted, so this is stored XSS — it fires for every reader, with no link to click. And an
+user submitted, so this is stored XSS - it fires for every reader, with no link to click. And an
 API response is untrusted input regardless of who owns the API; a bug in another service, a stale
 column, or an admin-panel injection all arrive through the same field.
 
@@ -114,20 +114,20 @@ function ArticleBody({ article }) {
 }
 ```
 
-If the field is plain text — a display name, a comment, a title — do not render it as HTML at all:
+If the field is plain text - a display name, a comment, a title - do not render it as HTML at all:
 
 ```jsx
 <div className="prose">{article.bodyText}</div>
 ```
 
 Why this works: DOMPurify parses the input into a DOM, walks it, and drops every node and attribute
-not on the allowlist, then serializes what remains. An allowlist fails closed — a tag nobody
+not on the allowlist, then serializes what remains. An allowlist fails closed - a tag nobody
 thought of is removed because it is absent, not because it was blocked. The `ALLOWED_URI_REGEXP`
 matters independently: without it, `<a href="javascript:alert(1)">` survives a tag allowlist that
 permits `a` and `href`.
 
 Two honest gaps. Sanitizing in a `useMemo` keyed on the raw value is correct here, but sanitizing
-once on the server and trusting the stored result later is not — the stored value is a snapshot of
+once on the server and trusting the stored result later is not - the stored value is a snapshot of
 one sanitizer version. Sanitize on output. And this config is for article bodies; the same config
 in an HTML attribute or a `<style>` context is not safe, because DOMPurify sanitizes document HTML,
 not arbitrary fragments in arbitrary contexts.
@@ -182,7 +182,7 @@ const rendered = computed(() =>
 </template>
 ```
 
-Note `{{ c.author }}` — mustache interpolation escapes, so the author name needs nothing extra.
+Note `{{ c.author }}` - mustache interpolation escapes, so the author name needs nothing extra.
 If comments are plain text with newlines, drop `v-html` entirely and use `white-space: pre-wrap`.
 
 Why this works: the sanitizer runs before the value reaches the directive, so `v-html` only ever
@@ -207,7 +207,7 @@ location.assign(next);
 
 Two attacks from one line. `?next=https://app-example.attacker.test/login` sends the user to a
 pixel-perfect clone immediately after a successful authentication, when they are most likely to
-retype credentials — and the link they clicked was genuinely on your domain, which is what makes it
+retype credentials - and the link they clicked was genuinely on your domain, which is what makes it
 work. `?next=javascript:fetch('/api/keys').then(r=>r.text()).then(t=>...)` is XSS, because
 `location.assign` executes a `javascript:` URL in the current origin.
 
@@ -231,7 +231,7 @@ function safeNext(raw) {
 location.assign(safeNext(new URLSearchParams(location.search).get("next")));
 ```
 
-Stronger where the design allows it — never accept a path from the client:
+Stronger where the design allows it - never accept a path from the client:
 
 ```javascript
 const DESTINATIONS = { dashboard: "/dashboard", billing: "/settings/billing", team: "/team" };
@@ -242,7 +242,7 @@ Why this works: `new URL(raw, location.origin)` performs the browser's own parse
 on the same interpretation the navigation will use. Comparing `url.origin` rejects
 `//attacker.test` (protocol-relative), `https://attacker.test`, and `\/\/attacker.test`, all of
 which defeat a string check. The protocol check catches `javascript:` and `data:`, whose `origin` is
-`"null"` and so would already fail the origin comparison — the explicit check documents the intent.
+`"null"` and so would already fail the origin comparison - the explicit check documents the intent.
 Returning only the path components discards any authority the attacker smuggled in.
 
 Every string-based approach fails. `startsWith("/")` passes `//attacker.test`.
@@ -269,7 +269,7 @@ iframe.contentWindow.postMessage({ type: "SESSION", token: accessToken }, "*");
 ```
 
 `message` events are delivered from any origin. Any page that opens yours with `window.open`, or
-embeds you in an iframe, holds a reference and can post to it — so the `RENDER` branch is XSS
+embeds you in an iframe, holds a reference and can post to it - so the `RENDER` branch is XSS
 reachable from an attacker's page, and the `NAVIGATE` branch is an open redirect. The `"*"` target
 on the send side hands the access token to whatever document currently occupies that frame, which
 after a redirect chain is not necessarily the one you loaded.
@@ -309,7 +309,7 @@ Why this works: `event.origin` is set by the browser and cannot be forged by the
 equality check is a real authentication of the peer. Checking `event.source` additionally binds the
 message to the specific frame you created, so a second embedded document from the same trusted
 origin cannot impersonate the first. Naming the target origin on send means the browser drops the
-message if the frame has navigated elsewhere — the token is never delivered to an unexpected
+message if the frame has navigated elsewhere - the token is never delivered to an unexpected
 document. And the handler no longer has an HTML sink or a navigation sink at all; every branch maps
 input to a server-chosen value.
 
@@ -338,8 +338,8 @@ async function login(email, password) {
 const authHeader = () => ({ Authorization: `Bearer ${localStorage.getItem("access_token")}` });
 ```
 
-One XSS anywhere in the origin — including inside a third-party analytics script, a compromised npm
-dependency, or a browser extension injecting into the page — reads the token with
+One XSS anywhere in the origin - including inside a third-party analytics script, a compromised npm
+dependency, or a browser extension injecting into the page - reads the token with
 `localStorage.getItem` and exfiltrates it. The token then works outside the browser, from the
 attacker's machine, until it expires. `localStorage` also has no expiry and survives tab close.
 
@@ -368,12 +368,12 @@ async function apiPost(path, body) {
 ```
 
 Why this works: `HttpOnly` removes the token from the JavaScript object graph, so an injected script
-cannot read it — the attacker is reduced to making requests from the victim's browser while the page
+cannot read it - the attacker is reduced to making requests from the victim's browser while the page
 is open, rather than stealing a portable credential. `Secure` keeps it off plaintext connections and
 `SameSite=Lax` blocks the cookie on cross-site POST.
 
 Be honest about the tradeoff rather than presenting cookies as a fix for XSS. The cookie design
-adds CSRF as a concern, because the browser now attaches the credential automatically — so it needs
+adds CSRF as a concern, because the browser now attaches the credential automatically - so it needs
 a CSRF token or an equivalent server-side check, which `localStorage` did not. And XSS is still
 catastrophic: the attacker can call your API from the victim's session for as long as the page is
 open. Cookies bound the damage to session-riding; they do not prevent it. The actual fix for XSS is
@@ -435,7 +435,7 @@ survivable in a real app without falling back to a host allowlist. `object-src '
 `require-trusted-types-for 'script'` converts every remaining DOM sink assignment into a runtime
 `TypeError`, which turns a silent vulnerability into a visible bug.
 
-Deployment notes that matter. The nonce must be unpredictable and per-response — `$request_id` is
+Deployment notes that matter. The nonce must be unpredictable and per-response - `$request_id` is
 nginx's per-request identifier and is acceptable; a build-time constant is not, because it is
 guessable from any cached page. Roll out with `Content-Security-Policy-Report-Only` first and read
 the reports, because enforcing an untested policy breaks the app. And verify the deployed header,
@@ -447,7 +447,7 @@ curl -sSI https://app.example.com/nope | grep -i content-security-policy   # 404
 ```
 
 A CDN, WAF, or framework middleware can strip or replace the header. Also check whether a
-`<meta http-equiv="Content-Security-Policy">` tag elsewhere in the app is competing — meta-delivered
+`<meta http-equiv="Content-Security-Policy">` tag elsewhere in the app is competing - meta-delivered
 policies cannot express `frame-ancestors` or `report-uri`, and two policies intersect, so a stray
 one can only make things stricter and more confusing.
 
@@ -466,7 +466,7 @@ one can only make things stricter and more confusing.
 `latest` means the bytes change without your involvement. A third-party script runs with the same
 privileges as your own code: it reads the DOM, reads `localStorage`, hooks `fetch`, and can rewrite
 the checkout form. A compromise of the CDN, of the vendor's build pipeline, or of the vendor's npm
-dependencies is a compromise of your origin — this is the shape of every Magecart-style card
+dependencies is a compromise of your origin - this is the shape of every Magecart-style card
 skimming incident.
 
 ```html
@@ -493,13 +493,13 @@ boundary at all. Then the CSP does not need a third-party host in `script-src`.
 
 Why this works: the browser hashes the fetched bytes and refuses to execute on mismatch, so a
 substituted file fails closed rather than running. `crossorigin="anonymous"` is required for SRI to
-be checked on a cross-origin response — without it the response is opaque and the integrity check
+be checked on a cross-origin response - without it the response is opaque and the integrity check
 cannot be performed. Pinning the version path means the URL's content is immutable, so the hash
 stays valid and an upgrade is a deliberate, reviewable change.
 
 Two limitations worth stating. SRI verifies the file you named; it says nothing about what that
 file loads afterwards, and most analytics and tag-manager scripts exist precisely to load more
-script — so SRI on a loader verifies the loader and nothing else. And SRI does not help if the
+script - so SRI on a loader verifies the loader and nothing else. And SRI does not help if the
 vendor ships a malicious version through the normal release channel and you update the hash along
 with it. For genuinely untrusted embeds, the boundary is a sandboxed iframe on a separate origin
 communicating over an origin-checked `postMessage`, not a hash:
@@ -513,7 +513,7 @@ communicating over an origin-checked `postMessage`, not a hash:
 ></iframe>
 ```
 
-Do not combine `allow-scripts` with `allow-same-origin` on content you do not control — together
+Do not combine `allow-scripts` with `allow-same-origin` on content you do not control - together
 they let the framed document remove its own sandbox attribute.
 
 ---

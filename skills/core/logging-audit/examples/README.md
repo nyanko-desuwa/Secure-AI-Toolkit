@@ -5,14 +5,14 @@ Every fix says why it closes the hole rather than merely looking cleaner.
 
 ## Contents
 
-- [Forged admin action through log injection](#forged-admin-action-through-log-injection) — A09, CWE-117
-- [Bearer token leaked into a log line](#bearer-token-leaked-into-a-log-line) — A09, CWE-532
-- [Missing authorization-denial event](#missing-authorization-denial-event) — A09, CWE-778
-- [Audit event records actor but not target](#audit-event-records-actor-but-not-target) — A09, CWE-223
-- [Privileged application can erase the trail](#privileged-application-can-erase-the-trail) — A09
-- [Alert rule with no emitter](#alert-rule-with-no-emitter) — A09, CWE-778
-- [Timestamp without a timezone](#timestamp-without-a-timezone) — A09, CWE-223
-- [Log sink blocks the request path](#log-sink-blocks-the-request-path) — A10, CWE-400
+- [Forged admin action through log injection](#forged-admin-action-through-log-injection) - A09, CWE-117
+- [Bearer token leaked into a log line](#bearer-token-leaked-into-a-log-line) - A09, CWE-532
+- [Missing authorization-denial event](#missing-authorization-denial-event) - A09, CWE-778
+- [Audit event records actor but not target](#audit-event-records-actor-but-not-target) - A09, CWE-223
+- [Privileged application can erase the trail](#privileged-application-can-erase-the-trail) - A09
+- [Alert rule with no emitter](#alert-rule-with-no-emitter) - A09, CWE-778
+- [Timestamp without a timezone](#timestamp-without-a-timezone) - A09, CWE-223
+- [Log sink blocks the request path](#log-sink-blocks-the-request-path) - A10, CWE-400
 
 ---
 
@@ -361,9 +361,9 @@ cannot diverge. Application logs and audit trails have different failure semanti
 
 ## Sources
 
-- OWASP Top 10 2025 A09 — <https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/>
-- OWASP ASVS 5.0 V16 — <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md>
-- OWASP Logging Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html>
-- CWE-117 — <https://cwe.mitre.org/data/definitions/117.html>
-- CWE-532 — <https://cwe.mitre.org/data/definitions/532.html>
-- CWE-778 — <https://cwe.mitre.org/data/definitions/778.html>
+- OWASP Top 10 2025 A09 - <https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/>
+- OWASP ASVS 5.0 V16 - <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md>
+- OWASP Logging Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html>
+- CWE-117 - <https://cwe.mitre.org/data/definitions/117.html>
+- CWE-532 - <https://cwe.mitre.org/data/definitions/532.html>
+- CWE-778 - <https://cwe.mitre.org/data/definitions/778.html>

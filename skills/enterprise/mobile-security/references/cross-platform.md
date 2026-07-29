@@ -36,7 +36,7 @@ Latest release 10.0.0 (published 2025-03-23). It wraps iOS Keychain and Android 
 
 Two option groups decide whether the storage is actually protective:
 
-`ACCESSIBLE` — the iOS accessibility class:
+`ACCESSIBLE` - the iOS accessibility class:
 
 | Value | Meaning |
 |---|---|
@@ -47,7 +47,7 @@ Two option groups decide whether the storage is actually protective:
 | `WHEN_UNLOCKED_THIS_DEVICE_ONLY` | As `WHEN_UNLOCKED`, does not migrate |
 | `AFTER_FIRST_UNLOCK_THIS_DEVICE_ONLY` | As `AFTER_FIRST_UNLOCK`, never migrates |
 
-`ACCESS_CONTROL` — the biometric or passcode constraint:
+`ACCESS_CONTROL` - the biometric or passcode constraint:
 
 | Value | Meaning |
 |---|---|
@@ -60,7 +60,7 @@ Two option groups decide whether the storage is actually protective:
 | `BIOMETRY_CURRENT_SET_OR_DEVICE_PASSCODE` | Either, enrolment-bound |
 
 Defaults are the permissive end of both lists. Calling `setGenericPassword(user, token)` with no
-options stores the token with whatever the library's default accessibility is — pass the options
+options stores the token with whatever the library's default accessibility is - pass the options
 explicitly rather than relying on it, and re-check them when upgrading a major version.
 
 `BIOMETRY_CURRENT_SET` is the value that survives the "attacker enrols their own face" case,
@@ -71,7 +71,7 @@ because the item is invalidated when the enrolled set changes. `BIOMETRY_ANY` is
 - Remote debugging and the dev menu must be off in release. A shipped dev bundle exposes the
   whole JS context.
 - Source maps uploaded to a crash reporter are fine. Source maps shipped inside the app package
-  are not — they hand over readable original source.
+  are not - they hand over readable original source.
 - OTA update mechanisms (CodePush and equivalents) are a code-integrity surface. If an attacker
   can serve a bundle, they own the app. Verify signatures and pin the update endpoint.
 - Native modules are still native. A bridge method that takes a path or a URL from JS needs the
@@ -111,7 +111,7 @@ Constructors that matter:
 
 On iOS, `IOSOptions(accessibility: ...)` takes `unlocked` (the default),
 `first_unlock`, or `first_unlock_this_device`. Pick `first_unlock_this_device` for a refresh token
-that a background task needs — it does not migrate to another device. `unlocked` is stricter and
+that a background task needs - it does not migrate to another device. `unlocked` is stricter and
 correct when access only happens in the foreground.
 
 Android auto-backup applies to the underlying preferences file. The package documents disabling

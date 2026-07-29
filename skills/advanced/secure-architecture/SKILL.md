@@ -64,7 +64,7 @@ Order matters. Work outside-in and put each control at the lowest layer that can
    not a network position.
 2. **Authorization next to the data.** The component holding the row decides who reads it. A
    gateway check is defence in depth, never the only check.
-3. **Isolation by default.** Separate what has different privilege levels — tenants, admin
+3. **Isolation by default.** Separate what has different privilege levels - tenants, admin
    surfaces, build and runtime.
 4. **Least privilege on every identity.** Human, service, and CI. Scope to the operation, not
    the service.
@@ -77,7 +77,7 @@ Order matters. Work outside-in and put each control at the lowest layer that can
 
 For each dependency: what breaks, what the caller sees, and whether security degrades. A design
 that is secure only while the auth service is up is not secure. Write down the answer per
-dependency — this is the part reviews skip and incidents find.
+dependency - this is the part reviews skip and incidents find.
 
 See [best-practices.md](best-practices.md#failure-modes-and-resilience).
 
@@ -96,13 +96,13 @@ stated, owned residual risk. Not silence.
 
 Rank by blast radius and by how many places the fix has to land.
 
-- **Critical** — a boundary that does not exist. One tenant reads another's data; a path reaches
+- **Critical** - a boundary that does not exist. One tenant reads another's data; a path reaches
   production data with no authenticated principal.
-- **High** — a boundary enforced in exactly one bypassable place. Gateway-only authorization,
+- **High** - a boundary enforced in exactly one bypassable place. Gateway-only authorization,
   client-side entitlement, shared credential across environments.
-- **Medium** — control present but too coarse. Role grants more than the job needs; blast radius
+- **Medium** - control present but too coarse. Role grants more than the job needs; blast radius
   larger than necessary; no audit trail on a sensitive flow.
-- **Low** — defence in depth missing, no current path. Missing egress restriction where nothing
+- **Low** - defence in depth missing, no current path. Missing egress restriction where nothing
   currently makes outbound calls.
 
 State the reasoning. "No mTLS between services" is Low in a single-tenant deployment with one
@@ -110,21 +110,21 @@ namespace and Critical when the same cluster hosts an untrusted workload.
 
 ## Related Skills
 
-- `core/owasp` — implementation-level controls and the Top 10 mapping
-- `core/devsecops` — where security checks run in the pipeline, and CI as a trust boundary
-- `advanced/supply-chain-security` — build integrity and provenance
-- `core/cloud-security` — IAM and network primitives per provider
-- `core/authentication` — token and session mechanics behind boundary identity
+- `core/owasp` - implementation-level controls and the Top 10 mapping
+- `core/devsecops` - where security checks run in the pipeline, and CI as a trust boundary
+- `advanced/supply-chain-security` - build integrity and provenance
+- `core/cloud-security` - IAM and network primitives per provider
+- `core/authentication` - token and session mechanics behind boundary identity
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards, configuration, limitations
-- [checklist.md](checklist.md) — pre-return verification, grouped by boundary
-- [best-practices.md](best-practices.md) — patterns, with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the secure design is not available
-- [prompts.md](prompts.md) — prompts that produce findings, and anti-patterns
-- [references/](references/) — standards, version-pinned with check dates
-- [examples/](examples/) — seven vulnerable/fixed architecture pairs
-- [Threat model template](../../../docs/templates/threat-model.md) — reviewable boundary and residual-risk record
-- [Security design review template](../../../docs/templates/security-design-review.md) — architecture-change decision and evidence record
+- [README.md](README.md) - purpose, standards, configuration, limitations
+- [checklist.md](checklist.md) - pre-return verification, grouped by boundary
+- [best-practices.md](best-practices.md) - patterns, with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the secure design is not available
+- [prompts.md](prompts.md) - prompts that produce findings, and anti-patterns
+- [references/](references/) - standards, version-pinned with check dates
+- [examples/](examples/) - seven vulnerable/fixed architecture pairs
+- [Threat model template](../../../docs/templates/threat-model.md) - reviewable boundary and residual-risk record
+- [Security design review template](../../../docs/templates/security-design-review.md) - architecture-change decision and evidence record

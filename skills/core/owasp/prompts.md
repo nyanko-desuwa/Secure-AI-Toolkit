@@ -1,7 +1,7 @@
 # Prompt Examples
 
 Prompts that get useful output from this skill. Each one states the scope, the standard, and
-the expected shape of the answer — vague prompts produce category recitals instead of findings.
+the expected shape of the answer - vague prompts produce category recitals instead of findings.
 
 ## Review a diff
 

@@ -89,7 +89,7 @@ for (const row of csv) {
 }
 ```
 Why the fix removes the option: `_status` is private and there is no setter. The bypass is not discouraged, it does not compile. Enforcement moved from "every caller must remember" to "the only door runs the check".
-Residual gap: `snapshot()` and `rehydrate()` are a way to construct any state. Keep `rehydrate` package-internal to the persistence layer and treat it as trusted input from your own database — if a caller outside persistence can call it, you have re-opened the door. ---
+Residual gap: `snapshot()` and `rehydrate()` are a way to construct any state. Keep `rehydrate` package-internal to the persistence layer and treat it as trusted input from your own database - if a caller outside persistence can call it, you have re-opened the door. ---
 ## 2. Aggregate boundary drawn too big
 Correctness and cost · `CWE-362` Concurrent Execution using Shared Resource with Improper Synchronization `Order` holds every line plus the customer plus inventory, so unrelated edits collide and the whole graph loads to read one field.
 ```python
@@ -142,7 +142,7 @@ class Order:
                 return
         raise DomainError("line_not_found")
 ```
-The invariant that justifies keeping lines inside `Order` is `total <= credit_limit` — you cannot check it without seeing all the lines. Stock levels have no such relationship to an order's total, so `Warehouse` is a separate aggregate with its own transaction. Reads go to a projection, not the aggregate:
+The invariant that justifies keeping lines inside `Order` is `total <= credit_limit` - you cannot check it without seeing all the lines. Stock levels have no such relationship to an order's total, so `Warehouse` is a separate aggregate with its own transaction. Reads go to a projection, not the aggregate:
 ```python
 # Read side. No aggregate, no invariant, one query, explicit bound.
 def order_header(conn, tenant: TenantId, order_id: OrderId) -> dict | None:
@@ -159,7 +159,7 @@ def order_header(conn, tenant: TenantId, order_id: OrderId) -> dict | None:
     return dict(row) if row else None
 ```
 Why the fix removes the failure: the collision disappears because the version now covers only state that genuinely shares an invariant. The load cost disappears because the read path no longer goes through the write model at all. See `skills/architecture/cqrs/` for the read-model side of this.
-Residual gap: if lines can legitimately reach the thousands, `Order` is still too big and the credit-limit invariant needs a different home — a running total maintained on the root, with a documented answer for how it stays correct. Splitting lines into their own aggregate makes that invariant cross-aggregate, which is example 3. ---
+Residual gap: if lines can legitimately reach the thousands, `Order` is still too big and the credit-limit invariant needs a different home - a running total maintained on the root, with a documented answer for how it stays correct. Splitting lines into their own aggregate makes that invariant cross-aggregate, which is example 3. ---
 ## 3. Cross-aggregate invariant checked in memory
 `CWE-362` Concurrent Execution using Shared Resource with Improper Synchronization · ASVS V2 (Validation and Business Logic) The rule spans two aggregates, so it is checked after loading both, and two concurrent transactions each see a state where the rule holds.
 ```python
@@ -171,7 +171,7 @@ def add_member(team_id: str, user_id: str) -> None:
         raise DomainError("team_full")
     membership_repo.add(Membership(team_id, user_id))  # commit
 ```
-Two requests arriving together both read four members, both pass, both insert. The team now has six. This is not a code-reading bug — it is only visible if you ask what happens when the same function runs twice concurrently. Two honest fixes. Pick one and say which. Fix A — make it one aggregate, so the database enforces the boundary:
+Two requests arriving together both read four members, both pass, both insert. The team now has six. This is not a code-reading bug - it is only visible if you ask what happens when the same function runs twice concurrently. Two honest fixes. Pick one and say which. Fix A - make it one aggregate, so the database enforces the boundary:
 ```python
 # Fixed A: memberships live inside Team. One row, one lock, one version.
 class Team:
@@ -203,7 +203,7 @@ def save(self, team: Team) -> None:
     if result.rowcount == 0:
         raise ConcurrencyError("team_modified_concurrently")   # caller retries
 ```
-Fix B — keep them separate and enforce the count at the database:
+Fix B - keep them separate and enforce the count at the database:
 ```sql
 -- Fixed B: the invariant as a constraint the application cannot race
 CREATE TABLE teams.membership (
@@ -218,7 +218,7 @@ CREATE TABLE teams.membership (
 -- unique-violation. The application maps that to "team_full".
 ```
 Why the fixes remove the failure: both move the check to something that serialises. Fix A uses a version predicate so the second write fails; Fix B uses a unique constraint so the second insert fails. The in-memory `if` never had that property no matter how carefully it was written.
-Residual gap and the honest third option: if the rule genuinely must span aggregates and you cannot serialise it — a limit spanning two services, for instance — then it is eventually consistent. Say that out loud, define the compensating action (revoke the sixth membership and notify), and accept that the system is briefly wrong. Eventual consistency here is a correctness cost you chose, not a free scaling win. ---
+Residual gap and the honest third option: if the rule genuinely must span aggregates and you cannot serialise it - a limit spanning two services, for instance - then it is eventually consistent. Say that out loud, define the compensating action (revoke the sixth membership and notify), and accept that the system is briefly wrong. Eventual consistency here is a correctness cost you chose, not a free scaling win. ---
 ## 4. Handler subscribed at construction, never removed
 `CWE-401` Missing Release of Memory after Effective Lifetime · `A06:2025` A handler registered in a constructor with no removal point accumulates one closure per instance, and each closure retains everything it captured.
 ```typescript
@@ -237,7 +237,7 @@ export class InvoiceNotifier {
   }
 }
 ```
-Two failures compound. Memory grows by one closure and one `RequestContext` per instance. And because every past subscription is still live, one `InvoiceApproved` sends N emails — the duplicate-delivery symptom that usually gets misdiagnosed as a broker problem.
+Two failures compound. Memory grows by one closure and one `RequestContext` per instance. And because every past subscription is still live, one `InvoiceApproved` sends N emails - the duplicate-delivery symptom that usually gets misdiagnosed as a broker problem.
 ```typescript
 // Fixed: subscription returns a disposer, ownership is explicit, and the handler
 // resolves its per-message context instead of capturing it.
@@ -280,7 +280,7 @@ for (const signal of ["SIGTERM", "SIGINT"] as const) {
 }
 ```
 Why the fix removes the failure: `on` cannot be called without producing a disposer, and `start()` throws if called twice, so the accumulating path is gone by construction. The handler no longer closes over request state, so nothing per-request is retained even if a subscription outlives its intent.
-Residual gap: this is source-level reasoning. Whether the process actually releases the memory depends on what else holds a reference — verify with a heap snapshot before and after a load run. `skills/architecture/performance/` has the diagnosis procedure. ---
+Residual gap: this is source-level reasoning. Whether the process actually releases the memory depends on what else holds a reference - verify with a heap snapshot before and after a load run. `skills/architecture/performance/` has the diagnosis procedure. ---
 ## 5. Event published before commit
 `A08:2025` Software or Data Integrity Failures · `CWE-662` Improper Synchronization · ASVS V2 The event goes out inside the transaction, so a consumer acts on state that then rolls back.
 ```csharp
@@ -358,7 +358,7 @@ public async Task DrainAsync(CancellationToken ct)
     }
 }
 ```
-Why the fix removes the failure: the event and the state change are the same write. If the transaction rolls back, the outbox row is gone too, so there is nothing to publish. The ordering hazard is not mitigated, it is structurally impossible. Consequence you must accept and design for: this is at-least-once delivery. The publish can succeed and the `DispatchedAt` update fail, so a consumer will occasionally see a duplicate. Every consumer keys on the message ID and skips a repeat. Also give the outbox table a retention job — undrained and dispatched rows both accumulate, and an unbounded table is its own availability problem. ---
+Why the fix removes the failure: the event and the state change are the same write. If the transaction rolls back, the outbox row is gone too, so there is nothing to publish. The ordering hazard is not mitigated, it is structurally impossible. Consequence you must accept and design for: this is at-least-once delivery. The publish can succeed and the `DispatchedAt` update fail, so a consumer will occasionally see a duplicate. Every consumer keys on the message ID and skips a repeat. Also give the outbox table a retention job - undrained and dispatched rows both accumulate, and an unbounded table is its own availability problem. ---
 ## 6. Repository returns the ORM entity
 `A01:2025` · `CWE-284` Improper Access Control · ASVS V8 The repository hands out the tracked persistence object, so the caller mutates state directly and both the invariants and the tenant filter are outside the boundary.
 ```csharp
@@ -445,8 +445,8 @@ public sealed class AccountRepository : IAccountRepository
     }
 }
 ```
-Why the fix removes the option: `TenantId` is a required parameter on every method, so a caller cannot forget it — it is a compile error, not an omission. `Account` exposes no setter, so the only route to a new credit limit runs the three checks and records the event. Caller two's code no longer has a form that compiles.
+Why the fix removes the option: `TenantId` is a required parameter on every method, so a caller cannot forget it - it is a compile error, not an omission. `Account` exposes no setter, so the only route to a new credit limit runs the three checks and records the event. Caller two's code no longer has a form that compiles.
 Residual gaps, stated rather than implied:
 - `AsNoTracking` plus `Rehydrate`/`ToRow` means an extra mapping step and a full-row update. That is real cost. It buys you a persistence model that cannot be mutated from a handler.
 - `internal` on `Rehydrate` and `ToRow` only holds within the assembly. Split persistence into its own project if you need the compiler to enforce it across module lines.
-- Nothing here stops a raw SQL query from bypassing the repository entirely. Enforce that with a per-context database role that has no grant outside its own schema — see [best-practices.md](../best-practices.md#bounded-context-is-a-trust-boundary). ---
+- Nothing here stops a raw SQL query from bypassing the repository entirely. Enforce that with a per-context database role that has no grant outside its own schema - see [best-practices.md](../best-practices.md#bounded-context-is-a-trust-boundary). ---

@@ -25,7 +25,7 @@ run it, the answer is "unknown", not "pass".
 ## Credential Exposure (A04 · ASVS V14 · CWE-522, CWE-798)
 
 - [ ] Credential Guard enabled on domain-joined, non-DC servers that meet the requirements **[host]**
-- [ ] LSA protection confirmed running, not just configured — System log WinInit event 12 **[host]**
+- [ ] LSA protection confirmed running, not just configured - System log WinInit event 12 **[host]**
 - [ ] CodeIntegrity operational log reviewed in audit mode before LSA protection was enforced **[host]**
 - [ ] Tier-0 accounts in Protected Users, after testing for lockout
 - [ ] No account for a service or computer is in Protected Users (it gives them no protection)
@@ -57,7 +57,7 @@ run it, the answer is "unknown", not "pass".
 - [ ] SPNs on ordinary user accounts inventoried and either moved to a gMSA or given long random passwords **[host]**
 - [ ] AES enforced and RC4 removed for SPN-bearing accounts where the service supports it
 - [ ] SMB signing required on both client and server (`RequireSecuritySignature` = 1) **[host]**
-- [ ] `EnableSecuritySignature` is not being relied on — it is ignored for SMB2 and later
+- [ ] `EnableSecuritySignature` is not being relied on - it is ignored for SMB2 and later
 - [ ] SMB signing audit run before fleet enforcement to find clients that cannot comply **[host]**
 - [ ] LDAP signing and channel binding required
 - [ ] Extended Protection for Authentication enabled on IIS sites using Windows Integrated auth
@@ -101,7 +101,7 @@ run it, the answer is "unknown", not "pass".
 
 ## Baseline, Patching, and Attack Surface (A02 · ASVS V13)
 
-- [ ] A named baseline applies — CIS benchmark for the exact OS version, or a Microsoft SCT baseline
+- [ ] A named baseline applies - CIS benchmark for the exact OS version, or a Microsoft SCT baseline
 - [ ] GPO precedence understood for the target OU; no conflicting GPO higher in the order **[host]**
 - [ ] Drift detection runs on a schedule, not once at build **[host]**
 - [ ] Unused roles and features removed, not just stopped

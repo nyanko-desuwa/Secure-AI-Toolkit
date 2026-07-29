@@ -3,17 +3,17 @@
 Vulnerable code next to its fix. Each example names the Top 10 category, the CWE, and why the
 fix actually closes the hole rather than just looking safer.
 
-Read these as patterns, not as drop-in code. The language is incidental — the mistake is not.
+Read these as patterns, not as drop-in code. The language is incidental - the mistake is not.
 
 ## Contents
 
-- [Broken object level authorization](#broken-object-level-authorization) — A01, CWE-639
-- [SQL injection through a sort parameter](#sql-injection-through-a-sort-parameter) — A05, CWE-89
-- [Path traversal in a download endpoint](#path-traversal-in-a-download-endpoint) — A01, CWE-22
-- [SSRF in a webhook fetcher](#ssrf-in-a-webhook-fetcher) — A06, CWE-918
-- [Failing open on a policy error](#failing-open-on-a-policy-error) — A10, CWE-636
-- [File upload trusting the declared type](#file-upload-trusting-the-declared-type) — A08, CWE-434
-- [JWT accepting the algorithm from the token](#jwt-accepting-the-algorithm-from-the-token) — A07, CWE-347
+- [Broken object level authorization](#broken-object-level-authorization) - A01, CWE-639
+- [SQL injection through a sort parameter](#sql-injection-through-a-sort-parameter) - A05, CWE-89
+- [Path traversal in a download endpoint](#path-traversal-in-a-download-endpoint) - A01, CWE-22
+- [SSRF in a webhook fetcher](#ssrf-in-a-webhook-fetcher) - A06, CWE-918
+- [Failing open on a policy error](#failing-open-on-a-policy-error) - A10, CWE-636
+- [File upload trusting the declared type](#file-upload-trusting-the-declared-type) - A08, CWE-434
+- [JWT accepting the algorithm from the token](#jwt-accepting-the-algorithm-from-the-token) - A07, CWE-347
 
 ---
 
@@ -48,7 +48,7 @@ app.get("/api/orders/:id", requireAuth, async (req, res) => {
 Why this works: there is no branch to forget. A missing order and someone else's order return
 the same 404, so the endpoint does not confirm which IDs exist.
 
-The tempting wrong fix is a UUID primary key. That is obscurity — it raises the cost of guessing
+The tempting wrong fix is a UUID primary key. That is obscurity - it raises the cost of guessing
 without removing the ability to read. IDs leak through exports, referrer headers, and logs.
 
 ---
@@ -85,7 +85,7 @@ def list_invoices(user_id: int, sort: str, direction: str):
 ```
 
 Why this works: the f-string now interpolates only values the server chose. User input selects a
-key; it never becomes SQL. Escaping or a regex on `sort` would be weaker — you would be trying
+key; it never becomes SQL. Escaping or a regex on `sort` would be weaker - you would be trying
 to enumerate every dangerous construction instead of enumerating the three safe ones.
 
 ---
@@ -121,7 +121,7 @@ def download(name: str):
 ```
 
 Why this works: the check happens after resolution, so `..` segments and symlinks are already
-collapsed. Checking before resolution — rejecting strings containing `..` — misses encoded
+collapsed. Checking before resolution - rejecting strings containing `..` - misses encoded
 variants and symlinks that point outside.
 
 Better still where the design allows it: store an opaque ID, look the real filename up in the
@@ -167,7 +167,7 @@ a permitted host cannot forward the request to `169.254.169.254`.
 
 Honest limitation: this is still vulnerable to DNS rebinding, because the address is resolved
 once for the check and again by `requests` for the connection. Closing that gap means pinning
-the validated IP into the connection — an egress proxy with an allowlist is the more robust
+the validated IP into the connection - an egress proxy with an allowlist is the more robust
 answer in production. Say so rather than implying the check is complete.
 
 ---
@@ -277,7 +277,7 @@ influences how it is checked. Pinning issuer and audience stops a valid token mi
 service from being replayed against this one.
 
 Also worth knowing: a JWT cannot be revoked before it expires. If logout must take effect
-immediately, keep server-side session state or a revocation list — a short expiry narrows the
+immediately, keep server-side session state or a revocation list - a short expiry narrows the
 window but does not close it.
 
 ---

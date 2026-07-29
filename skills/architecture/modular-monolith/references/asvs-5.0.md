@@ -22,5 +22,5 @@ the running deployment for a formal assessment.
 
 ## Sources
 
-- OWASP ASVS project — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP ASVS repository — <https://github.com/OWASP/ASVS>
+- OWASP ASVS project - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP ASVS repository - <https://github.com/OWASP/ASVS>

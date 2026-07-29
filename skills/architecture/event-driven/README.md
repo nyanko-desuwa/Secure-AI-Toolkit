@@ -11,7 +11,7 @@ does the consumer believe because the message arrived".
 
 The consumer usually believes everything. It reads `event.userId`, `event.tenantId`, and
 `event.role` and acts on them, because the message came off the internal bus. That moves the
-authorization decision off the request path — where a session, a token, and a policy existed —
+authorization decision off the request path - where a session, a token, and a policy existed -
 onto an unauthenticated struct that anyone with publish rights on the topic can write. This is
 the central failure of the pattern, and it is `A01:2025` with `CWE-602` and `CWE-1220` behind it.
 
@@ -138,7 +138,7 @@ production:
 
 - A consumer that grants, charges, or discloses based on a role or tenant read from the message
   body. Anyone with publish rights on the topic has that privilege (`A01:2025`, `CWE-602`).
-- A message body reaching a polymorphic deserializer — `pickle.loads`, Java
+- A message body reaching a polymorphic deserializer - `pickle.loads`, Java
   `enableDefaultTyping`, or any format where the payload names the class to construct
   (`A08:2025`, `CWE-502`).
 - A poison-message handler that logs the whole payload. Events carry tokens, card fragments, and
@@ -150,15 +150,15 @@ topic with 14-day retention holds every field you put in the payload for 14 days
 and a replay re-emits that personal data to every consumer subscribed at replay time. Payload
 minimisation is a data-protection control here, not a bandwidth optimisation (ASVS V14).
 
-All examples use clearly synthetic values — `broker.internal.example`, `user-0001`,
+All examples use clearly synthetic values - `broker.internal.example`, `user-0001`,
 `REPLACE_WITH_SECRET_REF`. No real credentials, hostnames, or personal data appear in this skill.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE — <https://cwe.mitre.org/>
-- Confluent, Authorization using ACLs — <https://docs.confluent.io/platform/current/security/authorization/acls/overview.html>
-- RabbitMQ, Quorum Queues — <https://www.rabbitmq.com/docs/quorum-queues>
-- Amazon SQS message quotas — <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html>
-- microservices.io, Transactional Outbox — <https://microservices.io/patterns/data/transactional-outbox.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE - <https://cwe.mitre.org/>
+- Confluent, Authorization using ACLs - <https://docs.confluent.io/platform/current/security/authorization/acls/overview.html>
+- RabbitMQ, Quorum Queues - <https://www.rabbitmq.com/docs/quorum-queues>
+- Amazon SQS message quotas - <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html>
+- microservices.io, Transactional Outbox - <https://microservices.io/patterns/data/transactional-outbox.html>

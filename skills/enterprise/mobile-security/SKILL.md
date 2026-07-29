@@ -79,7 +79,7 @@ without removing capability. If step one is skipped, step seven is decoration.
 ### 4. Verify
 
 Run [checklist.md](checklist.md). Mark each item pass, fail, or not applicable with a reason.
-Static reading cannot confirm runtime behaviour on a real device — say which items you could
+Static reading cannot confirm runtime behaviour on a real device - say which items you could
 only read, not test.
 
 ### 5. Report
@@ -93,11 +93,11 @@ Say so instead of inflating it.
 Rank by what the attacker gains beyond what they already have. The device owner already has
 their own data.
 
-- Critical — other users' data, or server-side privilege, reachable from one device
-- High — credential theft from a device the attacker briefly controls; MITM on a network they
+- Critical - other users' data, or server-side privilege, reachable from one device
+- High - credential theft from a device the attacker briefly controls; MITM on a network they
   control; state change triggered by any installed app
-- Medium — leaks the device owner's own sensitive data to other apps or to backups
-- Low — needs a rooted device to reach data the device owner is already entitled to
+- Medium - leaks the device owner's own sensitive data to other apps or to backups
+- Low - needs a rooted device to reach data the device owner is already entitled to
 
 "Token in `SharedPreferences`, therefore critical" is wrong on a non-rooted device with no
 backup enabled. It is high when `android:allowBackup` is true, because then it leaves the device.
@@ -105,17 +105,17 @@ State the precondition.
 
 ## Related Skills
 
-- `owasp-security` — the backend half of every mobile finding
-- `authentication` — OAuth, session lifecycle, refresh rotation
-- `api-security` — the endpoints the app talks to
+- `owasp-security` - the backend half of every mobile finding
+- `authentication` - OAuth, session lifecycle, refresh rotation
+- `api-security` - the endpoints the app talks to
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, standards table, limitations
-- [checklist.md](checklist.md) — pre-return verification, grouped by MASVS
-- [best-practices.md](best-practices.md) — patterns, each with a vulnerable/fixed pair
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the control cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — MASVS, Mobile Top 10, platform APIs, RFCs
-- [examples/](examples/) — eight vulnerable/fixed pairs
+- [README.md](README.md) - purpose, layout, standards table, limitations
+- [checklist.md](checklist.md) - pre-return verification, grouped by MASVS
+- [best-practices.md](best-practices.md) - patterns, each with a vulnerable/fixed pair
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the control cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - MASVS, Mobile Top 10, platform APIs, RFCs
+- [examples/](examples/) - eight vulnerable/fixed pairs

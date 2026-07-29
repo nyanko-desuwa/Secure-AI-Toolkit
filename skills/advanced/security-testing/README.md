@@ -51,7 +51,7 @@ examples/
 WSTG v4.2 is the current numbered release and dates from December 2020. Version 5.0 is in
 development and unreleased; a 4.3 placeholder exists in the repository. Every WSTG ID in this
 skill was read from its v4.2 page rather than recalled. WSTG's own guidance is to cite the
-versioned form — `WSTG-v42-ATHZ-04` — in external reports, because IDs move between releases;
+versioned form - `WSTG-v42-ATHZ-04` - in external reports, because IDs move between releases;
 this skill uses the short form in prose and states the version once.
 
 ## Configuration
@@ -128,10 +128,10 @@ appear in a test suite.
 
 ## References
 
-- OWASP Web Security Testing Guide v4.2 — <https://owasp.org/www-project-web-security-testing-guide/v42/>
-- OWASP WSTG project page — <https://owasp.org/www-project-web-security-testing-guide/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- CWE Top 25 (2025) — <https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html>
-- OWASP Cheat Sheet Series — <https://cheatsheetseries.owasp.org/>
+- OWASP Web Security Testing Guide v4.2 - <https://owasp.org/www-project-web-security-testing-guide/v42/>
+- OWASP WSTG project page - <https://owasp.org/www-project-web-security-testing-guide/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- CWE Top 25 (2025) - <https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html>
+- OWASP Cheat Sheet Series - <https://cheatsheetseries.owasp.org/>

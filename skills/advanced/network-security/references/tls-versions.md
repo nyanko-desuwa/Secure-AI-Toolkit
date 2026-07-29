@@ -23,7 +23,7 @@ argument better than an opinion about cipher strength.
 
 BCP 195 gained a third document in July 2026: RFC 9852, "New Protocols Using TLS Must Require
 TLS 1.3", which updates RFC 9325. It applies to new protocol definitions, not to existing
-deployments, and to TLS only — the RFC states DTLS 1.3 is not widely available or deployed. So
+deployments, and to TLS only - the RFC states DTLS 1.3 is not widely available or deployed. So
 it does not make TLS 1.2 non-compliant for an existing service. It does mean a protocol you are
 designing now has no defensible reason to allow 1.2.
 
@@ -35,7 +35,7 @@ designing now has no defensible reason to allow 1.2.
 
 RFC 8446 obsoletes RFC 5077, RFC 5246 (TLS 1.2), and RFC 6961, and updates RFC 5705 and
 RFC 6066. Note that "obsoletes RFC 5246" is a document relationship, not a deprecation of
-TLS 1.2 as a protocol — RFC 9325 still permits TLS 1.2 with constraints. Do not tell a reader
+TLS 1.2 as a protocol - RFC 9325 still permits TLS 1.2 with constraints. Do not tell a reader
 that TLS 1.2 is deprecated. It is not.
 
 Practical position for a new deployment:
@@ -55,7 +55,7 @@ fetched 2026-07-28. That document carries no date field of its own, only the ver
 | | Modern | Intermediate |
 |---|---|---|
 | TLS versions | 1.3 only | 1.2 and 1.3 |
-| TLS 1.2 cipher list | none — no 1.2 | explicit ECDHE/DHE AEAD list, below |
+| TLS 1.2 cipher list | none - no 1.2 | explicit ECDHE/DHE AEAD list, below |
 | TLS 1.3 ciphersuites | `TLS_AES_128_GCM_SHA256`, `TLS_AES_256_GCM_SHA384`, `TLS_CHACHA20_POLY1305_SHA256` | same three |
 | HSTS minimum age | 63072000 | 63072000 |
 
@@ -98,7 +98,7 @@ Two consequences for an engineer, independent of the exact dates:
   now, not when the deadline moves.
 - Expiry becomes the most likely cause of your next transport outage. Monitor the certificate
   the server is actually serving, from outside, with an alert at a multiple of the renewal
-  interval — not a calendar reminder and not a check against the file on disk.
+  interval - not a calendar reminder and not a check against the file on disk.
 
 ## Certificate and channel hardening
 
@@ -118,7 +118,7 @@ can mis-issue, not as preventing mis-issuance.
 
 HSTS commits a browser to HTTPS for a domain. Two honest limitations: the first request before
 any HSTS header is seen is unprotected unless the domain is preloaded, and `includeSubDomains`
-with a long `max-age` is hard to undo — every subdomain, including internal-only ones served
+with a long `max-age` is hard to undo - every subdomain, including internal-only ones served
 over plain HTTP, must have a valid certificate.
 
 ## Encrypted DNS
@@ -150,7 +150,7 @@ egress to arbitrary resolvers is.
 RFC 6890 restructures the IANA IPv4 and IPv6 Special-Purpose Address Registries so each
 records every special-purpose block with flags for Source, Destination, Forwardable, Global,
 and Reserved-by-Protocol. It obsoletes RFC 4773, RFC 5156, RFC 5735, and RFC 5736. Use the
-IANA registries as the source of truth for an SSRF denylist rather than a hand-written list —
+IANA registries as the source of truth for an SSRF denylist rather than a hand-written list -
 hand-written lists miss `100.64.0.0/10`, `::ffff:0:0/96`, and `64:ff9b::/96`.
 
 RFC 8981 obsoletes RFC 4941 and specifies temporary IPv6 addresses. Consequence for network
@@ -183,19 +183,19 @@ read the requirement text at <https://github.com/OWASP/ASVS>.
 
 ## Sources
 
-- RFC 9325 — <https://www.rfc-editor.org/rfc/rfc9325.html>
-- RFC 8996 — <https://www.rfc-editor.org/rfc/rfc8996.html>
-- RFC 9852 — <https://www.rfc-editor.org/rfc/rfc9852.html>
-- BCP 195 membership — <https://www.rfc-editor.org/info/bcp195>
-- RFC 8446 — <https://www.rfc-editor.org/rfc/rfc8446.html>
-- RFC 6797 — <https://www.rfc-editor.org/rfc/rfc6797.html>
-- RFC 8659 — <https://www.rfc-editor.org/rfc/rfc8659.html>
-- RFC 7858 — <https://www.rfc-editor.org/rfc/rfc7858.html>
-- RFC 8484 — <https://www.rfc-editor.org/rfc/rfc8484.html>
-- RFC 6890 — <https://www.rfc-editor.org/rfc/rfc6890.html>
-- RFC 8981 — <https://www.rfc-editor.org/rfc/rfc8981.html>
-- IANA special-purpose registries — <https://www.iana.org/assignments/iana-ipv4-special-registry/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE — <https://cwe.mitre.org/>
+- RFC 9325 - <https://www.rfc-editor.org/rfc/rfc9325.html>
+- RFC 8996 - <https://www.rfc-editor.org/rfc/rfc8996.html>
+- RFC 9852 - <https://www.rfc-editor.org/rfc/rfc9852.html>
+- BCP 195 membership - <https://www.rfc-editor.org/info/bcp195>
+- RFC 8446 - <https://www.rfc-editor.org/rfc/rfc8446.html>
+- RFC 6797 - <https://www.rfc-editor.org/rfc/rfc6797.html>
+- RFC 8659 - <https://www.rfc-editor.org/rfc/rfc8659.html>
+- RFC 7858 - <https://www.rfc-editor.org/rfc/rfc7858.html>
+- RFC 8484 - <https://www.rfc-editor.org/rfc/rfc8484.html>
+- RFC 6890 - <https://www.rfc-editor.org/rfc/rfc6890.html>
+- RFC 8981 - <https://www.rfc-editor.org/rfc/rfc8981.html>
+- IANA special-purpose registries - <https://www.iana.org/assignments/iana-ipv4-special-registry/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE - <https://cwe.mitre.org/>
 
 All URLs checked 2026-07-28.

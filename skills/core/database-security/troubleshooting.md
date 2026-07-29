@@ -9,7 +9,7 @@ Do not guess. `%s`, `$1`, `?`, `:name`, and `@name` are not interchangeable.
 - psycopg 3: `%s` for values; a sequence or mapping is the second `execute` argument.
 - SQLAlchemy `text()`: `:name` and a mapping.
 - PostgreSQL protocol / node-postgres: `$1`, `$2`.
-- Knex raw: `?` for values, `??` for identifiers — still allowlist identifiers first.
+- Knex raw: `?` for values, `??` for identifiers - still allowlist identifiers first.
 - PDO: `?` or `:name`; disable emulated prepares where supported.
 - JDBC: `?` with `PreparedStatement`; never `Statement` plus concatenation.
 
@@ -19,7 +19,7 @@ Read the pinned driver docs and add a malicious-value regression test. Parameter
 ## A table or column really must be dynamic
 
 A bind cannot represent it. Map a client key to one of a finite set of server-owned identifiers.
-If the set is not finite — a user-created table per account, for example — reconsider the schema.
+If the set is not finite - a user-created table per account, for example - reconsider the schema.
 One shared table with `tenant_id` is easier to grant, migrate, audit, and protect with RLS.
 
 Driver quoting (`psycopg.sql.Identifier`, Knex `??`) correctly escapes an identifier but does

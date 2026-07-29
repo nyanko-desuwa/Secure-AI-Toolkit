@@ -40,7 +40,7 @@ Drawback the source lists, verbatim and as a single item:
 > updating the database."
 
 The source separately notes that delivery is at-least-once: the relay may crash after publishing
-but before recording that it published, so consumers must be idempotent — for example by tracking
+but before recording that it published, so consumers must be idempotent - for example by tracking
 already-processed message IDs. It observes that this is rarely a burden, since brokers can
 duplicate deliveries anyway.
 
@@ -72,7 +72,7 @@ the migration and the repository.
 
 ## What at-least-once actually obliges you to do
 
-The source's phrasing — "rarely a burden" — is true of the mechanism and understates the code. The
+The source's phrasing - "rarely a burden" - is true of the mechanism and understates the code. The
 obligation is specific:
 
 - Every handler needs a dedupe key that is stable across redeliveries. The broker's message ID is
@@ -83,10 +83,10 @@ obligation is specific:
   by an `INSERT` is a time-of-check-time-of-use race, and two concurrent consumers will both pass
   the check (CWE-367 territory; see the CQRS skill, which owns that mapping).
 - The dedupe store needs a TTL longer than the maximum redelivery window, which is the broker's
-  retention period rather than its visibility timeout. And it needs a TTL at all — see the
+  retention period rather than its visibility timeout. And it needs a TTL at all - see the
   key-store growth hazard in this skill's E9 material. When the dedupe key is user-controlled,
   a missing TTL is an attacker-driven exhaustion vector, not only a leak.
-- Side effects that are not idempotent by nature — sending an email, calling a payment API —
+- Side effects that are not idempotent by nature - sending an email, calling a payment API -
   need the idempotency key pushed down to the provider, or a record written before the call and
   checked after. "The handler is idempotent" is false if the third-party call is not.
 
@@ -110,7 +110,7 @@ Event sourcing is listed as an alternative approach: if the event log is the sou
 there is no dual write to reconcile. Related patterns are saga and domain event, both of which
 create the need in the first place.
 
-Change data capture — log tailing rather than polling — is the same pattern with a different
+Change data capture - log tailing rather than polling - is the same pattern with a different
 relay. It removes the polling load and adds an operational dependency, and it publishes whatever
 the table contains, which means column-level minimisation becomes the only payload control you
 have. If the table has a `password_hash` column and the connector is configured for all columns,
@@ -118,6 +118,6 @@ that column is now on the topic (E2).
 
 ## Sources
 
-- microservices.io, Transactional Outbox — <https://microservices.io/patterns/data/transactional-outbox.html> (verified 2026-07-28)
+- microservices.io, Transactional Outbox - <https://microservices.io/patterns/data/transactional-outbox.html> (verified 2026-07-28)
 - microservices.io, Polling Publisher and Transaction Log Tailing are linked from that page as the
   two relay implementations (verified 2026-07-28)

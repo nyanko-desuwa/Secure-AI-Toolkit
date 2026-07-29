@@ -4,23 +4,23 @@ Control IDs used by this skill. Every ID and title below was read on 2026-07-28 
 `docker/docker-bench-security`, which states in its README that its tests implement
 CIS Docker Benchmark v1.6.0.
 
-- Tool source — <https://github.com/docker/docker-bench-security>
-- Benchmark landing page — <https://www.cisecurity.org/benchmark/docker>
-- Docker Content Trust retirement notice — <https://docs.docker.com/engine/security/trust/>
+- Tool source - <https://github.com/docker/docker-bench-security>
+- Benchmark landing page - <https://www.cisecurity.org/benchmark/docker>
+- Docker Content Trust retirement notice - <https://docs.docker.com/engine/security/trust/>
 
 ## Read this before citing a control
 
 The benchmark PDF itself is distributed through a CIS account and is not quoted here. What is
 quoted is the ID and title as implemented by the bench tool. That is enough to say "CIS 5.32
 covers the docker socket" and defend it. It is not enough to quote rationale text, remediation
-wording, or a Level 1 / Level 2 profile assignment — those live in the PDF and are not reproduced
+wording, or a Level 1 / Level 2 profile assignment - those live in the PDF and are not reproduced
 below.
 
 If a control ID is not in the tables on this page, do not cite it. Newer benchmark revisions
 renumber and add controls; an ID recalled from memory is likely to be wrong, and a wrong control
 number discredits an otherwise correct finding. Cite the OWASP category and CWE instead.
 
-## Section 1 — Host configuration
+## Section 1 - Host configuration
 
 1.1.3 through 1.1.18 are auditd rules for Docker paths (`/var/lib/docker`, `/etc/docker`,
 `docker.service`, `docker.socket`, `containerd.sock`, `/etc/docker/daemon.json`,
@@ -34,7 +34,7 @@ control the daemon (1.1.2).
 | 1.2.1 | Ensure the container host has been hardened | The kernel is shared; the host is in scope |
 | 1.2.2 | Ensure that the version of Docker is up to date | Runtime escapes get fixed in the runtime |
 
-## Section 2 — Daemon configuration
+## Section 2 - Daemon configuration
 
 | ID | Title (abbreviated) |
 |---|---|
@@ -50,7 +50,7 @@ control the daemon (1.1.2).
 2.1 is rootless mode. 2.14 is the daemon-wide equivalent of `--security-opt=no-new-privileges`, and
 setting it on the daemon is stronger than hoping every `docker run` remembers the flag.
 
-## Section 3 — Daemon configuration files
+## Section 3 - Daemon configuration files
 
 Twenty-four ownership and permission checks (3.1 to 3.24) on `docker.service`, `docker.socket`,
 `/etc/docker`, registry and TLS certificate files, `daemon.json`, `/etc/default/docker`,
@@ -63,7 +63,7 @@ Twenty-four ownership and permission checks (3.1 to 3.24) on `docker.service`, `
 
 3.15 and 3.16 are the host-side half of the socket problem. 5.32 is the container-side half.
 
-## Section 4 — Container images and build file
+## Section 4 - Container images and build file
 
 This is the Dockerfile section. Twelve controls.
 
@@ -91,7 +91,7 @@ dependency into a new pipeline solely to make this check pass.
 Note on 4.7: `RUN apt-get update` on its own line creates a cached layer whose package index goes
 stale, so a later `apt-get install` may install from a months-old index. Combine them in one `RUN`.
 
-## Section 5 — Container runtime
+## Section 5 - Container runtime
 
 Thirty-two controls, 5.1 to 5.32. The ones this skill leans on:
 
@@ -102,7 +102,7 @@ Thirty-two controls, 5.1 to 5.32. The ones this skill leans on:
 | 5.4 | Ensure that Linux kernel capabilities are restricted within containers | `--cap-drop=ALL` |
 | 5.5 | Ensure that privileged containers are not used | absence of `--privileged` |
 | 5.6 | Ensure sensitive host system directories are not mounted on containers | bind mounts |
-| 5.7 | Ensure sshd is not run within containers | — |
+| 5.7 | Ensure sshd is not run within containers | - |
 | 5.8 | Ensure privileged ports are not mapped within containers | port `< 1024` |
 | 5.9 | Ensure that only needed ports are open on the container | `EXPOSE`, `-p` |
 | 5.10 | Ensure that the host's network namespace is not shared | `--network=host` |
@@ -130,7 +130,7 @@ Thirty-two controls, 5.1 to 5.32. The ones this skill leans on:
 | 5.32 | Ensure that the Docker socket is not mounted inside any containers | `/var/run/docker.sock` |
 
 Six of the thirty-two are Manual: 5.9, 5.18, 5.19, 5.24, 5.28, 5.30. A Manual control cannot be
-satisfied by a passing bench run — someone has to look.
+satisfied by a passing bench run - someone has to look.
 
 ## Running the bench tool
 
@@ -145,7 +145,7 @@ docker run --rm --net host --pid host --userns host --cap-add audit_control \
 ```
 
 Read that invocation before you run it. It shares the host PID and user namespaces, adds
-`audit_control`, and mounts the docker socket — the exact things this skill tells you not to do.
+`audit_control`, and mounts the docker socket - the exact things this skill tells you not to do.
 That is defensible for a short-lived audit run on a host you already administer, and not defensible
 as a long-running service. Prefer running the script directly from a checkout on the host.
 

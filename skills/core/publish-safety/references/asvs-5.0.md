@@ -1,4 +1,4 @@
-# OWASP ASVS 5.0.0 — V13, V14, and V15 for publishing
+# OWASP ASVS 5.0.0 - V13, V14, and V15 for publishing
 
 Application Security Verification Standard, version 5.0.0, released 30 May 2025.
 
@@ -6,7 +6,7 @@ Source: <https://owasp.org/www-project-application-security-verification-standar
 verified 2026-07-28
 
 5.0 is a restructure of 4.0.3, not an increment. Chapter numbers and requirement IDs do not carry
-over — a `V2.10.x` citation from a 4.x report points somewhere else in 5.0. Re-map, do not translate.
+over - a `V2.10.x` citation from a 4.x report points somewhere else in 5.0. Re-map, do not translate.
 
 ## Why cite ASVS on a publish decision
 
@@ -24,7 +24,7 @@ checkable; "publishing is risky" is not.
 
 The boundary in practice: V13 is "what is in the artifact and why", V14 is "what that value is worth
 to whoever reads it", V15 is "what a consumer of your artifact inherits". A committed `.env` fails
-all three — configuration is not separated, the value is at rest unprotected, and anyone who clones
+all three - configuration is not separated, the value is at rest unprotected, and anyone who clones
 the repository inherits it.
 
 ## Adjacent chapters that come up
@@ -40,9 +40,9 @@ the repository inherits it.
 ASVS defines three verification levels. Say which one you targeted; "ASVS compliant" means nothing
 alone.
 
-- Level 1 — baseline, verifiable black-box. A floor, not a goal
-- Level 2 — the right default for most business applications
-- Level 3 — severe-consequence applications: health, finance, safety, critical infrastructure
+- Level 1 - baseline, verifiable black-box. A floor, not a goal
+- Level 2 - the right default for most business applications
+- Level 3 - severe-consequence applications: health, finance, safety, critical infrastructure
 
 Do not claim a level you have not verified requirement by requirement. "We followed ASVS V13
 guidance on configuration separation" is honest. "We are ASVS Level 2" implies a completed
@@ -54,7 +54,7 @@ Cite the chapter when the finding is general, the requirement only when you have
 statement. `ASVS V14 (Data Protection)` is a correct and useful citation. A precise requirement
 number recalled from memory is worse than a chapter, because it looks verifiable and is not.
 
-For requirement text, work from the official repository rather than recall — 5.0 numbering is new
+For requirement text, work from the official repository rather than recall - 5.0 numbering is new
 enough that remembered IDs are unreliable:
 
 <https://github.com/OWASP/ASVS>

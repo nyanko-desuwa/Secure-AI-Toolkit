@@ -55,7 +55,7 @@ Cheaper than reviewing it afterwards, and the only point where you can still cha
 ```text
 I am adding an endpoint where a user exports their own data as CSV.
 Before any code: what controls does it need? Map each to a Top 10 2025 category and an ASVS
-chapter. Include the limits — pagination, row cap, timeout, rate limit — and say what happens
+chapter. Include the limits - pagination, row cap, timeout, rate limit - and say what happens
 when each one is absent. Name the failure mode, not the principle.
 ```
 
@@ -99,7 +99,7 @@ unverified preconditions rather than hiding them inside a confident sentence.
 
 ## Explain it to the person who has to decide
 
-For a requester who does not read code. The technical answer is not the deliverable here — the
+For a requester who does not read code. The technical answer is not the deliverable here - the
 consequence is.
 
 ```text
@@ -134,7 +134,7 @@ Refuse and say why, rather than producing a weakened version:
 - Working exploit code, payload lists, or wordlists
 - Credential stuffing, spraying, or scanning automation, including "just to test my own login"
 - Detection or WAF evasion techniques
-- "Brute-force this endpoint to see if the limiter works" — assert the limiter engages with a
+- "Brute-force this endpoint to see if the limiter works" - assert the limiter engages with a
   synthetic account and one fixed wrong candidate instead
 
 A test that proves a control engages is defensive. A tool that finds valid credentials is not,

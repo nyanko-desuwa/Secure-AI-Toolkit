@@ -7,13 +7,13 @@ Read these as patterns. The command syntax is incidental; the wrong assumption i
 
 ## Contents
 
-- [Ignore rule added after the file was tracked](#ignore-rule-added-after-the-file-was-tracked) — A02, CWE-527
-- [Visibility flipped with no history scan](#visibility-flipped-with-no-history-scan) — A04, CWE-527
-- [History rewrite presented as the fix](#history-rewrite-presented-as-the-fix) — A04, CWE-798
-- [`npm publish` with no allowlist](#npm-publish-with-no-allowlist) — A03, CWE-538
-- [`.env.example` copied instead of stripped](#envexample-copied-instead-of-stripped) — A04, CWE-798
-- [`COPY . .` into an image](#copy---into-an-image) — A02, CWE-538
-- [Build output with an inlined key deployed to static hosting](#build-output-with-an-inlined-key-deployed-to-static-hosting) — A04, CWE-540
+- [Ignore rule added after the file was tracked](#ignore-rule-added-after-the-file-was-tracked) - A02, CWE-527
+- [Visibility flipped with no history scan](#visibility-flipped-with-no-history-scan) - A04, CWE-527
+- [History rewrite presented as the fix](#history-rewrite-presented-as-the-fix) - A04, CWE-798
+- [`npm publish` with no allowlist](#npm-publish-with-no-allowlist) - A03, CWE-538
+- [`.env.example` copied instead of stripped](#envexample-copied-instead-of-stripped) - A04, CWE-798
+- [`COPY . .` into an image](#copy---into-an-image) - A02, CWE-538
+- [Build output with an inlined key deployed to static hosting](#build-output-with-an-inlined-key-deployed-to-static-hosting) - A04, CWE-540
 
 ---
 
@@ -52,7 +52,7 @@ ignore rule can actually govern.
 
 Remaining gap, and it is the important half: the commit that added the file is still in history.
 Untracking stops the bleeding, it does not undo the exposure. Rotate every credential that was in
-that file — see
+that file - see
 [secrets-management/references/exposure-response.md](../../secrets-management/references/exposure-response.md).
 
 ---
@@ -79,7 +79,7 @@ scrape new public repositories continuously.
 git log --all --full-history --oneline -- \
   ".env" ".env.*" "*.pem" "*.key" "*.p12" "*credentials*.json" "*secrets*"
 
-# Content, not just filenames — a key pasted into a source file has no telltale name
+# Content, not just filenames - a key pasted into a source file has no telltale name
 gitleaks detect --source . --log-opts="--all" --redact
 ```
 
@@ -106,19 +106,19 @@ git push --force
 ```
 
 The key still authenticates. GitHub's own guidance is that a rewrite plus force-push leaves the
-commits reachable in clones, in forks, and through cached views addressed by SHA — and that
+commits reachable in clones, in forks, and through cached views addressed by SHA - and that
 Support only assists when the risk cannot be handled by rotating the credential. Meanwhile every
 collaborator with a stale clone can push the data straight back.
 
 ```bash
 # Fixed: revoke at the provider first. The rewrite is optional cleanup afterwards.
 
-# 1. Revoke — make the old value fail authentication
+# 1. Revoke - make the old value fail authentication
 aws iam update-access-key --access-key-id AKIAEXAMPLEPLACEHOLDER --status Inactive
 aws iam delete-access-key --access-key-id AKIAEXAMPLEPLACEHOLDER
 
-# 2. Rotate — issue and deploy the replacement, no overlap window
-# 3. Investigate — read the provider audit log for the exposure window
+# 2. Rotate - issue and deploy the replacement, no overlap window
+# 3. Investigate - read the provider audit log for the exposure window
 # 4. Only now, and only for hygiene:
 #    git filter-repo ... ; notify collaborators to re-clone, not merge
 ```
@@ -232,7 +232,7 @@ Layers are additive. Deleting a file in a later instruction leaves it in the ear
 FROM node:22-alpine
 WORKDIR /app
 COPY . .
-RUN rm -f .env          # too late — the previous layer still has it
+RUN rm -f .env          # too late - the previous layer still has it
 RUN npm ci --omit=dev
 CMD ["node", "dist/index.js"]
 ```
@@ -253,7 +253,7 @@ CMD ["node", "dist/index.js"]
 ```
 
 ```dockerignore
-# .dockerignore — belt as well as braces
+# .dockerignore - belt as well as braces
 .git
 .env
 .env.*
@@ -271,11 +271,11 @@ grep -rEl "BEGIN [A-Z ]*PRIVATE KEY|AKIA[0-9A-Z]{16}" /tmp/img
 ```
 
 Why this works: naming the paths means an unexpected file in the working directory cannot enter
-the image at all. `.dockerignore` is the second layer, and it also stops the context upload — but
+the image at all. `.dockerignore` is the second layer, and it also stops the context upload - but
 the explicit `COPY` is what makes the guarantee.
 
 For a build-time credential that genuinely cannot be avoided, use
-`RUN --mount=type=secret`, which never lands in a layer. Never `ARG` — build args are visible in
+`RUN --mount=type=secret`, which never lands in a layer. Never `ARG` - build args are visible in
 image metadata.
 
 ---
@@ -307,7 +307,7 @@ review passes this.
 
 ```javascript
 // Fixed: the credential stays server-side; the browser calls your route
-// app/api/welcome/route.ts  — server only
+// app/api/welcome/route.ts  - server only
 export async function POST(req: Request) {
   const { to } = await req.json();
   await fetch("https://api.sendgrid.com/v3/mail/send", {
@@ -327,7 +327,7 @@ grep -rEn "NEXT_PUBLIC_|VITE_|REACT_APP_|EXPO_PUBLIC_|PUBLIC_" src/ app/
 ```
 
 Why this works: the credential is only ever read in a process on hardware you control. Renaming
-the variable to drop the prefix is not sufficient on its own — the bundler follows imports, so a
+the variable to drop the prefix is not sufficient on its own - the bundler follows imports, so a
 non-prefixed value imported into a client component still ships.
 
 Per-framework prefixes, the keys that are meant to be public, and the full grep set are in
@@ -345,7 +345,7 @@ All values are placeholders. `AKIAEXAMPLEPLACEHOLDER`, `hunter2-real-password`, 
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- npm `package.json` `files` and `.npmignore` — <https://docs.npmjs.com/cli/v11/configuring-npm/package-json>
-- GitHub, removing sensitive data from a repository — <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository>
-- CWE-527, CWE-538, CWE-540, CWE-798 — <https://cwe.mitre.org/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- npm `package.json` `files` and `.npmignore` - <https://docs.npmjs.com/cli/v11/configuring-npm/package-json>
+- GitHub, removing sensitive data from a repository - <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository>
+- CWE-527, CWE-538, CWE-540, CWE-798 - <https://cwe.mitre.org/>

@@ -86,7 +86,7 @@ Nginx stops inheriting parent `add_header` values when a child location declares
 Move all headers to server scope and remove child declarations, or repeat the complete set. Test a
 success, 404, and upstream 502; `always` is required for error responses (A02 · ASVS V13).
 
-## Client IP is always the proxy—or is spoofable
+## Client IP is always the proxy-or is spoofable
 
 Choose one trust boundary. If nginx is internet-facing, `$remote_addr` is the client and input
 forwarding headers are untrusted. If a known load balancer is in front, list only its subnet in

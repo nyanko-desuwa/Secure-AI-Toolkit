@@ -5,14 +5,14 @@ Code assumes the standard project setup for the named framework.
 
 ## Contents
 
-- [Laravel mass assignment privilege escalation](#laravel-mass-assignment-privilege-escalation) — A01/A06, CWE-915
-- [Django ModelForm exclude exposes a new privilege field](#django-modelform-exclude-exposes-a-new-privilege-field) — A01/A06, CWE-915
-- [ASP.NET Core entity binding overposts approval](#aspnet-core-entity-binding-overposts-approval) — A01/A06, CWE-915
-- [Controller middleware misses invoice ownership](#controller-middleware-misses-invoice-ownership) — A01, CWE-639
-- [Blade raw output stores XSS](#blade-raw-output-stores-xss) — A05, CWE-79
-- [Spring MVC trusts a browser-computed price](#spring-mvc-trusts-a-browser-computed-price) — A06
-- [Rails wildcard route exposes a destructive action](#rails-wildcard-route-exposes-a-destructive-action) — A01/A02, CWE-639
-- [Django debug page left on](#django-debug-page-left-on) — A02, CWE-489
+- [Laravel mass assignment privilege escalation](#laravel-mass-assignment-privilege-escalation) - A01/A06, CWE-915
+- [Django ModelForm exclude exposes a new privilege field](#django-modelform-exclude-exposes-a-new-privilege-field) - A01/A06, CWE-915
+- [ASP.NET Core entity binding overposts approval](#aspnet-core-entity-binding-overposts-approval) - A01/A06, CWE-915
+- [Controller middleware misses invoice ownership](#controller-middleware-misses-invoice-ownership) - A01, CWE-639
+- [Blade raw output stores XSS](#blade-raw-output-stores-xss) - A05, CWE-79
+- [Spring MVC trusts a browser-computed price](#spring-mvc-trusts-a-browser-computed-price) - A06
+- [Rails wildcard route exposes a destructive action](#rails-wildcard-route-exposes-a-destructive-action) - A01/A02, CWE-639
+- [Django debug page left on](#django-debug-page-left-on) - A02, CWE-489
 
 ---
 
@@ -537,9 +537,9 @@ sample `.env` does not prove deployment used it.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS 5.0 — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE-915 — <https://cwe.mitre.org/data/definitions/915.html>
-- CWE-79 — <https://cwe.mitre.org/data/definitions/79.html>
-- CWE-639 — <https://cwe.mitre.org/data/definitions/639.html>
-- CWE-489 — <https://cwe.mitre.org/data/definitions/489.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS 5.0 - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE-915 - <https://cwe.mitre.org/data/definitions/915.html>
+- CWE-79 - <https://cwe.mitre.org/data/definitions/79.html>
+- CWE-639 - <https://cwe.mitre.org/data/definitions/639.html>
+- CWE-489 - <https://cwe.mitre.org/data/definitions/489.html>

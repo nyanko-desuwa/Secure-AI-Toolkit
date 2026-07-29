@@ -11,14 +11,14 @@ The language is incidental. The mistake is not.
 
 ## Contents
 
-- [Read model without the tenant filter](#read-model-without-the-tenant-filter) — A01, API1, CWE-1220
-- [Denormalised view leaking internal fields](#denormalised-view-leaking-internal-fields) — API3, CWE-213
-- [Command validated against a stale read model](#command-validated-against-a-stale-read-model) — A06, CWE-367
-- [Projector that double-applies on redelivery](#projector-that-double-applies-on-redelivery) — A08, CWE-837
-- [Dedupe set held in memory, unbounded](#dedupe-set-held-in-memory-unbounded) — API4, CWE-770
-- [Dual write with no outbox](#dual-write-with-no-outbox) — A08, no CWE
-- [Stale read after write, "fixed" by reading the write store](#stale-read-after-write-fixed-by-reading-the-write-store) — no CWE
-- [Event schema change that breaks replay](#event-schema-change-that-breaks-replay) — no CWE
+- [Read model without the tenant filter](#read-model-without-the-tenant-filter) - A01, API1, CWE-1220
+- [Denormalised view leaking internal fields](#denormalised-view-leaking-internal-fields) - API3, CWE-213
+- [Command validated against a stale read model](#command-validated-against-a-stale-read-model) - A06, CWE-367
+- [Projector that double-applies on redelivery](#projector-that-double-applies-on-redelivery) - A08, CWE-837
+- [Dedupe set held in memory, unbounded](#dedupe-set-held-in-memory-unbounded) - API4, CWE-770
+- [Dual write with no outbox](#dual-write-with-no-outbox) - A08, no CWE
+- [Stale read after write, "fixed" by reading the write store](#stale-read-after-write-fixed-by-reading-the-write-store) - no CWE
+- [Event schema change that breaks replay](#event-schema-change-that-breaks-replay) - no CWE
 - [When not to use CQRS](#when-not-to-use-cqrs)
 
 ---
@@ -33,7 +33,7 @@ query side became the authorization hole.
 The write path, which is correct:
 
 ```typescript
-// src/commands/approve-invoice.ts — tenant is part of the load, not a check afterwards
+// src/commands/approve-invoice.ts - tenant is part of the load, not a check afterwards
 const invoice = await loadInvoice(tx, actor.tenantId, cmd.invoiceId);
 if (!invoice) throw new NotFoundError();
 invoice.approve(actor);
@@ -63,7 +63,7 @@ export async function recentInvoices(limit: number): Promise<InvoiceListRow[]> {
 }
 ```
 
-Nothing errors. The endpoint returns rows, sorted, paginated, and rendered correctly — from every
+Nothing errors. The endpoint returns rows, sorted, paginated, and rendered correctly - from every
 tenant in the system. This survives review because the reviewer is looking at the command side,
 where the rule lives.
 
@@ -186,7 +186,7 @@ export async function invoiceDetail(
 ```
 
 Why this removes the option: `fraud_score` cannot leak because the projection does not contain
-it. The alternative — keep the wide view and strip fields in a serializer — fails the first time
+it. The alternative - keep the wide view and strip fields in a serializer - fails the first time
 someone adds a column and forgets the strip list, and it fails silently.
 
 Residual gap: the projector still reads the source tables, so a careless `INSERT INTO
@@ -257,7 +257,7 @@ public async Task<Guid> Handle(ReserveSeat cmd, CancellationToken ct)
 
 Why checking the read model can never be correct here: a projection is a snapshot of a past
 state. The gap between the check and the write is not a scheduler quantum you might lose a race
-in — it is the projection lag, which is unbounded and grows with load. The conditional `UPDATE`
+in - it is the projection lag, which is unbounded and grows with load. The conditional `UPDATE`
 collapses check and act into one statement the database serialises, and the `CHECK` constraint
 means even a future code path that increments directly cannot oversell.
 
@@ -265,7 +265,7 @@ The read model is still useful. It renders "3 seats left" on the page. It just c
 
 Residual gap: the row is now a contention point, so throughput on a single hot event is bounded
 by row-lock turnover. If that is the constraint, partition capacity into buckets and reserve from
-one — a deliberate design with its own fairness cost, not an accident.
+one - a deliberate design with its own fairness cost, not an accident.
 
 ---
 
@@ -334,7 +334,7 @@ def on_payment_received(ev: PaymentReceived) -> None:
 
 Why this removes the option: the dedupe record and the effect are in the same transaction, so
 there is no window where one exists without the other. A `SELECT` followed by an `INSERT` would
-leave that window open and two concurrent deliveries would both see nothing — the same TOCTOU as
+leave that window open and two concurrent deliveries would both see nothing - the same TOCTOU as
 the previous example. The `last_event_seq` guard adds ordering safety, so an out-of-order
 redelivery is ignored rather than applied backwards.
 
@@ -362,13 +362,13 @@ export async function project(ev: DomainEvent): Promise<void> {
 ```
 
 Two defects, and the second is worse. The set grows by one entry per event for the life of the
-process — memory that scales with total business volume, not with concurrency, so it survives
+process - memory that scales with total business volume, not with concurrency, so it survives
 every deploy-length window and dies at the container limit. And it is not durable: a restart
 empties it, so the guard that was supposed to make redelivery safe stops working exactly when
 redelivery is most likely.
 
-Treat it as resource exhaustion, not tidiness. Anyone who can drive events — including an
-authenticated user creating orders in a loop — accelerates the growth without needing a bug.
+Treat it as resource exhaustion, not tidiness. Anyone who can drive events - including an
+authenticated user creating orders in a loop - accelerates the growth without needing a bug.
 
 ```typescript
 // Fixed: durability lives in the database; the in-memory part is only a fast path
@@ -397,7 +397,7 @@ export async function project(ev: DomainEvent): Promise<void> {
 
 Why this removes the option: correctness no longer depends on the in-memory structure. Drop the
 cache entirely and the projector is still exactly-once in effect, because the unique constraint
-decides. That is the test for whether a cache is safe to add — remove it and ask whether anything
+decides. That is the test for whether a cache is safe to add - remove it and ask whether anything
 but latency changes. The `max` and `ttl` mean the cache cannot grow past a number you chose and
 can defend.
 
@@ -409,7 +409,7 @@ hit rate as a metric so the size is tuned from data rather than from the number 
 
 ## Dual write with no outbox
 
-`A08:2025` · no CWE — integrity defect in the application's own sequencing · ASVS V2
+`A08:2025` · no CWE - integrity defect in the application's own sequencing · ASVS V2
 
 Two systems, no transaction. This does not fail loudly; it produces missing data weeks later.
 
@@ -478,7 +478,7 @@ change and the event both exist, or neither does. No amount of retry logic aroun
 call achieves that, because the process can die between the two calls.
 
 Residual gap: the relay can publish and then crash before marking the row published, so consumers
-get duplicates. At-least-once is the guarantee — which is why the projector needs the dedupe from
+get duplicates. At-least-once is the guarantee - which is why the projector needs the dedupe from
 the two previous examples. Do not describe this as exactly-once. Also delete published rows on a
 schedule, or the outbox becomes the largest table in the database.
 
@@ -486,7 +486,7 @@ schedule, or the outbox becomes the largest table in the database.
 
 ## Stale read after write, "fixed" by reading the write store
 
-no CWE — correctness and product defect · ASVS V2
+no CWE - correctness and product defect · ASVS V2
 
 The user saves, the page reloads, the old value appears. The tempting fix collapses the pattern.
 
@@ -510,7 +510,7 @@ export async function getInvoice(
 
 Every caller that ever sees a stale value sets `consistent: true`, and within two sprints it is
 the default. Three things then follow: the read store is decoration, the write store carries read
-load it was not sized for, and the write entity is being cast into a response shape — so the
+load it was not sized for, and the write entity is being cast into a response shape - so the
 field-level control from the second example is gone.
 
 ```typescript
@@ -549,13 +549,13 @@ export async function invoiceDetailAtLeast(
 ```
 
 Why this is the honest fix: the projection stays the only read path, so its column set stays the
-contract. Option A needs no waiting at all — the command knows the outcome, so the UI renders it
+contract. Option A needs no waiting at all - the command knows the outcome, so the UI renders it
 directly. Option B bounds the wait and, critically, returns `fresh: false` instead of hanging or
 lying, so the caller can show "updating" rather than a wrong number.
 
 Cost, stated: a `version` column on the projection and on the command result, plus a client that
 carries the token. The polling loop holds a connection for up to the budget, so the budget is also
-a concurrency limit — 750 ms at 200 requests per second is up to 150 in-flight waiters. Size the
+a concurrency limit - 750 ms at 200 requests per second is up to 150 in-flight waiters. Size the
 pool for that or the fix becomes an availability problem.
 
 What not to do: making the projector synchronous. That reintroduces the coupling the split was
@@ -568,10 +568,10 @@ what the UI shows during the window. That is a product decision, not an implemen
 
 ## Event schema change that breaks replay
 
-no CWE — correctness defect · ASVS V2
+no CWE - correctness defect · ASVS V2
 
 The event type gained a required field. Old stored events no longer deserialize, so the
-projection cannot be rebuilt — which means it cannot be fixed, migrated, or moved.
+projection cannot be rebuilt - which means it cannot be fixed, migrated, or moved.
 
 ```csharp
 // Vulnerable: the record was edited in place. Events written before this change
@@ -630,14 +630,14 @@ public static CustomerEvent Deserialize(string storedType, string payload, Guid 
 
 Why this removes the option: the stored type name is a key in a map rather than a reflected class
 name, so renaming or moving the C# type cannot change how a persisted event deserializes. Only
-additive change is possible to `V2` — anything structural becomes `V3` plus an upcaster, and the
+additive change is possible to `V2` - anything structural becomes `V3` plus an upcaster, and the
 compiler forces the switch expression to be updated.
 
 Say the rule plainly: a projection you cannot rebuild is not a projection, it is a database with
 no backup. Prove rebuildability with a test that replays a fixture stream containing at least one
 event of every stored version, and run it in CI. That test is what stops the in-place edit.
 
-Residual gap: upcasters are forever, or until you rewrite the store — and each one is a decision
+Residual gap: upcasters are forever, or until you rewrite the store - and each one is a decision
 baked into every projection built afterwards. The tenant assigned to a V1 event above is now a
 recorded fact for all time. Get that decision reviewed once rather than discovering it later.
 
@@ -646,7 +646,7 @@ recorded fact for all time. Get that decision reviewed once rather than discover
 ## When not to use CQRS
 
 CQRS is the most over-applied pattern in this collection. A single CRUD screen does not need two
-models, two stores, and a broker. Create, edit, list, delete, one shape — splitting that buys
+models, two stores, and a broker. Create, edit, list, delete, one shape - splitting that buys
 nothing and doubles the number of places authorization can be forgotten.
 
 Do not split when:
@@ -659,7 +659,7 @@ Do not split when:
   answer across two codebases.
 - You need a report. A read replica and a few tuned queries give the read scaling with none of the
   lag, projectors, or replay cost.
-- A business rule requires consistency. Balances, quotas, uniqueness, capacity — those need the
+- A business rule requires consistency. Balances, quotas, uniqueness, capacity - those need the
   authoritative store, as in the third example above.
 
 The honest default is one model, one store, commands and queries as separate methods, and queries
@@ -668,7 +668,7 @@ the maintainability benefit.
 
 And the part that cannot be hidden: eventual consistency is a product decision, not an
 implementation detail. The moment reads come from an asynchronous projection, someone has to
-decide what a user sees in the window between their action and the update — and what happens when
+decide what a user sees in the window between their action and the update - and what happens when
 that window is minutes instead of milliseconds because the queue backed up. Put that decision in
 front of whoever owns the product before writing the projector, not in a comment afterwards.
 

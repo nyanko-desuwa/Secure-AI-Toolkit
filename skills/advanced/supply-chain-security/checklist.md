@@ -1,7 +1,7 @@
 # Supply Chain Verification Checklist
 
 Run before returning a dependency change, a pipeline change, or a release configuration. Mark
-each item pass, fail, or not applicable. "Not applicable" needs a one-line reason — an
+each item pass, fail, or not applicable. "Not applicable" needs a one-line reason - an
 unexplained skip is a gap.
 
 Only the sections the change touches need running. A single patch bump does not need the build
@@ -11,7 +11,7 @@ isolation section.
 
 - [ ] One index or registry per ecosystem, with no fallback that an outsider can publish to
 - [ ] Internal packages are scoped or namespaced, not bare names that exist publicly
-- [ ] Every new package name checked against the real project it resembles — spelling, scope,
+- [ ] Every new package name checked against the real project it resembles - spelling, scope,
       hyphenation, and the repository URL it declares
 - [ ] LLM-suggested package names are treated as unverified until confirmed in upstream
       documentation; slopsquatting was considered explicitly
@@ -43,7 +43,7 @@ isolation section.
 
 ## Build Isolation (A03 · ASVS V13 · SLSA Build L2/L3)
 
-- [ ] Untrusted code — fork PRs, unreviewed branches — never runs with secrets or a write token
+- [ ] Untrusted code - fork PRs, unreviewed branches - never runs with secrets or a write token
 - [ ] No `pull_request_target` (or equivalent) checking out attacker-controlled refs
 - [ ] Token permissions declared per job and default to read
 - [ ] Publishing runs in a separate job or workflow from testing
@@ -69,7 +69,7 @@ isolation section.
 
 - [ ] Artefact signing/provenance uses an attestation subject bound to the same immutable digest
 - [ ] Artefacts signed, and the signature verified at the point of consumption
-- [ ] Verification names the expected identity and issuer — no wildcard, no regex that matches
+- [ ] Verification names the expected identity and issuer - no wildcard, no regex that matches
       everything
 - [ ] Verification failure fails the pipeline or blocks admission; it does not warn
 - [ ] Verification is by digest, not by tag
@@ -79,7 +79,7 @@ isolation section.
 
 - [ ] One build per commit, promoted between environments by digest
 - [ ] Production runs the same digest that passed testing
-- [ ] Artefact storage immutable — tags cannot be repointed, versions cannot be republished
+- [ ] Artefact storage immutable - tags cannot be repointed, versions cannot be republished
 - [ ] Rollback targets a previously published digest, not a rebuild of an old tag
 
 ## Update Path (A03 · CWE-1357)
@@ -110,5 +110,5 @@ isolation section.
 
 - [ ] Build run with the frozen install command, from a clean state
 - [ ] Relevant tests run, output reported honestly
-- [ ] Lockfile diff read, not just regenerated — an unexpected transitive change is the finding
+- [ ] Lockfile diff read, not just regenerated - an unexpected transitive change is the finding
 - [ ] Anything unverifiable stated plainly, not implied to be fine

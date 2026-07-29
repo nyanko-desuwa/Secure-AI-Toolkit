@@ -21,7 +21,7 @@ proxy.
 If the feature is worth the extra exposure, use `AfterFirstUnlockThisDeviceOnly`; it becomes
 available after the first unlock following restart and does not migrate to another device. State
 the tradeoff: it remains readable while locked until the next restart. Do not jump to
-`AccessibleAlways` — Apple documents it as not recommended and deprecated.
+`AccessibleAlways` - Apple documents it as not recommended and deprecated.
 
 `MASVS-STORAGE-1` · `A04:2025` · ASVS V14 · `CWE-921`
 
@@ -142,7 +142,7 @@ proof that accessibility is dangerous.
 
 ## Push must show useful content on a locked screen
 
-Use generic copy — "New secure message" — plus an opaque event ID. After the user opens the app,
+Use generic copy - "New secure message" - plus an opaque event ID. After the user opens the app,
 authenticate and fetch the detail. If product insists on previews, make them opt-in, off by
 default, and warn that the content reaches push infrastructure and the lock screen.
 

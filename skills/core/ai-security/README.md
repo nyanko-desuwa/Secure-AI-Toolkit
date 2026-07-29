@@ -11,7 +11,7 @@ agent with a shell tool, a broad service credential, and a fetch tool, and then 
 "ignore malicious instructions" to the system prompt and calls it secured.
 
 The position it takes: prompt injection is not solved and cannot be solved with prompting.
-Every control here is architectural — at the tool, at the sink, at the credential, at the
+Every control here is architectural - at the tool, at the sink, at the credential, at the
 retrieval query. Prompt-level measures are documented as rate reducers and labelled as such.
 
 ## How It Works
@@ -48,7 +48,7 @@ examples/
 | CWE | CWE-1427, CWE-1426, CWE-441 and others | 2026-07-28, against `cwe.mitre.org` |
 | MCP specification | 2025-11-25 revision | 2026-07-28, against `modelcontextprotocol.io` |
 
-The LLM Top 10 changed between the 2023–24 and 2025 editions — categories were added,
+The LLM Top 10 changed between the 2023–24 and 2025 editions - categories were added,
 renamed, and renumbered. Quote IDs from `references/llm-top10.md` or re-fetch; do not quote
 them from memory.
 
@@ -74,7 +74,7 @@ whether all three are present in one context.
 Review a tool-calling loop:
 
 ```text
-Review src/agent/loop.py against OWASP LLM Top 10 2025. Assume prompt injection succeeds —
+Review src/agent/loop.py against OWASP LLM Top 10 2025. Assume prompt injection succeeds -
 an attacker is writing the model's output. For each finding give the category, the location,
 what the attacker reaches, and the fix.
 ```
@@ -115,7 +115,7 @@ This skill contains deliberately vulnerable code in `best-practices.md`,
 `common-mistakes.md`, and `examples/`. Every such block is labelled `Vulnerable:` and paired
 with a fixed version. Do not copy a labelled-vulnerable block into a project.
 
-Injection payloads appear as illustrations — in tool descriptions, document bodies, and issue
+Injection payloads appear as illustrations - in tool descriptions, document bodies, and issue
 text. They are deliberately mild and exist so a reader recognises the shape. They are not a
 payload library.
 
@@ -124,12 +124,12 @@ All values are placeholders. There are no real credentials, hostnames, or person
 
 ## References
 
-- OWASP Top 10 for LLM Applications 2025 — <https://genai.owasp.org/llm-top-10/>
-- OWASP GenAI Security Project — <https://genai.owasp.org/>
-- OWASP Agentic Security Initiative — <https://genai.owasp.org/initiatives/agentic-security-initiative/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- MCP security best practices — <https://modelcontextprotocol.io/specification/2025-11-25/basic/security_best_practices>
-- MCP authorization — <https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization>
-- CWE-1427, Improper Neutralization of Input Used for LLM Prompting — <https://cwe.mitre.org/data/definitions/1427.html>
-- CWE-1426, Improper Validation of Generative AI Output — <https://cwe.mitre.org/data/definitions/1426.html>
+- OWASP Top 10 for LLM Applications 2025 - <https://genai.owasp.org/llm-top-10/>
+- OWASP GenAI Security Project - <https://genai.owasp.org/>
+- OWASP Agentic Security Initiative - <https://genai.owasp.org/initiatives/agentic-security-initiative/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- MCP security best practices - <https://modelcontextprotocol.io/specification/2025-11-25/basic/security_best_practices>
+- MCP authorization - <https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization>
+- CWE-1427, Improper Neutralization of Input Used for LLM Prompting - <https://cwe.mitre.org/data/definitions/1427.html>
+- CWE-1426, Improper Validation of Generative AI Output - <https://cwe.mitre.org/data/definitions/1426.html>

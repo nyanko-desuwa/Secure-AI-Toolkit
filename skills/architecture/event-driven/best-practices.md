@@ -1,7 +1,7 @@
 # Event-Driven Best Practices
 
 Nine hazards, each with the failure first, then code that removes it. Every pattern names its
-security implication and its runtime cost. A pattern with no cost note is incomplete — a broker
+security implication and its runtime cost. A pattern with no cost note is incomplete - a broker
 between two services buys decoupling and charges in queue depth, duplicate side effects, and
 operational surface.
 
@@ -15,10 +15,10 @@ from an unauthenticated caller, and less context, because there is no session at
 
 ```mermaid
 flowchart LR
-  subgraph UNTRUSTED["untrusted — everything in the envelope"]
+  subgraph UNTRUSTED["untrusted - everything in the envelope"]
     P["payload fields:<br/>userId, role, tenantId, amount"]
   end
-  subgraph TRUSTED["trusted — established outside the payload"]
+  subgraph TRUSTED["trusted - established outside the payload"]
     A["broker-authenticated principal"]
     S["verified signature over the body"]
     D[("consumer's own store")]
@@ -32,7 +32,7 @@ flowchart LR
 Signing moves a message from untrusted to authenticated. It does not make it authorized. An
 authenticated producer can still ask for something it may not have.
 
-## E1 — Re-Authorize in the Consumer
+## E1 - Re-Authorize in the Consumer
 
 ```typescript
 // Vulnerable: src/consumers/refund-issued.ts
@@ -91,7 +91,7 @@ the window in which a revoked permission still works. Do not cache the entity lo
 The permission check being 60 seconds stale is a real gap. Say so rather than pretending the cache
 is free.
 
-## E2 — Thin Events
+## E2 - Thin Events
 
 ```python
 # Vulnerable: producer serialises the whole row because "consumers might need it"
@@ -124,7 +124,7 @@ Security: the topic stops being a data store. Retention and replay no longer dec
 personal data lives on a broker. `ASVS V8`, `ASVS V14`.
 
 Cost: one HTTP or database call per event, which turns a 10k/s topic into 10k/s of extra load on
-the owning service and couples the consumer to its availability. It also introduces a race — by
+the owning service and couples the consumer to its availability. It also introduces a race - by
 the time the consumer fetches, the entity may have changed again, so the consumer sees a newer
 state than the event describes. For a projection that is usually fine. For an audit record of what
 was true at the time, it is not, and then you need a fat event with field-level justification and
@@ -134,7 +134,7 @@ Middle ground worth naming: a claim-check. Put the payload in object storage wit
 authorization-checked read, and put the reference in the event. Cost is one more store and one more
 lifecycle to expire.
 
-## E3 — Parse, Do Not Deserialize
+## E3 - Parse, Do Not Deserialize
 
 ```java
 // Vulnerable: type information in the payload chooses the class to construct.
@@ -179,7 +179,7 @@ so a large body cannot be an allocation lever (`CWE-770`).
 Cost: an explicit record per event version, and an upcaster when a version is retired. That is
 maintenance, and it is cheaper than the alternative.
 
-## E4 — Idempotency in One Transaction
+## E4 - Idempotency in One Transaction
 
 At-least-once is the delivery guarantee of every broker in common use. A consumer that dies after
 the side effect but before the ack will see the message again.
@@ -228,7 +228,7 @@ await psp.charge({ idempotencyKey: msg.eventId, orderId: msg.orderId });
 Security: a duplicate delivery cannot duplicate money, a grant, or an invite. `ASVS V2`.
 
 Cost: one row per event, forever, unless you delete it. That is the leak. Give it a TTL longer
-than the maximum redelivery window — for SQS, message retention is configurable up to 14 days, so a
+than the maximum redelivery window - for SQS, message retention is configurable up to 14 days, so a
 window shorter than the configured retention is wrong. Verify the number against your own broker
 configuration rather than copying one.
 
@@ -237,11 +237,11 @@ configuration rather than copying one.
 DELETE FROM processed_event WHERE processed_at < now() - interval '30 days';
 ```
 
-If the dedupe key is user-controlled — a client-supplied request ID forwarded into the event — a
+If the dedupe key is user-controlled - a client-supplied request ID forwarded into the event - a
 caller can insert rows at will. Cap rows per tenant, or derive the key from server-side values.
 That variant is both a leak and an attacker-driven exhaustion vector.
 
-## E5 — Ordering and Version Guards
+## E5 - Ordering and Version Guards
 
 Per-key ordering is achievable by partitioning on the entity ID. Global ordering across a
 partitioned topic is not. A handler that assumes arrival order corrupts state the first time a
@@ -268,7 +268,7 @@ keeps a sequence per entity. Partitioning by entity ID caps parallelism at the p
 a hot entity, and a single hot key becomes a throughput ceiling you cannot scale past by adding
 consumers.
 
-## E6 — Failure Classes, Retry Budgets, and the DLQ
+## E6 - Failure Classes, Retry Budgets, and the DLQ
 
 Two failure classes, two paths. Retrying a permanent failure is a hot loop; DLQ-ing a transient one
 is data loss dressed as caution.
@@ -305,15 +305,15 @@ RabbitMQ quorum queues do part of this for you: `x-delivery-limit` defaults to 2
 configured. Setting it to `-1` disables the limit, which the RabbitMQ documentation explicitly
 discourages. Configure a dead-letter exchange for every quorum queue.
 
-Security: a DLQ with no alert is a silent data-loss channel that reports success — `A09:2025`,
+Security: a DLQ with no alert is a silent data-loss channel that reports success - `A09:2025`,
 `A10:2025`. Logging the whole payload on failure is how tokens and personal data reach a log
-aggregator with wider read access than the database ever had — `CWE-532`.
+aggregator with wider read access than the database ever had - `CWE-532`.
 
 Cost: the DLQ is a queue that nobody drains by default. Set retention, alert on depth, and name an
 owner. Retry with a cap and jitter costs latency on the unhappy path; retry with no cap costs the
 failing dependency its recovery window.
 
-## E7 — Additive Schema Change
+## E7 - Additive Schema Change
 
 ```java
 // Vulnerable as a change: a new required field. Old consumers fail or silently read null.
@@ -336,13 +336,13 @@ switch (envelope.schemaVersion()) {
 ```
 
 Security: failing closed on an unknown version prevents a consumer from acting on a message it does
-not fully understand. Silently ignoring unknown fields is a choice with a consequence — a field
+not fully understand. Silently ignoring unknown fields is a choice with a consequence - a field
 added to carry a restriction is ignored by every consumer deployed before it.
 
 Cost: dual publishing doubles topic volume for the migration window, and every version kept alive
 is a handler kept alive. Retire versions on a schedule, or the switch grows without limit.
 
-## E8 — Broker Authorization and Transport
+## E8 - Broker Authorization and Transport
 
 This is configuration, not code, and it is the control that makes the trust boundary real.
 
@@ -363,7 +363,7 @@ sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule require
 ```
 
 Security: `A02:2025`, `A07:2025`, `ASVS V12`, `ASVS V15`. One shared credential means the blast
-radius of any leaked config is every topic in the cluster — and it also destroys the only source of
+radius of any leaked config is every topic in the cluster - and it also destroys the only source of
 producer identity the consumer had. `CWE-522`.
 
 Cost: a principal, an ACL set, and a rotation path per service. Real operational work, and the
@@ -372,7 +372,7 @@ alternative is a bus where every service can impersonate every other.
 Whether these settings are applied in the running cluster cannot be verified from application
 source. Check the broker, or report it as unverified.
 
-## E9 — Subscription and Resource Lifecycle
+## E9 - Subscription and Resource Lifecycle
 
 The classic in-process leak: subscribe on every request, unsubscribe never.
 
@@ -411,7 +411,7 @@ app.get("/orders/:id/stream", (req, res) => {
 ```
 
 Backpressure on an in-memory bus. The default is unbounded, which means the producer outruns the
-consumer until the process is killed — `CWE-770` reaching `CWE-400`.
+consumer until the process is killed - `CWE-770` reaching `CWE-400`.
 
 ```python
 # Fixed: bounded queue, explicit full behaviour, drop with a metric rather than grow.
@@ -443,7 +443,7 @@ async def sweep_expired() -> None:              # scheduled, not an in-process t
 ```
 
 An in-process `asyncio.sleep` or `setTimeout` timeout does not survive a restart, so the saga waits
-forever and its row is never removed — `CWE-772`. A durable `expires_at` plus a sweeper does.
+forever and its row is never removed - `CWE-772`. A durable `expires_at` plus a sweeper does.
 
 Consumer connection lifetime:
 
@@ -464,13 +464,13 @@ DLQ retention, dedupe TTL, saga timeout, HTTP client timeout inside the handler.
 on the last one turns every other bound into a formality.
 
 For heap analysis, retained-size reading, and leak reproduction, use
-`skills/architecture/performance/` — it owns that material. This section owns which structures in
+`skills/architecture/performance/` - it owns that material. This section owns which structures in
 an event-driven system are the ones that grow.
 
 ## Sources
 
-- microservices.io, Transactional Outbox — <https://microservices.io/patterns/data/transactional-outbox.html>
-- RabbitMQ quorum queues, delivery limit and dead lettering — <https://www.rabbitmq.com/docs/quorum-queues>
-- Amazon SQS message quotas — <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html>
-- Confluent, Kafka authorization with ACLs — <https://docs.confluent.io/platform/current/security/authorization/acls/overview.html>
+- microservices.io, Transactional Outbox - <https://microservices.io/patterns/data/transactional-outbox.html>
+- RabbitMQ quorum queues, delivery limit and dead lettering - <https://www.rabbitmq.com/docs/quorum-queues>
+- Amazon SQS message quotas - <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html>
+- Confluent, Kafka authorization with ACLs - <https://docs.confluent.io/platform/current/security/authorization/acls/overview.html>
 - Details and verification dates in [references/](references/).

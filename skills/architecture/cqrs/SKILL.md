@@ -7,7 +7,7 @@ allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 # CQRS
 
 Commands change state and return nothing meaningful. Queries read and never write. That is the
-whole pattern. Everything else — a second database, a message broker, an event store — is
+whole pattern. Everything else - a second database, a message broker, an event store - is
 optional and usually unnecessary.
 
 The security claim in this skill is narrow and it is the point:
@@ -40,7 +40,7 @@ Most projects should stop at level 1. Going further buys scaling and costs corre
 | 3 | Separate read store, updated asynchronously | Eventual | Projection lag, dual writes, replay cost, stale-read authorization |
 | 4 | Event store as source of truth (event sourcing) | Eventual | Replay semantics, PII in an immutable log, event schema evolution |
 
-Level 3 is where the security holes in this skill appear. Level 4 is a separate decision — see
+Level 3 is where the security holes in this skill appear. Level 4 is a separate decision - see
 [best-practices.md](best-practices.md#event-sourcing-optional-and-separate). CQRS does not
 require event sourcing and event sourcing is not a prerequisite for anything here.
 
@@ -127,7 +127,7 @@ Do not split when:
   that answer across two codebases.
 - You need a report and nothing else. A read replica plus a few tuned queries gives you the read
   scaling without eventual consistency, projectors, or a broker.
-- Consistency is required by the business rule. Balance checks, quota enforcement, uniqueness —
+- Consistency is required by the business rule. Balance checks, quota enforcement, uniqueness -
   these need the authoritative store, not a projection.
 
 The honest default: one model, one store, commands and queries as separate methods on separate
@@ -141,21 +141,21 @@ system. See [references/cqrs-sources.md](references/cqrs-sources.md).
 
 ## Related Skills
 
-- `skills/core/owasp/` — the standards these findings cite
-- `skills/core/api-security/` — idempotency keys, response shaping, resource limits
-- `skills/core/database-security/` — row-level security, query scoping
-- `skills/architecture/performance/` — owns leak shapes, bounds, and backpressure detail
-- `skills/architecture/scalability/` — capacity planning once the split is justified
-- `skills/architecture/event-driven/` — event contracts and delivery semantics
-- `skills/architecture/ddd/` — aggregates and bounded contexts
+- `skills/core/owasp/` - the standards these findings cite
+- `skills/core/api-security/` - idempotency keys, response shaping, resource limits
+- `skills/core/database-security/` - row-level security, query scoping
+- `skills/architecture/performance/` - owns leak shapes, bounds, and backpressure detail
+- `skills/architecture/scalability/` - capacity planning once the split is justified
+- `skills/architecture/event-driven/` - event contracts and delivery semantics
+- `skills/architecture/ddd/` - aggregates and bounded contexts
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, limitations, security notes
-- [checklist.md](checklist.md) — pre-return verification, grouped by side
-- [best-practices.md](best-practices.md) — patterns with code, each with its security and cost note
-- [common-mistakes.md](common-mistakes.md) — what goes wrong, and the wrong fixes
-- [troubleshooting.md](troubleshooting.md) — when the split does not fit
-- [prompts.md](prompts.md) — prompts that produce structure, plus an anti-pattern table
-- [references/](references/) — sources with the date verified
-- [examples/](examples/) — eight before/after pairs
+- [README.md](README.md) - purpose, layout, limitations, security notes
+- [checklist.md](checklist.md) - pre-return verification, grouped by side
+- [best-practices.md](best-practices.md) - patterns with code, each with its security and cost note
+- [common-mistakes.md](common-mistakes.md) - what goes wrong, and the wrong fixes
+- [troubleshooting.md](troubleshooting.md) - when the split does not fit
+- [prompts.md](prompts.md) - prompts that produce structure, plus an anti-pattern table
+- [references/](references/) - sources with the date verified
+- [examples/](examples/) - eight before/after pairs

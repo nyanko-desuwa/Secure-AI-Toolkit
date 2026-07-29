@@ -121,10 +121,10 @@ still reduces the remaining guess space.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- NIST SP 800-63B-4 — <https://pages.nist.gov/800-63-4/sp800-63b.html>
-- OWASP Credential Stuffing Prevention Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Credential_Stuffing_Prevention_Cheat_Sheet.html>
-- OWASP Authentication Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html>
-- MITRE CWE — <https://cwe.mitre.org/data/index.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- NIST SP 800-63B-4 - <https://pages.nist.gov/800-63-4/sp800-63b.html>
+- OWASP Credential Stuffing Prevention Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Credential_Stuffing_Prevention_Cheat_Sheet.html>
+- OWASP Authentication Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html>
+- MITRE CWE - <https://cwe.mitre.org/data/index.html>

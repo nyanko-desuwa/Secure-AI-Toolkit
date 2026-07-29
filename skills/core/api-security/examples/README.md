@@ -7,14 +7,14 @@ These are patterns, not drop-in production code. Every vulnerable block is label
 
 ## Contents
 
-- [Object level authorization](#object-level-authorization) — API1, CWE-639
-- [Mass assignment on write](#mass-assignment-on-write) — API3, CWE-915
-- [Over-fetching on read](#over-fetching-on-read) — API3, CWE-213
-- [Function authorization by HTTP verb](#function-authorization-by-http-verb) — API5, CWE-285
-- [GraphQL field authorization and cost](#graphql-field-authorization-and-cost) — API3/API4, CWE-213/CWE-770
-- [Inbound webhook signature and replay](#inbound-webhook-signature-and-replay) — API2, CWE-345
-- [gRPC metadata trust](#grpc-metadata-trust) — API2/API5, CWE-345/CWE-285
-- [Idempotency key race](#idempotency-key-race) — API4/API6, CWE-362
+- [Object level authorization](#object-level-authorization) - API1, CWE-639
+- [Mass assignment on write](#mass-assignment-on-write) - API3, CWE-915
+- [Over-fetching on read](#over-fetching-on-read) - API3, CWE-213
+- [Function authorization by HTTP verb](#function-authorization-by-http-verb) - API5, CWE-285
+- [GraphQL field authorization and cost](#graphql-field-authorization-and-cost) - API3/API4, CWE-213/CWE-770
+- [Inbound webhook signature and replay](#inbound-webhook-signature-and-replay) - API2, CWE-345
+- [gRPC metadata trust](#grpc-metadata-trust) - API2/API5, CWE-345/CWE-285
+- [Idempotency key race](#idempotency-key-race) - API4/API6, CWE-362
 
 ---
 

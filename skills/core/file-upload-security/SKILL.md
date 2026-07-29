@@ -41,7 +41,7 @@ Three questions, answerable before any code:
 - What does the application do with these bytes later? Serve them, parse them, execute
   them, hand them to a shell tool, or index them?
 - Who is allowed to read the file once stored, and where is that decided?
-- If the file is hostile, what is the worst outcome — script in a page, code on the server,
+- If the file is hostile, what is the worst outcome - script in a page, code on the server,
   disk exhausted, or a parser crash?
 
 The third question sets the controls. An avatar that is only ever re-encoded and served
@@ -94,13 +94,13 @@ RCE" is.
 
 ## Severity
 
-- **Critical** — an uploaded file can be executed as code on the server, or a stored file
+- **Critical** - an uploaded file can be executed as code on the server, or a stored file
   runs script on your primary origin against a logged-in session
-- **High** — traversal writes or reads outside the storage root, one user reads another
+- **High** - traversal writes or reads outside the storage root, one user reads another
   user's file, or a presigned URL lets a client write anywhere in the bucket
-- **Medium** — decompression or pixel bomb takes the process down, EXIF GPS leaks to every
+- **Medium** - decompression or pixel bomb takes the process down, EXIF GPS leaks to every
   viewer, missing size limits fill the disk
-- **Low** — metadata not stripped from a non-public file, no malware scan, no checksum
+- **Low** - metadata not stripped from a non-public file, no malware scan, no checksum
 
 Adjust for reachability. An SVG upload restricted to admins and served from a
 sandboxed origin with `Content-Disposition: attachment` is not the same finding as an
@@ -108,18 +108,18 @@ avatar rendered inline on every profile page.
 
 ## Related Skills
 
-- `owasp` — the general Top 10 and ASVS mapping this skill specialises
-- `cloud-security` — bucket policy, IAM scoping, and CDN configuration
-- `frontend-security` — CSP and the separate-origin decision on the browser side
-- `api-security` — resource consumption limits on the endpoint itself
+- `owasp` - the general Top 10 and ASVS mapping this skill specialises
+- `cloud-security` - bucket policy, IAM scoping, and CDN configuration
+- `frontend-security` - CSP and the separate-origin decision on the browser side
+- `api-security` - resource consumption limits on the endpoint itself
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, configuration, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns, with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — ASVS V5 summary, file type detection
-- [examples/](examples/) — eight vulnerable/fixed pairs
+- [README.md](README.md) - purpose, configuration, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns, with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - ASVS V5 summary, file type detection
+- [examples/](examples/) - eight vulnerable/fixed pairs

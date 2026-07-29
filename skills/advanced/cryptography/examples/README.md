@@ -7,14 +7,14 @@ Every block labelled `Vulnerable:` is there to be recognised, not copied.
 
 ## Contents
 
-- [Password stored with a salted fast hash](#password-stored-with-a-salted-fast-hash) — A04, CWE-916
-- [Static IV in AES-GCM](#static-iv-in-aes-gcm) — A04, CWE-323
-- [Reset token from a non-cryptographic RNG](#reset-token-from-a-non-cryptographic-rng) — A04, CWE-338
-- [TLS verification disabled to make it work](#tls-verification-disabled-to-make-it-work) — A02, CWE-295
-- [AES-CBC with no integrity check](#aes-cbc-with-no-integrity-check) — A04, CWE-353
-- [JWT verified after the payload is trusted](#jwt-verified-after-the-payload-is-trusted) — A07, CWE-347
-- [Webhook signature compared with ==](#webhook-signature-compared-with-) — A04, CWE-208
-- [Hardcoded key with no rotation path](#hardcoded-key-with-no-rotation-path) — A04, CWE-321
+- [Password stored with a salted fast hash](#password-stored-with-a-salted-fast-hash) - A04, CWE-916
+- [Static IV in AES-GCM](#static-iv-in-aes-gcm) - A04, CWE-323
+- [Reset token from a non-cryptographic RNG](#reset-token-from-a-non-cryptographic-rng) - A04, CWE-338
+- [TLS verification disabled to make it work](#tls-verification-disabled-to-make-it-work) - A02, CWE-295
+- [AES-CBC with no integrity check](#aes-cbc-with-no-integrity-check) - A04, CWE-353
+- [JWT verified after the payload is trusted](#jwt-verified-after-the-payload-is-trusted) - A07, CWE-347
+- [Webhook signature compared with ==](#webhook-signature-compared-with-) - A04, CWE-208
+- [Hardcoded key with no rotation path](#hardcoded-key-with-no-rotation-path) - A04, CWE-321
 
 ---
 
@@ -58,7 +58,7 @@ def verify(stored: str, password: str) -> tuple[bool, str | None]:
 
 Why this works: Argon2id's cost is memory, which a GPU cannot parallelise away cheaply. The
 parameters live in the hash string, so `check_needs_rehash` gives a free upgrade path on the next
-login — you cannot strengthen a hash you already have, only replace it while the plaintext is in
+login - you cannot strengthen a hash you already have, only replace it while the plaintext is in
 hand.
 
 Parameters from [references/password-storage.md](../references/password-storage.md).
@@ -82,7 +82,7 @@ func Encrypt(key, plaintext []byte) ([]byte, error) {
 }
 ```
 
-Two messages under this key leak their XOR, and — specific to GCM — repeating a nonce lets an
+Two messages under this key leak their XOR, and - specific to GCM - repeating a nonce lets an
 attacker recover the authentication subkey and forge ciphertexts that verify. The failure is total,
 not partial.
 
@@ -104,7 +104,7 @@ func Encrypt(key, plaintext, aad []byte) ([]byte, error) {
 `crypto/rand`, never `math/rand`. Why prepending is safe: a nonce is not secret, only unique.
 
 The tempting wrong fix is a counter, because "random might collide". A counter is worse in
-practice — it has to survive restarts, replicas, and rollbacks, and two pods starting at zero reuse
+practice - it has to survive restarts, replicas, and rollbacks, and two pods starting at zero reuse
 every value. Random 96-bit nonces are fine up to roughly 2^32 messages per key; rotate the key on
 message count, or use XChaCha20-Poly1305 with its 192-bit nonce and stop counting.
 
@@ -141,7 +141,7 @@ export async function issueResetToken(userId) {
 ```
 
 Why this works: `randomBytes` draws from the OS CSPRNG, so past outputs reveal nothing about future
-ones. Storing only the hash means a leaked database does not hand over live reset links — the token
+ones. Storing only the hash means a leaked database does not hand over live reset links - the token
 is a bearer credential, so treat it like a password. Argon2 is unnecessary here because the token
 has 256 bits of entropy; there is nothing to brute force.
 
@@ -192,7 +192,7 @@ tr := &http.Transport{TLSClientConfig: &tls.Config{RootCAs: pool, MinVersion: tl
 ```
 
 Why this works: the client still checks the chain and the hostname, just against a CA you chose. The
-tempting wrong fix is a custom verifier that "only checks the fingerprint" — hand-written
+tempting wrong fix is a custom verifier that "only checks the fingerprint" - hand-written
 verification callbacks routinely skip hostname validation, which is CWE-297 and passes every test
 you would think to write.
 
@@ -211,7 +211,7 @@ byte[] ct = c.doFinal(plaintext);
 
 An attacker who can modify the ciphertext gets bit-flipping in the following block, and if
 decryption failures are distinguishable from padding failures, a padding oracle recovers the whole
-plaintext without the key. `AES/ECB/PKCS5Padding` — the default when you write `"AES"` in Java — is
+plaintext without the key. `AES/ECB/PKCS5Padding` - the default when you write `"AES"` in Java - is
 worse still: identical blocks give identical ciphertext.
 
 ```java
@@ -229,7 +229,7 @@ byte[] ct = c.doFinal(plaintext);
 // store iv || ct, plus a key id and algorithm label
 ```
 
-Decryption throws `AEADBadTagException` on any tampering. Let it propagate — catching it and
+Decryption throws `AEADBadTagException` on any tampering. Let it propagate - catching it and
 returning null converts an integrity failure into silent data corruption.
 
 Why this works: GCM authenticates as part of decryption, so there is no ordering to get wrong and no
@@ -270,8 +270,8 @@ if (payload.role !== "admin") throw new ForbiddenError();
 ```
 
 Why this works: nothing in the token influences how the token is checked. The algorithm comes from
-server config, the key is selected from a trusted JWKS by `kid` — a `kid` pointing at a URL or a
-file path is a separate vulnerability — and issuer and audience stop a valid token minted for another
+server config, the key is selected from a trusted JWKS by `kid` - a `kid` pointing at a URL or a
+file path is a separate vulnerability - and issuer and audience stop a valid token minted for another
 service being replayed here.
 
 Honest limitation: a verified JWT is still valid until it expires. If logout or a role change must
@@ -316,7 +316,7 @@ def verify_webhook(body: bytes) -> None:
 
 Why this works: `compare_digest` examines every byte regardless of where the first difference is, so
 timing carries no information about the correct value. Signing the timestamp alongside the body means
-a captured request cannot be replayed later — signature verification alone does not give you
+a captured request cannot be replayed later - signature verification alone does not give you
 freshness.
 
 Sign the raw bytes, not a re-serialised object. Re-encoding JSON changes key order and whitespace and
@@ -337,7 +337,7 @@ def encrypt_ssn(ssn: str) -> bytes:
 ```
 
 The key is in git history, in every image layer, and on every developer laptop. Rotating it means
-re-encrypting every row with a deploy that can read both keys — which is why it never happens. There
+re-encrypting every row with a deploy that can read both keys - which is why it never happens. There
 is also no algorithm or key identifier stored, so a future migration cannot tell old ciphertext from
 new.
 
@@ -378,7 +378,7 @@ binds each ciphertext to its record, so a row-swap attack fails.
 
 What this does not fix: an attacker with the application's IAM role can still call `kms:Decrypt`.
 Encryption at rest protects a stolen dump and a decommissioned disk, not an attacker inside the
-application. KMS CloudTrail logs are what make the bulk-decrypt visible — alert on the volume.
+application. KMS CloudTrail logs are what make the bulk-decrypt visible - alert on the volume.
 
 ---
 

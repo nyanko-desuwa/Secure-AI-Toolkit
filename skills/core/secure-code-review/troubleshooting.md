@@ -15,7 +15,7 @@ learn how a function is meant to be reached.
 If the source stays unconfirmed, report it with the gap named:
 
 ```text
-SQL injection in reports.build_query:88 — `sort` is interpolated. I could not find a
+SQL injection in reports.build_query:88 - `sort` is interpolated. I could not find a
 caller; the only reference is a registry keyed by string. Exploitable if any route passes
 a client-controlled value. Unconfirmed source.
 ```
@@ -45,7 +45,7 @@ Pick by what the code does, not by impact:
 | Code state | CWE |
 |---|---|
 | No authorization decision exists on the path | CWE-862 Missing Authorization |
-| A decision exists but is wrong — wrong operator, wrong role, wrong order | CWE-863 Incorrect Authorization |
+| A decision exists but is wrong - wrong operator, wrong role, wrong order | CWE-863 Incorrect Authorization |
 | The decision uses an identifier the client supplied | CWE-639 Authorization Bypass Through User-Controlled Key |
 | Access control is structurally absent across the component | CWE-284 Improper Access Control |
 
@@ -62,7 +62,7 @@ State the assumption in the finding, rate against it, and give the alternative r
 ```text
 Severity  High, assuming internet-facing and running on a cloud instance with an
           instance-role credential. Medium if this service has no metadata endpoint
-          reachable — I could not verify the runtime environment from the code.
+          reachable - I could not verify the runtime environment from the code.
 ```
 
 Two ratings with the pivot named beats one confident wrong number.
@@ -81,7 +81,7 @@ finding. A finding closed as "accepted" is different from one that was never the
 
 ## The vulnerability is in a dependency
 
-You cannot patch it. Check whether your code reaches the vulnerable path at all — most
+You cannot patch it. Check whether your code reaches the vulnerable path at all - most
 advisories affect a function nobody in the project calls.
 
 Report reachability separately from presence: "advisory affects `parse_options`; this repo
@@ -118,7 +118,7 @@ pattern. "This times out at 10,000 characters" is a runtime claim, and you have 
 ## No test framework exists and you need to prove the fix
 
 Set up the standard choice for the language, write the regression test, and say what you
-added. If the environment blocks it — missing dependencies, no network — state that plainly
+added. If the environment blocks it - missing dependencies, no network - state that plainly
 rather than calling the fix verified. An unproven fix is a proposal.
 
 ## A checklist item does not apply
@@ -129,6 +129,6 @@ unexplained skip reads exactly like an oversight.
 ## The standard may have moved
 
 The Top 10 2025, ASVS 5.0.0, CWE Top 25 2025, and CVSS 4.0 references here were verified on
-2026-07-28. Category IDs move between editions — Injection was A03 in 2021 and is A05 in
+2026-07-28. Category IDs move between editions - Injection was A03 in 2021 and is A05 in
 2025. If a report depends on a precise ID, re-check the source in
 [references/](references/) before quoting it.

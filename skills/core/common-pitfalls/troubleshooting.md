@@ -93,7 +93,7 @@ bound, `useEffect` with no cleanup, `setInterval` never cleared, listeners added
 Python list at module scope.
 
 Deep diagnosis per runtime, including snapshot workflow and container limits, belongs to
-`architecture/performance` — see `skills/architecture/performance/troubleshooting.md`. This page
+`architecture/performance` - see `skills/architecture/performance/troubleshooting.md`. This page
 covers recognising the shape; that one covers proving it.
 
 ## The app gets slower every week

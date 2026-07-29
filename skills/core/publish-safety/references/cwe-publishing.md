@@ -9,7 +9,7 @@ cite an ID you have not read.
 | ID | Title | Abstraction | Use it when |
 |---|---|---|---|
 | CWE-527 | Exposure of Version-Control Repository to an Unauthorized Control Sphere | Variant | The repository itself became reachable: private flipped to public, a `.git` directory served by a web host, a repo pushed to the wrong org |
-| CWE-540 | Inclusion of Sensitive Information in Source Code | Base | A credential or sensitive value inside source that is published — committed, packaged, or shipped in a bundle |
+| CWE-540 | Inclusion of Sensitive Information in Source Code | Base | A credential or sensitive value inside source that is published - committed, packaged, or shipped in a bundle |
 | CWE-538 | Insertion of Sensitive Information into Externally-Accessible File or Directory | Base | The value is in a file that the audience is allowed to fetch but not allowed to see the contents of: a deployed `.env`, a published tarball, a static asset |
 | CWE-798 | Use of Hard-coded Credentials | Base | A credential literal in code, config, a build file, or a fixture, independent of whether it shipped |
 | CWE-615 | Inclusion of Sensitive Information in Source Code Comments | Variant | A key, an internal URL, or a stale note left in a comment that ships with the file |
@@ -23,7 +23,7 @@ The distinction that holds:
 - 798 is about the code containing the credential. It applies the moment the literal is written,
   before anything is published.
 - 540 is about that source being published. Cite it when the exposure is the source code itself
-  reaching an audience — a public repo, a published package, a readable bundle.
+  reaching an audience - a public repo, a published package, a readable bundle.
 - 538 is about a non-source file placed somewhere fetchable. A `.env` deployed next to the app, a
   config file inside a published tarball, a backup left in a public bucket. MITRE's description
   covers actors who are permitted to access the location "but not to the sensitive information."
@@ -39,8 +39,8 @@ resource that is stored, transferred, or otherwise made accessible to unauthoriz
 covers the two cases that matter here: a visibility change on a hosted repository, and a `.git`
 directory that ends up inside deployed output or a container image.
 
-It was renamed twice — "Exposure of CVS Repository to an Unauthorized Control Sphere" before 2020,
-and "Information Leak Through CVS Repository" before 2009 — so older tooling may emit either title
+It was renamed twice - "Exposure of CVS Repository to an Unauthorized Control Sphere" before 2020,
+and "Information Leak Through CVS Repository" before 2009 - so older tooling may emit either title
 for the same ID.
 
 ## CWE-200 is deliberately not in the table above
@@ -74,7 +74,7 @@ which is worth quoting when someone argues that a key in a private repo is theor
 CWE-259, CWE-321, and CWE-522 are summarised with check dates in
 [secrets-management/references/cwe-secrets.md](../../secrets-management/references/cwe-secrets.md);
 CWE-1104 is cited by `core/devsecops`. They are listed here for orientation. Read the entry before
-citing one — this file only verified the six in the first table plus CWE-200 and CWE-527.
+citing one - this file only verified the six in the first table plus CWE-200 and CWE-527.
 
 ## Mapping to the Top 10 and ASVS
 
@@ -89,11 +89,11 @@ citing one — this file only verified the six in the first table plus CWE-200 a
 
 ## Sources
 
-- CWE list — <https://cwe.mitre.org/data/index.html>
-- CWE-527 — <https://cwe.mitre.org/data/definitions/527.html>
-- CWE-540 — <https://cwe.mitre.org/data/definitions/540.html>
-- CWE-538 — <https://cwe.mitre.org/data/definitions/538.html>
-- CWE-798 — <https://cwe.mitre.org/data/definitions/798.html>
-- CWE-615 — <https://cwe.mitre.org/data/definitions/615.html>
-- CWE-532 — <https://cwe.mitre.org/data/definitions/532.html>
-- CWE-200 — <https://cwe.mitre.org/data/definitions/200.html>
+- CWE list - <https://cwe.mitre.org/data/index.html>
+- CWE-527 - <https://cwe.mitre.org/data/definitions/527.html>
+- CWE-540 - <https://cwe.mitre.org/data/definitions/540.html>
+- CWE-538 - <https://cwe.mitre.org/data/definitions/538.html>
+- CWE-798 - <https://cwe.mitre.org/data/definitions/798.html>
+- CWE-615 - <https://cwe.mitre.org/data/definitions/615.html>
+- CWE-532 - <https://cwe.mitre.org/data/definitions/532.html>
+- CWE-200 - <https://cwe.mitre.org/data/definitions/200.html>

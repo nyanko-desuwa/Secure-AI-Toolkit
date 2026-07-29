@@ -1,7 +1,7 @@
 # OWASP Verification Checklist
 
 Run before returning code. Mark each item as pass, fail, or not applicable. "Not
-applicable" needs a one-line reason — an unexplained skip is a gap.
+applicable" needs a one-line reason - an unexplained skip is a gap.
 
 Only the sections that match the change need running. A CSS fix does not need the crypto
 section.

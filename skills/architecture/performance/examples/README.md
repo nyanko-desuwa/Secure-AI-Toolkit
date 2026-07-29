@@ -4,23 +4,23 @@ Vulnerable code next to its fix, one per leak shape. Each names the OWASP catego
 and why the fix closes the hole rather than looking safer.
 
 The scenarios here are deliberately different from the ones in
-[best-practices.md](../best-practices.md) — same eight shapes, different code, different
+[best-practices.md](../best-practices.md) - same eight shapes, different code, different
 languages, so the pattern is visible apart from any one API.
 
 ## Contents
 
-- [L1 — Rate limiter that leaks one entry per IP](#l1--rate-limiter-that-leaks-one-entry-per-ip) — A06, CWE-401
-- [L2 — Observer attached and never disconnected](#l2--observer-attached-and-never-disconnected) — A06, CWE-401
-- [L3 — HttpClient per request, sockets exhausted](#l3--httpclient-per-request-sockets-exhausted) — A06, CWE-772
-- [L4 — Ticker goroutine with no exit](#l4--ticker-goroutine-with-no-exit) — A06, CWE-772
-- [L5 — One field kept, the whole payload retained](#l5--one-field-kept-the-whole-payload-retained) — A06, CWE-401
-- [L6 — ThreadLocal on a pooled servlet thread](#l6--threadlocal-on-a-pooled-servlet-thread) — A01, CWE-401
-- [L7 — Archive extracted without an output bound](#l7--archive-extracted-without-an-output-bound) — A06, CWE-770
-- [L8 — Ignoring the return value of `write()`](#l8--ignoring-the-return-value-of-write) — A06, CWE-400
+- [L1 - Rate limiter that leaks one entry per IP](#l1--rate-limiter-that-leaks-one-entry-per-ip) - A06, CWE-401
+- [L2 - Observer attached and never disconnected](#l2--observer-attached-and-never-disconnected) - A06, CWE-401
+- [L3 - HttpClient per request, sockets exhausted](#l3--httpclient-per-request-sockets-exhausted) - A06, CWE-772
+- [L4 - Ticker goroutine with no exit](#l4--ticker-goroutine-with-no-exit) - A06, CWE-772
+- [L5 - One field kept, the whole payload retained](#l5--one-field-kept-the-whole-payload-retained) - A06, CWE-401
+- [L6 - ThreadLocal on a pooled servlet thread](#l6--threadlocal-on-a-pooled-servlet-thread) - A01, CWE-401
+- [L7 - Archive extracted without an output bound](#l7--archive-extracted-without-an-output-bound) - A06, CWE-770
+- [L8 - Ignoring the return value of `write()`](#l8--ignoring-the-return-value-of-write) - A06, CWE-400
 
 ---
 
-## L1 — Rate limiter that leaks one entry per IP
+## L1 - Rate limiter that leaks one entry per IP
 
 `A06:2025` · `API4:2023` · `CWE-401` · ASVS V13
 
@@ -42,7 +42,7 @@ export function rateLimit(req: Request, res: Response, next: NextFunction) {
 }
 ```
 
-The timestamp array is trimmed, so each entry stays small — and the entry count is unbounded.
+The timestamp array is trimmed, so each entry stays small - and the entry count is unbounded.
 Behind IPv6 an attacker has more addresses than you have bytes; a `/64` is 18 quintillion
 keys. The limiter dies before the endpoint it protects.
 
@@ -72,7 +72,7 @@ export function rateLimit(req: Request, res: Response, next: NextFunction) {
 }
 ```
 
-Why this works: memory is now `max × MAX_HITS × 8 bytes` in the worst case — a number you can
+Why this works: memory is now `max × MAX_HITS × 8 bytes` in the worst case - a number you can
 write in a budget. Eviction under pressure drops the oldest tracked source, which is the
 correct thing to lose: it had not sent a request recently.
 
@@ -84,7 +84,7 @@ per-instance blind spot, where an attacker gets N times the allowance by spreadi
 
 ---
 
-## L2 — Observer attached and never disconnected
+## L2 - Observer attached and never disconnected
 
 `A06:2025` · `CWE-401` · ASVS V13
 
@@ -138,7 +138,7 @@ class LazyImage {
 
 Why this works: `disconnect()` drops the observer's references to every target, and
 `AbortController` removes listeners without needing to remember each function reference.
-`destroy()` is now the single release point, so the audit question — who calls destroy — has
+`destroy()` is now the single release point, so the audit question - who calls destroy - has
 one answer instead of five.
 
 A single shared observer for all cards is better still: one instance, `observe`/`unobserve`
@@ -147,7 +147,7 @@ less than 5 000 observers with one target each.
 
 ---
 
-## L3 — HttpClient per request, sockets exhausted
+## L3 - HttpClient per request, sockets exhausted
 
 `A06:2025` · `CWE-772` · ASVS V13
 
@@ -201,7 +201,7 @@ constructed per call in generated code.
 
 ---
 
-## L4 — Ticker goroutine with no exit
+## L4 - Ticker goroutine with no exit
 
 `A06:2025` · `CWE-772`, `CWE-400` · ASVS V13
 
@@ -219,7 +219,7 @@ func StartCacheRefresh(c *Cache) {
 
 Called once at startup this is merely untidy. Called per tenant, per connection, or on every
 reconnect it is a leak: each call adds a goroutine, a runtime timer, and a strong reference to
-the cache. The goroutine has no exit path at all — `for range t.C` on a ticker that is never
+the cache. The goroutine has no exit path at all - `for range t.C` on a ticker that is never
 stopped blocks forever.
 
 ```go
@@ -259,7 +259,7 @@ which catches the regression at review time.
 
 ---
 
-## L5 — One field kept, the whole payload retained
+## L5 - One field kept, the whole payload retained
 
 `A06:2025` · `CWE-401` · ASVS V13
 
@@ -293,7 +293,7 @@ async function loadProfile(session, userId) {
 ```
 
 Why this works: nothing long-lived holds a reference into a large buffer. The narrower endpoint
-is the real fix — the client never allocates 40 MB, so no amount of retention matters. Where
+is the real fix - the client never allocates 40 MB, so no amount of retention matters. Where
 you cannot change the endpoint, copy the field you keep and let the parsed object go out of
 scope.
 
@@ -304,7 +304,7 @@ references are for caches whose loss is acceptable, not for data you intend to r
 
 ---
 
-## L6 — ThreadLocal on a pooled servlet thread
+## L6 - ThreadLocal on a pooled servlet thread
 
 `A01:2025` and `A06:2025` · `CWE-401` · ASVS V8, V13
 
@@ -330,7 +330,7 @@ public class TenantFilter implements Filter {
 ```
 
 Request A sets tenant `acme` on thread 7. Request B arrives on thread 7 without a resolvable
-tenant — an unauthenticated path, a health check, a request whose resolution threw — and
+tenant - an unauthenticated path, a health check, a request whose resolution threw - and
 `TenantContext.get()` returns `acme`. Queries are now scoped to the wrong tenant. Rank this
 critical: it serves one customer's data to another, and it is timing-dependent, so it will not
 appear in tests.
@@ -368,7 +368,7 @@ public final class TenantContext {
 ```
 
 Why this works: `remove()` in `finally` means no request can observe a previous request's
-value, and `require()` turns the dangerous case — nothing set — into a loud failure instead of
+value, and `require()` turns the dangerous case - nothing set - into a loud failure instead of
 a silent fallback to whatever was there. `CURRENT.set(null)` is not equivalent: it leaves an
 entry in the thread's map, so the classloader retention stays.
 
@@ -377,7 +377,7 @@ and to `contextvars` set without a `reset(token)`.
 
 ---
 
-## L7 — Archive extracted without an output bound
+## L7 - Archive extracted without an output bound
 
 `A06:2025` · `API4:2023` · `CWE-770`, `CWE-789` · ASVS V5
 
@@ -440,12 +440,12 @@ each file is tiny and the metadata is the payload.
 
 Two more bounds worth adding, both out of scope for the memory question but in scope for the
 endpoint: a wall-clock timeout, because decompression is CPU too, and a check on free disk if
-anything is written to it. The path check is here because extraction is also a traversal sink —
+anything is written to it. The path check is here because extraction is also a traversal sink -
 see `owasp-security` for that half.
 
 ---
 
-## L8 — Ignoring the return value of `write()`
+## L8 - Ignoring the return value of `write()`
 
 `A06:2025` · `API4:2023` · `CWE-400` · ASVS V13
 
@@ -466,7 +466,7 @@ async function exportRows(res, query) {
 
 A client on a slow connection, or one that stops reading entirely, consumes rows from the
 database faster than the socket drains. The difference accumulates in the response stream's
-internal buffer. Ten such clients against a 10 million row table exhausts memory — and it costs
+internal buffer. Ten such clients against a 10 million row table exhausts memory - and it costs
 the attacker nothing, because reading slowly is free.
 
 ```javascript
@@ -491,7 +491,7 @@ async function exportRows(res, query) {
 Why this works: `pipeline` stops reading from the source when the destination's buffer is full
 and resumes when it drains, so memory is bounded by `highWaterMark` rather than by the speed
 difference. It also destroys every stream in the chain when any one fails, which closes the
-database cursor — the `for await` version leaks it whenever the client disconnects mid-export.
+database cursor - the `for await` version leaks it whenever the client disconnects mid-export.
 
 The manual equivalent, if you cannot use `pipeline`, is to check the return value and wait:
 

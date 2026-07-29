@@ -114,11 +114,11 @@ guard changes appearance, not what an attacker can send to the API.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP XSS Prevention — <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
-- OWASP DOM XSS Prevention — <https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html>
-- OWASP CSRF Prevention — <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
-- CSP Level 3 — <https://www.w3.org/TR/CSP3/>
-- Trusted Types — <https://w3c.github.io/trusted-types/dist/spec/>
-- DOMPurify — <https://github.com/cure53/DOMPurify>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP XSS Prevention - <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
+- OWASP DOM XSS Prevention - <https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html>
+- OWASP CSRF Prevention - <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
+- CSP Level 3 - <https://www.w3.org/TR/CSP3/>
+- Trusted Types - <https://w3c.github.io/trusted-types/dist/spec/>
+- DOMPurify - <https://github.com/cure53/DOMPurify>

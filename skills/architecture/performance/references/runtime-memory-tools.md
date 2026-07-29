@@ -4,7 +4,7 @@ Version-pinned facts about the tools in [troubleshooting.md](../troubleshooting.
 2026-07-28 against the sources at the bottom.
 
 Where a value depends on the build or the deployment, this file says to print it rather than
-quoting a number. That is deliberate — a recalled default is the most common wrong statement
+quoting a number. That is deliberate - a recalled default is the most common wrong statement
 in a memory investigation.
 
 ## Python
@@ -51,7 +51,7 @@ Flags, with the version each was added. Print the current heap limit rather than
 | `--heap-prof-interval` | Average sampling interval in bytes. Default 512 KiB | 12.4.0 |
 | `--max-old-space-size=MiB` | V8 old-space maximum | V8 option |
 | `--max-old-space-size-percentage=P` | Percentage of available system memory. Takes precedence over the absolute flag when both are given | recent |
-| `--trace-warnings` | Prints the stack for warnings, including `MaxListenersExceededWarning` | — |
+| `--trace-warnings` | Prints the stack for warnings, including `MaxListenersExceededWarning` | - |
 
 `node:v8` API:
 
@@ -79,7 +79,7 @@ Security: an inspector bound to a public interface is remote code execution. Nev
 ## JVM
 
 Container awareness is on by default on Linux. Verify on your build rather than trusting a
-recalled default — the flags print themselves:
+recalled default - the flags print themselves:
 
 ```bash
 java -Xlog:os+container=trace -version
@@ -89,7 +89,7 @@ java -XX:+PrintFlagsFinal -version | grep -E 'MaxHeapSize|MaxRAMPercentage|UseCo
 | Flag | Notes |
 |---|---|
 | `-XX:+UseContainerSupport` | Reads cgroup memory and CPU limits instead of host-wide values. Enabled by default |
-| `-XX:MaxRAMPercentage` | Max heap as a percentage of available memory. Consulted only when `-Xmx` is unset — an explicit `-Xmx` always wins |
+| `-XX:MaxRAMPercentage` | Max heap as a percentage of available memory. Consulted only when `-Xmx` is unset - an explicit `-Xmx` always wins |
 | `-XX:NativeMemoryTracking=summary` | Required at launch for `jcmd VM.native_memory` to work |
 | `-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps` | Produces the dump you will want, at the moment you need it |
 
@@ -102,8 +102,8 @@ jcmd "$PID" GC.heap_dump /tmp/app.hprof
 jcmd "$PID" VM.native_memory summary
 ```
 
-The default heap percentage is conservative because non-heap memory — Metaspace, code cache,
-thread stacks, direct byte buffers — also comes out of the container limit. Raising the
+The default heap percentage is conservative because non-heap memory - Metaspace, code cache,
+thread stacks, direct byte buffers - also comes out of the container limit. Raising the
 percentage without budgeting for that native overhead gets the process killed by the kernel
 with no `OutOfMemoryError` and no heap dump.
 
@@ -113,8 +113,8 @@ with no `OutOfMemoryError` and no heap dump.
 |---|---|---|
 | `debug.SetMemoryLimit(n int64)` | Soft memory limit. Returns the previous value. A negative argument reads without modifying | Go 1.19 |
 | `GOMEMLIMIT` | Provides the initial value. Byte count with an optional `B`/`KiB`/`MiB`/`GiB`/`TiB` suffix | Go 1.19 |
-| `GODEBUG=gctrace=1` | One line per GC cycle with heap sizes around it | — |
-| `net/http/pprof` | Registers `/debug/pprof/*` handlers. Serve on an internal port only | — |
+| `GODEBUG=gctrace=1` | One line per GC cycle with heap sizes around it | - |
+| `net/http/pprof` | Registers `/debug/pprof/*` handlers. Serve on an internal port only | - |
 
 ```go
 current := debug.SetMemoryLimit(-1)   // read
@@ -122,7 +122,7 @@ debug.SetMemoryLimit(2 << 30)         // 2 GiB soft limit
 ```
 
 Two things to plan around. The default is effectively unlimited unless `GOMEMLIMIT` is set or
-`SetMemoryLimit` is called — the Go runtime does not read cgroup limits, so in a container you
+`SetMemoryLimit` is called - the Go runtime does not read cgroup limits, so in a container you
 plumb the value through yourself, from the orchestrator or by reading `/sys/fs/cgroup/memory.max`.
 And the limit only covers runtime-managed memory: it tracks `MemStats.Sys - MemStats.HeapReleased`
 and excludes kernel memory held for the process, allocations made by C code, and
@@ -154,10 +154,10 @@ be arranged before the kill.
 
 ## Sources
 
-- Python `tracemalloc` — <https://docs.python.org/3/library/tracemalloc.html>
-- Python `asyncio` tasks — <https://docs.python.org/3/library/asyncio-task.html>
-- Node CLI options — <https://nodejs.org/api/cli.html>
-- Node `v8` module — <https://nodejs.org/api/v8.html>
-- Go `runtime/debug` — <https://pkg.go.dev/runtime/debug#SetMemoryLimit>
-- Go GC guide — <https://go.dev/doc/gc-guide>
-- JVM troubleshooting guide — <https://docs.oracle.com/en/java/javase/21/troubleshoot/>
+- Python `tracemalloc` - <https://docs.python.org/3/library/tracemalloc.html>
+- Python `asyncio` tasks - <https://docs.python.org/3/library/asyncio-task.html>
+- Node CLI options - <https://nodejs.org/api/cli.html>
+- Node `v8` module - <https://nodejs.org/api/v8.html>
+- Go `runtime/debug` - <https://pkg.go.dev/runtime/debug#SetMemoryLimit>
+- Go GC guide - <https://go.dev/doc/gc-guide>
+- JVM troubleshooting guide - <https://docs.oracle.com/en/java/javase/21/troubleshoot/>

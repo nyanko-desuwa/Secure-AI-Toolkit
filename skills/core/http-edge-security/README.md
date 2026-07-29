@@ -107,8 +107,8 @@ All hostnames, IPs, tokens, and identifiers are placeholders.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- HTTP Request Smuggling (PortSwigger research overview) — conceptual framing only
-- RFC 9110 HTTP Semantics — <https://www.rfc-editor.org/rfc/rfc9110>
-- CWE-444 HTTP Request Smuggling — <https://cwe.mitre.org/data/definitions/444.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- HTTP Request Smuggling (PortSwigger research overview) - conceptual framing only
+- RFC 9110 HTTP Semantics - <https://www.rfc-editor.org/rfc/rfc9110>
+- CWE-444 HTTP Request Smuggling - <https://cwe.mitre.org/data/definitions/444.html>

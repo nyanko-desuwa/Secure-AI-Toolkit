@@ -14,7 +14,7 @@ This is the single most common mistake, and it is the one that feels safest. The
 is a strong suggestion inside the same token stream the attacker is writing to. There is no
 privileged channel.
 
-Fix: enforce at the tool and at the sink. Keep the prompt line — it costs nothing — but do not
+Fix: enforce at the tool and at the sink. Keep the prompt line - it costs nothing - but do not
 count it as a control, and do not write it in a report as a mitigation. `LLM01:2025` ·
 `CWE-1427`
 
@@ -71,7 +71,7 @@ The schema shapes generation. It is not a gate on the value that arrives in your
 and strict-validation features vary by provider and version. Assuming the schema validated
 for you leaves the function accepting anything.
 
-Fix: re-validate in the tool function. Keep the schema — it improves model behaviour — and
+Fix: re-validate in the tool function. Keep the schema - it improves model behaviour - and
 treat the function as the enforcement point.
 
 ## Identity taken from a tool argument
@@ -149,7 +149,7 @@ if any(p in text.lower() for p in BAD):
 
 This enumerates what you thought of. Paraphrase, translation, base64, homoglyphs,
 zero-width characters, and splitting the instruction across two retrieved documents all pass.
-Worse, it produces false confidence — the team believes injection is handled.
+Worse, it produces false confidence - the team believes injection is handled.
 
 Fix: use a classifier if you want detection, alert on hits, and design so a bypass is not
 catastrophic. Never let a denylist justify a capability. See
@@ -220,7 +220,7 @@ logger.info("conversation: %s", messages)
 ```
 
 Now the log store holds every pasted secret, every retrieved document, and every tool result
-— usually with weaker access control than the source systems.
+- usually with weaker access control than the source systems.
 
 Fix: log identifiers, tool names, resolved-and-masked arguments, and outcomes. Mask inside
 arguments before the pipeline. Give transcripts their own retention and access policy.

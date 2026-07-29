@@ -5,7 +5,7 @@ provider on another. Verified 2026-07-28 against the provider documentation link
 bottom.
 
 The mapping is by role, not by feature parity. Services in the same row solve the same
-problem and differ in detail — read the provider doc before assuming a flag exists.
+problem and differ in detail - read the provider doc before assuming a flag exists.
 
 ## Identity
 
@@ -111,11 +111,11 @@ IMDSv2 exists and why leaving v1 optional is the finding.
 
 ## Sources
 
-- AWS IAM — <https://docs.aws.amazon.com/IAM/latest/UserGuide/>
-- AWS IMDS — <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html>
-- Azure managed identities — <https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/>
-- Azure IMDS — <https://learn.microsoft.com/azure/virtual-machines/instance-metadata-service>
-- GCP IAM — <https://cloud.google.com/iam/docs>
-- GCP metadata server — <https://cloud.google.com/compute/docs/metadata/overview>
+- AWS IAM - <https://docs.aws.amazon.com/IAM/latest/UserGuide/>
+- AWS IMDS - <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html>
+- Azure managed identities - <https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/>
+- Azure IMDS - <https://learn.microsoft.com/azure/virtual-machines/instance-metadata-service>
+- GCP IAM - <https://cloud.google.com/iam/docs>
+- GCP metadata server - <https://cloud.google.com/compute/docs/metadata/overview>
 
 Checked 2026-07-28.

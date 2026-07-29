@@ -10,15 +10,15 @@ Generated code allocates confidently and releases carelessly. It writes a module
 connection pool inside the function that uses it, and reads the whole response body into a
 string. Each of those passes tests, passes review, and kills the process in week three.
 
-This skill gives an assistant a fixed question to ask — what was acquired, who owns it,
-when is it released — and a standard to cite when the answer is "nothing releases it".
+This skill gives an assistant a fixed question to ask - what was acquired, who owns it,
+when is it released - and a standard to cite when the answer is "nothing releases it".
 
 ## How It Works
 
 Plain Markdown. Nothing executes. An assistant reads `SKILL.md`, works the six-step
 workflow (inventory, bound, release on error, measure, diagnose, report), and pulls in the
 supporting file it needs. The diagnostic commands in `troubleshooting.md` are meant to be
-run by a human or by an agent with shell access — this skill's own `allowed-tools` is
+run by a human or by an agent with shell access - this skill's own `allowed-tools` is
 restricted to reading, searching, and web lookup.
 
 ```text
@@ -82,7 +82,7 @@ Choose a limit rather than accepting a default:
 
 ```text
 This endpoint accepts a JSON array of IDs and fetches each one. Give me the bounds it
-needs — array length, body size, concurrency, timeout — and the reasoning for each number.
+needs - array length, body size, concurrency, timeout - and the reasoning for each number.
 ```
 
 More in [prompts.md](prompts.md).
@@ -96,7 +96,7 @@ More in [prompts.md](prompts.md).
   is right or wrong depending on entry size and available memory; the skill tells you to
   pick a number and justify it, not which number.
 - Cannot confirm runtime configuration. Whether `GOMEMLIMIT` is actually set, whether the
-  container limit matches the JVM's view, whether the pool is shared across workers — all
+  container limit matches the JVM's view, whether the pool is shared across workers - all
   of that is deployment state, invisible in source.
 - Languages are Python, TypeScript/JavaScript (Node and browser), and Go, with Java and C#
   where they teach something the others cannot. Nothing here is Rust, Ruby, or PHP specific.
@@ -115,11 +115,11 @@ paired with a fixed version. Do not copy a labelled-vulnerable block into a proj
 
 Two of the leak shapes are also confidentiality bugs, not just availability ones. L6
 (request-scoped state stored globally) and shared-cache-without-tenant-key both serve one
-user's data to another — `A01:2025`, not just `A06:2025`. Treat them as data leaks first.
+user's data to another - `A01:2025`, not just `A06:2025`. Treat them as data leaks first.
 
 Heap dumps contain live application memory: session tokens, passwords in flight,
 decrypted PII. Treat a `.heapsnapshot`, `.hprof`, or `pprof` file as a secret. Do not
-attach one to a public issue, and do not leave `--inspect` bound to a public interface —
+attach one to a public issue, and do not leave `--inspect` bound to a public interface -
 an open inspector port is remote code execution.
 
 The examples use placeholder values only. No real credentials, hostnames, or personal
@@ -127,11 +127,11 @@ data appear in this skill.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE-400 — <https://cwe.mitre.org/data/definitions/400.html>
-- CWE-401 — <https://cwe.mitre.org/data/definitions/401.html>
-- CWE-770 — <https://cwe.mitre.org/data/definitions/770.html>
-- CWE-772 — <https://cwe.mitre.org/data/definitions/772.html>
-- CWE-789 — <https://cwe.mitre.org/data/definitions/789.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE-400 - <https://cwe.mitre.org/data/definitions/400.html>
+- CWE-401 - <https://cwe.mitre.org/data/definitions/401.html>
+- CWE-770 - <https://cwe.mitre.org/data/definitions/770.html>
+- CWE-772 - <https://cwe.mitre.org/data/definitions/772.html>
+- CWE-789 - <https://cwe.mitre.org/data/definitions/789.html>

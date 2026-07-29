@@ -1,7 +1,7 @@
 # Ecosystem Controls
 
 > Flags and file names verified 2026-07-28 against each tool's own documentation, linked per
-> section. These change far faster than the standards do — re-check before quoting one in a
+> section. These change far faster than the standards do - re-check before quoting one in a
 > report, and prefer `--help` on the installed version over this table.
 
 The six trust links from `SKILL.md` in each ecosystem's own vocabulary. Where a control does
@@ -21,7 +21,7 @@ Source: <https://docs.npmjs.com/cli/v11/using-npm/config> ·
 | Provenance | `npm publish --provenance` from a GitHub-hosted runner with `permissions: id-token: write`. Equivalent: `NPM_CONFIG_PROVENANCE=true`, `publishConfig.provenance` in `package.json`, or `provenance=true` in `.npmrc`. Trusted publishing generates provenance without the flag |
 
 Two gotchas the docs call out. `ignore-scripts` still lets `npm start`, `npm test`, and
-`npm run` execute their target script — it suppresses pre- and post-scripts. And if the
+`npm run` execute their target script - it suppresses pre- and post-scripts. And if the
 lockfile was generated with tree-shaping flags such as `--legacy-peer-deps`, `npm ci` needs the
 same flags or it errors; commit them via a project `.npmrc`.
 
@@ -37,14 +37,14 @@ pip install --require-hashes --only-binary :all: -r requirements.txt
 
 - Hash-checking is all-or-nothing. A `--hash` on any requirement activates it globally, and
   then hashes are required for every requirement and every dependency
-- Requirements must be pinned — `==`, a URL, or a filesystem path. Unpinned plus hashed is a
+- Requirements must be pinned - `==`, a URL, or a filesystem path. Unpinned plus hashed is a
   contradiction and pip treats it as an error
 - sha256 is the recommended algorithm. md5, sha1, and sha224 are excluded deliberately
 - Multiple hashes per package are allowed, which is how you cover several wheels plus the sdist
 - `--only-binary :all:` matters as much as the hashes: it refuses source distributions, and a
   source distribution executes `setup.py` at install time
 - `pip hash` generates the values. `--no-require-hashes` (added in pip 26.2) disables the
-  automatic global enforcement — reach for it only for local paths and VCS URLs
+  automatic global enforcement - reach for it only for local paths and VCS URLs
 
 On dependency confusion specifically: `--extra-index-url` gives no priority guarantee between
 indexes, and PEP 708 ("Extending the Repository API to Mitigate Dependency Confusion Attacks")
@@ -86,7 +86,7 @@ turns on automatically once that file exists:
 ./gradlew --write-verification-metadata sha256 help --dry-run   # preview only
 ```
 
-- Checksums prove integrity, signatures prove provenance. Record both — the docs are explicit
+- Checksums prove integrity, signatures prove provenance. Record both - the docs are explicit
   that "checksums alone verify integrity but not authenticity"
 - Trusted keys use the full 40-character fingerprint. A group-level `<trusted-key>` trusts
   every artefact in that group, so prefer per-artefact `<pgp>` entries
@@ -119,7 +119,7 @@ Identity values for CI-produced signatures, from the Sigstore documentation:
 
 `cosign verify` without both identity flags accepts a signature from any identity in the
 transparency log. That is the single most common way signing gets adopted without buying
-anything — see [../examples/README.md](../examples/README.md#deploying-an-image-nobody-verified).
+anything - see [../examples/README.md](../examples/README.md#deploying-an-image-nobody-verified).
 
 ## GitHub Actions attestations
 

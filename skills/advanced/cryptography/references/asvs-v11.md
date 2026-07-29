@@ -1,10 +1,10 @@
-# ASVS 5.0 V11 — Cryptography
+# ASVS 5.0 V11 - Cryptography
 
 Source: <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md>
 Appendix C: <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x92-Appendix-C_Cryptography.md>
 Version: ASVS 5.0.0, released 2025-05-30. Verified 2026-07-28.
 
-Cite the chapter and section. Do not invent a requirement ID — 5.0 renumbered everything, so a
+Cite the chapter and section. Do not invent a requirement ID - 5.0 renumbered everything, so a
 `V2.x` or `V6.2.x` citation carried over from 4.x means something else now.
 
 ## Sections
@@ -38,7 +38,7 @@ Strength:
 - "RSA requires a 3072-bit key to achieve 128 bits of security"
 - For collision resistance: "the output length must be at least 256 bits"
 
-Integrity of ciphertext — AEAD "preferably", encrypt-then-MAC otherwise:
+Integrity of ciphertext - AEAD "preferably", encrypt-then-MAC otherwise:
 
 - "preferably by using an approved authenticated encryption method"
 - "operating in encrypt-then-MAC mode"
@@ -107,7 +107,7 @@ Hash functions:
 | Level | Functions |
 |---|---|
 | A | SHA3-512, SHA-512, SHA3-384, SHA-384, SHA3-256, SHA-512/256, SHA-256, SHAKE256, BLAKE2s, BLAKE2b, BLAKE3 |
-| L | SHA-224, SHA-512/224, SHA3-224, SHA-1 — each marked "Not suitable for HMAC, KDF, RBG, digital signatures" |
+| L | SHA-224, SHA-512/224, SHA3-224, SHA-1 - each marked "Not suitable for HMAC, KDF, RBG, digital signatures" |
 | D | CRC (any length), MD4, MD5 |
 
 The cutoff is phrased as output "less than 254 bit", which is barred from signatures and any
@@ -178,9 +178,9 @@ CryptoMon and Cryptobom Forge as freeware options. "ASVS compliant" without a le
 
 ## Sources
 
-- ASVS 5.0.0 V11 —
+- ASVS 5.0.0 V11 -
   <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md> (2026-07-28)
-- ASVS 5.0.0 Appendix C —
+- ASVS 5.0.0 Appendix C -
   <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x92-Appendix-C_Cryptography.md> (2026-07-28)
-- ASVS project page —
+- ASVS project page -
   <https://owasp.org/www-project-application-security-verification-standard/> (2026-07-28)

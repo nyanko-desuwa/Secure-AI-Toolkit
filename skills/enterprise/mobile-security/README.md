@@ -107,17 +107,17 @@ This skill contains deliberately vulnerable code in `best-practices.md`,
 with a fixed version. Do not copy a labelled-vulnerable block into a project.
 
 All keys, hostnames, base64 pins, and bundle identifiers are placeholders. The pin values in
-particular are not real hashes — a copied pin set will fail every connection, which is the
+particular are not real hashes - a copied pin set will fail every connection, which is the
 intended outcome.
 
 ## References
 
-- OWASP MASVS — <https://mas.owasp.org/MASVS/>
-- OWASP MASTG — <https://mas.owasp.org/MASTG/>
-- OWASP Mobile Top 10 — <https://owasp.org/www-project-mobile-top-10/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- RFC 8252, OAuth 2.0 for Native Apps — <https://www.rfc-editor.org/rfc/rfc8252>
-- RFC 7636, PKCE — <https://www.rfc-editor.org/rfc/rfc7636>
-- Android security guidance — <https://developer.android.com/privacy-and-security/security-tips>
-- Apple, preventing insecure network connections — <https://developer.apple.com/documentation/security/preventing-insecure-network-connections>
+- OWASP MASVS - <https://mas.owasp.org/MASVS/>
+- OWASP MASTG - <https://mas.owasp.org/MASTG/>
+- OWASP Mobile Top 10 - <https://owasp.org/www-project-mobile-top-10/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- RFC 8252, OAuth 2.0 for Native Apps - <https://www.rfc-editor.org/rfc/rfc8252>
+- RFC 7636, PKCE - <https://www.rfc-editor.org/rfc/rfc7636>
+- Android security guidance - <https://developer.android.com/privacy-and-security/security-tips>
+- Apple, preventing insecure network connections - <https://developer.apple.com/documentation/security/preventing-insecure-network-connections>

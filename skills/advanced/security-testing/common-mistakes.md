@@ -16,7 +16,7 @@ test was written after the fix, against the fixed code, and never run against th
 version.
 
 Fix: check out the pre-fix commit, or revert the one-line control, and run the test. If it
-passes, it is not a regression test. Do this once per finding — it takes a minute and it is the
+passes, it is not a regression test. Do this once per finding - it takes a minute and it is the
 only proof the test has value.
 
 ## Authorization tested at the unit layer
@@ -124,7 +124,7 @@ assert elapsed < 0.05
 A shared CI runner under load fails this. The team adds a retry, then marks it flaky, then
 deletes it, and the ReDoS regression it guarded is now untested.
 
-Fix: assert the structural property where you can — the pattern is a literal, the query has a
+Fix: assert the structural property where you can - the pattern is a literal, the query has a
 `LIMIT`, the recursion depth is capped. Where only timing works, use a generous bound, isolate
 the job, and treat a failure as a prompt to measure. See
 [troubleshooting.md](troubleshooting.md#the-test-is-flaky).

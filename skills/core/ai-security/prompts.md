@@ -44,7 +44,7 @@ question is the one that finds real bugs.
 
 ```
 Read the retrieval path in src/rag/. Is the permission filter part of the vector query, or
-applied after retrieval? Where does the filter value come from — the session, the client
+applied after retrieval? Where does the filter value come from - the session, the client
 request, or the model? Show me the line.
 ```
 

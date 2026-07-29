@@ -310,6 +310,6 @@ so it is deliberately not used as a required collection ID here.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/>
 - Microsoft Learn sources and check dates are in `references/`.

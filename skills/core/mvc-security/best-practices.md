@@ -11,7 +11,7 @@ A controller owns HTTP concerns: bind the request, obtain the authenticated acto
 and choose a response. A middleware guard may establish authentication or coarse function access.
 It cannot establish ownership before the object has been loaded.
 
-Vulnerable — Spring MVC controller carries authorization and state-transition logic:
+Vulnerable - Spring MVC controller carries authorization and state-transition logic:
 
 ```java
 // Vulnerable: duplicated business and authorization rules live in the HTTP adapter.
@@ -30,7 +30,7 @@ public String cancel(@PathVariable long id, Principal principal) {
 }
 ```
 
-Fixed — controller delegates; repository scope and invariant live behind one service method:
+Fixed - controller delegates; repository scope and invariant live behind one service method:
 
 ```java
 @PostMapping("/orders/{id}/cancel")
@@ -65,7 +65,7 @@ Content-Type: application/json
 {"name":"Mallory","email":"mallory@example.test","password":"correct horse","is_admin":true}
 ```
 
-Vulnerable — Laravel accepts every submitted key and the model guards nothing:
+Vulnerable - Laravel accepts every submitted key and the model guards nothing:
 
 ```php
 // Vulnerable: is_admin, tenant_id, and account_credit are request-writable.
@@ -81,7 +81,7 @@ public function store(Request $request): RedirectResponse
 }
 ```
 
-Fixed — request and model both use positive field lists; server-owned fields come from trusted
+Fixed - request and model both use positive field lists; server-owned fields come from trusted
 state:
 
 ```php
@@ -136,7 +136,7 @@ added to the table is writable until someone remembers to add it to the denylist
 Field validation and write authorization are related but distinct. Validate type, shape, and range
 in a request object. Allowlist the fields that may mutate state when mapping to the domain.
 
-Vulnerable — ASP.NET Core binds a persistence entity. The `[Required]` checks do not stop
+Vulnerable - ASP.NET Core binds a persistence entity. The `[Required]` checks do not stop
 `IsApproved=true`:
 
 ```csharp
@@ -151,7 +151,7 @@ public async Task<IActionResult> Create(Expense expense)
 }
 ```
 
-Fixed — a request model exposes exactly three client fields; the service assigns identity and
+Fixed - a request model exposes exactly three client fields; the service assigns identity and
 approval:
 
 ```csharp
@@ -181,7 +181,7 @@ usually filter unpermitted keys unless configured to raise. In ASP.NET Core and 
 binding, configure strict unknown-member handling for security-sensitive commands or pre-validate
 the JSON shape. Never pass the original request object after validation.
 
-Vulnerable — DRF's serializer exposes every model field, including the role added by a later
+Vulnerable - DRF's serializer exposes every model field, including the role added by a later
 migration:
 
 ```python
@@ -192,7 +192,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = "__all__"
 ```
 
-Fixed — the input contract is explicit and server-owned state is read-only:
+Fixed - the input contract is explicit and server-owned state is read-only:
 
 ```python
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -219,7 +219,7 @@ discards unknown fields changes that default; review overrides before relying on
 A hidden button is not a rule. A JavaScript minimum, disabled checkbox, or template `if` is user
 experience. The attacker sends the request without rendering the page.
 
-Vulnerable — Rails trusts a browser-computed total and uses a template check as the only limit:
+Vulnerable - Rails trusts a browser-computed total and uses a template check as the only limit:
 
 ```erb
 <!-- Vulnerable: the user can remove max=5 and alter total_cents in the request. -->
@@ -238,7 +238,7 @@ def create
 end
 ```
 
-Fixed — controller supplies identifiers and typed input; service locks and recomputes:
+Fixed - controller supplies identifiers and typed input; service locks and recomputes:
 
 ```ruby
 def create
@@ -278,7 +278,7 @@ credited as a security control.
 A route parameter is attacker input even when the router converted it to an integer or model
 instance. Scope the query before the object exists.
 
-Vulnerable — Django fetches globally, then relies on a decorator that knows only that someone is
+Vulnerable - Django fetches globally, then relies on a decorator that knows only that someone is
 logged in:
 
 ```python
@@ -289,7 +289,7 @@ def invoice_detail(request: HttpRequest, invoice_id: int) -> HttpResponse:
     return render(request, "billing/invoice.html", {"invoice": invoice})
 ```
 
-Fixed — repository scope is part of the lookup:
+Fixed - repository scope is part of the lookup:
 
 ```python
 class InvoiceRepository:
@@ -329,7 +329,7 @@ choice such as `sort=created` to a server-owned expression.
 
 `A05:2025` · ASVS V1, V3 · CWE-79
 
-Vulnerable — Blade raw output turns a profile bio into stored XSS:
+Vulnerable - Blade raw output turns a profile bio into stored XSS:
 
 ```blade
 {{-- Vulnerable: <img src=x onerror=fetch('/account/delete',{method:'POST'})> executes. --}}
@@ -383,7 +383,7 @@ CSRF belongs at the request pipeline because it applies consistently before unsa
 actions. Server-rendered MVC frameworks already have a mechanism. The review question is whether
 the application disabled, bypassed, or failed to register it.
 
-Vulnerable — ASP.NET Core emits a form token but no MVC filter validates it:
+Vulnerable - ASP.NET Core emits a form token but no MVC filter validates it:
 
 ```csharp
 // Vulnerable in an MVC app with no global antiforgery filter.
@@ -395,7 +395,7 @@ public async Task<IActionResult> ChangeEmail(ChangeEmailInput input)
 }
 ```
 
-Fixed — enable validation broadly for unsafe methods:
+Fixed - enable validation broadly for unsafe methods:
 
 ```csharp
 builder.Services.AddControllersWithViews(options =>
@@ -423,7 +423,7 @@ non-API MVC controllers.
 Routing is an access-control inventory. Conventional or wildcard routes can make a public method
 reachable before anyone reviews it as an endpoint.
 
-Vulnerable — Rails exposes every conventional action and accepts destructive work over GET:
+Vulnerable - Rails exposes every conventional action and accepts destructive work over GET:
 
 ```ruby
 # Vulnerable: the catch-all can reach actions not deliberately routed.
@@ -437,7 +437,7 @@ class ReportsController < ApplicationController
 end
 ```
 
-Fixed — enumerate routes and use the intended unsafe verb:
+Fixed - enumerate routes and use the intended unsafe verb:
 
 ```ruby
 resources :reports, only: %i[index show] do
@@ -462,7 +462,7 @@ A framework debug page is a full information disclosure. It commonly contains st
 variables, request bodies, file paths, routes, dependency versions, SQL, environment values, and
 configuration. Some combinations turn disclosure into code execution.
 
-Vulnerable — Django production settings inherit `DEBUG=True`:
+Vulnerable - Django production settings inherit `DEBUG=True`:
 
 ```python
 # Vulnerable: an attacker triggers an exception and receives traceback and request details.
@@ -470,7 +470,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 ```
 
-Fixed — production fails during deployment unless explicit safe settings are present:
+Fixed - production fails during deployment unless explicit safe settings are present:
 
 ```python
 DEBUG = False

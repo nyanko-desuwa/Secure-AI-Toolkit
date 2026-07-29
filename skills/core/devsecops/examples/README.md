@@ -6,22 +6,22 @@ placeholders only.
 
 ## Contents
 
-1. [Fork PR secret exposure](#1-fork-pr-secret-exposure) — A08, CWE-829
-2. [Mutable third-party action](#2-mutable-third-party-action) — A03, CWE-829
-3. [Over-permissioned token](#3-over-permissioned-token) — A08, CWE-829
-4. [Long-lived cloud key](#4-long-lived-cloud-key) — A03/A08, CWE-829
-5. [No baseline](#5-no-baseline) — A03, ASVS V15
-6. [Late SBOM](#6-late-sbom) — A03, ASVS V15
-7. [Unverified artifact](#7-unverified-artifact) — A08, CWE-506
-8. [Auto-merge scope](#8-auto-merge-scope) — A03, CWE-1104
+1. [Fork PR secret exposure](#1-fork-pr-secret-exposure) - A08, CWE-829
+2. [Mutable third-party action](#2-mutable-third-party-action) - A03, CWE-829
+3. [Over-permissioned token](#3-over-permissioned-token) - A08, CWE-829
+4. [Long-lived cloud key](#4-long-lived-cloud-key) - A03/A08, CWE-829
+5. [No baseline](#5-no-baseline) - A03, ASVS V15
+6. [Late SBOM](#6-late-sbom) - A03, ASVS V15
+7. [Unverified artifact](#7-unverified-artifact) - A08, CWE-506
+8. [Auto-merge scope](#8-auto-merge-scope) - A03, CWE-1104
 
 Runnable files in this directory:
 
-- `vulnerable-pr-target.yml` — do not enable; fork secret exposure fixture
-- `hardened-pr.yml` — PR gate with minimal permissions and pinned actions
-- `release-signed.yml` — image, SBOM, cosign, and provenance release skeleton
-- `pre-commit-config.yaml` — fast local secret and syntax checks
-- `semgrep-rule.yml` — custom rule for a dangerous workflow pattern
+- `vulnerable-pr-target.yml` - do not enable; fork secret exposure fixture
+- `hardened-pr.yml` - PR gate with minimal permissions and pinned actions
+- `release-signed.yml` - image, SBOM, cosign, and provenance release skeleton
+- `pre-commit-config.yaml` - fast local secret and syntax checks
+- `semgrep-rule.yml` - custom rule for a dangerous workflow pattern
 
 ## 1. Fork PR Secret Exposure
 
@@ -215,11 +215,11 @@ so lockfile diff review, registry monitoring, required tests, and branch protect
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS 5.0 — <https://owasp.org/www-project-application-security-verification-standard/>
-- NIST SSDF — <https://csrc.nist.gov/pubs/sp/800/218/final>
-- SLSA v1.2 — <https://slsa.dev/spec/>
-- GitHub Actions security — <https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions>
-- CWE-1104 — <https://cwe.mitre.org/data/definitions/1104.html>
-- CWE-506 — <https://cwe.mitre.org/data/definitions/506.html>
-- CWE-829 — <https://cwe.mitre.org/data/definitions/829.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS 5.0 - <https://owasp.org/www-project-application-security-verification-standard/>
+- NIST SSDF - <https://csrc.nist.gov/pubs/sp/800/218/final>
+- SLSA v1.2 - <https://slsa.dev/spec/>
+- GitHub Actions security - <https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions>
+- CWE-1104 - <https://cwe.mitre.org/data/definitions/1104.html>
+- CWE-506 - <https://cwe.mitre.org/data/definitions/506.html>
+- CWE-829 - <https://cwe.mitre.org/data/definitions/829.html>

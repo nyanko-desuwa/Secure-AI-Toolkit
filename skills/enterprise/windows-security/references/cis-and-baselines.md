@@ -30,7 +30,7 @@ which. And STIG-aligned variants exist and renumber recommendations relative to 
 
 This skill does not quote CIS recommendation numbers. They are behind registration, they differ
 between the domain-joined and Stand-alone benchmarks, and they are renumbered between major
-versions — a number copied from a v4 document into a v5 audit is worse than no number at all.
+versions - a number copied from a v4 document into a v5 audit is worse than no number at all.
 
 Describe the control instead: "require SMB signing on both the client and server side" is
 unambiguous, checkable, and does not go stale. If a project needs the recommendation ID, download
@@ -64,7 +64,7 @@ Download: <https://www.microsoft.com/download/details.aspx?id=55319>
 ### Drift detection
 
 Policy Analyzer's baseline-then-snapshot comparison is the drift mechanism: capture the intended
-state, capture the host later, diff. It is a point-in-time comparison, not continuous monitoring —
+state, capture the host later, diff. It is a point-in-time comparison, not continuous monitoring -
 pair it with a configuration management tool or Azure Machine Configuration if you need
 continuous.
 
@@ -74,7 +74,7 @@ advanced audit configuration. That is drift you will otherwise discover during a
 
 ## GPO precedence
 
-Local, then Site, then Domain, then OU — later wins, so an OU-linked GPO beats a domain-linked
+Local, then Site, then Domain, then OU - later wins, so an OU-linked GPO beats a domain-linked
 one for objects in that OU. Within a single container, the GPO with the lowest link order wins.
 `Enforced` on a link makes it survive block-inheritance and beats lower-level GPOs.
 `Block Inheritance` on an OU stops higher-level GPOs except enforced ones.
@@ -108,10 +108,10 @@ A baseline applied and then silently exempted in twelve places is not a baseline
 
 ## Sources
 
-- CIS Benchmarks — <https://www.cisecurity.org/cis-benchmarks>, catalogue checked 2026-07-28
-- Microsoft Security Compliance Toolkit guide —
+- CIS Benchmarks - <https://www.cisecurity.org/cis-benchmarks>, catalogue checked 2026-07-28
+- Microsoft Security Compliance Toolkit guide -
   <https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/security-compliance-toolkit-10>,
   checked 2026-07-28
-- SCT download — <https://www.microsoft.com/download/details.aspx?id=55319>
-- Microsoft Security Baselines blog —
+- SCT download - <https://www.microsoft.com/download/details.aspx?id=55319>
+- Microsoft Security Baselines blog -
   <https://techcommunity.microsoft.com/t5/microsoft-security-baselines/bg-p/Microsoft-Security-Baselines>

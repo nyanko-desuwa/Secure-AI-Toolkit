@@ -16,7 +16,7 @@ names: something is acquired per unit of work and never released, so the process
 until the kernel kills it.
 
 Treat that as a security property. An attacker who can drive allocation takes the service
-down with no credentials — `A06:2025` Insecure Design, `API4:2023` Unrestricted Resource
+down with no credentials - `A06:2025` Insecure Design, `API4:2023` Unrestricted Resource
 Consumption, `CWE-400`.
 
 ## When to Use
@@ -53,7 +53,7 @@ Details and fixes: [best-practices.md](best-practices.md).
 Read the change and list what it acquires: allocations that outlive the call, cache
 entries, sockets, file handles, cursors, subscriptions, timers, tasks, goroutines, locks.
 For each one name the owner and the release point. If either is missing, that is the
-finding — you do not need a profiler to report it.
+finding - you do not need a profiler to report it.
 
 ### 2. Bound every acquisition
 
@@ -89,30 +89,30 @@ fix; "cap at 10 000 entries with a 5 minute TTL, sized from p99 active users" is
 
 Rank by whether an unauthenticated caller can drive the growth, and by how fast.
 
-- **Critical** — unauthenticated request grows a global structure with no bound. One
+- **Critical** - unauthenticated request grows a global structure with no bound. One
   attacker takes down the process. Or a request-scoped value leaks across users (L6).
-- **High** — authenticated caller drives unbounded growth; or a leak that reaches the
+- **High** - authenticated caller drives unbounded growth; or a leak that reaches the
   memory limit in normal traffic within a deploy cycle.
-- **Medium** — growth bounded by something else (disk, table size), or slow enough that a
+- **Medium** - growth bounded by something else (disk, table size), or slow enough that a
   weekly deploy hides it. Still a finding: the bound is accidental.
-- **Low** — bounded and correct, but the limit is undocumented or unmonitored.
+- **Low** - bounded and correct, but the limit is undocumented or unmonitored.
 
 A leak whose only trigger is an operator action is not critical. Say which it is.
 
 ## Related Skills
 
-- `owasp-security` — the standards map these findings cite
-- `database-security` — N+1 queries, cursors, statement timeouts
-- `scalability` — capacity planning once the leaks are gone
-- `api-design` — pagination contracts and body size limits
+- `owasp-security` - the standards map these findings cite
+- `database-security` - N+1 queries, cursors, statement timeouts
+- `scalability` - capacity planning once the leaks are gone
+- `api-design` - pagination contracts and body size limits
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — the eight shapes, with fixes
-- [common-mistakes.md](common-mistakes.md) — including the wrong fixes people reach for
-- [troubleshooting.md](troubleshooting.md) — runnable diagnosis per runtime
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — standards, version-pinned
-- [examples/](examples/) — eight vulnerable/fixed pairs
+- [README.md](README.md) - purpose, standards table, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - the eight shapes, with fixes
+- [common-mistakes.md](common-mistakes.md) - including the wrong fixes people reach for
+- [troubleshooting.md](troubleshooting.md) - runnable diagnosis per runtime
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - standards, version-pinned
+- [examples/](examples/) - eight vulnerable/fixed pairs

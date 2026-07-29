@@ -22,7 +22,7 @@ extra diagram boxes.
 | Management | Monitoring, log collectors | Agents pushing metrics and logs | Nothing inbound to workloads |
 
 Two rules make the table mean something. First, every arrow is a named rule, and there is no
-implicit allow between zones. Second, the data zone has no route to the internet — not a
+implicit allow between zones. Second, the data zone has no route to the internet - not a
 restricted route, no route. A database that cannot open an outbound connection cannot be used
 to exfiltrate over one.
 
@@ -64,7 +64,7 @@ that permits outbound only to the proxy, or the proxy is advice.
 The one control that closes an SSRF class rather than narrowing it: workloads that handle
 untrusted URLs get no direct route out, and the proxy applies the host allowlist. That way the
 application's own IP checks stop being the last line, which matters because they lose to DNS
-rebinding — the address is resolved once for the check and again for the connection.
+rebinding - the address is resolved once for the check and again for the connection.
 
 ## Cloud metadata endpoints
 
@@ -120,12 +120,12 @@ whether it is protecting anything or whether nothing has tried. `A09:2025`, `CWE
 
 ## Sources
 
-- NIST SP 800-207, Zero Trust Architecture, August 2020 — <https://csrc.nist.gov/pubs/sp/800/207/final>
-- RFC 6890, Special-Purpose IP Address Registries, BCP 153, April 2013 — <https://www.rfc-editor.org/rfc/rfc6890.html>
-- RFC 8981, Temporary Address Extensions for SLAAC in IPv6, February 2021 — <https://www.rfc-editor.org/rfc/rfc8981.html>
-- IANA IPv4 Special-Purpose Address Registry — <https://www.iana.org/assignments/iana-ipv4-special-registry/>
-- IANA IPv6 Special-Purpose Address Registry — <https://www.iana.org/assignments/iana-ipv6-special-registry/>
-- OWASP SSRF Prevention Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
+- NIST SP 800-207, Zero Trust Architecture, August 2020 - <https://csrc.nist.gov/pubs/sp/800/207/final>
+- RFC 6890, Special-Purpose IP Address Registries, BCP 153, April 2013 - <https://www.rfc-editor.org/rfc/rfc6890.html>
+- RFC 8981, Temporary Address Extensions for SLAAC in IPv6, February 2021 - <https://www.rfc-editor.org/rfc/rfc8981.html>
+- IANA IPv4 Special-Purpose Address Registry - <https://www.iana.org/assignments/iana-ipv4-special-registry/>
+- IANA IPv6 Special-Purpose Address Registry - <https://www.iana.org/assignments/iana-ipv6-special-registry/>
+- OWASP SSRF Prevention Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
 
 All URLs checked 2026-07-28.

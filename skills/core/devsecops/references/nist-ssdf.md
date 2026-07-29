@@ -10,10 +10,10 @@ organization's SDLC. It is not a scanner checklist and it does not prescribe a s
 
 | Group | Meaning | DevSecOps application |
 |---|---|---|
-| PO — Prepare the Organization | Prepare people, processes, and technology | Security roles, policy, tool ownership, training, risk tolerance, and supplier expectations |
-| PS — Protect the Software | Protect software from tampering and unauthorized access | Source and artifact access, signing keys, secrets, dependencies, repositories, and build isolation |
-| PW — Produce Well-Secured Software | Produce releases with as few security vulnerabilities as possible | Secure coding, reviews, SAST/DAST/SCA, IaC and container testing, SBOM, reproducible inputs |
-| RV — Respond to Vulnerabilities | Find, fix, and prevent recurrence | Triage, reachability, severity, SLAs, disclosure, exceptions, regression tests, and lessons learned |
+| PO - Prepare the Organization | Prepare people, processes, and technology | Security roles, policy, tool ownership, training, risk tolerance, and supplier expectations |
+| PS - Protect the Software | Protect software from tampering and unauthorized access | Source and artifact access, signing keys, secrets, dependencies, repositories, and build isolation |
+| PW - Produce Well-Secured Software | Produce releases with as few security vulnerabilities as possible | Secure coding, reviews, SAST/DAST/SCA, IaC and container testing, SBOM, reproducible inputs |
+| RV - Respond to Vulnerabilities | Find, fix, and prevent recurrence | Triage, reachability, severity, SLAs, disclosure, exceptions, regression tests, and lessons learned |
 
 ## How to Use SSDF Here
 
@@ -53,7 +53,7 @@ provenance levels. Use the organization's risk policy for remediation deadlines.
 
 ## Sources
 
-- NIST SP 800-218 final — <https://csrc.nist.gov/pubs/sp/800/218/final>
-- SP 800-218 PDF — <https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf>
-- NIST SSDF project — <https://csrc.nist.gov/Projects/ssdf>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
+- NIST SP 800-218 final - <https://csrc.nist.gov/pubs/sp/800/218/final>
+- SP 800-218 PDF - <https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-218.pdf>
+- NIST SSDF project - <https://csrc.nist.gov/Projects/ssdf>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>

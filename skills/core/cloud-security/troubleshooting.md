@@ -32,7 +32,7 @@ not the identity policy. Both must allow.
 
 ## The provider requires a wildcard resource
 
-Some APIs are account-scoped and reject a specific ARN — `cloudwatch:PutMetricData`,
+Some APIs are account-scoped and reject a specific ARN - `cloudwatch:PutMetricData`,
 `ec2:DescribeInstances`, `logs:DescribeLogGroups`, most `List*` operations. `Resource: "*"` is
 correct there.
 
@@ -57,7 +57,7 @@ the reviewer cannot distinguish it from laziness.
 ## Egress cannot be closed because the dependency list is unknown
 
 Run it open in staging with flow logs on, collect the destinations, then close it with that list
-as the allowlist. Do not close production egress from a guess — you will cause an outage and the
+as the allowlist. Do not close production egress from a guess - you will cause an outage and the
 control will be reverted permanently.
 
 If a dependency resolves to a rotating set of IPs (most SaaS APIs, package registries), the
@@ -83,7 +83,7 @@ Never resolve this by setting `optional` across a module that many instances sha
 
 ## The database must accept connections from the internet
 
-Sometimes true — a legacy client, a partner integration, an analyst's laptop with no VPN.
+Sometimes true - a legacy client, a partner integration, an analyst's laptop with no VPN.
 
 Ranked alternatives, best first:
 
@@ -103,7 +103,7 @@ needs the key policy and the identity policy to agree.
 
 If the team cannot yet run key rotation and key access reviews, provider-managed keys with
 encryption enabled are better than a CMEK nobody understands. Say which you chose and why. What
-is not acceptable is unencrypted storage — that is a default nobody has to manage.
+is not acceptable is unencrypted storage - that is a default nobody has to manage.
 
 Where CMEK is worth the cost: regulated data, data shared across accounts, and anywhere you need
 the ability to revoke access by disabling a key.
@@ -118,8 +118,8 @@ production, and keeping it means the code no longer describes reality.
 3. If correct, port it into the code and apply. If not, apply the code and tell the person.
 4. Either way, note whether console write access should exist for that role at all.
 
-Unexplained drift on a security-relevant field — a bucket policy, a security group, a key
-policy, a role trust policy — is an incident until proven otherwise. Do not silently `terraform
+Unexplained drift on a security-relevant field - a bucket policy, a security group, a key
+policy, a role trust policy - is an incident until proven otherwise. Do not silently `terraform
 apply` over it; you may be destroying evidence.
 
 ## The policy-as-code rule fires on something legitimate
@@ -143,7 +143,7 @@ a recommendation does not fit, document the deviation: which recommendation, why
 apply, and what compensates for it.
 
 Do not cite a CIS control number you have not read. The numbering changes between major versions
-and a wrong number is worse than none — it sends the reader to unrelated guidance. Cite the
+and a wrong number is worse than none - it sends the reader to unrelated guidance. Cite the
 recommendation by its title.
 
 ## The finding is in a managed service you cannot configure
@@ -153,7 +153,7 @@ region, or may not allow disabling a public port.
 
 Report it as accepted risk with the compensating controls: authentication strength, audit
 logging, network filtering where available, and a detection rule for anomalous access. Then check
-whether the provider has shipped support since the last time anyone looked — this changes often.
+whether the provider has shipped support since the last time anyone looked - this changes often.
 
 ## Two providers give conflicting advice for the same concern
 
@@ -161,8 +161,8 @@ They usually differ in mechanism, not intent. AWS solves the confused deputy wit
 Azure solves it with a tenant-ID claim check. Implement the mechanism the provider offers and
 name the concern it addresses, so a reader on the other cloud can map it.
 
-Where a provider genuinely offers less — no way to disable IMDS on Azure, no per-instance
-metadata disable on GCP — say so plainly instead of inventing an equivalent setting.
+Where a provider genuinely offers less - no way to disable IMDS on Azure, no per-instance
+metadata disable on GCP - say so plainly instead of inventing an equivalent setting.
 
 ## You cannot verify the deployed state from the code
 

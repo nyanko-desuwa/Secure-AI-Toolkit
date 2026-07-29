@@ -18,7 +18,7 @@ Verified: 2026-07-28
 | CWE-294 | Authentication Bypass by Capture-replay | A valid TOTP is accepted more than once during the same time step |
 | CWE-330 | Use of Insufficiently Random Values | Tokens, codes, or identifiers from a non-CSPRNG source |
 | CWE-340 | Generation of Predictable Numbers or Identifiers | Sequential IDs, timestamp-seeded tokens, counter-derived invite codes |
-| CWE-521 | Weak Password Requirements | No length floor, no breached-password check — the guess space is small enough to matter |
+| CWE-521 | Weak Password Requirements | No length floor, no breached-password check - the guess space is small enough to matter |
 | CWE-532 | Insertion of Sensitive Information into Log File | Attempted passwords, OTPs, keys, tokens, or partial values enter logs |
 | CWE-770 | Allocation of Resources Without Limits or Throttling | One request carrying many attempts: GraphQL batches, JSON-RPC arrays, unbounded array parameters |
 | CWE-778 | Insufficient Logging | Guessing events are not recorded well enough to detect or investigate |

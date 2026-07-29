@@ -1,10 +1,10 @@
-# ASVS 5.0 — V1 and V3 for Frontend Work
+# ASVS 5.0 - V1 and V3 for Frontend Work
 
 OWASP Application Security Verification Standard 5.0.0, released 2025-05-30. Source:
 <https://owasp.org/www-project-application-security-verification-standard/>. Checked 2026-07-28.
 
 This file is a chapter-level map, not a requirement list. ASVS 5.0 requirement IDs are versioned
-and change between editions — read them from the official release rather than quoting an ID from
+and change between editions - read them from the official release rather than quoting an ID from
 memory. Nothing in this skill claims an ASVS level; a level claim needs a requirement-by-requirement
 assessment against the published CSV.
 
@@ -21,7 +21,7 @@ assessment against the published CSV.
 | Redirect target validation | V2 Validation and Business Logic | A01 Broken Access Control | CWE-601 |
 | Prototype pollution through untrusted keys | V2 (with V15 Secure Coding) | A05 | CWE-1321 |
 | Third-party script integrity, SRI | V3 (with V15) | A03 Software Supply Chain Failures | CWE-353 |
-| Header delivery and environment config | V13 Configuration | A02 | — |
+| Header delivery and environment config | V13 Configuration | A02 | - |
 
 The full chapter list for 5.0.0 is V1 Encoding and Sanitization, V2 Validation and Business Logic,
 V3 Web Frontend Security, V4 API and Web Service, V5 File Handling, V6 Authentication,
@@ -41,7 +41,7 @@ Practical reading for a browser codebase:
   sanitized on output rather than on storage.
 - Each context gets its own control. An allowlist tuned for an article body is not a control for an
   attribute value, a CSS declaration, or an SVG fragment.
-- Dynamic code construction — `eval`, `new Function`, string timers — is removed rather than
+- Dynamic code construction - `eval`, `new Function`, string timers - is removed rather than
   guarded. There is no encoding that makes user data safe as code.
 
 A finding that cites V1 should name the sink and the context. "Unencoded output" without the
@@ -89,10 +89,10 @@ The clusters worth reviewing together:
 Cite the chapter, name the concrete failure, and state what you could not check:
 
 ```text
-V3 (Web Frontend Security) · A02:2025 · CWE-352 — POST /api/account/email authenticates by
+V3 (Web Frontend Security) · A02:2025 · CWE-352 - POST /api/account/email authenticates by
 session cookie and accepts no CSRF token. Any cross-site page can submit the form on behalf of a
 logged-in user. Cookie is SameSite=Lax, which blocks the cross-site POST in current browsers but
-is a mitigation, not the control. Deployed cookie attributes not verified — read from source only.
+is a mitigation, not the control. Deployed cookie attributes not verified - read from source only.
 ```
 
 That is defensible. "Violates ASVS V3" on its own is not, and neither is a requirement ID that was
@@ -100,8 +100,8 @@ not read from the published standard.
 
 ## Sources
 
-- OWASP ASVS project — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP XSS Prevention Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
-- OWASP CSRF Prevention Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
-- CWE — <https://cwe.mitre.org/>
+- OWASP ASVS project - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP XSS Prevention Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
+- OWASP CSRF Prevention Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
+- CWE - <https://cwe.mitre.org/>

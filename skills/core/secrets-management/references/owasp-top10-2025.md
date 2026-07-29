@@ -1,4 +1,4 @@
-# OWASP Top 10 2025 — the two categories that carry secrets
+# OWASP Top 10 2025 - the two categories that carry secrets
 
 Source: <https://owasp.org/Top10/2025/> · verified 2026-07-28
 
@@ -9,7 +9,7 @@ silently.
 Secrets work lands mainly in two categories, with three more appearing depending on where the
 credential leaked.
 
-## A02:2025 — Security Misconfiguration
+## A02:2025 - Security Misconfiguration
 
 The delivery path. A secret that is handled correctly in code and wrong in the pipeline, the
 image, or the cluster is an A02 finding.
@@ -26,9 +26,9 @@ Applies when:
 - Local development requires production credentials because nothing else works
 
 Ask: what is different between this configuration and production? Who can read the place the
-value ends up — and is that group larger than the group allowed to use the credential?
+value ends up - and is that group larger than the group allowed to use the credential?
 
-## A04:2025 — Cryptographic Failures
+## A04:2025 - Cryptographic Failures
 
 The credential itself. Storage, comparison, lifetime, and the keys that protect other data.
 
@@ -42,7 +42,7 @@ Applies when:
 - Rotation exists on paper but has never been executed
 
 Ask: what is sensitive here, and what makes the stored form safe if the store is read? For a
-credential the answer is usually "nothing" — which is why revocability and short lifetime carry
+credential the answer is usually "nothing" - which is why revocability and short lifetime carry
 the weight, not the storage format.
 
 ## Where a leaked secret is reported
@@ -65,4 +65,4 @@ pattern should raise an alert someone actually receives.
 ## What this reference does not settle
 
 The Top 10 is a risk ranking. It tells you a misconfiguration is common; it does not give you a
-testable statement. For that, use ASVS V13 and V14 — see [asvs-5.0.md](asvs-5.0.md).
+testable statement. For that, use ASVS V13 and V14 - see [asvs-5.0.md](asvs-5.0.md).

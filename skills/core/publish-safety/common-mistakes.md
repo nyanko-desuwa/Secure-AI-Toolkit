@@ -1,7 +1,7 @@
 # Common Mistakes
 
 What goes wrong in practice, and why the fix works. The interesting cases are the ones where the
-wrong version looks responsible — a `.gitignore` entry added, a commit deleted, a file renamed to
+wrong version looks responsible - a `.gitignore` entry added, a commit deleted, a file renamed to
 `.example`. Each of those reads as diligence in a diff.
 
 ## Adding the ignore rule after the file was already tracked
@@ -30,7 +30,7 @@ git log --all --full-history --oneline -- .env   # then rotate everything this s
 
 Why the fix closes it: `.gitignore` is only consulted for untracked paths, so the file has to leave
 the index before the rule means anything. The weaker fix people reach for is `git rm .env`, which
-also deletes the working copy and breaks the local environment — so it gets reverted, and the
+also deletes the working copy and breaks the local environment - so it gets reverted, and the
 tracking comes back with it.
 
 ## Treating a history rewrite as the remediation
@@ -49,14 +49,14 @@ git push --force
 
 Why it survives review: the value genuinely is absent from what you can now see, which is the only
 thing anyone checks. GitHub's own documentation is explicit that rewriting alone leaves the commits
-reachable — in existing clones and forks, in cached views addressable by SHA, and through
+reachable - in existing clones and forks, in cached views addressable by SHA, and through
 `refs/pull/` refs that a force-push does not update (verified 2026-07-28).
 
 ```bash
 # Fixed: order the response, and do the cleanup last if at all
-# 1. Revoke at the provider — make the old value useless
-# 2. Rotate — issue and deploy the replacement, with no overlap window
-# 3. Investigate — read the provider audit log for the exposure window
+# 1. Revoke at the provider - make the old value useless
+# 2. Rotate - issue and deploy the replacement, with no overlap window
+# 3. Investigate - read the provider audit log for the exposure window
 # 4. Optional hygiene: rewrite history, knowing it changes nothing about the exposure
 ```
 
@@ -80,7 +80,7 @@ ls -la          # no .env in sight
 ```
 
 Why it survives review: both commands answer honestly about the present. The question that matters
-— "was anything sensitive ever committed" — was never asked, and there is no visible signal that it
+- "was anything sensitive ever committed" - was never asked, and there is no visible signal that it
 was skipped.
 
 ```bash
@@ -103,7 +103,7 @@ gets forked into a personal account, or a contractor is added, or a CI integrati
 access to the whole org.
 
 Why it survives review: the reasoning is true on the day it is made. What changes is the audience,
-and audience is a setting somebody else can flip in two clicks — at which point the entire history
+and audience is a setting somebody else can flip in two clicks - at which point the entire history
 publishes at once, not just today's files.
 
 The fix is to treat "private" as a delay, not a control: no credential is committed regardless of
@@ -129,7 +129,7 @@ sed -E 's/=.*/=/' .env > .env.example
 ```
 
 Why the fix closes it: the transformation cannot carry a value through. Read the output before
-staging it anyway — `sed` does not understand a multi-line PEM block, so a private key spanning
+staging it anyway - `sed` does not understand a multi-line PEM block, so a private key spanning
 several lines survives the strip.
 
 ## `npm publish` with no allowlist
@@ -142,7 +142,7 @@ npm publish
 ```
 
 Everything in the directory that is not ignored goes into the tarball: `.env`, `scripts/`,
-internal notes, test fixtures with real data. Verified against the npm docs on 2026-07-28 — with no
+internal notes, test fixtures with real data. Verified against the npm docs on 2026-07-28 - with no
 `files` field the default is `["*"]`.
 
 Why it survives review: publishing succeeds and the package works when installed, so nothing signals
@@ -170,7 +170,7 @@ COPY . .
 ```
 
 The build context is the whole directory. `.gitignore` has no bearing on it, so `.env` and the
-entire `.git` directory — history included — land in a layer that anyone who pulls the image can
+entire `.git` directory - history included - land in a layer that anyone who pulls the image can
 extract.
 
 Why it survives review: the Dockerfile is short and idiomatic, the image builds, the application
@@ -185,13 +185,13 @@ COPY src/ ./src/
 
 Plus a `.dockerignore` with `.git`, `.env*`, and key patterns. Why the fix closes it: the narrow
 `COPY` means a new stray file is not copied even if the ignore file misses it. `RUN rm .env` in a
-later layer is not a fix — the earlier layer still holds the file.
+later layer is not a fix - the earlier layer still holds the file.
 
 ## Mistaking a public env prefix for a private variable
 
 `A04:2025` · `CWE-540`
 
-`NEXT_PUBLIC_`, `VITE_`, `REACT_APP_`, `EXPO_PUBLIC_`, `PUBLIC_` — each tells the bundler to inline
+`NEXT_PUBLIC_`, `VITE_`, `REACT_APP_`, `EXPO_PUBLIC_`, `PUBLIC_` - each tells the bundler to inline
 the value into client JavaScript as a string literal.
 
 Why it survives review: it is an environment variable in a gitignored `.env` file, which is where
@@ -211,7 +211,7 @@ Nothing scans an image. Nothing scans a chat message. A terminal screenshot atta
 carries whatever was in the scrollback, and an `Authorization` header pasted into a bug report is
 readable by everyone on the thread.
 
-Why it survives review: there is no diff, no commit, and no scanner output — so no review happens
+Why it survives review: there is no diff, no commit, and no scanner output - so no review happens
 at all. Editing the comment afterwards leaves the original in the edit history, in notification
 emails already sent, and in any webhook that fired.
 

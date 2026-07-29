@@ -23,15 +23,15 @@ this operation, the layering is decoration.
 ## The Dependency Rule
 
 Uncle Bob's 2012 article states it as: "source code dependencies can only point inwards."
-Four circles, innermost first — entities, use cases, interface adapters, frameworks and
+Four circles, innermost first - entities, use cases, interface adapters, frameworks and
 drivers. The count is schematic; the direction is not.
 
 ```mermaid
 flowchart RL
     F["Frameworks and Drivers<br/>Express, ASP.NET, EF Core, Prisma, SMTP, S3"]
     A["Interface Adapters<br/>controllers, presenters, repository implementations"]
-    U["Use Cases<br/>ApproveInvoice, TransferFunds — knows actor + intent"]
-    E["Entities<br/>Invoice, Money — invariants, no framework import"]
+    U["Use Cases<br/>ApproveInvoice, TransferFunds - knows actor + intent"]
+    E["Entities<br/>Invoice, Money - invariants, no framework import"]
     F --> A --> U --> E
     E -. "defines port" .-> P["IInvoiceRepository"]
     A -. implements .-> P
@@ -42,9 +42,9 @@ The security payoff of the direction is specific:
 | Boundary | What it enforces | Failure if crossed the wrong way |
 |---|---|---|
 | Entity constructor | Invariants. An invalid object cannot exist | Anemic entity, validation in the controller, second entry point writes bad data |
-| Use case signature | Authorization. Only this layer knows actor and intent | `A01:2025` — check lives in the controller, any other caller bypasses it |
+| Use case signature | Authorization. Only this layer knows actor and intent | `A01:2025` - check lives in the controller, any other caller bypasses it |
 | Port (interface owned by the domain) | Tenant and ownership predicates below every caller | Domain imports the ORM, so one query path skips the filter |
-| Output DTO | Which fields leave the process | `API3:2023` over-fetching — password hash, internal flags, other tenants' IDs |
+| Output DTO | Which fields leave the process | `API3:2023` over-fetching - password hash, internal flags, other tenants' IDs |
 | Input DTO / command | Which fields a caller may set | `CWE-915` mass assignment |
 
 ## Workflow
@@ -58,7 +58,7 @@ the use case is reusable by anything, including a job that has no actor. See
 
 ### 2. Put the invariant in the constructor
 
-Anything that must always be true about the object goes in the type — factory method,
+Anything that must always be true about the object goes in the type - factory method,
 private constructor, value object. Format checks (is this a well-formed email, is this an
 integer) stay at the edge. See
 [best-practices.md](best-practices.md#validation-format-at-the-edge-invariants-in-the-domain).
@@ -73,7 +73,7 @@ backwards. See [best-practices.md](best-practices.md#ports-belong-to-the-inner-l
 
 Every response is built from an output DTO with named fields. No entity, no ORM model, and
 no `toJSON()` on a domain object reaches a serialiser. This is a structural control, not
-ceremony — see [best-practices.md](best-practices.md#output-dtos-are-an-access-control).
+ceremony - see [best-practices.md](best-practices.md#output-dtos-are-an-access-control).
 
 ### 5. Price the indirection
 
@@ -84,7 +84,7 @@ list screen into 1+N queries unless you add a read path. See
 
 ### 6. Check the container lifetimes
 
-A singleton holding a request-scoped object — a user, a `DbContext`, a tenant — is a
+A singleton holding a request-scoped object - a user, a `DbContext`, a tenant - is a
 stale-authorization bug and a retained-reference leak at the same time. See
 [best-practices.md](best-practices.md#di-lifetimes-are-a-security-boundary).
 
@@ -101,7 +101,7 @@ Be blunt about this. Most projects that adopt the pattern do not need it.
   row", four layers buy nothing. A thin controller plus a scoped query is the honest answer:
   one file, the tenant predicate visible in the query, no mapper. Adding entities, use
   cases, ports, and DTOs to that gives you four files to read before you can see the
-  `WHERE` clause — and reviewers who cannot see the predicate stop checking it.
+  `WHERE` clause - and reviewers who cannot see the predicate stop checking it.
 - **A read-only reporting or export surface.** Projections do not have invariants. Go from
   SQL to DTO and skip the entity. Loading aggregates to flatten them is where the N+1 comes
   from.
@@ -118,21 +118,21 @@ is for.
 
 ## Related Skills
 
-- `core/owasp` — the Top 10 and ASVS mapping these findings cite
-- `core/api-security` — object and property level authorization at the API surface
-- `advanced/secure-architecture` — boundaries between processes, tenants, and services;
+- `core/owasp` - the Top 10 and ASVS mapping these findings cite
+- `core/api-security` - object and property level authorization at the API surface
+- `advanced/secure-architecture` - boundaries between processes, tenants, and services;
   this skill is boundaries inside one process
-- `architecture/performance` — owns heap, retention, and leak detail; linked from here
+- `architecture/performance` - owns heap, retention, and leak detail; linked from here
   rather than duplicated
-- `architecture/hexagonal`, `architecture/ddd`, `architecture/cqrs` — adjacent patterns
+- `architecture/hexagonal`, `architecture/ddd`, `architecture/cqrs` - adjacent patterns
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, standards, limitations
-- [checklist.md](checklist.md) — pre-return verification, grouped by boundary
-- [best-practices.md](best-practices.md) — patterns with cost and security implication
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix holds
-- [troubleshooting.md](troubleshooting.md) — when the pattern does not fit or conflicts
-- [prompts.md](prompts.md) — prompts that produce structure, plus anti-patterns
-- [references/](references/) — sources, each with the date verified
-- [examples/](examples/) — eight before/after pairs
+- [README.md](README.md) - purpose, layout, standards, limitations
+- [checklist.md](checklist.md) - pre-return verification, grouped by boundary
+- [best-practices.md](best-practices.md) - patterns with cost and security implication
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix holds
+- [troubleshooting.md](troubleshooting.md) - when the pattern does not fit or conflicts
+- [prompts.md](prompts.md) - prompts that produce structure, plus anti-patterns
+- [references/](references/) - sources, each with the date verified
+- [examples/](examples/) - eight before/after pairs

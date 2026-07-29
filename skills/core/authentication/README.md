@@ -111,9 +111,9 @@ passwords, reset tokens, access tokens, refresh tokens, recovery codes, or full 
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/>
-- NIST SP 800-63B-4 — <https://csrc.nist.gov/pubs/sp/800/63/b/4/final>
-- OAuth 2.0 Security BCP, RFC 9700 — <https://www.rfc-editor.org/rfc/rfc9700.html>
-- OWASP Password Storage Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html>
-- OWASP Session Management Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/>
+- NIST SP 800-63B-4 - <https://csrc.nist.gov/pubs/sp/800/63/b/4/final>
+- OAuth 2.0 Security BCP, RFC 9700 - <https://www.rfc-editor.org/rfc/rfc9700.html>
+- OWASP Password Storage Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html>
+- OWASP Session Management Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html>

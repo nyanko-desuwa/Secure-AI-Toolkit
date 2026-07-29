@@ -93,7 +93,7 @@ Work through it with privacy counsel:
    purposes
 4. Remove optional fields such as user agent after a shorter period even if the core audit row
    remains
-5. Record the residual data — source IP and timestamps can still identify a person
+5. Record the residual data - source IP and timestamps can still identify a person
 
 Pseudonymisation narrows the conflict. It does not make the log anonymous and does not erase
 the right-to-access problem.

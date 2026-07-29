@@ -29,8 +29,8 @@ aws ec2 modify-instance-attribute --instance-id i-EXAMPLE0123 --groups sg-QUARAN
 The same mistake wears other clothes: `kubectl delete pod`, `terminate-instances`, `docker rm`,
 "just reimage it". Each one is a reboot with better branding.
 
-When preservation and containment genuinely conflict — the workload is deleting or encrypting
-data right now — containment wins. Say so in the decision log, with who decided. The failure is
+When preservation and containment genuinely conflict - the workload is deleting or encrypting
+data right now - containment wins. Say so in the decision log, with who decided. The failure is
 not choosing containment; it is choosing it by reflex and not recording that a choice was made.
 
 ## Containing before you know the scope
@@ -38,7 +38,7 @@ not choosing containment; it is choosing it by reflex and not recording that a c
 One credential looks compromised, so it gets revoked in the first five minutes. It felt like
 progress. Two things follow.
 
-The attacker learns they were seen and moves to the access you have not found yet — the second
+The attacker learns they were seen and moves to the access you have not found yet - the second
 API key, the CI token, the added SSH key. And your only view of what they were doing was through
 that credential's activity, which just stopped generating evidence.
 
@@ -152,7 +152,7 @@ git grep -I 'AKIAEXAMPLE' $(git rev-list --all) | head  # still reachable anywhe
 ```
 
 The exposure window runs from the first commit containing the secret to the moment rotation
-completed — not to the removal commit. Scope the blast radius over that whole window.
+completed - not to the removal commit. Scope the blast radius over that whole window.
 
 ## Trusting logs the attacker could write
 
@@ -175,8 +175,8 @@ journalctl --verify
 ```
 
 Then state one of three things in the report: out of reach of the compromised identity,
-reachable and therefore uncorroborated, or undetermined. Structural fix — separate account,
-append-only, retention hold, separate shipper credential — is in `skills/core/logging-audit/`.
+reachable and therefore uncorroborated, or undetermined. Structural fix - separate account,
+append-only, retention hold, separate shipper credential - is in `skills/core/logging-audit/`.
 
 ## Notifying before you know the scope
 
@@ -189,7 +189,7 @@ hour of an investigation.
 
 Do instead: publish the shape, not the number. Say what is confirmed, say what is not yet
 established, and give the next update time. Distinguish "no evidence of access" from "not
-observable" — if data-event logging was never enabled, you have no evidence in either direction,
+observable" - if data-event logging was never enabled, you have no evidence in either direction,
 and saying "no evidence" is the sentence that gets quoted back at you.
 
 Statutory notification deadlines vary by jurisdiction, sector, and contract. This skill does not
@@ -200,7 +200,7 @@ windows are frequently tighter than statutory ones, and are missed for exactly t
 ## No writeback into detection
 
 The incident closes with a document. Nine months later the same intrusion path runs again and is
-found the same way — by accident.
+found the same way - by accident.
 
 An after-action finding that does not become a test, a detection rule, or an owned tracked item
 did not happen. "We should improve monitoring" is not a finding; it is a feeling with a verb.
@@ -236,7 +236,7 @@ def send_alert(event):
         pass
 ```
 
-A network blip, an expired SIEM token, a schema change — any of them turns detection off
+A network blip, an expired SIEM token, a schema change - any of them turns detection off
 permanently and silently. This is A10:2025 and A09:2025 in the same four lines, CWE-390
 (detection of error condition without action).
 
@@ -272,7 +272,7 @@ stalls.
 
 # Right
 - [ ] Revoke the compromised credential
-      Owner:    on-call SRE (has `SecurityBreakGlass` role — verified in last quarterly drill)
+      Owner:    on-call SRE (has `SecurityBreakGlass` role - verified in last quarterly drill)
       Deputy:   security lead, then platform manager
       Timeout:  15 min unreachable -> use break-glass, log the use in the working record
 - [ ] Customer notification decision

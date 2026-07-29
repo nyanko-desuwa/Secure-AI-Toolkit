@@ -72,7 +72,7 @@ with zipfile.ZipFile(upload) as z:
     z.extractall(dest)
 ```
 
-Zip entry names may contain `../` and write outside `dest` — zip slip. Python's `zipfile` has
+Zip entry names may contain `../` and write outside `dest` - zip slip. Python's `zipfile` has
 sanitized entry names on extraction for some time, but code that builds its own paths from
 `namelist()` does not inherit that, and other languages and libraries do not sanitize at all.
 Tar is worse: entries can be symlinks, hard links, or device nodes, and setuid bits ride along.
@@ -124,7 +124,7 @@ Fix: server-generated key under a quarantine prefix, short expiry, and a POST po
 `content-length-range`, an `eq` condition on `$Content-Type` and `$key`. Then validate the
 stored object before publishing it.
 Why it works: the policy bounds what the browser can send, and post-upload validation covers
-what a policy cannot check — the actual bytes.
+what a policy cannot check - the actual bytes.
 
 ## Malware scanning as the only control
 

@@ -1,6 +1,6 @@
 ---
 name: email-security
-description: 'Secure transactional email and provider delivery — SPF/DKIM/DMARC, recipients/headers, reset/verification delivery, templates, webhooks, bounces, and privacy. Triggers: "email security", "SMTP", "DKIM", "SPF", "DMARC", "password reset email", "magic link", "mail webhook", "bảo mật email", "gửi email".'
+description: 'Secure transactional email and provider delivery - SPF/DKIM/DMARC, recipients/headers, reset/verification delivery, templates, webhooks, bounces, and privacy. Triggers: "email security", "SMTP", "DKIM", "SPF", "DMARC", "password reset email", "magic link", "mail webhook", "bảo mật email", "gửi email".'
 allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
@@ -89,20 +89,20 @@ what live DNS/provider configuration remains unverified.
 
 ## Severity
 
-- **Critical** — attacker can take over accounts via poisoned links, forge recovery mail, or send as
+- **Critical** - attacker can take over accounts via poisoned links, forge recovery mail, or send as
   an unauthorized domain with a path to user action
-- **High** — header injection, unsigned provider events that change account state, unrestricted
+- **High** - header injection, unsigned provider events that change account state, unrestricted
   resend that enables takeover or mass abuse
-- **Medium** — incomplete SPF/DKIM/DMARC alignment, weak bounce handling, privacy-leaking templates
-- **Low** — defence-in-depth gaps with no demonstrated path
+- **Medium** - incomplete SPF/DKIM/DMARC alignment, weak bounce handling, privacy-leaking templates
+- **Low** - defence-in-depth gaps with no demonstrated path
 
 ## Related Skills
 
-- `authentication` — token and session policy behind security mail
-- `brute-force-defense` — resend and guessing policy
-- `api-security` — provider webhook endpoints
-- `http-client-security` — provider API transport
-- `http-edge-security` — Host and absolute URL trust
+- `authentication` - token and session policy behind security mail
+- `brute-force-defense` - resend and guessing policy
+- `api-security` - provider webhook endpoints
+- `http-client-security` - provider API transport
+- `http-edge-security` - Host and absolute URL trust
 - `secrets-management`, `logging-audit`
 
 ## Supporting Files

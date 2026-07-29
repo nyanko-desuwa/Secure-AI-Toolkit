@@ -51,12 +51,12 @@ possible."
 | Loopback interface | 7.3 | "may be susceptible to interception by other apps accessing the same loopback interface on some operating systems" |
 
 For a private-use scheme, the RFC requires a scheme "based on a domain name under their control,
-expressed in reverse order" — `com.example.app`, not `myapp`. A bare `myapp://` scheme does not
+expressed in reverse order" - `com.example.app`, not `myapp`. A bare `myapp://` scheme does not
 meet the requirement and collides with any other app that picked the same word.
 
 ## PKCE is not optional here
 
-Section 8.1: PKCE "was created specifically to mitigate this attack" — another app on the device
+Section 8.1: PKCE "was created specifically to mitigate this attack" - another app on the device
 registering the same scheme and receiving the code. Section 6 "requires that both clients and
 servers use PKCE for public native app clients", and authorization servers "SHOULD reject
 authorization requests from native apps that don't use PKCE".

@@ -1,6 +1,6 @@
 # Browser Platform Best Practices
 
-## Narrow service-worker scope — CWE-284
+## Narrow service-worker scope - CWE-284
 
 ```javascript
 // Vulnerable: controls the entire origin
@@ -12,7 +12,7 @@ navigator.serviceWorker.register("/sw.js", { scope: "/" });
 navigator.serviceWorker.register("/app/sw.js", { scope: "/app/" });
 ```
 
-## Do not cache private documents — CWE-200
+## Do not cache private documents - CWE-200
 
 ```javascript
 // Vulnerable: caches every successful fetch, including /account
@@ -24,7 +24,7 @@ self.addEventListener("fetch", event => event.respondWith(caches.match(event.req
 const PUBLIC_ASSETS = new Set(["/app/main.js", "/app/main.css"]);
 ```
 
-## Minimize extension hosts — CWE-250
+## Minimize extension hosts - CWE-250
 
 ```json
 // Vulnerable: "host_permissions": ["<all_urls>"]
@@ -34,7 +34,7 @@ const PUBLIC_ASSETS = new Set(["/app/main.js", "/app/main.css"]);
 // Fixed: "host_permissions": ["https://app.example.com/*"]
 ```
 
-## Validate extension senders — CWE-346
+## Validate extension senders - CWE-346
 
 ```javascript
 // Vulnerable: any page message triggers a privileged action
@@ -46,7 +46,7 @@ chrome.runtime.onMessage.addListener((msg) => perform(msg));
 chrome.runtime.onMessage.addListener((msg, sender) => { if (sender.id === chrome.runtime.id) perform(parse(msg)); });
 ```
 
-## Keep web resources private by default — CWE-200
+## Keep web resources private by default - CWE-200
 
 ```json
 // Vulnerable: every extension asset is web accessible

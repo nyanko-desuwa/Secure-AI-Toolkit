@@ -28,7 +28,7 @@ DB_PASSWORD = required("DB_PASSWORD")
 ```
 
 Why this works: there is no value in the repository to leak, and the failure is at boot
-rather than at first request. A default value is worse than no value — `os.environ.get("DB_PASSWORD", "changeme")`
+rather than at first request. A default value is worse than no value - `os.environ.get("DB_PASSWORD", "changeme")`
 means a misconfigured production deploy starts and quietly uses the placeholder.
 
 The tempting wrong fix is to keep the constant and add the file to `.gitignore`. That does
@@ -74,7 +74,7 @@ This is a partial control. The value is still in process memory and still in wha
 supervisor used to inject it. It closes the child-process and late-crash-dump paths, not the
 memory-disclosure path.
 
-Prefer a file over an env var where the platform supports it — a mounted file has
+Prefer a file over an env var where the platform supports it - a mounted file has
 permissions, is not inherited, and does not appear in `environ`:
 
 ```python
@@ -197,7 +197,7 @@ def get_secret(name: str) -> str:
 ```
 
 `DefaultAzureCredential` walks a chain: environment variables, workload identity, managed
-identity, Azure CLI. That is convenient and it is also a footgun — a stray `AZURE_CLIENT_SECRET`
+identity, Azure CLI. That is convenient and it is also a footgun - a stray `AZURE_CLIENT_SECRET`
 in the environment silently wins over managed identity. In production, construct the specific
 credential type you intend:
 
@@ -338,7 +338,7 @@ def verify_webhook(body: bytes, signature: str, secrets: list[str]) -> bool:
 
 Why this works: the producer can move to the new secret at its own pace while the verifier
 accepts both. Rotation becomes two independent deploys instead of one synchronised cutover.
-The overlap must be bounded and enforced — an overlap left open forever is just two live
+The overlap must be bounded and enforced - an overlap left open forever is just two live
 secrets.
 
 Sign with the newest, verify against the set. Never verify with a loop that has no end date.
@@ -347,10 +347,10 @@ Sign with the newest, verify against the set. Never verify with a loop that has 
 
 AWS Secrets Manager formalises what every rotation needs, whoever runs it:
 
-1. `createSecret` — generate the new value, store it labelled `AWSPENDING`
-2. `setSecret` — configure the upstream system to accept the new value, alongside the old
-3. `testSecret` — authenticate with `AWSPENDING` and confirm it actually works
-4. `finishSecret` — move `AWSCURRENT` to the new version; the old becomes `AWSPREVIOUS`
+1. `createSecret` - generate the new value, store it labelled `AWSPENDING`
+2. `setSecret` - configure the upstream system to accept the new value, alongside the old
+3. `testSecret` - authenticate with `AWSPENDING` and confirm it actually works
+4. `finishSecret` - move `AWSCURRENT` to the new version; the old becomes `AWSPREVIOUS`
 
 Step 3 is the one people skip, and skipping it is how rotation promotes a broken credential.
 Step 2 is where the dual window comes from: for databases, that means alternating between two
@@ -360,7 +360,7 @@ users rather than resetting one password.
 
 Scheduled rotation and exposure rotation are different operations. Scheduled rotation is
 gradual and safe. Exposure rotation is immediate and accepts breakage. Do not run an exposure
-event through the scheduled path — the overlap window that makes scheduled rotation safe keeps
+event through the scheduled path - the overlap window that makes scheduled rotation safe keeps
 the leaked credential valid.
 
 Revoke first, then rotate. See [references/exposure-response.md](references/exposure-response.md).
@@ -385,7 +385,7 @@ if hmac.compare_digest(provided_token, stored_token):
     grant()
 ```
 
-Node needs equal lengths, or `timingSafeEqual` throws — which itself leaks length. Hash both
+Node needs equal lengths, or `timingSafeEqual` throws - which itself leaks length. Hash both
 sides first so lengths always match:
 
 ```javascript
@@ -398,11 +398,11 @@ function secretEquals(a, b) {
 }
 ```
 
-Go: `hmac.Equal(a, b)` from `crypto/hmac`. PHP: `hash_equals($known, $user)` — argument order
+Go: `hmac.Equal(a, b)` from `crypto/hmac`. PHP: `hash_equals($known, $user)` - argument order
 matters, the known value goes first. Java: `MessageDigest.isEqual`.
 
 Honest scope: this matters most for values an attacker can guess byte by byte with unlimited
-attempts — API keys, HMAC signatures, password reset tokens. It matters less for a
+attempts - API keys, HMAC signatures, password reset tokens. It matters less for a
 high-entropy session ID behind rate limiting. Use it anyway; it costs nothing.
 
 ## Detection
@@ -422,7 +422,7 @@ repos:
       - id: gitleaks
 ```
 
-CI catches what bypassed the hook — `--no-verify`, a different clone, a web edit, a machine
+CI catches what bypassed the hook - `--no-verify`, a different clone, a web edit, a machine
 without hooks installed:
 
 ```yaml
@@ -445,7 +445,7 @@ jobs:
 Why scanning alone is insufficient: CI runs after the push. By the time the job is red, the
 value is in the remote repository, in every fork and mirror, in the CI log, and possibly in a
 notification webhook. A red build tells you to start the exposure response, not that you are
-protected. Scanners are also pattern-based — they catch `AKIA...` and `sk_live_...` reliably
+protected. Scanners are also pattern-based - they catch `AKIA...` and `sk_live_...` reliably
 and miss a bare 32-character database password entirely.
 
 Verify the `rev`/version pin against the tool's release page before committing it; do not

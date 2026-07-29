@@ -9,14 +9,14 @@ Do not copy a block labelled `Vulnerable:`.
 
 ## Contents
 
-- [Consumer trusts a role from the payload](#consumer-trusts-a-role-from-the-payload) — E1, A01, CWE-863
-- [Full customer row on a retained topic](#full-customer-row-on-a-retained-topic) — E2, A01, CWE-359
-- [Message body chooses the Python object](#message-body-chooses-the-python-object) — E3, A08, CWE-502
-- [Duplicate delivery charges twice](#duplicate-delivery-charges-twice) — E4, A06, CWE-799
-- [Older event overwrites newer state](#older-event-overwrites-newer-state) — E5, A06, CWE-841
-- [Poison message retries forever and leaks into logs](#poison-message-retries-forever-and-leaks-into-logs) — E6, A09/A10, CWE-532
-- [Subscription retains every client](#subscription-retains-every-client) — E9, A06, CWE-401
-- [In-memory bus grows until the process dies](#in-memory-bus-grows-until-the-process-dies) — E9, A06, CWE-770
+- [Consumer trusts a role from the payload](#consumer-trusts-a-role-from-the-payload) - E1, A01, CWE-863
+- [Full customer row on a retained topic](#full-customer-row-on-a-retained-topic) - E2, A01, CWE-359
+- [Message body chooses the Python object](#message-body-chooses-the-python-object) - E3, A08, CWE-502
+- [Duplicate delivery charges twice](#duplicate-delivery-charges-twice) - E4, A06, CWE-799
+- [Older event overwrites newer state](#older-event-overwrites-newer-state) - E5, A06, CWE-841
+- [Poison message retries forever and leaks into logs](#poison-message-retries-forever-and-leaks-into-logs) - E6, A09/A10, CWE-532
+- [Subscription retains every client](#subscription-retains-every-client) - E9, A06, CWE-401
+- [In-memory bus grows until the process dies](#in-memory-bus-grows-until-the-process-dies) - E9, A06, CWE-770
 
 ---
 
@@ -373,6 +373,6 @@ Residual gap: size 1000 from measured burst rate and handler latency, not from t
 
 ## Sources
 
-- CWE entries and titles — [cwe-event-driven.md](../references/cwe-event-driven.md)
-- OWASP mapping — [owasp-mapping.md](../references/owasp-mapping.md)
-- Broker limits — [broker-controls.md](../references/broker-controls.md)
+- CWE entries and titles - [cwe-event-driven.md](../references/cwe-event-driven.md)
+- OWASP mapping - [owasp-mapping.md](../references/owasp-mapping.md)
+- Broker limits - [broker-controls.md](../references/broker-controls.md)

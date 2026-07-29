@@ -29,7 +29,7 @@ search for callers; the second gets answered from the one query in front of it.
 
 ```
 The Invoice aggregate enforces that only a manager can see the fraud_score field. Find every
-other path that reads that column — projections, views, reporting queries, exports, admin
+other path that reads that column - projections, views, reporting queries, exports, admin
 tools. List each and say whether the same rule is enforced there.
 ```
 
@@ -48,7 +48,7 @@ state the projection lag under load and what a revoked user can still do during 
 ```
 This handler is invoked from an SQS consumer. Show me what happens on redelivery. If dedup
 exists, confirm the claim and the state change share one transaction. Do not accept a
-SELECT-then-INSERT as a fix — explain the race if that is what you find.
+SELECT-then-INSERT as a fix - explain the race if that is what you find.
 ```
 
 The last sentence pre-empts the most common wrong answer. `CWE-367`.

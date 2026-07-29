@@ -107,7 +107,7 @@ logger.info("outbound request", extra={"headers": dict(request.headers)})
 
 `Authorization` is a header. The bearer token is now in the log, replicated to whatever
 aggregator receives it, retained under that system's policy, and visible to everyone with log
-read — which is usually a much larger group than those with production credential access.
+read - which is usually a much larger group than those with production credential access.
 CWE-532.
 
 Fix: log an allowlist of fields, and add a redaction filter as a backstop.
@@ -171,7 +171,7 @@ session = boto3.Session(
 )
 ```
 
-A static key never expires, so it must be stored, delivered, rotated, and revoked — four
+A static key never expires, so it must be stored, delivered, rotated, and revoked - four
 processes that all have to work. It also survives leaving the environment it was created for.
 
 Fix: attach a role. IRSA on EKS, an instance profile on EC2, workload identity on GKE, managed
@@ -189,7 +189,7 @@ The value leaves your trust boundary, may be retained by the provider, and can s
 later completion or a trace UI. The same applies to tool arguments in an agent loop, where the
 full argument object is usually logged verbatim.
 
-Fix: redact before the prompt is built, and pass a reference instead of a value — a secret
+Fix: redact before the prompt is built, and pass a reference instead of a value - a secret
 name or a handle the tool resolves server-side. Why it works: the model never receives
 material it could echo, and the resolution happens inside a boundary you control.
 

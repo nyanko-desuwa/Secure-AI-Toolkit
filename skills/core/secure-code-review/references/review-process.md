@@ -6,7 +6,7 @@ Source: <https://owasp.org/www-project-code-review-guide/>
 Version: 2.0, July 2017. Checked 2026-07-28.
 
 The Guide is the only published OWASP process reference for manual code review. Its
-vulnerability chapters are built on the Top 10 2013 and are out of date — Injection was A1
+vulnerability chapters are built on the Top 10 2013 and are out of date - Injection was A1
 then, and there was no supply chain category. Its process material is not out of date: how to
 scope a review, who does it, and why a scanner does not replace a reader all still hold. Take
 process from the Guide, categories from Top 10 2025.
@@ -20,7 +20,7 @@ the invisible (the missing authorization check, which is an absence and has no l
 A fixed order forces both. The sink hunt finds absences because you enumerate the sinks that
 should have a control and check each one, rather than reading until something looks wrong.
 
-## Step 1 — Scope
+## Step 1 - Scope
 
 Write down four things before opening a file.
 
@@ -34,11 +34,11 @@ Write down four things before opening a file.
 The Guide is direct on the point that a review needs a defined scope agreed in advance,
 because the alternative is an open-ended read that stops when the reviewer gets tired.
 
-Diff reviews have a specific trap. The diff is not the change — the change is the diff plus
+Diff reviews have a specific trap. The diff is not the change - the change is the diff plus
 everything it now calls. If a changed line calls `get_document(doc_id)`, open that function.
 One level out from every changed line, minimum. Two if the first level is a thin wrapper.
 
-## Step 2 — Map trust boundaries
+## Step 2 - Map trust boundaries
 
 A trust boundary is where data changes owner. You are producing a source-to-sink list, not a
 diagram.
@@ -68,7 +68,7 @@ Then the four questions that decide whether the boundary holds:
 Anything with no path from an untrusted source to a sink is not a vulnerability. Write it in
 observations if it is worth saying, and move on.
 
-## Step 3 — Hunt by sink
+## Step 3 - Hunt by sink
 
 Sink-first, not source-first. Sinks are a short greppable list; sources are everything. See the
 sink table in [../SKILL.md](../SKILL.md#3-hunt-by-sink).
@@ -78,7 +78,7 @@ Method for each hit:
 1. Grep the sink pattern across scope
 2. For each hit, read the enclosing function and identify every parameter that reaches the sink
 3. Walk backwards to the entry point. Stop when you reach a route, a consumer, or a literal
-4. Note what control you passed on the way — validation, cast, allowlist, ORM
+4. Note what control you passed on the way - validation, cast, allowlist, ORM
 5. Decide: reachable with attacker-controlled data, or not
 
 Absences need their own pass, because grep does not find missing code. Three specific sweeps:
@@ -87,7 +87,7 @@ Absences need their own pass, because grep does not find missing code. Three spe
 - Every object lookup by ID: is the actor part of the query?
 - Every `catch` around a security decision: what does it return?
 
-## Step 4 — Verify adversarially
+## Step 4 - Verify adversarially
 
 The step that decides whether the report is trusted. For each candidate, argue against
 yourself. Five questions, all of which must survive:
@@ -95,7 +95,7 @@ yourself. Five questions, all of which must survive:
 1. Is the source actually attacker-controlled? Read the caller. A function taking a `path`
    parameter is not path traversal if every caller passes a literal
 2. Is there a control in between? A middleware, a validator, an ORM, a column type, a
-   framework default. Check the version and the config — not the framework's reputation
+   framework default. Check the version and the config - not the framework's reputation
 3. Does the sink behave as you assume? `cursor.execute(sql, params)` is safe;
    `cursor.execute(sql % params)` is not. `textContent` is not `innerHTML`. Read the API docs
    for the pinned version
@@ -108,7 +108,7 @@ Record the disproof attempt for anything you drop. "Checked, `sort` is validated
 allowlist in the caller at line 40" is worth more to the next reviewer than silence, and it
 stops the same false positive being re-reported.
 
-## Step 5 — Report
+## Step 5 - Report
 
 Findings and observations in separate lists, with separate counts.
 
@@ -136,6 +136,6 @@ consistency, and anything requiring cross-file taint tracking through a framewor
 
 ## Sources
 
-- OWASP Code Review Guide 2.0 (July 2017) — <https://owasp.org/www-project-code-review-guide/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Code Review Guide 2.0 (July 2017) - <https://owasp.org/www-project-code-review-guide/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/>

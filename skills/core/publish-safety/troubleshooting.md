@@ -9,7 +9,7 @@ push anyway.
 ## The secret is already public and rotating it breaks production
 
 Rotate anyway if the scope is write or admin. A live admin credential in a public place is being
-used by someone else, not just readable by them — public-repo commits are scraped within minutes.
+used by someone else, not just readable by them - public-repo commits are scraped within minutes.
 
 For a read-scoped credential you may have room to sequence it:
 
@@ -28,7 +28,7 @@ Then do not attempt it, and stop treating it as the fix. Rewriting history was n
 remediation; revocation is.
 
 GitHub's own guidance puts rotation first and says outright that if you only rewrite history and
-force-push, the commits "may still be accessible elsewhere" — in clones, in forks, in cached views
+force-push, the commits "may still be accessible elsewhere" - in clones, in forks, in cached views
 reachable by SHA, and through pull requests that reference the old commits. Force-pushing does not
 update read-only `refs/pull/` refs at all.
 
@@ -37,8 +37,8 @@ What to do instead:
 - Revoke and rotate. That is the whole remediation.
 - Add the control that stops the next one: pre-commit scanning, server-side push protection, an
   allowlist manifest.
-- If, and only if, the value cannot be rotated — a private key embedded in shipped hardware, a
-  third-party credential whose owner is gone — escalate to the platform's support for cache and PR
+- If, and only if, the value cannot be rotated - a private key embedded in shipped hardware, a
+  third-party credential whose owner is gone - escalate to the platform's support for cache and PR
   ref removal, and expect them to ask what you did about rotation first.
 
 Rewriting history also has costs worth naming before you start: every commit hash after the rewrite
@@ -59,7 +59,7 @@ Confirm it is not, then narrow the rule rather than disabling the scanner.
 
 - A test fixture, an example key from documentation, a public key, a hash: exclude that specific
   path or fingerprint, with a comment saying why.
-- A value that looks random but is not secret — a build ID, a content hash: same, with a comment.
+- A value that looks random but is not secret - a build ID, a content hash: same, with a comment.
 - If you cannot tell whether it is live, rotate it. The cost of rotating a non-secret is a deploy;
   the cost of publishing a secret is not bounded.
 
@@ -70,7 +70,7 @@ GitHub and GitLab, and reviewers read it as "there was a secret here".
 
 Escalate rather than wait. In order:
 
-1. Reduce what the credential can reach right now, even if you cannot delete it — remove the IAM
+1. Reduce what the credential can reach right now, even if you cannot delete it - remove the IAM
    policy, drop the database role's privileges, disable the integration on your side, block the
    token at a gateway.
 2. Say plainly, in the report, that the credential is still live and who owns it.
@@ -100,7 +100,7 @@ Do not reach for the bypass first. Work out whether the value needs to be in the
 - If it is a real credential: remove it, rotate it, and read the value from configuration instead.
 - If it is a test fixture: make it obviously fake. Prefix it with `EXAMPLE` or `PLACEHOLDER` so the
   next scanner and the next reader both stop worrying about it.
-- If it genuinely must ship — a public key, a signed manifest — use the platform's documented
+- If it genuinely must ship - a public key, a signed manifest - use the platform's documented
   bypass with an accurate reason. On GitHub the reason chosen determines whether the alert stays
   open, and a bypass generates an audit entry and notifies repository admins. On GitLab the skip
   method, account, and commits are all recorded.
@@ -120,7 +120,7 @@ git rm --cached path/to/file                # untrack, keep on disk
 ```
 
 Untracking removes it from future commits and from the published worktree. It does not remove it
-from history — see the rewrite entry above, and rotate.
+from history - see the rewrite entry above, and rotate.
 
 ## Two guidance items conflict
 
@@ -132,7 +132,7 @@ Common cases, and how they resolve:
   commit the example with empty or obviously fake values, and gitignore every real `.env` with a
   `!.env.example` negation.
 - "Publish the lockfile for reproducibility" versus "keep the tarball minimal". Publish it. It
-  contains no credentials, unless someone put a token in a registry URL — check that instead of
+  contains no credentials, unless someone put a token in a registry URL - check that instead of
   dropping the file.
 - "Ship the source for debuggability" versus "do not publish internal detail". Ship a source map to
   an error tracker with restricted access rather than to public hosting.
@@ -149,7 +149,7 @@ Report it with the precondition attached. For this skill the usual unknowns are:
 - Whether the artifact was ever downloaded. Only the registry's stats can say.
 
 "`SUPABASE_SERVICE_ROLE_KEY` appears in `dist/assets/index-4f3a.js`, which is deployed to static
-hosting. I could not confirm whether the key is still valid — rotate and check the provider's usage
+hosting. I could not confirm whether the key is still valid - rotate and check the provider's usage
 log" is a useful finding. An unqualified severity label is not.
 
 ## A checklist item genuinely does not apply

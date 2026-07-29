@@ -14,7 +14,7 @@ through. Everything that touches the outside world is an adapter on one side or 
 The failure: `POST /documents/:id/publish` checks that the caller owns the document. Six
 months later a queue consumer calls the same `publish()` function to handle a retry, and a
 cron job calls it for scheduled publishing. Neither checks ownership, because the check was
-never in the use case — it was in the HTTP handler. The authorization boundary was drawn
+never in the use case - it was in the HTTP handler. The authorization boundary was drawn
 around one adapter instead of around the port. `A01:2025`, `CWE-602`, `CWE-653`.
 
 Ports and adapters is worth its indirection when it makes that impossible. It is ceremony
@@ -36,25 +36,25 @@ by the core. They differ in who implements them.
 | Security role | The choke point where every actor is authorized | The choke point where outside data is made to conform |
 
 A driven port that the core implements is not a port, it is a helper. A driving port whose
-interface is written by the framework is not a port either — the arrow points the wrong way.
+interface is written by the framework is not a port either - the arrow points the wrong way.
 
 ```mermaid
 flowchart LR
-    subgraph Driving["Driving adapters — they call in"]
+    subgraph Driving["Driving adapters - they call in"]
         HTTP["HTTP handler"]
         MQ["Queue consumer"]
         CLI["CLI"]
         CRON["Scheduled job"]
         TEST["Test harness"]
     end
-    subgraph Core["Application core — no transport types cross this line"]
+    subgraph Core["Application core - no transport types cross this line"]
         DP{{"Driving port<br/>DocumentService.Publish(ctx, actor, cmd)"}}
         UC["Use case + authorization policy"]
         DRR{{"Driven port<br/>DocumentRepository"}}
         DRF{{"Driven port<br/>URLFetcher"}}
         DRC{{"Driven port<br/>Config / Secrets"}}
     end
-    subgraph Driven["Driven adapters — the core calls out"]
+    subgraph Driven["Driven adapters - the core calls out"]
         PG[("Postgres")]
         EG["Egress-guarded HTTP client"]
         SM["Secret manager"]
@@ -79,7 +79,7 @@ forgotten.
 
 ## When to Use
 
-- A use case has, or will have, more than one way in — HTTP plus a queue, a CLI, a job
+- A use case has, or will have, more than one way in - HTTP plus a queue, a CLI, a job
 - Authorization or tenancy scoping must hold regardless of which entry point is used
 - The core calls something you cannot run in a test: a payment provider, an SMTP server, a
   clock, a third-party API
@@ -92,7 +92,7 @@ forgotten.
 ### 1. List the actors, then the ports
 
 Write down who drives the system and what the system drives. Each driving actor gets an
-adapter, not a port — several actors share one port. If you have one port per adapter you
+adapter, not a port - several actors share one port. If you have one port per adapter you
 have renamed your controllers.
 
 ### 2. Put the identity in the port signature
@@ -103,16 +103,16 @@ No adapter can call the use case without supplying one, and the compiler enforce
 
 ### 3. Authorize inside the core, once
 
-The use case decides. Adapters may reject earlier — an HTTP handler returning 401 for a
-missing token is fine — but the decision that matters happens behind the port, where all
+The use case decides. Adapters may reject earlier - an HTTP handler returning 401 for a
+missing token is fine - but the decision that matters happens behind the port, where all
 adapters meet. `A01:2025`, ASVS V8.
 
 ### 4. Make the adapter conform the outside world
 
 Mapping belongs in the adapter, both directions. Inbound: parse the transport payload into a
 core command, reject what does not fit. Outbound: validate the third-party response before it
-becomes a domain object. A transport type in a core signature — `http.Request`, an ORM
-entity, a broker message — ends the boundary. [best-practices.md](best-practices.md#mapping-belongs-in-the-adapter).
+becomes a domain object. A transport type in a core signature - `http.Request`, an ORM
+entity, a broker message - ends the boundary. [best-practices.md](best-practices.md#mapping-belongs-in-the-adapter).
 
 ### 5. Bound the adapter's resources
 
@@ -158,7 +158,7 @@ Be blunt about this one. Most services that ask for hexagonal architecture do no
 
 The honest test: name the second adapter for the port. If you cannot, and it is not a
 security boundary you are deliberately creating, do not add the port. A port that exists to
-hold a security check is justified with one adapter — say that in a comment so the next
+hold a security check is justified with one adapter - say that in a comment so the next
 person does not "simplify" it away.
 
 ## How This Differs From Clean Architecture
@@ -167,8 +167,8 @@ They overlap enough that people use the words interchangeably. They are not the 
 
 - Hexagonal is symmetric about direction only. There is one core, and everything else is
   driving or driven. It does not prescribe how many layers live inside the core.
-- Clean architecture prescribes concentric layers — entities, use cases, interface adapters,
-  frameworks — plus the dependency rule that source dependencies point inward, and usually a
+- Clean architecture prescribes concentric layers - entities, use cases, interface adapters,
+  frameworks - plus the dependency rule that source dependencies point inward, and usually a
   model mapping at each layer boundary.
 - Consequence for security: hexagonal makes you enumerate ports, so the trust boundaries are
   countable. Clean makes you enumerate layers, and authorization tends to smear across them
@@ -182,19 +182,19 @@ sibling skill is `skills/architecture/clean-architecture/`.
 
 ## Related Skills
 
-- `owasp-security` — the standards these findings cite
-- `api-security` — controls for the HTTP driving adapter specifically
-- `database-security` — what a repository adapter must not do
-- `performance` — retained references, connection lifetime, unbounded caches
-- `scalability` — backpressure once the queue between adapter and core is bounded
+- `owasp-security` - the standards these findings cite
+- `api-security` - controls for the HTTP driving adapter specifically
+- `database-security` - what a repository adapter must not do
+- `performance` - retained references, connection lifetime, unbounded caches
+- `scalability` - backpressure once the queue between adapter and core is bounded
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, limitations, security notes
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns with Go, TypeScript, and Java code
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix holds
-- [troubleshooting.md](troubleshooting.md) — when the pattern does not fit
-- [prompts.md](prompts.md) — prompts that produce structure, plus an anti-pattern table
-- [references/](references/) — sources with the date verified
-- [examples/README.md](examples/README.md) — eight before/after pairs
+- [README.md](README.md) - purpose, layout, limitations, security notes
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns with Go, TypeScript, and Java code
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix holds
+- [troubleshooting.md](troubleshooting.md) - when the pattern does not fit
+- [prompts.md](prompts.md) - prompts that produce structure, plus an anti-pattern table
+- [references/](references/) - sources with the date verified
+- [examples/README.md](examples/README.md) - eight before/after pairs

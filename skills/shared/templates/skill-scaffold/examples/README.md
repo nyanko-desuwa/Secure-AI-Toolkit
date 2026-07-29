@@ -16,7 +16,7 @@ Each entry follows the same four beats:
 
 ```<lang>
 // Vulnerable: <what the code wrongly assumes>
-<minimal code — enough to show the bug, nothing more>
+<minimal code - enough to show the bug, nothing more>
 ```
 
 <One or two sentences on what the attacker actually does. Concrete: what they send, what
@@ -27,7 +27,7 @@ they get back.>
 <the corrected version>
 ```
 
-Why this works: <the mechanism. Not "it validates input" — say what is now impossible.>
+Why this works: <the mechanism. Not "it validates input" - say what is now impossible.>
 
 <Optional but valuable: the tempting wrong fix, and why it is weaker. Or a remaining gap.>
 ```
@@ -46,7 +46,7 @@ Why this works: <the mechanism. Not "it validates input" — say what is now imp
 
 ## Language
 
-Pick whatever shows the bug most plainly — the mistake is the subject, the syntax is
+Pick whatever shows the bug most plainly - the mistake is the subject, the syntax is
 incidental. `core/owasp` mixes Python, JavaScript, Java, and PHP for that reason. Do not
 translate one example into five languages.
 
@@ -59,5 +59,5 @@ Placeholder values only. No real credentials, hostnames, keys, or personal data.
 
 ## Worked example
 
-`skills/core/owasp/examples/README.md` — seven pairs in one file. Single-file works while the
+`skills/core/owasp/examples/README.md` - seven pairs in one file. Single-file works while the
 count is small; split into one file per category past roughly ten.

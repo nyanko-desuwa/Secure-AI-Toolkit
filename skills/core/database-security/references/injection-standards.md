@@ -3,7 +3,7 @@
 Standards and weakness IDs cited by this skill. Verified 2026-07-28 against the sources at the
 bottom of this file.
 
-## OWASP Top 10 2025 — the categories that apply
+## OWASP Top 10 2025 - the categories that apply
 
 The 2025 edition is not a renumbering of 2021. Injection moved from A03 to A05. Citing
 "A03 Injection" in 2025 terms points at Software Supply Chain Failures instead.
@@ -23,7 +23,7 @@ API4 Unrestricted Resource Consumption (unbounded result sets, N+1 amplification
 
 Source: <https://owasp.org/Top10/2025/> · <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
 
-## OWASP ASVS 5.0.0 — chapters to verify against
+## OWASP ASVS 5.0.0 - chapters to verify against
 
 ASVS 5.0.0 was released 2025-05-30. It is a restructure of 4.0.3, so 4.x requirement IDs do
 not carry over. This skill cites chapters, not requirement numbers. Pull requirement text from
@@ -33,7 +33,7 @@ not carry over. This skill cites chapters, not requirement numbers. Pull require
 |---|---|
 | V1 Encoding and Sanitization | Query parameterization, escaping for the query interpreter |
 | V2 Validation and Business Logic | Type and shape checks on input before it reaches a query object |
-| V8 Authorization | Where the access decision is enforced — route, repository, or engine |
+| V8 Authorization | Where the access decision is enforced - route, repository, or engine |
 | V11 Cryptography | Algorithm and key choices for column or application-level encryption |
 | V12 Secure Communication | TLS between application and database, certificate verification |
 | V13 Configuration | Credentials, connection strings, database role configuration |
@@ -82,11 +82,11 @@ A shorthand for citing findings consistently.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP SQL Injection Prevention Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html>
-- OWASP Query Parameterization Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html>
-- CWE — <https://cwe.mitre.org/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP SQL Injection Prevention Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html>
+- OWASP Query Parameterization Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Query_Parameterization_Cheat_Sheet.html>
+- CWE - <https://cwe.mitre.org/>
 
 All URLs checked 2026-07-28.

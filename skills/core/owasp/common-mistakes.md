@@ -36,8 +36,8 @@ Fix: put the constraint in the query so there is nothing to forget.
 cursor.execute(f"SELECT * FROM users ORDER BY {sort_column}")
 ```
 
-People learn "use placeholders" and then hit a case where placeholders do not work —
-column names, table names, `ASC`/`DESC` — and fall back to interpolation.
+People learn "use placeholders" and then hit a case where placeholders do not work -
+column names, table names, `ASC`/`DESC` - and fall back to interpolation.
 
 Fix: allowlist map from input to a known-safe identifier. Reject anything not in the map.
 
@@ -83,7 +83,7 @@ if file.content_type == "image/png":
 ```
 
 Three problems: `content_type` is attacker-controlled, `filename` allows traversal, and the
-destination is inside the web root — so an uploaded script may be executed.
+destination is inside the web root - so an uploaded script may be executed.
 
 Fix: verify the magic number, generate the stored filename yourself, store outside the web
 root, and serve with a fixed `Content-Type` plus
@@ -99,7 +99,7 @@ The TODO does not stop the commit. Once in git history, the secret is exposed ev
 the line is deleted.
 
 Fix: read from the environment from the first line of code. If a secret has already been
-committed, rotate it — deleting the line is not remediation.
+committed, rotate it - deleting the line is not remediation.
 
 ## Password hashed with a fast hash
 
@@ -129,7 +129,7 @@ resp = requests.get(request.json["callback_url"])
 ```
 
 Reaches internal services, cloud metadata endpoints, and `localhost`. Redirect following
-defeats naive hostname checks. SSRF has no standalone slot in the 2025 Top 10 — report it
+defeats naive hostname checks. SSRF has no standalone slot in the 2025 Top 10 - report it
 under A01 or A06 with CWE-918.
 
 Fix: allowlist scheme and host, resolve the hostname and reject private ranges, disable

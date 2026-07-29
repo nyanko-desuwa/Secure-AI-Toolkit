@@ -7,7 +7,7 @@ renumbering of 2021.
 
 Source: <https://owasp.org/Top10/2025/>
 
-### A03:2025 — Software Supply Chain Failures
+### A03:2025 - Software Supply Chain Failures
 
 This category covers more than outdated libraries. It includes package sources, transitive
 components, build tooling, CI/CD, artifact repositories, compromised suppliers, and the ability to
@@ -22,7 +22,7 @@ Use A03 for:
 - missing SBOM and unknown artifact contents;
 - malicious or compromised build dependencies.
 
-### A08:2025 — Software or Data Integrity Failures
+### A08:2025 - Software or Data Integrity Failures
 
 This category covers trust without verification: unsigned updates, mutable artifacts, insecure
 deserialization, and CI/CD that executes or promotes unverified input.
@@ -43,13 +43,13 @@ related rather than duplicating the finding.
 
 Source: <https://owasp.org/www-project-application-security-verification-standard/>
 
-### V13 — Configuration
+### V13 - Configuration
 
 Use V13 for pipeline, deploy, dependency, secret, and environment configuration: minimal token
 permissions, protected production environments, secret scoping, runner setup, debug logging, and
 secure defaults.
 
-### V15 — Secure Coding and Architecture
+### V15 - Secure Coding and Architecture
 
 Use V15 for software supply-chain design and secure development practice: dependency policy,
 security testing, build integrity, component inventory, provenance, and vulnerability management.
@@ -82,7 +82,7 @@ component could become malicious. CWE-1104 concerns maintenance status, not ever
 | Scope `GITHUB_TOKEN` per job | A08 | V13 | CWE-829 |
 | Use cloud OIDC instead of long-lived keys | A03, A08 | V13 | CWE-829 |
 | Isolate self-hosted runners | A08 | V13, V15 | CWE-829 |
-| Generate SBOM from exact artifact | A03 | V15 | — |
+| Generate SBOM from exact artifact | A03 | V15 | - |
 | Sign artifacts and verify at admission | A08 | V15 | CWE-506 |
 | Generate and verify provenance | A08 | V15 | CWE-506 |
 | Track reachability and remediation SLA | A03 | V15 | CWE-1104 |
@@ -91,8 +91,8 @@ component could become malicious. CWE-1104 concerns maintenance status, not ever
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS project — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE-1104 — <https://cwe.mitre.org/data/definitions/1104.html>
-- CWE-506 — <https://cwe.mitre.org/data/definitions/506.html>
-- CWE-829 — <https://cwe.mitre.org/data/definitions/829.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS project - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE-1104 - <https://cwe.mitre.org/data/definitions/1104.html>
+- CWE-506 - <https://cwe.mitre.org/data/definitions/506.html>
+- CWE-829 - <https://cwe.mitre.org/data/definitions/829.html>

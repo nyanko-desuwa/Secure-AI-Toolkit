@@ -7,14 +7,14 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 ### Added
 
 - `requirements.txt` documents that repository Python validation and maintenance scripts currently use only the standard library, while giving Dependabot a Python dependency surface to monitor.
-- `scripts/render_link_issue.py` — renders the advisory external-link issue body and its state files
+- `scripts/render_link_issue.py` - renders the advisory external-link issue body and its state files
   from the link report, replacing the inline workflow heredoc.
 - `.gitignore` is now tracked, and covers Python environments and coverage artifacts.
 - `python scripts/validate_repository.py --latest-changelog-version` prints the first released
   changelog version, which the release workflow uses to decide the tag to create.
-- `core/redis-security` skill — Redis OSS 7.x/8.x and Valkey 8.x service-boundary hardening: private reachability, ACLs, TLS, persistence and backups, Redis 8 integrated modules, Sentinel/Cluster, eviction, Redis-backed session/cache/queue/limiter roles, framework integration, real incident lessons, and operations telemetry. Grounded in official Redis/Valkey documentation, OWASP Top 10 2025, ASVS 5.0.0, and CWE mappings.
-- `core/email-security` skill — transactional email and mailbox-boundary security: sender identity, SPF/DKIM/DMARC evidence, reset/verification delivery, headers/templates, provider events, bounces, privacy, and role-specific hand-offs.
-- `core/http-client-security` skill — application outbound HTTP(S) security: SSRF/destination policy, redirects, DNS/private targets, TLS verification, proxies, deadlines, response bounds, retries, credentials, and telemetry.
+- `core/redis-security` skill - Redis OSS 7.x/8.x and Valkey 8.x service-boundary hardening: private reachability, ACLs, TLS, persistence and backups, Redis 8 integrated modules, Sentinel/Cluster, eviction, Redis-backed session/cache/queue/limiter roles, framework integration, real incident lessons, and operations telemetry. Grounded in official Redis/Valkey documentation, OWASP Top 10 2025, ASVS 5.0.0, and CWE mappings.
+- `core/email-security` skill - transactional email and mailbox-boundary security: sender identity, SPF/DKIM/DMARC evidence, reset/verification delivery, headers/templates, provider events, bounces, privacy, and role-specific hand-offs.
+- `core/http-client-security` skill - application outbound HTTP(S) security: SSRF/destination policy, redirects, DNS/private targets, TLS verification, proxies, deadlines, response bounds, retries, credentials, and telemetry.
 - Offline `unittest` coverage for the catalog validator, external-link checker, and link-issue
   renderer, plus a completed Redis-backed authentication/limiter threat model and security design
   review.
@@ -41,15 +41,15 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
   `scripts/release.sh` / `Release.ps1` remain the manual fallback.
 - `.github/workflows/external-link-check.yml` parses as YAML again. Its inline Python heredoc
   contained a triple-quoted string starting at column 0, which terminated the block scalar and
-  made the whole workflow file invalid — GitHub reported the run by file path instead of workflow
+  made the whole workflow file invalid - GitHub reported the run by file path instead of workflow
   name and every run failed. The body rendering now lives in `scripts/render_link_issue.py`.
 - `.github/dependabot.yml` adds a weekly `pip` ecosystem alongside `github-actions`.
 - Catalog ownership is now the routing source for pilot boundaries: each states protected assets
   and explicit hand-offs. The validator reports legacy coverage as warnings, blocks malformed pilot
   metadata and stale generated graph tables, and preserves only `depends_on` as an acyclic relation.
-- `docs/ADOPTION.md` — adds boundary-first loading, Redis and AI starter packs, and companion
+- `docs/ADOPTION.md` - adds boundary-first loading, Redis and AI starter packs, and companion
   control evidence/limitations; it now links reusable design-review artifacts.
-- Root `README.md` — the two-line "copy one skill" note becomes a full
+- Root `README.md` - the two-line "copy one skill" note becomes a full
   `## Installing as Claude Code skills` section: personal vs project scope, why the four
   category directories have to be flattened, install-a-few / install-all-45 / symlink /
   committed-per-project variants, how to confirm with `/skills`, and the startup context cost
@@ -60,22 +60,22 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ### Added
 
-- `core/publish-safety` skill — the publish boundary as a control point of its own. Thirteen
+- `core/publish-safety` skill - the publish boundary as a control point of its own. Thirteen
   files covering git push and repository visibility, package and container registries, static
   hosting and build output, mobile bundles, and the human channels (PR diffs, issues,
   screenshots, pasted logs, AI prompts). Grounded in OWASP Top 10 2025 A02/A03/A04/A08,
-  ASVS 5.0 V13/V14/V15, and CWE-527, CWE-540, CWE-538, CWE-798, CWE-615, CWE-532 — each CWE
+  ASVS 5.0 V13/V14/V15, and CWE-527, CWE-540, CWE-538, CWE-798, CWE-615, CWE-532 - each CWE
   fetched from cwe.mitre.org on 2026-07-28.
 - A mandatory pre-publish gate in `AI_INSTRUCTIONS.md` (`## Before you publish anything`, plus
   rule 11). It binds the assistant working in a consumer's project: run the checklist before any
   publishing command, stage named paths rather than `git add -A`, stop on any hit, and never
-  rewrite history or force-push to clean up a leak. It grants exactly one write authority —
+  rewrite history or force-push to clean up a leak. It grants exactly one write authority -
   creating or editing the user's ignore files and generating `.env.example` by stripping values,
   with a line-by-line report of what was added.
-- `skills/shared/references/skill-graph.md` — central `depends_on` / `related` / `loads` table
+- `skills/shared/references/skill-graph.md` - central `depends_on` / `related` / `loads` table
   for all 39 skills. Dependency metadata lives here rather than in per-skill frontmatter, so a
   reader can see the whole graph without opening 39 files.
-- `skills/shared/references/standards-matrix.md` — skill × standard coverage, so "which skill
+- `skills/shared/references/standards-matrix.md` - skill × standard coverage, so "which skill
   covers A03:2025" is a lookup rather than a search.
 - A `## Loading budget` section and a `## Before you return` self-review order in
   `AI_INSTRUCTIONS.md`. The budget caps a task at five `core/`, two `advanced/`, one
@@ -83,20 +83,20 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 - A content policy for new skills in `skills/shared/templates/README.md`: seven example pairs,
   four prompt tiers, a `When NOT to Use` routing table, named framework coverage, and the
   reference and deprecation rules.
-- `RELEASING.md` — version rules for a documentation repository, the tag and release sequence,
+- `RELEASING.md` - version rules for a documentation repository, the tag and release sequence,
   and the rule that a standards pin moves in three places together. Superseded by
   `MAINTENANCE.md`, `CONTRIBUTING.md`, and `scripts/README.md` in Unreleased.
 
 ### Changed
 
-- `AI_INSTRUCTIONS.md` — registry row and routing row for `publish-safety`.
-- Root `README.md` — 38 skills → 39, `core/*` 17 → 18, and `publish-safety` in the layout tree.
-- `skills/shared/checklists/README.md` — routing row for a publish-shaped change, and a
+- `AI_INSTRUCTIONS.md` - registry row and routing row for `publish-safety`.
+- Root `README.md` - 38 skills → 39, `core/*` 17 → 18, and `publish-safety` in the layout tree.
+- `skills/shared/checklists/README.md` - routing row for a publish-shaped change, and a
   publish-gate line in the universal pre-return checks.
-- `skills/shared/references/README.md` — pointers to the two new shared reference tables.
+- `skills/shared/references/README.md` - pointers to the two new shared reference tables.
 - `## Related Skills` cross-links added in `core/secrets-management`, `core/common-pitfalls`,
   and `core/devsecops`.
-- `CHANGELOG.md` — the previously unreleased content is now `1.0.0`, which is what the initial
+- `CHANGELOG.md` - the previously unreleased content is now `1.0.0`, which is what the initial
   two commits describe.
 
 ### Notes
@@ -111,7 +111,7 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
   notice it.
 - CWE-200 was considered and left out. MITRE marks it DISCOURAGED for mapping; the specific
   children are cited instead.
-- The content policy applies to skills added from now on. The existing 38 are not retrofitted —
+- The content policy applies to skills added from now on. The existing 38 are not retrofitted -
   a sweep would produce a large diff and no new guidance.
 
 ## [1.0.0] - 2026-07-28
@@ -132,7 +132,7 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
   open on a policy error, file upload type confusion, and JWT algorithm confusion.
 - Skill scaffold under `skills/shared/templates/skill-scaffold/`, matching the reference file
   shape, plus `skills/shared/templates/README.md` describing the bar a new skill must clear.
-- `AI_INSTRUCTIONS.md` — machine-facing entry point. Holds the skill registry, routing table,
+- `AI_INSTRUCTIONS.md` - machine-facing entry point. Holds the skill registry, routing table,
   standing rules, output contract, and conflict resolution. Kept separate from `README.md` so
   the human introduction and the assistant instructions can each grow without crowding the
   other.

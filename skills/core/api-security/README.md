@@ -6,7 +6,7 @@ Controls for API surfaces: REST, GraphQL, gRPC, and webhooks in both directions.
 
 APIs fail differently from web applications. There is no browser to lean on, no template to
 escape into, and the client is whatever the attacker wrote. The dominant failures are
-authorization ones — the wrong object, the wrong field, the wrong operation — and they are
+authorization ones - the wrong object, the wrong field, the wrong operation - and they are
 invisible to a scanner that does not know who should own what.
 
 This skill owns the OWASP API Security Top 10 2023 in depth. The `owasp` skill summarises that
@@ -43,7 +43,7 @@ examples/
 | CWE | MITRE, as cited by OWASP per category | 2026-07-28 |
 
 ASVS requirement IDs in `references/` were read from the 5.0 source files, not recalled. IDs do
-not carry over from 4.0.3 — a `4.1.1` from an old report is a different requirement.
+not carry over from 4.0.3 - a `4.1.1` from an old report is a different requirement.
 
 ## Configuration
 
@@ -58,7 +58,7 @@ readable, or copy the `api-security` directory into `~/.claude/skills/`. The fro
 Scope a review to one category, which is what produces findings rather than a recital:
 
 ```text
-Read src/api/bookings.ts and check every handler for API3:2023 — broken object property level
+Read src/api/bookings.ts and check every handler for API3:2023 - broken object property level
 authorization. For each one tell me the response schema, the input schema, and which
 server-owned fields a caller could set. Show the exact request that exploits it.
 ```
@@ -77,7 +77,7 @@ More in [prompts.md](prompts.md).
 - Guidance, not a scanner. No dataflow analysis. It cannot tell you that a field reaches a
   response three call frames away. Pair it with SAST and with an authorization test suite.
 - Cannot see runtime configuration. Whether rate limiting is actually enabled at the gateway,
-  whether TLS is enforced between internal services, whether `v1` is still routable — none of
+  whether TLS is enforced between internal services, whether `v1` is still routable - none of
   that is visible in application code. Those checks belong in an infrastructure review.
 - Business flow risk (API6) cannot be derived from code. Which flows harm the business is a
   product decision. This skill can tell you the flow is unprotected; it cannot tell you whether
@@ -101,9 +101,9 @@ similar values are not real and are not valid anywhere.
 
 ## References
 
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- REST Security Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html>
-- Mass Assignment Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html>
-- GraphQL Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html>
-- OWASP Automated Threats to Web Applications — <https://owasp.org/www-project-automated-threats-to-web-applications/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- REST Security Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html>
+- Mass Assignment Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html>
+- GraphQL Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html>
+- OWASP Automated Threats to Web Applications - <https://owasp.org/www-project-automated-threats-to-web-applications/>

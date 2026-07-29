@@ -77,7 +77,7 @@ predicate is missing, precisely because nobody reviews them as request handlers.
 ## Blast radius of one service
 
 ```
-Assume the payments-worker service is fully compromised — the attacker runs arbitrary code in that
+Assume the payments-worker service is fully compromised - the attacker runs arbitrary code in that
 container with its real credentials. List what it can read, what it can write, and where it can send
 data, using its IAM role, its database grants, its egress policy, and its mounted secrets. Do not
 list what it is supposed to do, and do not list what would stop them.
@@ -117,8 +117,8 @@ tradeoff into the answer; every architecture choice has one, and the version wit
 ## Failure modes
 
 ```
-For each external dependency in this design — auth service, policy service, database, cache, message
-broker — tell me what breaks when it is unavailable, what the caller sees, and whether the security
+For each external dependency in this design - auth service, policy service, database, cache, message
+broker - tell me what breaks when it is unavailable, what the caller sees, and whether the security
 posture degrades. Flag any dependency where the outage makes the system more permissive.
 ```
 
@@ -155,7 +155,7 @@ behaviour. Include feature flags, env var reads with defaults, and any try/excep
 load. Show the current default and the fail-closed version.
 ```
 
-Naming the three shapes — flags, env defaults, exception handlers — covers where fail-open actually
+Naming the three shapes - flags, env defaults, exception handlers - covers where fail-open actually
 lives. A general question about defaults returns advice about default passwords.
 
 ## Write the ADR

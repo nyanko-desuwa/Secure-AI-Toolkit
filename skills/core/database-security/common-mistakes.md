@@ -112,7 +112,7 @@ the owner bypasses it unless `FORCE ROW LEVEL SECURITY` is enabled.
 An endpoint returning 100 invoices and querying each customer's row consumes 101 connections or
 queries per request. An attacker repeats it and exhausts the pool, causing an availability
 incident. Eager-load deliberately, cap page size, and enforce query-count tests. Do not blindly
-eager-load every relation — that can create a larger Cartesian result and a different DoS.
+eager-load every relation - that can create a larger Cartesian result and a different DoS.
 
 ## “Backups are internal”
 

@@ -136,7 +136,7 @@ log.info({ event: "authn_login_fail", actor: email, source_ip: req.ip });
 ```
 
 Pino's `redact` uses fixed paths, so a nested or renamed field slips past. Do not log whole
-objects and rely on it — treat it as the second layer, with named-field logging as the first.
+objects and rely on it - treat it as the second layer, with named-field logging as the first.
 
 Hashing a session ID keeps correlation (same hash means same session) without giving a log
 reader a usable credential. Truncating to a prefix does not: `sess_a1b2...` plus a short
@@ -214,7 +214,7 @@ JSON encoding turns `\n` into the two characters `\` and `n` inside a string val
 no newline in the output, so there is no second entry. The parser also refuses to treat a
 field value as a record boundary.
 
-Where free text is unavoidable — a legacy sink, a syslog line — strip control characters
+Where free text is unavoidable - a legacy sink, a syslog line - strip control characters
 explicitly:
 
 ```python
@@ -258,7 +258,7 @@ per message format, and the regex breaks the day someone rewords the string. A f
 - Free text allowed in `description`, never load-bearing
 
 Treat the schema as an API. A renamed field breaks every detection rule that reads it, and
-the rule fails silently — it returns zero results rather than an error.
+the rule fails silently - it returns zero results rather than an error.
 
 ## Correlation IDs
 
@@ -357,7 +357,7 @@ chain forks.
 
 Be honest about the limit: hash chaining detects nothing against an attacker with write
 access to the whole table, because they recompute the chain. Tamper evidence requires an
-anchor outside the system — periodically publish the head hash to a separate account, a WORM
+anchor outside the system - periodically publish the head hash to a separate account, a WORM
 bucket with object lock, a signed transparency log, or a third party. Without external
 anchoring, a hash chain is an integrity check against accidental loss and partial compromise,
 not proof against a determined insider. Say that rather than claiming the log is immutable.
@@ -405,7 +405,7 @@ What a SIEM needs from your application, in priority order:
 
 Normalisation is the work. If three services call the same concept `user_id`, `uid`, and
 `actorId`, either the application normalises at emission or the SIEM does it at ingest with a
-mapping that nobody maintains. Normalise at emission — a shared logging module, not a
+mapping that nobody maintains. Normalise at emission - a shared logging module, not a
 convention in a wiki.
 
 Map to an existing schema (ECS, OCSF, CEF) if your SIEM prefers one. Any consistent schema
@@ -443,7 +443,7 @@ Dropping with a visible counter is honest degradation. Silently blocking is not,
 unbounded queue converts a slow sink into an out-of-memory kill.
 
 One exception: an audit entry that must not be lost belongs in the same database transaction
-as the change it describes, not in a queue. Accept the latency there — that is what makes the
+as the change it describes, not in a queue. Accept the latency there - that is what makes the
 trail trustworthy. Application logs go through the queue; audit entries commit with the write.
 
 Unbounded growth as a DoS. Attacker-controlled input that generates a log line per request,
@@ -454,7 +454,7 @@ repetitive events. Never let a user-controlled string set the log level or the m
 Losing logs on crash. Buffered writes lost on `SIGKILL` are exactly the entries an attacker
 wants gone. Flush security events synchronously to a local durable sink even when the remote
 ship is async, and register a signal handler that drains the queue on shutdown. Also log
-`sys_crash` from the last-resort handler (ASVS 16.5.4) — in Go, that is a `recover()` in
+`sys_crash` from the last-resort handler (ASVS 16.5.4) - in Go, that is a `recover()` in
 middleware, since the language has no exceptions.
 
 ## Log access control
@@ -488,7 +488,7 @@ What works in practice:
   or email. Erasure then deletes the identity mapping in the user table, and the audit
   entries survive as `actor_id=8f3c...` with no route back to a person
 - Rely on the legal-obligation and legitimate-interest bases for security logs, and document
-  which one applies per stream — that is what makes a retention period defensible
+  which one applies per stream - that is what makes a retention period defensible
 - Set a retention period per stream and enforce it automatically. "We keep everything forever"
   is a finding under both GDPR and A09's own inventory requirement
 - Keep the log inventory (ASVS 16.1.1) current enough to answer a subject access request

@@ -7,12 +7,12 @@ allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 # Supply Chain Security
 
 Most of the code you ship, you did not write. `A03:2025 Software Supply Chain Failures` is
-new in the 2025 Top 10 — not a renumbering of 2021's A06 Vulnerable and Outdated Components.
+new in the 2025 Top 10 - not a renumbering of 2021's A06 Vulnerable and Outdated Components.
 It was promoted because the failure has grown beyond known CVEs in libraries to the full process
 that builds, distributes, and updates software: dependency resolution, maintainer compromise,
 install hooks, developer tooling, registries, CI/CD, provenance, and artifact promotion. It ranked
 first in the community survey, with exactly half of respondents placing it #1, and had the highest
-average incidence in the contributed data while mapping to only 11 CVEs — a broken build or
+average incidence in the contributed data while mapping to only 11 CVEs - a broken build or
 poisoned registry usually does not receive a CVE at all.
 
 `A08:2025 Software or Data Integrity Failures` is related but lower-level: it is your consumer
@@ -102,14 +102,14 @@ Run [checklist.md](checklist.md). Every unchecked box is a fix or a stated limit
 
 Rank by what executes, where, and with which credentials.
 
-- **Critical** — code from an unverified source executes in CI or production with access to
+- **Critical** - code from an unverified source executes in CI or production with access to
   secrets or deploy credentials. Dependency confusion on a resolvable internal name, a
   malicious lifecycle script, an unsigned artefact deployed unverified
-- **High** — a reachable, exploitable vulnerability in a production dependency; a CI workflow
+- **High** - a reachable, exploitable vulnerability in a production dependency; a CI workflow
   where a fork PR can run with a write token; unpinned mutable references in a release path
-- **Medium** — unmaintained or unreachable-vulnerable dependency; missing provenance or SBOM;
+- **Medium** - unmaintained or unreachable-vulnerable dependency; missing provenance or SBOM;
   no lockfile in a non-release path
-- **Low** — a lint-level gap with no execution path. Missing `Scorecard` badge, unpinned
+- **Low** - a lint-level gap with no execution path. Missing `Scorecard` badge, unpinned
   dev-only tool version
 
 A CVSS 9.8 in a package imported only by a test fixture is not critical. Say why. Conversely
@@ -118,22 +118,22 @@ CVSS does not score "runs arbitrary code by design".
 
 ## Related Skills
 
-- `owasp-security` — the wider Top 10 and ASVS mapping
-- `devsecops` — pipeline wiring, scanner placement, gate enforcement
-- `secrets-management` — the tokens a compromised build step steals
-- `docker-security` — base images, layers, registry configuration
-- `cloud-security` — artifact registry IAM, OIDC trust policies
-- `incident-response` — the process a malicious dependency triggers
-- `logging-audit` — the audit trail that tells you which builds consumed the bad version
+- `owasp-security` - the wider Top 10 and ASVS mapping
+- `devsecops` - pipeline wiring, scanner placement, gate enforcement
+- `secrets-management` - the tokens a compromised build step steals
+- `docker-security` - base images, layers, registry configuration
+- `cloud-security` - artifact registry IAM, OIDC trust policies
+- `incident-response` - the process a malicious dependency triggers
+- `logging-audit` - the audit trail that tells you which builds consumed the bad version
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, configuration, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — A03/A08, ASVS, SLSA, SBOM formats, SSDF, ecosystem flags,
+- [README.md](README.md) - purpose, configuration, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - A03/A08, ASVS, SLSA, SBOM formats, SSDF, ecosystem flags,
   and historical incident mechanisms
-- [examples/](examples/) — eight vulnerable/fixed pairs
+- [examples/](examples/) - eight vulnerable/fixed pairs

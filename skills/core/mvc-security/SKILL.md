@@ -55,13 +55,13 @@ Jinja2 autoescapes in Flask and not in bare Jinja2. Spring Boot turns off Jackso
 
 Work inward from the request:
 
-1. Routing — is the action reachable only by the verbs and paths you intended?
-2. Request validation — typed, allowlisted fields, unknown fields rejected.
-3. Controller — resolve the actor, delegate, return. No policy logic, no queries.
-4. Authorization — with the object in hand, at the query or in a policy call.
-5. Service — business invariants, recomputed server-side from trusted data.
-6. Model — writable field allowlist. Never a denylist.
-7. Template — auto-escaping on, correct escape for the context.
+1. Routing - is the action reachable only by the verbs and paths you intended?
+2. Request validation - typed, allowlisted fields, unknown fields rejected.
+3. Controller - resolve the actor, delegate, return. No policy logic, no queries.
+4. Authorization - with the object in hand, at the query or in a policy call.
+5. Service - business invariants, recomputed server-side from trusted data.
+6. Model - writable field allowlist. Never a denylist.
+7. Template - auto-escaping on, correct escape for the context.
 
 ### 4. Verify
 
@@ -78,13 +78,13 @@ finding. "Missing access control in `InvoiceController`" is a guess at the fix.
 
 Rank by who can reach it and what they gain.
 
-- **Critical** — mass assignment reaching a role, permission, or tenant column; stored XSS in a
+- **Critical** - mass assignment reaching a role, permission, or tenant column; stored XSS in a
   page an admin views; debug page exposed on the internet with credentials in the environment dump
-- **High** — object-level authorization missing on a read of other tenants' data; raw template
+- **High** - object-level authorization missing on a read of other tenants' data; raw template
   output of user content; verb tunnelling reaching a destructive action
-- **Medium** — mass assignment reaching a non-privilege column, business logic enforced only in
+- **Medium** - mass assignment reaching a non-privilege column, business logic enforced only in
   the controller and duplicated inconsistently, unknown fields silently ignored
-- **Low** — fat controller with no current bypass, missing defence in depth
+- **Low** - fat controller with no current bypass, missing defence in depth
 
 A mass assignment finding is not automatically critical. It depends entirely on which columns are
 reachable. Read the schema before you rank it.
@@ -100,20 +100,20 @@ reachable. Read the schema before you rank it.
 
 ## Related Skills
 
-- `owasp` — the standards themselves, and controls outside MVC
-- `api-security` — object and property level authorization on API surfaces
-- `frontend-security` — CSP, headers, and the browser side of XSS
-- `database-security` — query construction beyond the ORM escape hatches
-- `secure-code-review` — reviewing an existing codebase in depth
+- `owasp` - the standards themselves, and controls outside MVC
+- `api-security` - object and property level authorization on API surfaces
+- `frontend-security` - CSP, headers, and the browser side of XSS
+- `database-security` - query construction beyond the ORM escape hatches
+- `secure-code-review` - reviewing an existing codebase in depth
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations
-- [checklist.md](checklist.md) — pre-return verification, grouped by layer
-- [best-practices.md](best-practices.md) — patterns per layer, with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance conflicts with the framework
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/framework-defaults.md](references/framework-defaults.md) — on by default, opt-in, off
-- [references/template-escaping.md](references/template-escaping.md) — engine by engine
-- [examples/README.md](examples/README.md) — eight vulnerable/fixed pairs
+- [README.md](README.md) - purpose, standards table, limitations
+- [checklist.md](checklist.md) - pre-return verification, grouped by layer
+- [best-practices.md](best-practices.md) - patterns per layer, with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance conflicts with the framework
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/framework-defaults.md](references/framework-defaults.md) - on by default, opt-in, off
+- [references/template-escaping.md](references/template-escaping.md) - engine by engine
+- [examples/README.md](examples/README.md) - eight vulnerable/fixed pairs

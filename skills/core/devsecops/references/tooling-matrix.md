@@ -71,13 +71,13 @@ input to legal review, not legal advice.
 
 ## References
 
-- OWASP A03 and A08 — <https://owasp.org/Top10/2025/>
-- NIST SSDF PW.5 (secure code practices) and PW.8 (testing) — <https://csrc.nist.gov/pubs/sp/800/218/final>
-- Semgrep rules — <https://docs.semgrep.dev/writing-rules/rule-syntax>
-- CodeQL — <https://codeql.github.com/docs/>
-- ZAP — <https://www.zaproxy.org/docs/>
-- Trivy — <https://trivy.dev/>
-- Checkov — <https://www.checkov.io/>
-- tfsec status — <https://github.com/aquasecurity/tfsec>
-- CycloneDX — <https://cyclonedx.org/>
-- SPDX — <https://spdx.dev/>
+- OWASP A03 and A08 - <https://owasp.org/Top10/2025/>
+- NIST SSDF PW.5 (secure code practices) and PW.8 (testing) - <https://csrc.nist.gov/pubs/sp/800/218/final>
+- Semgrep rules - <https://docs.semgrep.dev/writing-rules/rule-syntax>
+- CodeQL - <https://codeql.github.com/docs/>
+- ZAP - <https://www.zaproxy.org/docs/>
+- Trivy - <https://trivy.dev/>
+- Checkov - <https://www.checkov.io/>
+- tfsec status - <https://github.com/aquasecurity/tfsec>
+- CycloneDX - <https://cyclonedx.org/>
+- SPDX - <https://spdx.dev/>

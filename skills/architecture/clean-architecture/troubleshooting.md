@@ -132,7 +132,7 @@ instances and results differ. Then use a heap profiler if retained references ar
 ## Cancellation does not exist in the current port
 
 Changing the signature is worth the break. Add the token/deadline at the entry point and thread it
-through use cases and every I/O port. Do not fetch a global request token in the adapter — that is
+through use cases and every I/O port. Do not fetch a global request token in the adapter - that is
 ambient request state and fails in jobs.
 
 The adapter adds its own dependency budget by linking tokens. The use case chooses what a timeout

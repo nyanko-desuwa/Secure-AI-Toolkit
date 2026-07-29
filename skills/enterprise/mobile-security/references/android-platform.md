@@ -135,9 +135,9 @@ keep 1.0.0 knowingly. Do not present the deprecated wrapper as current guidance.
 
 | Surface | Control |
 |---|---|
-| Screenshots and the task snapshot | `WindowManager.LayoutParams.FLAG_SECURE` — "treat the content of the window as secure, preventing it from appearing in screenshots or from being viewed on non-secure displays". `View.setContentSensitivity(int)` marks a window secure during media projection |
+| Screenshots and the task snapshot | `WindowManager.LayoutParams.FLAG_SECURE` - "treat the content of the window as secure, preventing it from appearing in screenshots or from being viewed on non-secure displays". `View.setContentSensitivity(int)` marks a window secure during media projection |
 | Lock-screen notifications | `Notification.VISIBILITY_PRIVATE` conceals sensitive content on secure lock screens; `VISIBILITY_SECRET` reveals no part of it; `setPublicVersion(Notification)` supplies a redacted variant |
-| Caller identity | `Activity.getReferrer()` — "this is not a security feature -- you can not trust the referrer information, applications can spoof it" |
+| Caller identity | `Activity.getReferrer()` - "this is not a security feature -- you can not trust the referrer information, applications can spoof it" |
 | Backups | `android:allowBackup`, `android:dataExtractionRules` |
 
 `getReferrer()` being spoofable is the reason a deep link cannot authenticate its caller. If a

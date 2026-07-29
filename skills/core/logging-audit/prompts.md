@@ -103,7 +103,7 @@ do not claim pseudonymisation makes the data anonymous.
 For this login and authorization middleware, add tests that assert: failures emit the expected
 security event; every required field exists; a password and bearer token never appear in
 captured output; newline and ANSI input cannot create a second record; and the event name still
-matches the SIEM rule. Do not snapshot the entire line — assert the stable schema fields.
+matches the SIEM rule. Do not snapshot the entire line - assert the stable schema fields.
 ```
 
 ## Triage a leaked token

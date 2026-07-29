@@ -13,7 +13,7 @@ Flag any table written by two contexts as CWE-653/CWE-1220. Do not infer isolati
 folders alone.
 ```
 
-Why it works: it asks for enforceable evidence — grants and writers — rather than boxes.
+Why it works: it asks for enforceable evidence - grants and writers - rather than boxes.
 
 ## Review One Aggregate
 

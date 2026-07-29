@@ -5,14 +5,14 @@ bypass. Values are synthetic. Do not turn these into candidate-testing tools.
 
 ## Contents
 
-- [Per-IP limiter bypassed by rotating addresses](#per-ip-limiter-bypassed-by-rotating-addresses) — A07, CWE-307
-- [In-memory counter defeated by horizontal scaling](#in-memory-counter-defeated-by-horizontal-scaling) — A07, CWE-307
-- [OTP with no attempt cap](#otp-with-no-attempt-cap) — A07, CWE-307
-- [Guessable reset token](#guessable-reset-token) — A07/A04, CWE-330/CWE-340
-- [GraphQL batch counts one request](#graphql-batch-counts-one-request) — A06/API4, CWE-770/CWE-307
-- [Timing-unsafe HMAC comparison](#timing-unsafe-hmac-comparison) — A04, CWE-208
-- [Lockout used to deny a victim](#lockout-used-to-deny-a-victim) — A06/A07, CWE-645
-- [Redis error fails open](#redis-error-fails-open) — A10/A07, CWE-307
+- [Per-IP limiter bypassed by rotating addresses](#per-ip-limiter-bypassed-by-rotating-addresses) - A07, CWE-307
+- [In-memory counter defeated by horizontal scaling](#in-memory-counter-defeated-by-horizontal-scaling) - A07, CWE-307
+- [OTP with no attempt cap](#otp-with-no-attempt-cap) - A07, CWE-307
+- [Guessable reset token](#guessable-reset-token) - A07/A04, CWE-330/CWE-340
+- [GraphQL batch counts one request](#graphql-batch-counts-one-request) - A06/API4, CWE-770/CWE-307
+- [Timing-unsafe HMAC comparison](#timing-unsafe-hmac-comparison) - A04, CWE-208
+- [Lockout used to deny a victim](#lockout-used-to-deny-a-victim) - A06/A07, CWE-645
+- [Redis error fails open](#redis-error-fails-open) - A10/A07, CWE-307
 
 ---
 
@@ -327,9 +327,9 @@ cost. A local-memory fallback is not equivalent because it multiplies with pods 
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- NIST SP 800-63B-4 — <https://pages.nist.gov/800-63-4/sp800-63b.html>
-- OWASP Credential Stuffing Prevention Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Credential_Stuffing_Prevention_Cheat_Sheet.html>
-- MITRE CWE — <https://cwe.mitre.org/data/index.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- NIST SP 800-63B-4 - <https://pages.nist.gov/800-63-4/sp800-63b.html>
+- OWASP Credential Stuffing Prevention Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Credential_Stuffing_Prevention_Cheat_Sheet.html>
+- MITRE CWE - <https://cwe.mitre.org/data/index.html>

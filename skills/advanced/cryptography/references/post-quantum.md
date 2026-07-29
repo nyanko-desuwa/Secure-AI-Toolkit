@@ -1,4 +1,4 @@
-# Post-Quantum Cryptography — Status
+# Post-Quantum Cryptography - Status
 
 What is standardized, what is deployable, and what is still a draft. Verified 2026-07-28.
 
@@ -60,7 +60,7 @@ Deliberately not reproduced here: the per-algorithm deprecation and disallowed y
 ECDH, and DH. Those tables are in the PDF, not on the landing page, and they drive procurement
 decisions. Read the document rather than trusting a recalled year.
 
-## Hybrid key exchange in TLS — the one thing to actually do
+## Hybrid key exchange in TLS - the one thing to actually do
 
 The urgency is asymmetric and it is worth being precise about why:
 
@@ -68,8 +68,8 @@ The urgency is asymmetric and it is worth being precise about why:
   relevant quantum computer exists. This is "harvest now, decrypt later", and it means the deadline
   for confidentiality already passed for any data with a long secrecy lifetime.
 - Signatures are not urgent in the same way. A signature verified today cannot be retroactively
-  forged by a future machine. What does need a plan is long-lived roots of trust — code signing
-  keys, firmware verification, CA roots — because those must still be trustworthy in 2040.
+  forged by a future machine. What does need a plan is long-lived roots of trust - code signing
+  keys, firmware verification, CA roots - because those must still be trustworthy in 2040.
 
 Hybrid means the session key derives from both a classical ECDH share and an ML-KEM share, so the
 connection is secure unless both are broken. That is the property that makes it safe to deploy
@@ -80,7 +80,7 @@ before anyone is confident in lattice assumptions.
 The specification is `draft-ietf-tls-ecdhe-mlkem`, "Post-quantum hybrid ECDHE-MLKEM Key Agreement
 for TLSv1.3". Status as of 2026-07-28: revision 05, dated 2026-05-26, expiring 2026-11-27. It is an
 active IETF TLS working group Internet-Draft with intended status Proposed Standard. IESG state is
-"Approved-announcement sent" and RFC Editor state is "In Progress" — it is in the publication queue
+"Approved-announcement sent" and RFC Editor state is "In Progress" - it is in the publication queue
 and has no RFC number yet. Do not cite an RFC number for it. It replaces
 `draft-kwiatkowski-tls-ecdhe-mlkem`.
 
@@ -93,7 +93,7 @@ Code points, all marked DTLS-OK:
 | SecP384r1MLKEM1024 | 4589 (0x11ED) | N | secp384r1 ECDH + ML-KEM-1024 |
 
 X25519MLKEM768 is the one to configure. It is the only group marked Recommended, and it puts the
-ML-KEM share first in the concatenation — a deviation from the hybrid design draft's naming
+ML-KEM share first in the concatenation - a deviation from the hybrid design draft's naming
 convention that the document attributes to "historical reasons". The other two put the ECDH share
 first so the FIPS-approved scheme leads the HKDF input. If you are implementing the derivation
 yourself, that ordering detail is load-bearing; if you are configuring a server, it is trivia.
@@ -110,7 +110,7 @@ Firefox 132 and Chrome 131, and that it "may be used in cryptographic testing en
 available within industry- or government-approved libraries".
 
 Read that carefully. ASVS is not telling you to require PQC. It is telling you to use it where a
-vetted library offers it, and to have a documented migration path — V11.1 asks for "the migration
+vetted library offers it, and to have a documented migration path - V11.1 asks for "the migration
 path to new cryptographic standards, such as post-quantum cryptography", which is an inventory and
 planning requirement, not an algorithm requirement.
 
@@ -132,12 +132,12 @@ What that means in practice:
 ## Do not build the hybrid yourself
 
 Concatenating an ECDH secret and an ML-KEM secret and hashing them is not obviously wrong, and that
-is exactly the problem — the safe combiners are specified, and the specification exists because the
+is exactly the problem - the safe combiners are specified, and the specification exists because the
 obvious constructions have subtle issues around key-commitment and share ordering. Use what your TLS
 or SSH implementation ships.
 
-Where you genuinely need ML-KEM at the application layer — a stored-message protocol, not a
-transport — the API is a KEM, not encryption. It gives you a shared secret; you still need an AEAD.
+Where you genuinely need ML-KEM at the application layer - a stored-message protocol, not a
+transport - the API is a KEM, not encryption. It gives you a shared secret; you still need an AEAD.
 Go's standard library, since Go 1.24:
 
 ```go
@@ -217,13 +217,13 @@ func newGCM(key []byte) (cipher.AEAD, error) {
 
 Two things to note about that code. The HKDF `info` string is domain separation: change the protocol
 and change the string, or two protocols derive the same key from the same shared secret. And this is
-ML-KEM alone, not hybrid — it is secure against a quantum adversary and it is not hedged against a
+ML-KEM alone, not hybrid - it is secure against a quantum adversary and it is not hedged against a
 flaw in ML-KEM itself. For a stored-message protocol that is a defensible tradeoff you should state
 explicitly; for transport, use TLS's hybrid group instead.
 
 `crypto/mlkem` and `crypto/hkdf` were both added to the Go standard library in Go 1.24. The API above
 is from the go1.26.5 documentation. Python's `cryptography` and Node's `crypto` had no stable ML-KEM
-API at this check — verify against your installed version rather than assuming one exists.
+API at this check - verify against your installed version rather than assuming one exists.
 
 ## What to write in an inventory
 
@@ -235,14 +235,14 @@ expires in an hour is not.
 
 ## Sources
 
-- NIST PQC project — <https://csrc.nist.gov/projects/post-quantum-cryptography> (2026-07-28)
-- FIPS 203 — <https://csrc.nist.gov/pubs/fips/203/final> (2026-07-28)
-- FIPS 204 — <https://csrc.nist.gov/pubs/fips/204/final> (2026-07-28)
-- FIPS 205 — <https://csrc.nist.gov/pubs/fips/205/final> (2026-07-28)
-- NIST IR 8547 (ipd) — <https://csrc.nist.gov/pubs/ir/8547/ipd> (2026-07-28)
-- draft-ietf-tls-ecdhe-mlkem-05 —
+- NIST PQC project - <https://csrc.nist.gov/projects/post-quantum-cryptography> (2026-07-28)
+- FIPS 203 - <https://csrc.nist.gov/pubs/fips/203/final> (2026-07-28)
+- FIPS 204 - <https://csrc.nist.gov/pubs/fips/204/final> (2026-07-28)
+- FIPS 205 - <https://csrc.nist.gov/pubs/fips/205/final> (2026-07-28)
+- NIST IR 8547 (ipd) - <https://csrc.nist.gov/pubs/ir/8547/ipd> (2026-07-28)
+- draft-ietf-tls-ecdhe-mlkem-05 -
   <https://datatracker.ietf.org/doc/draft-ietf-tls-ecdhe-mlkem/> (2026-07-28)
-- OWASP ASVS 5.0.0 Appendix C —
+- OWASP ASVS 5.0.0 Appendix C -
   <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x92-Appendix-C_Cryptography.md> (2026-07-28)
-- Go `crypto/mlkem` — <https://pkg.go.dev/crypto/mlkem> (2026-07-28)
-- Go `crypto/hkdf` — <https://pkg.go.dev/crypto/hkdf> (2026-07-28)
+- Go `crypto/mlkem` - <https://pkg.go.dev/crypto/mlkem> (2026-07-28)
+- Go `crypto/hkdf` - <https://pkg.go.dev/crypto/hkdf> (2026-07-28)

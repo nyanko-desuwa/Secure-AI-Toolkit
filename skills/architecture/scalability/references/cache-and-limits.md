@@ -53,8 +53,8 @@ an offline fixed-size job with no shared caller population; use a local semaphor
 
 ## Sources
 
-- OWASP API Security Top 10 2023, API4 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS 5.0 project — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- CWE-400 — <https://cwe.mitre.org/data/definitions/400.html>
-- CWE-770 — <https://cwe.mitre.org/data/definitions/770.html>
+- OWASP API Security Top 10 2023, API4 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS 5.0 project - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- CWE-400 - <https://cwe.mitre.org/data/definitions/400.html>
+- CWE-770 - <https://cwe.mitre.org/data/definitions/770.html>

@@ -83,29 +83,29 @@ Run [checklist.md](checklist.md). For each finding state the key family affected
 
 ## Security Levels
 
-- **Critical** — public or unauthorized listener; accessible administrator/destructive path; unauthorized replication/configuration change; exposed sensitive snapshot or backup
-- **High** — shared/default broad user, missing ACL isolation, plaintext across a shared network, security-state eviction, no persistence/failover plan for security state
-- **Medium** — certificate validation not proven, broad module permissions, unbounded data/key growth, missing alerts for ACL/persistence/evictions
-- **Low** — defence-in-depth gap such as overly broad slow-log visibility with no route to sensitive values
+- **Critical** - public or unauthorized listener; accessible administrator/destructive path; unauthorized replication/configuration change; exposed sensitive snapshot or backup
+- **High** - shared/default broad user, missing ACL isolation, plaintext across a shared network, security-state eviction, no persistence/failover plan for security state
+- **Medium** - certificate validation not proven, broad module permissions, unbounded data/key growth, missing alerts for ACL/persistence/evictions
+- **Low** - defence-in-depth gap such as overly broad slow-log visibility with no route to sensitive values
 
 Exploitability and blast radius override the ladder. A loopback-only cache without persistence is not High merely because persistence is absent.
 
 ## Related Skills
 
-- `authentication` — session and token policy; this skill secures its Redis store
-- `brute-force-defense` — limiter policy; this skill secures the counter store
-- `secrets-management` — credentials, certificates, rotation, and exposure response
-- `docker-security`, `cloud-security`, `advanced/network-security` — deployment boundary controls
-- `logging-audit`, `advanced/incident-response` — telemetry and response
-- `architecture/scalability`, `architecture/event-driven` — cache and broker semantics
+- `authentication` - session and token policy; this skill secures its Redis store
+- `brute-force-defense` - limiter policy; this skill secures the counter store
+- `secrets-management` - credentials, certificates, rotation, and exposure response
+- `docker-security`, `cloud-security`, `advanced/network-security` - deployment boundary controls
+- `logging-audit`, `advanced/incident-response` - telemetry and response
+- `architecture/scalability`, `architecture/event-driven` - cache and broker semantics
 
 ## Supporting Files
 
-- [README.md](README.md) — scope, platforms, framework integration, limitations
-- [checklist.md](checklist.md) — deployment and role-specific verification
-- [best-practices.md](best-practices.md) — secure patterns
-- [common-mistakes.md](common-mistakes.md) — tempting but unsafe fixes
-- [troubleshooting.md](troubleshooting.md) — migration and operational tradeoffs
-- [prompts.md](prompts.md) — scoped prompts and anti-patterns
-- [references/](references/) — source summaries and version pins
-- [examples/README.md](examples/README.md) — eight vulnerable/fixed pairs, incidents, and a completed Redis auth/limiter design review
+- [README.md](README.md) - scope, platforms, framework integration, limitations
+- [checklist.md](checklist.md) - deployment and role-specific verification
+- [best-practices.md](best-practices.md) - secure patterns
+- [common-mistakes.md](common-mistakes.md) - tempting but unsafe fixes
+- [troubleshooting.md](troubleshooting.md) - migration and operational tradeoffs
+- [prompts.md](prompts.md) - scoped prompts and anti-patterns
+- [references/](references/) - source summaries and version pins
+- [examples/README.md](examples/README.md) - eight vulnerable/fixed pairs, incidents, and a completed Redis auth/limiter design review

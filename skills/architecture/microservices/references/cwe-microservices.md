@@ -19,13 +19,13 @@ Do not cite a CWE because it is listed in a nearby skill. Verify the mechanism a
 
 ## Sources
 
-- CWE-290 — <https://cwe.mitre.org/data/definitions/290.html>
-- CWE-400 — <https://cwe.mitre.org/data/definitions/400.html>
-- CWE-441 — <https://cwe.mitre.org/data/definitions/441.html>
-- CWE-602 — <https://cwe.mitre.org/data/definitions/602.html>
-- CWE-653 — <https://cwe.mitre.org/data/definitions/653.html>
-- CWE-770 — <https://cwe.mitre.org/data/definitions/770.html>
-- CWE-772 — <https://cwe.mitre.org/data/definitions/772.html>
-- CWE-799 — <https://cwe.mitre.org/data/definitions/799.html>
-- CWE-918 — <https://cwe.mitre.org/data/definitions/918.html>
-- CWE-1220 — <https://cwe.mitre.org/data/definitions/1220.html>
+- CWE-290 - <https://cwe.mitre.org/data/definitions/290.html>
+- CWE-400 - <https://cwe.mitre.org/data/definitions/400.html>
+- CWE-441 - <https://cwe.mitre.org/data/definitions/441.html>
+- CWE-602 - <https://cwe.mitre.org/data/definitions/602.html>
+- CWE-653 - <https://cwe.mitre.org/data/definitions/653.html>
+- CWE-770 - <https://cwe.mitre.org/data/definitions/770.html>
+- CWE-772 - <https://cwe.mitre.org/data/definitions/772.html>
+- CWE-799 - <https://cwe.mitre.org/data/definitions/799.html>
+- CWE-918 - <https://cwe.mitre.org/data/definitions/918.html>
+- CWE-1220 - <https://cwe.mitre.org/data/definitions/1220.html>

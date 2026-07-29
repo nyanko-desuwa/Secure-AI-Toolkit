@@ -1,7 +1,7 @@
 # Event-Driven Checklist
 
 Run before returning code. Mark each item pass, fail, or not applicable. "Not applicable" needs a
-one-line reason — an unexplained skip reads the same as an oversight.
+one-line reason - an unexplained skip reads the same as an oversight.
 
 Only run the sections the change touches. Adding one consumer to an existing topic does not need
 the broker configuration section, but it does need E1, E4, and E9.
@@ -15,7 +15,7 @@ the broker configuration section, but it does need E1, E4, and E9.
 - [ ] Tracing, DLQ visibility, and a replay procedure exist before the topic does
 - [ ] The topic is not a request/reply channel wearing an event's name
 
-## E1 — Identity and authorization in the consumer
+## E1 - Identity and authorization in the consumer
 
 - [ ] No handler branches on a role, permission, scope, or plan tier read from the message
 - [ ] `tenantId` from the payload is treated as a routing hint, never as an access grant
@@ -27,7 +27,7 @@ the broker configuration section, but it does need E1, E4, and E9.
 - [ ] Signature verification failure sends the message to the DLQ; it does not log and continue
 - [ ] A test publishes a forged message with an elevated `role` and asserts the handler refuses
 
-## E2 — Payload contents
+## E2 - Payload contents
 
 - [ ] The event carries the minimum: entity ID, event type, occurred-at, schema version
 - [ ] No full entity serialised into the payload "in case a consumer needs it"
@@ -37,7 +37,7 @@ the broker configuration section, but it does need E1, E4, and E9.
 - [ ] A replay of this topic re-emitting the payload has been considered and is acceptable
 - [ ] A future consumer subscribing to this topic would not thereby gain data it may not see
 
-## E3 — Parsing
+## E3 - Parsing
 
 - [ ] Every event type has an explicit schema, and the handler parses against it
 - [ ] No type name, class path, or discriminator in the payload selects a class to construct
@@ -47,7 +47,7 @@ the broker configuration section, but it does need E1, E4, and E9.
 - [ ] Numeric and string fields have range and length limits, not just types
 - [ ] A malformed body produces a DLQ entry and a metric, not an unhandled crash loop
 
-## E4 — Idempotency
+## E4 - Idempotency
 
 - [ ] Delivery is documented as at-least-once; nothing in the code claims exactly-once
 - [ ] Every handler with a side effect has a dedupe key derived from the event, not from `now()`
@@ -58,7 +58,7 @@ the broker configuration section, but it does need E1, E4, and E9.
 - [ ] An external call that cannot be transactional passes an idempotency key downstream
 - [ ] A test delivers the same event twice and asserts one side effect
 
-## E5 — Ordering
+## E5 - Ordering
 
 - [ ] The ordering guarantee is written down: per-key, per-partition, or none
 - [ ] Nothing depends on cross-entity ordering
@@ -66,7 +66,7 @@ the broker configuration section, but it does need E1, E4, and E9.
 - [ ] Concurrency inside a partition does not silently break the per-key guarantee
 - [ ] The handler is correct when a delete arrives before the create it refers to
 
-## E6 — Failure path and DLQ
+## E6 - Failure path and DLQ
 
 - [ ] Permanent failures (schema, authorization, not-found) go to the DLQ immediately
 - [ ] Transient failures retry with a cap, jitter, and a total budget
@@ -75,10 +75,10 @@ the broker configuration section, but it does need E1, E4, and E9.
 - [ ] Depth of the DLQ is a metric with an alert and a named owner
 - [ ] A documented procedure exists for draining or replaying the DLQ
 - [ ] Redrive does not re-run side effects that already succeeded (depends on E4)
-- [ ] Poison-message logs record the message ID, type, and error — not the whole payload
+- [ ] Poison-message logs record the message ID, type, and error - not the whole payload
 - [ ] No secret or personal data can reach the log through the error path
 
-## E7 — Schema evolution
+## E7 - Schema evolution
 
 - [ ] Changes are additive; no field renamed, retyped, or repurposed
 - [ ] New required fields ship as a new event version, with both published during migration
@@ -87,7 +87,7 @@ the broker configuration section, but it does need E1, E4, and E9.
 - [ ] An unknown event version fails closed and loudly, not silently ignored
 - [ ] The set of consumers per topic is discoverable, so a breaking change can be assessed
 
-## E8 — Broker and transport
+## E8 - Broker and transport
 
 - [ ] TLS in transit to the broker, with certificate verification enabled
 - [ ] One credential per service, not one shared cluster credential
@@ -98,7 +98,7 @@ the broker configuration section, but it does need E1, E4, and E9.
 - [ ] Broker admin operations are not available to application credentials
 - [ ] Whether these are actually applied in the running cluster is verified, or reported as unverified
 
-## E9 — Resource lifecycle
+## E9 - Resource lifecycle
 
 - [ ] Every subscription registration has a matching teardown on the shutdown path
 - [ ] Teardown also runs on the error path, not only on clean shutdown

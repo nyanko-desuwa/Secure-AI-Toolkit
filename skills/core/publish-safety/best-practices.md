@@ -57,7 +57,7 @@ Rules that follow:
 `A02:2025` · ASVS V13 · `CWE-527`
 
 `.gitignore` protects the repository. It does nothing for the Docker build context, the npm
-tarball, or the static-host upload — each of those reads a different file, and they drift apart
+tarball, or the static-host upload - each of those reads a different file, and they drift apart
 the moment one is edited alone.
 
 ```dockerfile
@@ -68,8 +68,8 @@ COPY . .
 RUN npm ci --omit=dev
 ```
 
-`.gitignore` is irrelevant here. `COPY . .` copies `.env` and the entire `.git` directory —
-history included — into a layer. `docker history` shows the instruction, and anyone who pulls the
+`.gitignore` is irrelevant here. `COPY . .` copies `.env` and the entire `.git` directory -
+history included - into a layer. `docker history` shows the instruction, and anyone who pulls the
 image can extract the layer.
 
 ```dockerfile
@@ -82,7 +82,7 @@ COPY src/ ./src/
 ```
 
 ```gitignore
-# .dockerignore — the build context, not the repository
+# .dockerignore - the build context, not the repository
 .git
 .env
 .env.*
@@ -137,7 +137,7 @@ ancestors, which is where a "removed" secret lives. A scanner catches patterned 
 search misses.
 
 Order matters when there is a hit: revoke at the provider first, then rotate, then investigate.
-Cleaning history is not remediation — see
+Cleaning history is not remediation - see
 [secrets-management/references/exposure-response.md](../secrets-management/references/exposure-response.md).
 
 Rules that follow:
@@ -175,7 +175,7 @@ git log --all --full-history --oneline -- .env
 
 Why this works: `git rm --cached` removes the file from the index while leaving it on disk, so the
 next commit records the deletion and the ignore rule takes effect from then on. The tempting
-alternative — `git rm .env` — deletes the local file too and breaks the developer's environment,
+alternative - `git rm .env` - deletes the local file too and breaks the developer's environment,
 which is how the change gets reverted.
 
 Neither command touches history. If the file was ever pushed, rotation is the fix and the untrack
@@ -212,7 +212,7 @@ git add .env.example
 
 Why this works: the transformation cannot preserve a value, so there is nothing to remember. The
 `!.env.example` negation is what lets the broad `.env.*` rule coexist with the one file that
-should be committed — without it, the example is ignored and new contributors get no key list.
+should be committed - without it, the example is ignored and new contributors get no key list.
 
 Rules that follow:
 
@@ -252,7 +252,7 @@ git commit -m "add invoice export endpoint"
 
 Why this works: `.git/info/exclude` is per-clone and never committed, so a personal file needs no
 entry in a shared file. Naming paths at `git add` time means an unreviewed file cannot be swept
-in — the failure mode becomes "forgot to stage a file", which the next commit fixes.
+in - the failure mode becomes "forgot to stage a file", which the next commit fixes.
 
 A global gitignore covers patterns you carry between projects:
 
@@ -278,10 +278,10 @@ which means it is detection, not prevention. Both, or neither works.
 
 Do not write new configurations for this. Two already exist in the toolkit, pinned and verified:
 
-- [devsecops/examples/pre-commit-config.yaml](../devsecops/examples/pre-commit-config.yaml) —
+- [devsecops/examples/pre-commit-config.yaml](../devsecops/examples/pre-commit-config.yaml) -
   gitleaks and `detect-private-key` on the staged diff
 - The `secret-scan.yml` workflow in
-  [secrets-management/best-practices.md](../secrets-management/best-practices.md#detection) —
+  [secrets-management/best-practices.md](../secrets-management/best-practices.md#detection) -
   gitleaks in CI with `fetch-depth: 0` so history is scanned, not just the tip
 
 The third layer is provider-side and the only one an attacker's clone cannot skip: GitHub secret

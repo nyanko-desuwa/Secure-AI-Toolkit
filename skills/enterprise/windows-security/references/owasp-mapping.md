@@ -64,7 +64,7 @@ A control with no exploitation path is defence in depth, not a vulnerability. Sa
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>, checked 2026-07-28
-- OWASP ASVS 5.0.0 (released 2025-05-30) —
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>, checked 2026-07-28
+- OWASP ASVS 5.0.0 (released 2025-05-30) -
   <https://owasp.org/www-project-application-security-verification-standard/>, checked 2026-07-28
-- CWE — <https://cwe.mitre.org/>
+- CWE - <https://cwe.mitre.org/>

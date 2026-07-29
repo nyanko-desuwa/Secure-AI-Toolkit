@@ -56,7 +56,7 @@ The matrix keys on "confirmed", so the word has to mean something.
 | Ruled out | The capability did not exist, or complete logs show non-use | The key was scoped to a different account; the trail covers the whole window |
 
 Absence of evidence is not "ruled out" unless you have shown the log covers the window. If
-data events were never enabled on that bucket, you have no evidence either way — treat it as
+data events were never enabled on that bucket, you have no evidence either way - treat it as
 possible and say why in the report. Writing "no evidence of access" when you had no ability to
 see access is the sentence that gets quoted back at you later.
 
@@ -87,7 +87,7 @@ to "show all recent orders."**
 
 SEV1 if the records reached the user. Cross-tenant data disclosure is data impact regardless
 of whether the mechanism was SQL injection or a model following instructions. The novelty of
-the mechanism does not lower the severity — see OWASP LLM01 and LLM06.
+the mechanism does not lower the severity - see OWASP LLM01 and LLM06.
 
 **Ransomware note on one file share, backups verified 6 hours old.**
 
@@ -104,13 +104,13 @@ r3 distinguishes them, and the distinction is useful:
 > indicates involving a higher level of management in the response efforts.
 
 You escalate when the work is bigger than the people on it. You elevate when a decision
-belongs to someone with the authority to make it — taking production offline, notifying
+belongs to someone with the authority to make it - taking production offline, notifying
 customers, engaging law enforcement. Elevating is not admitting failure; making that call
 yourself at 3am is.
 
 ## Sources
 
-- <https://doi.org/10.6028/NIST.SP.800-61r3> — `RS.MA-03`, `RS.MA-04`
+- <https://doi.org/10.6028/NIST.SP.800-61r3> - `RS.MA-03`, `RS.MA-04`
 - <https://attack.mitre.org/tactics/TA0003/> · <https://attack.mitre.org/tactics/TA0006/> · <https://attack.mitre.org/tactics/TA0040/>
 - <https://attack.mitre.org/techniques/T1486/> · <https://attack.mitre.org/techniques/T1490/>
 - <https://genai.owasp.org/llm-top-10/>

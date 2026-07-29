@@ -36,7 +36,7 @@ def verify(stored: str, pw: str) -> bool:
 
 Why this works: Argon2id is memory-hard, so a GPU cannot amortise it the way it does SHA-256. The
 salt is per-hash, so identical passwords produce different rows. The parameters live in the string,
-which is what makes `check_needs_rehash` — and therefore a cost upgrade without a mass reset —
+which is what makes `check_needs_rehash` - and therefore a cost upgrade without a mass reset -
 possible at all.
 
 The tempting wrong fix is `sha256(salt + password)` in a loop. You have invented PBKDF2 badly:
@@ -63,7 +63,7 @@ const requestId  = randomUUID();                           // 122 bits, fine for
 
 Why this works: `randomBytes` draws from the OS CSPRNG, so observing earlier outputs gives no
 advantage on later ones. `Math.random` uses a fast PRNG whose internal state is recoverable from a
-handful of outputs — an attacker who sees one token predicts the next reset link.
+handful of outputs - an attacker who sees one token predicts the next reset link.
 
 Store the hash of a reset token, not the token. A leaked table then yields nothing usable.
 
@@ -122,12 +122,12 @@ func Open(key, blob, aad []byte) ([]byte, error) {
         return nil, errors.New("ciphertext too short")
     }
     nonce, ct := blob[:gcm.NonceSize()], blob[gcm.NonceSize():]
-    return gcm.Open(nil, nonce, ct, aad) // returns an error on tamper — do not swallow it
+    return gcm.Open(nil, nonce, ct, aad) // returns an error on tamper - do not swallow it
 }
 ```
 
 Why this works: a fresh 96-bit random nonce per message keeps collisions at the birthday bound
-rather than at one. GCM nonce reuse is not a partial failure — it exposes the authentication
+rather than at one. GCM nonce reuse is not a partial failure - it exposes the authentication
 subkey, so the attacker forges as well as reads. The AAD (`"invoice:4192:v1"`) means a ciphertext
 moved to another row fails to open instead of decrypting into the wrong context.
 
@@ -176,7 +176,7 @@ def decrypt_record(row: dict) -> bytes:
 ```
 
 Why this works: rotating the KEK is a KMS operation plus a re-wrap of the small `wrapped_dek`
-values — the row ciphertext is untouched. Compromise of one DEK exposes one record. The KMS logs
+values - the row ciphertext is untouched. Compromise of one DEK exposes one record. The KMS logs
 every unwrap, so key use is auditable, and revoking IAM access to the KEK renders the whole dataset
 unreadable immediately, which is a working kill switch.
 
@@ -228,7 +228,7 @@ HttpClient client = HttpClient.newBuilder()
 ```
 
 Why this works: the default trust store validates the chain, and
-`setEndpointIdentificationAlgorithm("HTTPS")` is what validates the name — a valid certificate for
+`setEndpointIdentificationAlgorithm("HTTPS")` is what validates the name - a valid certificate for
 `attacker.example` fails against `api.example.com`. Chain-only validation is a common half-fix and
 still lets any CA-issued certificate impersonate your endpoint.
 
@@ -255,7 +255,7 @@ const claims = jwt.verify(token, process.env.JWT_SECRET, {
 ```
 
 For asymmetric verification, resolve `kid` against a fetched JWKS and pin `algorithms: ["RS256"]`.
-Never treat `kid` as a path or URL — that turns key selection into SSRF or file read.
+Never treat `kid` as a path or URL - that turns key selection into SSRF or file read.
 
 Webhooks: verify over the raw body, before parsing.
 
@@ -282,7 +282,7 @@ window bounds replay. `timingSafeEqual` removes the byte-by-byte timing leak, an
 length check exists because it throws on unequal lengths.
 
 A JWT cannot be revoked before expiry. If logout must take effect immediately, keep server-side
-session state — a short expiry narrows the window without closing it.
+session state - a short expiry narrows the window without closing it.
 
 ## Constant-Time Comparison
 
@@ -312,7 +312,7 @@ a secret an attacker does not already hold.
 
 base64, hex, URL encoding, `rot13`, gzip, and JWT payloads are all reversible without a key. If a
 function name contains "encode" or "obfuscate", it provides no confidentiality. A JWT payload is
-base64url and readable by anyone holding the token — never put anything sensitive in a claim.
+base64url and readable by anyone holding the token - never put anything sensitive in a claim.
 
 ## Deterministic Encryption
 
@@ -333,7 +333,7 @@ def blind_index(value: str, index_key: bytes) -> bytes:
     return hmac.new(index_key, value.strip().lower().encode(), hashlib.sha256).digest()[:16]
 ```
 
-Why this works: the stored value stays randomized under AEAD, and the index is keyed — so an
+Why this works: the stored value stays randomized under AEAD, and the index is keyed - so an
 attacker with the database but not `index_key` cannot build a dictionary of candidate values.
 A plain `sha256(value)` index would be trivially reversible for emails, names, or postcodes.
 
@@ -353,9 +353,9 @@ to strengthen an existing password hash without the plaintext at login.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Password Storage Cheat Sheet —
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Password Storage Cheat Sheet -
   <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html>
-- OWASP Cryptographic Storage Cheat Sheet —
+- OWASP Cryptographic Storage Cheat Sheet -
   <https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html>

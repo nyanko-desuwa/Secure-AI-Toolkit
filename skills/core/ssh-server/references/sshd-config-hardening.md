@@ -117,8 +117,8 @@ forwarding exposes their use on the remote host.
 
 ## Sources
 
-- OpenSSH release notes — <https://www.openssh.org/releasenotes.html>, checked 2026-07-28
-- `sshd_config(5)` — <https://man.openbsd.org/sshd_config>
-- CIS Benchmarks — <https://www.cisecurity.org/cis-benchmarks>, Ubuntu 24.04 v2.0.0 and Ubuntu
+- OpenSSH release notes - <https://www.openssh.org/releasenotes.html>, checked 2026-07-28
+- `sshd_config(5)` - <https://man.openbsd.org/sshd_config>
+- CIS Benchmarks - <https://www.cisecurity.org/cis-benchmarks>, Ubuntu 24.04 v2.0.0 and Ubuntu
   22.04 v3.0.0, checked 2026-07-28
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/>

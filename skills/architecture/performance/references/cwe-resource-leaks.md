@@ -2,7 +2,7 @@
 
 The five weaknesses this skill cites. Verified 2026-07-28 against <https://cwe.mitre.org>.
 
-Only these five. If a finding needs a different CWE, look it up at cwe.mitre.org first — a
+Only these five. If a finding needs a different CWE, look it up at cwe.mitre.org first - a
 plausible-looking number that turns out to be about something else discredits the whole
 report.
 
@@ -11,7 +11,7 @@ report.
 | CWE-400 | Uncontrolled Resource Consumption | The outcome. The system does not control how much of a resource is consumed |
 | CWE-401 | Missing Release of Memory After Effective Lifetime | Memory specifically, still held after it is no longer needed |
 | CWE-770 | Allocation of Resources Without Limits or Throttling | No cap on the allocation in the first place |
-| CWE-772 | Missing Release of Resource after Effective Lifetime | Any resource — handle, socket, connection, lock — not released |
+| CWE-772 | Missing Release of Resource after Effective Lifetime | Any resource - handle, socket, connection, lock - not released |
 | CWE-789 | Memory Allocation with Excessive Size Value | One allocation whose size comes from untrusted input |
 
 ## Picking between them
@@ -27,11 +27,11 @@ timer, or lock. They overlap for objects that hold both; cite 772 when the scarc
 handle and 401 when it is the bytes.
 
 CWE-400 is the consequence, and it is the right citation when the mechanism is not a single
-missing bound or release — a retry storm, an algorithmic blow-up, a queue that grows because
+missing bound or release - a retry storm, an algorithmic blow-up, a queue that grows because
 the consumer is slow. In a chain, MITRE treats 770 and 401 as ways to reach 400. Citing 400
 alone reads as vague; citing 400 alongside the specific mechanism reads as complete.
 
-CWE-789 is narrower than it looks. It is one allocation sized by input — `malloc(n)` where the
+CWE-789 is narrower than it looks. It is one allocation sized by input - `malloc(n)` where the
 caller chose `n`, `bytearray(header_length)`, a buffer preallocated from a declared content
 length. Not a loop that allocates many small objects; that is 770.
 
@@ -43,7 +43,7 @@ length. Not a loop that allocates many small objects; that is 770.
 | L2 Listener accumulation | CWE-401 | CWE-772 |
 | L3 Connection and handle exhaustion | CWE-772 | CWE-400 |
 | L4 Timer and background task leaks | CWE-772 | CWE-400 |
-| L5 Closure capture and retention | CWE-401 | — |
+| L5 Closure capture and retention | CWE-401 | - |
 | L6 Request-scoped state stored globally | CWE-401 | see also A01:2025 |
 | L7 Large payload read fully into memory | CWE-770 | CWE-789 |
 | L8 Unbounded queue or buffer | CWE-400 | CWE-770 |
@@ -81,15 +81,15 @@ If a report needs one of these, verify the number before writing it down.
 
 Attach it to the mechanism, not to the symptom. "OOMKilled, CWE-400" says nothing actionable.
 "`asyncio.Queue()` with default `maxsize=0` at `ingest.py:31`, producer at request rate,
-consumer at 200/s — CWE-400 via CWE-770" names the bound that is missing and where.
+consumer at 200/s - CWE-400 via CWE-770" names the bound that is missing and where.
 
 One CWE plus one OWASP category is enough. A finding tagged with five identifiers looks
 generated rather than investigated.
 
 ## Sources
 
-- CWE-400 — <https://cwe.mitre.org/data/definitions/400.html>
-- CWE-401 — <https://cwe.mitre.org/data/definitions/401.html>
-- CWE-770 — <https://cwe.mitre.org/data/definitions/770.html>
-- CWE-772 — <https://cwe.mitre.org/data/definitions/772.html>
-- CWE-789 — <https://cwe.mitre.org/data/definitions/789.html>
+- CWE-400 - <https://cwe.mitre.org/data/definitions/400.html>
+- CWE-401 - <https://cwe.mitre.org/data/definitions/401.html>
+- CWE-770 - <https://cwe.mitre.org/data/definitions/770.html>
+- CWE-772 - <https://cwe.mitre.org/data/definitions/772.html>
+- CWE-789 - <https://cwe.mitre.org/data/definitions/789.html>

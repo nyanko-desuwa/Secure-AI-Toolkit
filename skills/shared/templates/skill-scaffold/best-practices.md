@@ -20,7 +20,7 @@ prevents, not the theory behind it.>
 <minimal code>
 ```
 
-<Why the fix works. Prefer structural reasons — "there is no branch to forget" — over
+<Why the fix works. Prefer structural reasons - "there is no branch to forget" - over
 "this is more secure". If the obvious alternative fix is weaker, say why: readers reach for
 regex denylists and UUIDs on their own.>
 

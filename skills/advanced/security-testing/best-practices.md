@@ -4,7 +4,7 @@ Patterns for tests that fail on vulnerable code. Each names the WSTG v4.2 test, 
 chapter, and the CWE where one applies.
 
 Weak tests are labelled `Weak:` and pass on both the vulnerable and the fixed version. That is
-the property that makes them worthless, and it is not visible from reading them alone — you
+the property that makes them worthless, and it is not visible from reading them alone - you
 find it by running them against the unfixed code.
 
 ## Write the failing test first
@@ -185,7 +185,7 @@ def test_nonexistent_and_not_yours_are_indistinguishable(client, actors, invoice
 
 Limitation worth stating: the matrix tests the endpoints you list. An unlisted route, a GraphQL
 resolver, or a batch endpoint that takes an array of IDs is untested. Enumerate routes from the
-router, not from memory — WSTG-INPV-19 aside, the most common miss is a second code path to the
+router, not from memory - WSTG-INPV-19 aside, the most common miss is a second code path to the
 same object.
 
 ## Assert the security property, not the status code
@@ -218,12 +218,12 @@ def test_search_reflects_query_escaped():
 ```
 
 Why this works: it names both halves of the property. The payload must be absent in executable
-form and present in escaped form — the second half stops the test passing because the endpoint
+form and present in escaped form - the second half stops the test passing because the endpoint
 started dropping the parameter entirely, which is a different bug wearing the same green tick.
 
 For attribute and JavaScript contexts, escaping alone is not the property. `"` inside an
 unquoted attribute breaks out even when `<` is escaped, so the assertion must match the sink's
-context. Where the sink is the DOM, use a browser test — see below.
+context. Where the sink is the DOM, use a browser test - see below.
 
 ## Test DOM XSS in a browser, not with string matching
 
@@ -262,7 +262,7 @@ test("profile name does not execute injected script", async ({ page }) => {
 ```
 
 Why this works: it observes execution, which is the actual security property, through three
-independent signals — no dialog, no injected element in the DOM, and the payload rendered as
+independent signals - no dialog, no injected element in the DOM, and the payload rendered as
 text. Checking only for the absence of a dialog would pass against a payload that exfiltrates
 without one.
 
@@ -316,7 +316,7 @@ def test_resolved_upload_path_never_escapes(name):
 ```
 
 Why this works: the assertion is the invariant, so it holds for inputs nobody enumerated. The
-`except: return` matters — a property test must accept rejection as valid, or it fails on every
+`except: return` matters - a property test must accept rejection as valid, or it fails on every
 input the validator correctly refuses and tells you nothing.
 
 Two more properties worth stating for their whole class:
@@ -339,7 +339,7 @@ def test_search_matcher_is_bounded(s):
 
 Timing assertions are flaky by nature. Use a generous bound, run them on a dedicated job, and
 treat a failure as a signal to measure rather than as a hard gate. The honest alternative is to
-assert the structural property instead — that the pattern is a literal, not a regex — which is
+assert the structural property instead - that the pattern is a literal, not a regex - which is
 deterministic.
 
 Where a real fuzzer beats a property test: binary parsers, file format handlers, and anything
@@ -471,7 +471,7 @@ def test_sqli():
 ```
 
 Two problems. It asserts on an error string, which is brittle, and a syntax error means the
-input reached the SQL parser — the payload got through and merely failed. That is a vulnerable
+input reached the SQL parser - the payload got through and merely failed. That is a vulnerable
 endpoint producing a green test.
 
 ```python
@@ -500,7 +500,7 @@ def test_sort_allowlist_accepts_known_keys(client, actor):
 
 Why this works: 400 proves the allowlist rejected the value before SQL was built, the absence
 of engine detail covers WSTG-ERRH-01 at the same time, and the positive test stops the fix from
-being "reject everything". Blind injection deserves its own case — a timing payload that
+being "reject everything". Blind injection deserves its own case - a timing payload that
 returns 200 in 5 seconds is a passing test on the weak version above.
 
 ## Race conditions need concurrency, not sequence
@@ -564,7 +564,7 @@ describe("balance transfer concurrency (CWE-362)", () => {
 
 Why this works: the assertion is a conservation invariant plus a non-negativity bound, which
 holds regardless of scheduling. Asserting only `accepted === 1` would be flaky in the other
-direction — under a slow runner the requests may serialize by accident and pass on broken code.
+direction - under a slow runner the requests may serialize by accident and pass on broken code.
 Checking the persisted totals catches the double-spend even when the status codes look sane.
 
 Three notes on making this test honest rather than decorative:
@@ -575,7 +575,7 @@ Three notes on making this test honest rather than decorative:
   reliable than one attempt at `N = 2`. If it passes once it is not evidence.
 - Prefer a deterministic version where the code allows it: a test that holds a transaction open,
   or one that patches the balance read to block on a barrier, fails every time. Probabilistic
-  tests belong in CI only alongside the structural assertion — that the update uses
+  tests belong in CI only alongside the structural assertion - that the update uses
   `SELECT ... FOR UPDATE`, a conditional `UPDATE ... WHERE cents >= ?`, or a unique constraint.
 
 The same pattern applies to coupon redemption, invitation acceptance, stock decrement, and any
@@ -645,7 +645,7 @@ it("rejects a signed webhook outside the freshness window", async () => {
 ```
 
 Why this works: the replay carries a genuine signature, so it isolates freshness from
-authenticity. The side-effect assertion is what proves it — a handler that returns 409 after
+authenticity. The side-effect assertion is what proves it - a handler that returns 409 after
 already crediting the account passes a status-only test.
 
 The equivalent cases elsewhere, all the same shape:
@@ -660,7 +660,7 @@ The equivalent cases elsewhere, all the same shape:
 | JWT after revocation | Present a token from the revocation list | 401 |
 
 For the logout case, capture the cookie, log out, then reuse it. Testing that logout returns 200
-tests nothing — the question is whether the old token is dead server-side, which only the reuse
+tests nothing - the question is whether the old token is dead server-side, which only the reuse
 attempt answers.
 
 ## Partial failure must not leave a usable half-state
@@ -688,7 +688,7 @@ def test_failed_notification_does_not_leave_an_active_api_key(client, actor, db)
         assert db.query(AuditLog).filter_by(action="api_key.created").count() == 1
 ```
 
-Why this works: it accepts either design and rejects the third outcome, which is the bug — a key
+Why this works: it accepts either design and rejects the third outcome, which is the bug - a key
 row created, no audit entry, and a 500 to the caller, so a live credential exists that nobody
 owns. Testing only that the endpoint returns 500 misses it entirely.
 
@@ -721,8 +721,8 @@ What to track instead, all of it checkable:
 
 Mutation testing is the closest available proxy for "would this suite catch a regression".
 Removing a conditional is exactly the mutation an authorization bug is, so a surviving mutant in
-an authorization module is a real gap. Run it on the security-critical modules only —
-`mutmut`, `cosmic-ray`, or Stryker for TypeScript — because a whole-codebase mutation run costs
+an authorization module is a real gap. Run it on the security-critical modules only -
+`mutmut`, `cosmic-ray`, or Stryker for TypeScript - because a whole-codebase mutation run costs
 more than it returns.
 
 Use coverage for one thing only: finding files the suite never touches at all. A handler with

@@ -16,13 +16,13 @@ states June 2024. Verify the PCI SSC document used by the assessor before an ext
 
 | Implemented control | Verified top-level requirement |
 |---|---|
-| Encryption for stored account data | Requirement 3 — Protect stored account data. |
-| Strong cryptography for transmission over open, public networks | Requirement 4 — Protect cardholder data with strong cryptography during transmission over open, public networks. |
-| Secure SDLC and blocking change gates | Requirement 6 — Develop and maintain secure systems and software. |
-| Business-need authorization | Requirement 7 — Restrict access to system components and cardholder data by business need to know. |
-| Unique users and authentication | Requirement 8 — Identify users and authenticate access to system components. |
-| Audit logging and monitoring | Requirement 10 — Log and monitor all access to system components and cardholder data. |
-| Vulnerability scans and security tests | Requirement 11 — Test security of systems and networks regularly. |
+| Encryption for stored account data | Requirement 3 - Protect stored account data. |
+| Strong cryptography for transmission over open, public networks | Requirement 4 - Protect cardholder data with strong cryptography during transmission over open, public networks. |
+| Secure SDLC and blocking change gates | Requirement 6 - Develop and maintain secure systems and software. |
+| Business-need authorization | Requirement 7 - Restrict access to system components and cardholder data by business need to know. |
+| Unique users and authentication | Requirement 8 - Identify users and authenticate access to system components. |
+| Audit logging and monitoring | Requirement 10 - Log and monitor all access to system components and cardholder data. |
+| Vulnerability scans and security tests | Requirement 11 - Test security of systems and networks regularly. |
 
 A technical artifact supports assessment only for the cardholder-data environment and connected
 systems it actually covers. Tokenisation, outsourcing, or encryption may reduce exposure but does

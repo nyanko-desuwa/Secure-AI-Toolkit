@@ -1,4 +1,4 @@
-# ASVS 5.0 V5 — File Handling
+# ASVS 5.0 V5 - File Handling
 
 OWASP Application Security Verification Standard, version 5.0.0, released 30 May 2025.
 Chapter V5 is the file-handling chapter: uploads, downloads, path handling, and archive

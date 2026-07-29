@@ -10,7 +10,7 @@ quoted confidently is how a review loses credibility.
 ## Kafka authorization (source: Confluent ACL documentation)
 
 Resource types: Cluster, Topic, Group, TransactionalId, DelegationToken. Each is identified by a
-name — topic name, group name — and patterns can be LITERAL (the default), PREFIXED, or the
+name - topic name, group name - and patterns can be LITERAL (the default), PREFIXED, or the
 wildcard `*`.
 
 Note that Group is broader than "consumer group". The documentation states it covers Consumer
@@ -34,13 +34,13 @@ Two defaults that decide whether you have a boundary at all:
   `server.properties` inverts that for resources with no ACLs. Confluent calls production use of
   it "strongly discouraged", and gives the reason: deleting your last ACL exposes the cluster to
   everyone, and adding the first one silently revokes access from principals who had it a moment
-  earlier. If this is `true` in a cluster you are reviewing, that is the E8 finding — everything
+  earlier. If this is `true` in a cluster you are reviewing, that is the E8 finding - everything
   else is secondary.
 - Deny takes precedence over allow. A broad allow plus a narrow deny is a valid shape, but the
   deny has to exist; there is no implicit deny for a principal already covered by a wildcard
   allow.
 
-Super users bypass ACLs entirely, and wildcards do not work there — `User:*` in `super.users` does
+Super users bypass ACLs entirely, and wildcards do not work there - `User:*` in `super.users` does
 not make everyone a super user. The broker principal must be a super user or replication breaks.
 
 What this means for a review: "our services authenticate to Kafka" is not authorization. Ask for
@@ -124,7 +124,7 @@ Three consequences for the hazards in this skill:
 
 `MessageGroupId` is required on FIFO queues; sending without it fails. On standard queues it
 enables fair queues. Valid characters are alphanumeric plus punctuation, 128 characters. Do not
-use a raw email address or any personal identifier as the group ID — it is metadata, it appears in
+use a raw email address or any personal identifier as the group ID - it is metadata, it appears in
 logs and metrics, and it is not covered by whatever you did to the payload.
 
 ## What none of these give you
@@ -141,7 +141,7 @@ logs and metrics, and it is not covered by whatever you did to the payload.
 ## Verification status
 
 Kafka ACL details come from the Confluent platform documentation rather than the Apache Kafka
-site — the `kafka.apache.org/documentation#security` anchor returned a redirect stub when fetched
+site - the `kafka.apache.org/documentation#security` anchor returned a redirect stub when fetched
 on 2026-07-28, with no content. Confluent's page covers Apache Kafka's authorizer semantics, but
 if you need the Apache wording, fetch a versioned path such as
 `kafka.apache.org/40/documentation/#security_authz`.
@@ -150,6 +150,6 @@ Everything else was read directly from the vendor page listed below.
 
 ## Sources
 
-- Confluent, Authorization using ACLs — <https://docs.confluent.io/platform/current/security/authorization/acls/overview.html> (verified 2026-07-28)
-- RabbitMQ, Quorum Queues — <https://www.rabbitmq.com/docs/quorum-queues> (verified 2026-07-28)
-- Amazon SQS message quotas — <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html> (verified 2026-07-28)
+- Confluent, Authorization using ACLs - <https://docs.confluent.io/platform/current/security/authorization/acls/overview.html> (verified 2026-07-28)
+- RabbitMQ, Quorum Queues - <https://www.rabbitmq.com/docs/quorum-queues> (verified 2026-07-28)
+- Amazon SQS message quotas - <https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html> (verified 2026-07-28)

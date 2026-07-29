@@ -102,8 +102,8 @@ More in [prompts.md](prompts.md).
 - Reads designs and configuration; cannot confirm deployment. A correct `NetworkPolicy` in git is
   not a `NetworkPolicy` in the cluster. Every finding about runtime state is unverified unless
   someone checked the cluster.
-- No cost or latency model. Several recommendations here — per-tenant keys, mTLS everywhere,
-  break-glass workflows — cost real money and real p99. The skill states the security position
+- No cost or latency model. Several recommendations here - per-tenant keys, mTLS everywhere,
+  break-glass workflows - cost real money and real p99. The skill states the security position
   and names the tradeoff; it cannot decide it for you.
 - Cloud examples are AWS-flavoured for IAM and Kubernetes-flavoured for network policy. The
   reasoning transfers to Azure and GCP; the syntax does not.
@@ -130,11 +130,11 @@ this skill.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Threat Modeling Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html>
-- Threat Modeling Manifesto — <https://www.threatmodelingmanifesto.org/>
-- LINDDUN — <https://linddun.org/>
-- NIST SP 800-207 Zero Trust Architecture — <https://csrc.nist.gov/pubs/sp/800/207/final>
-- NIST SP 800-218 SSDF 1.1 — <https://csrc.nist.gov/pubs/sp/800/218/final>
-- CWE — <https://cwe.mitre.org/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Threat Modeling Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html>
+- Threat Modeling Manifesto - <https://www.threatmodelingmanifesto.org/>
+- LINDDUN - <https://linddun.org/>
+- NIST SP 800-207 Zero Trust Architecture - <https://csrc.nist.gov/pubs/sp/800/207/final>
+- NIST SP 800-218 SSDF 1.1 - <https://csrc.nist.gov/pubs/sp/800/218/final>
+- CWE - <https://cwe.mitre.org/>

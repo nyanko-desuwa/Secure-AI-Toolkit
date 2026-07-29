@@ -12,8 +12,8 @@ evidence you need in the second.
 ## Read This First
 
 This skill does not make anyone a forensic investigator. It covers the decisions a
-development or platform team makes in the first hours — what to capture, what to revoke,
-what to say — and where the handoff to specialists is.
+development or platform team makes in the first hours - what to capture, what to revoke,
+what to say - and where the handoff to specialists is.
 
 Bring in outside help when any of these are true:
 
@@ -25,7 +25,7 @@ Bring in outside help when any of these are true:
 
 Law enforcement gets contacted per your incident response plan and with management
 approval, not ad hoc by whoever noticed. Notification deadlines are legal, jurisdictional,
-and not something to reason out during an outage — see `compliance` and your legal team.
+and not something to reason out during an outage - see `compliance` and your legal team.
 
 ## When to Use
 
@@ -87,7 +87,7 @@ together is how root cause gets lost.
 ### 4. Scope the blast radius
 
 What did this credential reach, and what did that token authorize? Answer with logs, not
-with the permission policy alone — the policy is the ceiling, the logs are the floor. See
+with the permission policy alone - the policy is the ceiling, the logs are the floor. See
 [best-practices.md](best-practices.md#blast-radius-assessment).
 
 Under-scoping is the standard failure. SP 800-61r3 says performing magnitude estimation
@@ -118,33 +118,33 @@ Rank by confirmed access and blast radius, not by how alarming the alert was. Fu
 with worked examples in
 [references/severity-classification.md](references/severity-classification.md).
 
-- **SEV1** — confirmed unauthorized access to production data or customer data, or loss of
+- **SEV1** - confirmed unauthorized access to production data or customer data, or loss of
   control of production infrastructure
-- **SEV2** — confirmed compromise of a credential with production reach, no confirmed data
+- **SEV2** - confirmed compromise of a credential with production reach, no confirmed data
   access yet
-- **SEV3** — exposure with limited or expired reach, or a contained single-host compromise
-- **SEV4** — suspicious activity with no confirmed unauthorized access
+- **SEV3** - exposure with limited or expired reach, or a contained single-host compromise
+- **SEV4** - suspicious activity with no confirmed unauthorized access
 
 Escalate on new facts, never quietly downgrade. Write the reason for any severity change.
 
 ## Related Skills
 
-- `compliance` — breach notification obligations and retention requirements. Timing is
+- `compliance` - breach notification obligations and retention requirements. Timing is
   jurisdiction-specific and belongs there, not here
-- `secrets-management` — preventing the exposure you are now responding to
-- `supply-chain-security` — compromised dependency and build system specifics
-- `logging-monitoring` — making logs that support timeline reconstruction
-- `owasp-security` — the vulnerability class that let the incident happen
+- `secrets-management` - preventing the exposure you are now responding to
+- `supply-chain-security` - compromised dependency and build system specifics
+- `logging-monitoring` - making logs that support timeline reconstruction
+- `owasp-security` - the vulnerability class that let the incident happen
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations
-- [checklist.md](checklist.md) — per-phase verification
-- [best-practices.md](best-practices.md) — patterns, with the collector script and queries
-- [common-mistakes.md](common-mistakes.md) — what goes wrong under pressure
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/nist-800-61.md](references/nist-800-61.md) — the standard, version-pinned
-- [references/severity-classification.md](references/severity-classification.md) — ranking
-- [references/runbook-template.md](references/runbook-template.md) — fillable runbook
-- [examples/README.md](examples/README.md) — wrong versus right response, eight incidents
+- [README.md](README.md) - purpose, standards table, limitations
+- [checklist.md](checklist.md) - per-phase verification
+- [best-practices.md](best-practices.md) - patterns, with the collector script and queries
+- [common-mistakes.md](common-mistakes.md) - what goes wrong under pressure
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/nist-800-61.md](references/nist-800-61.md) - the standard, version-pinned
+- [references/severity-classification.md](references/severity-classification.md) - ranking
+- [references/runbook-template.md](references/runbook-template.md) - fillable runbook
+- [examples/README.md](examples/README.md) - wrong versus right response, eight incidents

@@ -7,14 +7,14 @@ Every block marked `Vulnerable:` is deliberately broken. Do not copy one into a 
 
 ## Contents
 
-- [Declared type trusted, stored in the web root](#declared-type-trusted-stored-in-the-web-root) — A08, A02, CWE-434
-- [SVG rendered inline becomes stored XSS](#svg-rendered-inline-becomes-stored-xss) — A05, CWE-79
-- [Pixel flood in a thumbnail worker](#pixel-flood-in-a-thumbnail-worker) — A10, CWE-409
-- [Zip slip in an archive importer](#zip-slip-in-an-archive-importer) — A01, CWE-22
-- [Presigned URL with no constraints](#presigned-url-with-no-constraints) — A01, A06, CWE-434
-- [Path traversal in a download endpoint](#path-traversal-in-a-download-endpoint) — A01, CWE-22
-- [Entity expansion while parsing an uploaded document](#entity-expansion-while-parsing-an-uploaded-document) — A08, CWE-611
-- [EXIF GPS served to every viewer](#exif-gps-served-to-every-viewer) — A01, CWE-359
+- [Declared type trusted, stored in the web root](#declared-type-trusted-stored-in-the-web-root) - A08, A02, CWE-434
+- [SVG rendered inline becomes stored XSS](#svg-rendered-inline-becomes-stored-xss) - A05, CWE-79
+- [Pixel flood in a thumbnail worker](#pixel-flood-in-a-thumbnail-worker) - A10, CWE-409
+- [Zip slip in an archive importer](#zip-slip-in-an-archive-importer) - A01, CWE-22
+- [Presigned URL with no constraints](#presigned-url-with-no-constraints) - A01, A06, CWE-434
+- [Path traversal in a download endpoint](#path-traversal-in-a-download-endpoint) - A01, CWE-22
+- [Entity expansion while parsing an uploaded document](#entity-expansion-while-parsing-an-uploaded-document) - A08, CWE-611
+- [EXIF GPS served to every viewer](#exif-gps-served-to-every-viewer) - A01, CWE-359
 
 ---
 
@@ -91,7 +91,7 @@ This is defense in depth, not the fix. Move the files out of the web root.
 `A05:2025` · `CWE-79` · ASVS V1, V3, V5
 
 An SVG is an XML document that carries script, event handlers, `<foreignObject>` with HTML,
-and external references. Magic-number detection passes it happily — an SVG genuinely is an
+and external references. Magic-number detection passes it happily - an SVG genuinely is an
 SVG.
 
 ```typescript
@@ -113,7 +113,7 @@ Upload:
 
 Navigating to `/logo/abc` on the application origin executes that script with the victim's
 session cookies. An `<img src>` reference does not run the script, but a direct link, a new
-tab, or an inline `<svg>` include does — and you do not control which one a future template
+tab, or an inline `<svg>` include does - and you do not control which one a future template
 author reaches for.
 
 ```typescript
@@ -142,7 +142,7 @@ When vector output is a product requirement, ranked by residual risk:
    agreeing with the browser's parser.
 
 Do not do 3 alone on your primary origin. Renaming the file to `.png` is not an option
-either — the bytes are still XML, and a browser asked to render them as SVG will.
+either - the bytes are still XML, and a browser asked to render them as SVG will.
 
 ---
 
@@ -191,13 +191,13 @@ def make_thumbnail(raw: bytes, out: Path) -> None:
     out.write_bytes(buf.getvalue())
 ```
 
-Why this works: `Image.open` is lazy — it parses the header and gives you `size` without
+Why this works: `Image.open` is lazy - it parses the header and gives you `size` without
 allocating the pixel buffer. Rejecting on dimensions happens before any large allocation.
 `convert()` and `thumbnail()` are the first calls that actually decode.
 
 Relying on Pillow's default is the tempting shortcut. Two problems: the default
 `MAX_IMAGE_PIXELS` is 89,478,485, which is around 350 MB of RGBA and already enough to hurt
-a small container; and Pillow only raises `DecompressionBombError` above twice that value —
+a small container; and Pillow only raises `DecompressionBombError` above twice that value -
 between 1x and 2x the limit it emits a `DecompressionBombWarning` and carries on. Set an
 application limit and check it yourself.
 
@@ -281,16 +281,16 @@ export async function importArchive(stream: NodeJS.ReadableStream) {
 Why this works: containment is tested on the resolved absolute path, so `..` segments and
 absolute prefixes are already collapsed when the check runs. `path.relative` starting with
 `..` is the definitive answer to "did this escape", and it does not depend on string
-matching. `wx` means a later entry cannot overwrite an earlier one — the trick that turns
+matching. `wx` means a later entry cannot overwrite an earlier one - the trick that turns
 duplicate entry names into a swap of an already-validated file.
 
 The tempting wrong fixes, and why they fail:
 
-- `if (entry.path.includes(".."))` — misses encoded and mixed separators, and rejects the
+- `if (entry.path.includes(".."))` - misses encoded and mixed separators, and rejects the
   legitimate file `notes..txt`.
-- `path.basename(entry.path)` — safe, but flattens the tree, so it is only correct if you did
+- `path.basename(entry.path)` - safe, but flattens the tree, so it is only correct if you did
   not want directories.
-- Checking `path.join` output against a prefix string — `/srv/work-evil` passes a
+- Checking `path.join` output against a prefix string - `/srv/work-evil` passes a
   `startsWith("/srv/work")` test.
 
 For tar, entry names are only half of it: tar carries symlinks, hard links, device nodes, and
@@ -298,7 +298,7 @@ setuid bits. A symlink entry `data -> /etc` followed by an entry writing `data/p
 without any `..` in a path. In Python use `tarfile.extractall(filter="data")`, which refuses
 absolute and escaping paths, refuses links pointing outside the destination, refuses device
 files, and clears setuid/setgid/sticky bits. It became the default in Python 3.14; on 3.12 and
-3.13 pass it explicitly. In Node, no core tar exists — with the `tar` package set
+3.13 pass it explicitly. In Node, no core tar exists - with the `tar` package set
 `preservePaths: false` (the default) and filter entry types yourself. The Python docs are
 explicit that no filter blocks every dangerous archive feature: `data` does not stop
 zip-bomb-style resource exhaustion or repeated members, so keep the count and byte limits.
@@ -329,7 +329,7 @@ app.post("/api/uploads/done", requireAuth, async (req, res) => {
 Four separate holes. The client names the key, so `Key: "config/app-settings.json"` or
 another tenant's prefix is writable. There is no size limit, so a 500 GB upload is a storage
 bill. There is no content constraint, so the object can be HTML that later gets served from
-the bucket's origin. And `/done` marks the record ready without anyone reading the bytes —
+the bucket's origin. And `/done` marks the record ready without anyone reading the bytes -
 the validation you wrote for the direct-upload path simply does not run.
 
 ```typescript
@@ -393,7 +393,7 @@ export async function onQuarantineObject(key: string) {
 ```
 
 Why this works: `content-length-range` and the `eq` conditions are signed into the policy, so
-S3 rejects a request that breaks them — the constraint is enforced by the storage service, not
+S3 rejects a request that breaks them - the constraint is enforced by the storage service, not
 by the browser you asked nicely. The key is server-generated and prefixed with the owner, so
 one user cannot write into another's space or over application data. And the object is
 unreadable by the app until a worker has read the actual bytes, so a lying `Content-Type`
@@ -401,7 +401,7 @@ changes nothing.
 
 Two things the policy cannot do, worth stating plainly. It cannot verify content: `Content-Type:
 image/png` in the policy constrains the header the browser sends, not the bytes. And
-`content-length-range` is a PresignedPost feature — a presigned PUT has no equivalent, which is
+`content-length-range` is a PresignedPost feature - a presigned PUT has no equivalent, which is
 the main reason to prefer POST for browser uploads. If PUT is required, cap size with a bucket
 policy or check `ContentLength` in the validation worker and delete oversized objects.
 
@@ -463,7 +463,7 @@ readfile($path);
 Why this works: `realpath` collapses `..`, `.`, and symlinks, so the containment test runs on
 the real location. The client supplies a database ID, not a path, so there is no filename to
 traverse with. The query is scoped to the owner, so the endpoint is not an enumeration oracle
-— and a missing file and someone else's file both return 404.
+- and a missing file and someone else's file both return 404.
 
 Note the separator in the prefix test. `str_starts_with($path, $root)` alone would accept
 `/srv/app-data/uploads-old/secret`. Appending the separator is what makes the prefix a
@@ -530,7 +530,7 @@ is bounded by the input size. `forbid_external` closes the file-read and SSRF va
 Version detail worth knowing. Python's built-in parsers use libexpat, and the 3.14 docs state
 that Expat below 2.7.2 may be vulnerable to billion laughs, quadratic blowup, and large-token
 attacks. The old per-module vulnerability table is gone from the docs; the guidance is now to
-check `pyexpat.EXPAT_VERSION` at runtime. Do not assume the bundled Expat is current — the
+check `pyexpat.EXPAT_VERSION` at runtime. Do not assume the bundled Expat is current - the
 same Python version ships against different Expat builds depending on how it was configured.
 `defusedxml` stays worth using as defense in depth precisely because you often cannot
 guarantee the Expat build.
@@ -577,12 +577,12 @@ def save_photo(raw: bytes, dest: Path) -> None:
 
 Why this works: the new file is built from the decoded pixel array. EXIF, XMP, IPTC, ICC
 comments, and any trailing appended data exist only in the source container and are not
-carried into the output. This is the same operation that defeats polyglots — one control,
+carried into the output. This is the same operation that defeats polyglots - one control,
 two benefits.
 
 Two details that bite. Apply `exif_transpose` first: EXIF orientation is the reason
 "stripping metadata" often rotates everyone's photos sideways. And be explicit about the ICC
-profile — dropping it shifts colours on wide-gamut images, so pass
+profile - dropping it shifts colours on wide-gamut images, so pass
 `icc_profile=src.info.get("icc_profile")` if colour accuracy matters. That is a deliberate
 choice to keep one metadata block, not an accident.
 
@@ -595,9 +595,9 @@ dedicated library rather than a re-encode.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP File Upload Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html>
-- CWE-434, CWE-22, CWE-79, CWE-409, CWE-611, CWE-359 — <https://cwe.mitre.org/>
-- Python `tarfile` extraction filters — <https://docs.python.org/3/library/tarfile.html#extraction-filters>
-- Python XML security notes — <https://docs.python.org/3/library/xml.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP File Upload Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html>
+- CWE-434, CWE-22, CWE-79, CWE-409, CWE-611, CWE-359 - <https://cwe.mitre.org/>
+- Python `tarfile` extraction filters - <https://docs.python.org/3/library/tarfile.html#extraction-filters>
+- Python XML security notes - <https://docs.python.org/3/library/xml.html>

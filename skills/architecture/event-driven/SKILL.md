@@ -19,7 +19,7 @@ cannot be applied at all.
 flowchart LR
   A[order-service<br/>publisher] -- publish --> T
   X(("any principal with<br/>publish rights on the topic")) -. also publishes .-> T
-  subgraph BROKER["broker — trust boundary"]
+  subgraph BROKER["broker - trust boundary"]
     T[("topic: orders.placed")]
   end
   T -- deliver --> H[billing-service<br/>handler]
@@ -77,7 +77,7 @@ and fetch. See [best-practices.md](best-practices.md#e2--thin-events).
 
 Look the actor up in the consumer's own source of truth, or call the owning service.
 Never branch on a role that arrived in the message. Signing the event proves it came from
-the producer — it does not prove the producer was allowed to ask for this.
+the producer - it does not prove the producer was allowed to ask for this.
 
 ### 4. Parse, do not deserialize
 
@@ -129,13 +129,13 @@ re-fetch the order scoped to the actor" is.
 Rank by what an unauthenticated or low-privileged publisher can achieve, not by how bad
 the pattern looks.
 
-- **Critical** — a publisher with topic access causes a privileged action or reads another
+- **Critical** - a publisher with topic access causes a privileged action or reads another
   tenant's data (E1, E2). Or a payload reaches a polymorphic deserializer (E3).
-- **High** — redelivery causes a money or grant duplication (E4). Or a DLQ with no
+- **High** - redelivery causes a money or grant duplication (E4). Or a DLQ with no
   alerting on a path that carries financial or audit events (E6).
-- **Medium** — ordering assumption that corrupts state under normal broker behaviour
+- **Medium** - ordering assumption that corrupts state under normal broker behaviour
   (E5). Schema break that fails closed and is noisy (E7).
-- **Low** — an unbounded structure that only grows under operator action, or a missing
+- **Low** - an unbounded structure that only grows under operator action, or a missing
   limit that another layer happens to bound.
 
 E9 items are graded by whether a caller can drive the growth. A subscription leak in a
@@ -165,20 +165,20 @@ minutes later without anyone being lied to.
 
 ## Related Skills
 
-- `owasp-security` — the standards map cited here
-- `api-security` — the synchronous surface the consumer calls back into
-- `performance` — heap and goroutine-level detail for E9 leaks
-- `scalability` — load shedding, partition sizing, consumer autoscaling
-- `secure-architecture` — trust zones and threat modelling across services
-- `redis-security` — Redis/Valkey ACLs, TLS, key/channel namespaces, Streams/Pub/Sub retention, and broker service boundaries
+- `owasp-security` - the standards map cited here
+- `api-security` - the synchronous surface the consumer calls back into
+- `performance` - heap and goroutine-level detail for E9 leaks
+- `scalability` - load shedding, partition sizing, consumer autoscaling
+- `secure-architecture` - trust zones and threat modelling across services
+- `redis-security` - Redis/Valkey ACLs, TLS, key/channel namespaces, Streams/Pub/Sub retention, and broker service boundaries
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations
-- [checklist.md](checklist.md) — pre-return verification, grouped by hazard
-- [best-practices.md](best-practices.md) — the nine hazards with real code
-- [common-mistakes.md](common-mistakes.md) — including the wrong fixes
-- [troubleshooting.md](troubleshooting.md) — when the pattern does not fit
-- [prompts.md](prompts.md) — prompts that produce structure
-- [references/](references/) — standards and broker docs, date-verified
-- [examples/](examples/) — eight before/after pairs
+- [README.md](README.md) - purpose, standards table, limitations
+- [checklist.md](checklist.md) - pre-return verification, grouped by hazard
+- [best-practices.md](best-practices.md) - the nine hazards with real code
+- [common-mistakes.md](common-mistakes.md) - including the wrong fixes
+- [troubleshooting.md](troubleshooting.md) - when the pattern does not fit
+- [prompts.md](prompts.md) - prompts that produce structure
+- [references/](references/) - standards and broker docs, date-verified
+- [examples/](examples/) - eight before/after pairs

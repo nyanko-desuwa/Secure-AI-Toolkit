@@ -6,7 +6,7 @@ Current released version. Verified 2026-07-28 against
 The 2025 edition is not a renumbering of 2021. Injection moved to A05; A03 and A10 are new.
 Resource exhaustion has no dedicated category, so this skill uses the categories below.
 
-## A06:2025 — Insecure Design
+## A06:2025 - Insecure Design
 
 Use A06 when the design never defined a limit or owner:
 
@@ -27,7 +27,7 @@ Review questions:
 - What ceiling stops it before process, cgroup, or dependency exhaustion?
 - Is saturation block, drop, or reject? Is that outcome visible?
 
-## A02:2025 — Security Misconfiguration
+## A02:2025 - Security Misconfiguration
 
 Use A02 when the platform provides a limit and deployment leaves it unset or unsafe:
 
@@ -41,7 +41,7 @@ The A06/A02 distinction identifies the owner. A06 belongs to the design owner. A
 whoever configures the runtime or deployment. A finding may cite both when neither layer has a
 bound.
 
-## A01:2025 — Broken Access Control
+## A01:2025 - Broken Access Control
 
 Use A01 instead of treating these as ordinary performance findings:
 
@@ -52,7 +52,7 @@ Use A01 instead of treating these as ordinary performance findings:
 The failure is unauthorized disclosure. Memory retention is secondary. Test with two users on
 the same worker and assert that neither receives the other's value.
 
-## A09:2025 — Security Logging and Alerting Failures
+## A09:2025 - Security Logging and Alerting Failures
 
 Resource failure is invisible when no one records:
 
@@ -66,7 +66,7 @@ Resource failure is invisible when no one records:
 A log line nobody alerts on is not an alert. Track the structure that grows, not only process
 RSS, so the signal identifies an owner.
 
-## A10:2025 — Mishandling of Exceptional Conditions
+## A10:2025 - Mishandling of Exceptional Conditions
 
 Use A10 when the success path releases and an exceptional path does not:
 
@@ -100,4 +100,4 @@ Do not escalate on category name alone. State which precondition was verified.
 
 ## Source
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>

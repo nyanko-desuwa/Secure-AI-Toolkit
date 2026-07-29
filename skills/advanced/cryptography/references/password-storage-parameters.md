@@ -4,9 +4,9 @@ Concrete parameters. Copy the numbers, not the vibe.
 
 Two sources, checked 2026-07-28:
 
-- OWASP Password Storage Cheat Sheet —
+- OWASP Password Storage Cheat Sheet -
   <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html>
-- OWASP ASVS 5.0.0 Appendix C —
+- OWASP ASVS 5.0.0 Appendix C -
   <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x92-Appendix-C_Cryptography.md>
 
 The cheat sheet carries no version number or publication date. The only temporal marker on the page
@@ -18,7 +18,7 @@ of RTX 4000 GPUs". Treat the page as current-as-checked, not as a dated release.
 Login flow, MFA, lockout, and credential recovery are `core/authentication`. This file is only the
 KDF and its parameters.
 
-## Argon2id — first choice
+## Argon2id - first choice
 
 Use the `id` variant. Not `i`, not `d`. The cheat sheet picks it because it "provides a balanced
 approach to resisting both side-channel and GPU-based attacks".
@@ -29,7 +29,7 @@ described as giving "an equal level of defense", trading CPU against RAM:
 | memory (m) | iterations (t) | parallelism (p) | Note |
 |---|---|---|---|
 | 47104 KiB (46 MiB) | 1 | 1 | "Do not use with Argon2i" |
-| 19456 KiB (19 MiB) | 2 | 1 | "Do not use with Argon2i" — the baseline |
+| 19456 KiB (19 MiB) | 2 | 1 | "Do not use with Argon2i" - the baseline |
 | 12288 KiB (12 MiB) | 3 | 1 | |
 | 9216 KiB (9 MiB) | 4 | 1 | |
 | 7168 KiB (7 MiB) | 5 | 1 | |
@@ -40,7 +40,7 @@ review: `t=1` needs `m ≥ 47104`, `t=2` needs `m ≥ 19456`, and `t ≥ 3` need
 cite the one you followed. Memory is the parameter a GPU attacker feels most, so trade iterations
 down before memory.
 
-## scrypt — when Argon2id is unavailable
+## scrypt - when Argon2id is unavailable
 
 Cheat sheet floor: N = 2^17, r = 8, p = 1. Described as "a similar minimal level of defense".
 
@@ -54,13 +54,13 @@ Cheat sheet floor: N = 2^17, r = 8, p = 1. Described as "a similar minimal level
 
 ASVS expresses it as `p=1: N ≥ 2^17`, `p=2: N ≥ 2^16`, `p ≥ 3: N ≥ 2^15`.
 
-## bcrypt — legacy only
+## bcrypt - legacy only
 
 Work factor 10 minimum (both sources agree), and as high as the verification server tolerates.
 
 The input limit is the trap. The cheat sheet gives 72 bytes: bcrypt "has a maximum length input
 length of 72 bytes for most implementations". Cap password length at 72 bytes, or lower if your
-library truncates earlier. Do not truncate silently — that turns a 100-character passphrase into a
+library truncates earlier. Do not truncate silently - that turns a 100-character passphrase into a
 72-byte one without telling anyone.
 
 Pre-hashing to escape the limit is called out as dangerous for two specific reasons:
@@ -80,7 +80,7 @@ bcrypt(base64(hmac-sha384(data:$password, key:$pepper)), $salt, $cost)
 
 with the pepper stored outside the database.
 
-## PBKDF2 — when FIPS-140 validation is required
+## PBKDF2 - when FIPS-140 validation is required
 
 Internal PRF: HMAC-SHA-256. The two sources give different SHA-512 numbers; both are minimums, so
 take the higher one if you want to satisfy both.
@@ -89,7 +89,7 @@ take the higher one if you want to satisfy both.
 |---|---|---|
 | PBKDF2-HMAC-SHA256 | 600,000 | ≥ 600,000 (A) |
 | PBKDF2-HMAC-SHA512 | 220,000 | ≥ 210,000 (A) |
-| PBKDF2-HMAC-SHA1 | 1,400,000 — legacy only | ≥ 1,300,000 (L) |
+| PBKDF2-HMAC-SHA1 | 1,400,000 - legacy only | ≥ 1,300,000 (L) |
 
 SHA-1 is disallowed for new use after 2030 per NIST SP 800-131A Rev. 2, cited on the cheat sheet.
 Do not select it for a new system regardless of iteration count.
@@ -118,8 +118,8 @@ users chose the same password. It does nothing about throughput.
 ## Peppers
 
 Defence in depth only. The cheat sheet is explicit that on its own a pepper "provides no additional
-secure characteristics". Its value is narrow and real: an attacker holding only the database — SQL
-injection, a stolen backup — cannot crack anything without also holding the pepper.
+secure characteristics". Its value is narrow and real: an attacker holding only the database - SQL
+injection, a stolen backup - cannot crack anything without also holding the pepper.
 
 - A pepper is shared across all stored passwords. A salt is per user. They are not variants of the
   same idea.
@@ -159,7 +159,7 @@ The cheat sheet gives two paths beyond rehash-on-login:
 
 - Delete hashes for long-inactive users and require a reset. Secure, unfriendly, and a mass expiry
   can read to users as a breach notification.
-- Nest the old hash inside a strong one — `md5($password)` becomes `bcrypt(md5($password))`. This
+- Nest the old hash inside a strong one - `md5($password)` becomes `bcrypt(md5($password))`. This
   needs no plaintext, but the cheat sheet warns it "can make the hashes easier to crack" through
   shucking. Replace with a direct hash at next login.
 
@@ -180,9 +180,9 @@ working one account at a time it changes nothing.
 
 ## Sources
 
-- OWASP Password Storage Cheat Sheet —
+- OWASP Password Storage Cheat Sheet -
   <https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html> (2026-07-28)
-- OWASP ASVS 5.0.0 Appendix C —
+- OWASP ASVS 5.0.0 Appendix C -
   <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x92-Appendix-C_Cryptography.md> (2026-07-28)
-- CWE-916 — <https://cwe.mitre.org/data/definitions/916.html>
-- CWE-759 — <https://cwe.mitre.org/data/definitions/759.html>
+- CWE-916 - <https://cwe.mitre.org/data/definitions/916.html>
+- CWE-759 - <https://cwe.mitre.org/data/definitions/759.html>

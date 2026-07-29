@@ -63,7 +63,7 @@ being passed to EC2 or CodeBuild where a shell is easier to get.
 
 The GCP equivalent is `iam.serviceAccounts.actAs`. Grant it on the specific service account
 resource, never at project level. `iam.serviceAccountTokenCreator` and
-`iam.serviceAccountKeys.create` are the impersonation and key-minting equivalents — treat both
+`iam.serviceAccountKeys.create` are the impersonation and key-minting equivalents - treat both
 as privilege escalation primitives.
 
 ## Other escalation primitives worth naming
@@ -105,9 +105,9 @@ same applies to a GCP service account JSON key and an Azure app registration cli
 
 Replacements, in order of preference:
 
-1. The platform's ambient identity — instance profile, managed identity, attached service
+1. The platform's ambient identity - instance profile, managed identity, attached service
    account. No credential exists to leak.
-2. Workload identity federation from an external OIDC issuer — GitHub Actions, GitLab,
+2. Workload identity federation from an external OIDC issuer - GitHub Actions, GitLab,
    another cloud. The exchanged token lives minutes.
 3. `sts:AssumeRole` or impersonation from an identity that itself came from step 1 or 2.
 4. An access key with a documented rotation job, only where the provider offers nothing else.
@@ -126,7 +126,7 @@ its age. GCP lets you block key creation entirely with the
 }
 ```
 
-Any principal in any AWS account can assume this role. This is not theoretical — it is a
+Any principal in any AWS account can assume this role. This is not theoretical - it is a
 one-line typo away from `"Principal": {"AWS": "arn:aws:iam::111122223333:root"}`, and account
 IDs are not secrets.
 
@@ -136,7 +136,7 @@ Also over-broad, more subtly:
 - An OIDC trust for GitHub Actions whose `sub` condition ends in `:*`, which trusts every
   branch and every pull request in the repository, including a fork's PR in some workflows
 - `"Principal": {"Federated": "..."}` with `token.actions.githubusercontent.com:aud` checked
-  but `sub` not checked at all — that trusts every repository on GitHub
+  but `sub` not checked at all - that trusts every repository on GitHub
 
 Pin the subject. For GitHub Actions, `repo:org/name:ref:refs/heads/main` or
 `repo:org/name:environment:production`. For GCP workload identity federation, set both
@@ -148,7 +148,7 @@ You grant a third-party SaaS vendor a role in your account so it can read your m
 vendor's trust policy names the vendor's account. Every one of the vendor's customers has the
 same arrangement.
 
-Another customer of that vendor tells it "read the role in account 111122223333" — your
+Another customer of that vendor tells it "read the role in account 111122223333" - your
 account. The vendor's code has the permission, so the request succeeds. The vendor was the
 deputy; it was confused about whose behalf it acted on.
 
@@ -165,7 +165,7 @@ deputy; it was confused about whose behalf it acted on.
 
 The external ID is not a secret and does not need to be. It is a correlation value: the vendor
 must present the ID it associated with your account, and it cannot present yours while acting
-for someone else. Generating the external ID yourself weakens it — the vendor should generate
+for someone else. Generating the external ID yourself weakens it - the vendor should generate
 it, because the vendor is the one who must not mix customers up.
 
 For services rather than vendors, the AWS conditions are `aws:SourceAccount` and
@@ -222,13 +222,13 @@ When reading a policy, check in this order. Stop at the first failure and report
 
 ## Sources
 
-- AWS IAM policy evaluation — <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html>
-- AWS PassRole — <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html>
-- AWS confused deputy and external ID — <https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html>
-- AWS permissions boundaries — <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html>
-- AWS SCPs — <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html>
-- GCP service account impersonation — <https://cloud.google.com/iam/docs/service-account-impersonation>
-- GCP deny policies — <https://cloud.google.com/iam/docs/deny-overview>
-- Azure RBAC best practices — <https://learn.microsoft.com/azure/role-based-access-control/best-practices>
+- AWS IAM policy evaluation - <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html>
+- AWS PassRole - <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html>
+- AWS confused deputy and external ID - <https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html>
+- AWS permissions boundaries - <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html>
+- AWS SCPs - <https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html>
+- GCP service account impersonation - <https://cloud.google.com/iam/docs/service-account-impersonation>
+- GCP deny policies - <https://cloud.google.com/iam/docs/deny-overview>
+- Azure RBAC best practices - <https://learn.microsoft.com/azure/role-based-access-control/best-practices>
 
 Checked 2026-07-28.

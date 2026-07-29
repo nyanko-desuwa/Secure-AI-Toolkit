@@ -40,12 +40,12 @@ root, or an nginx block that serves `.git`. Weight your attention accordingly.
 Before editing config, write down the actual access needs. Three columns: principal, what they
 do, minimum privilege that allows it.
 
-Most answers collapse. "The deploy pipeline needs to restart the app" does not need a root key —
+Most answers collapse. "The deploy pipeline needs to restart the app" does not need a root key -
 it needs one sudo rule for one systemctl verb. "The developer needs to read logs" does not need
 a shell on the box if logs ship to a collector.
 
-If SSH can be removed from the internet entirely — a bastion, AWS SSM Session Manager, GCP
-IAP TCP forwarding, Tailscale/WireGuard — do that first. It is worth more than every directive
+If SSH can be removed from the internet entirely - a bastion, AWS SSM Session Manager, GCP
+IAP TCP forwarding, Tailscale/WireGuard - do that first. It is worth more than every directive
 in this skill combined, because an sshd that is not reachable cannot be attacked. See
 [best-practices.md](best-practices.md#do-not-expose-sshd-to-the-internet).
 
@@ -63,7 +63,7 @@ sudo sshd -T | grep -Ei 'permitrootlogin|passwordauthentication|kbdinteractive|a
 
 `sshd -T` prints the effective configuration after includes and defaults. A directive placed
 below a `Match` block, or after an earlier occurrence of the same keyword, does not do what the
-file looks like it does — first occurrence wins in OpenSSH.
+file looks like it does - first occurrence wins in OpenSSH.
 
 ### 3. Confine the service
 
@@ -83,7 +83,7 @@ rate limits, no directory listing, no dotfiles served, no version banner. Values
 [best-practices.md](best-practices.md#nginx-server-block).
 
 Check what the proxy trusts. If the app reads `X-Forwarded-For` and nginx does not overwrite it,
-every client sets their own IP — and your rate limiter, audit log, and IP allowlist all become
+every client sets their own IP - and your rate limiter, audit log, and IP allowlist all become
 decorative.
 
 ### 5. Make the deploy reversible
@@ -95,22 +95,22 @@ are backward compatible for one release. See
 
 ### 6. Verify
 
-Run [checklist.md](checklist.md). State what you could not check — reading a config file does not
+Run [checklist.md](checklist.md). State what you could not check - reading a config file does not
 prove the daemon reloaded it, and this skill cannot run commands on the target host.
 
 ## Severity
 
 Rank by what an attacker gains, not by which directive is missing.
 
-- **Critical** — password auth on an internet-facing sshd, root login permitted, a service running
+- **Critical** - password auth on an internet-facing sshd, root login permitted, a service running
   as root with a network listener, a deploy key with root or full-account scope, `.git` or `.env`
   served over HTTP
-- **High** — agent forwarding to an untrusted host, `StrictHostKeyChecking no` in an automated
+- **High** - agent forwarding to an untrusted host, `StrictHostKeyChecking no` in an automated
   path, sudo rule granting a shell or a wildcard command, spoofable `X-Forwarded-For` trusted for
   access control, TLS 1.0/1.1 enabled
-- **Medium** — no rate limiting, missing HSTS, no unattended security updates, world-readable
+- **Medium** - no rate limiting, missing HSTS, no unattended security updates, world-readable
   secret file, no log rotation on a disk that fills
-- **Low** — version banner exposed, SSH on port 22, no fail2ban. These are noise reduction, not
+- **Low** - version banner exposed, SSH on port 22, no fail2ban. These are noise reduction, not
   controls
 
 Say which it is. "SSH on port 22" reported as high severity is how a report gets ignored.
@@ -120,7 +120,7 @@ Say which it is. "SSH on port 22" reported as high severity is how a report gets
 This skill contains commands that delete data or cut access. Every one is marked. The three that
 end careers:
 
-- `rsync --delete` — deletes on the destination. Dry-run first, always
+- `rsync --delete` - deletes on the destination. Dry-run first, always
 - Reloading sshd with a broken config, having closed your only session
 - `systemctl disable` on something you did not identify
 
@@ -130,24 +130,24 @@ Read the warning before running the command, not after.
 
 A host you believe was compromised is rebuilt from a known-good image, not cleaned. Rotate every
 credential that touched it. `journalctl` triage exists to learn what happened and what else to
-rotate — not to decide the box is fine now. See
+rotate - not to decide the box is fine now. See
 [best-practices.md](best-practices.md#incident-triage-with-journalctl).
 
 ## Related Skills
 
-- `docker-security` — container images and runtime, if the service runs in a container
-- `secrets-management` — where deploy keys and TLS private keys actually live
-- `devsecops` — CI/CD pipeline permissions and the credentials it holds
-- `cloud-security` — security groups, IAM, and SSM/IAP as an SSH replacement
-- `logging-audit` — shipping and retaining what `journalctl` shows you
+- `docker-security` - container images and runtime, if the service runs in a container
+- `secrets-management` - where deploy keys and TLS private keys actually live
+- `devsecops` - CI/CD pipeline permissions and the credentials it holds
+- `cloud-security` - security groups, IAM, and SSM/IAP as an SSH replacement
+- `logging-audit` - shipping and retaining what `journalctl` shows you
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations, security notes
-- [checklist.md](checklist.md) — pre-return verification, grouped by surface
-- [best-practices.md](best-practices.md) — real configs: sshd, systemd, nginx, deploy
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the hardening breaks the thing
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — version-pinned standard summaries
-- [examples/](examples/) — vulnerable and fixed configs side by side
+- [README.md](README.md) - purpose, standards table, limitations, security notes
+- [checklist.md](checklist.md) - pre-return verification, grouped by surface
+- [best-practices.md](best-practices.md) - real configs: sshd, systemd, nginx, deploy
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the hardening breaks the thing
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - version-pinned standard summaries
+- [examples/](examples/) - vulnerable and fixed configs side by side

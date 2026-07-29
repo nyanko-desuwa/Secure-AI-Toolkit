@@ -35,7 +35,7 @@ Establish and record five things:
 |---|---|
 | Targets | Exact hostnames, IP ranges, and accounts. Anything not listed is out of scope |
 | Environment | Staging or production. Production needs separate, explicit sign-off |
-| Techniques allowed | Passive, active injection, credential attacks, denial of service — each named |
+| Techniques allowed | Passive, active injection, credential attacks, denial of service - each named |
 | Window | Start and end time, plus who is on call |
 | Contact | Who to call when a test causes an incident, and how to abort |
 
@@ -85,7 +85,7 @@ Then generate the tests from the grid rather than writing them one at a time. A 
 four actors and six operations is 24 assertions; hand-written, it becomes six tests for the
 happy path. See [best-practices.md](best-practices.md#authorization-matrix-testing).
 
-Note that "other user" returns 404, not 403 — the matrix encodes existence non-disclosure, so
+Note that "other user" returns 404, not 403 - the matrix encodes existence non-disclosure, so
 the test enforces it. WSTG-ATHZ-02, WSTG-ATHZ-04, ASVS V8.
 
 ### 3. Test at the cheapest layer that can fail
@@ -149,13 +149,13 @@ or an observation. See [common-mistakes.md](common-mistakes.md#treating-scanner-
 Rate what the test proves, not what the tool called it. Exploitability multiplied by blast
 radius.
 
-- Critical — a test demonstrates unauthenticated access to other users' data, or code
+- Critical - a test demonstrates unauthenticated access to other users' data, or code
   execution
-- High — a test demonstrates authenticated cross-tenant or cross-user access, or injection
+- High - a test demonstrates authenticated cross-tenant or cross-user access, or injection
   behind auth
-- Medium — exploitation needs an unlikely precondition, or the leak is non-sensitive
-- Low — a hardening gap the test detects with no demonstrated path
-- Informational — the test asserts a defence-in-depth control that is absent
+- Medium - exploitation needs an unlikely precondition, or the leak is non-sensitive
+- Low - a hardening gap the test detects with no demonstrated path
+- Informational - the test asserts a defence-in-depth control that is absent
 
 Two rules specific to testing:
 
@@ -166,18 +166,18 @@ Two rules specific to testing:
 
 ## Related Skills
 
-- `core/secure-code-review` — finding the bug by reading, and CWE assignment
-- `core/devsecops` — the CI platform, gating policy, and secret scanning depth
-- `core/api-security` — API weakness classes worth building matrices for
-- `advanced/incident-response` — what happens when a test finds it in production
+- `core/secure-code-review` - finding the bug by reading, and CWE assignment
+- `core/devsecops` - the CI platform, gating policy, and secret scanning depth
+- `core/api-security` - API weakness classes worth building matrices for
+- `advanced/incident-response` - what happens when a test finds it in production
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, standards, limitations
-- [checklist.md](checklist.md) — pre-return verification for a test suite
-- [best-practices.md](best-practices.md) — patterns, with weak and strong test pairs
-- [common-mistakes.md](common-mistakes.md) — tests that pass on vulnerable code
-- [troubleshooting.md](troubleshooting.md) — flaky tests, blocked scope, wrong gates
-- [prompts.md](prompts.md) — prompts that produce tests, and anti-patterns
-- [references/](references/) — WSTG v4.2, ASVS 5.0.0, Top 10 2025, CWE
-- [examples/](examples/) — eight weak/strong test pairs with WSTG and CWE IDs
+- [README.md](README.md) - purpose, layout, standards, limitations
+- [checklist.md](checklist.md) - pre-return verification for a test suite
+- [best-practices.md](best-practices.md) - patterns, with weak and strong test pairs
+- [common-mistakes.md](common-mistakes.md) - tests that pass on vulnerable code
+- [troubleshooting.md](troubleshooting.md) - flaky tests, blocked scope, wrong gates
+- [prompts.md](prompts.md) - prompts that produce tests, and anti-patterns
+- [references/](references/) - WSTG v4.2, ASVS 5.0.0, Top 10 2025, CWE
+- [examples/](examples/) - eight weak/strong test pairs with WSTG and CWE IDs

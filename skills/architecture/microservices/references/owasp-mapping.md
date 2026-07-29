@@ -13,7 +13,7 @@ Verified 2026-07-28 against the repository brief. OWASP Top 10 2025 is not a ren
 | Event accepted without integrity or current policy | A01, A08 Software or Data Integrity Failures | V8, V15 | CWE-602 |
 | Unbounded pools, queues, retry, cache, or saga | A06, A10 Mishandling of Exceptional Conditions | V2 Validation and Business Logic, V15 | CWE-400, CWE-770, or CWE-772 |
 | Missing release of service resources | A10 | V15 | CWE-772 |
-| Missing denial/alert on exceptional path | A09 Security Logging and Alerting Failures, A10 | V16 Security Logging and Error Handling | — |
+| Missing denial/alert on exceptional path | A09 Security Logging and Alerting Failures, A10 | V16 Security Logging and Error Handling | - |
 
 Use one mechanism-specific CWE per finding where possible. Do not attach a CWE merely because the impact sounds similar. A correctness or distributed-consistency defect may have no suitable CWE; say so.
 
@@ -28,6 +28,6 @@ State whether the control is verified in source, inferred, tested, or unverified
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>; categories pinned and verified 2026-07-28.
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>; 5.0.0, chapter list pinned and verified 2026-07-28.
-- CWE — <https://cwe.mitre.org/>; individual entries in [cwe-microservices.md](cwe-microservices.md).
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>; categories pinned and verified 2026-07-28.
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>; 5.0.0, chapter list pinned and verified 2026-07-28.
+- CWE - <https://cwe.mitre.org/>; individual entries in [cwe-microservices.md](cwe-microservices.md).

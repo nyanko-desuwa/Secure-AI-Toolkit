@@ -7,7 +7,7 @@ allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 # Publish Safety
 
 Publishing is a one-way door. On the far side, the only remediation is revocation at the
-provider — not a commit, not a force-push, not a deleted repository. This skill is the gate you
+provider - not a commit, not a force-push, not a deleted repository. This skill is the gate you
 run before the door, and it applies to every push, publish, deploy, and shared screenshot.
 
 ## When to Use
@@ -68,7 +68,7 @@ already has a copy. That is why the check belongs before the action.
 
 ### 1. Inventory what will ship
 
-List the files the action will publish — not the files you edited. These are different sets, and
+List the files the action will publish - not the files you edited. These are different sets, and
 the gap is where leaks live.
 
 ```bash
@@ -99,7 +99,7 @@ Build first. Bundlers inline environment variables, so a key can be absent from 
 wrote and present in what you ship.
 
 Per-stack commands and the public-prefix table are in
-[common-pitfalls/references/secret-exposure.md](../common-pitfalls/references/secret-exposure.md) —
+[common-pitfalls/references/secret-exposure.md](../common-pitfalls/references/secret-exposure.md) -
 use those rather than reinventing the greps.
 
 ### 4. Check the packaging manifest
@@ -118,12 +118,12 @@ These bypass every scanner you installed, because nothing scans an image or a ch
 Also check for local-only files: private notes, personal instruction files, scratch directories,
 editor state. If it is not part of the project, it does not get staged. Keep it out with
 `.git/info/exclude` or a global gitignore so a personal file does not need a rule in a shared
-`.gitignore` — see [best-practices.md](best-practices.md#keep-local-only-files-out-without-a-shared-rule).
+`.gitignore` - see [best-practices.md](best-practices.md#keep-local-only-files-out-without-a-shared-rule).
 
 ### 6. Verify and report
 
 Run [checklist.md](checklist.md). Report what you checked, what you found, and what you could not
-verify. If anything was found, stop — do not publish and then mention it.
+verify. If anything was found, stop - do not publish and then mention it.
 
 For each finding, say the cost in plain words before the technical detail. "Your Stripe secret key
 is in the published tarball, so anyone who downloads it can charge cards on your account" lands
@@ -133,38 +133,38 @@ where "credential present in package artifact" does not.
 
 Audience reach × credential scope. Where it was found matters less than who can read it.
 
-- **Critical** — a live production credential with write or admin scope in a public place: public
+- **Critical** - a live production credential with write or admin scope in a public place: public
   repo or its history, public registry artifact, deployed bundle, store build. Assume automated
   use within minutes.
-- **High** — a live production credential in a place with broad internal read: private repo
+- **High** - a live production credential in a place with broad internal read: private repo
   history, CI log, org-wide registry, a shared chat channel. Or any credential in a place you do
   not control, such as a model provider's logs.
-- **Medium** — a scoped, short-lived, or non-production credential in a public place. Internal
+- **Medium** - a scoped, short-lived, or non-production credential in a public place. Internal
   hostnames, infrastructure detail, or private paths published with no credential attached.
-- **Low** — a missing ignore rule or allowlist with nothing sensitive currently in scope. A
+- **Low** - a missing ignore rule or allowlist with nothing sensitive currently in scope. A
   local-only file committed that contains nothing private.
 
-Do not inflate, and do not deflate. A "read-only" key is not automatically medium — read access on
+Do not inflate, and do not deflate. A "read-only" key is not automatically medium - read access on
 a customer database is a breach. A committed `.env` holding only `PORT=3000` is low.
 
 ## Related Skills
 
-- `secrets-management` — where credentials should live, rotation, and the revoke/rotate/investigate
+- `secrets-management` - where credentials should live, rotation, and the revoke/rotate/investigate
   order once something has leaked
-- `common-pitfalls` — build-output greps, per-framework public env prefixes, keys that are meant to
+- `common-pitfalls` - build-output greps, per-framework public env prefixes, keys that are meant to
   be public
-- `devsecops` — pre-commit hooks and CI secret scanning as enforced gates, fork-PR exposure
-- `docker-security` — image layers and build context beyond the secrets question
-- `advanced/supply-chain-security` — signing and provenance for what you publish
-- `advanced/incident-response` — the wider process when a leak becomes an incident
+- `devsecops` - pre-commit hooks and CI secret scanning as enforced gates, fork-PR exposure
+- `docker-security` - image layers and build context beyond the secrets question
+- `advanced/supply-chain-security` - signing and provenance for what you publish
+- `advanced/incident-response` - the wider process when a leak becomes an incident
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, configuration, limitations, security notes
-- [checklist.md](checklist.md) — pre-publish verification, grouped by surface
-- [best-practices.md](best-practices.md) — patterns with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — beginner, developer, review, and audit prompts
-- [references/](references/) — Top 10, ASVS, CWE, and platform controls, version-pinned
-- [examples/](examples/) — seven vulnerable/fixed pairs
+- [README.md](README.md) - purpose, configuration, limitations, security notes
+- [checklist.md](checklist.md) - pre-publish verification, grouped by surface
+- [best-practices.md](best-practices.md) - patterns with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - beginner, developer, review, and audit prompts
+- [references/](references/) - Top 10, ASVS, CWE, and platform controls, version-pinned
+- [examples/](examples/) - seven vulnerable/fixed pairs

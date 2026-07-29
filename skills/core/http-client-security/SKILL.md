@@ -1,6 +1,6 @@
 ---
 name: http-client-security
-description: 'Secure outbound HTTP(S) clients — SSRF, URL parsing, redirects, DNS/private targets, TLS verification, proxies, timeouts, retries, credentials, and response limits. Triggers: "HTTP client", "outbound HTTP", "SSRF", "fetch URL", "redirect", "HttpClient", "requests", "bảo mật HTTP client".'
+description: 'Secure outbound HTTP(S) clients - SSRF, URL parsing, redirects, DNS/private targets, TLS verification, proxies, timeouts, retries, credentials, and response limits. Triggers: "HTTP client", "outbound HTTP", "SSRF", "fetch URL", "redirect", "HttpClient", "requests", "bảo mật HTTP client".'
 allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
@@ -53,10 +53,10 @@ transport behavior, credentials, response bounds, and safe telemetry.
 
 ## Severity
 
-- **Critical** — SSRF reaches metadata/control plane, credentials follow an attacker destination, or TLS bypass exposes secrets
-- **High** — redirect/proxy bypass, private-target reachability, unbounded retry/download causing material impact
-- **Medium** — missing bounds or weak logging hygiene without a demonstrated sensitive destination
-- **Low** — defence-in-depth telemetry/configuration gap with no reachable path
+- **Critical** - SSRF reaches metadata/control plane, credentials follow an attacker destination, or TLS bypass exposes secrets
+- **High** - redirect/proxy bypass, private-target reachability, unbounded retry/download causing material impact
+- **Medium** - missing bounds or weak logging hygiene without a demonstrated sensitive destination
+- **Low** - defence-in-depth telemetry/configuration gap with no reachable path
 
 ## Related Skills
 

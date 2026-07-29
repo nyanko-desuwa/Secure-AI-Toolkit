@@ -83,10 +83,10 @@ def render_graph(catalog: dict[str, Any]) -> str:
         lines.extend([f"## {title}", "", "| Skill | depends_on | related | loads |", "|---|---|---|---|"])
         for skill in (s for s in catalog["skills"] if s["category"] == category):
             def cell(values: list[str]) -> str:
-                return ", ".join(f"`{value}`" for value in values) if values else "—"
+                return ", ".join(f"`{value}`" for value in values) if values else "-"
             lines.append(
                 f"| `{skill['name']}` | {cell(skill['depends_on'])} | "
-                f"{cell(skill['related'])} | {', '.join(skill['loads']) or '—'} |"
+                f"{cell(skill['related'])} | {', '.join(skill['loads']) or '-'} |"
             )
         lines.extend([""])
     lines.append(GRAPH_END)
@@ -133,7 +133,7 @@ def report_boundaries(skills: dict[str, dict[str, Any]]) -> None:
         handoffs = ", ".join(
             f"{item['owner']} ({item['concern']})" for item in ownership["non_goals"]
         )
-        related = ", ".join(skills[name]["related"]) or "—"
+        related = ", ".join(skills[name]["related"]) or "-"
         print(f"  {name}: {ownership['owner_boundary']}")
         print(f"    assets: {assets}")
         print(f"    hand-offs: {handoffs}")

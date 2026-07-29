@@ -25,11 +25,11 @@ skills/<category>/<skill-name>/
 ```
 
 Eleven is the floor, not the target. `references/` holds one file per standard plus its own
-`README.md` index, so a skill citing four sources has more files than one citing two —
+`README.md` index, so a skill citing four sources has more files than one citing two -
 `core/publish-safety/` has thirteen. What matters is that every entry in the tree above exists and
 none of them is a stub.
 
-`skills/core/owasp/` is the worked example. Read it before starting — it is easier to match
+`skills/core/owasp/` is the worked example. Read it before starting - it is easier to match
 than to describe.
 
 ## The bar
@@ -41,7 +41,7 @@ A skill is not done because the files exist. It is done when:
 - Every pattern shows both states. Vulnerable code, fixed code, and a sentence on why the
   fix closes the hole rather than just looking safer.
 - Limitations are stated. If a control has a known gap, name it. The SSRF example in
-  `core/owasp/examples/README.md` says outright that it is still open to DNS rebinding —
+  `core/owasp/examples/README.md` says outright that it is still open to DNS rebinding -
   that honesty is the point, not a flaw in the example.
 - Version-specific claims carry the source URL and the date checked. Category IDs move
   between editions.
@@ -63,19 +63,19 @@ Two habits worth copying:
 ## Content policy for new skills
 
 These apply to any skill added or substantially rewritten from now on. Existing skills are not
-being retrofitted — a sweep across 47 skills would produce a large diff and no new guidance, and
+being retrofitted - a sweep across 47 skills would produce a large diff and no new guidance, and
 the ones already written meet the bar above. So this section describes the shape of the next skill,
 not a debt against the current ones.
 
-### `examples/README.md` — at least seven pairs
+### `examples/README.md` - at least seven pairs
 
 Three that are vulnerable in a way a reader would plausibly write, three that are secure by
 construction rather than by remembering a check, and one drawn from a real failure mode with the
 cost stated. Every pair carries its category and CWE on the heading line. Every vulnerable block is
-labelled `Vulnerable:` on its first line, and the fix is in the same section — not in another file,
+labelled `Vulnerable:` on its first line, and the fix is in the same section - not in another file,
 not implied.
 
-### `prompts.md` — four tiers
+### `prompts.md` - four tiers
 
 | Tier | Written for | Shape |
 |---|---|---|
@@ -87,7 +87,7 @@ not implied.
 Plus the anti-pattern table: the prompt that produces a reassuring non-answer (`"is this secure?"`)
 next to the one that produces a finding.
 
-### `SKILL.md` — routing and ownership boundaries
+### `SKILL.md` - routing and ownership boundaries
 
 `When NOT to Use` has two columns: the request shape that looks like this skill, and the skill
 that actually owns it. This is the highest-value paragraph in the file. A skill that cannot say
@@ -99,8 +99,8 @@ Also complete `## Ownership Boundary`: one specific boundary the skill owns, the
 `protected_assets`, and `non_goals` fields must match the owner IDs in the table. Do not repeat
 `related` or `loads` as new metadata; they already describe the canonical graph.
 
-A new skill needs all three mandatory conditions — a clear owner boundary, routing path, and
-non-goals — plus at least three of: distinct assets, attack surface, verifiable workflow, primary
+A new skill needs all three mandatory conditions - a clear owner boundary, routing path, and
+non-goals - plus at least three of: distinct assets, attack surface, verifiable workflow, primary
 standards, or lifecycle. Otherwise expand an existing owner skill instead of adding a directory.
 
 ### Framework and platform coverage, named
@@ -109,11 +109,11 @@ State which stacks the guidance was written against and which it only reaches by
 whose framework is in the second group needs to know that the reasoning transfers and the exact
 field names do not. Vague coverage claims are worse than narrow ones.
 
-### `references/` — one file per source
+### `references/` - one file per source
 
 Standard name, version, release date if published, the URL you fetched, and the date you checked
 it. Only what the skill uses; a reference file is not a mirror of the standard. What you could not
-verify is named, not filled in from memory — a document behind a registration wall is a stated gap,
+verify is named, not filled in from memory - a document behind a registration wall is a stated gap,
 and the gap is the honest output.
 
 New skills also add their row to `skills/shared/references/skill-graph.md` and
@@ -122,7 +122,7 @@ frontmatter carries no dependency metadata.
 
 ### Versioning and deprecation
 
-A skill's guidance is dated by its `references/` check dates, not by a version number of its own —
+A skill's guidance is dated by its `references/` check dates, not by a version number of its own -
 the repository version in `CHANGELOG.md` covers the pack. If a skill's advice becomes wrong because
 a standard moved, update the reference file and the pin in all three places
 (`references/`, `AI_INSTRUCTIONS.md`, root `README.md`) in the same change. If a skill is
@@ -154,7 +154,7 @@ trigger words alongside English ones. After editing frontmatter, run
 - [ ] Every control names a standard and, where applicable, a CWE
 - [ ] `examples/README.md` has at least three vulnerable/fixed pairs, one of them a real-world shape
 - [ ] Every vulnerable block labelled `Vulnerable:` and paired with a fix
-- [ ] `prompts.md` covers all four tiers: beginner, developer, review, audit — plus anti-patterns
+- [ ] `prompts.md` covers all four tiers: beginner, developer, review, audit - plus anti-patterns
 - [ ] `SKILL.md` has `When NOT to Use` and `Ownership Boundary` sections routing to the skill that does own it
 - [ ] Catalog `ownership` states the owner boundary, protected assets, and every non-goal hand-off
 - [ ] Framework and ecosystem coverage stated by name, with the gaps named too

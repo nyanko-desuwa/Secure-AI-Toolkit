@@ -1,6 +1,6 @@
 # Content Security Policy and Trusted Types
 
-CSP Level 3 — <https://www.w3.org/TR/CSP3/>. Trusted Types —
+CSP Level 3 - <https://www.w3.org/TR/CSP3/>. Trusted Types -
 <https://w3c.github.io/trusted-types/dist/spec/>. Both checked 2026-07-28. Both are living
 documents: re-read the source before quoting a section number, and do not cite a directive name
 from memory.
@@ -12,7 +12,7 @@ CWE-79
 
 CSP is a second layer. It limits what an injected string can do after your escaping has already
 failed. It is not an XSS fix, and a policy added to a page with an unsanitized `innerHTML` sink
-still has an XSS finding behind it — report both.
+still has an XSS finding behind it - report both.
 
 Ranked by what actually holds up:
 
@@ -43,22 +43,22 @@ add_header Content-Security-Policy "
 
 Reading it directive by directive:
 
-- `script-src 'nonce-...'` — only scripts carrying this response's nonce run. The nonce must be at
+- `script-src 'nonce-...'` - only scripts carrying this response's nonce run. The nonce must be at
   least 128 bits from a CSPRNG, regenerated per response, and never reused across responses or
   cached.
-- `'strict-dynamic'` — a script that already passed the nonce check may create further scripts.
+- `'strict-dynamic'` - a script that already passed the nonce check may create further scripts.
   Without it, every dynamically injected script (analytics loaders, bundle chunk loaders) breaks.
-- `https: 'unsafe-inline'` — deliberate fallback, not a mistake. Browsers that support
+- `https: 'unsafe-inline'` - deliberate fallback, not a mistake. Browsers that support
   `strict-dynamic` ignore both; browsers that do not fall back to the weaker pair rather than
   blocking the whole app. If you have no legacy browsers to support, drop them.
-- `object-src 'none'` — kills `<embed>`, `<object>`, and Flash-era plugin script execution. Cheap,
+- `object-src 'none'` - kills `<embed>`, `<object>`, and Flash-era plugin script execution. Cheap,
   no downside.
-- `base-uri 'none'` — without it, an injected `<base href="https://attacker.example">` repoints
+- `base-uri 'none'` - without it, an injected `<base href="https://attacker.example">` repoints
   every relative script URL. This is the directive people forget, and its absence undoes a nonce
   policy on a page with relative script paths.
-- `frame-ancestors 'none'` — clickjacking. Supersedes `X-Frame-Options` where supported. Keep both
+- `frame-ancestors 'none'` - clickjacking. Supersedes `X-Frame-Options` where supported. Keep both
   for older browsers.
-- `connect-src` — bounds where injected code can exfiltrate to. Not perfect (DNS prefetch,
+- `connect-src` - bounds where injected code can exfiltrate to. Not perfect (DNS prefetch,
   navigation, and images all leak) but it raises the cost.
 
 The nonce must reach the tag:
@@ -138,7 +138,7 @@ Without the `trusted-types` allowlist directive, attacker-injected code can call
 `trustedTypes.createPolicy` with a pass-through `createHTML` and defeat the whole mechanism.
 
 Two honest limits. First, a policy whose `createHTML` returns its input unchanged provides nothing
-— it satisfies the type system and sanitizes nothing, and this is the most common way Trusted Types
+- it satisfies the type system and sanitizes nothing, and this is the most common way Trusted Types
 gets adopted incorrectly. Second, browser support is uneven outside Chromium; check current support
 data before treating it as your only layer. Roll it out report-only the same way you would a CSP.
 
@@ -156,7 +156,7 @@ data before treating it as your only layer. Roll it out report-only the same way
 
 ## Sources
 
-- CSP Level 3 — <https://www.w3.org/TR/CSP3/>
-- Trusted Types — <https://w3c.github.io/trusted-types/dist/spec/>
-- OWASP CSP Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html>
-- CSP Evaluator — <https://csp-evaluator.withgoogle.com/>
+- CSP Level 3 - <https://www.w3.org/TR/CSP3/>
+- Trusted Types - <https://w3c.github.io/trusted-types/dist/spec/>
+- OWASP CSP Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html>
+- CSP Evaluator - <https://csp-evaluator.withgoogle.com/>

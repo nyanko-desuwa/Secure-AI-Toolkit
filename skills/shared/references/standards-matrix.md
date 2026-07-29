@@ -26,30 +26,30 @@ before you use this as a coverage claim:
 
 | Skill | Top 10 2025 | API Top 10 2023 | ASVS 5.0 chapters | Other |
 |---|---|---|---|---|
-| `common-pitfalls` | all ten | API3, API4 | V2, V3, V4, V5, V6, V8, V9, V11, V12, V13, V14, V15, V16 | — |
+| `common-pitfalls` | all ten | API3, API4 | V2, V3, V4, V5, V6, V8, V9, V11, V12, V13, V14, V15, V16 | - |
 | `owasp` | all ten | all ten | all seventeen | ISO 27001, PCI DSS, SOC 2 |
-| `secure-code-review` | A01, A02, A03, A05, A06, A08, A10 | API1, API3 | all seventeen | — |
-| `api-security` | — (maps to the API list) | API1–API7, API9, API10 | V1, V2, V4, V5, V6, V7, V8, V9, V10, V12, V13, V16 | — |
-| `mvc-security` | A01, A02, A05, A06 | — | V1, V2, V3, V8, V13, V16 | — |
-| `database-security` | A01, A02, A04, A05, A06, A08, A09 | API4 | V1, V2, V8, V11, V12, V13, V14, V15, V16 | — |
-| `authentication` | A01, A07 | — | V2, V3, V6, V7, V8, V9, V10, V11, V14, V16 | NIST SP 800-63, 800-63B |
+| `secure-code-review` | A01, A02, A03, A05, A06, A08, A10 | API1, API3 | all seventeen | - |
+| `api-security` | - (maps to the API list) | API1–API7, API9, API10 | V1, V2, V4, V5, V6, V7, V8, V9, V10, V12, V13, V16 | - |
+| `mvc-security` | A01, A02, A05, A06 | - | V1, V2, V3, V8, V13, V16 | - |
+| `database-security` | A01, A02, A04, A05, A06, A08, A09 | API4 | V1, V2, V8, V11, V12, V13, V14, V15, V16 | - |
+| `authentication` | A01, A07 | - | V2, V3, V6, V7, V8, V9, V10, V11, V14, V16 | NIST SP 800-63, 800-63B |
 | `brute-force-defense` | A01, A04, A06, A07, A09, A10 | API4, API6 | V2, V4, V6, V7, V8, V11, V16 | NIST SP 800-63B |
-| `secrets-management` | A02, A04 | — | V2, V6, V11, V12, V13, V14, V15, V16 | NIST SP 800-57 |
-| `publish-safety` | A02, A03, A04, A08 | — | V2, V3, V12, V13, V14, V15, V16 | SLSA |
-| `logging-audit` | A01, A05, A06, A09, A10 | — | V7, V16 | GDPR, HIPAA, PCI DSS, ISO 27001, SOC 2 |
-| `frontend-security` | A01, A02, A03, A05, A07 | — | all seventeen | — |
-| `file-upload-security` | A01, A02, A05, A06, A08, A10 | — | V1, V2, V3, V4, V5, V8, V12, V13, V14, V16 | — |
-| `docker-security` | A02, A03, A04, A08 | — | V12, V13, V14, V15, V16 | CIS Docker Benchmark, CIS Kubernetes Benchmark |
-| `cloud-security` | A01, A02, A04, A06, A08, A09 | — | V2, V8, V11, V12, V13, V14, V15, V16 | — |
-| `ssh-server` | A02, A04, A07, A08, A09 | — | V6, V7, V8, V12, V13, V16 | CIS NGINX Benchmark |
-| `devsecops` | A03, A08 | — | V13, V15 | SLSA, NIST SP 800-218 |
-| `ai-security` | all ten | — | V1, V2, V5, V8, V10, V11, V13, V14, V15, V16 | OWASP LLM Top 10, NIST AI RMF, EU AI Act |
-| `http-edge-security` | A02, A04, A05, A06 | — | V4, V11, V13, V14 | HTTP RFC 9110–9114 |
+| `secrets-management` | A02, A04 | - | V2, V6, V11, V12, V13, V14, V15, V16 | NIST SP 800-57 |
+| `publish-safety` | A02, A03, A04, A08 | - | V2, V3, V12, V13, V14, V15, V16 | SLSA |
+| `logging-audit` | A01, A05, A06, A09, A10 | - | V7, V16 | GDPR, HIPAA, PCI DSS, ISO 27001, SOC 2 |
+| `frontend-security` | A01, A02, A03, A05, A07 | - | all seventeen | - |
+| `file-upload-security` | A01, A02, A05, A06, A08, A10 | - | V1, V2, V3, V4, V5, V8, V12, V13, V14, V16 | - |
+| `docker-security` | A02, A03, A04, A08 | - | V12, V13, V14, V15, V16 | CIS Docker Benchmark, CIS Kubernetes Benchmark |
+| `cloud-security` | A01, A02, A04, A06, A08, A09 | - | V2, V8, V11, V12, V13, V14, V15, V16 | - |
+| `ssh-server` | A02, A04, A07, A08, A09 | - | V6, V7, V8, V12, V13, V16 | CIS NGINX Benchmark |
+| `devsecops` | A03, A08 | - | V13, V15 | SLSA, NIST SP 800-218 |
+| `ai-security` | all ten | - | V1, V2, V5, V8, V10, V11, V13, V14, V15, V16 | OWASP LLM Top 10, NIST AI RMF, EU AI Act |
+| `http-edge-security` | A02, A04, A05, A06 | - | V4, V11, V13, V14 | HTTP RFC 9110–9114 |
 | `realtime-security` | A01, A04, A05, A07 | API1, API2, API4, API5 | V4, V6, V7, V8, V13 | RFC 6455, WebRTC |
 | `redis-security` | A01, A02, A03, A04, A06, A08, A09, A10 | API4 | V2, V6, V7, V8, V11, V12, V13, V14, V15, V16 | Redis OSS, Valkey, MITRE CWE |
-| `sso-federation` | A01, A07, A08 | — | V2, V3, V6, V7, V8 | SAML 2.0 |
-| `browser-platform-security` | A01, A02, A06, A08 | — | V1, V3, V13, V14 | Service Worker, WebExtensions |
-| `deserialization-security` | A05, A06, A08 | — | V2, V5, V13 | CWE-502, CWE-611, CWE-776 |
+| `sso-federation` | A01, A07, A08 | - | V2, V3, V6, V7, V8 | SAML 2.0 |
+| `browser-platform-security` | A01, A02, A06, A08 | - | V1, V3, V13, V14 | Service Worker, WebExtensions |
+| `deserialization-security` | A05, A06, A08 | - | V2, V5, V13 | CWE-502, CWE-611, CWE-776 |
 | `email-security` | A01, A02, A04, A05, A06, A08, A09, A10 | API4, API8, API10 | V2, V4, V6, V7, V8, V11, V12, V13, V14, V15, V16 | RFC 5321, 5322, 6376, 7208, 7489 |
 | `http-client-security` | A01, A02, A04, A06, A08, A09, A10 | API4, API7, API8, API10 | V4, V7, V8, V11, V12, V13, V14, V15, V16 | RFC 3986, 9110, 9325; OWASP SSRF Cheat Sheet |
 
@@ -57,22 +57,22 @@ before you use this as a coverage claim:
 
 | Skill | Top 10 2025 | API Top 10 2023 | ASVS 5.0 chapters | Other |
 |---|---|---|---|---|
-| `cryptography` | A02, A04, A07, A08, A10 | — | V2, V6, V9, V11, V12, V14, V16 | FIPS 140, 203, 204, 205; NIST SP 800-38, 800-56A, 800-57, 800-77, 800-90A, 800-131A |
-| `network-security` | A01, A02, A04, A06, A09 | — | V1, V2, V6, V12, V13, V16, V17 | NIST SP 800-207 |
+| `cryptography` | A02, A04, A07, A08, A10 | - | V2, V6, V9, V11, V12, V14, V16 | FIPS 140, 203, 204, 205; NIST SP 800-38, 800-56A, 800-57, 800-77, 800-90A, 800-131A |
+| `network-security` | A01, A02, A04, A06, A09 | - | V1, V2, V6, V12, V13, V16, V17 | NIST SP 800-207 |
 | `security-testing` | all ten | API1 | all seventeen | OWASP MASTG |
-| `incident-response` | A07, A09, A10 | — | V6, V7, V10, V16 | NIST SP 800-61, 800-86, 800-92, 800-184; NIST CSF; OWASP LLM Top 10 |
-| `supply-chain-security` | A03, A08 | — | V13, V14, V15 | SLSA, NIST SP 800-218, 800-218A |
-| `secure-architecture` | A01, A02, A06, A09, A10 | — | all seventeen | NIST SP 800-207, 800-218, 800-218A; SLSA; STRIDE; ISO 27001; SOC 2; GDPR |
+| `incident-response` | A07, A09, A10 | - | V6, V7, V10, V16 | NIST SP 800-61, 800-86, 800-92, 800-184; NIST CSF; OWASP LLM Top 10 |
+| `supply-chain-security` | A03, A08 | - | V13, V14, V15 | SLSA, NIST SP 800-218, 800-218A |
+| `secure-architecture` | A01, A02, A06, A09, A10 | - | all seventeen | NIST SP 800-207, 800-218, 800-218A; SLSA; STRIDE; ISO 27001; SOC 2; GDPR |
 
 ## Enterprise
 
 | Skill | Top 10 2025 | API Top 10 2023 | ASVS 5.0 chapters | Other |
 |---|---|---|---|---|
-| `kubernetes-security` | A01, A02, A03, A09 | — | V13, V14, V15, V16 | CIS Kubernetes Benchmark |
-| `windows-security` | A01, A02, A04, A09, A10 | — | V1, V12, V13, V14, V16, V17 | NIST SP 800-53 |
-| `mobile-security` | A01, A02, A03, A04, A06, A07 | — | V1, V2, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16 | OWASP MASVS, MASTG |
-| `blockchain-security` | A01, A04, A06, A08, A10 | — | V1, V2, V4, V8, V11, V13, V14, V15, V16, V17 | — |
-| `compliance` | all ten | — | V8, V11, V12, V13, V14, V15, V16 | GDPR, HIPAA, PCI DSS, ISO/IEC 27001, SOC 2 |
+| `kubernetes-security` | A01, A02, A03, A09 | - | V13, V14, V15, V16 | CIS Kubernetes Benchmark |
+| `windows-security` | A01, A02, A04, A09, A10 | - | V1, V12, V13, V14, V16, V17 | NIST SP 800-53 |
+| `mobile-security` | A01, A02, A03, A04, A06, A07 | - | V1, V2, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16 | OWASP MASVS, MASTG |
+| `blockchain-security` | A01, A04, A06, A08, A10 | - | V1, V2, V4, V8, V11, V13, V14, V15, V16, V17 | - |
+| `compliance` | all ten | - | V8, V11, V12, V13, V14, V15, V16 | GDPR, HIPAA, PCI DSS, ISO/IEC 27001, SOC 2 |
 
 ## Architecture
 
@@ -82,16 +82,16 @@ covers A01".
 
 | Skill | Top 10 2025 | API Top 10 2023 | ASVS 5.0 chapters | Other |
 |---|---|---|---|---|
-| `clean-architecture` | A01, A05, A06, A10 | API1, API3, API4 | V2, V7, V8, V14, V15, V16 | — |
-| `hexagonal` | all ten | all ten | all seventeen | — |
-| `ddd` | A01, A09 | — | V2, V4, V8, V14, V15, V16 | — |
+| `clean-architecture` | A01, A05, A06, A10 | API1, API3, API4 | V2, V7, V8, V14, V15, V16 | - |
+| `hexagonal` | all ten | all ten | all seventeen | - |
+| `ddd` | A01, A09 | - | V2, V4, V8, V14, V15, V16 | - |
 | `cqrs` | A01, A04, A06, A08 | API1, API3, API4 | V1, V2, V8, V11, V14, V15 | GDPR |
-| `event-driven` | A01, A02, A04, A06, A07, A08, A09, A10 | — | V2, V6, V8, V11, V12, V13, V14, V15, V16 | — |
-| `modular-monolith` | A01, A05, A06, A08, A10 | — | V2, V4, V8, V13, V14, V15, V16 | — |
-| `microservices` | A01, A06 | — | V2, V4, V6, V8, V9, V12, V13, V14, V15, V16 | — |
-| `design-patterns` | A01, A05, A06, A10 | — | V8, V15, V16 | — |
+| `event-driven` | A01, A02, A04, A06, A07, A08, A09, A10 | - | V2, V6, V8, V11, V12, V13, V14, V15, V16 | - |
+| `modular-monolith` | A01, A05, A06, A08, A10 | - | V2, V4, V8, V13, V14, V15, V16 | - |
+| `microservices` | A01, A06 | - | V2, V4, V6, V8, V9, V12, V13, V14, V15, V16 | - |
+| `design-patterns` | A01, A05, A06, A10 | - | V8, V15, V16 | - |
 | `performance` | A01, A02, A06, A09, A10 | API1, API4, API6 | V2, V4, V5, V8, V13, V15, V16 | ISO 27001, PCI DSS, SOC 2 |
-| `scalability` | A01, A02, A06, A09, A10 | API4 | V4, V8, V13, V15, V16 | — |
+| `scalability` | A01, A02, A06, A09, A10 | API4 | V4, V8, V13, V15, V16 | - |
 
 ## Category → skill
 
@@ -137,7 +137,7 @@ while looking authoritative.
 
 Two entries need care wherever they appear, because MITRE marks them DISCOURAGED for mapping:
 CWE-200 (Exposure of Sensitive Information to an Unauthorized Actor) and CWE-284/CWE-285 (access
-control). They are too abstract to act on. Cite the specific child — CWE-527, CWE-538, CWE-540,
+control). They are too abstract to act on. Cite the specific child - CWE-527, CWE-538, CWE-540,
 CWE-615, CWE-532 for exposure; the concrete authorization weakness for access control.
 
 ## Keeping this current

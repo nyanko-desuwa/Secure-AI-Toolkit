@@ -361,7 +361,7 @@ Azure diagnostic settings to a separate immutable destination and GCP organisati
 locked bucket. Detection rules worth having cover root use, MFA and key changes, policy and
 logging changes, public storage, unusual role assumption or service-account impersonation,
 new regions, metadata access, and mass object deletion. Log actor, action, target, outcome, time,
-and source — never the credential.
+and source - never the credential.
 
 ## Secrets, serverless, and Terraform state
 

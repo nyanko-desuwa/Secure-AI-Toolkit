@@ -12,7 +12,7 @@ longer exists is.
 `A04:2025 Cryptographic Failures` · ASVS V14 (Data Protection) · `CWE-798`, `CWE-540`
 
 Anyone who opens your website can read every value your frontend code was built with. Not
-"a skilled attacker" — anyone, using the browser's own view-source. If that value is an API
+"a skilled attacker" - anyone, using the browser's own view-source. If that value is an API
 key, they can spend your credits, read your customer records, or send email as you, until you
 revoke the key.
 
@@ -49,7 +49,7 @@ export function Summarise({ text }: { text: string }) {
 
 The fix is to move the call to a server route. The key stays on the server, the browser talks to
 your route, and your route talks to the provider. If you have no backend, the smallest version
-that works is a single serverless function — one file in `app/api/` on Vercel or Netlify, no
+that works is a single serverless function - one file in `app/api/` on Vercel or Netlify, no
 server to run.
 
 ```typescript
@@ -279,7 +279,7 @@ app.get("/api/admin/users", (req, res) => {
 ```
 
 Decoding a JWT is unpacking a piece of text. It proves nothing. The middle segment is
-base64 — anyone can write `{"sub":"1","role":"admin"}`, encode it, and send it. Verifying
+base64 - anyone can write `{"sub":"1","role":"admin"}`, encode it, and send it. Verifying
 checks the signature against a key only your server holds. That is the step that matters
 (`CWE-347`).
 
@@ -346,8 +346,8 @@ The symptom is an app that works fine after a restart and gets worse over hours.
 responses slow, the process is killed and restarted, and eventually the restarts overlap with
 traffic and users see errors.
 
-For the deep version of this topic — the eight leak shapes, heap snapshot workflow per runtime,
-backpressure design — use the `performance` skill at
+For the deep version of this topic - the eight leak shapes, heap snapshot workflow per runtime,
+backpressure design - use the `performance` skill at
 `skills/architecture/performance/`. What follows is the subset that shows up in
 AI-generated web code.
 
@@ -442,7 +442,7 @@ useEffect(() => {
 ```
 
 Two details that are easy to miss. `removeEventListener` matches by reference, so an inline
-arrow function cannot be removed — name it. And `prev.slice(-200)` bounds the state array; a
+arrow function cannot be removed - name it. And `prev.slice(-200)` bounds the state array; a
 list that only ever grows is a leak even with correct cleanup.
 
 ### Node and Python
@@ -616,7 +616,7 @@ Data-loss rules worth following without exception:
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE list — <https://cwe.mitre.org/data/index.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE list - <https://cwe.mitre.org/data/index.html>

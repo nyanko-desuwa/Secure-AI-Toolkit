@@ -19,7 +19,7 @@ Anything sized by input needs an explicit maximum. A missing bound is a finding 
 
 "Silently grow" is not a full-queue policy. It is what happens when nobody chose.
 
-## L1 — Unbounded Cache
+## L1 - Unbounded Cache
 
 `A06:2025` · `CWE-401`, `CWE-770`
 
@@ -67,7 +67,7 @@ bounds staleness as well as size. `lru_cache(maxsize=N)` works when no TTL is ne
 positive size is unbounded. In Node, prefer an LRU with both `maxSize` and a
 `sizeCalculation`; a bare `Map` has no eviction.
 
-## L2 — Listener and Subscription Accumulation
+## L2 - Listener and Subscription Accumulation
 
 `A06:2025` · `CWE-401`
 
@@ -124,7 +124,7 @@ useEffect(() => {
 An `isMounted` flag only suppresses the state update. It does not cancel the request or release
 its buffers and captured closure. `AbortController` does.
 
-## L3 — Connection and Handle Exhaustion
+## L3 - Connection and Handle Exhaustion
 
 `A06:2025` · `A10:2025` · `CWE-772`
 
@@ -169,7 +169,7 @@ return names, rows.Err()
 Set `SetMaxOpenConns`, `SetMaxIdleConns`, and `SetConnMaxLifetime`. Go's default open limit is
 unlimited. The same scope rule applies to files, sockets, cursors, locks, and C# `using`.
 
-## L4 — Timer and Background Task Leaks
+## L4 - Timer and Background Task Leaks
 
 `A06:2025` · `CWE-772`, `CWE-400`
 
@@ -226,7 +226,7 @@ func fetch(ctx context.Context, url string, out chan<- Result) {
 Use `errgroup.WithContext` plus `SetLimit` for bounded fan-out. Structured concurrency is the
 structural fix: a scope cannot finish while its children still run.
 
-## L5 — Closure Capture and Accidental Retention
+## L5 - Closure Capture and Accidental Retention
 
 `A06:2025` · `CWE-401`
 
@@ -269,7 +269,7 @@ parent.children.append(child)
 Why this works: the weak parent link no longer keeps the cycle alive. Prefer explicit `close()`
 or a context manager to `__del__`, whose timing is nondeterministic.
 
-## L6 — Request-Scoped State Stored Globally
+## L6 - Request-Scoped State Stored Globally
 
 `A01:2025` and `A06:2025` · `CWE-401`
 
@@ -300,7 +300,7 @@ Why this works: `reset(token)` prevents the next request from observing stale st
 when the handler raises. A `ContextVar` set without reset, or a thread local never cleared
 before returning to its pool, still leaks across work.
 
-## L7 — Large Payloads Read Fully Into Memory
+## L7 - Large Payloads Read Fully Into Memory
 
 `A06:2025` · `API4:2023` · `CWE-770`, `CWE-789`
 
@@ -327,7 +327,7 @@ Why this works: the cap uses bytes received, not attacker-controlled `Content-Le
 Enforce the same cap at the gateway. Stream database rows with a cursor or `yield_per`; never
 call `.all()` on a query whose result grows with the table.
 
-## L8 — Unbounded Queue or Buffer
+## L8 - Unbounded Queue or Buffer
 
 `A06:2025` · `API4:2023` · `CWE-400`, `CWE-770`
 
@@ -395,7 +395,7 @@ idempotency key.
 ## Measure Before Optimising
 
 State the workload, duration, metric, baseline, and result. "Reduced allocations by 40 %"
-without a workload is not evidence. Profile first — speculative optimisation often adds an
+without a workload is not evidence. Profile first - speculative optimisation often adds an
 L1 cache to a cold path.
 
 ## Sources

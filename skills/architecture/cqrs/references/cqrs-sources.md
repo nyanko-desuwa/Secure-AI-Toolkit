@@ -5,7 +5,7 @@ the date the page was checked.
 
 ## Martin Fowler, CQRS
 
-<https://martinfowler.com/bliki/CQRS.html> — verified 2026-07-28.
+<https://martinfowler.com/bliki/CQRS.html> - verified 2026-07-28.
 
 Fowler credits the pattern to Greg Young and states the core idea as using a different model to
 update information than the model used to read it. The two models are usually distinct object
@@ -16,7 +16,7 @@ Used in this skill for the "when NOT to use" position, which is Fowler's own and
 blunt for a pattern writeup:
 
 - For most systems CQRS adds risky complexity.
-- Apply it to a particular portion of a system — a bounded context in DDD terms — never the whole
+- Apply it to a particular portion of a system - a bounded context in DDD terms - never the whole
   system.
 - Domains complex enough to warrant it are very much the minority case; usually command and query
   overlap enough that one shared model is simpler.
@@ -24,7 +24,7 @@ blunt for a pattern writeup:
 - For demanding queries in a domain that is not a CQRS fit, use a reporting database instead:
   keep the main system for most queries and offload only the expensive ones.
 
-Fowler mentions eventual consistency once, and frames it as a consequence rather than a benefit —
+Fowler mentions eventual consistency once, and frames it as a consequence rather than a benefit -
 maintaining two models raises the question of how hard to keep them consistent, which raises the
 likelihood of using eventual consistency.
 
@@ -35,16 +35,16 @@ for keeping event sourcing optional and separate in `best-practices.md`.
 
 ## Azure Architecture Center, CQRS pattern
 
-<https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs> — verified 2026-07-28. Page
+<https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs> - verified 2026-07-28. Page
 `ms.date` 2025-02-20.
 
 Used for the level table in `SKILL.md`. Microsoft describes two approaches to read/write model
 separation:
 
-- Separate models in a single data store — the foundational level. Both models share one database
+- Separate models in a single data store - the foundational level. Both models share one database
   but maintain distinct logic. The write model holds validation and domain logic; the read model
   serves DTOs or projections optimised for presentation and avoids domain logic.
-- Separate models in different data stores — the advanced level. Each model scales to match its
+- Separate models in different data stores - the advanced level. Each model scales to match its
   load and can use a different storage technology.
 
 Points this skill leans on directly:
@@ -57,7 +57,7 @@ Points this skill leans on directly:
   consumes. Because message brokers and databases usually cannot be enlisted in a single
   distributed transaction, consistency problems occur between updating the database and publishing
   the event. That is the dual-write problem the outbox pattern addresses.
-- Commands should represent specific business tasks rather than low-level data updates — "Book
+- Commands should represent specific business tasks rather than low-level data updates - "Book
   hotel room", not "Set ReservationStatus to Reserved".
 - Queries never alter data and return DTOs with no domain logic.
 - Stated as not suitable when the domain or business rules are simple, or when a CRUD-style UI and
@@ -67,25 +67,25 @@ Points this skill leans on directly:
 
 ## microservices.io, Transactional Outbox
 
-<https://microservices.io/patterns/data/transactional-outbox.html> — verified 2026-07-28.
+<https://microservices.io/patterns/data/transactional-outbox.html> - verified 2026-07-28.
 
 Used for the outbox section in `best-practices.md`.
 
 The problem: a command often has to change database state and emit messages at the same time, and
 two-phase commit is not an option. Sending mid-transaction risks a rollback that the broker never
-sees; sending after commit risks a crash before the message goes out. Ordering matters too —
+sees; sending after commit risks a crash before the message goes out. Ordering matters too -
 events must reach the broker in the sequence the service produced them, including across multiple
 instances updating the same aggregate.
 
 The mechanism: the message is written to the database inside the same transaction that updates the
-business entities. A separate process — the message relay — then sends the messages to the broker.
+business entities. A separate process - the message relay - then sends the messages to the broker.
 In a relational database the outbox is a table of pending messages. Two relay implementations are
 referenced: transaction log tailing and polling publisher.
 
 Drawbacks the page names, and which this skill repeats rather than glossing over:
 
 - Error prone in practice; a developer can forget to publish the event after the database update.
-- The relay may deliver duplicates — for example by crashing after publishing but before recording
+- The relay may deliver duplicates - for example by crashing after publishing but before recording
   that it did, then republishing on restart.
 
 On idempotency the page is explicit: a message consumer must be idempotent, perhaps by tracking
@@ -95,7 +95,7 @@ for the `last_event_seq` guard in the projector examples.
 
 ## GDPR Article 17, right to erasure
 
-<https://gdpr-info.eu/art-17-gdpr/> — verified 2026-07-28.
+<https://gdpr-info.eu/art-17-gdpr/> - verified 2026-07-28.
 
 Used for the PII-in-an-immutable-log section. Article 17 is titled "Right to erasure ('right to be
 forgotten')". Paragraph 1 gives a data subject the right to have personal data erased without

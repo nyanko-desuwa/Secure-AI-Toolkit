@@ -10,7 +10,7 @@ download. None of those can be taken back by editing a file afterwards.
 
 If a value is needed by code that runs on someone else's device, that value is public. There is
 no build setting, minifier, or obfuscator that changes this. Code that runs on a device you
-control — a server, a serverless function, a background worker — is the only place a secret can
+control - a server, a serverless function, a background worker - is the only place a secret can
 live.
 
 ## Env var prefixes that mean public
@@ -22,15 +22,15 @@ download.
 | Framework | Public prefix | Server-only variable |
 |---|---|---|
 | Next.js | `NEXT_PUBLIC_` | any name without the prefix, read in a route handler or server component |
-| Vite, and anything built on it | `VITE_` | not available in the browser at all — needs a server |
+| Vite, and anything built on it | `VITE_` | not available in the browser at all - needs a server |
 | Create React App | `REACT_APP_` | needs a separate backend |
 | Nuxt 3 | keys under `runtimeConfig.public` | keys at the top level of `runtimeConfig` |
 | SvelteKit | `PUBLIC_` | `$env/static/private`, `$env/dynamic/private` |
-| Expo / React Native | `EXPO_PUBLIC_` | no client-side option — the whole bundle is readable |
+| Expo / React Native | `EXPO_PUBLIC_` | no client-side option - the whole bundle is readable |
 | Astro | `PUBLIC_` | `import.meta.env` in server-rendered code only |
 
 Two things follow. A variable without the public prefix is still not secret if it is imported
-into a component that ships to the browser — the bundler follows the import. And a `.env` file is
+into a component that ships to the browser - the bundler follows the import. And a `.env` file is
 not encrypted; the name means "environment", not "secret".
 
 ## Keys that are meant to be public

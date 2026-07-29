@@ -57,7 +57,7 @@ Give me the ordered response. Be explicit about what happens first and why delet
 is not it. Then tell me what to check in CloudTrail and over what window.
 ```
 
-Stating the elapsed time and the public visibility changes the answer — it moves the assumption
+Stating the elapsed time and the public visibility changes the answer - it moves the assumption
 from "seen" to "used". Asking for the order explicitly is what stops the git-cleanup reflex.
 
 ## Review a secret manager integration
@@ -100,7 +100,7 @@ pass, fail, or not applicable with a reason. Do not mark anything pass that you 
 actually read the file for, and list what you could not verify.
 ```
 
-The last clause matters. Runtime state — etcd encryption, whether rotation has ever run — is
+The last clause matters. Runtime state - etcd encryption, whether rotation has ever run - is
 not verifiable from the repo, and a wall of checkmarks hides that.
 
 ## Anti-patterns

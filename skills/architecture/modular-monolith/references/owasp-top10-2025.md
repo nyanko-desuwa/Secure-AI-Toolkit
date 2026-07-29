@@ -21,4 +21,4 @@ risk, and whether a database/compiler/runtime control blocks it.
 
 ## Source
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>

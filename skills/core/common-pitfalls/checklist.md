@@ -1,7 +1,7 @@
 # Pre-Ship Checklist
 
 Run this before anyone outside your team can reach the app. Mark each item pass, fail, or not
-applicable. "Not applicable" needs one line of reason — an unexplained skip looks exactly like
+applicable. "Not applicable" needs one line of reason - an unexplained skip looks exactly like
 an oversight.
 
 Only run the sections that match what you built. A static landing page does not need the
@@ -10,7 +10,7 @@ database section.
 ## 1. Secrets (A04 · ASVS V14 · CWE-798, CWE-540)
 
 - [ ] Built the app, then searched the output for every key you own. Source-only search is not
-      enough — the build inlines env vars
+      enough - the build inlines env vars
 - [ ] No `NEXT_PUBLIC_`, `VITE_`, `REACT_APP_`, `EXPO_PUBLIC_`, or `PUBLIC_` variable holds a
       value you would mind a stranger having
 - [ ] No OpenAI, Anthropic, Stripe secret, SendGrid, Twilio, or cloud key is referenced anywhere
@@ -19,7 +19,7 @@ database section.
       server code only
 - [ ] Firebase: the config object is present in the client (expected) and Security Rules deny by
       default (required)
-- [ ] `.env`, `.env.local`, `.env.production` are in `.gitignore` and were never committed —
+- [ ] `.env`, `.env.local`, `.env.production` are in `.gitignore` and were never committed -
       checked with `git log --all --full-history -- .env*`, not just `git status`
 - [ ] Every key that was ever committed, pasted into a chat, or found in a bundle has been
       rotated at the provider, not merely deleted from the file
@@ -90,7 +90,7 @@ database section.
 - [ ] No `await` inside a `for` loop over rows. Batched, joined, or `Promise.all`ed
 - [ ] Every column used in a `WHERE`, `JOIN`, or `ORDER BY` has an index
 - [ ] Counts and sums run in the database, not by loading rows into memory
-- [ ] Slow work — images, PDFs, email, exports — is on a queue, not the request path
+- [ ] Slow work - images, PDFs, email, exports - is on a queue, not the request path
 - [ ] Independent awaits run concurrently, with a concurrency cap on fan-out
 - [ ] Clients, connection pools, and config files are created once at startup, not per request
 - [ ] Expensive reads are cached with an explicit expiry

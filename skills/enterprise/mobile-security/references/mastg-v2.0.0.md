@@ -12,7 +12,7 @@ Two things about the numbering, both of which trip up report readers:
 
 - Test IDs are not sequential by topic and are not stable across editions. The guide is being
   migrated from prose tests to atomic tests, so older four-digit IDs coexist with newer ones and
-  some topics have two IDs — one for the Android test, one for iOS.
+  some topics have two IDs - one for the Android test, one for iOS.
 - The same title appears under different IDs per platform. "Testing Backups for Sensitive Data"
   is MASTG-TEST-0009 and MASTG-TEST-0058. Quote the ID and the platform, not just the title.
 
@@ -69,7 +69,7 @@ Verified present in the v2.0.0 tests index on the date above.
 | MASTG-TEST-0266 | References to APIs for Event-Bound Biometric Authentication | AUTH |
 | MASTG-TEST-0268 | References to APIs Allowing Fallback to Non-Biometric Authentication | AUTH |
 
-Some of these come in static/dynamic pairs — 0242 and 0243 read the config, 0244 watches the
+Some of these come in static/dynamic pairs - 0242 and 0243 read the config, 0244 watches the
 handshake. A static pass with no dynamic test is not a pass, because a pinning class can be
 present and never installed on the client that makes the request.
 

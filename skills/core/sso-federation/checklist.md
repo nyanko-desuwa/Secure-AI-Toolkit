@@ -1,13 +1,13 @@
 # SSO Federation Checklist
 
-## Trust and metadata — A08 · CWE-829
+## Trust and metadata - A08 · CWE-829
 
 - [ ] Each tenant has an explicit IdP entity ID and metadata source allowlist.
 - [ ] Metadata is authenticated, signed, pinned, or updated through a controlled review process.
 - [ ] Signing certificates have rotation ownership and expiry monitoring.
 - [ ] No arbitrary metadata URL or uploaded certificate becomes trusted.
 
-## Assertion validation — A07 · CWE-347/CWE-345
+## Assertion validation - A07 · CWE-347/CWE-345
 
 - [ ] Library validates XML signatures using the configured IdP key before application reads claims.
 - [ ] Validated assertion issuer equals the configured IdP entity ID.
@@ -16,7 +16,7 @@
 - [ ] InResponseTo is checked for SP-initiated flows; assertion IDs have replay protection where supported.
 - [ ] Parser/library is supported and hardened against signature wrapping; no custom XPath verification.
 
-## Identity and authorization — A01
+## Identity and authorization - A01
 
 - [ ] NameID/subject maps to a local tenant-bound account, not a globally guessed email alone.
 - [ ] Attribute-to-role mapping is an allowlist and defaults to least privilege.

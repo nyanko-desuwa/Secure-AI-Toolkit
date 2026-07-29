@@ -55,7 +55,7 @@ per-request rate limit.
 
 ## ASVS 5.0.0
 
-Version 5.0.0, released 2025-05-30. Chapter-level citations only — 5.0 renumbered
+Version 5.0.0, released 2025-05-30. Chapter-level citations only - 5.0 renumbered
 requirements, so a recalled ID from 4.x means something different or nothing at all.
 
 | Chapter | Relevance here |
@@ -89,7 +89,7 @@ starting position, and the ceiling it hits.
 |---|---|
 | Critical | Unauthenticated caller drives unbounded growth in a global structure, or request-scoped data crosses users |
 | High | Authenticated caller drives it, or normal traffic reaches the limit within a deploy cycle |
-| Medium | Growth bounded by something incidental — table size, disk, an upstream quota — or slow enough that routine deploys mask it |
+| Medium | Growth bounded by something incidental - table size, disk, an upstream quota - or slow enough that routine deploys mask it |
 | Low | Bounded and correct, but the limit is undocumented or unmonitored |
 
 Do not escalate on category name. An unbounded cache keyed by a value only an operator can

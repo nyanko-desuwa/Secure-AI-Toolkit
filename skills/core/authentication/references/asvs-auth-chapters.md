@@ -1,4 +1,4 @@
-# ASVS 5.0.0 — the identity chapters
+# ASVS 5.0.0 - the identity chapters
 
 Application Security Verification Standard 5.0.0, released 30 May 2025. Five of its
 seventeen chapters cover identity. This file summarises what each one is for.
@@ -40,14 +40,14 @@ Supporting chapters you will end up in from here:
 
 Cite the chapter when the finding is general. `ASVS V7 (Session Management)` is a correct,
 defensible citation. A specific requirement number is only worth quoting if you have read
-its current text — the 5.0 numbering is new enough that recalled IDs are unreliable, and an
+its current text - the 5.0 numbering is new enough that recalled IDs are unreliable, and an
 invented ID discredits everything around it.
 
 ## Verification levels
 
-- **Level 1** — black-box achievable baseline. A floor, not a target.
-- **Level 2** — the right default for anything holding user accounts.
-- **Level 3** — health, finance, safety, critical infrastructure.
+- **Level 1** - black-box achievable baseline. A floor, not a target.
+- **Level 2** - the right default for anything holding user accounts.
+- **Level 3** - health, finance, safety, critical infrastructure.
 
 "We followed ASVS V6 and V7" is honest. "We are ASVS Level 2" implies a completed
 requirement-by-requirement assessment. Do not claim the second for the first.

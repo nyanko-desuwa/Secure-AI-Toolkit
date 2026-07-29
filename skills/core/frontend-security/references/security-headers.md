@@ -52,7 +52,7 @@ location / {
 }
 ```
 
-Two nginx-specific traps. Without `always`, the header is not sent on error responses — and error
+Two nginx-specific traps. Without `always`, the header is not sent on error responses - and error
 pages are exactly where a reflected value often lands. And `add_header` in a nested block replaces
 the parent's entire set rather than merging, so a `location /api` block with one `add_header` silently
 drops every header defined at `server` level. Re-declare them or use a shared `include`.
@@ -100,7 +100,7 @@ app.use(
 );
 ```
 
-`useDefaults: false` is deliberate — helmet's default CSP includes `script-src 'self'`, which
+`useDefaults: false` is deliberate - helmet's default CSP includes `script-src 'self'`, which
 combined with a user-upload path on the same origin is not a boundary.
 
 ## HSTS, carefully
@@ -123,8 +123,8 @@ request to the preload list and then waiting for browser releases to ship. Start
 | `strict-origin-when-cross-origin` | Full URL same-origin, origin only cross-origin HTTPS, nothing on downgrade | Sensible default |
 | `unsafe-url` | Full URL always | Never |
 
-If a URL in your app ever contains a token — a password reset link, a magic login link, a signed
-download URL — the referrer policy is load-bearing, not cosmetic. `unsafe-url` on such a page ships
+If a URL in your app ever contains a token - a password reset link, a magic login link, a signed
+download URL - the referrer policy is load-bearing, not cosmetic. `unsafe-url` on such a page ships
 the token to every third-party resource the page loads.
 
 ## Cookie attributes
@@ -143,7 +143,7 @@ res.cookie("sid", sessionId, {
 
 `SameSite=Lax` blocks the cookie on cross-site POST, which stops the simplest CSRF. It is not a
 substitute for a CSRF token: `Lax` still sends the cookie on top-level cross-site GET navigation,
-so any state-changing GET is still reachable, and `SameSite` is site-scoped, not origin-scoped —
+so any state-changing GET is still reachable, and `SameSite` is site-scoped, not origin-scoped -
 a sibling subdomain is same-site.
 
 ## Verify against the real origin
@@ -159,13 +159,13 @@ strip, or overwrite any of these. Check an error response too:
 curl -sSI https://app.example.com/does-not-exist | grep -i content-security
 ```
 
-If the header is missing there, the 404 page is unprotected — and 404 pages frequently reflect the
+If the header is missing there, the 404 page is unprotected - and 404 pages frequently reflect the
 requested path.
 
 ## Sources
 
-- OWASP Secure Headers Project — <https://owasp.org/www-project-secure-headers/>
-- MDN HTTP headers — <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers>
-- MDN Strict-Transport-Security — <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security>
-- MDN Set-Cookie — <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>
-- helmet — <https://helmetjs.github.io/>
+- OWASP Secure Headers Project - <https://owasp.org/www-project-secure-headers/>
+- MDN HTTP headers - <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers>
+- MDN Strict-Transport-Security - <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security>
+- MDN Set-Cookie - <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie>
+- helmet - <https://helmetjs.github.io/>

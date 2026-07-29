@@ -8,7 +8,7 @@ allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 
 Review code for security in a fixed order, so two reviews of the same diff produce the same
 findings. The output is a list where every entry has a location, a sink, a CWE, an
-exploitation path, and a fix — or it is labelled a smell and kept out of the findings list.
+exploitation path, and a fix - or it is labelled a smell and kept out of the findings list.
 
 ## When to Use
 
@@ -52,7 +52,7 @@ Build the map before hunting. You are looking for the places where data changes 
 |---|---|
 | Request entry | Every route, handler, consumer, cron, and webhook the diff touches |
 | Authentication | Where the actor identity is established, and from what |
-| Authorization | Where the decision is made — route, service, or query |
+| Authorization | Where the decision is made - route, service, or query |
 | Trust downgrade | Where internal code treats external data as trusted |
 | Egress | Outbound HTTP, DB writes, file writes, shell, logs |
 
@@ -112,7 +112,7 @@ For each candidate, spend one round trying to prove it is not a finding. Five qu
    have a smell, not a vulnerability.
 
 A candidate that survives all five is a finding. One that does not goes to a separate
-"observations" list, or gets dropped. Do not pad the findings list — see
+"observations" list, or gets dropped. Do not pad the findings list - see
 [common-mistakes.md](common-mistakes.md#reporting-a-smell-as-a-vulnerability).
 
 ### 5. Report
@@ -182,18 +182,18 @@ code.
 
 ## Related Skills
 
-- `core/owasp` — the standards themselves, and controls for new code
-- `core/api-security` — API-specific weakness classes
-- `core/authentication` — auth and session review depth
-- `core/devsecops` — wiring SAST and secret scanning into CI so this review is not the only gate
+- `core/owasp` - the standards themselves, and controls for new code
+- `core/api-security` - API-specific weakness classes
+- `core/authentication` - auth and session review depth
+- `core/devsecops` - wiring SAST and secret scanning into CI so this review is not the only gate
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, standards, limitations
-- [checklist.md](checklist.md) — pre-return verification for the review itself
-- [best-practices.md](best-practices.md) — review patterns and secure refactoring
-- [common-mistakes.md](common-mistakes.md) — how reviews go wrong
-- [troubleshooting.md](troubleshooting.md) — when a finding cannot be resolved
-- [prompts.md](prompts.md) — prompts that produce findings, and anti-patterns
-- [references/](references/) — CWE Top 25, review process, ASVS, CVSS, Top 10
-- [examples/](examples/) — eight findings, two of which are not vulnerabilities
+- [README.md](README.md) - purpose, layout, standards, limitations
+- [checklist.md](checklist.md) - pre-return verification for the review itself
+- [best-practices.md](best-practices.md) - review patterns and secure refactoring
+- [common-mistakes.md](common-mistakes.md) - how reviews go wrong
+- [troubleshooting.md](troubleshooting.md) - when a finding cannot be resolved
+- [prompts.md](prompts.md) - prompts that produce findings, and anti-patterns
+- [references/](references/) - CWE Top 25, review process, ASVS, CVSS, Top 10
+- [examples/](examples/) - eight findings, two of which are not vulnerabilities

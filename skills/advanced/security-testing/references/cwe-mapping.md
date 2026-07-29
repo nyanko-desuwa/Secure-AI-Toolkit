@@ -74,7 +74,7 @@ The pairs that get confused, and the question that separates them:
 | If | Then |
 |---|---|
 | No authorization decision exists on the path | CWE-862 Missing Authorization |
-| A decision exists and is wrong — wrong operator, wrong role, wrong order | CWE-863 Incorrect Authorization |
+| A decision exists and is wrong - wrong operator, wrong role, wrong order | CWE-863 Incorrect Authorization |
 | The decision uses an identifier the client supplied | CWE-639 |
 | Access control is structurally absent across a component | CWE-284 |
 | The sink is SQL | CWE-89, not the generic CWE-20 |
@@ -109,7 +109,7 @@ weakness.
 
 ## Sources
 
-- 2025 CWE Top 25 — <https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html>
-- CWE Top 25 landing page — <https://cwe.mitre.org/top25/>
-- CWE list — <https://cwe.mitre.org/data/index.html>
-- OWASP WSTG v4.2 — <https://owasp.org/www-project-web-security-testing-guide/v42/>
+- 2025 CWE Top 25 - <https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html>
+- CWE Top 25 landing page - <https://cwe.mitre.org/top25/>
+- CWE list - <https://cwe.mitre.org/data/index.html>
+- OWASP WSTG v4.2 - <https://owasp.org/www-project-web-security-testing-guide/v42/>

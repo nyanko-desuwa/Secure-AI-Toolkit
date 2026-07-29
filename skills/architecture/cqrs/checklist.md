@@ -1,7 +1,7 @@
 # CQRS Checklist
 
 Run before returning code. Mark each item pass, fail, or not applicable. "Not applicable" needs
-a one-line reason — an unexplained skip reads the same as an oversight.
+a one-line reason - an unexplained skip reads the same as an oversight.
 
 Only run the sections the change touches. A change at level 1 does not need the projector or
 event store sections.
@@ -19,7 +19,7 @@ event store sections.
 
 - [ ] Command is named after a business intent, not a table operation
 - [ ] Command returns an identifier or an acknowledgement, not the whole entity
-- [ ] Payload schema is closed — unknown keys rejected, no free-form field map
+- [ ] Payload schema is closed - unknown keys rejected, no free-form field map
 - [ ] Actor and tenant come from the session, never from the request body
 - [ ] The rule that governs the change lives in the aggregate, not in the handler
 - [ ] Every state change path passes through that rule; no direct table update bypasses it
@@ -56,7 +56,7 @@ event store sections.
 - [ ] No check-then-act where the check reads a projection and the act writes elsewhere
 - [ ] Uniqueness, balance, and quota invariants are enforced in the authoritative store
 - [ ] Read-your-own-write handled deliberately: optimistic render, read-write routing, or
-      version polling — not by making the projector synchronous
+      version polling - not by making the projector synchronous
 - [ ] Projection lag is emitted as a metric and has an alert threshold
 - [ ] The staleness window is written down somewhere a product owner has seen
 
@@ -65,7 +65,7 @@ event store sections.
 - [ ] Nothing accumulates per entity in memory. The database holds running state
 - [ ] Any in-memory cache has a max size and a TTL, with the number's basis stated
 - [ ] Correctness does not depend on that cache being warm or present
-- [ ] Every projector handler is idempotent — a sequence or version guard rejects replays
+- [ ] Every projector handler is idempotent - a sequence or version guard rejects replays
 - [ ] Handler is a pure function of the event plus current projection state
 - [ ] Projector has no side effects: no email, no webhook, no third-party call
 - [ ] Queue or channel between command side and projector is bounded
@@ -107,6 +107,6 @@ event store sections.
 - [ ] Relevant tests run, output reported honestly
 - [ ] A test asserts that a cross-tenant read returns nothing, not just that the happy path works
 - [ ] A test delivers the same event twice and asserts the projection is unchanged
-- [ ] Anything depending on runtime state — lag, RLS enabled, projector running — labelled
+- [ ] Anything depending on runtime state - lag, RLS enabled, projector running - labelled
       as unverified from source
 - [ ] Any recommendation to split stated with its cost, not just its benefit

@@ -1,7 +1,7 @@
 # Detection Rules
 
 > Event vocabulary verified 2026-07-28 against the OWASP Application Logging Vocabulary Cheat
-> Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html>
+> Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html>
 >
 > Rules below are this skill's own, not OWASP text. Pseudo-query syntax; SIEM dialects differ.
 
@@ -135,6 +135,6 @@ results. Assert the event in the same test that asserts the 403.
 
 ## Sources
 
-- OWASP A09:2025 — <https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/>
-- OWASP Application Logging Vocabulary Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html>
-- OWASP Logging Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html>
+- OWASP A09:2025 - <https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/>
+- OWASP Application Logging Vocabulary Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html>
+- OWASP Logging Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html>

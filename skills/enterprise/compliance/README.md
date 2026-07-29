@@ -8,12 +8,12 @@ inventories, audit evidence, and scope reduction. Not as paperwork.
 Two failures happen in opposite directions and both are common.
 
 A control passes the audit and remains exploitable. The access review was signed, the
-retention policy was written, the encryption box was ticked — and the deletion endpoint sets
+retention policy was written, the encryption box was ticked - and the deletion endpoint sets
 `deleted_at` while the read replica, the nightly backup, the Kinesis stream, and the
 warehouse table keep the row intact. The auditor sampled the endpoint's response code.
 
 A system is genuinely secure and fails the audit. Authorization is correct, secrets are in a
-manager, TLS is pinned — and there is no append-only record of who granted the admin role,
+manager, TLS is pinned - and there is no append-only record of who granted the admin role,
 so nothing can be tested. Auditors evaluate evidence, not code. No artifact means no control.
 
 This skill closes both gaps by naming, for every control, the code that implements it and
@@ -49,16 +49,16 @@ examples/
 
 | Standard | Version / citation | Verified |
 |---|---|---|
-| OWASP Top 10 | 2025 — A01, A02, A04, A09 | 2026-07-28, `owasp.org/Top10/2025/` |
-| OWASP ASVS | 5.0.0 — V14 Data Protection, V16 Logging and Error Handling, chapter level | 2026-07-28, ASVS project page |
+| OWASP Top 10 | 2025 - A01, A02, A04, A09 | 2026-07-28, `owasp.org/Top10/2025/` |
+| OWASP ASVS | 5.0.0 - V14 Data Protection, V16 Logging and Error Handling, chapter level | 2026-07-28, ASVS project page |
 | GDPR | Regulation (EU) 2016/679, article numbers per `references/gdpr-articles.md` | 2026-07-28, `gdpr-info.eu` |
 | PCI DSS | 4.0.1 (listed as current in the PCI SSC Document Library) | 2026-07-28, `pcisecuritystandards.org` Document Library |
-| HIPAA | 45 CFR Part 164 — §§ 164.312(b), 164.502(b), 164.504(e) | 2026-07-28, `ecfr.gov` |
+| HIPAA | 45 CFR Part 164 - §§ 164.312(b), 164.502(b), 164.504(e) | 2026-07-28, `ecfr.gov` |
 | ISO/IEC 27001 | 2022 edition | 2026-07-28, see the caveat below |
 | SOC 2 | AICPA Trust Services Criteria, five categories | 2026-07-28, `aicpa-cima.com` |
 | NIST Privacy Framework | 1.0 final; 1.1 at initial public draft | 2026-07-28, `nist.gov/privacy-framework` |
 | CCPA / CPRA | Title 11 CCR § 7001 et seq., effective 2023-03-29 | 2026-07-28, `oag.ca.gov` |
-| CWE | 4.20 — CWE-359, 311, 312, 532, 200, 922 | 2026-07-28, `cwe.mitre.org` |
+| CWE | 4.20 - CWE-359, 311, 312, 532, 200, 922 | 2026-07-28, `cwe.mitre.org` |
 
 Two honest gaps in that table:
 
@@ -143,17 +143,17 @@ with a fixed version. Do not copy a labelled-vulnerable block into a project.
 
 All personal data in the examples is fabricated placeholder data. There are no real
 credentials, hostnames, email addresses, card numbers, or patient records anywhere in this
-skill. Keep it that way — a compliance skill that leaks a sample of real PII into a git
+skill. Keep it that way - a compliance skill that leaks a sample of real PII into a git
 history is its own finding.
 
 ## References
 
-- GDPR full text — <https://gdpr-info.eu/>
-- PCI SSC Document Library — <https://www.pcisecuritystandards.org/document_library/>
-- HIPAA Security Rule, 45 CFR § 164.312 — <https://www.ecfr.gov/current/title-45/section-164.312>
-- NIST Privacy Framework — <https://www.nist.gov/privacy-framework>
-- AICPA SOC for Service Organizations — <https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2>
-- California AG CCPA FAQ — <https://oag.ca.gov/privacy/ccpa>
-- CWE list — <https://cwe.mitre.org/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
+- GDPR full text - <https://gdpr-info.eu/>
+- PCI SSC Document Library - <https://www.pcisecuritystandards.org/document_library/>
+- HIPAA Security Rule, 45 CFR § 164.312 - <https://www.ecfr.gov/current/title-45/section-164.312>
+- NIST Privacy Framework - <https://www.nist.gov/privacy-framework>
+- AICPA SOC for Service Organizations - <https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2>
+- California AG CCPA FAQ - <https://oag.ca.gov/privacy/ccpa>
+- CWE list - <https://cwe.mitre.org/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>

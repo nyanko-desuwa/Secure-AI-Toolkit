@@ -3,7 +3,7 @@
 Mark each item pass, fail, or not applicable. An N/A needs a reason. Controls map to OWASP Top
 10 2025, ASVS 5.0, and CWE where applicable.
 
-## Query construction — A05 · ASVS V1, V2
+## Query construction - A05 · ASVS V1, V2
 
 - [ ] Every SQL value uses a driver bind; no f-string, template literal, `+`, `%`, or `.format`
 - [ ] ORM escape hatches (`text`, `raw`, `extra`, `RawSQL`, `$queryRawUnsafe`, `whereRaw`) are
@@ -17,7 +17,7 @@ Mark each item pass, fail, or not applicable. An N/A needs a reason. Controls ma
 - [ ] Stored values that later become query text are validated again at the later sink
 - [ ] SQL error details and query text do not reach the client
 
-## NoSQL and ORM — A05, A01 · ASVS V2, V8
+## NoSQL and ORM - A05, A01 · ASVS V2, V8
 
 - [ ] No request object is passed directly into a MongoDB-style filter
 - [ ] Query fields have explicit types; unknown keys are rejected (`CWE-943`)
@@ -26,7 +26,7 @@ Mark each item pass, fail, or not applicable. An N/A needs a reason. Controls ma
 - [ ] Relations are loaded deliberately; N+1 fan-out has a query count or result-size bound
       (`CWE-770`, API4:2023)
 
-## Authorization and tenancy — A01 · ASVS V8
+## Authorization and tenancy - A01 · ASVS V8
 
 - [ ] Every read, write, and delete is scoped to actor and tenant server-side (`CWE-566`)
 - [ ] Tenant ID comes from authenticated context, never a body, query parameter, or path alone
@@ -36,7 +36,7 @@ Mark each item pass, fail, or not applicable. An N/A needs a reason. Controls ma
 - [ ] A direct cross-tenant read and write test returns zero rows / an error
 - [ ] A UUID or opaque ID is not treated as authorization; it is only an enumeration defence
 
-## Roles and migrations — A02, A01 · ASVS V8, V13, V15
+## Roles and migrations - A02, A01 · ASVS V8, V13, V15
 
 - [ ] Runtime, migration, reporting, and owner roles are separate
 - [ ] Runtime role cannot `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, grant, or change roles (`CWE-250`)
@@ -47,7 +47,7 @@ Mark each item pass, fail, or not applicable. An N/A needs a reason. Controls ma
 - [ ] Destructive migrations are two-phase and have rollback/data-retention plans
 - [ ] Data migrations require a predicate, row-count assertion, and second review
 
-## Encryption and connections — A04 · ASVS V11, V12, V14
+## Encryption and connections - A04 · ASVS V11, V12, V14
 
 - [ ] Volume/TDE, column, and application encryption are mapped to a stated threat
 - [ ] Application-level encryption uses an AEAD primitive and nonce/IV rules (`CWE-311`)
@@ -58,7 +58,7 @@ Mark each item pass, fail, or not applicable. An N/A needs a reason. Controls ma
 - [ ] Connection strings are not in source, images, shell history, or logs (`CWE-522`)
 - [ ] Credentials rotate without a source change or full application rebuild
 
-## Backups and audit — A04, A09 · ASVS V14, V16
+## Backups and audit - A04, A09 · ASVS V14, V16
 
 - [ ] Backups and snapshots are encrypted with separately protected keys
 - [ ] Backup creation and restore privileges are restricted and logged

@@ -40,7 +40,7 @@ Nothing in that line is exotic. Every flag maps to a CIS section 5 control liste
 
 | Flag | Effect | Cost |
 |---|---|---|
-| `--user UID:GID` | Runs as that UID regardless of the image's `USER` | Volume file ownership must match. Numeric only — a name must exist in the image's `/etc/passwd` |
+| `--user UID:GID` | Runs as that UID regardless of the image's `USER` | Volume file ownership must match. Numeric only - a name must exist in the image's `/etc/passwd` |
 | `--userns=host` | Disables user namespace remapping for this container | CIS 5.31. Removes the last layer between container root and host root |
 | `--group-add` | Extra supplementary groups | Adding `docker` here is the socket problem by another route |
 
@@ -107,8 +107,8 @@ Order of effort that actually pays: keep the default seccomp profile, keep the d
 profile, drop capabilities, and only then consider a custom profile. A hand-written seccomp profile
 that is silently disabled by a typo in the path is worse than the default, because it looks done.
 
-To build a real profile, record syscalls under load first — `strace -f -c`, `perf trace`, or
-`oci-seccomp-bpf-hook` on Podman — then allowlist. Guessing produces a profile that fails in
+To build a real profile, record syscalls under load first - `strace -f -c`, `perf trace`, or
+`oci-seccomp-bpf-hook` on Podman - then allowlist. Guessing produces a profile that fails in
 production at 3am.
 
 ## Resources as a DoS control

@@ -93,8 +93,8 @@ personal data in this skill.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Cheat Sheet Series — <https://cheatsheetseries.owasp.org/>
-- CWE Top 25 — <https://cwe.mitre.org/top25/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Cheat Sheet Series - <https://cheatsheetseries.owasp.org/>
+- CWE Top 25 - <https://cwe.mitre.org/top25/>

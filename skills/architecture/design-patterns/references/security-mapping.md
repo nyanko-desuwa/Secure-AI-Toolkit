@@ -49,11 +49,11 @@ formal assessment.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE-401 — <https://cwe.mitre.org/data/definitions/401.html>
-- CWE-602 — <https://cwe.mitre.org/data/definitions/602.html>
-- CWE-653 — <https://cwe.mitre.org/data/definitions/653.html>
-- CWE-770 — <https://cwe.mitre.org/data/definitions/770.html>
-- CWE-772 — <https://cwe.mitre.org/data/definitions/772.html>
-- CWE-1220 — <https://cwe.mitre.org/data/definitions/1220.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE-401 - <https://cwe.mitre.org/data/definitions/401.html>
+- CWE-602 - <https://cwe.mitre.org/data/definitions/602.html>
+- CWE-653 - <https://cwe.mitre.org/data/definitions/653.html>
+- CWE-770 - <https://cwe.mitre.org/data/definitions/770.html>
+- CWE-772 - <https://cwe.mitre.org/data/definitions/772.html>
+- CWE-1220 - <https://cwe.mitre.org/data/definitions/1220.html>

@@ -18,5 +18,5 @@ default to least privilege, and review the mapping when tenants change.
 
 ## "Metadata refresh is harmless"
 
-A metadata URL changes signing keys and endpoints — it changes who may authenticate. Authenticate and
+A metadata URL changes signing keys and endpoints - it changes who may authenticate. Authenticate and
 review updates like any other trust-root change.

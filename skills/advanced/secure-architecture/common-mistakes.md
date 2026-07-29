@@ -63,7 +63,7 @@ caller. Partition derived stores per tenant. `A01:2025`, `CWE-653`. Working SQL 
 [examples/tenant-isolation.sql](examples/tenant-isolation.sql).
 
 Why it works: RLS moves the predicate below every code path. A forgotten filter returns zero rows
-instead of another tenant's rows — a visible bug rather than a silent breach.
+instead of another tenant's rows - a visible bug rather than a silent breach.
 
 ## Cache keys without a tenant prefix
 
@@ -140,10 +140,10 @@ Why it works: the bound converts an indefinite grant into a short one. Without a
 
 ## Layers that fail for the same reason
 
-"We have a WAF, a gateway rule, and input validation — three layers." All three inspect the same
+"We have a WAF, a gateway rule, and input validation - three layers." All three inspect the same
 attacker-controlled string with pattern matching. One encoding trick bypasses all three at once.
 
-Fix: choose layers with independent failure modes — traffic shape, signature verification, business
+Fix: choose layers with independent failure modes - traffic shape, signature verification, business
 rule on the actor, database predicate, append-only audit. `A06:2025`.
 
 Why it works: independence is the property that makes depth meaningful. Counting correlated
@@ -201,8 +201,8 @@ can use. `A09:2025`.
 The service records an audit row in the API handler. Background jobs, migrations, and the admin
 console mutate the same tables directly and record nothing.
 
-Fix: emit the audit record where the mutation happens — a repository method, a domain event, or a
-database trigger — not in the handler. `A09:2025`.
+Fix: emit the audit record where the mutation happens - a repository method, a domain event, or a
+database trigger - not in the handler. `A09:2025`.
 
 Why it works: coupling the record to the write means a new caller cannot mutate without recording.
 Handler-level auditing records only the callers someone remembered.

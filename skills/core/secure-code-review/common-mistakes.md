@@ -43,7 +43,7 @@ diff-only and name the limitation.
 
 "Django escapes output." "The ORM parameterizes." "Spring has CSRF on by default."
 
-Why it fails: all three are true by default and all three are one keyword from off —
+Why it fails: all three are true by default and all three are one keyword from off -
 `|safe`, `.extra()`, `.raw()`, `csrf().disable()`. Reputation is not verification.
 
 Fix: confirm the version in the lockfile, the setting in the config, and the call site. Where
@@ -112,11 +112,11 @@ Traversal fix: `if ".." in name: reject()`. Injection fix: escaping quotes with 
 Access control fix: switching integer IDs to UUIDs.
 
 Why it fails, in order: `..%2f` and symlinks skip the string check; escaping misses backslash
-handling, numeric contexts, and identifier positions; UUIDs are obscurity — IDs leak through
+handling, numeric contexts, and identifier positions; UUIDs are obscurity - IDs leak through
 exports, logs, and referrer headers, and the object is still readable once you have one.
 
 Fix: resolve then compare against the base directory; parameterize, and allowlist identifiers;
-scope the query by actor. In review, name the wrong fix explicitly — the author will otherwise
+scope the query by actor. In review, name the wrong fix explicitly - the author will otherwise
 reach for it again on the next finding.
 
 ## Treating a scanner result as a finding
@@ -140,7 +140,7 @@ Why it fails: fluency and correctness are not correlated in generated code. It f
 plausibility, not haste, and it defeats the reviewer's usual heuristics for "sloppy, look
 harder".
 
-Fix: run the four AI failure modes deliberately — auth in the wrong layer, validation without
+Fix: run the four AI failure modes deliberately - auth in the wrong layer, validation without
 encoding, fail-open catch, invented API surface. See
 [best-practices.md](best-practices.md#reviewing-ai-generated-code).
 

@@ -11,7 +11,7 @@ Vulnerable: the controller checks permission, but the exported module method acc
 can call it directly.
 
 ```typescript
-// vulnerable.ts — run: npx tsx vulnerable.ts
+// vulnerable.ts - run: npx tsx vulnerable.ts
 class Billing {
   approve(invoiceId: string): void { console.log(`approved:${invoiceId}`); }
 }
@@ -27,7 +27,7 @@ billing.approve("invoice-2"); // background caller bypasses the controller
 Fixed: the owner requires and checks an actor. Every caller has the same path.
 
 ```typescript
-// fixed.ts — run: npx tsx fixed.ts
+// fixed.ts - run: npx tsx fixed.ts
 type Actor = Readonly<{ tenantId: string; permissions: ReadonlySet<string> }>;
 type Invoice = { id: string; tenantId: string; status: "submitted" | "approved" };
 
@@ -56,7 +56,7 @@ lookup predicate; real persistence should index tenant plus ID.
 Vulnerable: another module receives mutable owned state and can change it without the owner's rule.
 
 ```java
-// Vulnerable.java — javac Vulnerable.java && java Vulnerable
+// Vulnerable.java - javac Vulnerable.java && java Vulnerable
 import java.util.*;
 class Vulnerable {
   static final class Account { String tenant, status; Account(String t){ tenant=t; status="OPEN"; } }
@@ -75,7 +75,7 @@ class Vulnerable {
 Fixed: callers depend on an immutable public contract. The owner applies scope and mutation rules.
 
 ```java
-// Fixed.java — javac Fixed.java && java Fixed
+// Fixed.java - javac Fixed.java && java Fixed
 import java.util.*;
 class Fixed {
   record Actor(String tenantId, Set<String> permissions) {
@@ -111,7 +111,7 @@ ORM entities and accidental full-row serialization.
 Vulnerable: a database transaction remains open while a slow dependency runs.
 
 ```python
-# vulnerable.py — python vulnerable.py
+# vulnerable.py - python vulnerable.py
 import sqlite3, time
 conn = sqlite3.connect(":memory:")
 conn.execute("create table orders(id text primary key, status text)")
@@ -128,7 +128,7 @@ print("done")
 Fixed: call before opening the local transaction, then write local state plus outbox atomically.
 
 ```python
-# fixed.py — python fixed.py
+# fixed.py - python fixed.py
 import json, sqlite3, time, uuid
 conn = sqlite3.connect(":memory:")
 conn.executescript("""
@@ -156,7 +156,7 @@ quote version/expiry and bounded retry where business rules require freshness.
 Vulnerable: every request adds a process-lifetime listener that captures tenant state.
 
 ```typescript
-// vulnerable-listener.ts — run: npx tsx vulnerable-listener.ts
+// vulnerable-listener.ts - run: npx tsx vulnerable-listener.ts
 import { EventEmitter } from "node:events";
 const bus = new EventEmitter();
 function request(tenantId: string): void {
@@ -169,7 +169,7 @@ console.log(bus.listenerCount("paid")); // 20; each tenant closure remains
 Fixed: one host-owned listener; tenant data comes from the event, and shutdown removes it.
 
 ```typescript
-// fixed-listener.ts — run: npx tsx fixed-listener.ts
+// fixed-listener.ts - run: npx tsx fixed-listener.ts
 import { EventEmitter } from "node:events";
 type Paid = Readonly<{ tenantId: string; invoiceId: string }>;
 const bus = new EventEmitter();
@@ -190,7 +190,7 @@ lookups may be needed instead of captured request services.
 Vulnerable: an unbounded queue grows whenever producers outrun the consumer.
 
 ```java
-// VulnerableQueue.java — javac VulnerableQueue.java && java VulnerableQueue
+// VulnerableQueue.java - javac VulnerableQueue.java && java VulnerableQueue
 import java.util.concurrent.*;
 class VulnerableQueue {
   public static void main(String[] args) {
@@ -204,7 +204,7 @@ class VulnerableQueue {
 Fixed: capacity is explicit, saturation rejects and can be measured/retried.
 
 ```java
-// FixedQueue.java — javac FixedQueue.java && java FixedQueue
+// FixedQueue.java - javac FixedQueue.java && java FixedQueue
 import java.util.concurrent.*;
 class FixedQueue {
   public static void main(String[] args) {
@@ -227,7 +227,7 @@ Vulnerable: a module returns a generator backed by an open connection. A caller 
 leaves release timing to generator finalization.
 
 ```python
-# vulnerable_cursor.py — python vulnerable_cursor.py
+# vulnerable_cursor.py - python vulnerable_cursor.py
 import sqlite3
 def rows():
     conn=sqlite3.connect(":memory:")
@@ -242,7 +242,7 @@ it=rows(); print(next(it))  # caller never exhausts or closes it
 Fixed: materialize a bounded page and release the handle inside the owning module.
 
 ```python
-# fixed_cursor.py — python fixed_cursor.py
+# fixed_cursor.py - python fixed_cursor.py
 import sqlite3
 def page(limit: int) -> list[int]:
     safe_limit=max(1,min(limit,100))

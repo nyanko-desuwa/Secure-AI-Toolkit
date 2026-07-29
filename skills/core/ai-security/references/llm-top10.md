@@ -4,7 +4,7 @@ Source: <https://genai.owasp.org/llm-top-10/>
 Verified: 2026-07-28, fetched from the OWASP GenAI Security Project site.
 
 This list is maintained by the OWASP GenAI Security Project (formerly the OWASP Top 10 for
-LLM Applications project). The IDs changed between the 2023–24 edition and 2025 — do not
+LLM Applications project). The IDs changed between the 2023–24 edition and 2025 - do not
 carry an ID over from an older document without re-checking it.
 
 ## Categories
@@ -15,7 +15,7 @@ carry an ID over from an older document without re-checking it.
 | `LLM02:2025` | Sensitive Information Disclosure | What is in the context, the system prompt, the logs, and the retrieval index that this caller should not see? |
 | `LLM03:2025` | Supply Chain | Where did the model weights, adapters, prompts, plugins, and MCP servers come from, and who can change them? |
 | `LLM04:2025` | Data and Model Poisoning | Who can write to the training set, the fine-tune data, the retrieval corpus, or the agent's persistent memory? |
-| `LLM05:2025` | Improper Output Handling | Which sink consumes model output — shell, SQL, `eval`, HTML, a file path, a URL — and is it encoded for that sink? |
+| `LLM05:2025` | Improper Output Handling | Which sink consumes model output - shell, SQL, `eval`, HTML, a file path, a URL - and is it encoded for that sink? |
 | `LLM06:2025` | Excessive Agency | What can the agent's tools do, with whose permissions, and which actions are irreversible? |
 | `LLM07:2025` | System Prompt Leakage | Does anything in the system prompt need to stay secret? (If yes, that is the bug.) |
 | `LLM08:2025` | Vector and Embedding Weaknesses | Is retrieval authorized per user, and can embeddings be inverted or the index poisoned? |
@@ -24,7 +24,7 @@ carry an ID over from an older document without re-checking it.
 
 ## Mapping to the general standards
 
-The LLM list does not replace the general Top 10 — most LLM findings have a matching
+The LLM list does not replace the general Top 10 - most LLM findings have a matching
 classic category, and reporting both is what makes a finding actionable for a reviewer who
 does not work on AI.
 
@@ -68,13 +68,13 @@ as of 2026-07-28:
 Honest limitation: the category IDs and names inside the Agentic Top 10, and the
 `T`-numbered IDs in the Threats and Mitigations taxonomy, are published only inside the
 downloadable PDFs. They are not on any HTML page that could be verified on 2026-07-28.
-This skill therefore describes agentic risks — memory poisoning, tool misuse, cascading
-failure, identity spoofing — by name and mechanism, with no ID attached. If you need to
+This skill therefore describes agentic risks - memory poisoning, tool misuse, cascading
+failure, identity spoofing - by name and mechanism, with no ID attached. If you need to
 cite an Agentic Top 10 ID, download the PDF and read the ID off it. Do not infer one from
 the risk name, and do not let an assistant generate one.
 
 ## Also cited by this skill
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/> (A01 Broken Access Control, A05 Injection, A06 Insecure Design; 2025 is not a renumbering of 2021)
-- OWASP ASVS 5.0.0, released 2025-05-30 — <https://owasp.org/www-project-application-security-verification-standard/> (V2 Validation and Business Logic, V8 Authorization, V15 Secure Coding and Architecture)
-- Model Context Protocol specification, revision `2025-11-25` — <https://modelcontextprotocol.io/specification/2025-11-25/> and its Security Best Practices page
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/> (A01 Broken Access Control, A05 Injection, A06 Insecure Design; 2025 is not a renumbering of 2021)
+- OWASP ASVS 5.0.0, released 2025-05-30 - <https://owasp.org/www-project-application-security-verification-standard/> (V2 Validation and Business Logic, V8 Authorization, V15 Secure Coding and Architecture)
+- Model Context Protocol specification, revision `2025-11-25` - <https://modelcontextprotocol.io/specification/2025-11-25/> and its Security Best Practices page

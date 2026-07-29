@@ -1,4 +1,4 @@
-# CWE Top 25 — 2025 Edition
+# CWE Top 25 - 2025 Edition
 
 Source: <https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html>
 Landing page: <https://cwe.mitre.org/top25/>
@@ -6,7 +6,7 @@ Verified: 2026-07-28. List page states "Page Last Updated: December 15, 2025".
 Dataset: 39,080 CVE records.
 
 The list ranks weakness classes by prevalence and severity in that CVE dataset. It is a
-prioritisation input for a reviewer, not a checklist — rank 1 in the CVE corpus is not
+prioritisation input for a reviewer, not a checklist - rank 1 in the CVE corpus is not
 necessarily rank 1 in your application.
 
 ## The ranked list
@@ -15,7 +15,7 @@ necessarily rank 1 in your application.
 |---|---|---|---|
 | 1 | CWE-79 | Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') | Yes |
 | 2 | CWE-89 | Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection') | Yes |
-| 3 | CWE-352 | Cross-Site Request Forgery (CSRF) | Partly — needs config |
+| 3 | CWE-352 | Cross-Site Request Forgery (CSRF) | Partly - needs config |
 | 4 | CWE-862 | Missing Authorization | Yes |
 | 5 | CWE-787 | Out-of-bounds Write | Memory safety |
 | 6 | CWE-22 | Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal') | Yes |
@@ -61,7 +61,7 @@ Work down, not up:
 ### The three that get overused
 
 CWE-20 (Improper Input Validation) is a parent class. Almost every injection can be described
-as failed input validation, which is exactly why it is the wrong answer — it points the fix at
+as failed input validation, which is exactly why it is the wrong answer - it points the fix at
 the boundary when the fix belongs at the sink. Use CWE-20 only when validation genuinely is
 the control: a numeric range that the business logic depends on, a length limit, a state
 machine that accepts an out-of-order transition. If there is a sink, name the sink's CWE.
@@ -71,7 +71,7 @@ CWE-284 (Improper Access Control) is likewise a parent. Reach for a child:
 | Situation | CWE |
 |---|---|
 | No authorization check exists on the handler at all | CWE-862 Missing Authorization |
-| A check exists and is wrong — wrong role, wrong comparison, wrong order | CWE-863 Incorrect Authorization |
+| A check exists and is wrong - wrong role, wrong comparison, wrong order | CWE-863 Incorrect Authorization |
 | The check reads an object key the client supplied | CWE-639 Authorization Bypass Through User-Controlled Key |
 | No authentication at all on something that needs it | CWE-306 Missing Authentication for Critical Function |
 | Authorization is enforced only in the client | CWE-602 Client-Side Enforcement of Server-Side Security |
@@ -79,7 +79,7 @@ CWE-284 (Improper Access Control) is likewise a parent. Reach for a child:
 CWE-200 (Exposure of Sensitive Information) gets applied to any response containing more
 fields than necessary. If the extra fields belong to another user, the weakness is the
 authorization failure that returned them, not the exposure. Use CWE-200 when the actor is
-entitled to the object but not to those fields — a serializer leaking `password_hash` or
+entitled to the object but not to those fields - a serializer leaking `password_hash` or
 `internal_notes` on the user's own record. That is also API3:2023.
 
 ### Sink to CWE, the pairs that recur
@@ -128,10 +128,10 @@ signal, not a validity test.
 
 ## Related MITRE views worth knowing
 
-- CWE Top 10 KEV Weaknesses (2025) — ranked from CISA's Known Exploited Vulnerabilities
+- CWE Top 10 KEV Weaknesses (2025) - ranked from CISA's Known Exploited Vulnerabilities
   catalog: <https://cwe.mitre.org/top25/archive/2025/2025_kev_list.html>. Weight this above the
   main Top 25 when arguing exploitability, since every entry has confirmed exploitation.
-- On the Cusp (2025) — 15 weaknesses that just missed the cut:
+- On the Cusp (2025) - 15 weaknesses that just missed the cut:
   <https://cwe.mitre.org/top25/archive/2025/2025_onthecusp_list.html>.
 
 ## Limitations of the list itself

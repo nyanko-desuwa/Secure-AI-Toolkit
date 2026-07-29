@@ -24,8 +24,8 @@ argument:
 - If a test script and a production HTTP request enter through the same port, then whatever the
   port enforces is enforced for both. Whatever only the HTTP adapter enforces is enforced for
   neither the test nor any adapter added later.
-- If the application is developed without the database, then the database's behaviour — including
-  a tenant predicate — is the adapter's responsibility, and the core cannot assume it.
+- If the application is developed without the database, then the database's behaviour - including
+  a tenant predicate - is the adapter's responsibility, and the core cannot assume it.
 
 ## Mechanism
 
@@ -65,7 +65,7 @@ claims is made by the source.
 
 The page treats the count as largely a matter of taste. Neither one port per use case nor
 collapsing everything into two extremes is presented as optimal. The stated preference is a small
-number — two, three, or four — with four reported as the most encountered in practice.
+number - two, three, or four - with four reported as the most encountered in practice.
 
 The hexagon shape is not about the number six. Six sides simply leave drawing room for ports and
 adapters without forcing a one-dimensional layered picture.

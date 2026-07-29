@@ -1,4 +1,4 @@
-# ASVS 5.0.0 — V16 Security Logging and Error Handling
+# ASVS 5.0.0 - V16 Security Logging and Error Handling
 
 > Version 5.0.0 (released 2025-05-30), verified 2026-07-28 against
 > <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md>
@@ -14,7 +14,7 @@ logged data must be protected as a high-value asset.
 
 Two consequences worth pulling out, because they change design decisions:
 
-- If you log classified data, the log inherits that classification — and with it encryption,
+- If you log classified data, the log inherits that classification - and with it encryption,
   retention, and disclosure obligations. Logging less is cheaper than protecting more.
 - Alerting and correlation are explicitly out of ASVS scope. ASVS gets you the events;
   A09:2025 is where the alerting obligation lives. Do not read ASVS compliance as coverage
@@ -35,7 +35,7 @@ source file linked above.
 
 | # | Requirement | L |
 |---|---|---|
-| 16.2.1 | Each entry includes the metadata needed to reconstruct a timeline — when, where, who, what | 2 |
+| 16.2.1 | Each entry includes the metadata needed to reconstruct a timeline - when, where, who, what | 2 |
 | 16.2.2 | Time sources synchronized across logging components; timestamps in UTC or with an explicit offset. UTC recommended, to avoid DST ambiguity across distributed systems | 2 |
 | 16.2.3 | The application only stores or broadcasts logs to the files and services in the documented inventory | 2 |
 | 16.2.4 | Logs are readable and correlatable by the log processor in use, preferably via a common format | 2 |
@@ -46,12 +46,12 @@ source file linked above.
 | # | Requirement | L |
 |---|---|---|
 | 16.3.1 | All authentication operations logged, success and failure, with metadata such as authentication type or factors used | 2 |
-| 16.3.2 | Failed authorization attempts logged. At L3, all authorization decisions logged, including access to sensitive data — without logging the data itself | 2 |
+| 16.3.2 | Failed authorization attempts logged. At L3, all authorization decisions logged, including access to sensitive data - without logging the data itself | 2 |
 | 16.3.3 | The application logs the security events named in its documentation, plus attempts to bypass security controls: input validation, business logic, anti-automation | 2 |
 | 16.3.4 | Unexpected errors and security control failures logged, such as backend TLS failures | 2 |
 
-Note 16.3.2 carefully. Logging only failures is the L2 floor. The L3 requirement — every
-authorization decision, including successful sensitive-data reads — is what makes bulk-export
+Note 16.3.2 carefully. Logging only failures is the L2 floor. The L3 requirement - every
+authorization decision, including successful sensitive-data reads - is what makes bulk-export
 detection possible. If a project needs that rule, it needs the L3 behaviour.
 
 ### V16.4 Log Protection
@@ -69,14 +69,14 @@ to the same host, in the same trust zone, deletable by the same service account.
 
 | # | Requirement | L |
 |---|---|---|
-| 16.5.1 | A generic message is returned to the consumer on unexpected or security-sensitive errors — no stack traces, queries, keys, or tokens | 2 |
+| 16.5.1 | A generic message is returned to the consumer on unexpected or security-sensitive errors - no stack traces, queries, keys, or tokens | 2 |
 | 16.5.2 | The application continues to operate securely when external resource access fails, e.g. circuit breakers or graceful degradation | 2 |
 | 16.5.3 | The application fails gracefully and securely, preventing fail-open conditions such as processing a transaction despite validation errors | 2 |
 | 16.5.4 | A last-resort handler catches all unhandled exceptions, so error detail is not lost and one error does not take down the process | 3 |
 
 The standard adds a note on 16.5.4: Swift, Go, and many functional languages have no
-exceptions or last-resort handler. There, use the language-idiomatic equivalent —
-`recover()` in a Go middleware, an error-returning boundary — rather than claiming the
+exceptions or last-resort handler. There, use the language-idiomatic equivalent -
+`recover()` in a Go middleware, an error-returning boundary - rather than claiming the
 requirement does not apply.
 
 ## Level guidance
@@ -90,12 +90,12 @@ logs. That is a testing artefact, not permission to skip logging in a Level 1 ap
 ## Citation practice
 
 Cite the requirement number only for the statements above, which were read from the source.
-For anything else in V16, cite the chapter — `ASVS V16` — or fetch the file. ASVS 5.0
+For anything else in V16, cite the chapter - `ASVS V16` - or fetch the file. ASVS 5.0
 renumbered everything from 4.0.3, so a recalled `V7.x` logging ID from an older report does
 not map.
 
 ## Related cheat sheets, referenced by the chapter itself
 
-- OWASP Logging Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html>
-- OWASP Application Logging Vocabulary Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html>
-- OWASP WSTG: Testing for Error Handling — <https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/08-Testing_for_Error_Handling/README>
+- OWASP Logging Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html>
+- OWASP Application Logging Vocabulary Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html>
+- OWASP WSTG: Testing for Error Handling - <https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/08-Testing_for_Error_Handling/README>

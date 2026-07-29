@@ -1,7 +1,7 @@
 # Docker Best Practices
 
 Patterns that hold up under review. Each names the Top 10 category, ASVS chapter, and CIS control it
-serves. Digests shown are illustrative placeholders in valid `sha256:` form — they will not pull.
+serves. Digests shown are illustrative placeholders in valid `sha256:` form - they will not pull.
 
 ## Run as a non-root UID
 
@@ -75,7 +75,7 @@ docker buildx imagetools inspect node:22.11-alpine --format '{{.Manifest.Digest}
 
 The cost, stated honestly: you stop getting base image patches automatically. A digest pinned in
 January is missing six months of fixes by July, and nothing warns you. The pin is only defensible
-with an update mechanism attached — Renovate or Dependabot both raise PRs that bump the digest, which
+with an update mechanism attached - Renovate or Dependabot both raise PRs that bump the digest, which
 turns a silent change into a reviewed one. If you pin and do not automate the bump, you have traded
 a supply chain risk for a patching risk. Pick deliberately.
 
@@ -120,7 +120,7 @@ whole module cache stayed in the discarded stage.
 
 `COPY --from=build` copies from the build stage's filesystem, so nothing in that stage's layer
 history reaches the final image. This is also why a multi-stage build is the correct fix for a secret
-used at build time and not needed at runtime — provided the secret was used in the build stage and
+used at build time and not needed at runtime - provided the secret was used in the build stage and
 never copied forward.
 
 ## Build-time secrets with `--mount=type=secret`
@@ -159,7 +159,7 @@ docker build --secret id=npmrc,src="$HOME/.npmrc" -t app:build .
 
 Why this works: BuildKit exposes the file on a tmpfs for the duration of that one `RUN` and it is
 absent from the resulting layer, from `docker history`, and from the build cache. The `# syntax` line
-matters — without a BuildKit frontend the `--mount` flag is a syntax error rather than a silent
+matters - without a BuildKit frontend the `--mount` flag is a syntax error rather than a silent
 downgrade, which is the failure mode you want.
 
 Verify with `docker history --no-trunc <image>` and by grepping the layer tarballs:
@@ -181,7 +181,7 @@ were compiled for your laptop.
 
 ```text
 # Vulnerable: no .dockerignore, so COPY . . ships all of this
-.git/                 full history — every secret ever committed and reverted
+.git/                 full history - every secret ever committed and reverted
 .env                  local credentials
 *.pem *.key           keys
 node_modules/         host-compiled binaries, possibly wrong architecture
@@ -189,7 +189,7 @@ node_modules/         host-compiled binaries, possibly wrong architecture
 ```
 
 ```text
-# Fixed: .dockerignore — deny broadly, then allow what the build needs
+# Fixed: .dockerignore - deny broadly, then allow what the build needs
 *
 !package.json
 !package-lock.json
@@ -233,7 +233,7 @@ replaces the file, the build fails instead of shipping different code. Use `COPY
 the build context and reserve remote fetches for cases where a checksum is available.
 
 Recent BuildKit supports `ADD --checksum=sha256:...` for the URL form. If your builder supports it,
-that is an acceptable alternative — the point is the verification, not the instruction name.
+that is an acceptable alternative - the point is the verification, not the instruction name.
 
 ## Read-only root filesystem
 
@@ -270,7 +270,7 @@ Why this works: `noexec` on the one writable path means a dropped binary cannot 
 
 The work is finding what the process writes. Common cases: `/tmp`, a PID file, a framework cache
 directory, and `/var/run`. Run with `--read-only` and read the errors; do not guess. Language
-runtimes are the usual surprise — Python writes `__pycache__`, Node writes to `/tmp` for some
+runtimes are the usual surprise - Python writes `__pycache__`, Node writes to `/tmp` for some
 native modules, JVM writes `hsperfdata`.
 
 ## `HEALTHCHECK`, and why `depends_on` is not readiness
@@ -332,7 +332,7 @@ reachable often falls back to a default configuration, an in-memory store, or a 
 
 The size argument, made concretely rather than as a slogan: a `debian:bookworm` base is roughly 120 MB
 and carries a package manager, `wget`, `passwd`, and a shell. `distroless/static` is under 3 MB with
-no shell. The difference is not the megabytes — it is that post-exploitation in the first image is
+no shell. The difference is not the megabytes - it is that post-exploitation in the first image is
 `apt-get install` and in the second there is no way to run a command at all, because there is no
 `/bin/sh` for a reverse shell or a `system()` call to land on. Fewer packages also means fewer
 scanner findings, which means the findings you do get are readable.
@@ -444,7 +444,7 @@ secrets:
     file: ./secrets/db_password        # 0400, gitignored, or use an external secret
 ```
 
-Why this works: the file is mounted at `/run/secrets/db_password`, file permissions apply, and it does not appear in `docker inspect` output. Passing the path in `ENV` rather than the value is the pattern — `_FILE` suffix conventions exist in the official Postgres, MySQL, and Redis images for exactly this reason.
+Why this works: the file is mounted at `/run/secrets/db_password`, file permissions apply, and it does not appear in `docker inspect` output. Passing the path in `ENV` rather than the value is the pattern - `_FILE` suffix conventions exist in the official Postgres, MySQL, and Redis images for exactly this reason.
 
 Compose's ordinary `secrets:` implementation bind-mounts the configured source file under `/run/secrets`; it is not automatically a tmpfs. Protect the host source file (`0400`, gitignored), or use Swarm secrets or an external injector when disk-backed source material is not acceptable.
 
@@ -487,7 +487,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Scan — fail the build on fixable critical and high
+      - name: Scan - fail the build on fixable critical and high
         uses: aquasecurity/trivy-action@0.24.0
         with:
           image-ref: ghcr.io/${{ github.repository }}:${{ github.sha }}
@@ -496,7 +496,7 @@ jobs:
           exit-code: "1"
           vuln-type: os,library
 
-      - name: Scan — full report, never fails
+      - name: Scan - full report, never fails
         uses: aquasecurity/trivy-action@0.24.0
         with:
           image-ref: ghcr.io/${{ github.repository }}:${{ github.sha }}
@@ -529,7 +529,7 @@ because failing a build on a vulnerability with no available patch teaches peopl
 
 Sign the digest, not the tag. A tag can be repointed after signing; a digest cannot.
 
-Two scanners find slightly different things — Trivy and Grype use different databases and different
+Two scanners find slightly different things - Trivy and Grype use different databases and different
 matching logic. Running both is defensible for a release gate and excessive on every push.
 
 ```yaml
@@ -563,7 +563,7 @@ Keyless signing uses an OIDC token from the CI provider to obtain a short-lived 
 and the signature is recorded in the Rekor transparency log. The benefit is no long-lived signing key
 to steal or rotate. The costs are real: verification needs network access to Rekor unless you run a
 mirror, air-gapped verification needs extra setup, and your trust root is now the CI provider's OIDC
-issuer — compromise of the workflow identity means a valid signature on a malicious image.
+issuer - compromise of the workflow identity means a valid signature on a malicious image.
 
 For Kubernetes, enforce at admission with Sigstore Policy Controller or Kyverno. Docker alone has no
 admission hook, so with plain Docker or compose the verification step belongs in the deploy script,

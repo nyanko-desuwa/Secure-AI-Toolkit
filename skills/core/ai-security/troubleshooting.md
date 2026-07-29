@@ -14,7 +14,7 @@ You cannot prompt your way out of this. Options, in order of strength:
    never sees the raw page. This removes a leg rather than mitigating it.
 2. Gate the outbound leg. Human approval on the resolved arguments for anything
    irreversible or outward-facing.
-3. Narrow the outbound leg to destinations derived from server state — the account owner's
+3. Narrow the outbound leg to destinations derived from server state - the account owner's
    email, a fixed webhook, one repository.
 
 If none is acceptable to the product, say so plainly: the feature carries a standing risk of
@@ -48,7 +48,7 @@ The downstream system has no per-user identity, or issuing tokens per user is a 
 work. Fallback, in order:
 
 1. Pass the actor into every tool and scope every query by it server-side. This moves the
-   check from the credential to your code — weaker, because it depends on you not forgetting.
+   check from the credential to your code - weaker, because it depends on you not forgetting.
 2. Split the broad credential into several narrow ones by capability, so no single tool
    reaches everything.
 3. Read-only credential plus human approval on writes.
@@ -61,7 +61,7 @@ credential reaches, limited only by your own query scoping.
 Report it with the uncertainty attached and name the precondition you could not verify.
 
 "Retrieved document content reaches a context that holds `send_email`; exploitable if any
-user-uploaded document is indexed into the shared corpus — I could not determine the ingest
+user-uploaded document is indexed into the shared corpus - I could not determine the ingest
 path" is useful. "Prompt injection, critical" without tracing the content path is noise.
 
 Do not resolve the uncertainty by testing whether the model complies. A model refusing your
@@ -90,7 +90,7 @@ the exfiltration channel.
 
 The LLM Top 10 renumbered and renamed categories between the 2023–24 and 2025 editions, and
 the Agentic Security Initiative publishes separately on its own cadence. Category IDs here
-were verified on 2026-07-28 — see [references/llm-top10.md](references/llm-top10.md) for the
+were verified on 2026-07-28 - see [references/llm-top10.md](references/llm-top10.md) for the
 URLs and what could not be verified.
 
 If a report depends on a precise ID, re-fetch the source. If you cannot verify an ID, describe

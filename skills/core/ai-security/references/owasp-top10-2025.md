@@ -20,4 +20,4 @@ The 2025 edition is not a renumbering of 2021. Injection is `A05`, not `A03`; `A
 | A10:2025 | Mishandling of Exceptional Conditions | Fail-closed authorization and budget checks |
 
 Use the category to communicate the risk; use ASVS for verifiable controls. Do not report
-"OWASP-compliant" as a status — the Top 10 is a risk taxonomy, not a certification.
+"OWASP-compliant" as a status - the Top 10 is a risk taxonomy, not a certification.

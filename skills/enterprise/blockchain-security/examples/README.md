@@ -5,15 +5,15 @@ complete compilation unit. Vulnerable blocks are intentionally unsafe. Do not de
 
 ## Contents
 
-1. [Withdrawal reentrancy](#1-withdrawal-reentrancy) — SC08, CWE-841
-2. [`tx.origin` authorization](#2-txorigin-authorization) — SC01, CWE-284
-3. [AMM spot price oracle](#3-amm-spot-price-oracle) — SC03/SC04, CWE-682
-4. [Unprotected initializer and upgrade](#4-unprotected-initializer-and-upgrade) — SC01/SC10, CWE-284
-5. [Signature replay and malleability](#5-signature-replay-and-malleability) — A04, CWE-347
-6. [Unbounded batch payout](#6-unbounded-batch-payout) — A10, CWE-400/CWE-703
-7. [Non-standard token integration](#7-non-standard-token-integration) — SC06/SC08, CWE-252
-8. [MEV without slippage or deadline](#8-mev-without-slippage-or-deadline) — SC02, CWE-841
-9. [Reorg-safe TypeScript indexer](#9-reorg-safe-typescript-indexer) — A08/A10, CWE-703
+1. [Withdrawal reentrancy](#1-withdrawal-reentrancy) - SC08, CWE-841
+2. [`tx.origin` authorization](#2-txorigin-authorization) - SC01, CWE-284
+3. [AMM spot price oracle](#3-amm-spot-price-oracle) - SC03/SC04, CWE-682
+4. [Unprotected initializer and upgrade](#4-unprotected-initializer-and-upgrade) - SC01/SC10, CWE-284
+5. [Signature replay and malleability](#5-signature-replay-and-malleability) - A04, CWE-347
+6. [Unbounded batch payout](#6-unbounded-batch-payout) - A10, CWE-400/CWE-703
+7. [Non-standard token integration](#7-non-standard-token-integration) - SC06/SC08, CWE-252
+8. [MEV without slippage or deadline](#8-mev-without-slippage-or-deadline) - SC02, CWE-841
+9. [Reorg-safe TypeScript indexer](#9-reorg-safe-typescript-indexer) - A08/A10, CWE-703
 
 ---
 

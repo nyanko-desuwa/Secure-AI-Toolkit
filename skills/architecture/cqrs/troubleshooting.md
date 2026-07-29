@@ -9,7 +9,7 @@ Do not rewrite it in one change. Work per bounded context:
 
 1. Find the contexts where the read shape equals the write shape. Those are the collapse
    candidates.
-2. Collapse the query side first — replace the projection with a query against the write tables
+2. Collapse the query side first - replace the projection with a query against the write tables
    with an explicit column list. The command side can stay as it is.
 3. Delete the projector, then the broker topic, then the read table. In that order, so nothing is
    reading a table you removed.
@@ -49,7 +49,7 @@ Do not make the projector synchronous. That is covered in
 
 ## An invariant needs data from two aggregates
 
-The projection is the tempting place to check it, and the projection is the wrong place — it is
+The projection is the tempting place to check it, and the projection is the wrong place - it is
 eventually consistent, so the check is a race.
 
 Options, in order:
@@ -57,7 +57,7 @@ Options, in order:
 1. Reconsider the aggregate boundary. If two things must be consistent at the same instant, they
    may be one aggregate.
 2. Enforce it in the authoritative store with a constraint or a conditional `UPDATE`.
-3. Accept the race and add a compensating action — detect the violation from events and correct it.
+3. Accept the race and add a compensating action - detect the violation from events and correct it.
    This is only acceptable when the business can tolerate a temporary violation. Overselling a
    seat sometimes can be; granting a permission cannot.
 
@@ -102,7 +102,7 @@ Diagnose before scaling. Ordering constraints are what usually bite.
 - Partition by aggregate or tenant so multiple projector instances can run without reordering
   events for the same entity. Global ordering plus parallelism cannot both hold.
 - Batch the upserts. One statement per event into a remote database is usually the bottleneck.
-- Check for an N+1 in the projector — an event handler that reads a related row per event.
+- Check for an N+1 in the projector - an event handler that reads a related row per event.
   `skills/architecture/performance/` covers this.
 - Confirm the queue is bounded. An unbounded queue hides the problem until the process is killed.
 
@@ -125,7 +125,7 @@ The order matters:
 
 1. Identify every event stream and every projection holding data for that subject.
 2. Delete the per-subject key if crypto-shredding is in place. If it is not, you have a design
-   problem, not an operations problem — say so rather than improvising a targeted delete.
+   problem, not an operations problem - say so rather than improvising a targeted delete.
 3. Purge or rebuild the affected projections. A projection built before erasure may still hold
    plaintext.
 4. Record what remains: structural residue in the stream, and the backup retention window during

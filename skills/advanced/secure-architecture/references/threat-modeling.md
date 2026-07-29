@@ -1,11 +1,11 @@
-# Threat Modeling — sources and frames
+# Threat Modeling - sources and frames
 
 Verified 2026-07-28 against:
 
-- OWASP Threat Modeling Cheat Sheet —
+- OWASP Threat Modeling Cheat Sheet -
   <https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html>
-- Threat Modeling Manifesto — <https://www.threatmodelingmanifesto.org/>
-- LINDDUN — <https://linddun.org/>
+- Threat Modeling Manifesto - <https://www.threatmodelingmanifesto.org/>
+- LINDDUN - <https://linddun.org/>
 
 None of these carry a dated version number on the page. Treat them as living documents and
 re-read before quoting exact wording.
@@ -74,7 +74,7 @@ The four anti-patterns are the most useful part for a reviewer:
 Recommended patterns: Systematic Approach, Informed Creativity, Varied Viewpoints, Useful
 Toolkit, Theory into Practice.
 
-## LINDDUN — privacy threats
+## LINDDUN - privacy threats
 
 Seven categories, from the acronym: Linking, Identifying, Non-repudiation, Detecting, Data
 Disclosure, Unawareness, Non-compliance. Built at KU Leuven's DistriNet unit.

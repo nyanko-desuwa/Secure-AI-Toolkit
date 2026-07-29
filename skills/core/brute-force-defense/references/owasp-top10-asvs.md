@@ -1,4 +1,4 @@
-# OWASP Top 10 2025 and ASVS 5.0 — the parts this skill uses
+# OWASP Top 10 2025 and ASVS 5.0 - the parts this skill uses
 
 Sources: <https://owasp.org/Top10/2025/> ·
 <https://owasp.org/www-project-application-security-verification-standard/> ·
@@ -19,8 +19,8 @@ The 2025 edition is not a renumbering of 2021. A03 (Software Supply Chain Failur
 (Mishandling of Exceptional Conditions) are new, and Injection moved from A03 to A05. Do not
 carry an A03 citation over from a 2021 report.
 
-A10 is worth naming when the limiter fails open on an error. The exceptional condition — Redis
-unreachable — is mishandled, and the outcome is unlimited attempts.
+A10 is worth naming when the limiter fails open on an error. The exceptional condition - Redis
+unreachable - is mishandled, and the outcome is unlimited attempts.
 
 ## ASVS 5.0.0 chapters used here
 

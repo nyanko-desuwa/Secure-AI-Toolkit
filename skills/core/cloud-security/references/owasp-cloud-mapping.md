@@ -26,7 +26,7 @@ Two more appear less often but matter:
 | A08 Software or Data Integrity Failures | Unsigned or unverified IaC modules, a Terraform state file anyone can write, a container image pulled by mutable tag |
 
 Note the 2025 numbering. Injection is A05, not A03. A03 is Software Supply Chain Failures and
-A10 is Mishandling of Exceptional Conditions — both new in this edition. Guidance recalled
+A10 is Mishandling of Exceptional Conditions - both new in this edition. Guidance recalled
 from the 2021 list will mis-map.
 
 ## ASVS 5.0 chapters used here
@@ -40,7 +40,7 @@ from the 2021 list will mis-map.
 | V16 Security Logging and Error Handling | What to log, what to mask, and how failures behave |
 | V8 Authorization | The access-control model itself, including least privilege for machine identities |
 
-ASVS mapping here is at chapter level. This skill does not quote individual requirement IDs —
+ASVS mapping here is at chapter level. This skill does not quote individual requirement IDs -
 for formal verification, work from the official ASVS 5.0.0 CSV.
 
 ## CWE identifiers that fit cloud findings
@@ -84,8 +84,8 @@ narrower applies. Do not stretch a specific CWE to fit.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE list — <https://cwe.mitre.org/data/index.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE list - <https://cwe.mitre.org/data/index.html>
 
 Checked 2026-07-28.

@@ -1,7 +1,7 @@
 # <Skill Name> Verification Checklist
 
 Run before returning code. Mark each item pass, fail, or not applicable. "Not applicable"
-needs a one-line reason — an unexplained skip is indistinguishable from an oversight.
+needs a one-line reason - an unexplained skip is indistinguishable from an oversight.
 
 Only the sections matching the change need running.
 

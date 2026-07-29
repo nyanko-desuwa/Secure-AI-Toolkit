@@ -31,7 +31,7 @@ last one matters most, because an external call hands the CPU to code the attack
 | CWE | Root-cause naming in a finding | current |
 
 The Smart Contract Top 10 names the on-chain failure. The general Top 10 and ASVS cover the
-backend, the key handling, and the API in front of it — the parts an on-chain-only review
+backend, the key handling, and the API in front of it - the parts an on-chain-only review
 misses. See [references/](references/).
 
 On SWC: the SWC Registry is no longer actively maintained and stopped taking new entries in
@@ -85,19 +85,19 @@ analyser. Manual reading finds intent bugs; a fuzzer finds the arithmetic ones.
 ### 7. Report
 
 Per finding: category, contract and function, the concrete profit path, and the fix. A
-finding with no profit path and no denial-of-service path is a code smell — label it as one.
+finding with no profit path and no denial-of-service path is a code smell - label it as one.
 
 ## Severity
 
 Rank by what an attacker walks away with, and what precondition they need.
 
-- **Critical** — direct theft or permanent freeze of user funds, or seizure of admin rights,
+- **Critical** - direct theft or permanent freeze of user funds, or seizure of admin rights,
   reachable by anyone
-- **High** — theft or freeze that needs capital (a flash loan counts as available capital),
+- **High** - theft or freeze that needs capital (a flash loan counts as available capital),
   a specific market state, or one privileged key
-- **Medium** — value leakage bounded by fees or rounding, griefing that costs the attacker
+- **Medium** - value leakage bounded by fees or rounding, griefing that costs the attacker
   more than the victim, or a bug behind a trusted multisig
-- **Low** — defence in depth missing, gas waste, no value path
+- **Low** - defence in depth missing, gas waste, no value path
 
 Say "a flash loan is available capital" out loud when it applies. Reviews that rate an
 oracle bug medium because "you'd need $50M" are wrong; the attacker borrows it and repays it
@@ -105,17 +105,17 @@ in the same transaction.
 
 ## Related Skills
 
-- `core/owasp` — the general Top 10 and ASVS baseline this builds on
-- `core/api-security` — the API in front of a signing or indexing service
-- `core/secrets-management` — deployer keys, signer keys, and HSM boundaries
+- `core/owasp` - the general Top 10 and ASVS baseline this builds on
+- `core/api-security` - the API in front of a signing or indexing service
+- `core/secrets-management` - deployer keys, signer keys, and HSM boundaries
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, standards table, limitations
-- [checklist.md](checklist.md) — pre-return verification, grouped
-- [best-practices.md](best-practices.md) — patterns with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — standards, version-pinned with check dates
-- [examples/](examples/) — eight vulnerable/fixed contract pairs plus one backend example
+- [README.md](README.md) - purpose, layout, standards table, limitations
+- [checklist.md](checklist.md) - pre-return verification, grouped
+- [best-practices.md](best-practices.md) - patterns with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - standards, version-pinned with check dates
+- [examples/](examples/) - eight vulnerable/fixed contract pairs plus one backend example

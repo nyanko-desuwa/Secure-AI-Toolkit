@@ -9,7 +9,7 @@ them; do not paraphrase a CWE title in a finding, and do not invent an ID you ha
 |---|---|---|
 | CWE-798 | Use of Hard-coded Credentials | Any credential literal in source, config, or a build file |
 | CWE-259 | Use of Hard-coded Password | Specifically a password literal. More precise than 798 when it applies |
-| CWE-522 | Insufficiently Protected Credentials | Stored or transmitted without adequate protection — plaintext at rest, weak transport, over-broad read access |
+| CWE-522 | Insufficiently Protected Credentials | Stored or transmitted without adequate protection - plaintext at rest, weak transport, over-broad read access |
 | CWE-532 | Insertion of Sensitive Information into Log File | A token, key, or password reaching a log or a telemetry sink |
 | CWE-214 | Invocation of Process Using Visible Sensitive Information | Secret in command-line arguments or the environment block, visible to other processes on the host |
 | CWE-208 | Observable Timing Discrepancy | Secret compared with `==`, where the timing difference leaks a prefix |
@@ -24,7 +24,7 @@ neither and saying "hardcoded secret" is a finding a reviewer cannot look up.
 ## Where 522 fits
 
 522 is the catch-all for a credential that exists in the right place but is not protected there.
-A Kubernetes Secret in an etcd with no encryption at rest is 522, not 798 — the design is
+A Kubernetes Secret in an etcd with no encryption at rest is 522, not 798 - the design is
 correct, the protection is missing. A Terraform state file with a database password in a public
 bucket is 522. A `.env` file readable by every user on a shared host is 522.
 
@@ -55,7 +55,7 @@ read access for the whole engineering group".
 
 208 is real and usually low severity on its own. The exploit needs many samples and a low-noise
 network path. Report it as a defence-in-depth gap unless the compared value is guessable byte by
-byte with unlimited attempts — an API key checked without rate limiting, for example. Do not
+byte with unlimited attempts - an API key checked without rate limiting, for example. Do not
 inflate it to critical because the word "timing attack" sounds severe.
 
 ## Related IDs you may reach for
@@ -82,10 +82,10 @@ they are listed for orientation, not as a substitute for reading the entry.
 
 ## Sources
 
-- CWE list — <https://cwe.mitre.org/data/index.html>
-- CWE-798 — <https://cwe.mitre.org/data/definitions/798.html>
-- CWE-259 — <https://cwe.mitre.org/data/definitions/259.html>
-- CWE-522 — <https://cwe.mitre.org/data/definitions/522.html>
-- CWE-532 — <https://cwe.mitre.org/data/definitions/532.html>
-- CWE-214 — <https://cwe.mitre.org/data/definitions/214.html>
-- CWE-208 — <https://cwe.mitre.org/data/definitions/208.html>
+- CWE list - <https://cwe.mitre.org/data/index.html>
+- CWE-798 - <https://cwe.mitre.org/data/definitions/798.html>
+- CWE-259 - <https://cwe.mitre.org/data/definitions/259.html>
+- CWE-522 - <https://cwe.mitre.org/data/definitions/522.html>
+- CWE-532 - <https://cwe.mitre.org/data/definitions/532.html>
+- CWE-214 - <https://cwe.mitre.org/data/definitions/214.html>
+- CWE-208 - <https://cwe.mitre.org/data/definitions/208.html>

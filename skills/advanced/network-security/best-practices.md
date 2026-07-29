@@ -23,7 +23,7 @@ table ip filter {
 ```
 
 Two holes. The policy is `accept`, so every port not mentioned is open. The table is `ip`, so
-the same host is entirely unfiltered over IPv6 — which is on by default on most images.
+the same host is entirely unfiltered over IPv6 - which is on by default on most images.
 
 ```bash
 # Fixed: inet covers both families, default drop, egress named
@@ -144,7 +144,7 @@ mechanism.
 
 On HSTS (RFC 6797, November 2012): the first request before any header is seen is unprotected
 unless the domain is preloaded, and `includeSubDomains` with a one-year `max-age` commits every
-subdomain — including internal-only names — to having a valid certificate. Say that out loud
+subdomain - including internal-only names - to having a valid certificate. Say that out loud
 before adding it.
 
 ## mTLS and Service Identity
@@ -179,12 +179,12 @@ location /internal/ {
 ```
 
 Why this works: the identity comes from a certificate the CA issued, not from a header the
-caller controls. Clearing the inbound copy of the header matters — otherwise a client sends its
+caller controls. Clearing the inbound copy of the header matters - otherwise a client sends its
 own `X-Service-Name` and the upstream cannot tell which value the proxy set.
 
 Limitations worth stating: `ssl_verify_client on` proves the peer holds a key the CA vouched
 for. It does not authorise the request, which is why the `CN` allowlist is there. A CRL file is
-only as fresh as the last time you shipped it — short-lived certificates (hours, issued by a
+only as fresh as the last time you shipped it - short-lived certificates (hours, issued by a
 workload identity system) are the stronger revocation story. And mTLS at the edge proxy says
 nothing about the hop from proxy to upstream; note `proxy_pass https://` above.
 
@@ -240,7 +240,7 @@ Where it does not:
 
 - Business-logic abuse. A request that is valid but should not be permitted for this actor
   looks identical to one that should.
-- Anything inside TLS it does not terminate, and anything on a path that bypasses it — a
+- Anything inside TLS it does not terminate, and anything on a path that bypasses it - a
   direct-to-origin IP, an internal admin listener, a non-HTTP protocol.
 - Encoding variants. Every generic ruleset has a bypass corpus.
 
@@ -314,10 +314,10 @@ Do not build detection that assumes SNI is visible. Encrypted Client Hello remov
 
 ## Sources
 
-- RFC 9325 (BCP 195) — <https://www.rfc-editor.org/rfc/rfc9325.html>
-- RFC 8996 (BCP 195) — <https://www.rfc-editor.org/rfc/rfc8996.html>
-- RFC 6797 (HSTS) — <https://www.rfc-editor.org/rfc/rfc6797.html>
-- RFC 8659 (CAA) — <https://www.rfc-editor.org/rfc/rfc8659.html>
-- NIST SP 800-207 — <https://csrc.nist.gov/pubs/sp/800/207/final>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
+- RFC 9325 (BCP 195) - <https://www.rfc-editor.org/rfc/rfc9325.html>
+- RFC 8996 (BCP 195) - <https://www.rfc-editor.org/rfc/rfc8996.html>
+- RFC 6797 (HSTS) - <https://www.rfc-editor.org/rfc/rfc6797.html>
+- RFC 8659 (CAA) - <https://www.rfc-editor.org/rfc/rfc8659.html>
+- NIST SP 800-207 - <https://csrc.nist.gov/pubs/sp/800/207/final>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>

@@ -65,7 +65,7 @@ let (data, _) = try await URLSession.shared.data(for: request)
 
 The backend owns the vendor key, authorizes the user, constrains query shape, and rate-limits by
 account. The app now holds only a revocable user-scoped token. Restricting a vendor key by bundle
-ID is useful abuse throttling, not secrecy — a patched client can still call from inside the app.
+ID is useful abuse throttling, not secrecy - a patched client can still call from inside the app.
 
 ## Store refresh tokens in hardware-backed storage
 
@@ -260,7 +260,7 @@ in [examples/README.md](examples/README.md#oauth-in-an-embedded-webview).
 
 Why this works: the app cannot read keystrokes or cookies in the system-owned session; the user
 sees the identity provider's domain; PKCE makes an intercepted code useless. `state` still needs
-to be checked — PKCE does not replace it. Never use the implicit flow; RFC 8252 says it cannot be
+to be checked - PKCE does not replace it. Never use the implicit flow; RFC 8252 says it cannot be
 protected by PKCE and is not recommended for native apps.
 
 ## Rotate the refresh token and revoke the session

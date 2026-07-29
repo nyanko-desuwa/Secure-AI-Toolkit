@@ -1,6 +1,6 @@
 # Redis Security Checklist
 
-Mark every relevant item **pass**, **fail**, or **not applicable**. Every N/A needs a reason and evidence is a configuration line, provider setting, command output, or deployment manifest — not an assumption.
+Mark every relevant item **pass**, **fail**, or **not applicable**. Every N/A needs a reason and evidence is a configuration line, provider setting, command output, or deployment manifest - not an assumption.
 
 ## Stop conditions
 

@@ -8,7 +8,7 @@ Do not stall on the ideal. Move up one rung and say so.
 
 Order of preference when a manager is off the table:
 
-1. Platform-native injection with no repository footprint — systemd `LoadCredential`, a
+1. Platform-native injection with no repository footprint - systemd `LoadCredential`, a
    Docker/Swarm secret, an ECS task definition pulling from Parameter Store.
 2. A mounted file with `0400` permissions, path supplied by an env var.
 3. An env var set by the orchestrator, never by a committed file.
@@ -25,7 +25,7 @@ compliance retention. That does not change the response.
 
 Revoke and rotate. The old value being visible in history stops mattering the moment it stops
 working. Then decide about the cleanup separately, on its own merits. Never let a debate about
-`filter-repo` delay revocation — that ordering mistake is the one that turns an exposure into
+`filter-repo` delay revocation - that ordering mistake is the one that turns an exposure into
 an incident.
 
 If the repository is public, assume automated collection happened within minutes and treat the
@@ -77,7 +77,7 @@ Do not solve this by copying the value into more places. Fewer copies, one owner
 Test fixtures, example keys from documentation, and public identifiers all trip pattern
 matchers. Suppress narrowly:
 
-- Prefer changing the value so it does not look real — insert `PLACEHOLDER` or `EXAMPLE` into
+- Prefer changing the value so it does not look real - insert `PLACEHOLDER` or `EXAMPLE` into
   the string. This fixes it for every scanner at once and for humans reading the diff.
 - If the value must keep its shape, use the tool's inline allow directive on that specific
   line with a comment explaining why, not a path-wide or rule-wide exclusion.

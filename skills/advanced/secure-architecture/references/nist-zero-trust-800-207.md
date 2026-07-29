@@ -1,4 +1,4 @@
-# NIST SP 800-207 — Zero Trust Architecture
+# NIST SP 800-207 - Zero Trust Architecture
 
 Version: NIST Special Publication 800-207, August 2020, 59 pages. Authors Scott Rose and
 Oliver Borchert (NIST), Stu Mitchell (Stu2Labs), Sean Connelly (CISA).
@@ -12,10 +12,10 @@ document, this is the one to anchor to.
 ## The model in one paragraph
 
 A subject requests a resource. A policy decision point (PDP) decides, a policy enforcement
-point (PEP) enforces. Everything past a PEP is an "implicit trust zone" — an area where
+point (PEP) enforces. Everything past a PEP is an "implicit trust zone" - an area where
 entities are trusted to the level of the last PDP/PEP gateway. The document's airport analogy:
 once through the checkpoint, everyone in the boarding area is treated as trusted. The design
-goal follows directly — move PEPs close to the resource so the implicit trust zone is as small
+goal follows directly - move PEPs close to the resource so the implicit trust zone is as small
 as possible.
 
 That sentence is the whole architectural instruction. A single gateway in front of forty
@@ -31,7 +31,7 @@ fully implemented in their purest form.
    enterprise network must meet the same requirements as requests from anywhere else.
 3. Access to individual resources is granted on a per-session basis, with least privilege.
    Authorization to one resource does not automatically grant access to another.
-4. Access is determined by dynamic policy — client identity, application/service, requesting
+4. Access is determined by dynamic policy - client identity, application/service, requesting
    asset state, plus behavioural and environmental attributes. Least privilege restricts both
    visibility and accessibility.
 5. The enterprise monitors and measures the integrity and security posture of all owned and
@@ -66,7 +66,7 @@ Useful when someone argues the private network is safe:
 |---|---|
 | 2 | mTLS or signed requests between services, not "it's in the VPC" |
 | 3 | Service-to-service tokens are audience-scoped, short-lived, one per call path |
-| 4 | Authorization input includes tenant, resource, action, and asset state — not just a role |
+| 4 | Authorization input includes tenant, resource, action, and asset state - not just a role |
 | 5 | Workload identity depends on attestable state, not a static shared secret |
 | 6 | Re-authorize per request. A cached decision from login is a stale decision |
 | 7 | Every allow and deny is logged with actor, resource, and decision input |

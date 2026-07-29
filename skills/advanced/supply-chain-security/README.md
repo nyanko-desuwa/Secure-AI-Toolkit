@@ -6,8 +6,8 @@ Guidance for deciding how dependencies, builds, and artefacts are trusted, mappe
 ## Purpose
 
 Most of the code in a deployed application came from somewhere else. This skill covers the
-process that put it there — dependency selection and maintenance signals, resolution, retrieval,
-install-time execution, build, distribution, and update — and what to verify at each step. It
+process that put it there - dependency selection and maintenance signals, resolution, retrieval,
+install-time execution, build, distribution, and update - and what to verify at each step. It
 exists so an assistant can say "this resolves internal names against a public index, which is ASVS
 15.2.4 and A03" instead of "consider using trusted dependencies".
 
@@ -40,7 +40,7 @@ references/
   sbom-formats.md               CycloneDX versus SPDX, actual uses and limits
   incident-patterns.md          event-stream, ua-parser-js, xz, Codecov, PyPI, slopsquatting
   nist-ssdf-1.1.md              practice groups and the cross-standard mapping
-  ecosystem-controls.md         npm, pip, Go, Java, containers — verified flags
+  ecosystem-controls.md         npm, pip, Go, Java, containers - verified flags
 examples/
   README.md                     eight vulnerable/fixed pairs, package and CI
 ```
@@ -136,19 +136,19 @@ Real incidents named in [references/incident-patterns.md](references/incident-pa
 with the mechanism and source attached rather than an exploit payload.
 
 Commit-SHA pins in the examples are illustrative. Resolve the real SHA for the version you
-want before using one — a wrong pin is a broken build, and copying a pin from documentation is
+want before using one - a wrong pin is a broken build, and copying a pin from documentation is
 how you end up trusting a commit nobody reviewed.
 
 ## References
 
-- OWASP Top 10 2025 A03 — <https://owasp.org/Top10/2025/A03_2025-Software_Supply_Chain_Failures/>
-- OWASP Top 10 2025 A08 — <https://owasp.org/Top10/2025/A08_2025-Software_or_Data_Integrity_Failures/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- SLSA — <https://slsa.dev/spec/v1.2/>
-- NIST SP 800-218 — <https://csrc.nist.gov/pubs/sp/800/218/final>
-- Sigstore documentation — <https://docs.sigstore.dev/>
-- OpenSSF Scorecard — <https://github.com/ossf/scorecard>
-- CycloneDX — <https://owasp.org/www-project-cyclonedx/>
-- SPDX — <https://spdx.dev/use/specifications/>
-- PyPA PEP 708 — <https://peps.python.org/pep-0708/>
-- Sigstore cosign — <https://docs.sigstore.dev/cosign/>
+- OWASP Top 10 2025 A03 - <https://owasp.org/Top10/2025/A03_2025-Software_Supply_Chain_Failures/>
+- OWASP Top 10 2025 A08 - <https://owasp.org/Top10/2025/A08_2025-Software_or_Data_Integrity_Failures/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- SLSA - <https://slsa.dev/spec/v1.2/>
+- NIST SP 800-218 - <https://csrc.nist.gov/pubs/sp/800/218/final>
+- Sigstore documentation - <https://docs.sigstore.dev/>
+- OpenSSF Scorecard - <https://github.com/ossf/scorecard>
+- CycloneDX - <https://owasp.org/www-project-cyclonedx/>
+- SPDX - <https://spdx.dev/use/specifications/>
+- PyPA PEP 708 - <https://peps.python.org/pep-0708/>
+- Sigstore cosign - <https://docs.sigstore.dev/cosign/>

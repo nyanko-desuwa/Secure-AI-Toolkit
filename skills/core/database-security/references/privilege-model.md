@@ -108,11 +108,11 @@ Fail on TLS downgrade. Rotate with an overlap: issue new, drain old pool connect
 
 ## Sources
 
-- PostgreSQL 17 `GRANT` — <https://www.postgresql.org/docs/17/sql-grant.html>
-- PostgreSQL 17 `CREATE POLICY` — <https://www.postgresql.org/docs/17/sql-createpolicy.html>
-- PostgreSQL 17 SSL — <https://www.postgresql.org/docs/17/libpq-ssl.html>
-- MySQL 8.4 roles — <https://dev.mysql.com/doc/refman/8.4/en/roles.html>
-- MySQL 8.4 TLS — <https://dev.mysql.com/doc/refman/8.4/en/encrypted-connections.html>
-- OWASP Database Security Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Database_Security_Cheat_Sheet.html>
+- PostgreSQL 17 `GRANT` - <https://www.postgresql.org/docs/17/sql-grant.html>
+- PostgreSQL 17 `CREATE POLICY` - <https://www.postgresql.org/docs/17/sql-createpolicy.html>
+- PostgreSQL 17 SSL - <https://www.postgresql.org/docs/17/libpq-ssl.html>
+- MySQL 8.4 roles - <https://dev.mysql.com/doc/refman/8.4/en/roles.html>
+- MySQL 8.4 TLS - <https://dev.mysql.com/doc/refman/8.4/en/encrypted-connections.html>
+- OWASP Database Security Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Database_Security_Cheat_Sheet.html>
 
 All URLs checked 2026-07-28.

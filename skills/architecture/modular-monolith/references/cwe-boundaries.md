@@ -26,8 +26,8 @@ grows and which object/handle remains held.
 
 ## Sources
 
-- CWE-602 — <https://cwe.mitre.org/data/definitions/602.html>
-- CWE-653 — <https://cwe.mitre.org/data/definitions/653.html>
-- CWE-770 — <https://cwe.mitre.org/data/definitions/770.html>
-- CWE-772 — <https://cwe.mitre.org/data/definitions/772.html>
-- CWE-1220 — <https://cwe.mitre.org/data/definitions/1220.html>
+- CWE-602 - <https://cwe.mitre.org/data/definitions/602.html>
+- CWE-653 - <https://cwe.mitre.org/data/definitions/653.html>
+- CWE-770 - <https://cwe.mitre.org/data/definitions/770.html>
+- CWE-772 - <https://cwe.mitre.org/data/definitions/772.html>
+- CWE-1220 - <https://cwe.mitre.org/data/definitions/1220.html>

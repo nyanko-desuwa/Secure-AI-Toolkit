@@ -22,7 +22,7 @@ non-compliant, or not addressed by the RFC. Cite the RFC for anything you call n
 ```
 
 Naming BCP 195 rather than "best practice" is what stops the answer being a cipher-list
-opinion. Asking for "not addressed by the RFC" is important — plenty of hardening advice is
+opinion. Asking for "not addressed by the RFC" is important - plenty of hardening advice is
 reasonable but not in the standard, and conflating the two makes the citation worthless.
 
 ## Find the egress path for an SSRF

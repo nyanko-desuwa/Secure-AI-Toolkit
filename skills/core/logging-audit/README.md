@@ -81,7 +81,7 @@ Wire an alert to its emitter:
 
 ```text
 Here are our five detection rules. For each, find the code path that emits the event it
-keys on. If nothing emits it, say so — that rule has never fired.
+keys on. If nothing emits it, say so - that rule has never fired.
 ```
 
 More in [prompts.md](prompts.md).
@@ -92,7 +92,7 @@ More in [prompts.md](prompts.md).
   three call frames into a log statement. Pair it with SAST rules for log sinks and a secret
   scanner pointed at the log store itself.
 - Reading code cannot confirm runtime behaviour. Whether the redaction processor is actually
-  registered, whether the sink is append-only, whether the alert reaches a human — none of
+  registered, whether the sink is append-only, whether the alert reaches a human - none of
   that is visible in a diff. Every claim about deployed state needs a runtime check.
 - Detection rules in `references/detection-rules.md` are pseudo-queries. SIEM syntax differs
   per product; translation is on you, and thresholds must be tuned against your baseline or
@@ -103,7 +103,7 @@ More in [prompts.md](prompts.md).
   alerting obligation comes from A09. Do not read an ASVS V16 pass as coverage of alerting.
 - Compliance mapping is partial. GDPR Articles 15 and 17 are named where they collide with
   append-only audit trails. PCI DSS, HIPAA, SOC 2, and ISO 27001 retention requirements are
-  not covered — those belong in a `compliance` skill.
+  not covered - those belong in a `compliance` skill.
 - Tamper evidence has a hard ceiling. Hash chaining detects deletion by an attacker without
   full table write access. It proves nothing against one who has it. External anchoring is
   named in `best-practices.md` but not implemented here.
@@ -125,10 +125,10 @@ appear anywhere in this skill. Example domains use `.test` or `example.com`.
 
 ## References
 
-- OWASP Top 10 2025 A09 — <https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/>
-- OWASP ASVS 5.0 V16 — <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md>
-- OWASP Logging Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html>
-- OWASP Application Logging Vocabulary Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html>
-- CWE-117 Improper Output Neutralization for Logs — <https://cwe.mitre.org/data/definitions/117.html>
-- CWE-532 Insertion of Sensitive Information into Log File — <https://cwe.mitre.org/data/definitions/532.html>
-- CWE-778 Insufficient Logging — <https://cwe.mitre.org/data/definitions/778.html>
+- OWASP Top 10 2025 A09 - <https://owasp.org/Top10/2025/A09_2025-Security_Logging_and_Alerting_Failures/>
+- OWASP ASVS 5.0 V16 - <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x25-V16-Security-Logging-and-Error-Handling.md>
+- OWASP Logging Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html>
+- OWASP Application Logging Vocabulary Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Logging_Vocabulary_Cheat_Sheet.html>
+- CWE-117 Improper Output Neutralization for Logs - <https://cwe.mitre.org/data/definitions/117.html>
+- CWE-532 Insertion of Sensitive Information into Log File - <https://cwe.mitre.org/data/definitions/532.html>
+- CWE-778 Insufficient Logging - <https://cwe.mitre.org/data/definitions/778.html>

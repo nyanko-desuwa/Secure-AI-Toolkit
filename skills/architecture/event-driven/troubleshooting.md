@@ -68,7 +68,7 @@ Almost always one message failing forever at the head (E6).
 1. Read the consumer's error log for a repeating identifier. Same key, rising attempt count.
 2. Decide whether it is permanent. Schema mismatch, missing referenced entity, and impossible state
    are permanent; a timeout is not.
-3. Move it out of the way — dead-letter it explicitly, or on Kafka skip the offset after recording
+3. Move it out of the way - dead-letter it explicitly, or on Kafka skip the offset after recording
    the key and the reason somewhere durable. Skipping without a record is data loss you chose.
 4. Then fix the cap that let it retry forever.
 
@@ -98,7 +98,7 @@ you how to prove it.
 A process manager that waits for a reply that will never arrive holds its context forever
 (`CWE-772`).
 
-- Every saga gets a timeout on creation, persisted with the instance. Not an in-process timer — a
+- Every saga gets a timeout on creation, persisted with the instance. Not an in-process timer - a
   process restart loses those.
 - Timeouts are stored as rows with a due time, and a scheduler polls them. That makes the pending
   set queryable, which is also how you find the stuck ones.
@@ -117,8 +117,8 @@ exist. What does exist:
 - Broker-internal transactional semantics that cover reading, processing, and writing back to the
   same broker. They do not cover an HTTP call to a payment provider.
 
-If a third party is in the path, the dedupe has to happen at the third party — an idempotency key on
-their API — or you accept the duplicate and reconcile. Do not claim a guarantee you cannot enforce.
+If a third party is in the path, the dedupe has to happen at the third party - an idempotency key on
+their API - or you accept the duplicate and reconcile. Do not claim a guarantee you cannot enforce.
 
 ## Ordering is required across entities
 
@@ -140,7 +140,7 @@ Options when the requirement is real:
 Prefer the more security-focused option and say you made the call.
 
 - Performance material may suggest putting more into the event to avoid the callback. This skill says
-  thin by default. Security wins, and the cost — one fetch per event — is stated rather than hidden.
+  thin by default. Security wins, and the cost - one fetch per event - is stated rather than hidden.
 - Framework docs may present schema-registry validation as sufficient input handling. It validates
   shape against a registered schema; it does not authorize the action or bound the values. Both are
   still yours.

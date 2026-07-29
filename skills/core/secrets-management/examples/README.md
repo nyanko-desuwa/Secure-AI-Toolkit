@@ -8,14 +8,14 @@ formatted to pass as live key material.
 
 ## Contents
 
-- [Hardcoded credential with a TODO](#hardcoded-credential-with-a-todo) — A04, CWE-798
-- [Dockerfile baking a token into a layer](#dockerfile-baking-a-token-into-a-layer) — A02, CWE-798
-- [Kubernetes Secret assumed to be encrypted](#kubernetes-secret-assumed-to-be-encrypted) — A02, CWE-522
-- [Log line that leaks a bearer token](#log-line-that-leaks-a-bearer-token) — A09, CWE-532
-- [API key compared with `==`](#api-key-compared-with-) — A04, CWE-208
-- [Long-lived cloud key where a role would do](#long-lived-cloud-key-where-a-role-would-do) — A02, CWE-798
-- [Rotation designed as a swap](#rotation-designed-as-a-swap) — A04, CWE-522
-- [Secret on a CI command line](#secret-on-a-ci-command-line) — A02, CWE-214
+- [Hardcoded credential with a TODO](#hardcoded-credential-with-a-todo) - A04, CWE-798
+- [Dockerfile baking a token into a layer](#dockerfile-baking-a-token-into-a-layer) - A02, CWE-798
+- [Kubernetes Secret assumed to be encrypted](#kubernetes-secret-assumed-to-be-encrypted) - A02, CWE-522
+- [Log line that leaks a bearer token](#log-line-that-leaks-a-bearer-token) - A09, CWE-532
+- [API key compared with `==`](#api-key-compared-with-) - A04, CWE-208
+- [Long-lived cloud key where a role would do](#long-lived-cloud-key-where-a-role-would-do) - A02, CWE-798
+- [Rotation designed as a swap](#rotation-designed-as-a-swap) - A04, CWE-522
+- [Secret on a CI command line](#secret-on-a-ci-command-line) - A02, CWE-214
 
 ---
 
@@ -58,7 +58,7 @@ the environment lookup is just plumbing.
 
 The tempting wrong fix is to keep the literal and add the file to `.gitignore`. `.gitignore` does
 nothing for a file already tracked and nothing for history. Once the value has been committed,
-the only remediation is revoke-then-rotate — see
+the only remediation is revoke-then-rotate - see
 [../references/exposure-response.md](../references/exposure-response.md).
 
 ---
@@ -85,7 +85,7 @@ CMD ["node", "server.js"]
 
 `docker history` prints the `ARG` and `ENV` values. `docker inspect` shows `SENTRY_AUTH_TOKEN` in
 the image config for anyone who pulls the tag. And `rm -f /app/.npmrc` runs in a later layer, so
-the layer created by `COPY .npmrc` still contains the file — extract the tarball and read it:
+the layer created by `COPY .npmrc` still contains the file - extract the tarball and read it:
 
 ```bash
 docker save myimage:1.0 -o img.tar   # unpack, find the layer, the .npmrc is intact
@@ -135,7 +135,7 @@ node_modules
 ```
 
 Why this works: a secret mount is a tmpfs visible only during that one `RUN` instruction, and it
-is excluded from the layer's filesystem diff — there is no layer to extract it from and no image
+is excluded from the layer's filesystem diff - there is no layer to extract it from and no image
 metadata recording it. The multi-stage split means the build stage, where the secret was present
 in memory, is not part of the published image at all.
 
@@ -230,7 +230,7 @@ rules:
     verbs: ["get"]
 ```
 
-Also required, and not visible in any manifest — encryption at rest on the API server:
+Also required, and not visible in any manifest - encryption at rest on the API server:
 
 ```yaml
 # EncryptionConfiguration on the control plane
@@ -253,7 +253,7 @@ deploy.
 
 Worth being honest about: with external-secrets the value still materialises as a Kubernetes
 Secret, so RBAC and encryption at rest still matter. The Secrets Store CSI driver goes further by
-projecting into the pod's filesystem without creating the object — at the cost of a
+projecting into the pod's filesystem without creating the object - at the cost of a
 `volumeMount` and no `envFrom`. If manifests must carry values, SOPS or sealed-secrets encrypt
 them for git, which solves the repository problem and not the etcd or RBAC problems.
 
@@ -336,8 +336,8 @@ class RedactFilter(logging.Filter):
         return True
 ```
 
-Why this works: the header allowlist means a new sensitive header — `X-Session-Token` next
-sprint — is excluded by default rather than needing to be added to a denylist. Redaction happens
+Why this works: the header allowlist means a new sensitive header - `X-Session-Token` next
+sprint - is excluded by default rather than needing to be added to a denylist. Redaction happens
 before the log call, so the value never enters the pipeline and cannot be recovered from a buffer
 or a sink that ignores your filter.
 
@@ -366,7 +366,7 @@ def authorize(request) -> bool:
 prefix, so with enough samples an attacker recovers the key one byte at a time. On this endpoint
 there is no rate limit to make that expensive. It also fails oddly when the header is absent:
 `None == str` is `False`, which is right by accident, and `secrets.compare_digest(None, s)`
-raises — so handle the missing case explicitly.
+raises - so handle the missing case explicitly.
 
 ```python
 # Fixed: constant-time comparison, explicit missing-header path
@@ -400,7 +400,7 @@ is why the Node version does not leak what `timingSafeEqual` alone would.
 
 Honest severity: on its own this is low. The attack needs many samples over a low-noise path. It
 matters when the compared value is guessable byte by byte with unlimited attempts. Report it as a
-defence-in-depth gap unless you can show the sampling is practical — and fix it anyway, because
+defence-in-depth gap unless you can show the sampling is practical - and fix it anyway, because
 it costs one function call.
 
 Equivalents: Go `hmac.Equal`, PHP `hash_equals($known, $user)` with the known value first, Java
@@ -436,8 +436,8 @@ stringData:
 ```
 
 A static key never expires. It works from anywhere, so it keeps working after it leaves the
-cluster in a log, a laptop, or a screenshot. Four separate processes — storage, delivery,
-rotation, revocation — all have to work, and rotation usually has not been tested.
+cluster in a log, a laptop, or a screenshot. Four separate processes - storage, delivery,
+rotation, revocation - all have to work, and rotation usually has not been tested.
 
 ```python
 # Fixed: no credentials in code. The SDK finds the projected token.
@@ -496,13 +496,13 @@ Why this works: credentials are minted per session with a short expiry and never
 There is nothing to store, nothing to rotate, and nothing a leaked file can contain.
 
 The failure mode to watch for is the trust policy. `StringLike` with `system:serviceaccount:*:*`
-on `:sub`, or omitting `:sub` entirely, lets any pod in the cluster assume the role — which turns
+on `:sub`, or omitting `:sub` entirely, lets any pod in the cluster assume the role - which turns
 a namespace boundary into nothing and is the most common IRSA misconfiguration. Condition on
 `:aud` as well; without it the policy accepts tokens minted for other audiences.
 
 Same shape elsewhere: Workload Identity Federation on GKE, Microsoft Entra Workload ID on AKS,
 instance profiles on EC2, and OIDC federation from a CI provider. For CI, condition on the
-repository and the branch or environment — trusting the issuer alone means anyone's pipeline on
+repository and the branch or environment - trusting the issuer alone means anyone's pipeline on
 that provider can assume your role.
 
 ---
@@ -563,7 +563,7 @@ def sign(body: bytes, secrets: list[SigningSecret]) -> str:
 Rotation becomes four ordered steps, each independently deployable:
 
 1. Add the new secret as current, keep the old with `not_after = now + 24h`. Verifier accepts both.
-2. Authenticate with the new value and confirm it works — before anything depends on it only.
+2. Authenticate with the new value and confirm it works - before anything depends on it only.
 3. Move senders to the new secret.
 4. Let `not_after` pass. The old secret stops being accepted with no deploy.
 
@@ -571,7 +571,7 @@ Why this works: no instant exists where a valid configuration is impossible, so 
 sequence of safe changes rather than a synchronised cutover. Step 2 is the one people skip, and
 skipping it is how rotation promotes a credential that was never tested.
 
-Two things to keep honest. The overlap must expire on its own — an overlap window enforced only
+Two things to keep honest. The overlap must expire on its own - an overlap window enforced only
 by a calendar reminder is just two live secrets. And this is the scheduled path: an exposure
 event must not run through it, because the overlap keeps the leaked value working. Revoke first,
 then rotate. See [../references/exposure-response.md](../references/exposure-response.md).
@@ -611,7 +611,7 @@ jobs:
 ```
 
 Four independent failures. The literal in `env:` is in git, and because it was never a
-repository secret it gets no masking — it prints in full the first time a step runs `env` or
+repository secret it gets no masking - it prints in full the first time a step runs `env` or
 fails with a verbose stack. `--token=...` on the command line is visible in the process table to
 anything else on the runner and lands in the step log; `--verbose` makes that near-certain.
 `pull_request_target` runs code from the fork's branch with access to secrets, so a pull request
@@ -661,7 +661,7 @@ The IAM trust policy scopes to the repository and the ref, not just the provider
 }
 ```
 
-Why this works: the AWS credentials no longer exist — the job exchanges a short-lived OIDC token
+Why this works: the AWS credentials no longer exist - the job exchanges a short-lived OIDC token
 for session credentials that expire in minutes, so there is nothing to steal from the repository
 settings and nothing to rotate. `DEPLOY_TOKEN` reaches the script through the environment instead
 of `argv`, so it is not in the process table or the command echo. `permissions:` caps what a

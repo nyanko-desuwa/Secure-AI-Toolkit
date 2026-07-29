@@ -55,11 +55,11 @@ Laravel documents username/password, separate connections, prefixes, TLS schemes
 
 These cases describe defensive lessons, not reproduction steps.
 
-1. **Exposed port 6379** — Redis itself warns that a public listener can accept destructive commands such as `FLUSHALL`. Private network reachability is the primary control; protected mode is a fallback.
-2. **Configuration/file-write abuse** — Redis documents that a client able to use `CONFIG` can change working directory and dump filename, creating a host-compromise path under the Redis service account. Deny administration to runtime ACL users and run an unprivileged service account.
-3. **Destructive deletion/ransomware-style events** — a broad credential or public listener lets an attacker erase data. Separate disposable cache from durable security state, restrict destructive commands, maintain tested off-host backups, and alert on abnormal administration.
-4. **Published Docker service** — `ports: ["6379:6379"]` exposes a Redis container on every host interface by default. Use internal Docker networks; only bind a justified local development port to loopback.
-5. **Managed cache reachable from the wrong network** — managed encryption does not make a broad VPC/Security Group safe. Verify the actual subnet, private endpoint, access group, ACL/auth mode, and backup readers.
+1. **Exposed port 6379** - Redis itself warns that a public listener can accept destructive commands such as `FLUSHALL`. Private network reachability is the primary control; protected mode is a fallback.
+2. **Configuration/file-write abuse** - Redis documents that a client able to use `CONFIG` can change working directory and dump filename, creating a host-compromise path under the Redis service account. Deny administration to runtime ACL users and run an unprivileged service account.
+3. **Destructive deletion/ransomware-style events** - a broad credential or public listener lets an attacker erase data. Separate disposable cache from durable security state, restrict destructive commands, maintain tested off-host backups, and alert on abnormal administration.
+4. **Published Docker service** - `ports: ["6379:6379"]` exposes a Redis container on every host interface by default. Use internal Docker networks; only bind a justified local development port to loopback.
+5. **Managed cache reachable from the wrong network** - managed encryption does not make a broad VPC/Security Group safe. Verify the actual subnet, private endpoint, access group, ACL/auth mode, and backup readers.
 
 ## Limitations
 
@@ -75,9 +75,9 @@ All hosts, credentials, certificates, URLs, ACL passwords, and data in examples 
 
 ## References
 
-- Redis security — <https://redis.io/docs/latest/operate/oss_and_stack/management/security/>
-- Redis ACL — <https://redis.io/docs/latest/operate/oss_and_stack/management/security/acl/>
-- Redis persistence — <https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/>
-- Redis replication — <https://redis.io/docs/latest/operate/oss_and_stack/management/replication/>
-- Redis OSS 8 release notes — <https://redis.io/docs/latest/operate/oss_and_stack/stack-with-enterprise/release-notes/redisce/redisos-8.0-release-notes/>
-- Valkey security — <https://valkey.io/topics/security/>
+- Redis security - <https://redis.io/docs/latest/operate/oss_and_stack/management/security/>
+- Redis ACL - <https://redis.io/docs/latest/operate/oss_and_stack/management/security/acl/>
+- Redis persistence - <https://redis.io/docs/latest/operate/oss_and_stack/management/persistence/>
+- Redis replication - <https://redis.io/docs/latest/operate/oss_and_stack/management/replication/>
+- Redis OSS 8 release notes - <https://redis.io/docs/latest/operate/oss_and_stack/stack-with-enterprise/release-notes/redisce/redisos-8.0-release-notes/>
+- Valkey security - <https://valkey.io/topics/security/>

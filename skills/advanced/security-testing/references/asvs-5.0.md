@@ -45,10 +45,10 @@ contributors.
 
 ## Levels, and what they mean for a suite
 
-- Level 1 — baseline, verifiable by black-box testing. Treat as a floor.
-- Level 2 — for applications handling sensitive data. The right default for most business
+- Level 1 - baseline, verifiable by black-box testing. Treat as a floor.
+- Level 2 - for applications handling sensitive data. The right default for most business
   applications.
-- Level 3 — for applications where failure is severe: health, finance, safety, critical
+- Level 3 - for applications where failure is severe: health, finance, safety, critical
   infrastructure.
 
 Level 1 is the level a DAST baseline scan can speak to, because it is defined as black-box
@@ -65,7 +65,7 @@ is correct, useful, and checkable. A fabricated `V8.2.7` is worse than no citati
 reader may act on it.
 
 For requirement-level citations, pull the current text from the official repository rather than
-from memory — 5.0 numbering is new enough that recalled IDs are unreliable:
+from memory - 5.0 numbering is new enough that recalled IDs are unreliable:
 
 <https://github.com/OWASP/ASVS>
 

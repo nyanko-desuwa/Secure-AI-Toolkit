@@ -26,7 +26,7 @@ see the `docker-security` skill for the container side.
 
 ## How to cite one
 
-Do not quote a control number from memory. Section numbering changes between major versions —
+Do not quote a control number from memory. Section numbering changes between major versions -
 a control that was 2.1.5 in one edition is renumbered in the next, and citing the wrong number
 makes the whole finding suspect.
 
@@ -61,8 +61,8 @@ the code actually calls.
 
 Each benchmark splits recommendations into Level 1 and Level 2.
 
-- Level 1 — expected to be safe to apply broadly, low functional impact.
-- Level 2 — defence in depth for environments where security outweighs convenience. Some
+- Level 1 - expected to be safe to apply broadly, low functional impact.
+- Level 2 - defence in depth for environments where security outweighs convenience. Some
   Level 2 items will break things. Read them before enabling.
 
 State the level when you recommend an item. "CIS Level 2" is a useful signal that a change
@@ -94,9 +94,9 @@ and none of them evaluates whether a permission is wider than the workload needs
 
 ## Sources
 
-- CIS Benchmarks list — <https://www.cisecurity.org/cis-benchmarks>
-- AWS benchmarks — <https://www.cisecurity.org/benchmark/amazon_web_services>
-- Azure benchmarks — <https://www.cisecurity.org/benchmark/azure>
-- GCP benchmarks — <https://www.cisecurity.org/benchmark/google_cloud_computing_platform>
+- CIS Benchmarks list - <https://www.cisecurity.org/cis-benchmarks>
+- AWS benchmarks - <https://www.cisecurity.org/benchmark/amazon_web_services>
+- Azure benchmarks - <https://www.cisecurity.org/benchmark/azure>
+- GCP benchmarks - <https://www.cisecurity.org/benchmark/google_cloud_computing_platform>
 
 Checked 2026-07-28.

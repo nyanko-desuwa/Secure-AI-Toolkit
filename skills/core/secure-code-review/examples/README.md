@@ -1,6 +1,6 @@
 # Review Examples
 
-Eight findings as a reviewer would actually meet them. Six are vulnerabilities. Two are not —
+Eight findings as a reviewer would actually meet them. Six are vulnerabilities. Two are not -
 they are the ones a scanner or a keyword pass reports, and the reasoning for closing them is the
 part worth reading.
 
@@ -9,14 +9,14 @@ either a fix or the reason it stays an observation.
 
 ## Contents
 
-- [1. Unscoped order lookup](#1-unscoped-order-lookup) — A01, CWE-639 — High
-- [2. Sort parameter reaching ORDER BY](#2-sort-parameter-reaching-order-by) — A05, CWE-89 — High
-- [3. Traversal in an attachment download](#3-traversal-in-an-attachment-download) — A01, CWE-22 — High
-- [4. MD5 in a cache key](#4-md5-in-a-cache-key) — claimed CWE-328 — not a vulnerability
-- [5. YAML config parsed with a code-capable loader](#5-yaml-config-parsed-with-a-code-capable-loader) — A08, CWE-502 — Critical
-- [6. Profile update assigning the whole body](#6-profile-update-assigning-the-whole-body) — A01, CWE-915 — Critical
-- [7. No CSRF token on a Bearer-auth JSON API](#7-no-csrf-token-on-a-bearer-auth-json-api) — claimed CWE-352 — not a vulnerability
-- [8. User-supplied pattern in a search filter](#8-user-supplied-pattern-in-a-search-filter) — A06, CWE-1333 — Medium
+- [1. Unscoped order lookup](#1-unscoped-order-lookup) - A01, CWE-639 - High
+- [2. Sort parameter reaching ORDER BY](#2-sort-parameter-reaching-order-by) - A05, CWE-89 - High
+- [3. Traversal in an attachment download](#3-traversal-in-an-attachment-download) - A01, CWE-22 - High
+- [4. MD5 in a cache key](#4-md5-in-a-cache-key) - claimed CWE-328 - not a vulnerability
+- [5. YAML config parsed with a code-capable loader](#5-yaml-config-parsed-with-a-code-capable-loader) - A08, CWE-502 - Critical
+- [6. Profile update assigning the whole body](#6-profile-update-assigning-the-whole-body) - A01, CWE-915 - Critical
+- [7. No CSRF token on a Bearer-auth JSON API](#7-no-csrf-token-on-a-bearer-auth-json-api) - claimed CWE-352 - not a vulnerability
+- [8. User-supplied pattern in a search filter](#8-user-supplied-pattern-in-a-search-filter) - A06, CWE-1333 - Medium
 
 ---
 
@@ -131,7 +131,7 @@ confined? Container filesystem, same user as the app, so `.env` and the app sour
 
 Exploit: `GET /attachments?name=../../../proc/self/environ` returns the process environment,
 including database credentials. `name=/etc/passwd` also works, because `os.path.join` throws away
-`ATTACH_DIR` when the second argument is absolute — the case a `..` check misses entirely.
+`ATTACH_DIR` when the second argument is absolute - the case a `..` check misses entirely.
 
 ```python
 # Fixed: resolve first, then confirm the result is still inside the directory
@@ -153,7 +153,7 @@ resolution misses `..%2f`, `....//`, and a symlink inside the directory pointing
 
 Stronger where the design allows it: accept an opaque attachment ID, look the stored filename up
 in the database scoped to the actor, and never take a path from the client. That also fixes the
-authorization hole this example quietly has — any user can read any attachment.
+authorization hole this example quietly has - any user can read any attachment.
 
 Remaining gap: `is_relative_to` compares paths, so a bind mount or a hardlink that places outside
 content inside the directory still passes. Filesystem layout is not visible in code; state that
@@ -185,7 +185,7 @@ Reported as an observation: FIPS-mode deployments reject MD5 outright, so
 `hashlib.md5(..., usedforsecurity=False)` on Python 3.9+ or `blake2b` documents the intent and
 avoids a runtime failure later. That is portability, not a fix.
 
-Where the same call would be a real finding — the difference is the property being relied on, not
+Where the same call would be a real finding - the difference is the property being relied on, not
 the algorithm:
 
 - Deduplicating uploaded files by digest, where a collision lets one user's file overwrite
@@ -238,14 +238,14 @@ def import_pipeline(actor: User = Depends(current_user)):
 ```
 
 Why it closes: `safe_load` has no constructor for arbitrary Python types, so no tag in the
-document can reach an import or a call. The schema is a second, separate control — it stops
+document can reach an import or a call. The schema is a second, separate control - it stops
 unexpected keys from reaching `save_pipeline`, which `safe_load` alone does not.
 
 Remaining gaps worth naming: YAML aliases still allow a billion-laughs expansion, so the size cap
 matters and a node-count cap is better; and `safe_load` on a 200 MB document is a memory problem
 regardless of tags.
 
-Severity: authenticated remote code execution in the application process. Critical — blast radius
+Severity: authenticated remote code execution in the application process. Critical - blast radius
 is the host and every credential the process holds, not one user's data.
 
 ---
@@ -262,7 +262,7 @@ app.patch("/api/me", requireAuth, async (req, res) => {
 });
 ```
 
-Disproof attempt: the row is correctly scoped — `where` uses the session user, so this is not an
+Disproof attempt: the row is correctly scoped - `where` uses the session user, so this is not an
 IDOR. The question is which properties are writable, not which row. Read the schema: `User` has
 `role`, `emailVerified`, `stripeCustomerId`, and `credits`. All are reachable through `data`.
 Does a validator run first? There is no schema on the route. Is there a Prisma-level allowlist?
@@ -292,8 +292,8 @@ app.patch("/api/me", requireAuth, async (req, res) => {
 });
 ```
 
-Why it closes: an allowlist stays correct when someone adds a column. A denylist —
-`delete req.body.role` — is correct only until the next migration, and the next migration will
+Why it closes: an allowlist stays correct when someone adds a column. A denylist -
+`delete req.body.role` - is correct only until the next migration, and the next migration will
 not remember to update it. `.strict()` rejects unknown keys instead of dropping them silently, so
 an attempt is a 400 you can alert on. `select` fixes the mirror-image bug: the response was
 returning the whole row, including `stripeCustomerId`.
@@ -345,7 +345,7 @@ Disproof attempt, four checks that all have to hold:
 
 With all four holding, there is no exploitation path: no concrete cross-origin request completes.
 The finding is closed as an observation, with the preconditions written down, because it is the
-preconditions that are fragile — not the code in the diff.
+preconditions that are fragile - not the code in the diff.
 
 What would bring it back, each of which is a real finding on its own:
 
@@ -385,14 +385,14 @@ def search(pattern: str, actor: User = Depends(current_user)):
 ```
 
 Disproof attempt: is the pattern really attacker-controlled? Yes, straight from the query string
-with no validation. Is Python's `re` backtracking? Yes — it is a backtracking engine, so nested
+with no validation. Is Python's `re` backtracking? Yes - it is a backtracking engine, so nested
 quantifiers can go exponential. Is the work bounded elsewhere? No request timeout in the app;
 the reverse proxy has a 60 s read timeout, which bounds one client's wait but not the CPU already
 committed. Is the endpoint reachable without an account? No, it needs a session.
 
 Exploit: `?pattern=(a%2B)%2B%24` against a document body containing a long run of `a`. One request
 occupies a worker for minutes. With a handful of requests the pool is exhausted and the whole
-application stops responding — the impact lands on all users, not just the caller.
+application stops responding - the impact lands on all users, not just the caller.
 
 ```python
 # Fixed: the client supplies terms, the server supplies the pattern
@@ -413,7 +413,7 @@ alternation survives from user input. The pattern's structure is now server-auth
 is capped, which removes the exponential class rather than making it slower to trigger.
 
 Why the tempting fixes are weaker: a timeout around the match does not exist in Python's `re`, so
-it becomes a thread or subprocess with a kill — real complexity for a problem the escape removes.
+it becomes a thread or subprocess with a kill - real complexity for a problem the escape removes.
 A denylist of "dangerous" constructs like `(a+)+` fails because catastrophic backtracking has
 many shapes and new ones keep being published. If genuine regex search is a product requirement,
 use a linear-time engine (`re2`) or push the search into the database's full-text index.

@@ -11,7 +11,7 @@ How container findings map to the standards this skill cites. Verified 2026-07-2
 
 Containers land in two categories. Claiming more than that dilutes the report.
 
-### A02:2025 — Security Misconfiguration
+### A02:2025 - Security Misconfiguration
 
 Everything about how the container runs. Defaults left in place, privilege not dropped, ports
 exposed wider than intended, a writable filesystem where none is needed.
@@ -22,10 +22,10 @@ correct application is deployed insecurely.
 Report under A02: root user, missing `--cap-drop`, `--privileged`, host namespaces, docker socket
 mount, missing resource limits, `0.0.0.0` port publishing, seccomp disabled.
 
-### A03:2025 — Software Supply Chain Failures
+### A03:2025 - Software Supply Chain Failures
 
 Everything about what is in the image and where it came from. This is a new 2025 category and it is
-broader than the old "vulnerable and outdated components" — it covers the base image, the registry,
+broader than the old "vulnerable and outdated components" - it covers the base image, the registry,
 the build tooling, and the artefact.
 
 Report under A03: `FROM` a floating tag, no digest pin, unscanned images, no SBOM, unsigned images,
@@ -34,11 +34,11 @@ source.
 
 ### Categories that do not apply
 
-- A04 Cryptographic Failures — a secret in an image layer is not a crypto failure. It is A02 if it
+- A04 Cryptographic Failures - a secret in an image layer is not a crypto failure. It is A02 if it
   is a runtime configuration leak, A03 if it shipped in the artefact. Cite CWE-522 or CWE-798.
-- A05 Injection — a Dockerfile is not an interpreter boundary. `ARG` interpolation into a `RUN`
+- A05 Injection - a Dockerfile is not an interpreter boundary. `ARG` interpolation into a `RUN`
   during a build from an untrusted PR is closer to A08.
-- A08 Software or Data Integrity Failures — applies when an unverified artefact is executed. An
+- A08 Software or Data Integrity Failures - applies when an unverified artefact is executed. An
   unsigned image deployed without verification can be reported as A08 instead of A03 when the point
   is the missing verification step rather than the source.
 
@@ -90,7 +90,7 @@ There is no CWE that says "container escape", so describe the mechanism instead 
 | No resource limits | A02 | V13 | CWE-770 |
 | setuid binaries retained | A02 | V13 | CWE-269 |
 | No image scanning in CI | A03 | V15 | CWE-1104 |
-| No SBOM | A03 | V15 | — |
+| No SBOM | A03 | V15 | - |
 | Unsigned image, unverified deploy | A03 or A08 | V15 | CWE-345 |
 | Insecure registry over HTTP | A03 | V12 | CWE-319 |
 | Build tooling in the shipped image | A03 | V15 | CWE-1104 |
@@ -99,5 +99,5 @@ There is no CWE that says "container escape", so describe the mechanism instead 
 ## CIS Docker Benchmark
 
 The CIS benchmark is the control-by-control reference for the same ground. Where a finding has a CIS
-control, cite it alongside the OWASP category — CIS is more specific and more useful to whoever has
+control, cite it alongside the OWASP category - CIS is more specific and more useful to whoever has
 to fix it. See [cis-docker-benchmark.md](cis-docker-benchmark.md) for verified IDs.

@@ -1,6 +1,6 @@
 ---
 name: deserialization-security
-description: 'Unsafe deserialization and parsers — pickle, Java/.NET binary, YAML load, XML XXE/expansion. Triggers: "deserialization", "pickle", "ObjectInputStream", "BinaryFormatter", "YAML load", "XXE", "unserialize", "giải tuần tự hóa", "XML external entity".'
+description: 'Unsafe deserialization and parsers - pickle, Java/.NET binary, YAML load, XML XXE/expansion. Triggers: "deserialization", "pickle", "ObjectInputStream", "BinaryFormatter", "YAML load", "XXE", "unserialize", "giải tuần tự hóa", "XML external entity".'
 allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
@@ -47,10 +47,10 @@ OWASP Top 10 2025 A08, ASVS 5.0 V2/V5/V13, and CWE are the sources; see [referen
 
 ## Severity
 
-- Critical — untrusted bytes can instantiate arbitrary types or execute privileged behavior
-- High — external entity reads or unbounded expansion reaches sensitive files/network/resources
-- Medium — unsafe parser on authenticated but low-trust import data
-- Low — deprecated API unreachable from untrusted input, with migration planned
+- Critical - untrusted bytes can instantiate arbitrary types or execute privileged behavior
+- High - external entity reads or unbounded expansion reaches sensitive files/network/resources
+- Medium - unsafe parser on authenticated but low-trust import data
+- Low - deprecated API unreachable from untrusted input, with migration planned
 
 ## Related Skills
 

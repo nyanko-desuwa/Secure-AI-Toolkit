@@ -1,6 +1,6 @@
 # References
 
-One file per standard this skill maps to. Summaries, not copies — link to the source for the
+One file per standard this skill maps to. Summaries, not copies - link to the source for the
 full text.
 
 ```text
@@ -20,7 +20,7 @@ references/
 ## Version pinning
 
 Category IDs move between editions. Guidance written against a stale ID mis-maps every
-finding, which is worse than no mapping at all — a reviewer trusts the number.
+finding, which is worse than no mapping at all - a reviewer trusts the number.
 
 So every reference file opens with:
 

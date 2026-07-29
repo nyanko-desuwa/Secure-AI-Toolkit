@@ -3,7 +3,7 @@
 Vulnerable configuration next to its fix. Each names the Top 10 category, the CWE where one
 applies, and why the fix closes the hole rather than just looking safer.
 
-These are defensive examples. Nothing here is a working attack — the malicious side is shown as
+These are defensive examples. Nothing here is a working attack - the malicious side is shown as
 the shape of a manifest or workflow you would find during review, not as a payload.
 
 Commit SHAs, digests, hostnames, and identities are placeholders. Resolve the real values before
@@ -11,14 +11,14 @@ using any of it; a pin copied out of documentation is a pin nobody reviewed.
 
 ## Contents
 
-1. [Version ranges versus a lockfile with hashes](#1-version-ranges-versus-a-lockfile-with-hashes) — A03, CWE-345
-2. [A package name that looks right](#2-a-package-name-that-looks-right) — A03, CWE-1357
-3. [Public registry fallback versus a scoped private registry](#3-public-registry-fallback-versus-a-scoped-private-registry) — A03, CWE-1357
-4. [Install scripts trusted versus disabled and allowlisted](#4-install-scripts-trusted-versus-disabled-and-allowlisted) — A03, CWE-829
-5. [Toolchain downloaded without verification](#5-toolchain-downloaded-without-verification) — A08, CWE-494
-6. [Unsigned artefact versus cosign-verified](#6-unsigned-artefact-versus-cosign-verified) — A08, CWE-347
-7. [SBOM generated but never checked](#7-sbom-generated-but-never-checked) — A03, CWE-1395
-8. [Auto-merge meeting a compromised maintainer](#8-auto-merge-meeting-a-compromised-maintainer) — A03, CWE-1357
+1. [Version ranges versus a lockfile with hashes](#1-version-ranges-versus-a-lockfile-with-hashes) - A03, CWE-345
+2. [A package name that looks right](#2-a-package-name-that-looks-right) - A03, CWE-1357
+3. [Public registry fallback versus a scoped private registry](#3-public-registry-fallback-versus-a-scoped-private-registry) - A03, CWE-1357
+4. [Install scripts trusted versus disabled and allowlisted](#4-install-scripts-trusted-versus-disabled-and-allowlisted) - A03, CWE-829
+5. [Toolchain downloaded without verification](#5-toolchain-downloaded-without-verification) - A08, CWE-494
+6. [Unsigned artefact versus cosign-verified](#6-unsigned-artefact-versus-cosign-verified) - A08, CWE-347
+7. [SBOM generated but never checked](#7-sbom-generated-but-never-checked) - A03, CWE-1395
+8. [Auto-merge meeting a compromised maintainer](#8-auto-merge-meeting-a-compromised-maintainer) - A03, CWE-1357
 
 ---
 
@@ -112,7 +112,7 @@ second it comes from a model.
 ```
 
 The names are close enough to `cross-env`, `pyjwt`, and `requests` that a reviewer's eye
-completes them. Typosquats commonly re-export the real package, so the application works — which
+completes them. Typosquats commonly re-export the real package, so the application works - which
 removes the only feedback that would prompt a second look.
 
 ```bash
@@ -125,7 +125,7 @@ pip install huggingface-cli
 `pip install -U "huggingface_hub[cli]"`. An empty package registered under the hallucinated name
 was downloaded over 30,000 times in three months. Spracklen et al. (arXiv:2406.10279) measured
 19.7% of LLM-recommended packages as nonexistent, with more than 205,000 distinct hallucinated
-names — and the same model produces the same plausible name repeatedly, which is what makes
+names - and the same model produces the same plausible name repeatedly, which is what makes
 pre-registering them worth an attacker's time.
 
 ```bash
@@ -138,18 +138,18 @@ pip install -U "huggingface_hub[cli]"
 ```
 
 Why checking at adoption is the only place it works: once installed, the package has already run
-whatever it wanted to run. The signals are cheap — does the declared repository exist and contain
+whatever it wanted to run. The signals are cheap - does the declared repository exist and contain
 the published code, is the first-publish date days old, do the maintainers overlap with the
 project the package claims to belong to.
 
 The tempting wrong fix is a scanner. SCA matches known-vulnerable versions of known-good
 packages; a fresh squat is neither, so it scans clean. Registry reputation gates help and are not
-first-line either — download counts are inflatable, and the name has to be wrong before anything
+first-line either - download counts are inflatable, and the name has to be wrong before anything
 can flag it.
 
 For AI-assisted work specifically: treat every package name in generated code as unverified
 input, and never let an agent install a name a human has not read. A hallucinated name is absent
-from your lockfile, so a frozen install fails rather than fetching — which is the second reason
+from your lockfile, so a frozen install fails rather than fetching - which is the second reason
 example 1 matters.
 
 Honest status: no attack in the wild has been publicly attributed to slopsquatting. The
@@ -180,7 +180,7 @@ requests>=2.31
 `acme-billing` exists only on the internal index. pip offers no priority guarantee between
 indexes, so anyone who publishes `acme-billing 99.0.0` to PyPI becomes a candidate, and version
 resolution prefers it. The attacker needs no access to anything and does not have to guess your
-version — they publish an absurd one. PEP 708 was written to address exactly this and is
+version - they publish an absurd one. PEP 708 was written to address exactly this and is
 Rejected, so there is no index-priority feature to wait for.
 
 ```ini
@@ -190,21 +190,21 @@ index-url = https://pypi.acme.internal/simple/
 ```
 
 ```ini
-# .npmrc — internal names live in a scope bound to one registry
+# .npmrc - internal names live in a scope bound to one registry
 registry=https://npm.acme.internal/repository/npm-group/
 @acme:registry=https://npm.acme.internal/repository/npm-private/
 //npm.acme.internal/:_authToken=${NPM_TOKEN}
 ```
 
 ```bash
-# Go — keep private module paths off the public proxy and checksum database
+# Go - keep private module paths off the public proxy and checksum database
 go env -w GOPRIVATE='corp.example.com/*'
 go env -w GOPROXY='https://goproxy.acme.internal'
 ```
 
 Why this works: the attacker's package is never a candidate, because the resolver never queries a
 registry they can publish to. Scoping the internal name means claiming `acme-billing` publicly
-gains nothing. The hashes from example 1 are the second layer — even a poisoned mirror serves
+gains nothing. The hashes from example 1 are the second layer - even a poisoned mirror serves
 bytes that fail the check.
 
 The tempting wrong fix is defensive publishing: registering `acme-billing` on PyPI as an empty
@@ -222,8 +222,8 @@ verification. Scope it to the narrowest prefix that works, never `*`.
 
 `A03:2025` · `CWE-829`
 
-The attack lands before your code ever runs. The 2025 `Shai-Hulud` worm — which OWASP describes
-as the first successful self-propagating npm worm — used post-install scripts to exfiltrate
+The attack lands before your code ever runs. The 2025 `Shai-Hulud` worm - which OWASP describes
+as the first successful self-propagating npm worm - used post-install scripts to exfiltrate
 secrets, then republished itself with the npm tokens it found, reaching more than 500 package
 versions.
 
@@ -238,7 +238,7 @@ versions.
 ```
 
 ```json
-// What any package in the tree can declare — no consent required from you
+// What any package in the tree can declare - no consent required from you
 {
   "name": "some-transitive-dep",
   "scripts": {
@@ -283,13 +283,13 @@ denylist would require predicting which transitive dependency adds a `postinstal
 patch release.
 
 Two documented details. `npm start`, `npm test`, and `npm run` still execute their target script
-under `ignore-scripts` — it suppresses the pre- and post-scripts around them, so `npm test` still
+under `ignore-scripts` - it suppresses the pre- and post-scripts around them, so `npm test` still
 works. And `strict-allow-scripts` turns the unreviewed-dependency warning into a failure, which
 is what you want in CI.
 
 Honest limitation: this stops install-time execution, not malicious runtime code. A backdoor in a
 library you import runs when you call it. Egress restriction is the control that still helps
-after a script slips through — ASVS 13.2.4 asks for an allowlist of external systems the
+after a script slips through - ASVS 13.2.4 asks for an allowlist of external systems the
 application may talk to.
 
 ---
@@ -336,12 +336,12 @@ visible diff.
 
 Preferring the ecosystem's package manager over a download is better still, because it brings a
 lockfile and an advisory feed with it. A `curl | sh` step is a dependency that appears in no
-manifest, no lockfile, and no SBOM — which is precisely why Codecov reached so many pipelines.
+manifest, no lockfile, and no SBOM - which is precisely why Codecov reached so many pipelines.
 
 Honest limitation: the checksum protects integrity, not provenance. It confirms you got the bytes
 you recorded; it says nothing about whether that release was built from the source it claims. And
 a checksum copied from the same page that served the file proves only that the download
-completed. Where the tool publishes Sigstore signatures, verify the signature instead — that is
+completed. Where the tool publishes Sigstore signatures, verify the signature instead - that is
 the next example.
 
 ---
@@ -391,7 +391,7 @@ npm audit signatures
 
 Why this works: the Sigstore certificate binds the signature to an OIDC identity, so pinning
 identity and issuer means only that workflow, on that branch, can produce an artefact you accept.
-Verifying by digest rather than tag matters independently — a tag can be repointed at a different
+Verifying by digest rather than tag matters independently - a tag can be repointed at a different
 image whose own signature is perfectly valid.
 
 Run it where the artefact is consumed. An admission controller is the strongest placement,
@@ -400,7 +400,7 @@ that just signed the image tells you nothing you did not already know.
 
 Two claims worth separating. A signature says who produced the artefact. SLSA provenance says how
 it was built, and Build L2 is the level where the platform signs that provenance and the consumer
-checks it — see [../references/slsa.md](../references/slsa.md). Neither says the source
+checks it - see [../references/slsa.md](../references/slsa.md). Neither says the source
 was benign: a backdoor committed by a compromised maintainer produces flawless provenance. What
 you get is attribution, which is what makes an incident tractable.
 
@@ -454,12 +454,12 @@ so a critical finding inside it changes nothing.
 
 Why this works: `--fail-on high` sets a non-zero exit status, so the release stops rather than
 printing a report into a log nobody opens. `cosign attest` binds the document to the artefact
-digest, so an incident query has something to join on — two builds of `v1.4.2` are two artefacts,
+digest, so an incident query has something to join on - two builds of `v1.4.2` are two artefacts,
 and an SBOM keyed by version string cannot tell you which one is deployed.
 
 Running both generators is deliberate. `npm sbom` reads the lockfile and gives the exact resolved
 graph including dev scopes; `syft <image>` reads the finished artefact and finds OS packages the
-lockfile never mentioned. When the two disagree, that disagreement is the finding — something
+lockfile never mentioned. When the two disagree, that disagreement is the finding - something
 entered the artefact outside the declared graph.
 
 What people wrongly expect from an SBOM: that it is a vulnerability report (it is the input to
@@ -493,8 +493,8 @@ repository does during those hours.
 }
 ```
 
-A malicious release published at 02:00 is merged at 02:10 and running in CI — with CI's
-credentials — before anyone is awake. The configuration is not careless; it is what "keep
+A malicious release published at 02:00 is merged at 02:10 and running in CI - with CI's
+credentials - before anyone is awake. The configuration is not careless; it is what "keep
 dependencies current" looks like when nobody asked what happens on a bad release.
 
 ```json
@@ -533,7 +533,7 @@ updates:
 Why the cooldown works: malicious releases are usually detected and yanked within days, often
 hours. Waiting converts "we were patient zero" into "the registry pulled it before we resolved
 it". The cost is a few days of exposure to already-published CVEs, which is why the delay is
-short and why the `vulnerabilityAlerts` override exists — advisory-driven updates skip the queue.
+short and why the `vulnerabilityAlerts` override exists - advisory-driven updates skip the queue.
 Dependabot applies a three-day cooldown by default and does not apply it to security updates.
 
 Two details that carry weight. `pinDigests` on Actions and Dockerfiles closes the mutable-tag gap
@@ -543,7 +543,7 @@ a request path.
 
 Honest limitation: a cooldown is a probability play, not a guarantee. A patient attacker waits out
 the window, and `event-stream` sat in the tree for weeks. It is worth having because most
-attackers are not patient and it costs one configuration line — but it is not a substitute for
+attackers are not patient and it costs one configuration line - but it is not a substitute for
 `--ignore-scripts` and least privilege in CI, which hold regardless of timing.
 
 ---

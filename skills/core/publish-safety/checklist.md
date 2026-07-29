@@ -1,6 +1,6 @@
 # Pre-Publish Verification Checklist
 
-Run this before the push, the publish, the deploy, or the paste — not after. Mark each item pass,
+Run this before the push, the publish, the deploy, or the paste - not after. Mark each item pass,
 fail, or not applicable. "Not applicable" needs a one-line reason; an unexplained skip reads
 exactly like an oversight.
 
@@ -19,7 +19,7 @@ Any fail stops the action. Report it, then wait.
       directories, editor state, `.claude/local/`
 - [ ] Commit message quotes no credential, no internal hostname, and no private file path
 - [ ] `.gitignore` covers the ignore set, with `!.env.example` after the `.env*` rule
-- [ ] Every file the ignore rules are meant to cover is actually untracked —
+- [ ] Every file the ignore rules are meant to cover is actually untracked -
       `git ls-files | grep -E "^\.env|\.pem$|\.key$"` returns nothing. `.gitignore` does not
       affect an already-tracked file
 
@@ -29,7 +29,7 @@ Any fail stops the action. Report it, then wait.
       `git log --all --full-history --oneline -- ".env*" "*.pem" "*.key" "*credentials*.json"`
 - [ ] Secret scanner run over full history with `--redact`, not just over the tip
 - [ ] Every hit rotated at the provider. Rotation done, not planned
-- [ ] Branches, tags, and stashes considered — `--all` covers refs, `git stash list` does not
+- [ ] Branches, tags, and stashes considered - `--all` covers refs, `git stash list` does not
 - [ ] Issues, PR descriptions, and PR comments reviewed. Those become public with the repo
 - [ ] Wiki, releases, and attached release assets reviewed
 - [ ] CI logs and build artifacts reviewed for values printed before masking existed
@@ -56,7 +56,7 @@ Any fail stops the action. Report it, then wait.
 - [ ] `.dockerignore` exists and excludes `.env`, `.git`, `node_modules`, key files
 - [ ] No `COPY . .` without a `.dockerignore` covering the build context
 - [ ] `docker history --no-trunc <image>` shows no credential in any layer command
-- [ ] No secret in `ARG` — build args are visible in image metadata
+- [ ] No secret in `ARG` - build args are visible in image metadata
 - [ ] No secret in `ENV` in the Dockerfile
 - [ ] A file added in one layer and deleted in a later one is understood to still be present
 - [ ] Image inspected as a filesystem, not just by history:
@@ -71,7 +71,7 @@ Any fail stops the action. Report it, then wait.
 - [ ] Every public-prefixed variable (`NEXT_PUBLIC_`, `VITE_`, `REACT_APP_`, `EXPO_PUBLIC_`,
       `PUBLIC_`) reviewed by value, and each is one a stranger may hold
 - [ ] Keys that are designed to be public are distinguished from keys that are not, and the
-      control that actually protects them is in place — RLS, security rules, referrer restriction
+      control that actually protects them is in place - RLS, security rules, referrer restriction
 - [ ] Source maps either not deployed, or confirmed to contain nothing sensitive
 - [ ] No `.env`, `.git`, or config file in the deployed directory
 - [ ] Host ignore file (`.vercelignore`, `netlify.toml` publish path) matches intent
@@ -92,7 +92,7 @@ Any fail stops the action. Report it, then wait.
 ## After something has already shipped (A04 · ASVS V14 · CWE-798)
 
 - [ ] Revoked at the provider first. Not deleted from the file, not force-pushed
-- [ ] Rotated, with a zero-length overlap window — the leaked value must not stay accepted
+- [ ] Rotated, with a zero-length overlap window - the leaked value must not stay accepted
 - [ ] Provider audit log read for the window between first exposure and revocation, where first
       exposure is the commit or push timestamp, not the moment you noticed
 - [ ] Durable artifacts the credential could have created checked: new keys, new grants, new
@@ -100,7 +100,7 @@ Any fail stops the action. Report it, then wait.
 - [ ] Exposure surface established: public repo, public registry, deployed bundle, third-party log
 - [ ] History rewrite, if done at all, done after revocation and reported as hygiene rather than
       as the fix
-- [ ] A control added so the same path cannot recur — pre-commit hook, CI scan, push protection,
+- [ ] A control added so the same path cannot recur - pre-commit hook, CI scan, push protection,
       or removing the stored value entirely
 
 ## Before Returning

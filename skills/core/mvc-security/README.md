@@ -116,12 +116,12 @@ available at that layer. Follow the data, not the annotation name.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Mass Assignment Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html>
-- OWASP Cross Site Scripting Prevention Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
-- OWASP CSRF Prevention Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
-- CWE-915 — <https://cwe.mitre.org/data/definitions/915.html>
-- CWE-79 — <https://cwe.mitre.org/data/definitions/79.html>
-- CWE-639 — <https://cwe.mitre.org/data/definitions/639.html>
-- CWE-489 — <https://cwe.mitre.org/data/definitions/489.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Mass Assignment Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Mass_Assignment_Cheat_Sheet.html>
+- OWASP Cross Site Scripting Prevention Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html>
+- OWASP CSRF Prevention Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html>
+- CWE-915 - <https://cwe.mitre.org/data/definitions/915.html>
+- CWE-79 - <https://cwe.mitre.org/data/definitions/79.html>
+- CWE-639 - <https://cwe.mitre.org/data/definitions/639.html>
+- CWE-489 - <https://cwe.mitre.org/data/definitions/489.html>

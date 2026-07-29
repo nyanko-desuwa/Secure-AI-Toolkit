@@ -51,7 +51,7 @@ Mermaid context map template in [best-practices.md](best-practices.md#bounded-co
 
 Per context, name three things: which tables it owns, which DB role it uses, and the
 contract other contexts call. If two contexts share a write path to one table, the boundary
-does not exist yet — say so rather than drawing it.
+does not exist yet - say so rather than drawing it.
 
 ### 3. Draw aggregates from invariants, not from data shape
 
@@ -85,10 +85,10 @@ owned residual risk.
 
 | Decision | Runtime cost |
 |---|---|
-| Large aggregate | Whole object graph loaded to change one field. Read/write split is the answer — `skills/architecture/cqrs/` |
+| Large aggregate | Whole object graph loaded to change one field. Read/write split is the answer - `skills/architecture/cqrs/` |
 | Repository per aggregate | N+1 loading across a collection of roots; retained entities in a long-lived unit of work |
 | In-process event dispatch | One slow handler stalls the publishing transaction. No bound, no backpressure |
-| Long-lived handler subscription | Retains the scope it closed over. A per-request handler on a global bus is a leak — `skills/architecture/performance/` |
+| Long-lived handler subscription | Retains the scope it closed over. A per-request handler on a global bus is a leak - `skills/architecture/performance/` |
 | Eventual consistency between aggregates | A real correctness cost. Something is briefly wrong and someone must define what a reader sees |
 | Value objects on hot paths | Allocation per wrap. Use language value types where available; measure before assuming it matters |
 
@@ -119,31 +119,31 @@ harder to secure.
 
 Rank by how many places a fix must land and whether a boundary exists at all.
 
-- **Critical** — two contexts write one table and one of them filters by tenant. Cross-tenant
+- **Critical** - two contexts write one table and one of them filters by tenant. Cross-tenant
   read is one migration away, or already live.
-- **High** — an invariant enforced in one service with a second write path around it; a
+- **High** - an invariant enforced in one service with a second write path around it; a
   consumer that treats an event as authorization.
-- **Medium** — primitive IDs at call sites where two ID types are adjacent; a repository
+- **Medium** - primitive IDs at call sites where two ID types are adjacent; a repository
   returning a query object; an event carrying more than the consumer needs.
-- **Low** — inconsistent language, missing context map, aggregate slightly larger than
+- **Low** - inconsistent language, missing context map, aggregate slightly larger than
   needed with no measured cost.
 
 ## Related Skills
 
-- `skills/core/owasp/` — the Top 10 and ASVS mapping these findings cite
-- `skills/advanced/secure-architecture/` — trust boundaries and threat modelling at system level
-- `skills/architecture/cqrs/` — the read/write split that fixes large-aggregate loading
-- `skills/architecture/performance/` — handler retention, unbounded dispatch, heap detail
-- `skills/core/database-security/` — per-context DB roles, schema grants, N+1
-- `skills/architecture/event-driven/` — event transport, delivery, ordering
+- `skills/core/owasp/` - the Top 10 and ASVS mapping these findings cite
+- `skills/advanced/secure-architecture/` - trust boundaries and threat modelling at system level
+- `skills/architecture/cqrs/` - the read/write split that fixes large-aggregate loading
+- `skills/architecture/performance/` - handler retention, unbounded dispatch, heap detail
+- `skills/core/database-security/` - per-context DB roles, schema grants, N+1
+- `skills/architecture/event-driven/` - event transport, delivery, ordering
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, configuration, limitations, security notes
-- [checklist.md](checklist.md) — pre-return verification, grouped by construct
-- [best-practices.md](best-practices.md) — patterns with real code, each with its cost
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix holds
-- [troubleshooting.md](troubleshooting.md) — when DDD does not fit or conflicts
-- [prompts.md](prompts.md) — prompts that produce structure, plus an anti-pattern table
-- [references/](references/) — one file per source, with the date verified
-- [examples/README.md](examples/README.md) — eight before/after pairs
+- [README.md](README.md) - purpose, layout, configuration, limitations, security notes
+- [checklist.md](checklist.md) - pre-return verification, grouped by construct
+- [best-practices.md](best-practices.md) - patterns with real code, each with its cost
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix holds
+- [troubleshooting.md](troubleshooting.md) - when DDD does not fit or conflicts
+- [prompts.md](prompts.md) - prompts that produce structure, plus an anti-pattern table
+- [references/](references/) - one file per source, with the date verified
+- [examples/README.md](examples/README.md) - eight before/after pairs

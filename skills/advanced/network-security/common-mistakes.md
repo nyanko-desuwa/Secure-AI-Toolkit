@@ -8,7 +8,7 @@ Security groups reviewed line by line on the inbound side, outbound left at "all
 is the default in every cloud provider and in most host firewall images.
 
 Why it goes wrong: inbound rules decide who starts a conversation. Every post-exploitation
-step — pulling a second stage, reaching the metadata service, exfiltrating data — is outbound.
+step - pulling a second stage, reaching the metadata service, exfiltrating data - is outbound.
 An SSRF in an application with unrestricted egress is a request to anywhere.
 
 Fix: default-deny egress with a named destination list, and an egress proxy for anything that
@@ -35,7 +35,7 @@ real_ip_header X-Forwarded-For;
 ```
 
 Why it goes wrong: the header is client-supplied. Every downstream control keyed on client IP
-— rate limits, geo rules, internal-only allowlists, audit logs — now reads an attacker-chosen
+- rate limits, geo rules, internal-only allowlists, audit logs - now reads an attacker-chosen
 value. `X-Forwarded-For: 127.0.0.1` is the whole attack.
 
 Fix: list only the CIDRs of hops you operate, in both families, and set `X-Forwarded-Proto`
@@ -48,7 +48,7 @@ A resolver call, a private-range check, then an HTTP request with the original U
 Why it goes wrong: two resolutions. The check resolves the name, the HTTP client resolves it
 again, and a DNS record with a one-second TTL returns a public address for the first and
 `169.254.169.254` for the second. A hand-written private-range list also tends to miss
-`100.64.0.0/10`, `::ffff:0:0/96`, and `64:ff9b::/96` — use the IANA special-purpose registries
+`100.64.0.0/10`, `::ffff:0:0/96`, and `64:ff9b::/96` - use the IANA special-purpose registries
 (RFC 6890) instead of writing the list from memory.
 
 Fix: keep the application check, and put the workload behind an egress proxy so the connection
@@ -74,7 +74,7 @@ November 2022) is the document to cite. CWE-326, CWE-757.
 `proxy_ssl_verify off`.
 
 Why it goes wrong: it turns a name-mismatch or expired-CA error into no authentication at all.
-The connection is still encrypted, which is why it looks fine — it is encrypted to whoever
+The connection is still encrypted, which is why it looks fine - it is encrypted to whoever
 answered. The flag added during an incident is the one that stays.
 
 Fix: fix the trust store or the hostname. Add the internal CA to the client's trust bundle;
@@ -94,7 +94,7 @@ identity. See [best-practices.md](best-practices.md#mtls-and-service-identity).
 
 ## WAF cited as the fix for an injection
 
-"SQL injection in the report endpoint — mitigated, the WAF blocks it."
+"SQL injection in the report endpoint - mitigated, the WAF blocks it."
 
 Why it goes wrong: generic rulesets have a documented bypass corpus, the WAF does not see
 traffic on paths that reach the origin directly, and a rule tuned to stop false positives
@@ -125,7 +125,7 @@ queue, and it surfaces in an audit two years later.
 
 Fix: put temporary rules in a separate, dated ruleset file or tag, and add the removal to the
 same change that opened them. Review the diff of every network change against the previous
-state — a rule set nobody diffs only accumulates. `A02:2025`.
+state - a rule set nobody diffs only accumulates. `A02:2025`.
 
 ## Deny rules with no logging
 
@@ -145,7 +145,7 @@ is the problem.
 
 Why it goes wrong: it exposes every listener on the host for as long as it takes to test, and
 if the change was not persisted, a reboot is the only thing that restores protection. The
-answer it gives — "yes, the firewall" — is available without the exposure.
+answer it gives - "yes, the firewall" - is available without the exposure.
 
 Fix: read the rule set, then add one specific counter or log rule. See
 [troubleshooting.md](troubleshooting.md#safe-diagnosis).

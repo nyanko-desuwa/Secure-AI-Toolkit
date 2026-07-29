@@ -50,12 +50,12 @@ Most breaches labelled "auth bug" are actually the second question never being a
 
 Trace one account from creation to deletion and name what happens at each edge:
 
-- Registration — is the identifier verified? Is enumeration possible here too?
-- Login — what is compared, how slowly, and how often can it be retried?
-- Session establishment — what is issued, where is it stored, when does it die?
-- Privilege change — login, password change, role change, impersonation start and end
-- Recovery — reset, MFA loss, and the human support path behind both
-- Termination — logout, password change, admin disable, credential compromise
+- Registration - is the identifier verified? Is enumeration possible here too?
+- Login - what is compared, how slowly, and how often can it be retried?
+- Session establishment - what is issued, where is it stored, when does it die?
+- Privilege change - login, password change, role change, impersonation start and end
+- Recovery - reset, MFA loss, and the human support path behind both
+- Termination - logout, password change, admin disable, credential compromise
 
 Recovery and termination are where real attacks land. Login gets all the attention.
 
@@ -95,21 +95,21 @@ session ID captured before login, a token signed with the wrong algorithm.
 ### 5. Report
 
 Per finding: category, location, the attacker's starting position, the exploitation path,
-the fix. "Attacker knows the victim's email address" is a precondition worth stating —
+the fix. "Attacker knows the victim's email address" is a precondition worth stating -
 it changes severity.
 
 ## Severity
 
 Rank by what the attacker gets and what they need to start.
 
-- **Critical** — account takeover with no prior access. Guessable reset token, JWT
+- **Critical** - account takeover with no prior access. Guessable reset token, JWT
   signature bypass, credential stuffing with no throttle, auth bypass.
-- **High** — takeover needing a plausible precondition, or privilege escalation while
+- **High** - takeover needing a plausible precondition, or privilege escalation while
   authenticated. Session fixation, missing invalidation after password change, no refresh
   token rotation, IDOR on any user-scoped object.
-- **Medium** — narrows an attacker's cost without granting access. User enumeration,
+- **Medium** - narrows an attacker's cost without granting access. User enumeration,
   missing absolute timeout, weak Argon2 parameters, no MFA available.
-- **Low** — defence in depth missing with no path. No pepper, `SameSite` unset when a CSRF
+- **Low** - defence in depth missing with no path. No pepper, `SameSite` unset when a CSRF
   token is already enforced.
 
 Weak password hashing is Critical only if the database is already exposed. Say which
@@ -117,19 +117,19 @@ assumption you are pricing in.
 
 ## Related Skills
 
-- `owasp-security` — the umbrella standards map and general controls
-- `api-security` — token handling at API boundaries, scopes, machine-to-machine auth
-- `secure-code-review` — reviewing an existing auth implementation in depth
-- `secrets-management` — where the signing keys and peppers actually live
-- `redis-security` — ACLs, TLS, persistence, eviction, and failure behavior when sessions or revocation state use Redis/Valkey
+- `owasp-security` - the umbrella standards map and general controls
+- `api-security` - token handling at API boundaries, scopes, machine-to-machine auth
+- `secure-code-review` - reviewing an existing auth implementation in depth
+- `secrets-management` - where the signing keys and peppers actually live
+- `redis-security` - ACLs, TLS, persistence, eviction, and failure behavior when sessions or revocation state use Redis/Valkey
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations, security notes
-- [checklist.md](checklist.md) — pre-return verification, grouped by lifecycle stage
-- [best-practices.md](best-practices.md) — patterns, each with a vulnerable/fixed pair
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied as written
-- [prompts.md](prompts.md) — prompts that produce findings, plus an anti-pattern table
-- [references/](references/) — ASVS chapters, NIST SP 800-63B-4, RFC 9700, version-pinned
-- [examples/](examples/) — eight vulnerable/fixed pairs with CWE mappings
+- [README.md](README.md) - purpose, standards table, limitations, security notes
+- [checklist.md](checklist.md) - pre-return verification, grouped by lifecycle stage
+- [best-practices.md](best-practices.md) - patterns, each with a vulnerable/fixed pair
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied as written
+- [prompts.md](prompts.md) - prompts that produce findings, plus an anti-pattern table
+- [references/](references/) - ASVS chapters, NIST SP 800-63B-4, RFC 9700, version-pinned
+- [examples/](examples/) - eight vulnerable/fixed pairs with CWE mappings

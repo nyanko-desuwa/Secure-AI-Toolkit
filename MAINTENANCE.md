@@ -48,8 +48,8 @@ and hand-off map without creating another generated document.
 ## Ownership touch policy
 
 Ownership migration is incremental. A typo-only correction does not require a metadata sweep. A
-substantive edit to a legacy skill — workflow, standards, routing, examples, limitations, or its
-boundary — must add its catalog `ownership` object and `## Ownership Boundary` hand-off table in
+substantive edit to a legacy skill - workflow, standards, routing, examples, limitations, or its
+boundary - must add its catalog `ownership` object and `## Ownership Boundary` hand-off table in
 the same change.
 
 | Change | Required companion work |
@@ -70,7 +70,7 @@ boundary and hand-offs; it does not grant exclusive authority or replace indepen
 
 A re-verified standard moves in the same change:
 
-1. Owning skill `references/<standard>.md` — version, URL, date checked
+1. Owning skill `references/<standard>.md` - version, URL, date checked
 2. `## Pinned versions` in [`AI_INSTRUCTIONS.md`](AI_INSTRUCTIONS.md)
 3. `## Standards` in [`README.md`](README.md)
 4. [`skills/shared/references/README.md`](skills/shared/references/README.md) when it is a primary standard
@@ -97,7 +97,7 @@ Cadence:
 6. Manual fallback remains `./scripts/release.sh --version X.Y.Z --tag --push`
    or PowerShell `.\scripts\Release.ps1 -Version X.Y.Z -Tag -Push`
 
-Never `git add -A`. Stage named paths only. Never force-push to clean a leak —
+Never `git add -A`. Stage named paths only. Never force-push to clean a leak -
 revoke first ([skills/core/secrets-management/references/exposure-response.md](skills/core/secrets-management/references/exposure-response.md)).
 
 ## Automation owned here

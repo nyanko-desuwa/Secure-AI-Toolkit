@@ -32,7 +32,7 @@
 
 4. Add a row to [`catalog/skills.json`](catalog/skills.json) with:
    - `name` matching the directory and `category` / `path`
-   - `depends_on` / `related` / `loads` (canonical directory names only — no `owasp-security` aliases)
+   - `depends_on` / `related` / `loads` (canonical directory names only - no `owasp-security` aliases)
    - `standards`, `allowed_tools_profile` (almost always `research-only`), and `routing_hints`
    - `ownership`: `owner_boundary`, protected assets, and non-goals with canonical owner IDs
 
@@ -83,4 +83,4 @@ only then add a minimal allowlist entry in `.gitleaks.toml` with rationale.
 - Every control cites a standard where possible
 - Every vulnerable example is labelled and paired with a fix
 - No real secrets, hostnames of real victims, or personal data
-- State limitations honestly — especially what code review cannot prove
+- State limitations honestly - especially what code review cannot prove

@@ -11,7 +11,7 @@
       "category": "core",
       "path": "skills/core/ai-security",
       "status": "Ready",
-      "description": "Secure applications that use LLMs — agents, tool calling, MCP servers, and RAG. Maps findings to OWASP Top 10 for LLM Applications 2025, OWASP Top 10 2025, and ASVS 5.0. Triggers: \"prompt injection\", \"AI agent\", \"tool calling\", \"MCP server\", \"RAG\", \"LLM security\", \"bảo mật AI\", \"tiêm lệnh\".",
+      "description": "Secure applications that use LLMs - agents, tool calling, MCP servers, and RAG. Maps findings to OWASP Top 10 for LLM Applications 2025, OWASP Top 10 2025, and ASVS 5.0. Triggers: \"prompt injection\", \"AI agent\", \"tool calling\", \"MCP server\", \"RAG\", \"LLM security\", \"bảo mật AI\", \"tiêm lệnh\".",
       "triggers": [
         "prompt injection",
         "AI agent",
@@ -95,7 +95,7 @@
       "category": "core",
       "path": "skills/core/api-security",
       "status": "Ready",
-      "description": "Secure API surfaces — REST, GraphQL, gRPC, and webhooks — against the OWASP API Security Top 10 2023 and ASVS 5.0 V4. Triggers: \"API security\", \"REST\", \"GraphQL\", \"gRPC\", \"webhook\", \"BOLA\", \"mass assignment\", \"rate limit\", \"idempotency\", \"bảo mật API\", \"xác thực webhook\".",
+      "description": "Secure API surfaces - REST, GraphQL, gRPC, and webhooks - against the OWASP API Security Top 10 2023 and ASVS 5.0 V4. Triggers: \"API security\", \"REST\", \"GraphQL\", \"gRPC\", \"webhook\", \"BOLA\", \"mass assignment\", \"rate limit\", \"idempotency\", \"bảo mật API\", \"xác thực webhook\".",
       "triggers": [
         "API security",
         "REST",
@@ -269,7 +269,7 @@
       "category": "core",
       "path": "skills/core/browser-platform-security",
       "status": "Ready",
-      "description": "Service workers, extensions, and PWAs — update/cache attacks, permission least privilege, web accessible resources, SW scope. Triggers: \"service worker\", \"browser extension\", \"PWA\", \"chrome.runtime\", \"web_accessible_resources\", \"bảo mật extension\", \"service worker\".",
+      "description": "Service workers, extensions, and PWAs - update/cache attacks, permission least privilege, web accessible resources, SW scope. Triggers: \"service worker\", \"browser extension\", \"PWA\", \"chrome.runtime\", \"web_accessible_resources\", \"bảo mật extension\", \"service worker\".",
       "triggers": [
         "service worker",
         "browser extension",
@@ -546,7 +546,7 @@
       "category": "core",
       "path": "skills/core/deserialization-security",
       "status": "Ready",
-      "description": "Unsafe deserialization and parsers — pickle, Java/.NET binary, YAML load, XML XXE/expansion. Triggers: \"deserialization\", \"pickle\", \"ObjectInputStream\", \"BinaryFormatter\", \"YAML load\", \"XXE\", \"unserialize\", \"giải tuần tự hóa\", \"XML external entity\".",
+      "description": "Unsafe deserialization and parsers - pickle, Java/.NET binary, YAML load, XML XXE/expansion. Triggers: \"deserialization\", \"pickle\", \"ObjectInputStream\", \"BinaryFormatter\", \"YAML load\", \"XXE\", \"unserialize\", \"giải tuần tự hóa\", \"XML external entity\".",
       "triggers": [
         "deserialization",
         "pickle",
@@ -596,7 +596,7 @@
       "category": "core",
       "path": "skills/core/devsecops",
       "status": "Ready",
-      "description": "Design and review security in the CI/CD pipeline — what scanners run, when they run, and what blocks a merge. Covers SAST, DAST, SCA, secret and IaC scanning, SBOM, SLSA provenance, GitHub Actions hardening, and vulnerability SLAs. Triggers: \"CI/CD security\", \"pipeline\", \"GitHub Actions\", \"SBOM\", \"supply chain\", \"pre-commit\", \"SLSA\", \"bảo mật CI\", \"chuỗi cung ứng\".",
+      "description": "Design and review security in the CI/CD pipeline - what scanners run, when they run, and what blocks a merge. Covers SAST, DAST, SCA, secret and IaC scanning, SBOM, SLSA provenance, GitHub Actions hardening, and vulnerability SLAs. Triggers: \"CI/CD security\", \"pipeline\", \"GitHub Actions\", \"SBOM\", \"supply chain\", \"pre-commit\", \"SLSA\", \"bảo mật CI\", \"chuỗi cung ứng\".",
       "triggers": [
         "CI/CD security",
         "pipeline",
@@ -801,7 +801,7 @@
       "category": "core",
       "path": "skills/core/http-edge-security",
       "status": "Ready",
-      "description": "HTTP edge trust — reverse proxies, forwarded headers, Host validation, request desync, and cache poisoning. Triggers: \"reverse proxy\", \"X-Forwarded-For\", \"Host header\", \"request smuggling\", \"HTTP desync\", \"cache poisoning\", \"CDN\", \"bảo mật reverse proxy\", \"đầu HTTP\".",
+      "description": "HTTP edge trust - reverse proxies, forwarded headers, Host validation, request desync, and cache poisoning. Triggers: \"reverse proxy\", \"X-Forwarded-For\", \"Host header\", \"request smuggling\", \"HTTP desync\", \"cache poisoning\", \"CDN\", \"bảo mật reverse proxy\", \"đầu HTTP\".",
       "triggers": [
         "reverse proxy",
         "X-Forwarded-For",
@@ -1166,7 +1166,7 @@
       "category": "core",
       "path": "skills/core/realtime-security",
       "status": "Ready",
-      "description": "Secure WebSocket, SSE, and WebRTC signaling — connect authz, Origin checks, message injection, fan-out abuse, reconnect binding. Triggers: \"WebSocket security\", \"SSE\", \"WebRTC\", \"realtime\", \"socket.io\", \"Origin check\", \"bảo mật WebSocket\", \"thời gian thực\".",
+      "description": "Secure WebSocket, SSE, and WebRTC signaling - connect authz, Origin checks, message injection, fan-out abuse, reconnect binding. Triggers: \"WebSocket security\", \"SSE\", \"WebRTC\", \"realtime\", \"socket.io\", \"Origin check\", \"bảo mật WebSocket\", \"thời gian thực\".",
       "triggers": [
         "WebSocket security",
         "SSE",
@@ -1380,7 +1380,7 @@
       "category": "core",
       "path": "skills/core/sso-federation",
       "status": "Ready",
-      "description": "Enterprise SSO federation — SAML assertion validation, ACS/Audience/Recipient, metadata trust, IdP mix-up, signature wrapping. Triggers: \"SAML\", \"SSO\", \"IdP\", \"SP metadata\", \"ACS\", \"federation\", \"đăng nhập doanh nghiệp\", \"liên kết IdP\".",
+      "description": "Enterprise SSO federation - SAML assertion validation, ACS/Audience/Recipient, metadata trust, IdP mix-up, signature wrapping. Triggers: \"SAML\", \"SSO\", \"IdP\", \"SP metadata\", \"ACS\", \"federation\", \"đăng nhập doanh nghiệp\", \"liên kết IdP\".",
       "triggers": [
         "SAML",
         "SSO",
@@ -1787,7 +1787,7 @@
       "category": "enterprise",
       "path": "skills/enterprise/compliance",
       "status": "Ready",
-      "description": "Implement privacy and compliance controls in code — GDPR data subject rights, retention and deletion jobs, consent records, data inventory, audit evidence, PCI scope reduction, HIPAA safeguards. Triggers: \"GDPR\", \"compliance\", \"data retention\", \"right to erasure\", \"consent\", \"PII\", \"PCI DSS\", \"HIPAA\", \"SOC 2\", \"ISO 27001\", \"audit evidence\", \"tuân thủ\", \"quyền xóa dữ liệu\".",
+      "description": "Implement privacy and compliance controls in code - GDPR data subject rights, retention and deletion jobs, consent records, data inventory, audit evidence, PCI scope reduction, HIPAA safeguards. Triggers: \"GDPR\", \"compliance\", \"data retention\", \"right to erasure\", \"consent\", \"PII\", \"PCI DSS\", \"HIPAA\", \"SOC 2\", \"ISO 27001\", \"audit evidence\", \"tuân thủ\", \"quyền xóa dữ liệu\".",
       "triggers": [
         "GDPR",
         "compliance",
@@ -2518,7 +2518,7 @@
       "category": "core",
       "path": "skills/core/email-security",
       "status": "Ready",
-      "description": "Secure transactional email and mail providers — sender identity, SPF/DKIM/DMARC, reset/verification delivery, templates, provider events, bounces, and privacy. Triggers: \"SMTP\", \"DKIM\", \"DMARC\", \"magic link\", \"email webhook\", \"bảo mật email\".",
+      "description": "Secure transactional email and mail providers - sender identity, SPF/DKIM/DMARC, reset/verification delivery, templates, provider events, bounces, and privacy. Triggers: \"SMTP\", \"DKIM\", \"DMARC\", \"magic link\", \"email webhook\", \"bảo mật email\".",
       "triggers": [
         "email security",
         "SMTP",
@@ -2630,7 +2630,7 @@
       "category": "core",
       "path": "skills/core/http-client-security",
       "status": "Ready",
-      "description": "Secure outbound HTTP(S) clients — SSRF, URL parsing, redirects, DNS/private targets, TLS verification, proxies, timeouts, retries, credentials, and response limits. Triggers: \"HTTP client\", \"outbound HTTP\", \"SSRF\", \"fetch URL\", \"redirect\", \"HttpClient\", \"bảo mật HTTP client\".",
+      "description": "Secure outbound HTTP(S) clients - SSRF, URL parsing, redirects, DNS/private targets, TLS verification, proxies, timeouts, retries, credentials, and response limits. Triggers: \"HTTP client\", \"outbound HTTP\", \"SSRF\", \"fetch URL\", \"redirect\", \"HttpClient\", \"bảo mật HTTP client\".",
       "triggers": [
         "HTTP client",
         "outbound HTTP",

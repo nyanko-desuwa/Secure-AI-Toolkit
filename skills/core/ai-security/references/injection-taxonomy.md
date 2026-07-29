@@ -5,7 +5,7 @@ the control at that point can actually do.
 
 Standards: OWASP Top 10 for LLM Applications 2025 `LLM01` (Prompt Injection) and `LLM05`
 (Improper Output Handling). CWE-1427 (Improper Neutralization of Input Used for LLM
-Prompting) — abstraction Base, child of CWE-77, alternate term "prompt injection". CWE-1426
+Prompting) - abstraction Base, child of CWE-77, alternate term "prompt injection". CWE-1426
 (Improper Validation of Generative AI Output) for the sink side.
 
 Verified 2026-07-28 against <https://genai.owasp.org/llm-top-10/>,
@@ -18,7 +18,7 @@ Verified 2026-07-28 against <https://genai.owasp.org/llm-top-10/>,
 |---|---|---|
 | Who writes the payload | The user | A third party |
 | Who is harmed | The user themselves, or your policy | The user, usually without knowing |
-| Permissions it runs with | The user's own | The user's own — which is why it matters |
+| Permissions it runs with | The user's own | The user's own - which is why it matters |
 | Typical goal | Jailbreak, system-prompt extraction, free compute | Read private data, take an action, exfiltrate |
 | Usual severity | Low to medium; often a product problem | Up to critical |
 | Where the fix goes | Policy, abuse handling, rate limits | Architecture: tool scope, egress, context separation |
@@ -33,7 +33,7 @@ Anything in this table can carry instructions into the context. The point of the
 
 | Channel | Where it enters | Notes |
 |---|---|---|
-| Fetched web page | Browse or fetch tool | Includes HTML comments, `alt` text, `title`, `aria-label`, CSS-hidden text, and off-screen elements — none of which the human reviewer sees |
+| Fetched web page | Browse or fetch tool | Includes HTML comments, `alt` text, `title`, `aria-label`, CSS-hidden text, and off-screen elements - none of which the human reviewer sees |
 | Retrieved document | RAG | Uploaded PDF, synced wiki page, scraped site, support ticket |
 | Tool result | Any tool | A tool that returns third-party data returns third-party instructions |
 | MCP tool description | Server handshake | In the context on every request, before any tool is called |
@@ -71,11 +71,11 @@ Being honest about this distinction is the point of the taxonomy.
 | Input classifier / injection detector | Real reduction in known-payload rate; useful detection | That it eliminates the class. Paraphrase, encoding, translation, and multi-step setups evade |
 | Output scanner, canary tokens | Detection, sometimes prevention of the specific leak shape | Prevention in general |
 | Stripping hidden text and HTML comments | Removes the cheapest tricks | That visible text is safe |
-| Narrow tools, no shell-exec, allowlisted destinations | Removes capability. Holds when the model is fully compromised | — |
-| Per-user credentials, server-side authorization | Removes capability. Caps blast radius at one user | — |
+| Narrow tools, no shell-exec, allowlisted destinations | Removes capability. Holds when the model is fully compromised | - |
+| Per-user credentials, server-side authorization | Removes capability. Caps blast radius at one user | - |
 | Egress allowlist | Removes the outbound leg for hosts not on the list | That an allowlisted host with arbitrary paths is closed |
 | Human approval on resolved arguments | Removes autonomy for that action | That approval of a model-written summary is approval |
-| Context separation (read context has no write tools) | Removes the trifecta by construction | — |
+| Context separation (read context has no write tools) | Removes the trifecta by construction | - |
 | Iteration, token, and time caps | Bounds cost and runaway loops | That it prevents injection |
 
 The capability-removing rows survive a fully compromised model. The rows above them reduce

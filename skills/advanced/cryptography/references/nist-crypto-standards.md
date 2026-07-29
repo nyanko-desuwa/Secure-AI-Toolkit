@@ -36,7 +36,7 @@ before implementing from the published text.
   cryptographically relevant quantum computer exists ("harvest now, decrypt later"). Hybrid KEX in
   TLS and SSH is available and cheap; adopt it where the stack supports it
 - Signatures are less urgent. A signature verified today cannot be retroactively forged by a future
-  machine — but long-lived roots of trust (code signing, firmware, CA roots) do need a plan
+  machine - but long-lived roots of trust (code signing, firmware, CA roots) do need a plan
 - Do not hand-roll a hybrid construction. Use what your TLS or SSH implementation ships
 
 NIST IR 8547, "Transition to Post-Quantum Cryptography Standards", is an Initial Public Draft
@@ -45,7 +45,7 @@ per a planning note dated 2025-01-21. As of this check there is no final version
 
 Deliberately not stated here: the per-algorithm deprecation and disallowed years for RSA, ECDSA,
 ECDH, and DH. They are in the IR 8547 PDF, not on the landing page, and they drive procurement
-decisions — read the document rather than trusting a recalled year.
+decisions - read the document rather than trusting a recalled year.
 
 ## Symmetric encryption modes
 
@@ -61,7 +61,7 @@ What you can rely on without the document, because it is arithmetic rather than 
   collision probability is on the order of 2^-33; at 2^48 messages it is near certainty. Rotate the
   key long before you approach either
 - A single nonce reused under one GCM key leaks the XOR of the two plaintexts and, worse, allows
-  recovery of the authentication subkey — which lets an attacker forge messages, not just read them.
+  recovery of the authentication subkey - which lets an attacker forge messages, not just read them.
   There is no partial failure here
 - A 64-bit random nonce is not enough for a high-volume key. If your library offers XChaCha20 with a
   192-bit nonce, random nonces stop being a counting problem
@@ -77,7 +77,7 @@ NIST SP 800-57 Part 1 Revision 5, "Recommendation for Key Management: Part 1 –
 The publication defines originator-usage period and recipient-usage period, and specifies the
 protection each type of key requires.
 
-Not verified from the source: the cryptoperiod tables — the recommended maximum usage periods for
+Not verified from the source: the cryptoperiod tables - the recommended maximum usage periods for
 symmetric data encryption keys, private signature keys, and the rest. They appear in the PDF, not
 on the landing page. Do not quote a number of years as "NIST says" without opening the document.
 
@@ -104,7 +104,7 @@ emergency rotation you already know the procedure works.
 | HMAC-SHA-256 | Use |
 | Ed25519, ECDSA P-256/P-384 | Use |
 | RSA-PSS, RSA-OAEP, 2048-bit minimum | Use; prefer 3072-bit for long-lived keys |
-| RSA PKCS#1 v1.5 encryption | Avoid — padding-oracle prone |
+| RSA PKCS#1 v1.5 encryption | Avoid - padding-oracle prone |
 | 3DES, RC4, Blowfish | Do not use |
 | MD5, SHA-1 | Do not use for signatures or integrity |
 | AES-ECB | Never. Identical plaintext blocks produce identical ciphertext |
@@ -112,10 +112,10 @@ emergency rotation you already know the procedure works.
 
 ## Sources
 
-- FIPS 203 — <https://csrc.nist.gov/pubs/fips/203/final> (checked 2026-07-28)
-- FIPS 204 — <https://csrc.nist.gov/pubs/fips/204/final> (checked 2026-07-28)
-- FIPS 205 — <https://csrc.nist.gov/pubs/fips/205/final> (checked 2026-07-28)
-- NIST IR 8547 (ipd) — <https://csrc.nist.gov/pubs/ir/8547/ipd> (checked 2026-07-28)
-- NIST SP 800-38D — <https://csrc.nist.gov/pubs/sp/800/38/d/final> (checked 2026-07-28)
-- NIST SP 800-57 Part 1 Rev. 5 — <https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final> (checked
+- FIPS 203 - <https://csrc.nist.gov/pubs/fips/203/final> (checked 2026-07-28)
+- FIPS 204 - <https://csrc.nist.gov/pubs/fips/204/final> (checked 2026-07-28)
+- FIPS 205 - <https://csrc.nist.gov/pubs/fips/205/final> (checked 2026-07-28)
+- NIST IR 8547 (ipd) - <https://csrc.nist.gov/pubs/ir/8547/ipd> (checked 2026-07-28)
+- NIST SP 800-38D - <https://csrc.nist.gov/pubs/sp/800/38/d/final> (checked 2026-07-28)
+- NIST SP 800-57 Part 1 Rev. 5 - <https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final> (checked
   2026-07-28)

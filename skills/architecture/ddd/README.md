@@ -8,7 +8,7 @@ boundary or a hole.
 Generated "DDD" code is usually vocabulary. Folders named `domain`, `application`, and
 `infrastructure`; entities that are public setters; a service that validates before saving;
 an event bus with no payload contract. The structure looks right and the security-relevant
-question — where is authorization enforced — now has four possible answers.
+question - where is authorization enforced - now has four possible answers.
 
 This skill gives an assistant a fixed set of questions per construct:
 
@@ -35,7 +35,7 @@ common-mistakes.md              what goes wrong and why the fix holds
 troubleshooting.md              when DDD does not fit, and what to do instead
 prompts.md                      prompts that produce structure, plus an anti-pattern table
 references/
-  ddd-sources.md                Evans, Vernon, Fowler — what each is authoritative for
+  ddd-sources.md                Evans, Vernon, Fowler - what each is authoritative for
   security-standards.md         Top 10 2025, ASVS 5.0, CWE mapping per construct
 examples/
   README.md                     six before/after pairs, real code
@@ -95,7 +95,7 @@ More in [prompts.md](prompts.md).
   a schema grant review, and in some cases a database audit log.
 - Cannot confirm runtime state. Whether the DB role is actually restricted, whether the
   event dispatcher holds strong references, whether the unit of work is scoped per request
-  in the deployed container — none of that is visible in source. Where a claim depends on
+  in the deployed container - none of that is visible in source. Where a claim depends on
   runtime behaviour this skill says so, and you should too.
 - Aggregate sizing has no rule. "Small" is relative to contention and row count. The skill
   tells you to measure loaded rows per operation and observe optimistic-concurrency
@@ -105,7 +105,7 @@ More in [prompts.md](prompts.md).
   ordering, and handler lifetime.
 - No heap-level detail. Retention shapes are named and linked; the diagnosis method lives
   in `skills/architecture/performance/`.
-- Languages are TypeScript, Python, and C# — C# where DI and unit-of-work lifetime are the
+- Languages are TypeScript, Python, and C# - C# where DI and unit-of-work lifetime are the
   point. Java and Kotlin appear where a language feature (records, sealed types) teaches
   something the others cannot. Nothing here is Go, Rust, or PHP specific.
 - Says nothing about which DDD book's terminology to prefer where the sources differ. Where
@@ -123,16 +123,16 @@ migration (`A01:2025`). A domain event carrying a full entity puts internal fiel
 consumer code and into log pipelines (`A01:2025`, `A09:2025`). Treat both as data leaks
 first and architecture second.
 
-The examples use placeholder values only — `tenant-a`, `user@example.com`, `https://vendor.example.com`.
+The examples use placeholder values only - `tenant-a`, `user@example.com`, `https://vendor.example.com`.
 No real credentials, hostnames, keys, or personal data appear in this skill.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- Fowler, Bounded Context — <https://martinfowler.com/bliki/BoundedContext.html>
-- Fowler, DDD Aggregate — <https://martinfowler.com/bliki/DDD_Aggregate.html>
-- Vernon, Effective Aggregate Design — <https://domainlanguage.com/ddd/>
-- CWE-653 — <https://cwe.mitre.org/data/definitions/653.html>
-- CWE-1220 — <https://cwe.mitre.org/data/definitions/1220.html>
-- CWE-863 — <https://cwe.mitre.org/data/definitions/863.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- Fowler, Bounded Context - <https://martinfowler.com/bliki/BoundedContext.html>
+- Fowler, DDD Aggregate - <https://martinfowler.com/bliki/DDD_Aggregate.html>
+- Vernon, Effective Aggregate Design - <https://domainlanguage.com/ddd/>
+- CWE-653 - <https://cwe.mitre.org/data/definitions/653.html>
+- CWE-1220 - <https://cwe.mitre.org/data/definitions/1220.html>
+- CWE-863 - <https://cwe.mitre.org/data/definitions/863.html>

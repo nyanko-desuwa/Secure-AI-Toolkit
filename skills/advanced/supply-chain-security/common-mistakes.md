@@ -14,7 +14,7 @@ Written to "let pip find both". pip gives no priority guarantee between indexes,
 package claiming the internal name with a higher version can win. This is dependency
 confusion, and it needs no access to your systems at all.
 
-Fix: one index — an internal proxy that decides what public packages it mirrors. See
+Fix: one index - an internal proxy that decides what public packages it mirrors. See
 [best-practices.md](best-practices.md#resolve-from-one-place-you-control).
 
 ## Defensive publishing treated as the fix
@@ -29,7 +29,7 @@ Fix: fix the resolver, then squat the names as defence in depth.
 ## A plausible package name nobody checked
 
 An assistant suggests `python-jwt`, `requests-oauth`, or `@types/lodash-es` and it installs
-cleanly. Typosquats install cleanly by design — that is the whole attack. Registry search
+cleanly. Typosquats install cleanly by design - that is the whole attack. Registry search
 ranking and download counts can both be manipulated.
 
 Fix: verify the name against the project's own documentation, check that the declared
@@ -82,7 +82,7 @@ A version pin says which release you want. It does not say which bytes you got. 
 compromise, mirror poisoning, and republishing all survive a version pin.
 
 Fix: hashes. `pip install --require-hashes` fails if any requirement, transitive included,
-lacks one — so a partially hashed file cannot smuggle an unpinned dependency through.
+lacks one - so a partially hashed file cannot smuggle an unpinned dependency through.
 
 ## Actions pinned to a tag
 
@@ -124,7 +124,7 @@ cosign sign "$IMAGE"      # in the build pipeline
 
 Signing proves who built it only to someone who checks. An unverified signature is metadata.
 
-Fix: verify at the consuming end — deploy job or admission controller — with the expected
+Fix: verify at the consuming end - deploy job or admission controller - with the expected
 identity and issuer pinned, by digest, failing the pipeline on mismatch.
 
 ## Verification with a wildcard identity
@@ -190,7 +190,7 @@ Record remaining nondeterminism instead of claiming reproducibility.
 ```
 
 Fast patching is genuinely good. Applied to production dependencies with no cooldown, it makes
-you the fastest consumer of a compromised maintainer account — a bot merges the malicious
+you the fastest consumer of a compromised maintainer account - a bot merges the malicious
 release at 03:00 and CI runs its install scripts.
 
 Fix: a short cooldown, automerge limited to dev dependencies, and a separate faster path for
@@ -230,5 +230,5 @@ version, no advisory feed, no SBOM entry, and nobody patches it.
 Fix: if you must vendor, record upstream URL, exact version or commit, and source hash; preserve
 local modifications as reviewable patches; make the component appear in the SBOM; and assign an
 owner to monitor upstream advisories. Silent vendoring is CWE-1104 with the evidence removed.
-Vendoring trades registry and availability risk for patch ownership — it does not eliminate a
+Vendoring trades registry and availability risk for patch ownership - it does not eliminate a
 dependency.

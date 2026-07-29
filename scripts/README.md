@@ -1,6 +1,6 @@
 # Scripts
 
-Operational helpers for this documentation pack. No application runtime — only
+Operational helpers for this documentation pack. No application runtime - only
 validation, install, and release orchestration.
 
 | Script | Purpose |

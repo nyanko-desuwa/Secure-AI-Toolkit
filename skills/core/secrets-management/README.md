@@ -40,8 +40,8 @@ examples/
 
 | Standard | Version | Verified |
 |---|---|---|
-| OWASP Top 10 | 2025 — A02 Security Misconfiguration, A04 Cryptographic Failures | 2026-07-28, against `owasp.org/Top10/2025/` |
-| OWASP ASVS | 5.0.0 (released 2025-05-30) — V13 Configuration, V14 Data Protection | 2026-07-28, against the ASVS project page |
+| OWASP Top 10 | 2025 - A02 Security Misconfiguration, A04 Cryptographic Failures | 2026-07-28, against `owasp.org/Top10/2025/` |
+| OWASP ASVS | 5.0.0 (released 2025-05-30) - V13 Configuration, V14 Data Protection | 2026-07-28, against the ASVS project page |
 | CWE | CWE-798, CWE-259, CWE-522, CWE-532, CWE-214, CWE-208 | 2026-07-28, against `cwe.mitre.org` |
 
 Version numbers are pinned in `references/` with the date checked. Update the reference file
@@ -121,9 +121,9 @@ requests.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- OWASP Secrets Management Cheat Sheet — <https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html>
-- CWE-798 Use of Hard-coded Credentials — <https://cwe.mitre.org/data/definitions/798.html>
-- CWE-532 Insertion of Sensitive Information into Log File — <https://cwe.mitre.org/data/definitions/532.html>
-- NIST SP 800-57 Part 1 Rev. 5, key management — <https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP Secrets Management Cheat Sheet - <https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html>
+- CWE-798 Use of Hard-coded Credentials - <https://cwe.mitre.org/data/definitions/798.html>
+- CWE-532 Insertion of Sensitive Information into Log File - <https://cwe.mitre.org/data/definitions/532.html>
+- NIST SP 800-57 Part 1 Rev. 5, key management - <https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final>

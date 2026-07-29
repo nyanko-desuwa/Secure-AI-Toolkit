@@ -4,9 +4,9 @@ Two cheat sheets carry the practical guidance. Both were fetched and read on 202
 publishes a version number or a last-reviewed date in its content, so cite them by name and URL,
 not by version.
 
-- Credential Stuffing Prevention —
+- Credential Stuffing Prevention -
   <https://cheatsheetseries.owasp.org/cheatsheets/Credential_Stuffing_Prevention_Cheat_Sheet.html>
-- Authentication —
+- Authentication -
   <https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html>
 
 ## The attack split, in OWASP's words
@@ -29,7 +29,7 @@ FIDO2 passkeys.
 Where mandatory MFA is not practical, it can be triggered conditionally on unfamiliar device or
 IP, unusual or untrusted country, denylisted or VPN/proxy addresses, an IP touching many
 accounts, or traffic that looks scripted. The same signals gate step-up prompts before high-risk
-actions. Applying MFA unevenly by role — mandatory for administrators only — is explicitly
+actions. Applying MFA unevenly by role - mandatory for administrators only - is explicitly
 offered as a partial position.
 
 Secondary passwords, PINs, and security questions are explicitly not MFA. Both factors are
@@ -117,7 +117,7 @@ Passive HTTP signals plus JavaScript-derived data build a device fingerprint. Th
 is the important part: everything comes from the client and can be spoofed, trivially for the
 User-Agent. Connection-level fingerprinting (JA3, HTTP/2 fingerprinting, header ordering) is
 presented as more reliable because it keys on how the connection is made, and contradictions
-between layers are a strong signal — a mobile user agent paired with a scripted client's
+between layers are a strong signal - a mobile user agent paired with a scripted client's
 connection signature.
 
 Mismatches should prompt extra authentication, not an outright block. Users legitimately own

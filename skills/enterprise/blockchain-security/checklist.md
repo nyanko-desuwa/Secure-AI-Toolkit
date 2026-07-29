@@ -1,7 +1,7 @@
 # Blockchain Verification Checklist
 
 Run before returning Solidity or web3 integration code. Mark each item pass, fail, or not
-applicable. "Not applicable" needs a one-line reason — an unexplained skip is a gap.
+applicable. "Not applicable" needs a one-line reason - an unexplained skip is a gap.
 
 Only the sections the change touches need running. A pure view function does not need the
 oracle section.
@@ -93,7 +93,7 @@ oracle section.
       the effect
 - [ ] Deadline or expiry in the signed payload
 - [ ] `ecrecover` result compared against zero, or a library used that reverts on failure
-- [ ] Malleable signatures rejected — `s` in the lower half order, `v` in {27, 28}
+- [ ] Malleable signatures rejected - `s` in the lower half order, `v` in {27, 28}
 - [ ] Signature is not used as a unique identifier. Replay protection is a nonce or hash
       invalidation
 - [ ] Contract signers supported through ERC-1271 where relevant, or explicitly unsupported

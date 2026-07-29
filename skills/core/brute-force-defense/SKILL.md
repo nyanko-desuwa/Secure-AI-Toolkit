@@ -90,13 +90,13 @@ Cross-link `advanced/incident-response`.
 
 Rank by candidate space, attempts available, and what a hit is worth.
 
-- **Critical** — an unauthenticated endpoint with a small candidate space and no cap: OTP
+- **Critical** - an unauthenticated endpoint with a small candidate space and no cap: OTP
   verification, reset token submission, MFA code entry. Account takeover in minutes.
-- **High** — login with a bypassable limiter (per-IP only, per-process only, fails open), or
+- **High** - login with a bypassable limiter (per-IP only, per-process only, fails open), or
   no breached-password check on an account base with no MFA.
-- **Medium** — limiter present but on one dimension, no global failure-rate monitoring, no
+- **Medium** - limiter present but on one dimension, no global failure-rate monitoring, no
   alerting on spraying patterns, enumerable sequential IDs behind valid authorization.
-- **Low** — missing defence in depth with no path: no CAPTCHA, no device fingerprinting, when
+- **Low** - missing defence in depth with no path: no CAPTCHA, no device fingerprinting, when
   the multi-dimensional limiter and MFA are already in place.
 
 A hard per-account lockout with no self-service recovery is a High availability finding, not a
@@ -104,21 +104,21 @@ security win. Say which side of the tradeoff you are reporting.
 
 ## Related Skills
 
-- `authentication` — password storage, uniform login errors, session and token design
-- `advanced/cryptography` — KDF cost, which is the only defence against offline cracking
-- `api-security` — resource consumption at the API boundary (API4:2023)
-- `logging-audit` — what to log, and what must never reach a log
-- `advanced/incident-response` — the response path once guessing succeeded
-- `ssh-server` — `MaxAuthTries`, `LoginGraceTime`, `PerSourcePenalties` for SSH specifically
-- `redis-security` — ACL, TLS, persistence, eviction, and outage behavior of Redis/Valkey limiter stores
+- `authentication` - password storage, uniform login errors, session and token design
+- `advanced/cryptography` - KDF cost, which is the only defence against offline cracking
+- `api-security` - resource consumption at the API boundary (API4:2023)
+- `logging-audit` - what to log, and what must never reach a log
+- `advanced/incident-response` - the response path once guessing succeeded
+- `ssh-server` - `MaxAuthTries`, `LoginGraceTime`, `PerSourcePenalties` for SSH specifically
+- `redis-security` - ACL, TLS, persistence, eviction, and outage behavior of Redis/Valkey limiter stores
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, configuration, limitations
-- [checklist.md](checklist.md) — pre-return verification, grouped by surface
-- [best-practices.md](best-practices.md) — patterns, each with a vulnerable/fixed pair
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied as written
-- [prompts.md](prompts.md) — prompts that produce findings, plus an anti-pattern table
-- [references/](references/) — OWASP, ASVS, NIST SP 800-63B-4, CWE, version-pinned
-- [examples/](examples/) — eight vulnerable/fixed pairs with CWE mappings
+- [README.md](README.md) - purpose, standards table, configuration, limitations
+- [checklist.md](checklist.md) - pre-return verification, grouped by surface
+- [best-practices.md](best-practices.md) - patterns, each with a vulnerable/fixed pair
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied as written
+- [prompts.md](prompts.md) - prompts that produce findings, plus an anti-pattern table
+- [references/](references/) - OWASP, ASVS, NIST SP 800-63B-4, CWE, version-pinned
+- [examples/](examples/) - eight vulnerable/fixed pairs with CWE mappings

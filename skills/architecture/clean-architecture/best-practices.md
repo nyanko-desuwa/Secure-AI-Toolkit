@@ -69,7 +69,7 @@ public sealed class ApproveInvoice
 
 Why it removes the option rather than relying on discipline: `ExecuteAsync(invoiceId, ct)` no
 longer compiles. A new caller must produce an `Actor`, and the only honest way to produce one
-is from a verified credential. A reviewer sees a missing argument — a build failure — instead
+is from a verified credential. A reviewer sees a missing argument - a build failure - instead
 of a missing `if`, which is invisible.
 
 Two rules that follow:
@@ -78,7 +78,7 @@ Two rules that follow:
   `contextvar`, or a container-injected `ICurrentUser` all make the parameter optional again,
   and a background job resolving `ICurrentUser` gets whatever the last request left behind.
 - Service-to-service and job callers need a real principal too. A job that legitimately acts
-  for the system gets `Actor.System(tenantId)` — explicit, greppable, and auditable — not a
+  for the system gets `Actor.System(tenantId)` - explicit, greppable, and auditable - not a
   bypass path.
 
 Cost: one extra parameter, no allocation of consequence. `Actor` is a small record; if you are
@@ -139,12 +139,12 @@ export class Shipment {
 
 `private constructor` plus a static factory is the whole trick. There is no path to a
 `Shipment` that skipped `open()`. The rehydration path from persistence gets its own named
-factory (`Shipment.rehydrate`) which is allowed to trust the database — mark it clearly and
+factory (`Shipment.rehydrate`) which is allowed to trust the database - mark it clearly and
 keep it internal to the infrastructure package if the language lets you.
 
 Cost: value objects (`Weight`, `Money`, `ShipmentId`) allocate. On a hot list endpoint
 returning 500 rows, constructing 500 aggregates with 4 value objects each is 2500 short-lived
-objects per request. That is fine for a write path and wasteful for a read path — see
+objects per request. That is fine for a write path and wasteful for a read path - see
 [Repository per Aggregate and the Query Count](#repository-per-aggregate-and-the-query-count).
 
 ## Ports Belong to the Inner Layer
@@ -170,7 +170,7 @@ flowchart LR
 ```
 
 If `IInvoiceRepository` lives in the infrastructure project, the domain project must reference
-infrastructure to compile, which means the domain can now import `DbContext` — and once one
+infrastructure to compile, which means the domain can now import `DbContext` - and once one
 use case queries directly, the predicate that lives in the repository is no longer below every
 caller. With the interface in the domain, the reference goes the other way and the ORM type is
 not even visible from the inner layer. The compiler enforces the boundary; nobody has to
@@ -182,21 +182,21 @@ Two properties the port must have:
   and `ListOpenForCustomerAsync(customerId, page, ct)`. Not `IQueryable<Invoice> Query()` and
   not `find(criteria: object)`.
 - Materialized results. Returning `IQueryable`, a lazy relation, or an ORM query object drags
-  persistence semantics — and the tenant filter's composability — past the boundary. See
+  persistence semantics - and the tenant filter's composability - past the boundary. See
   [examples/README.md](examples/README.md#repository-returning-iqueryable).
 
 Honest counterpoint: one interface with exactly one implementation and no test double is
 ceremony. Add the port when there are two implementations, when the domain must compile
 without the framework, or when the port is where a security predicate is pinned. Otherwise a
-concrete class in the domain that owns its own SQL is a defensible choice — say so rather than
+concrete class in the domain that owns its own SQL is a defensible choice - say so rather than
 generating an interface per class.
 
 ## Output DTOs Are an Access Control
 
 `A01:2025` · `API3:2023` · ASVS V8, V14 · `CWE-213`
 
-An explicit output DTO is the structural fix for over-fetching. The alternative — returning
-the entity and trusting a serializer annotation — fails the moment someone adds a field.
+An explicit output DTO is the structural fix for over-fetching. The alternative - returning
+the entity and trusting a serializer annotation - fails the moment someone adds a field.
 
 ```python
 # Vulnerable: the response shape is whatever the ORM model happens to have today
@@ -237,8 +237,8 @@ class GetUserProfile:
 
 Why it removes the option: the DTO is an allowlist by construction. A new column on
 `UserRow`, a new relation, or a new internal flag cannot appear in the response, because
-nothing copies it there. Deny-list approaches — `@JsonIgnore`, `exclude = [...]`,
-`serializer.exclude_fields` — invert the default, so the next field added is exposed until
+nothing copies it there. Deny-list approaches - `@JsonIgnore`, `exclude = [...]`,
+`serializer.exclude_fields` - invert the default, so the next field added is exposed until
 someone remembers to hide it.
 
 Field-level authorization is a use case decision, as above, not a serializer concern. The
@@ -250,7 +250,7 @@ still an order of magnitude below the query. Where it stops mattering:
 
 - Below a few hundred objects per response, the mapping is noise next to the database round
   trip and JSON encoding.
-- Above that, do not delete the DTO — skip the entity. Query straight into the DTO
+- Above that, do not delete the DTO - skip the entity. Query straight into the DTO
   (`SELECT id, display_name, ... ` projected into the view type) so you pay one materialization
   instead of two.
 - Reflection-based mappers (AutoMapper-style, `ObjectMapper` conventions) are where mapping
@@ -281,7 +281,7 @@ async function listOrdersForAdmin(actor: Actor): Promise<OrderRow[]> {
 
 At 201 round trips of 2 ms, the handler spends 400 ms in the database driver and holds a
 connection for all of it. Under 50 concurrent requests that is a pool exhaustion incident, and
-an unauthenticated caller who can trigger it has a denial of service — `API4:2023`.
+an unauthenticated caller who can trigger it has a denial of service - `API4:2023`.
 
 Two fixes, and the choice matters:
 
@@ -302,14 +302,14 @@ interface OrderListReadModel {
 ```
 
 Fix A keeps one model and pays 3 queries. Fix B pays 1 query and accepts a second read path,
-which means the tenant predicate now exists in two places — write it into the SQL and test it,
+which means the tenant predicate now exists in two places - write it into the SQL and test it,
 or you have traded a performance bug for `A01`. Say which trade you made.
 
 Retention cost of the write path: an ORM change tracker holds every entity it materialized for
 the length of the unit of work. Loading 10 000 aggregates to update three of them retains all
 10 000 until the context is disposed. Batch and dispose per chunk. Heap-level detail lives in
-[`skills/architecture/performance/`](../performance/best-practices.md) — L7 (large result sets)
-and L3 (connection lifetime) — not here.
+[`skills/architecture/performance/`](../performance/best-practices.md) - L7 (large result sets)
+and L3 (connection lifetime) - not here.
 
 Assert the query count in a test where N+1 is plausible. It is the only way the regression
 stays fixed.
@@ -398,7 +398,7 @@ The framework will tell you, if you let it. `Host.CreateApplicationBuilder` in D
 runs scope validation, which verifies that scoped services are not resolved from the root
 provider and not injected into singletons; it throws when `BuildServiceProvider` is called.
 Turn it on in every environment you can afford to fail fast in, and in CI. Containers in other
-ecosystems have equivalents — NestJS scopes bubble up, so injecting a `REQUEST`-scoped provider
+ecosystems have equivalents - NestJS scopes bubble up, so injecting a `REQUEST`-scoped provider
 into a default-scoped one silently promotes the consumer; verify the behaviour of your version
 rather than assuming.
 
@@ -406,7 +406,7 @@ Two further hazards in this family:
 
 - A use case registered as a singleton that memoizes a lookup in an instance field. The
   memo is correct for one tenant and wrong for every other one. Use cases are scoped, and any
-  cache they touch is an injected, keyed, bounded cache — not a field.
+  cache they touch is an injected, keyed, bounded cache - not a field.
 - Background services. A hosted service or worker is a singleton by nature, so it must not
   take a scoped dependency in its constructor. Inject the scope factory, open a scope per unit
   of work, resolve inside it, and dispose it. That scope is also where the job's `Actor` is
@@ -452,7 +452,7 @@ public sealed class HttpCarrierRatesAdapter : ICarrierRatesPort
 
 Without this, a carrier that accepts connections and never responds pins one request thread and
 its whole object graph per call until the process dies. The domain does not know what a socket
-is, which is the point — it knows there is a deadline, because `ct` is in the signature.
+is, which is the point - it knows there is a deadline, because `ct` is in the signature.
 
 Rules: the token is a parameter, never a field. Every port method that does I/O takes one. The
 adapter's timeout is its own dependency budget, linked to the caller's token so either can
@@ -466,7 +466,7 @@ Say this out loud before recommending the structure.
 | Cost | Size | When it stops mattering |
 |---|---|---|
 | Mapping per boundary crossing | 2 to 3 object copies per entity per request | Below a few hundred objects per response |
-| Files to read to follow one request | 4 to 6 instead of 1 | Never — it is a permanent navigation tax you pay for a permanent enforcement point |
+| Files to read to follow one request | 4 to 6 instead of 1 | Never - it is a permanent navigation tax you pay for a permanent enforcement point |
 | Aggregate materialization on read paths | N value objects per row | Use a read model and skip the entity |
 | Repository per aggregate | 1+N queries across aggregates | Batch loaders or a read model |
 | Interfaces with one implementation | Indirection with no benefit | Do not create them |
@@ -479,8 +479,8 @@ the route. See `SKILL.md` for the full "when NOT to use this" list.
 
 ## Sources
 
-- [references/dependency-rule.md](references/dependency-rule.md) — the dependency rule
-- [references/di-lifetimes.md](references/di-lifetimes.md) — captive dependencies, scope
+- [references/dependency-rule.md](references/dependency-rule.md) - the dependency rule
+- [references/di-lifetimes.md](references/di-lifetimes.md) - captive dependencies, scope
   validation, `DbContext` lifetime
 - <https://owasp.org/Top10/2025/>
 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>

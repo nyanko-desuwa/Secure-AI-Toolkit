@@ -1,8 +1,8 @@
-# RFC 9700 — OAuth 2.0 Security Best Current Practice
+# RFC 9700 - OAuth 2.0 Security Best Current Practice
 
 Also published as BCP 240. Authors T. Lodderstedt, J. Bradley, A. Labunets, D. Fett.
 Published January 2025. This is the document to cite for grant selection, PKCE, redirect
-URI handling, and refresh token handling — not RFC 6749, which predates every attack it
+URI handling, and refresh token handling - not RFC 6749, which predates every attack it
 does not defend against.
 
 Source: <https://www.rfc-editor.org/rfc/rfc9700.html>
@@ -52,7 +52,7 @@ pre-registered redirect URIs, judged by Simple String Comparison (RFC 3986 Secti
 
 One carve-out: variable port numbers for `localhost` redirect URIs belonging to native apps.
 
-The case against patterns is empirical, not theoretical — wildcard matching has produced
+The case against patterns is empirical, not theoretical - wildcard matching has produced
 real attacks, including via subdomain takeover in deployments that parsed the wildcard
 correctly. Related requirements: hosts serving redirect URIs must not run open redirectors,
 and servers may append `#_` to the `Location` header to stop browsers reattaching fragments.
@@ -65,9 +65,9 @@ verified, for example RFC 9101 (JAR) or RFC 9126 (PAR) plus client authenticatio
 Section 4.14. For public clients, authorization servers MUST use one of two defences against
 refresh token replay:
 
-1. Sender-constraining — bind the token to a client instance cryptographically, via mutual
+1. Sender-constraining - bind the token to a client instance cryptographically, via mutual
    TLS (RFC 8705) or DPoP (RFC 9449).
-2. Rotation — issue a new refresh token with every refresh response, invalidate the old one,
+2. Rotation - issue a new refresh token with every refresh response, invalidate the old one,
    and keep a record linking them.
 
 Rotation gives you detection: if a token is stolen and both the attacker and the legitimate

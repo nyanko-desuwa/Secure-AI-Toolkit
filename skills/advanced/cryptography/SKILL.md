@@ -48,11 +48,11 @@ management risk without adding a defence.
 | Authenticate a message | HMAC-SHA-256 | `hash(secret + message)` |
 | Sign for third-party verification | Ed25519, or ECDSA P-256 | RSA PKCS#1 v1.5 for new systems |
 | Compare two secrets | Constant-time comparison | `==`, `===`, `equals`, `strcmp` |
-| Encode for transport | base64, hex — this is not encryption | base64 as a confidentiality control |
+| Encode for transport | base64, hex - this is not encryption | base64 as a confidentiality control |
 
 Use the highest-level API your language offers. `libsodium`, Go's `crypto/cipher` AEAD interface,
 Java's `AES/GCM/NoPadding` via a vetted wrapper, Python's `cryptography` `AESGCM` or Fernet. If you
-are choosing a mode and a MAC separately, stop — that is a construction, and constructions fail.
+are choosing a mode and a MAC separately, stop - that is a construction, and constructions fail.
 
 ## Workflow
 
@@ -70,7 +70,7 @@ one (TLS, JOSE, age, Signal) rather than assemble one.
 ### 3. Key lifecycle before implementation
 
 Generation, storage, use, rotation, revocation, destruction. Answer all six now, not after
-launch — retrofitting rotation onto data encrypted with a hardcoded key is a migration project.
+launch - retrofitting rotation onto data encrypted with a hardcoded key is a migration project.
 See [best-practices.md](best-practices.md#key-lifecycle).
 
 Envelope encryption is the default answer for data at rest: a KMS-held key encrypts a per-record
@@ -93,14 +93,14 @@ expired signature must fail, a wrong key must fail loudly.
 
 ## Severity
 
-- **Critical** — passwords stored with a fast hash or unsalted; a hardcoded key in source or an
+- **Critical** - passwords stored with a fast hash or unsalted; a hardcoded key in source or an
   image layer; JWT verified with `algorithms` unpinned or `none` accepted; TLS certificate
   verification disabled on a path carrying credentials
-- **High** — nonce reuse under a static key; unauthenticated cipher mode (CBC without a MAC);
+- **High** - nonce reuse under a static key; unauthenticated cipher mode (CBC without a MAC);
   tokens from a non-cryptographic RNG; no key rotation path at all; ECB mode
-- **Medium** — timing-unsafe secret comparison; PBKDF2 with a low iteration count; missing AAD
+- **Medium** - timing-unsafe secret comparison; PBKDF2 with a low iteration count; missing AAD
   where context binding matters; no algorithm identifier stored with ciphertext
-- **Low** — a stronger parameter available but current one still acceptable; hex where base64url
+- **Low** - a stronger parameter available but current one still acceptable; hex where base64url
   would be neater
 
 Weight by what the attacker gets. A timing leak on an HMAC over a network is usually much harder
@@ -118,19 +118,19 @@ before writing the construction.
 
 ## Related Skills
 
-- `secrets-management` — where keys live, and how they reach the process
-- `authentication` — password policy, MFA, session lifecycle around the hashing
-- `api-security` — JWT and token handling at the API surface
-- `cloud-security` — KMS/HSM configuration and IAM on key policies
-- `ssh-server` — server-side TLS configuration in context
+- `secrets-management` - where keys live, and how they reach the process
+- `authentication` - password policy, MFA, session lifecycle around the hashing
+- `api-security` - JWT and token handling at the API surface
+- `cloud-security` - KMS/HSM configuration and IAM on key policies
+- `ssh-server` - server-side TLS configuration in context
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations, security notes
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/](references/) — version-pinned standard summaries
-- [examples/](examples/) — vulnerable and fixed code side by side
+- [README.md](README.md) - purpose, standards table, limitations, security notes
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/](references/) - version-pinned standard summaries
+- [examples/](examples/) - vulnerable and fixed code side by side

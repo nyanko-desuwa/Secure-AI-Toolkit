@@ -121,7 +121,7 @@ The report format that keeps this honest:
 
 ```text
 ## Findings
-1. [High] Unscoped invoice lookup — CWE-639 — src/api/invoices.py:41
+1. [High] Unscoped invoice lookup - CWE-639 - src/api/invoices.py:41
    Exploit: GET /invoices/8123 as any logged-in user returns another tenant's invoice.
 
 ## Observations (no exploitation path found)
@@ -144,7 +144,7 @@ Order of preference, most to least contained:
 1. Add the missing constraint or parameter at the sink.
 2. Replace the unsafe API with the safe one from the same library.
 3. Introduce a small helper and route the one call site through it.
-4. Move the check to another layer. This is a design change — say so and get agreement.
+4. Move the check to another layer. This is a design change - say so and get agreement.
 
 The proof is a test that fails on the pre-fix code:
 

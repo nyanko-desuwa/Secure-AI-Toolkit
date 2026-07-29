@@ -33,7 +33,7 @@ TLS handshakes consume CPU and sockets; certificate rotation creates synchronize
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/> (A01, A02, A07; pinned 2026-07-28).
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/> (V6, V8, V12, V13, V15; chapter-level citation, pinned 2026-07-28).
-- CWE-441 — <https://cwe.mitre.org/data/definitions/441.html>.
-- CWE-918 — <https://cwe.mitre.org/data/definitions/918.html>.
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/> (A01, A02, A07; pinned 2026-07-28).
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/> (V6, V8, V12, V13, V15; chapter-level citation, pinned 2026-07-28).
+- CWE-441 - <https://cwe.mitre.org/data/definitions/441.html>.
+- CWE-918 - <https://cwe.mitre.org/data/definitions/918.html>.

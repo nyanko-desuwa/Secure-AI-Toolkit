@@ -9,7 +9,7 @@ Log in with a captured pre-login cookie value and see whether the post-login res
 a `Set-Cookie` with a different value. If it does not, the framework is not rotating and
 session fixation is live regardless of what the docs claim.
 
-Known shapes: Express `express-session` does not regenerate on its own — you call
+Known shapes: Express `express-session` does not regenerate on its own - you call
 `req.session.regenerate()`. Django's `login()` does cycle the key. PHP needs an explicit
 `session_regenerate_id(true)`. Spring Security rotates by default but the behaviour is
 configurable and sometimes disabled to keep a legacy integration working.
@@ -33,7 +33,7 @@ NIST SP 800-63B-4 Section 3.1.1.2 prohibits composition rules and periodic rotat
 internal policies still require both, usually because an old audit template says so.
 
 Report the conflict rather than picking a side silently: name the requirement, name the
-internal rule, and say what each buys. If the internal policy wins, implement it — but do not
+internal rule, and say what each buys. If the internal policy wins, implement it - but do not
 also lower the length floor, because that is where the actual strength lives. A 15-character
 minimum with no composition rule is stronger than 8 characters with four character classes.
 
@@ -43,7 +43,7 @@ You cannot. Say so. There are three honest options, and the choice is a product 
 
 1. Short access token lifetime plus a refresh token you can revoke. Logout takes effect
    within the access token's remaining life. Name the window in the report.
-2. A server-side check on every request — a revocation list, or a `tokens_valid_after`
+2. A server-side check on every request - a revocation list, or a `tokens_valid_after`
    timestamp on the user row. Correct and immediate, and it gives up statelessness, which was
    the reason for choosing JWT.
 3. Server-side sessions instead. Often the right answer once someone writes down what
@@ -57,7 +57,7 @@ Product wants "this email is not registered" for conversion. That is a user enum
 oracle (CWE-204).
 
 The workable compromise: keep the login endpoint uniform, and move the enumeration risk to a
-flow you can rate limit and monitor separately — registration tells the user the address is
+flow you can rate limit and monitor separately - registration tells the user the address is
 taken only after an email round-trip, not in the form response. If the business accepts
 enumeration knowingly, record the decision and the compensating controls (throttling,
 alerting on enumeration patterns). An accepted risk documented is different from a bug.
@@ -67,7 +67,7 @@ alerting on enumeration patterns). An accepted risk documented is different from
 Per-account lockout is a denial-of-service lever: an attacker locks a known account on
 purpose. NIST 3.2.2 flags this directly.
 
-Prefer graduated friction over hard lockout — increasing delay, then a CAPTCHA, then a
+Prefer graduated friction over hard lockout - increasing delay, then a CAPTCHA, then a
 verified email step. Reserve hard lockout for a very high failure count and make the recovery
 path self-service. Never lock out based on IP alone; NAT and mobile carriers put thousands of
 users behind one address.
@@ -77,7 +77,7 @@ users behind one address.
 Public clients must have it (RFC 9700 Section 2.1.1). If the provider genuinely lacks it:
 
 - Never fall back to the implicit grant. That is trading one gap for a worse one.
-- If the client can hold a secret — a server-side backend for frontend — use the code flow
+- If the client can hold a secret - a server-side backend for frontend - use the code flow
   with client authentication and a strictly validated `state`, and keep tokens server-side.
 - Log the provider limitation as an accepted risk with an owner, and check for support again
   at the next dependency review.
@@ -87,7 +87,7 @@ that plainly instead of building something that looks compliant.
 
 ## Existing password hashes use the wrong algorithm
 
-Do not rehash the stored hashes — you cannot recover the passwords, and wrapping a weak hash
+Do not rehash the stored hashes - you cannot recover the passwords, and wrapping a weak hash
 in a strong one leaves the weak hash's collision and shucking properties in place.
 
 Migrate on next login: verify against the old scheme, and on success rehash the plaintext you
@@ -99,7 +99,7 @@ never come back, force a reset after a deadline rather than leaving SHA-1 hashes
 Symptoms: nobody can answer "who can read this document" without running the code, and
 policy lives in three places.
 
-Do not rewrite it in one pass. Instead: write the read-only query first — a function that,
+Do not rewrite it in one pass. Instead: write the read-only query first - a function that,
 given a subject and a resource, returns the decision and the rule that produced it. That
 makes the current behaviour observable. Migrate call sites to it, then consolidate the rules
 behind it. An unobservable policy layer cannot be safely refactored.

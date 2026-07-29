@@ -4,7 +4,7 @@ Verified 2026-07-28:
 <https://owasp.org/www-project-application-security-verification-standard/>.
 
 Version 5.0.0, released 2025-05-30. This skill cites ASVS at chapter level only. Requirement IDs
-are not reproduced here and must not be inferred from a chapter citation — if you need a specific
+are not reproduced here and must not be inferred from a chapter citation - if you need a specific
 requirement, open the standard and quote it.
 
 ## Chapters
@@ -44,7 +44,7 @@ malformed input to enter.
 
 ### V4 API and Web Service
 
-Applies to the HTTP driving adapter specifically — content type handling, method semantics, error
+Applies to the HTTP driving adapter specifically - content type handling, method semantics, error
 shape, rate limiting. Controls live in `skills/core/api-security/`. The relevant structural point
 here is that these are adapter concerns and none of them may be pushed into the core.
 
@@ -76,7 +76,7 @@ adapter, and fakes held to a contract the real adapter also passes.
 ### V16 Security Logging and Error Handling
 
 Error translation at the adapter boundary. Log the detail with a correlation id, return a stable
-code. Log the authorization decision — allowed and denied — with the actor, and never log the
+code. Log the authorization decision - allowed and denied - with the actor, and never log the
 credential or the secret the adapter holds.
 
 ## Chapters this skill does not address

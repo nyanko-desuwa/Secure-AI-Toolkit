@@ -98,10 +98,10 @@ rotate; it does not certify the old host as clean.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/>
-- CIS Benchmarks — <https://www.cisecurity.org/cis-benchmarks>
-- OpenSSH manuals — <https://man.openbsd.org/sshd_config>
-- Mozilla TLS guidelines 5.7 — <https://ssl-config.mozilla.org/guidelines/5.7.json>
-- Nginx documentation — <https://nginx.org/en/docs/>
-- systemd execution sandboxing — <https://www.freedesktop.org/software/systemd/man/systemd.exec.html>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/>
+- CIS Benchmarks - <https://www.cisecurity.org/cis-benchmarks>
+- OpenSSH manuals - <https://man.openbsd.org/sshd_config>
+- Mozilla TLS guidelines 5.7 - <https://ssl-config.mozilla.org/guidelines/5.7.json>
+- Nginx documentation - <https://nginx.org/en/docs/>
+- systemd execution sandboxing - <https://www.freedesktop.org/software/systemd/man/systemd.exec.html>

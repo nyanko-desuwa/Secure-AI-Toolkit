@@ -54,7 +54,7 @@ information leakage.
 
 Do not mark it pass from an architectural diagram. Ask for the deployed rule, its key, scope,
 burst, window, failure mode, and an observed 429 test. Confirm the edge strips client-set
-`X-Forwarded-For` before the limiter uses it — ASVS 4.1.3.
+`X-Forwarded-For` before the limiter uses it - ASVS 4.1.3.
 
 If deployment cannot be inspected, report "not verifiable from application code" rather than
 "handled by gateway". `API4:2023` · CWE-799.

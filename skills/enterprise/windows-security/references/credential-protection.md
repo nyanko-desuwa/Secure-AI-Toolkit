@@ -36,7 +36,7 @@ disabled before the upgrade, the upgrade does not re-enable it.
 
 What breaks, per Microsoft: Kerberos DES, Kerberos unconstrained delegation, Kerberos TGT
 extraction, NTLMv1. Digest, credential delegation, MS-CHAPv2, and CredSSP still work but expose
-credentials. Note the second item — if unconstrained delegation is configured anywhere in the
+credentials. Note the second item - if unconstrained delegation is configured anywhere in the
 path, Credential Guard breaks it. That is a feature; fix the delegation.
 
 Where not to enable it: domain controllers (Microsoft says it adds no security there and causes
@@ -48,7 +48,7 @@ protect a VM's secrets from a privileged attack originating on the Hyper-V host.
 ## LSA protection (RunAsPPL)
 
 Runs LSASS as a protected process so non-protected processes cannot read its memory or inject code.
-Complementary to Credential Guard, not a replacement — enable both.
+Complementary to Credential Guard, not a replacement - enable both.
 
 ```powershell
 # Enabled with UEFI lock (1) or without (2). Value 2 is enforced on Win11 22H2+ / Server 2025+.
@@ -56,8 +56,8 @@ Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa' -Name RunAsPPL -Ty
 # Reboot required.
 ```
 
-Audit before enforcing. Any LSA plug-in or driver — smart card drivers, cryptographic plug-ins,
-password filters — must be signed with a Microsoft signature or it will fail to load.
+Audit before enforcing. Any LSA plug-in or driver - smart card drivers, cryptographic plug-ins,
+password filters - must be signed with a Microsoft signature or it will fail to load.
 
 ```powershell
 # Audit mode: log what would fail, block nothing.
@@ -73,7 +73,7 @@ App Control is enabled, or when a kernel debugger is attached.
 Confirm it took effect from the System log, not the registry: WinInit event 12,
 "LSASS.exe was started as a protected process with level: 4".
 
-Two consequences worth knowing. With UEFI lock set, clearing the registry value does nothing — the
+Two consequences worth knowing. With UEFI lock set, clearing the registry value does nothing - the
 UEFI variable has to be removed with Microsoft's LSA Protected Process Opt-out tool. And you cannot
 attach a debugger to a protected LSASS, so a custom LSA plug-in becomes undebuggable.
 
@@ -96,7 +96,7 @@ Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDige
 If a hardening baseline sets it explicitly to `0`, leave it explicit. An explicit safe value
 survives a host being rebuilt from an old image; a default does not.
 
-Protected Users membership makes this moot for those accounts — Microsoft states Windows Digest
+Protected Users membership makes this moot for those accounts - Microsoft states Windows Digest
 does not cache a Protected User's plaintext credentials even when Windows Digest is enabled.
 
 ## Protected Users group
@@ -157,7 +157,7 @@ Which to use: Microsoft recommends Restricted Admin (`mstsc.exe /RestrictedAdmin
 support, because if the *client* is already compromised, an attacker can ride an open Remote
 Credential Guard channel and act as the user for the life of the session and briefly after.
 
-Enable on the remote host — required for both modes:
+Enable on the remote host - required for both modes:
 
 ```
 Computer Configuration\Administrative Templates\System\Credentials Delegation
@@ -180,7 +180,7 @@ One-off without policy: `mstsc.exe /remoteGuard`.
 
 Limits: Remote Credential Guard needs Kerberos and does not allow NTLM fallback, works only against
 AD-joined remote hosts (not Microsoft Entra joined), does not support compound authentication, works
-only for direct connections — not through Connection Broker or RD Gateway — and the Remote Desktop
+only for direct connections - not through Connection Broker or RD Gateway - and the Remote Desktop
 UWP app does not support it. When "Restrict Credential Delegation" is enabled the
 `/restrictedAdmin` switch is ignored in favour of the policy.
 
@@ -198,19 +198,19 @@ movement.
 
 ## Sources
 
-- Credential Guard overview —
+- Credential Guard overview -
   <https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/>,
   checked 2026-07-28
-- Configure added LSA protection —
+- Configure added LSA protection -
   <https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection>,
   checked 2026-07-28
-- Protected Users security group —
+- Protected Users security group -
   <https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group>,
   checked 2026-07-28
-- Credentials Protection and Management —
+- Credentials Protection and Management -
   <https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/credentials-protection-and-management>,
   checked 2026-07-28
-- Remote Credential Guard —
+- Remote Credential Guard -
   <https://learn.microsoft.com/en-us/windows/security/identity-protection/remote-credential-guard>,
   checked 2026-07-28
-- Windows LAPS — <https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview>
+- Windows LAPS - <https://learn.microsoft.com/en-us/windows-server/identity/laps/laps-overview>

@@ -35,7 +35,7 @@ instead of assuming.
 
 Report it with the uncertainty attached. State the precondition you could not verify.
 
-"SQL injection in `get_report`, exploitable if `sort` reaches the query unvalidated — I
+"SQL injection in `get_report`, exploitable if `sort` reaches the query unvalidated - I
 could not find the caller, so the input source is unconfirmed" is useful. "Critical SQL
 injection" without checking is noise, and noise gets checklists ignored.
 
@@ -47,7 +47,7 @@ expand the change into a cleanup sweep unless asked. Fix the file you are in.
 ## No test framework exists and you need to prove the fix
 
 Set up the standard choice for the language, write the regression test, and say what you
-added. If the environment blocks it — missing dependencies, no network — state that plainly
+added. If the environment blocks it - missing dependencies, no network - state that plainly
 rather than claiming the fix is verified.
 
 ## A checklist item genuinely does not apply

@@ -9,14 +9,14 @@ Every pair names the WSTG v4.2 test ID, the CWE, the OWASP Top 10 2025 category,
 
 ## Contents
 
-- [1. BOLA on an order endpoint](#1-bola-on-an-order-endpoint) — WSTG-ATHZ-04, CWE-639
-- [2. Privilege escalation through a writable role field](#2-privilege-escalation-through-a-writable-role-field) — WSTG-ATHZ-03, CWE-915
-- [3. Stored XSS in a comment body](#3-stored-xss-in-a-comment-body) — WSTG-INPV-02, CWE-79
-- [4. Blind SQL injection in a filter parameter](#4-blind-sql-injection-in-a-filter-parameter) — WSTG-INPV-05, CWE-89
-- [5. SSRF in a webhook registration](#5-ssrf-in-a-webhook-registration) — WSTG-INPV-19, CWE-918
-- [6. Malicious file upload](#6-malicious-file-upload) — WSTG-BUSL-09, CWE-434
-- [7. Session surviving logout](#7-session-surviving-logout) — WSTG-SESS-06, CWE-613
-- [8. Account enumeration on password reset](#8-account-enumeration-on-password-reset) — WSTG-IDNT-04, CWE-204
+- [1. BOLA on an order endpoint](#1-bola-on-an-order-endpoint) - WSTG-ATHZ-04, CWE-639
+- [2. Privilege escalation through a writable role field](#2-privilege-escalation-through-a-writable-role-field) - WSTG-ATHZ-03, CWE-915
+- [3. Stored XSS in a comment body](#3-stored-xss-in-a-comment-body) - WSTG-INPV-02, CWE-79
+- [4. Blind SQL injection in a filter parameter](#4-blind-sql-injection-in-a-filter-parameter) - WSTG-INPV-05, CWE-89
+- [5. SSRF in a webhook registration](#5-ssrf-in-a-webhook-registration) - WSTG-INPV-19, CWE-918
+- [6. Malicious file upload](#6-malicious-file-upload) - WSTG-BUSL-09, CWE-434
+- [7. Session surviving logout](#7-session-surviving-logout) - WSTG-SESS-06, CWE-613
+- [8. Account enumeration on password reset](#8-account-enumeration-on-password-reset) - WSTG-IDNT-04, CWE-204
 
 ---
 
@@ -222,7 +222,7 @@ test("csp on the post page has no unsafe-inline for scripts", async ({ request }
 });
 ```
 
-Why the strong version detects it: three independent signals for the same property — rendered
+Why the strong version detects it: three independent signals for the same property - rendered
 as text, no injected node, no side effect on `window`. The `onerror` payload is used instead of
 `alert(1)` deliberately, because a dialog-only assertion misses payloads that exfiltrate
 silently.
@@ -371,7 +371,7 @@ def test_a_public_url_is_still_accepted(client, actor, httpserver):
 ```
 
 Why the strong version detects it: `send.call_count == 0` is the security property. A 400 on
-its own can mean the request was sent, reached the internal service, and then failed to parse —
+its own can mean the request was sent, reached the internal service, and then failed to parse -
 blind SSRF, already exploited, test green. The numeric-encoding cases are included because a
 hostname denylist of `169.254.169.254` and `localhost` passes all of them.
 
@@ -455,7 +455,7 @@ wrote the upload into a temporary directory inside the web root is a bypass, and
 storage assertion sees it.
 
 Gap to state: magic-number detection is fooled by polyglots. The `GIF_POLYGLOT` case is left in
-deliberately — if your control is magic numbers alone it fails, and that failure is accurate.
+deliberately - if your control is magic numbers alone it fails, and that failure is accurate.
 Re-encoding the image through an imaging library is the stronger control. SVG is excluded rather
 than sanitized here, because sanitizing SVG safely is a project of its own.
 
@@ -526,7 +526,7 @@ describe("session invalidation (CWE-613)", () => {
 ```
 
 Why the strong version detects it: the assertion is the reuse attempt, which is exactly what an
-attacker holding a stolen cookie does. The pre-logout check matters too — without it, a fixture
+attacker holding a stolen cookie does. The pre-logout check matters too - without it, a fixture
 that never authenticated produces 401 everywhere and the test passes for the wrong reason.
 
 The password-change case is a separate finding class: an attacker with a stolen session survives
@@ -607,8 +607,8 @@ catches the common leak where only the existing-account path sets a rate-limit o
 header.
 
 On timing: the response-time difference caused by hashing a password only for existing users is
-a real oracle, but a wall-clock assertion in CI is flaky. Prefer the structural fix — hash
-against a dummy record on the unknown-user path — and assert it deterministically if the code
+a real oracle, but a wall-clock assertion in CI is flaky. Prefer the structural fix - hash
+against a dummy record on the unknown-user path - and assert it deterministically if the code
 exposes a seam. If you do measure, use many samples and a median comparison, run it in a
 dedicated job, and treat a failure as a prompt to measure rather than a build gate.
 
@@ -629,7 +629,7 @@ def test_login_timing_is_comparable(client, alice):
     assert abs(existing - missing) < max(25.0, 0.5 * min(existing, missing))
 ```
 
-Gap to state: none of this covers registration, which is the other enumeration surface — "this
+Gap to state: none of this covers registration, which is the other enumeration surface - "this
 email is already taken" is the same oracle with a friendlier message. Test it the same way, and
 if the product requires that message, record the accepted risk instead of asserting a behaviour
 the product does not have.
@@ -638,9 +638,9 @@ the product does not have.
 
 ## Sources
 
-- OWASP WSTG v4.2 — <https://owasp.org/www-project-web-security-testing-guide/v42/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP API Security Top 10 2023 — <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- CWE Top 25 (2025) — <https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html>
-- OWASP Cheat Sheet Series — <https://cheatsheetseries.owasp.org/>
+- OWASP WSTG v4.2 - <https://owasp.org/www-project-web-security-testing-guide/v42/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP API Security Top 10 2023 - <https://owasp.org/API-Security/editions/2023/en/0x11-t10/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- CWE Top 25 (2025) - <https://cwe.mitre.org/top25/archive/2025/2025_cwe_top25.html>
+- OWASP Cheat Sheet Series - <https://cheatsheetseries.owasp.org/>

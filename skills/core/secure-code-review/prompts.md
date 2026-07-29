@@ -19,7 +19,7 @@ The disprove instruction is doing the work. Without it a model reports every f-s
 ## Review one weakness class across a codebase
 
 ```
-Search src/api for object lookups by ID — findUnique, findById, .get(pk). For each one, tell
+Search src/api for object lookups by ID - findUnique, findById, .get(pk). For each one, tell
 me whether the query is scoped to the acting user or whether ownership is checked separately
 afterwards. List the ones with no scoping at all first.
 ```
@@ -47,8 +47,8 @@ positive, tell me exactly what stops the attack and whether that control is load
 incidental.
 ```
 
-The last clause matters. A finding stopped by an incidental control — an int cast that exists
-for formatting reasons — is a smell worth reporting, because the next refactor removes it.
+The last clause matters. A finding stopped by an incidental control - an int cast that exists
+for formatting reasons - is a smell worth reporting, because the next refactor removes it.
 
 ## Review AI-generated code
 
@@ -59,8 +59,8 @@ security decision, and calls to library options that do not exist in the pinned 
 Verify every library call against package-lock.json.
 ```
 
-Version-checking is the step humans skip. A `verify(token, { algorithm: "HS256" })` — singular
-key where the library reads `algorithms` — silently accepts any algorithm.
+Version-checking is the step humans skip. A `verify(token, { algorithm: "HS256" })` - singular
+key where the library reads `algorithms` - silently accepts any algorithm.
 
 ## Assign severity to someone else's finding
 
@@ -87,7 +87,7 @@ CWE-284.
 ## Propose the fix and prove it
 
 ```
-Fix the BOLA in src/api/orders.ts:41. Change only what the vulnerability needs — no
+Fix the BOLA in src/api/orders.ts:41. Change only what the vulnerability needs - no
 refactoring of the surrounding handler. Then write a regression test that fails against the
 current code and passes after the fix, asserting on the response, not on internals.
 ```

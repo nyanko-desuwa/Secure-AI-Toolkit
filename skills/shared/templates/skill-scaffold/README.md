@@ -5,7 +5,7 @@
 ## Purpose
 
 <Why this skill exists as a separate thing rather than a section of another skill. Name the
-standard it is grounded in — a skill that cites nothing is an opinion.>
+standard it is grounded in - a skill that cites nothing is an opinion.>
 
 ## How It Works
 
@@ -68,5 +68,5 @@ labelled and paired with a fix.>
 
 ## References
 
-- <Standard> — <url>
-- <Standard> — <url>
+- <Standard> - <url>
+- <Standard> - <url>

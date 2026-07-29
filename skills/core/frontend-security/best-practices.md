@@ -32,7 +32,7 @@ function renderName(el, user) {
 
 Why this works: `textContent` assigns a string to a text node. There is no HTML parser in the
 path, so there is nothing to escape and nothing to get wrong. Escaping the value with a hand-written
-`replace()` chain is the tempting alternative and it is weaker — it has to be correct for HTML
+`replace()` chain is the tempting alternative and it is weaker - it has to be correct for HTML
 body, attribute, and URL contexts at once, and it usually misses backtick, single quote, or
 `</script`.
 
@@ -160,7 +160,7 @@ function safeReturnPath(raw: string): string {
 ```
 
 Why this works: the decision is made from a server-controlled set, not from a string the attacker
-supplied. Prefix checks are the tempting wrong fix — `startsWith("https://app.example.com")`
+supplied. Prefix checks are the tempting wrong fix - `startsWith("https://app.example.com")`
 accepts `https://app.example.com.attacker-site.test`, and `startsWith("/")` accepts `//attacker`,
 which browsers read as protocol-relative and treat as cross-origin.
 
@@ -210,12 +210,12 @@ app.use((req, res, next) => {
 
 Why this works: the nonce is unguessable and regenerated per response, so an injected script tag
 cannot carry a valid one. `strict-dynamic` lets a nonced script load its own dependencies without
-you maintaining a host list. The trailing `https: 'unsafe-inline'` is a deliberate fallback — CSP
+you maintaining a host list. The trailing `https: 'unsafe-inline'` is a deliberate fallback - CSP
 Level 3 browsers ignore both once a nonce is present, and older browsers get something rather than
 nothing.
 
 `nginx`'s `$request_id` is a 32-hex-character value derived from a random source and is acceptable
-as a nonce. Do not substitute `$msec`, `$connection`, or a timestamp — a predictable nonce is no
+as a nonce. Do not substitute `$msec`, `$connection`, or a timestamp - a predictable nonce is no
 nonce.
 
 Details, including `report-only` rollout and the `frame-ancestors` versus `X-Frame-Options` split,
@@ -251,7 +251,7 @@ Assignment of a raw string to `innerHTML` becomes a `TypeError`, which surfaces 
 CSP reports rather than in a bug bounty.
 
 Two honest limits. Support is Chromium-first, so treat it as a hardening layer and keep the sinks
-safe on their own. And a policy that returns its input unchanged is a rubber stamp — the policy body
+safe on their own. And a policy that returns its input unchanged is a rubber stamp - the policy body
 is now the thing to review, so keep it to one file and one owner.
 
 ## Tokens Out of JavaScript's Reach
@@ -348,7 +348,7 @@ await fetch("/api/account/email", {
 Why this works: a cross-site page can cause the browser to send the cookie but cannot read it and
 cannot set a custom header on a cross-origin request without a preflight the server will reject.
 The HMAC binds the token to the session, so a token planted by a subdomain the attacker controls
-fails verification — plain double-submit without the MAC is the common weak version.
+fails verification - plain double-submit without the MAC is the common weak version.
 
 Synchronizer tokens stored server-side are stronger where you have session storage. Also check
 `Origin`/`Sec-Fetch-Site` server-side as a second signal; do not rely on `Referer`, which is
@@ -442,7 +442,7 @@ sticky for `max-age`. Roll it out with a short `max-age` first.
 
 Why this works: the browser hashes the fetched bytes and refuses to execute on a mismatch, so a
 compromised CDN or a hijacked DNS answer fails closed instead of running. `latest` cannot be
-protected this way — a mutable URL and SRI are incompatible by design, which is the point.
+protected this way - a mutable URL and SRI are incompatible by design, which is the point.
 
 SRI does not help a script that legitimately updates, and it does not constrain what an
 intentionally malicious-but-unchanged script does. For anything that must self-update, the answers
@@ -493,7 +493,7 @@ const config = Object.create(null);
 
 Why this works: two independent layers. The key check blocks the known escalation names, and
 `Object.create(null)` means there is no prototype chain to poison even if a name is missed. A `Map`
-is the better shape where the keys are genuinely dynamic — string keys on a `Map` cannot reach a
+is the better shape where the keys are genuinely dynamic - string keys on a `Map` cannot reach a
 prototype at all. `Object.freeze(Object.prototype)` is a blunt global mitigation that breaks some
 libraries; measure before reaching for it.
 
@@ -541,7 +541,7 @@ const safeBody = computed(() =>
 Why this works: the sanitizer runs on every render path, including the one added next sprint,
 because it lives in the component rather than in a caller's discipline.
 
-Two framework-specific traps worth knowing. React's JSX spread — `<div {...props} />` — will set
+Two framework-specific traps worth knowing. React's JSX spread - `<div {...props} />` - will set
 `dangerouslySetInnerHTML` if the object contains it, so spreading a server-supplied object is a
 sink. And a dynamic component name (`<component :is="name">`, `React.createElement(name)`) sourced
 from user input lets an attacker pick which component renders.

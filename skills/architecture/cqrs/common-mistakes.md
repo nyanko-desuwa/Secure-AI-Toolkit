@@ -6,7 +6,7 @@ wrong fix somebody reached for after hitting an earlier one.
 ## Applying it to everything
 
 The mistake: a repository where every entity has a `Commands` folder, a `Queries` folder, a
-handler per operation, and a projection — including the `Country` lookup table.
+handler per operation, and a projection - including the `Country` lookup table.
 
 Why it happens: the pattern reads as a code layout, so it gets applied as one. An AI asked for
 "CQRS" produces the folders because the folders are the visible part.
@@ -27,7 +27,7 @@ Why it happens: the split was adopted for its own sake, so there was never a rea
 discover.
 
 The fix: either delete the read model and query the table with an explicit column list, or find
-the actual read shape — usually a join already done, a count already computed, a status already
+the actual read shape - usually a join already done, a count already computed, a status already
 translated. If neither, you are at level 0 and that is fine.
 
 Why that works: the projection now earns the write amplification it costs. A copy costs the same
@@ -105,7 +105,7 @@ user's reads to the write store briefly, or return a version the client can wait
 Why that works: the synchronous projector has recoupled the two sides. A projector failure now
 fails the command, projection count now multiplies command latency, and you kept the complexity of
 the split while losing its independence. If synchronous projection is genuinely acceptable, you
-wanted level 2 — same transaction, same database, no broker — and should say so.
+wanted level 2 - same transaction, same database, no broker - and should say so.
 
 ## Ignoring eventual consistency in an authorization check
 
@@ -155,19 +155,19 @@ in-memory state is needed for throughput, cap it with a size and a TTL and make 
 independent of it.
 
 Why that works: memory now scales with the cap instead of with total entities. Detail on bounds
-and diagnosis is in `skills/architecture/performance/` — L1, unbounded cache, `CWE-401`.
+and diagnosis is in `skills/architecture/performance/` - L1, unbounded cache, `CWE-401`.
 
 ## Dual write treated as good enough because it usually works
 
 The mistake: commit, then publish. It works in testing and in most of production.
 
-Why it happens: the failure is invisible. There is no error, no exception, no alert — just a
+Why it happens: the failure is invisible. There is no error, no exception, no alert - just a
 projection row that never updated.
 
 The fix: outbox table, written in the same transaction, published by a relay.
 
 Why that works: there is no window between the two writes because there is only one write. The
-remaining failure mode — a duplicate publish — is one the projector's sequence guard already
+remaining failure mode - a duplicate publish - is one the projector's sequence guard already
 handles. `A08:2025`.
 
 ## Rebuilding a projection by truncating it
@@ -192,7 +192,7 @@ Why it happens: the projector already has the event, and the email needs the sam
 The fix: separate the process that maintains state from the process that acts on events. The
 projector is replayable; the notifier is not.
 
-Why that works: a rebuild resends every email ever sent. That is not a hypothetical — it is the
+Why that works: a rebuild resends every email ever sent. That is not a hypothetical - it is the
 classic event-sourcing production incident.
 
 ## Event store holding plaintext personal data

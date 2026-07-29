@@ -32,7 +32,7 @@ not-applicable mark needs a reason. Do not mark a runtime item pass from source 
 - [ ] Authentication endpoints never log the full request body
 - [ ] Logs contain secret names, not secret values
 - [ ] Session identifiers and other identifiers are hashed or partially masked only when correlation is required
-- [ ] Masking runs before rendering, buffering, queueing, or shipping — not only at the sink
+- [ ] Masking runs before rendering, buffering, queueing, or shipping - not only at the sink
 - [ ] Logging classification matches the data classification; encryption and access controls follow it
 - [ ] Log exports and log-reader access are themselves logged and authorized
 - [ ] PII minimisation, pseudonymisation, legal basis, and retention are documented per stream

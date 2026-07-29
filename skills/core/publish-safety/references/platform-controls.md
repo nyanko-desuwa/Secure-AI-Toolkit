@@ -7,7 +7,7 @@ the gap.
 
 Platform behaviour changes more often than a standard does. Re-check before quoting a default.
 
-## GitHub — secret scanning and push protection
+## GitHub - secret scanning and push protection
 
 Source: <https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection> ·
 verified 2026-07-28
@@ -28,16 +28,16 @@ private repository with Secret Protection not enabled, nothing blocks the push.
 
 Bypass, and why it matters for a finding: on repository-level protection the default is that anyone
 with write access can push through by choosing a reason. The reason chosen determines the resulting
-alert state — "used in tests" and "false positive" close the alert, "I'll fix it later" leaves it
+alert state - "used in tests" and "false positive" close the alert, "I'll fix it later" leaves it
 open. Bypasses generate an alert in the Security tab, an audit log entry, and email to owners,
 security managers, and watching admins. Delegated bypass narrows who can do it. User-level bypasses
 create no alert unless repository-level protection is also on.
 
 What this means in practice: push protection is a strong control against accident and a weak one
-against determination. Treat a bypassed push the same as an unprotected one — the value reached the
+against determination. Treat a bypassed push the same as an unprotected one - the value reached the
 remote.
 
-## GitHub — removing sensitive data after the fact
+## GitHub - removing sensitive data after the fact
 
 Source: <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository> ·
 verified 2026-07-28
@@ -47,14 +47,14 @@ credential, "as a first step you need to revoke and/or rotate that secret", and 
 "Going through the extra steps to rewrite the history and remove the secret may not be warranted."
 
 Force-pushing does not finish the job. Per the same page, "If you only rewrite your history and
-force push it, the commits with sensitive data may still be accessible elsewhere" — in clones and
+force push it, the commits with sensitive data may still be accessible elsewhere" - in clones and
 forks, in cached views reachable by SHA-1, and through pull requests referencing the old commits.
 
 What you cannot fix yourself:
 
 - Other people's clones. "You cannot remove sensitive data from other users' clones of your
   repository." Collaborators must follow the `git-filter-repo` cleanup themselves, and must rebase
-  rather than merge — a single merge commit reintroduces the purged history.
+  rather than merge - a single merge commit reintroduces the purged history.
 - Forks. "If the commit that introduced the sensitive data exists in any forks, it will continue to
   be accessible there." You have to ask the fork owners, and "GitHub cannot provide contact
   information for these owners."
@@ -64,7 +64,7 @@ What you cannot fix yourself:
 
 And the catch on Support: "GitHub Support won't remove non-sensitive data," and they act on
 sensitive data only where they judge that "the risk can't be mitigated by rotating affected
-credentials." Rotation is not merely the recommended first step — it is effectively the gate on
+credentials." Rotation is not merely the recommended first step - it is effectively the gate on
 getting help at all.
 
 Costs of the rewrite, worth stating before anyone starts: every commit hash from the rewrite point
@@ -74,7 +74,7 @@ of recontamination when a collaborator with a stale clone pulls and pushes. The 
 irony that visible history divergence points an observer straight at the data still sitting in their
 local copy.
 
-## GitLab — secret push protection
+## GitLab - secret push protection
 
 Source: <https://docs.gitlab.com/user/application_security/secret_detection/secret_push_protection/> ·
 verified 2026-07-28
@@ -99,7 +99,7 @@ Documented skip paths, both audited: `git push -o secret_push_protection.skip_al
 including the Web IDE. Audit events record the skip method, account, timestamp, project, target
 branch, and the commits involved.
 
-Cases where protection silently does not apply — each one a real gap to account for rather than a
+Cases where protection silently does not apply - each one a real gap to account for rather than a
 footnote: configured exclusions, binary files, files or diff patches over 1 MiB, renames or moves
 with no content change, duplicate file content, the initial repository push, and very large
 changesets (documented as more than 3,150 changed paths or 350,000 lines, to prevent push timeouts).
@@ -108,13 +108,13 @@ Two of those deserve emphasis. The initial push is exactly the push most likely 
 historically committed `.env`. And a large import is exactly the changeset nobody reads. Pipeline
 secret detection still scans contents after the push, so configure both layers if the tier allows.
 
-## npm — what ends up in the tarball
+## npm - what ends up in the tarball
 
 Source: <https://docs.npmjs.com/cli/v11/configuring-npm/package-json#files> ·
 verified 2026-07-28
 
 `files` is an allowlist. Its patterns use ".gitignore, but reversed" semantics: listing a file,
-directory, or glob pulls it in. Omit the field and it defaults to `["*"]` — everything ships.
+directory, or glob pulls it in. Omit the field and it defaults to `["*"]` - everything ships.
 
 Precedence, which is the part that produces surprises:
 
@@ -143,7 +143,7 @@ Note what is not on the default-excluded list: `.env`, `.env.local`, `*.pem`, `*
 those shipping unless an allowlist or an ignore rule excludes them. Verify with `npm pack --dry-run`
 rather than reasoning about the rules.
 
-## Docker — layers and history
+## Docker - layers and history
 
 `docker history --no-trunc <image>` prints the command that created each layer.
 `docker image inspect --format '{{json .Config.Env}}'` prints the environment baked into the image.
@@ -169,7 +169,7 @@ scan happened.
 
 ## Sources
 
-- GitHub push protection — <https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection>
-- GitHub, removing sensitive data — <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository>
-- GitLab secret push protection — <https://docs.gitlab.com/user/application_security/secret_detection/secret_push_protection/>
-- npm `files` and ignore precedence — <https://docs.npmjs.com/cli/v11/configuring-npm/package-json#files>
+- GitHub push protection - <https://docs.github.com/en/code-security/secret-scanning/introduction/about-push-protection>
+- GitHub, removing sensitive data - <https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository>
+- GitLab secret push protection - <https://docs.gitlab.com/user/application_security/secret_detection/secret_push_protection/>
+- npm `files` and ignore precedence - <https://docs.npmjs.com/cli/v11/configuring-npm/package-json#files>

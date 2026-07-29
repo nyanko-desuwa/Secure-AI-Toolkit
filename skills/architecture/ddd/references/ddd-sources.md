@@ -4,7 +4,7 @@ Verified 2026-07-28. Use these for pattern definitions. Security conclusions in 
 are mapped separately in [security-standards.md](security-standards.md); the generic DDD
 sources do not claim that every context is automatically a secure trust boundary.
 
-## Eric Evans — Domain-Driven Design
+## Eric Evans - Domain-Driven Design
 
 Eric Evans, *Domain-Driven Design: Tackling Complexity in the Heart of Software* (2003).
 
@@ -29,13 +29,13 @@ specific ORM, event broker, database isolation mode, or runtime resource lifetim
 
 Reference:
 
-- Evans classification and DDD index — <https://martinfowler.com/tags/domain%20driven%20design.html>
+- Evans classification and DDD index - <https://martinfowler.com/tags/domain%20driven%20design.html>
 
 Verification note: Fowler's index identifies the name as coming from a 2003 book by Eric
 Evans. Publisher/ISBN are deliberately omitted because they were not needed or verified for
 this skill.
 
-## Martin Fowler — Bounded Context
+## Martin Fowler - Bounded Context
 
 Martin Fowler, "Bounded Context", published 15 January 2014.
 
@@ -44,7 +44,7 @@ internally consistent model, and makes relationships between contexts explicit t
 context map. Context boundaries usually follow breaks in language and team culture. A word
 such as `Customer` or `Meter` can have distinct meanings in distinct contexts.
 
-What this skill adds: the context is a trust boundary only when ownership is enforceable —
+What this skill adds: the context is a trust boundary only when ownership is enforceable -
 private tables/schema, a principal without grants outside the context, and a published
 contract. Fowler's page defines the modelling boundary; it does not by itself prove database
 or authorization isolation.
@@ -55,7 +55,7 @@ Reference:
 
 Verified: 2026-07-28.
 
-## Martin Fowler — DDD Aggregate
+## Martin Fowler - DDD Aggregate
 
 Martin Fowler, "DDD Aggregate", published 23 April 2013.
 
@@ -74,15 +74,15 @@ Reference:
 
 Verified: 2026-07-28.
 
-## Vaughn Vernon — Effective Aggregate Design
+## Vaughn Vernon - Effective Aggregate Design
 
 Vaughn Vernon, "Effective Aggregate Design", posted 1 October 2011 as a three-part series.
 
 The series covers:
 
-- Part I — modelling an aggregate
-- Part II — how aggregates relate to one another
-- Part III — discovering and revising aggregate designs
+- Part I - modelling an aggregate
+- Part II - how aggregates relate to one another
+- Part III - discovering and revising aggregate designs
 
 This skill follows its practical emphasis: model true consistency constraints, keep
 aggregates small, reference other aggregates by identity, and accept eventual consistency

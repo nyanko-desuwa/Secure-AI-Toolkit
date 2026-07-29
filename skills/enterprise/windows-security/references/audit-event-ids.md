@@ -124,36 +124,36 @@ events leave the host, because a local administrator can clear the Security log.
 
 ## Sources
 
-- Advanced security audit policy settings —
+- Advanced security audit policy settings -
   <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/advanced-security-audit-policy-settings>,
   checked 2026-07-28
-- Command line process auditing —
+- Command line process auditing -
   <https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/component-updates/command-line-process-auditing>,
   checked 2026-07-28
-- Event 4625 —
+- Event 4625 -
   <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4625>,
   checked 2026-07-28
-- Event 4672 —
+- Event 4672 -
   <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4672>,
   checked 2026-07-28
-- Event 4697 —
+- Event 4697 -
   <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4697>,
   checked 2026-07-28
-- Event 4720 —
+- Event 4720 -
   <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4720>,
   checked 2026-07-28
-- Audit Security Group Management —
+- Audit Security Group Management -
   <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/audit-security-group-management>,
   checked 2026-07-28
-- Audit privilege use (legacy) —
+- Audit privilege use (legacy) -
   <https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/basic-audit-privilege-use>,
   checked 2026-07-28
-- `about_Logging` (5.1) and `about_Logging_Windows` (7.x) —
+- `about_Logging` (5.1) and `about_Logging_Windows` (7.x) -
   <https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_logging>,
   checked 2026-07-28
-- Configure added LSA protection —
+- Configure added LSA protection -
   <https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection>,
   checked 2026-07-28
-- Protected Users security group —
+- Protected Users security group -
   <https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/protected-users-security-group>,
   checked 2026-07-28

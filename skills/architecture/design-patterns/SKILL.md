@@ -127,11 +127,11 @@ runtime state. Mark deployment assumptions and third-party behavior as unverifie
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, layout, limitations, and references
-- [checklist.md](checklist.md) — actionable pre-return verification
-- [best-practices.md](best-practices.md) — boundary patterns with runnable code
-- [common-mistakes.md](common-mistakes.md) — failures, fixes, and why fixes hold
-- [troubleshooting.md](troubleshooting.md) — conflicts and pattern-removal paths
-- [prompts.md](prompts.md) — prompts that produce structural findings
-- [references/](references/) — concise, date-verified sources and mappings
-- [examples/](examples/) — vulnerable/fixed TypeScript and Python pairs
+- [README.md](README.md) - purpose, layout, limitations, and references
+- [checklist.md](checklist.md) - actionable pre-return verification
+- [best-practices.md](best-practices.md) - boundary patterns with runnable code
+- [common-mistakes.md](common-mistakes.md) - failures, fixes, and why fixes hold
+- [troubleshooting.md](troubleshooting.md) - conflicts and pattern-removal paths
+- [prompts.md](prompts.md) - prompts that produce structural findings
+- [references/](references/) - concise, date-verified sources and mappings
+- [examples/](examples/) - vulnerable/fixed TypeScript and Python pairs

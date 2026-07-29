@@ -46,7 +46,7 @@ examples/
 | Kubernetes API | v1.36 documentation | 2026-07-28, against `kubernetes.io/docs` |
 
 Two honest gaps in that table. CIS publishes the benchmark PDF behind a registration form, so
-this skill names the version but cites no recommendation IDs — a control described without an
+this skill names the version but cites no recommendation IDs - a control described without an
 ID is still checkable, an invented ID is not. The NSA/CISA guidance is hosted on
 `media.defense.gov`, which returned HTTP 403 to the fetch; the document is cited by name and
 its content is described from the Kubernetes documentation that covers the same controls, not
@@ -120,13 +120,13 @@ credentials. The digests in examples are illustrative and will not resolve.
 
 ## References
 
-- Pod Security Standards — <https://kubernetes.io/docs/concepts/security/pod-security-standards/>
-- Pod Security Admission — <https://kubernetes.io/docs/concepts/security/pod-security-admission/>
-- RBAC good practices — <https://kubernetes.io/docs/concepts/security/rbac-good-practices/>
-- Good practices for Secrets — <https://kubernetes.io/docs/concepts/security/secrets-good-practices/>
-- NetworkPolicy — <https://kubernetes.io/docs/concepts/services-networking/network-policies/>
-- Auditing — <https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- CIS Benchmarks — <https://www.cisecurity.org/benchmark/kubernetes>
-- NSA/CISA Kubernetes Hardening Guidance — <https://www.cisa.gov/news-events/alerts/2022/03/15/updated-kubernetes-hardening-guide>
+- Pod Security Standards - <https://kubernetes.io/docs/concepts/security/pod-security-standards/>
+- Pod Security Admission - <https://kubernetes.io/docs/concepts/security/pod-security-admission/>
+- RBAC good practices - <https://kubernetes.io/docs/concepts/security/rbac-good-practices/>
+- Good practices for Secrets - <https://kubernetes.io/docs/concepts/security/secrets-good-practices/>
+- NetworkPolicy - <https://kubernetes.io/docs/concepts/services-networking/network-policies/>
+- Auditing - <https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- CIS Benchmarks - <https://www.cisecurity.org/benchmark/kubernetes>
+- NSA/CISA Kubernetes Hardening Guidance - <https://www.cisa.gov/news-events/alerts/2022/03/15/updated-kubernetes-hardening-guide>

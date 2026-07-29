@@ -9,14 +9,14 @@ All identifiers are obvious placeholders. `web-03.example.com`, `203.0.113.10`,
 
 ## Contents
 
-- [Reboot versus preserve then isolate](#reboot-versus-preserve-then-isolate) — A09, ASVS V16, CWE-778
-- [Partial versus complete credential revocation](#partial-versus-complete-credential-revocation) — A07, ASVS V7/V10, CWE-613
-- [Unusable versus correlatable audit records](#unusable-versus-correlatable-audit-records) — A09, ASVS V16, CWE-778
-- [Ownerless versus executable runbook step](#ownerless-versus-executable-runbook-step) — A10, ASVS V16, CWE-636
-- [Silently dropped versus durable alert delivery](#silently-dropped-versus-durable-alert-delivery) — A09/A10, ASVS V16, CWE-390
-- [Removing versus rotating a committed secret](#removing-versus-rotating-a-committed-secret) — A04/A09, ASVS V11/V16, CWE-798
-- [Trusting versus validating the log source](#trusting-versus-validating-the-log-source) — A09, ASVS V16, CWE-778
-- [Hope-based versus evidence-based recovery](#hope-based-versus-evidence-based-recovery) — A10, ASVS V16, CWE-636
+- [Reboot versus preserve then isolate](#reboot-versus-preserve-then-isolate) - A09, ASVS V16, CWE-778
+- [Partial versus complete credential revocation](#partial-versus-complete-credential-revocation) - A07, ASVS V7/V10, CWE-613
+- [Unusable versus correlatable audit records](#unusable-versus-correlatable-audit-records) - A09, ASVS V16, CWE-778
+- [Ownerless versus executable runbook step](#ownerless-versus-executable-runbook-step) - A10, ASVS V16, CWE-636
+- [Silently dropped versus durable alert delivery](#silently-dropped-versus-durable-alert-delivery) - A09/A10, ASVS V16, CWE-390
+- [Removing versus rotating a committed secret](#removing-versus-rotating-a-committed-secret) - A04/A09, ASVS V11/V16, CWE-798
+- [Trusting versus validating the log source](#trusting-versus-validating-the-log-source) - A09, ASVS V16, CWE-778
+- [Hope-based versus evidence-based recovery](#hope-based-versus-evidence-based-recovery) - A10, ASVS V16, CWE-636
 
 ---
 
@@ -332,8 +332,8 @@ def alert_account_change(event: dict) -> None:
         pass
 ```
 
-`except: pass` turns any failure — expired credential, schema mismatch, outage, programming
-error — into silent permanent loss. The caller believes the event was delivered because the
+`except: pass` turns any failure - expired credential, schema mismatch, outage, programming
+error - into silent permanent loss. The caller believes the event was delivered because the
 function returned normally. The detection exists only in code review.
 
 ### Right
@@ -611,7 +611,7 @@ Every incident finding should preserve uncertainty rather than polishing it away
 - Evidence: data-event selectors were absent from 2026-07-20T00:00Z through rotation
 - Impact: object reads by AKIAEXAMPLE cannot be observed; policy allowed reads from bucket
   example-artifacts
-- State: possible, unproven — not "no evidence of access"
+- State: possible, unproven - not "no evidence of access"
 - Fix: enable organization-level data events to an append-only destination outside the
   workload account; alert on selector changes and logging stops
 - Severity: SEV2 pending independent CDN/object-store access records; escalate if reads confirm

@@ -57,7 +57,7 @@ cur.execute("SELECT * FROM users WHERE id = %s" % user_id)
 Binds cover values. Identifiers, sort direction, `IN` arity, and predicate structure are syntax,
 and no driver will bind them. This is where injection survives in otherwise careful code.
 
-### Identifiers — allowlist map
+### Identifiers - allowlist map
 
 ```python
 # Vulnerable
@@ -90,7 +90,7 @@ query = sql.SQL("SELECT * FROM invoices ORDER BY {}").format(sql.Identifier(colu
 `sql.Identifier` quotes and escapes correctly, but it will happily quote a column you did not
 intend to allow. Allowlist first, quote second.
 
-### `IN` lists — generate placeholders, cap the length
+### `IN` lists - generate placeholders, cap the length
 
 ```python
 # Vulnerable
@@ -113,10 +113,10 @@ cur.execute("SELECT * FROM orders WHERE tenant_id = %s AND id = ANY(%s)",
             (tenant_id, ids))
 ```
 
-The cap is not cosmetic. An unbounded `IN` list is `CWE-770` — a single request asking for
+The cap is not cosmetic. An unbounded `IN` list is `CWE-770` - a single request asking for
 100,000 ids is a cheap way to saturate the database. `A06:2025`, API4:2023.
 
-### `LIKE` patterns — bind, then escape wildcards
+### `LIKE` patterns - bind, then escape wildcards
 
 Binding a `LIKE` argument stops injection but not wildcard abuse. A search of `%` matches every
 row; `%a%b%c%d%` on a large text column forces a scan per row.
@@ -136,7 +136,7 @@ def like_prefix(term: str) -> str:
 Escape the backslash first, or you double-escape the escapes. Prefer prefix matching over
 leading-wildcard matching so an index can still be used, and require a minimum term length.
 
-### Dynamic `WHERE` — compose server-owned fragments
+### Dynamic `WHERE` - compose server-owned fragments
 
 ```python
 # Fixed: each fragment is a fixed string plus its own binds
@@ -190,7 +190,7 @@ db.execute(text("SELECT * FROM users WHERE role = :role"), {"role": role})
 // Vulnerable: Unsafe is in the name for a reason
 await prisma.$queryRawUnsafe(`SELECT * FROM "User" WHERE email = '${email}'`);
 
-// Fixed: tagged template — Prisma parameterizes the interpolations
+// Fixed: tagged template - Prisma parameterizes the interpolations
 await prisma.$queryRaw`SELECT * FROM "User" WHERE email = ${email}`;
 ```
 
@@ -199,7 +199,7 @@ tagged template builds the string first and parameterizes nothing. The tag is wh
 safe, not the function name.
 
 ```java
-// Vulnerable: JPQL by concatenation — CWE-564
+// Vulnerable: JPQL by concatenation - CWE-564
 em.createQuery("FROM Invoice i WHERE i.status = '" + status + "'").getResultList();
 
 // Fixed: named parameter, typed query
@@ -233,7 +233,7 @@ await prisma.user.update({
 ```
 
 `.strict()` rejects unknown keys instead of dropping them silently, so an attempt to set `role`
-becomes a 400 you can alert on. A denylist of forbidden fields is the wrong shape — the next
+becomes a 400 you can alert on. A denylist of forbidden fields is the wrong shape - the next
 migration adds a sensitive column and nobody updates the list.
 
 ## Second-order injection
@@ -383,14 +383,14 @@ def encrypt_ssn(plaintext: str, dek: bytes, record_id: str) -> bytes:
 Randomized AEAD means you cannot query the column. If you must look values up by equality, that
 is a deliberate tradeoff:
 
-- Deterministic encryption — same plaintext, same ciphertext — supports equality and joins, and
+- Deterministic encryption - same plaintext, same ciphertext - supports equality and joins, and
   leaks equality. On a low-cardinality column (a country, a status, a boolean) frequency
   analysis recovers the values, so deterministic encryption there is decoration.
 - A keyed hash (HMAC with a secret key) in a separate index column supports exact lookup while
   the real value stays randomized. Plain SHA-256 is the wrong choice: the input space of an SSN
   or a phone number is small enough to brute force.
 - Neither supports range queries or `LIKE`. If the feature needs those, encryption at that layer
-  is not the answer — narrow who can read the column instead.
+  is not the answer - narrow who can read the column instead.
 
 Rotate by wrapping a per-record data key with a KMS key. Re-wrapping keys is cheap;
 re-encrypting a table is not.

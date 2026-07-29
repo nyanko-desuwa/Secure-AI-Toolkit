@@ -6,8 +6,8 @@ chapter, and a CWE where one applies.
 Order matters here more than in most security work. Signing an artefact built from a confused
 dependency proves you faithfully shipped someone else's code.
 
-CI pipeline mechanics — which scanner runs at which stage, what blocks a merge, how token
-permissions are scoped — belong to `devsecops`. This file covers what you depend on and what you
+CI pipeline mechanics - which scanner runs at which stage, what blocks a merge, how token
+permissions are scoped - belong to `devsecops`. This file covers what you depend on and what you
 ship.
 
 ## Decide Whether to Add It At All
@@ -32,12 +32,12 @@ Maintenance signals worth reading, and what each one actually tells you:
 |---|---|---|
 | Last release date | Active maintenance | A stable, finished library legitimately looks abandoned |
 | Single maintainer | One account compromise is total | Most of the ecosystem looks like this |
-| Declared repository missing or empty | Strong negative — published code has no reviewable source | |
+| Declared repository missing or empty | Strong negative - published code has no reviewable source | |
 | First publish within days | Strong negative for a name resembling an established package | |
 | Download count | Popularity | Trivially inflated, and popularity is what attackers target |
 | OpenSSF Scorecard `Signed-Releases`, `Pinned-Dependencies` | Process maturity | A score is an input to a decision, not a gate |
 
-ASVS 15.1.4 (L3) asks documentation to highlight "risky components" — its own examples are
+ASVS 15.1.4 (L3) asks documentation to highlight "risky components" - its own examples are
 poorly maintained, unsupported, end-of-life, or a history of significant vulnerabilities. Write
 that list at adoption, when you have just done the research, not during an incident.
 
@@ -60,7 +60,7 @@ pip index versions requests        # and read the project page, not search resul
 ```
 
 Why checking first is the only control: by the time the package is installed it has already run
-whatever it wanted to run. An SCA scanner cannot help here — it matches known-vulnerable
+whatever it wanted to run. An SCA scanner cannot help here - it matches known-vulnerable
 versions of known-good packages, and a fresh typosquat is neither.
 
 ### Slopsquatting
@@ -77,7 +77,7 @@ observed. Hallucinated names repeat across runs, which is what makes registering
 worthwhile.
 
 The demonstrated case predates the name. In 2023 Bar Lanyado found models recommending
-`huggingface-cli` — plausible, because that is the command name, while the real install is
+`huggingface-cli` - plausible, because that is the command name, while the real install is
 `pip install -U "huggingface_hub[cli]"`. He published an empty package under the hallucinated
 name and it was downloaded more than 30,000 times in three months, and the fake name appeared
 in the README of an Alibaba research repository.
@@ -145,7 +145,7 @@ Why this closes it: the attacker's package is never a candidate, because the res
 asks a registry they can publish to. The private name is namespaced, so claiming
 `acme-billing` publicly gains nothing.
 
-The tempting wrong fix is defensive publishing — registering your internal names on the public
+The tempting wrong fix is defensive publishing - registering your internal names on the public
 registry as empty stubs. It helps on npm and it is worth doing as a second layer, but it is
 not the control. It does nothing about a resolver that prefers the highest version across
 indexes, nothing for ecosystems where you cannot squat the whole namespace, and it fails the
@@ -163,7 +163,7 @@ A03's prevention text asks you to obtain components from official sources over s
 and A08 goes further: restrict npm, Maven, and similar to trusted repositories, with a vetted
 internal mirror for higher-risk organisations.
 
-A pull-through proxy — Artifactory, Nexus, Verdaccio, Athens, a cloud artifact registry — is
+A pull-through proxy - Artifactory, Nexus, Verdaccio, Athens, a cloud artifact registry - is
 where three controls become possible at once that are awkward anywhere else:
 
 - One resolution endpoint, which is what closes dependency confusion for every ecosystem in one
@@ -192,7 +192,7 @@ quarantine window even if a manifest asks for it.
 
 What a proxy does not do, and this is where teams overestimate it. A cache serves whatever
 upstream served, so a compromised upstream release is faithfully mirrored. The proxy is a
-control point, not a verdict. Keep hashes in the lockfile — they are what detects a poisoned
+control point, not a verdict. Keep hashes in the lockfile - they are what detects a poisoned
 mirror, including your own.
 
 Two configuration details that decide whether it holds:
@@ -228,12 +228,12 @@ RUN npm ci --ignore-scripts
 `npm ci` is the load-bearing change. It requires an existing `package-lock.json` or
 `npm-shrinkwrap.json`, exits with an error when the lockfile and `package.json` disagree
 instead of updating the lock, and never writes to either file. `npm install` silently
-resolves and rewrites — which means the build you tested and the build you shipped can differ.
+resolves and rewrites - which means the build you tested and the build you shipped can differ.
 
 Python needs hashes explicitly:
 
 ```text
-# requirements.txt — hash-checking mode is all-or-nothing and requires pinned versions
+# requirements.txt - hash-checking mode is all-or-nothing and requires pinned versions
 requests==2.32.3 \
   --hash=sha256:<hex> \
   --hash=sha256:<hex-of-sdist>
@@ -257,7 +257,7 @@ actions, Terraform modules, Helm charts.
 
 Your `package.json` has 12 entries. Your `node_modules` has 900 packages. The 888 you did not
 choose have the same execution rights as the 12 you did, and they are where the incidents
-happen — `event-stream` was compromised through `flatmap-stream`, a dependency nobody added on
+happen - `event-stream` was compromised through `flatmap-stream`, a dependency nobody added on
 purpose.
 
 ASVS 15.1.2 asks for an inventory of all third-party libraries, and 15.2.4 says "all transitive
@@ -286,7 +286,7 @@ what will execute. A PR that changes only the lockfile is not noise; it is the d
 Three properties of transitive dependencies that change how you triage them:
 
 - You cannot patch one directly. Fixing a vulnerable transitive dependency means the direct
-  dependency upgrades, or you override the resolution yourself — `overrides` in npm, `resolutions`
+  dependency upgrades, or you override the resolution yourself - `overrides` in npm, `resolutions`
   in Yarn and pnpm, `dependencyManagement` in Maven, a `replace` directive in Go. An override
   pins a version its parent was never tested against, so it buys time, not correctness.
 - Depth does not reduce privilege. A dependency six levels down runs its `postinstall` with the
@@ -304,8 +304,8 @@ exposure worse. Count the resolved graph.
 `A03:2025` · `CWE-829`
 
 `postinstall` runs with the credentials of whoever ran the install: a developer's SSH agent
-and cloud session, or a CI runner's tokens. The 2025 `Shai-Hulud` npm worm — described by
-OWASP as the first successful self-propagating npm worm — used post-install scripts to
+and cloud session, or a CI runner's tokens. The 2025 `Shai-Hulud` npm worm - described by
+OWASP as the first successful self-propagating npm worm - used post-install scripts to
 exfiltrate secrets and then republished itself with the npm tokens it found, reaching more
 than 500 package versions.
 
@@ -326,7 +326,7 @@ post-scripts around it.
 Node is not unique here. A Python source distribution runs its build backend and historically
 `setup.py` during installation; refuse source distributions with
 `pip install --only-binary :all:` where wheels exist. Go does not run `go generate` during
-`go build` — that is the safety property. Keep generation as an explicit, reviewed step, commit
+`go build` - that is the safety property. Keep generation as an explicit, reviewed step, commit
 its output where practical, and never add an implicit `go generate ./...` to the release build.
 A generator named in a `//go:generate` directive is arbitrary code.
 
@@ -417,7 +417,7 @@ workflow needs to change.
 
 Two details in the fixed version that are easy to drop. Actions are pinned to a commit SHA
 with the version in a comment, because a tag is a mutable pointer the action's owner can move.
-And publishing uses OIDC (`id-token: write`) rather than a stored registry token — npm
+And publishing uses OIDC (`id-token: write`) rather than a stored registry token - npm
 generates provenance attestations automatically under trusted publishing, without the
 `--provenance` flag and without a token to steal.
 
@@ -425,7 +425,7 @@ generates provenance attestations automatically under trusted publishing, withou
 
 `A03:2025` · ASVS V15 · SLSA v1.2 · `CWE-506`
 
-The xz backdoor was not in the git repository. It was in the release tarball — extra autotools
+The xz backdoor was not in the git repository. It was in the release tarball - extra autotools
 files that the repository never contained, which extracted a prebuilt object during the build
 and patched liblzma. Reviewing the source found nothing, because the source was clean.
 
@@ -511,7 +511,7 @@ What people wrongly expect from an SBOM, and it is worth saying out loud:
 - It is not proof of reachability. Presence of a vulnerable version says nothing about whether
   the vulnerable function is called
 - It is not trustworthy on its own. Unsigned, it inherits the credibility of whoever handed it
-  to you — which is why the `cosign attest` line is not optional
+  to you - which is why the `cosign attest` line is not optional
 - It is not a licence compliance verdict, though it is the evidence a lawyer needs
 
 Format details, current versions, and the build-time versus scan-time tradeoff are in
@@ -542,7 +542,7 @@ Why this works: the certificate binds the signature to an OIDC identity, so pinn
 and issuer means only that workflow on that branch can produce an artefact you will accept. A
 wildcard identity verifies that Sigstore is reachable and nothing more.
 
-Verify by digest, not by tag — a tag can be repointed at an image whose own signature is
+Verify by digest, not by tag - a tag can be repointed at an image whose own signature is
 perfectly valid. And run the verification where the artefact is consumed: an admission
 controller or the deploy job, not the build job that just signed it.
 
@@ -582,7 +582,7 @@ Rebuilding per environment produces a different artefact with none of the testin
 Why this works: promotion moves a label, so the bytes in production are provably the bytes
 that passed staging, and the signature and SBOM attached to that digest still describe what is
 running. Two builds of one commit differ in base image contents, resolved dependencies, and
-build timestamps — so a clean staging run says nothing about production.
+build timestamps - so a clean staging run says nothing about production.
 
 A03 lists promotion over rebuilds among its artefact hardening recommendations, alongside
 provenance, signing, timestamping, and immutability.
@@ -622,7 +622,7 @@ of a maintainer account compromise and gets merged by a bot at 03:00.
 Why the cooldown works: malicious releases are usually found and yanked in days, often hours.
 Waiting turns "we were patient zero" into "the registry pulled it before we resolved it". The
 cost is a few days of exposure to known CVEs, which is why the delay is short and why security
-advisories should override it — most tools support a separate, faster path for vulnerability
+advisories should override it - most tools support a separate, faster path for vulnerability
 fixes.
 
 Staged rollouts and canary deployments belong here too, and A03 names them: updating

@@ -1,14 +1,14 @@
 # API Verification Checklist
 
 Run before returning API code. Mark each item pass, fail, or not applicable. "Not applicable"
-needs a one-line reason — an unexplained skip reads the same as an oversight.
+needs a one-line reason - an unexplained skip reads the same as an oversight.
 
 Only run the sections the change touches. A GraphQL-only change does not need the gRPC section.
 
 ## Object Level Authorization (API1 · ASVS 8.2.2, 8.3.1, 8.4.1)
 
 - [ ] Every handler taking an object ID scopes the lookup by the actor, or calls a policy
-- [ ] Read, write, and delete are all covered — check delete explicitly
+- [ ] Read, write, and delete are all covered - check delete explicitly
 - [ ] Tenant comes from the session, never from a request field or header
 - [ ] Nested routes check the child, not only the parent
 - [ ] Objects that are not the actor's return 404, not 403
@@ -40,7 +40,7 @@ Only run the sections the change touches. A GraphQL-only change does not need th
 - [ ] Router denies by default; each route and method needs an explicit grant
 - [ ] Guards attached per method, not once per path prefix
 - [ ] Unused HTTP methods blocked, including auto-handled `HEAD` and `TRACE`
-- [ ] Admin functions found by capability, not by path — grep `export`, `impersonate`, `bulk`,
+- [ ] Admin functions found by capability, not by path - grep `export`, `impersonate`, `bulk`,
       `sync`, `recalculate`, `refund`
 - [ ] Admin handlers inherit or compose a role check that cannot be omitted per handler
 
@@ -59,7 +59,7 @@ Only run the sections the change touches. A GraphQL-only change does not need th
 
 - [ ] Flows that harm the business at scale identified, not just expensive ones
 - [ ] Per-actor cap on the business object, not only on request rate
-- [ ] Free-to-reverse actions considered — cancellations, refunds, unredeemed holds
+- [ ] Free-to-reverse actions considered - cancellations, refunds, unredeemed holds
 - [ ] Signup, referral, and promotion flows have an anti-automation control
 - [ ] B2B, developer, and internal APIs carry the same protections as the public one
 
@@ -97,13 +97,13 @@ Only run the sections the change touches. A GraphQL-only change does not need th
 - [ ] Upstream responses schema-validated before use
 - [ ] Response size bounded and timeouts set
 - [ ] Redirects from upstream not followed blindly
-- [ ] Upstream data encoded at its sink — SQL, template, shell, deserializer
+- [ ] Upstream data encoded at its sink - SQL, template, shell, deserializer
 - [ ] Upstream failure fails closed, with no partial state persisted
 
 ## GraphQL (ASVS 4.3.1, 4.3.2)
 
 - [ ] Depth limit and complexity or cost limit both configured
-- [ ] Amount limiting on list arguments — a shallow query asking for 100,000 rows is bounded
+- [ ] Amount limiting on list arguments - a shallow query asking for 100,000 rows is bounded
 - [ ] Introspection disabled in production, or the schema is deliberately public
 - [ ] Batched arrays and aliased duplicate fields counted against the limit, not per HTTP request
 - [ ] Authorization enforced in resolvers or the data layer, not only at the query entry point
@@ -123,7 +123,7 @@ Only run the sections the change touches. A GraphQL-only change does not need th
 - [ ] Comparison is constant-time
 - [ ] Timestamp checked against a replay window, and the timestamp is inside the signed payload
 - [ ] Delivery IDs recorded so a replay inside the window is rejected
-- [ ] Handler idempotent — a duplicate delivery does not double-apply
+- [ ] Handler idempotent - a duplicate delivery does not double-apply
 - [ ] Outbound deliveries signed, retried with backoff and a cap, and the destination URL is
       SSRF-checked
 - [ ] Outbound payloads carry only fields the receiver needs

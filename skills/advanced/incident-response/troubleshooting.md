@@ -1,7 +1,7 @@
 # Troubleshooting
 
 When the guidance in this skill cannot be applied cleanly. Every case below is a real conflict,
-not an edge case — each one shows up in the first few hours of a serious incident.
+not an edge case - each one shows up in the first few hours of a serious incident.
 
 The general rule: when two correct instructions disagree, pick one, write down that you picked
 it and why, and name what it costs. An undocumented choice looks identical to a missed step.
@@ -20,7 +20,7 @@ What not to do: rebuild first and promise to reconstruct evidence from backups. 
 contain memory, deleted files, or the attacker's own artefacts, and a backup taken after initial
 access may itself be contaminated.
 
-If you cannot preserve — the instance is already gone, the pod already rescheduled — say so
+If you cannot preserve - the instance is already gone, the pod already rescheduled - say so
 explicitly and early. Legal can work with a documented gap. They cannot work with a gap they find
 out about during discovery.
 
@@ -54,7 +54,7 @@ The compromised host is serving traffic. Somebody senior wants it restarted now.
 
 Both can usually be satisfied, in this order:
 
-1. Shift traffic away — drain the load balancer target, scale up replacements, fail over.
+1. Shift traffic away - drain the load balancer target, scale up replacements, fail over.
 2. Capture volatile state on the now-idle host.
 3. Then do whatever recovery wants with it.
 
@@ -64,7 +64,7 @@ argument. Prepare it before the conversation rather than during it.
 When capacity genuinely does not exist and the choice is real, it is a business decision, not
 yours. Elevate it: state that restarting destroys the ability to determine what else was
 accessed, name who is deciding, and record the decision with a timestamp. Then get whatever is
-cheap — disk snapshot, log export, container filesystem copy — even if memory is lost.
+cheap - disk snapshot, log export, container filesystem copy - even if memory is lost.
 
 Active destruction changes the calculation. If data is being encrypted or deleted right now,
 contain immediately and capture what survives. Note in the record that preservation was
@@ -104,7 +104,7 @@ registry. Provider-side records are the usual save, because they live outside th
 wiped.
 
 Then treat every unanswerable question as an explicit gap in the report, and lower your
-confidence accordingly. Do not backfill the timeline with plausible reconstruction — an inferred
+confidence accordingly. Do not backfill the timeline with plausible reconstruction - an inferred
 entry that looks like an observed entry is how a report becomes wrong.
 
 ## The logs do not exist for the window you need
@@ -118,7 +118,7 @@ have request records the application does not, and provider audit logs are often
 than application logs.
 
 If it is truly gone, the finding is "not observable", never "no unauthorized access". Then extend
-retention immediately — before the rest of the investigation window also expires — and record the
+retention immediately - before the rest of the investigation window also expires - and record the
 missing event class as a post-incident item. Enumerating capability from the identity's policy is
 still useful, but it gives you the ceiling, not what happened.
 
@@ -126,7 +126,7 @@ still useful, but it gives you the ceiling, not what happened.
 
 Two things resolve most of these: ask out of band, and correlate a second independent source.
 
-Ask the named actor through a channel the attacker does not control — not by replying to the
+Ask the named actor through a channel the attacker does not control - not by replying to the
 account in question. Then check whether the session, device, IP, user agent, and timing match
 that person's normal pattern. Confirmed status requires two independent sources; one log line and
 a plausible story is not confirmation in either direction.
@@ -145,7 +145,7 @@ person reading the record next week has no way to tell them apart.
 
 ## Sources
 
-- <https://doi.org/10.6028/NIST.SP.800-61r3> — evidence handling and recovery-initiation guidance
-- <https://csrc.nist.gov/pubs/sp/800/86/final> — forensic capture and handoff
-- <https://www.rfc-editor.org/rfc/rfc3227.html> — order of volatility
-- <https://owasp.org/Top10/2025/> — A09, A10
+- <https://doi.org/10.6028/NIST.SP.800-61r3> - evidence handling and recovery-initiation guidance
+- <https://csrc.nist.gov/pubs/sp/800/86/final> - forensic capture and handoff
+- <https://www.rfc-editor.org/rfc/rfc3227.html> - order of volatility
+- <https://owasp.org/Top10/2025/> - A09, A10

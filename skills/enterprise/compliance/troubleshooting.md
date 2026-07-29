@@ -9,7 +9,7 @@ Do not guess. Use this fallback:
 
 1. State the control behavior and scope.
 2. Describe the apparent framework intent in prose.
-3. Label the mapping `unverified — source unavailable`.
+3. Label the mapping `unverified - source unavailable`.
 4. Link the attempted source and date.
 5. Ask the control owner or auditor to validate before the ID enters an audit package.
 

@@ -1,7 +1,7 @@
 # Provider Well-Architected Security Pillars
 
 Design-time guidance from each provider. Use these for trade-off arguments, not as a control
-list — the CIS benchmarks are the control list. Principle names below are quoted from the
+list - the CIS benchmarks are the control list. Principle names below are quoted from the
 provider documentation. Checked 2026-07-28.
 
 ## AWS Well-Architected Framework, Security Pillar
@@ -20,7 +20,7 @@ Seven design principles, verbatim:
 - Prepare for security events
 
 Two of these get skipped most often in Terraform reviews. "Implement a strong identity
-foundation" includes the phrase "aim to eliminate reliance on long-term static credentials" —
+foundation" includes the phrase "aim to eliminate reliance on long-term static credentials" -
 that is the standard citation for rejecting an `aws_iam_access_key` in a workload. "Keep people
 away from data" is the argument for read-only break-glass roles and query tooling instead of
 direct database credentials for humans.
@@ -86,6 +86,6 @@ the infrastructure, you secure the configuration, the identities, and the data. 
 in this skill sits on your side of that line, which is why "the cloud is secure" is not an
 answer to any of them.
 
-- AWS — <https://aws.amazon.com/compliance/shared-responsibility-model/>
-- Azure — <https://learn.microsoft.com/azure/security/fundamentals/shared-responsibility>
-- GCP — <https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate>
+- AWS - <https://aws.amazon.com/compliance/shared-responsibility-model/>
+- Azure - <https://learn.microsoft.com/azure/security/fundamentals/shared-responsibility>
+- GCP - <https://cloud.google.com/architecture/framework/security/shared-responsibility-shared-fate>

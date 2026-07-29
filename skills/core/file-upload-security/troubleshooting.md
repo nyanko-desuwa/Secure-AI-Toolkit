@@ -9,7 +9,7 @@ is not a complete answer.
 
 Rank the options and present them with what each costs:
 
-1. Rasterise on upload, store PNG or WebP, discard the SVG. Loses scalability — a logo
+1. Rasterise on upload, store PNG or WebP, discard the SVG. Loses scalability - a logo
    becomes fixed-resolution.
 2. Store the SVG, never render it inline. Fixed `image/svg+xml`,
    `Content-Disposition: attachment`, `nosniff`, separate cookieless origin, restrictive
@@ -59,7 +59,7 @@ the product accepts CSV.
 For text formats, detection is not the control. Parse it as the format you expect with a
 strict parser, cap the size, and serve it as an attachment. For CSV specifically, remember
 that a leading `=`, `+`, `-`, or `@` in a cell is a formula-injection problem in Excel, not
-an upload problem — it belongs to the export path.
+an upload problem - it belongs to the export path.
 
 ## Magic bytes pass but the file is still rejected downstream
 
@@ -67,7 +67,7 @@ The detected container is right and the inner format is wrong. `PK\x03\x04` matc
 XLSX, JAR, and APK identically. Detecting ZIP does not tell you which.
 
 Inspect the container: for OOXML, check for `[Content_Types].xml` and the expected part
-layout; for a JAR, `META-INF/MANIFEST.MF`. Then apply the archive limits — an XLSX is a ZIP,
+layout; for a JAR, `META-INF/MANIFEST.MF`. Then apply the archive limits - an XLSX is a ZIP,
 so entry count and expanded size limits apply to it too.
 
 ## The scanner is unavailable in the deploy environment
@@ -87,7 +87,7 @@ usable.
 
 Write the object into a `quarantine/` prefix, have a worker read it, validate, re-encode,
 strip metadata, scan, then copy to the served prefix and update the record. If there is no
-worker infrastructure, validate on first access and cache the result — worse for latency,
+worker infrastructure, validate on first access and cache the result - worse for latency,
 but still a real check.
 
 If the constraint is "the client needs the URL immediately after upload", return a URL that
@@ -110,8 +110,8 @@ serving breaks a same-origin fetch that relies on cookies.
 
 Resolve by asking what has to render inline. Images that must render inline get:
 re-encoded to a raster format server-side, served from the separate origin with a fixed
-image type and `nosniff`, without attachment disposition. Everything else — documents,
-archives, anything unrecognised — gets attachment disposition. That split is defensible;
+image type and `nosniff`, without attachment disposition. Everything else - documents,
+archives, anything unrecognised - gets attachment disposition. That split is defensible;
 turning off attachment disposition globally because one avatar needed it is not.
 
 ## The standard has moved on

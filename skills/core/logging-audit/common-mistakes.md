@@ -13,8 +13,8 @@ if verify_password(password):
     logger.info("login success", extra={"actor": user.id})
 ```
 
-A credential-stuffing run leaves no application evidence. The only useful entry — the failed
-attempt — was omitted.
+A credential-stuffing run leaves no application evidence. The only useful entry - the failed
+attempt - was omitted.
 
 Fix: emit both `authn_login_success` and `authn_login_fail`, with actor or attempted identity,
 source IP, request ID, and authentication method. The fix closes the gap because the SIEM can
@@ -32,7 +32,7 @@ if invoice.owner_id != actor.id:
 return invoice
 ```
 
-The audit entry is true — a denial happened — but the response is still a data leak. It also
+The audit entry is true - a denial happened - but the response is still a data leak. It also
 omits the target, so investigators cannot tell what was exposed.
 
 Fix: scope the query by actor and emit the denial before returning 404. The query makes the

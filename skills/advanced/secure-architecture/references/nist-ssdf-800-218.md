@@ -1,4 +1,4 @@
-# NIST SSDF — SP 800-218
+# NIST SSDF - SP 800-218
 
 Version: Secure Software Development Framework (SSDF) Version 1.1, NIST SP 800-218, published
 February 2022. Supersedes NIST CSWP 13 (April 2020). Tied to Executive Order 14028.
@@ -24,8 +24,8 @@ architecture work belongs.
 
 Architecture work concentrates in PW. Threat modeling, design review, and secure design
 requirements are PW practices. Boundary and identity controls that protect the build system
-itself are PS. Security requirements defined once for the organization — the baseline every
-design inherits — are PO.
+itself are PS. Security requirements defined once for the organization - the baseline every
+design inherits - are PO.
 
 ## Using it honestly
 

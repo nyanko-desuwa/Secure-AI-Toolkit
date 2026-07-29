@@ -27,9 +27,9 @@ nft list chain inet filter input
 
 What not to do, ever, as a diagnostic step:
 
-- `nft flush ruleset`, `iptables -F`, `systemctl stop firewalld` — exposes every listener, and
+- `nft flush ruleset`, `iptables -F`, `systemctl stop firewalld` - exposes every listener, and
   the "test" tells you nothing you could not get from reading the rules.
-- `--insecure`, `verify=False`, `rejectUnauthorized: false`, `InsecureSkipVerify: true` — this
+- `--insecure`, `verify=False`, `rejectUnauthorized: false`, `InsecureSkipVerify: true` - this
   is the flag that gets committed. Use `openssl s_client` to see the chain instead, then fix
   the trust store.
 - Port scanners, traffic generators, or exploit tooling against any host. Reachability testing
@@ -43,7 +43,7 @@ What not to do, ever, as a diagnostic step:
 TLS 1.2-only clients, or a client that cannot do ECDHE, appearing after you restrict the suite
 list.
 
-Do not restore TLS 1.0/1.1 — they are Historic per RFC 8996 and there is no configuration that
+Do not restore TLS 1.0/1.1 - they are Historic per RFC 8996 and there is no configuration that
 makes them acceptable. Instead:
 
 1. Identify the client from the handshake failure logs. Get a count, not an impression.
@@ -63,7 +63,7 @@ enforce policy.
 
 Report the uncertainty rather than resolving it by guessing:
 
-"`nftables.conf` sets a default-drop input policy. I could not confirm it is loaded — `nft list
+"`nftables.conf` sets a default-drop input policy. I could not confirm it is loaded - `nft list
 ruleset` was not available to me. If the service is not enabled, this file has no effect."
 
 For Kubernetes specifically: check that the CNI enforces NetworkPolicy at all. Flannel without
@@ -95,7 +95,7 @@ Options in order of preference:
 1. Terminate mTLS at a sidecar or local proxy on the same host, so the plaintext hop never
    leaves the network namespace.
 2. Use a signed service token (short-lived, audience-bound) over TLS. Weaker than mTLS because
-   a token is bearer-based and replayable within its lifetime — keep the lifetime short.
+   a token is bearer-based and replayable within its lifetime - keep the lifetime short.
 3. Restrict by network policy alone, and record it as an accepted gap. Network position is not
    identity; NIST SP 800-207 is the reference for why.
 
@@ -129,7 +129,7 @@ Fix both. Note which layer you are relying on.
 Say so, with the precondition attached.
 
 "Redis on `0.0.0.0:6379` with no `requirepass`. Exploitable from anywhere the subnet routing
-allows — I could not determine whether the subnet is internet-reachable, so severity is High
+allows - I could not determine whether the subnet is internet-reachable, so severity is High
 pending that check, Critical if it is public."
 
 That is useful. "Critical: exposed Redis" without checking the routing is the kind of noise
@@ -138,7 +138,7 @@ that gets a report ignored. Use `core/redis-security` for ACL, TLS, persistence,
 ## The standard has moved on
 
 The RFC numbers, titles, and dates in [references/tls-versions.md](references/tls-versions.md)
-were checked on 2026-07-28. BCP 195 has been revised before — RFC 9325 obsoleted RFC 7525 — so
+were checked on 2026-07-28. BCP 195 has been revised before - RFC 9325 obsoleted RFC 7525 - so
 re-check `rfc-editor.org` before quoting it in a document with a long life.
 
 Never assume undocumented behaviour, in a standard or in a proxy. Fetch it.

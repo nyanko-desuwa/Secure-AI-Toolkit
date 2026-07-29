@@ -1,7 +1,7 @@
 # Secrets Verification Checklist
 
 Run before returning code. Mark each item pass, fail, or not applicable. "Not applicable"
-needs a one-line reason — an unexplained skip is a gap.
+needs a one-line reason - an unexplained skip is a gap.
 
 Only the sections the change touches need running. A CSS fix does not need the Kubernetes
 section.
@@ -77,14 +77,14 @@ section.
 - [ ] Secrets not exposed to workflows triggered by forks (`pull_request_target` reviewed)
 - [ ] `permissions:` block present and minimal on GitHub Actions workflows
 - [ ] Third-party actions pinned to a commit SHA, not a mutable tag
-- [ ] No secret passed as a command-line argument — it lands in the process listing and log
+- [ ] No secret passed as a command-line argument - it lands in the process listing and log
 - [ ] Debug/verbose modes off, or confirmed not to print the environment
 - [ ] Build logs reviewed for the secret after the first run on a new pipeline
 
 ## Container Images (A02, A03 · ASVS V13)
 
 - [ ] No `COPY` of a credential file, even if a later layer deletes it
-- [ ] No secret in `ARG` — build args are visible in `docker history` and image metadata
+- [ ] No secret in `ARG` - build args are visible in `docker history` and image metadata
 - [ ] No secret in `ENV` in the Dockerfile
 - [ ] Build-time secrets use `RUN --mount=type=secret`, not a copied file or an arg
 - [ ] `.dockerignore` excludes `.env`, `.git`, and key files from the build context
@@ -93,7 +93,7 @@ section.
 
 ## Kubernetes (A02 · ASVS V13)
 
-- [ ] Understood that a Secret is base64-encoded, not encrypted — `data` is not protection
+- [ ] Understood that a Secret is base64-encoded, not encrypted - `data` is not protection
 - [ ] etcd encryption at rest enabled for `secrets` resources
 - [ ] RBAC restricts `get`/`list`/`watch` on Secrets to the specific service accounts
       that need them, with no wildcard verb on `secrets`
@@ -126,7 +126,7 @@ section.
 ## AI and Tooling (A02 · ASVS V13, V14)
 
 - [ ] No secret in a system prompt, a few-shot example, or a tool description
-- [ ] No secret in a tool call argument — those are logged by the model provider
+- [ ] No secret in a tool call argument - those are logged by the model provider
 - [ ] Retrieved documents and tool output scrubbed of credentials before entering the prompt
 - [ ] Agent runs with its own scoped, short-lived credential, not the operator's
 - [ ] Any secret pasted into a prompt during development treated as exposed and rotated

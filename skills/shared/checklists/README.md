@@ -100,7 +100,7 @@ category-specific, which is exactly why it gets skipped.
 
 ## Using these with an assistant
 
-A checklist an assistant marks all-pass without reading the code is worse than no checklist —
+A checklist an assistant marks all-pass without reading the code is worse than no checklist -
 it teaches the reader to stop looking. Ask for evidence per item, not a verdict:
 
 ```text

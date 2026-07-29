@@ -11,14 +11,14 @@ Every address here is from a documentation range (`10.0.0.0/8`, `192.0.2.0/24`,
 
 ## Contents
 
-- [Datastore reachable from the internet](#datastore-reachable-from-the-internet) — A02, CWE-1327
-- [Flat network with no policy between tiers](#flat-network-with-no-policy-between-tiers) — A06, CWE-923
-- [SSRF blocked in the application only](#ssrf-blocked-in-the-application-only) — A01, CWE-918
-- [TLS verification disabled between services](#tls-verification-disabled-between-services) — A04, CWE-295
-- [Admin endpoint protected by network location alone](#admin-endpoint-protected-by-network-location-alone) — A01, CWE-306
-- [IPv6 left out of the policy](#ipv6-left-out-of-the-policy) — A02, CWE-923
-- [Dangling DNS record](#dangling-dns-record) — A02, CWE-829
-- [VPN that grants the whole estate](#vpn-that-grants-the-whole-estate) — A01, CWE-668
+- [Datastore reachable from the internet](#datastore-reachable-from-the-internet) - A02, CWE-1327
+- [Flat network with no policy between tiers](#flat-network-with-no-policy-between-tiers) - A06, CWE-923
+- [SSRF blocked in the application only](#ssrf-blocked-in-the-application-only) - A01, CWE-918
+- [TLS verification disabled between services](#tls-verification-disabled-between-services) - A04, CWE-295
+- [Admin endpoint protected by network location alone](#admin-endpoint-protected-by-network-location-alone) - A01, CWE-306
+- [IPv6 left out of the policy](#ipv6-left-out-of-the-policy) - A02, CWE-923
+- [Dangling DNS record](#dangling-dns-record) - A02, CWE-829
+- [VPN that grants the whole estate](#vpn-that-grants-the-whole-estate) - A01, CWE-668
 
 ---
 
@@ -69,7 +69,7 @@ password is usually in an environment variable that has never rotated.
 ```
 
 ```conf
-# Fixed: postgresql.conf — private interface, TLS required
+# Fixed: postgresql.conf - private interface, TLS required
 listen_addresses = '10.0.4.10'
 ssl = on
 ```
@@ -79,7 +79,7 @@ mistake does not expose the listener, and the source allowlist means a bind mist
 either.
 
 The tempting wrong fix is moving the port. Changing 5432 to 55432 removes it from the top of
-the scan list and nothing else — the service still answers, and a banner grab identifies it.
+the scan list and nothing else - the service still answers, and a banner grab identifies it.
 
 ---
 
@@ -159,7 +159,7 @@ Why this works: a policy that selects a pod for a direction denies everything no
 that direction, so the allowlist is the whole story. Naming the pair also documents the intended
 call graph, which makes an unexpected connection reviewable.
 
-Two things to state honestly. The DNS egress rule is mandatory — a default-deny egress policy
+Two things to state honestly. The DNS egress rule is mandatory - a default-deny egress policy
 without it breaks name resolution, and that gets fixed by deleting the policy. And
 NetworkPolicy enforcement is the CNI's job: with a CNI that does not implement it, these objects
 are accepted by the API server and enforce nothing. Confirm which CNI is running.
@@ -241,7 +241,7 @@ const res = await fetch("https://payments.svc.internal/charge", {
 ```
 
 The connection is encrypted and unauthenticated, which means anyone who can answer for that name
-— through DNS, ARP or NDP spoofing, or a takeover of the internal name — reads and rewrites
+- through DNS, ARP or NDP spoofing, or a takeover of the internal name - reads and rewrites
 payment requests. The process-wide flag disables verification for every TLS client in the
 runtime, including the ones you did not write.
 
@@ -267,7 +267,7 @@ const res = await fetch("https://payments.svc.internal/charge", {
 ```
 
 Why this works: the trust decision is narrowed to one CA for one client rather than removed for
-the whole process, and hostname verification still runs — that is the part `CWE-297` covers and
+the whole process, and hostname verification still runs - that is the part `CWE-297` covers and
 the part a bare `ca:` addition without `servername` on a mismatched SNI can still get wrong.
 
 The tempting wrong fix is pinning the certificate's fingerprint. It works until renewal, and the
@@ -320,7 +320,7 @@ location = /_authz {
 
 Why this works: the request now needs a private key the CA issued and a positive authorisation
 decision, so being on the network is a precondition rather than the credential. Clearing the
-inbound `X-Admin-Subject` copy matters — otherwise the caller supplies the value the backend
+inbound `X-Admin-Subject` copy matters - otherwise the caller supplies the value the backend
 logs.
 
 Note the `if` here is a verification check on a value nginx set, not a rewrite of a client
@@ -344,7 +344,7 @@ table ip filter {
 ```
 
 The `ip` family only sees IPv4. On a dual-stacked host the IPv6 path has no table at all, so
-`policy drop` is not in effect there and `8443` — plus everything else listening — is reachable
+`policy drop` is not in effect there and `8443` - plus everything else listening - is reachable
 over IPv6 from wherever the route reaches. The rule set looks locked down in review.
 
 ```bash
@@ -395,7 +395,7 @@ promo     CNAME  campaign-2019.example-paas.net.
 The provider released both names. Anyone can register `campaign-2019` on that platform and serve
 content from `promo.example.com`. That is a phishing page on your domain with a valid
 certificate, and worse, any cookie scoped to `.example.com` is now readable by attacker-served
-JavaScript — including a session cookie set without a host-only scope.
+JavaScript - including a session cookie set without a host-only scope.
 
 ```dns
 ; Fixed: records removed with the resource, and CAA limits who can issue
@@ -416,7 +416,7 @@ monitoring:
     on_failure: alert security, do not auto-delete
 ```
 
-Why this works: deleting the record before releasing the resource removes the window entirely —
+Why this works: deleting the record before releasing the resource removes the window entirely -
 ordering is the whole fix. The daily inventory check catches the ones that slip, because in
 practice some will.
 
@@ -426,7 +426,7 @@ CA that ignores it, has no effect on already-issued certificates, and does not h
 the attacker legitimately controls the takeover target and requests their own certificate for it.
 
 The tempting wrong fix is a wildcard `*.example.com` pointing at a "not found" page. That makes
-takeover harder to notice, not harder to do — the specific record still wins.
+takeover harder to notice, not harder to do - the specific record still wins.
 
 ---
 
@@ -481,13 +481,13 @@ AllowGroups bastion-users
 
 Why this works: the VPN grants reachability to one small segment instead of the estate, and
 reaching a workload from there needs a second authorisation step. `AllowTcpForwarding no` is the
-line that preserves that boundary — with forwarding on, the jump segment restriction is
+line that preserves that boundary - with forwarding on, the jump segment restriction is
 decorative. `LogLevel VERBOSE` records the key fingerprint used, so a session maps to a specific
 credential rather than to an account name shared by four people.
 
 Stated limitation: this still trusts a long-lived private key on an endpoint. An identity-aware
 proxy that authorises per connection against current device and user posture is the stronger
-model (NIST SP 800-207, August 2020) — a bastion is the pragmatic step, not the destination.
+model (NIST SP 800-207, August 2020) - a bastion is the pragmatic step, not the destination.
 
 Do not test any of this by port-scanning the jump segment. Read the rule set and the sshd
 config; they are authoritative and they do not generate an incident.
@@ -496,13 +496,13 @@ config; they are authoritative and they do not generate an incident.
 
 ## Sources
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- RFC 9325 (BCP 195) — <https://www.rfc-editor.org/rfc/rfc9325.html>
-- RFC 8996 (BCP 195) — <https://www.rfc-editor.org/rfc/rfc8996.html>
-- RFC 8659 (CAA) — <https://www.rfc-editor.org/rfc/rfc8659.html>
-- RFC 8981 (IPv6 temporary addresses) — <https://www.rfc-editor.org/rfc/rfc8981.html>
-- NIST SP 800-207 — <https://csrc.nist.gov/pubs/sp/800/207/final>
-- CWE — <https://cwe.mitre.org/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- RFC 9325 (BCP 195) - <https://www.rfc-editor.org/rfc/rfc9325.html>
+- RFC 8996 (BCP 195) - <https://www.rfc-editor.org/rfc/rfc8996.html>
+- RFC 8659 (CAA) - <https://www.rfc-editor.org/rfc/rfc8659.html>
+- RFC 8981 (IPv6 temporary addresses) - <https://www.rfc-editor.org/rfc/rfc8981.html>
+- NIST SP 800-207 - <https://csrc.nist.gov/pubs/sp/800/207/final>
+- CWE - <https://cwe.mitre.org/>
 
 All URLs checked 2026-07-28.

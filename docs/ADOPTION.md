@@ -79,7 +79,7 @@ Details: [scripts/README.md](../scripts/README.md) and root [README.md](../READM
 
 “Point the tool at `AI_INSTRUCTIONS.md`” always means: make that file part of the
 model’s standing instructions, then load individual `skills/**/SKILL.md` files
-when the task matches the routing table — do not paste the entire repository.
+when the task matches the routing table - do not paste the entire repository.
 
 ## 4. Team rollout
 
@@ -128,7 +128,7 @@ Code Owners” in a GitHub ruleset or branch protection; the file alone does not
 ## 5. Public vs private consumer repos
 
 - In **public** consumer repos, never commit real env files; run publish-safety before visibility changes.
-- Skills contain synthetic vulnerable examples — still review diffs so labelled blocks are not copied live.
+- Skills contain synthetic vulnerable examples - still review diffs so labelled blocks are not copied live.
 - This toolkit’s own CI validates its Markdown; your application still needs its own gates.
 
 ## 6. Loading budget

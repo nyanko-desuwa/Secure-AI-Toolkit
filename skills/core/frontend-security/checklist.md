@@ -3,7 +3,7 @@
 Run the sections that match the change. Mark every item pass, fail, or not applicable with a
 reason. Do not claim a deployed control from source inspection alone.
 
-## Data flow and XSS — A05 · ASVS V1, V3 · CWE-79
+## Data flow and XSS - A05 · ASVS V1, V3 · CWE-79
 
 - [ ] Searched for `innerHTML`, `outerHTML`, `insertAdjacentHTML`, `document.write`, `srcdoc`,
       `dangerouslySetInnerHTML`, `v-html`, `{@html}`, `bypassSecurityTrust*`, `eval`, `new Function`,
@@ -21,7 +21,7 @@ reason. Do not claim a deployed control from source inspection alone.
       sanitizer, and regression tests
 - [ ] No client-side validation is treated as server authorization or input validation
 
-## CSP and Trusted Types — A02 · ASVS V3, V13 · CWE-79
+## CSP and Trusted Types - A02 · ASVS V3, V13 · CWE-79
 
 - [ ] CSP is sent as an HTTP response header on the real origin
 - [ ] `script-src` uses per-response nonces or hashes; no broad `unsafe-inline`
@@ -35,7 +35,7 @@ reason. Do not claim a deployed control from source inspection alone.
 - [ ] Trusted Types policies are small, reviewed, and do not return arbitrary strings
 - [ ] CSP is not used as the only XSS fix; sinks remain safe without it
 
-## Cookies, tokens, and CSRF — A02, A07 · ASVS V3, V6, V7 · CWE-352, CWE-1004, CWE-1275
+## Cookies, tokens, and CSRF - A02, A07 · ASVS V3, V6, V7 · CWE-352, CWE-1004, CWE-1275
 
 - [ ] Tokens are not in `localStorage`, `sessionStorage`, URL parameters, HTML, or the JS bundle
 - [ ] Session cookies are `HttpOnly`, `Secure`, and have an intentional `SameSite` value
@@ -48,7 +48,7 @@ reason. Do not claim a deployed control from source inspection alone.
 - [ ] Access tokens have bounded lifetime and are refreshed server-side or through a reviewed flow
 - [ ] Client route guards are presentation only; API authorization is server-side
 
-## Navigation and windows — A01, A05 · ASVS V2, V3 · CWE-601
+## Navigation and windows - A01, A05 · ASVS V2, V3 · CWE-601
 
 - [ ] Redirect targets are mapped to known paths or same-origin URLs
 - [ ] `javascript:`, `data:`, and unexpected schemes are rejected
@@ -59,7 +59,7 @@ reason. Do not claim a deployed control from source inspection alone.
 - [ ] Message data is schema-validated before use
 - [ ] `window.name` is treated as attacker-controlled
 
-## Clickjacking and headers — A02 · ASVS V3, V13 · CWE-1021, CWE-346
+## Clickjacking and headers - A02 · ASVS V3, V13 · CWE-1021, CWE-346
 
 - [ ] `frame-ancestors` or `X-Frame-Options` prevents untrusted framing
 - [ ] `X-Content-Type-Options: nosniff` is set
@@ -69,7 +69,7 @@ reason. Do not claim a deployed control from source inspection alone.
 - [ ] CORS allowed origins are exact and reviewed
 - [ ] Header values are set by a trusted server layer, not from request input
 
-## Third-party code and assets — A03 · ASVS V3, V13, V15 · CWE-353
+## Third-party code and assets - A03 · ASVS V3, V13, V15 · CWE-353
 
 - [ ] Third-party scripts are minimized and pinned to an immutable version or digest
 - [ ] Cross-origin scripts use SRI `integrity` and `crossorigin="anonymous"`
@@ -79,7 +79,7 @@ reason. Do not claim a deployed control from source inspection alone.
 - [ ] `postMessage` integrations document their origin and message schema
 - [ ] An externally controlled CDN is not treated as a security boundary
 
-## Prototype pollution and data handling — A05 · ASVS V2, V15 · CWE-1321
+## Prototype pollution and data handling - A05 · ASVS V2, V15 · CWE-1321
 
 - [ ] Deep merge, query-string, and object-path libraries are pinned and current
 - [ ] Untrusted keys such as `__proto__`, `constructor`, and `prototype` are rejected where

@@ -49,7 +49,7 @@ examples/
 | SWC Registry | unmaintained since 2020, not cited | 2026-07-28, against `swcregistry.io` |
 
 Every reference file carries its source URL and the date checked. EIP numbers and Solidity
-version behaviour in this skill were fetched, not recalled — see
+version behaviour in this skill were fetched, not recalled - see
 [references/eips-and-solidity.md](references/eips-and-solidity.md) for the list and the
 sources.
 
@@ -63,8 +63,8 @@ To use it in Claude Code, keep this repository in the working directory so
 restricts it to read, search, and web lookup plus `ls`/`cat`.
 
 The Solidity examples pin `pragma solidity 0.8.36;`. They compile with solc 0.8.36. If your
-project is on an older 0.8.x, the examples still hold — nothing in them depends on a feature
-newer than 0.8.0 checked arithmetic — but change the pragma to match your toolchain rather
+project is on an older 0.8.x, the examples still hold - nothing in them depends on a feature
+newer than 0.8.0 checked arithmetic - but change the pragma to match your toolchain rather
 than floating it with `^`.
 
 ## Example Usage
@@ -106,7 +106,7 @@ Name these when using the skill. Silence about a gap reads as a guarantee.
   model do not. Solana's account model in particular changes what "reentrancy" means.
 - Economic security is out of scope. Whether your liquidation incentive is large enough,
   whether your collateral factor survives a 40% gap down, whether your governance token
-  distribution permits a cheap takeover — those need modelling, not a code review.
+  distribution permits a cheap takeover - those need modelling, not a code review.
 - No gas optimisation advice. Where a security control costs gas, this skill takes the
   control. If your bottleneck is gas, that is a different conversation and the tradeoff
   should be explicit.
@@ -139,12 +139,12 @@ addresses, or personal data anywhere in this skill.
 
 ## References
 
-- OWASP Smart Contract Top 10 2026 — <https://scs.owasp.org/sctop10/>
-- OWASP Smart Contract Security project — <https://scs.owasp.org/>
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS — <https://owasp.org/www-project-application-security-verification-standard/>
-- Solidity documentation — <https://docs.soliditylang.org/>
-- EIPs — <https://eips.ethereum.org/>
-- OpenZeppelin Contracts — <https://docs.openzeppelin.com/contracts/5.x/>
-- SWC Registry (unmaintained) — <https://swcregistry.io/>
-- CWE — <https://cwe.mitre.org/>
+- OWASP Smart Contract Top 10 2026 - <https://scs.owasp.org/sctop10/>
+- OWASP Smart Contract Security project - <https://scs.owasp.org/>
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- Solidity documentation - <https://docs.soliditylang.org/>
+- EIPs - <https://eips.ethereum.org/>
+- OpenZeppelin Contracts - <https://docs.openzeppelin.com/contracts/5.x/>
+- SWC Registry (unmaintained) - <https://swcregistry.io/>
+- CWE - <https://cwe.mitre.org/>

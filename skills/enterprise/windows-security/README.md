@@ -44,7 +44,7 @@ examples/README.md                  eight vulnerable/fixed pairs
 | Microsoft Security Compliance Toolkit | Windows Server 2025, 2022, 2019, 2016 baselines | GPO baselines, Policy Analyzer, LGPO | 2026-07-28, against Microsoft Learn |
 | NIST SP 800-53 | Rev. 5 families, not control IDs | AC, AU, CM, IA, SC mapping at family level | 2026-07-28 |
 
-ASVS is mapped at chapter level only. CIS is cited by benchmark version, never by control number —
+ASVS is mapped at chapter level only. CIS is cited by benchmark version, never by control number -
 the numbering moves between versions and this skill does not have the PDFs. If you need a control
 ID, open the benchmark for your exact OS version and quote it from there.
 
@@ -125,19 +125,19 @@ Three changes in here can lock you out or stop a service. They are marked where 
 
 Enabling command-line capture in process-creation events makes the Security log more sensitive.
 Microsoft's own note is that anyone who can read security events can then read the command line of
-every process — including a password passed as an argument. Enable it, restrict who reads the log,
+every process - including a password passed as an argument. Enable it, restrict who reads the log,
 and stop passing secrets on command lines.
 
 ## References
 
-- OWASP Top 10 2025 — <https://owasp.org/Top10/2025/>
-- OWASP ASVS 5.0.0 — <https://owasp.org/www-project-application-security-verification-standard/>
-- CIS Benchmarks — <https://www.cisecurity.org/cis-benchmarks>
-- Microsoft Security Compliance Toolkit —
+- OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
+- OWASP ASVS 5.0.0 - <https://owasp.org/www-project-application-security-verification-standard/>
+- CIS Benchmarks - <https://www.cisecurity.org/cis-benchmarks>
+- Microsoft Security Compliance Toolkit -
   <https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/security-compliance-toolkit-10>
-- Windows Server security documentation — <https://learn.microsoft.com/en-us/windows-server/security/>
-- Credential Guard — <https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/>
-- Just Enough Administration — <https://learn.microsoft.com/en-us/powershell/scripting/security/remoting/jea/overview>
-- ASP.NET Core Data Protection —
+- Windows Server security documentation - <https://learn.microsoft.com/en-us/windows-server/security/>
+- Credential Guard - <https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/>
+- Just Enough Administration - <https://learn.microsoft.com/en-us/powershell/scripting/security/remoting/jea/overview>
+- ASP.NET Core Data Protection -
   <https://learn.microsoft.com/en-us/aspnet/core/security/data-protection/configuration/overview>
-- NIST SP 800-53 Rev. 5 — <https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final>
+- NIST SP 800-53 Rev. 5 - <https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final>

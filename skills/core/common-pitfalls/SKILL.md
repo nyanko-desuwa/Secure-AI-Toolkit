@@ -67,8 +67,8 @@ If the answer is "the button is hidden", there is no control. Hiding a button is
 ### 3. Find what has no limit
 
 Every list endpoint, every upload, every outbound HTTP call, every retry loop, every cache,
-every loop over user input. Each needs a maximum. Missing limits are a security finding —
-`API4:2023 Unrestricted Resource Consumption`, `CWE-770` — not a performance nitpick.
+every loop over user input. Each needs a maximum. Missing limits are a security finding -
+`API4:2023 Unrestricted Resource Consumption`, `CWE-770` - not a performance nitpick.
 
 Starting values worth copying are in
 [references/resource-limits.md](references/resource-limits.md).
@@ -98,13 +98,13 @@ technical explanation: what an attacker or a busy Tuesday actually gets.
 
 Rank by what it costs before anyone notices.
 
-- Critical — a live secret in a public bundle or public repo, or any visitor can read or
+- Critical - a live secret in a public bundle or public repo, or any visitor can read or
   change other people's data. Money leaves, or data leaves, today.
-- High — an authenticated user can reach data or actions that are not theirs. One request can
+- High - an authenticated user can reach data or actions that are not theirs. One request can
   exhaust the process. A write can be lost silently.
-- Medium — degrades under growth or load: no pagination on a table that will get big, a leak
+- Medium - degrades under growth or load: no pagination on a table that will get big, a leak
   that needs a weekly restart, a hardcoded limit that truncates results.
-- Low — hardcoded value with no security or correctness impact, a magic number, a missing
+- Low - hardcoded value with no security or correctness impact, a magic number, a missing
   timeout on a call to something you control.
 
 Do not inflate. A hardcoded `localhost` in a script that only ever runs locally is low. A
@@ -113,23 +113,23 @@ be reading nothing or writing to the wrong place.
 
 ## Related Skills
 
-- `secrets-management` — where secrets should live, rotation, and leaked-secret response
-- `frontend-security` — XSS, CSP, token storage in the browser
-- `owasp-security` — the standards these findings map to
-- `api-security` — object-level authorization and rate limiting in depth
-- `database-security` — RLS, query safety, index and connection concerns
-- `logging-audit` — what to log when you stop swallowing errors
-- `publish-safety` — the same leaks at the moment they become public: push, package, image, bundle
+- `secrets-management` - where secrets should live, rotation, and leaked-secret response
+- `frontend-security` - XSS, CSP, token storage in the browser
+- `owasp-security` - the standards these findings map to
+- `api-security` - object-level authorization and rate limiting in depth
+- `database-security` - RLS, query safety, index and connection concerns
+- `logging-audit` - what to log when you stop swallowing errors
+- `publish-safety` - the same leaks at the moment they become public: push, package, image, bundle
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, who it is for, limitations
-- [checklist.md](checklist.md) — pre-ship checks, grouped by family
-- [best-practices.md](best-practices.md) — the safe default per family
-- [common-mistakes.md](common-mistakes.md) — the catalogue: shape, cost, fix
-- [troubleshooting.md](troubleshooting.md) — start from the symptom
-- [prompts.md](prompts.md) — prompts that produce a real audit
-- [references/secret-exposure.md](references/secret-exposure.md) — where secrets leak, per stack
-- [references/resource-limits.md](references/resource-limits.md) — limits worth starting from
-- [references/owasp-mapping.md](references/owasp-mapping.md) — family to standard
-- [examples/README.md](examples/README.md) — twelve vulnerable/fixed pairs
+- [README.md](README.md) - purpose, who it is for, limitations
+- [checklist.md](checklist.md) - pre-ship checks, grouped by family
+- [best-practices.md](best-practices.md) - the safe default per family
+- [common-mistakes.md](common-mistakes.md) - the catalogue: shape, cost, fix
+- [troubleshooting.md](troubleshooting.md) - start from the symptom
+- [prompts.md](prompts.md) - prompts that produce a real audit
+- [references/secret-exposure.md](references/secret-exposure.md) - where secrets leak, per stack
+- [references/resource-limits.md](references/resource-limits.md) - limits worth starting from
+- [references/owasp-mapping.md](references/owasp-mapping.md) - family to standard
+- [examples/README.md](examples/README.md) - twelve vulnerable/fixed pairs

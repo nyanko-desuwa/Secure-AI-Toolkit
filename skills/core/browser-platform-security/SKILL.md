@@ -1,6 +1,6 @@
 ---
 name: browser-platform-security
-description: 'Service workers, extensions, and PWAs — update/cache attacks, permission least privilege, web accessible resources, SW scope. Triggers: "service worker", "browser extension", "PWA", "chrome.runtime", "web_accessible_resources", "bảo mật extension", "service worker".'
+description: 'Service workers, extensions, and PWAs - update/cache attacks, permission least privilege, web accessible resources, SW scope. Triggers: "service worker", "browser extension", "PWA", "chrome.runtime", "web_accessible_resources", "bảo mật extension", "service worker".'
 allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 ---
 
@@ -48,16 +48,16 @@ Uses OWASP Top 10 2025, ASVS 5.0 V1/V3/V13/V14, and CWE. See [references/](refer
 
 ## Severity
 
-- Critical — arbitrary webpage triggers privileged extension action or malicious update executes
-- High — broad host permission plus unsafe content-script/message bridge; service worker exposes private data
-- Medium — stale cache, open web-accessible asset, excess permission without demonstrated abuse
-- Low — unused manifest capability or missing defense-in-depth control
+- Critical - arbitrary webpage triggers privileged extension action or malicious update executes
+- High - broad host permission plus unsafe content-script/message bridge; service worker exposes private data
+- Medium - stale cache, open web-accessible asset, excess permission without demonstrated abuse
+- Low - unused manifest capability or missing defense-in-depth control
 
 ## Related Skills
 
-- `frontend-security` — DOM and browser document controls
-- `publish-safety` — extension bundles and store release
-- `api-security` — backend authorization reached by the platform
+- `frontend-security` - DOM and browser document controls
+- `publish-safety` - extension bundles and store release
+- `api-security` - backend authorization reached by the platform
 
 ## Supporting Files
 

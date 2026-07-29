@@ -1,7 +1,7 @@
 # Docker Verification Checklist
 
 Run before returning a Dockerfile, compose file, or CI pipeline. Mark each item pass, fail, or not
-applicable. "Not applicable" needs a one-line reason — an unexplained skip is a gap.
+applicable. "Not applicable" needs a one-line reason - an unexplained skip is a gap.
 
 Only run the sections the change touches. A compose-only change does not need the build section.
 
@@ -21,7 +21,7 @@ If any of these is true, report it first and rank it Critical. The rest of the c
 ## Image build (A03 · ASVS V15 · CIS 4.x)
 
 - [ ] Base image pinned by digest, with the tag kept alongside for readability (CIS 4.2, CWE-1104)
-- [ ] An automated digest bump exists (Renovate, Dependabot) — a pin with no update path is a
+- [ ] An automated digest bump exists (Renovate, Dependabot) - a pin with no update path is a
       patching gap, not a control
 - [ ] `USER` set to a numeric UID above 10000, or 65532 for distroless `:nonroot` (CIS 4.1, CWE-250)
 - [ ] Multi-stage build: no compiler, package manager, `git`, `curl`, or dev dependency in the
@@ -46,7 +46,7 @@ If any of these is true, report it first and rank it Critical. The rest of the c
 - [ ] `--cap-drop=ALL`, then only the capabilities the process demonstrably needs (CIS 5.4)
 - [ ] `NET_RAW` dropped unless the container needs raw sockets
 - [ ] `--read-only` root filesystem, with writable paths as sized `noexec,nosuid` tmpfs (CIS 5.13)
-- [ ] `no-new-privileges` set — per container, and on the daemon if you control it (CIS 5.26, 2.14)
+- [ ] `no-new-privileges` set - per container, and on the daemon if you control it (CIS 5.26, 2.14)
 - [ ] Default seccomp profile not disabled (CIS 5.22)
 - [ ] AppArmor or SELinux left enabled where the host provides it (CIS 5.2, 5.3)
 - [ ] `--memory` and `--memory-swap` set (CIS 5.11)
@@ -69,7 +69,7 @@ If any of these is true, report it first and rank it Critical. The rest of the c
 
 ## Compose (A02 · ASVS V13)
 
-- [ ] No unintended `ports:` — internal services talk over the network, not published ports
+- [ ] No unintended `ports:` - internal services talk over the network, not published ports
 - [ ] `depends_on` uses `condition: service_healthy` where startup order matters
 - [ ] Every service that accepts traffic has a `healthcheck`
 - [ ] Volumes are `:ro` unless the service must write
@@ -92,7 +92,7 @@ If any of these is true, report it first and rank it Critical. The rest of the c
 ## Host and daemon, where you control them (A02 · CIS 1.x, 2.x, 3.x)
 
 - [ ] Rootless mode or `userns-remap` in use, or a written reason it is not (CIS 2.1, 2.9)
-- [ ] `docker` group membership limited — it is equivalent to root (CIS 1.1.2)
+- [ ] `docker` group membership limited - it is equivalent to root (CIS 1.1.2)
 - [ ] `"no-new-privileges": true` in `daemon.json` (CIS 2.14)
 - [ ] No insecure registries configured (CIS 2.5)
 - [ ] Docker Engine version current (CIS 1.2.2)
@@ -101,6 +101,6 @@ If any of these is true, report it first and rank it Critical. The rest of the c
 
 - [ ] Each finding names the layer (image, runtime, host), a standard, and what the attacker gains
 - [ ] Severity reflects attacker gain, not scanner severity
-- [ ] Scanner findings separated into reachable, unreachable, and undetermined — with
+- [ ] Scanner findings separated into reachable, unreachable, and undetermined - with
       "undetermined" said out loud rather than guessed
 - [ ] Anything unverifiable from reading files is stated as unverifiable

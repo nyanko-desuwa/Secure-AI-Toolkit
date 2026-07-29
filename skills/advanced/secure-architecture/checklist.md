@@ -32,7 +32,7 @@ need the privacy section.
 
 ## Least Privilege (A01 · ASVS V8 · CWE-250)
 
-- [ ] Every identity — human, service, CI — is scoped to specific operations and resources
+- [ ] Every identity - human, service, CI - is scoped to specific operations and resources
 - [ ] No wildcard resource in an IAM policy that touches customer data
 - [ ] Database credentials match the access needed: read-only stays read-only, no DDL at runtime
 - [ ] Workloads do not run as root, and do not mount a token they never call the API with
@@ -96,5 +96,5 @@ need the privacy section.
 
 - [ ] Findings state which are architectural and which are implementation
 - [ ] Every finding names its standard and a CWE where one fits
-- [ ] Anything unverifiable — runtime state, deployed config — said plainly
+- [ ] Anything unverifiable - runtime state, deployed config - said plainly
 - [ ] Severity reasoning given, not just a label

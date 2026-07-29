@@ -19,7 +19,7 @@ impossible. Cross-context reads go through a published contract.
 
 Why it holds: the database refuses the query. Nobody has to remember the rule.
 
-## Anemic aggregate — public setters plus a service that validates
+## Anemic aggregate - public setters plus a service that validates
 
 ```typescript
 class Order {
@@ -37,7 +37,7 @@ class OrderService {
 
 The rule "a submitted order has at least one line" lives in `OrderService`. Any other code
 with an `Order` reference can write `order.status = "submitted"`. Admin tooling, an importer,
-a retry job — each is a second write path, and each is written by someone who never read
+a retry job - each is a second write path, and each is written by someone who never read
 `OrderService`.
 
 Fix: private state, behaviour methods, the invariant checked inside the aggregate. See
@@ -73,7 +73,7 @@ that is how the tables join. Changing a delivery note loads several hundred rows
 them. Two users editing unrelated lines collide on the version check.
 
 Fix: size the aggregate by what must be transactionally consistent. Reference other
-aggregates by ID. Reads that need the joined shape get a query model —
+aggregates by ID. Reads that need the joined shape get a query model -
 `skills/architecture/cqrs/`.
 
 Why it holds: contention is proportional to aggregate size. A smaller aggregate has fewer
@@ -87,7 +87,7 @@ loadDocument(user.id, tenant.id); // compiles, wrong order
 ```
 
 This is not hypothetical tidiness. The query runs with a user ID in the tenant slot, the
-filter matches nothing or — worse, where IDs collide across namespaces — matches another
+filter matches nothing or - worse, where IDs collide across namespaces - matches another
 tenant's rows.
 
 Fix: branded or nominal ID types. `TenantId` and `UserId` are not assignable to each other.
@@ -138,7 +138,7 @@ on("InvoiceApproved", async (e) => {
 Whoever can publish to the bus can move money. Any producer bug, any replay of an old
 message, any misconfigured topic becomes a payment. `A01:2025`, `CWE-863`.
 
-Fix: the handler re-checks its own preconditions against its own state — invoice exists, is
+Fix: the handler re-checks its own preconditions against its own state - invoice exists, is
 in an approvable state, approver still holds the role, not already disbursed.
 
 Why it holds: authorization is decided by the component that owns the consequence. The event
@@ -160,7 +160,7 @@ outbox in the same transaction.
 
 Why it holds: commit is the point where the state became real. Ordering the publish after it
 means a consumer can never observe a state the database rolled back. Accept and document
-at-least-once delivery — make handlers idempotent.
+at-least-once delivery - make handlers idempotent.
 
 ## Handler subscribed in a constructor, never removed
 
@@ -228,13 +228,13 @@ object you can construct in a test.
 ## Ubiquitous language treated as a security control
 
 Renaming a class to match business vocabulary reduces misunderstanding. It does not enforce
-anything. Do not put "aligned the ubiquitous language" in a security section — it belongs in
+anything. Do not put "aligned the ubiquitous language" in a security section - it belongs in
 maintainability, and claiming otherwise makes the rest of the report less credible.
 
 ## DDD applied where there is no domain
 
 Six folders, an `IOrderRepository` with one implementation, an `OrderCreatedEvent` with no
-subscriber, and a service that calls a repository that calls an ORM — to save a form. The
+subscriber, and a service that calls a repository that calls an ORM - to save a form. The
 authorization question now takes four files to answer.
 
 Fix: a validated request DTO, one query with the ownership predicate, one table. Add

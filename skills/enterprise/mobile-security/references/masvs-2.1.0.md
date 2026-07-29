@@ -10,7 +10,7 @@ control text below is quoted from the individual control pages on `mas.owasp.org
 MASVS 2.x is not a renumbering of 1.x. The 1.x scheme was `MASVS-Vn.n` with numbered
 requirements and L1/L2/R levels; 2.x replaced it with named groups and dropped the level
 system in favour of profiles. A `MASVS-4.7` citation from an older report has no 2.x
-equivalent — re-map it, do not translate it.
+equivalent - re-map it, do not translate it.
 
 ## Control groups
 
@@ -66,21 +66,21 @@ MASVS-AUTH-1 says the enforcement must be on the remote endpoint and the app's j
 the protocol correctly. That is the sentence to quote when someone proposes a client-side
 authorization check.
 
-MASVS-AUTH-2 is local authentication — biometrics, app PIN. It is a separate control from
+MASVS-AUTH-2 is local authentication - biometrics, app PIN. It is a separate control from
 AUTH-1 precisely because unlocking an app is not the same as authenticating to a server.
 
 MASVS-NETWORK-2 scopes pinning to "remote endpoints under the developer's control". Pinning a
 third-party API you do not control is how apps break when someone else rotates a certificate.
 
 MASVS-RESILIENCE is one group of four controls out of twenty-four. Treat a report that leads
-with RESILIENCE findings and has nothing in STORAGE or AUTH with suspicion — it is usually a
+with RESILIENCE findings and has nothing in STORAGE or AUTH with suspicion - it is usually a
 tool run, not a review.
 
 ## Using MASVS in a review
 
 Cite the group when the finding is general, the specific control when you have checked its
 text. `MASVS-STORAGE-1` is a correct and useful citation. Inventing a sub-numbered requirement
-like `MASVS-STORAGE-1.3` is not — 2.x controls have no sub-numbers.
+like `MASVS-STORAGE-1.3` is not - 2.x controls have no sub-numbers.
 
 ## Testing
 

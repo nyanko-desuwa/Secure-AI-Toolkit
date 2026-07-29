@@ -1,4 +1,4 @@
-# AI Security — Standards Index
+# AI Security - Standards Index
 
 This skill uses the following published standards. The per-standard files are version-pinned
 and carry the check date.

@@ -7,13 +7,13 @@ Six mechanisms, not six names. The point of reading these is that each one defea
 people assume they have: a version pin, a code review, a lockfile, a checksum on the wrong
 file.
 
-## A patch release that adds a dependency — `event-stream`
+## A patch release that adds a dependency - `event-stream`
 
 Source: <https://github.com/advisories/GHSA-mh6f-8j2x-4483> ·
 <https://github.com/advisories/GHSA-52w4-pxx8-4xj4>
 
 `event-stream` 3.3.6 added `flatmap-stream` as a dependency. `flatmap-stream` is malicious in
-its entirety — the advisory marks all versions affected, with no patched version and removal as
+its entirety - the advisory marks all versions affected, with no patched version and removal as
 the only remediation. GitHub assigned no CVE; the identifiers are GHSA-mh6f-8j2x-4483 for
 `event-stream` and CWE-506, CVSS 9.8. Remediation was 3.3.4, the last clean release, or 4.0.0.
 
@@ -28,11 +28,11 @@ machine-generated.
 The advisory does not describe how maintainership changed hands or what the payload targeted.
 Both are widely reported elsewhere; neither is needed for the lesson.
 
-## A compromised publish account — `ua-parser-js`
+## A compromised publish account - `ua-parser-js`
 
 Source: <https://github.com/advisories/GHSA-pjwm-rvh2-c87w>
 
-Three versions — 0.7.29, 0.8.0, 1.0.0 — were published with malicious code on 2021-10-22, fixed
+Three versions - 0.7.29, 0.8.0, 1.0.0 - were published with malicious code on 2021-10-22, fixed
 in 0.7.30, 0.8.1, and 1.0.1. CVE-2021-4229. CWE-506 (Embedded Malicious Code) and CWE-912
 (Hidden Functionality), CVSS 8.8.
 
@@ -46,13 +46,13 @@ secrets and keys should be rotated from a different computer, and removing the p
 
 What it defeats: every control based on reputation. Download counts, maintainer history, and
 repository quality were all excellent minutes before publication. It is also the reason
-[best-practices.md](../best-practices.md#guard-the-update-path) puts a cooldown on adoption —
+[best-practices.md](../best-practices.md#guard-the-update-path) puts a cooldown on adoption -
 this was found and fixed within hours, so a delay of days converts the incident into a non-event.
 
 The advisory does not state which lifecycle script executed or what the payload did. Do not
 assert `preinstall` specifically without the upstream issue in front of you.
 
-## Malicious code shipped only in the release tarball — xz / liblzma
+## Malicious code shipped only in the release tarball - xz / liblzma
 
 Source: <https://nvd.nist.gov/vuln/detail/CVE-2024-3094>
 
@@ -61,7 +61,7 @@ starting with version 5.6.0." During the build, the liblzma build process extrac
 object file from a disguised test file in the source tree, through layered obfuscation, and that
 object patches specific functions in liblzma. The result is a tampered library that any linking
 software loads, "intercepting and modifying the data interaction with this library". Red Hat's
-earlier text named the practical target — liblzma as used by sshd. CVSS 10.0, CWE-506.
+earlier text named the practical target - liblzma as used by sshd. CVSS 10.0, CWE-506.
 
 Mechanism: the git repository was clean. The distributed tarball carried extra `.m4` autotools
 files that were absent from the repository, and those drove the extraction.
@@ -74,9 +74,9 @@ The control that addresses this is reproducibility: build from the repository, o
 the tarball reproduces from tagged source. See
 [best-practices.md](../best-practices.md#build-reproducibly-enough-to-compare). An NVD reference
 added in August 2025 covers the backdoor persisting in container images, so affected artefacts
-can still be in circulation years later — which is what an SBOM keyed by digest is for.
+can still be in circulation years later - which is what an SBOM keyed by digest is for.
 
-## A build tool nobody treated as a dependency — Codecov Bash Uploader
+## A build tool nobody treated as a dependency - Codecov Bash Uploader
 
 Source: <https://about.codecov.io/apr-2021-post-mortem/>
 
@@ -84,7 +84,7 @@ The attacker extracted a Google Cloud Storage HMAC key from an intermediate laye
 public self-hosted Docker image, then used it to modify the Bash Uploader stored in that bucket.
 Modified copies were served directly to users. The payload "extracted git remote origin URLs and
 environment variables from the environment where the maliciously altered Bash Uploader was
-executed" — so every secret exposed to a CI step that also ran the uploader. Delivery reached the
+executed" - so every secret exposed to a CI step that also ran the uploader. Delivery reached the
 GitHub Action, the CircleCI Orb, and the Bitrise Step, all of which wrapped the same script.
 
 Timeline: modification detected 2021-04-01 by a customer who compared the SHA256 published on
@@ -96,33 +96,33 @@ pinned, never hashed, and not in anyone's dependency graph.
 
 What it defeats: your entire dependency policy, because the uploader was not a dependency. It
 was a line in a CI file. It also shows how a secret in a published image layer becomes an
-upstream compromise — deleting a file in a later layer does not remove it.
+upstream compromise - deleting a file in a later layer does not remove it.
 
 Two details worth keeping. The detection method was checksum comparison by one customer, which is
 the control the affected pipelines were not running. And the compromise of a coverage tool
 produced credential theft at scale, because CI hands every step the whole environment.
 
-## An internal name that resolved publicly — dependency confusion
+## An internal name that resolved publicly - dependency confusion
 
 Source: <https://peps.python.org/pep-0708/>
 
 PEP 708, "Extending the Repository API to Mitigate Dependency Confusion Attacks", states the
 root cause plainly: there is no global namespace for package names, each repository defines its
 own, and installers flatten several configured repositories into one namespace by default. The
-PEP cites `torchtriton` — an internal PyTorch package name that was unclaimed on PyPI, where an
+PEP cites `torchtriton` - an internal PyTorch package name that was unclaimed on PyPI, where an
 attacker published a malicious version under the same name.
 
 Mechanism: the attacker needs no access to anything. They publish a name you already use
 privately, at a version higher than yours, on an index your resolver also consults.
 
 Status matters for planning: PEP 708 is Rejected. It spent three years provisionally accepted
-and the conditions for finalisation — implementations in Warehouse, a second index, and an
-opt-in pip implementation — were never met. Its proposed `Tracks` and `Alternate Locations`
+and the conditions for finalisation - implementations in Warehouse, a second index, and an
+opt-in pip implementation - were never met. Its proposed `Tracks` and `Alternate Locations`
 metadata is not arriving. There is no index-priority feature to wait for, which is why
 [best-practices.md](../best-practices.md#resolve-from-one-place-you-control) says to use one
 index.
 
-## A hallucinated name someone registered — slopsquatting
+## A hallucinated name someone registered - slopsquatting
 
 Source: <https://en.wikipedia.org/wiki/Slopsquatting> ·
 <https://arxiv.org/abs/2406.10279>
@@ -138,7 +138,7 @@ averaging 21.7 percent against 5.2 percent for proprietary models, and more than
 hallucinated names observed.
 
 The demonstration predates the name. In 2023 Bar Lanyado found models hallucinating
-`huggingface-cli` — plausible, because that is the command name, while the real install is
+`huggingface-cli` - plausible, because that is the command name, while the real install is
 `pip install -U "huggingface_hub[cli]"`. An empty package registered under the hallucinated name
 drew over 30,000 downloads in three months and reached the README of an Alibaba research
 repository.
@@ -148,14 +148,14 @@ repeatedly, and the name is plausible precisely because it matches a command, a 
 phrase, or another ecosystem's convention. That repetition is what makes registering them
 worthwhile.
 
-What it defeats: the reviewer's eye, exactly as typosquatting does, plus one more layer — an
+What it defeats: the reviewer's eye, exactly as typosquatting does, plus one more layer - an
 agent that runs `pip install` on its own suggestion never shows a human the name at all.
 
 Honest status: as of the source's July 2026 revision, no slopsquatting attack has been reported
 in the wild. The hallucination rate is measured, the registration is trivial, and the exposure
 is real; the incident is not. Say that rather than implying a documented breach.
 
-## The self-propagating case — `Shai-Hulud`
+## The self-propagating case - `Shai-Hulud`
 
 Source: <https://owasp.org/Top10/2025/A03_2025-Software_Supply_Chain_Failures/>
 

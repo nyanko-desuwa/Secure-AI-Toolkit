@@ -67,8 +67,8 @@ query, or row-level security so the engine refuses. See
 
 ### 5. Check the credential
 
-Runtime credentials do not need DDL. Read paths do not need `UPDATE`. Two roles — one for
-migrations, one for runtime — turn a SQL injection from schema destruction into a data read.
+Runtime credentials do not need DDL. Read paths do not need `UPDATE`. Two roles - one for
+migrations, one for runtime - turn a SQL injection from schema destruction into a data read.
 See [references/privilege-model.md](references/privilege-model.md).
 
 ### 6. Verify
@@ -79,32 +79,32 @@ Run [checklist.md](checklist.md). Skip sections that do not apply, with a reason
 
 Rank by what the flaw reaches, not by its name.
 
-- **Critical** — injection reaching an interpreter with a broad credential, cross-tenant read
+- **Critical** - injection reaching an interpreter with a broad credential, cross-tenant read
   or write, cleartext secrets in a backup or replica
-- **High** — injection behind auth, tenant filter missing on one handler, app credential with
+- **High** - injection behind auth, tenant filter missing on one handler, app credential with
   DDL or superuser, unverified TLS to the database over a shared network
-- **Medium** — deterministic encryption leaking equality on a low-cardinality column, N+1 on
+- **Medium** - deterministic encryption leaking equality on a low-cardinality column, N+1 on
   an unauthenticated endpoint, audit gap on sensitive reads
-- **Low** — defence in depth missing where another layer still holds
+- **Low** - defence in depth missing where another layer still holds
 
 An `ORDER BY` interpolation on an admin-only endpoint is not critical. Say why.
 
 ## Related Skills
 
-- `owasp` — the standards this skill maps to
-- `secrets-management` — where the connection string lives and how it rotates
-- `logging-audit` — what audit records go to, and who watches them
-- `api-security` — the layer above, where the tenant is established
-- `redis-security` — Redis/Valkey ACLs, transport, persistence, and command/key authorization
+- `owasp` - the standards this skill maps to
+- `secrets-management` - where the connection string lives and how it rotates
+- `logging-audit` - what audit records go to, and who watches them
+- `api-security` - the layer above, where the tenant is established
+- `redis-security` - Redis/Valkey ACLs, transport, persistence, and command/key authorization
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, standards table, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns, with vulnerable/fixed pairs
-- [common-mistakes.md](common-mistakes.md) — what goes wrong and why the fix works
-- [troubleshooting.md](troubleshooting.md) — when the guidance cannot be applied
-- [prompts.md](prompts.md) — prompts that produce findings
-- [references/injection-standards.md](references/injection-standards.md) — A05, ASVS V1, CWEs
-- [references/privilege-model.md](references/privilege-model.md) — roles, grants, RLS
-- [examples/README.md](examples/README.md) — eight vulnerable/fixed pairs
+- [README.md](README.md) - purpose, standards table, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns, with vulnerable/fixed pairs
+- [common-mistakes.md](common-mistakes.md) - what goes wrong and why the fix works
+- [troubleshooting.md](troubleshooting.md) - when the guidance cannot be applied
+- [prompts.md](prompts.md) - prompts that produce findings
+- [references/injection-standards.md](references/injection-standards.md) - A05, ASVS V1, CWEs
+- [references/privilege-model.md](references/privilege-model.md) - roles, grants, RLS
+- [examples/README.md](examples/README.md) - eight vulnerable/fixed pairs

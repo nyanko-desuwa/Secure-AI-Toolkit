@@ -1,7 +1,7 @@
 # Realtime Verification Checklist
 
 Run before returning WebSocket, SSE, or WebRTC signaling code. Mark each item pass, fail, or not
-applicable. "Not applicable" needs a one-line reason — an unexplained skip reads the same as an
+applicable. "Not applicable" needs a one-line reason - an unexplained skip reads the same as an
 oversight.
 
 Only run the sections the change touches. An SSE-only change does not need the WebRTC section.
@@ -23,7 +23,7 @@ Only run the sections the change touches. An SSE-only change does not need the W
 - [ ] Every message type has an explicit allowlist of roles or permissions
 - [ ] Subscribe / join / room enter checks object-level access for that channel
 - [ ] Send / publish checks whether the actor may write that channel or target user
-- [ ] Presence, typing, and "who is online" events are scoped — not a global directory leak
+- [ ] Presence, typing, and "who is online" events are scoped - not a global directory leak
 - [ ] Admin-only message types cannot be invoked by a normal member of the same socket
 - [ ] Denial returns a generic error frame; does not confirm that a private channel exists when
       existence is sensitive
@@ -96,7 +96,7 @@ Only run the sections the change touches. An SSE-only change does not need the W
 ## Socket.IO / Library-Specific (when used)
 
 - [ ] Namespaces are authorized independently
-- [ ] `socket.join(room)` is only called server-side after authz — never from a raw client room
+- [ ] `socket.join(room)` is only called server-side after authz - never from a raw client room
       name without a check
 - [ ] `socket.handshake` auth runs before event handlers are registered
 - [ ] Admin namespaces are not reachable with a user-scoped token

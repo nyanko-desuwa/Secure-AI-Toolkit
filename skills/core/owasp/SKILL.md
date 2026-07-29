@@ -75,27 +75,27 @@ without an exploitation path is a code smell, not a vulnerability. Say which it 
 
 Rank by exploitability and blast radius, not by category name.
 
-- **Critical** — unauthenticated access to other users' data or code execution
-- **High** — authenticated privilege escalation, injection behind auth
-- **Medium** — needs an unlikely precondition, or leaks non-sensitive detail
-- **Low** — defence in depth missing, no direct path
+- **Critical** - unauthenticated access to other users' data or code execution
+- **High** - authenticated privilege escalation, injection behind auth
+- **Medium** - needs an unlikely precondition, or leaks non-sensitive detail
+- **Low** - defence in depth missing, no direct path
 
 State your reasoning. "SQL injection, therefore critical" is wrong if the endpoint is
 admin-only and the parameter is an integer cast.
 
 ## Related Skills
 
-- `secure-code-review` — reviewing existing code in depth
-- `api-security` — API-specific controls
-- `authentication` — auth flows and session handling
+- `secure-code-review` - reviewing existing code in depth
+- `api-security` - API-specific controls
+- `authentication` - auth flows and session handling
 
 ## Supporting Files
 
-- [README.md](README.md) — purpose, configuration, limitations
-- [checklist.md](checklist.md) — pre-return verification
-- [best-practices.md](best-practices.md) — patterns that hold up
-- [common-mistakes.md](common-mistakes.md) — what goes wrong, with fixes
-- [troubleshooting.md](troubleshooting.md) — when the guidance conflicts
-- [prompts.md](prompts.md) — prompt examples
-- [references/](references/) — standard summaries with source links
-- [examples/](examples/) — vulnerable and fixed code side by side
+- [README.md](README.md) - purpose, configuration, limitations
+- [checklist.md](checklist.md) - pre-return verification
+- [best-practices.md](best-practices.md) - patterns that hold up
+- [common-mistakes.md](common-mistakes.md) - what goes wrong, with fixes
+- [troubleshooting.md](troubleshooting.md) - when the guidance conflicts
+- [prompts.md](prompts.md) - prompt examples
+- [references/](references/) - standard summaries with source links
+- [examples/](examples/) - vulnerable and fixed code side by side

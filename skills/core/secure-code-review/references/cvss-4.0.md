@@ -1,4 +1,4 @@
-# CVSS v4.0 — as a communication tool
+# CVSS v4.0 - as a communication tool
 
 Common Vulnerability Scoring System version 4.0. Specification document v1.2, dated
 2024-06-18. Initial v4.0 publication 2023-11-01, revised v1.1 on 2023-11-09. Verified against
@@ -21,7 +21,7 @@ a CVSS vector if the audience needs one. Not the other way round.
 
 All eleven Base metrics are mandatory in a vector string, in this order.
 
-Exploitability — the ease and technical means of exploitation:
+Exploitability - the ease and technical means of exploitation:
 
 | Metric | Code | Values |
 |---|---|---|
@@ -31,7 +31,7 @@ Exploitability — the ease and technical means of exploitation:
 | Privileges Required | PR | N (none), L (low), H (high) |
 | User Interaction | UI | N (none), P (passive), A (active) |
 
-Impact — split between the vulnerable system and any subsequent system, each H, L, or N:
+Impact - split between the vulnerable system and any subsequent system, each H, L, or N:
 
 | Metric | Code |
 |---|---|
@@ -42,9 +42,9 @@ Two changes from v3.1 that matter when reviewing code. `AT` is new: it captures 
 outside the attacker's control, such as a race that must land or a specific deployment
 configuration. And the old single `Scope` flag has been replaced by the Vulnerable/Subsequent
 impact split, which is a better fit for findings where a service is the pivot rather than the
-target — SSRF reaching a metadata endpoint scores impact on the subsequent system.
+target - SSRF reaching a metadata endpoint scores impact on the subsequent system.
 
-## Nomenclature — say which groups you scored
+## Nomenclature - say which groups you scored
 
 | Label | Metric groups used |
 |---|---|
@@ -59,11 +59,11 @@ maturity and environmental context were considered.
 
 In v4.0 all three groups always feed the calculation. Unspecified Threat and Environmental
 metrics fall back to Not Defined, which assumes the worst case. So a Base-only score is not
-neutral — it is the pessimistic end of the range, which is why NVD-style CVSS-B numbers often
+neutral - it is the pessimistic end of the range, which is why NVD-style CVSS-B numbers often
 read higher than a defender's own assessment.
 
-Threat holds one metric, Exploit Maturity (E). Supplemental metrics — Safety, Automatable,
-Provider Urgency, Recovery, Value Density, Vulnerability Response Effort — never change the
+Threat holds one metric, Exploit Maturity (E). Supplemental metrics - Safety, Automatable,
+Provider Urgency, Recovery, Value Density, Vulnerability Response Effort - never change the
 score; they carry information for the consumer to act on.
 
 ## Vectors for common review findings

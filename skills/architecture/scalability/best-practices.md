@@ -3,7 +3,7 @@
 The failure comes first. Every fixed pattern states the boundary it protects, its runtime cost, a
 real initial limit, what to measure, and when not to use it. Example limits are hypotheses to verify.
 
-## S1 — Bound Concurrency Before Creating Work
+## S1 - Bound Concurrency Before Creating Work
 
 `A06:2025` · `API4:2023` · ASVS V15 · `CWE-400`, `CWE-770`
 
@@ -52,7 +52,7 @@ Measure in-flight calls, p95 upstream service time, wait time, and timeouts. Sta
 dependency budget supports `16 × maximum replicas`. Do not use fan-out at all when a bulk endpoint or
 one database query can return the same data.
 
-## S2 — Make Backpressure an API Outcome
+## S2 - Make Backpressure an API Outcome
 
 `A06:2025` · `API4:2023` · ASVS V4/V15/V16 · `CWE-400`, `CWE-770`
 
@@ -96,7 +96,7 @@ large; measure actual p99 job bytes and choose a byte-aware queue when variation
 age of oldest job, rejections, and process memory. Do not queue synchronous work whose result is
 required before success; reject or process within the request deadline.
 
-## S3/S4 — Cache Only Authorized, Canonical Representations
+## S3/S4 - Cache Only Authorized, Canonical Representations
 
 `A01:2025` · `A06:2025` · ASVS V8/V13/V15 · `CWE-401`, `CWE-770`
 
@@ -141,7 +141,7 @@ Runtime cost: lower hit rate and more key cardinality, plus serialization to mea
 Measure hit rate by view, bytes, eviction, fill errors, and two-tenant negative tests. Do not use a
 shared cache for rapidly revoked entitlements or secrets; a 60-second TTL is a 60-second stale window.
 
-## S5 — Enforce One Rate Allowance Across Replicas
+## S5 - Enforce One Rate Allowance Across Replicas
 
 `A02:2025` · `A06:2025` · `API4:2023` · ASVS V4/V13/V15
 
@@ -175,7 +175,7 @@ limits where semantics allow; keep a small local concurrency ceiling as fail-saf
 latency, 429s, fallback decisions, and aggregate requests accepted across replicas. Do not use a
 distributed limiter for fixed-volume batch jobs; bound local workers instead.
 
-## S6 — Make Query Count Independent of Row Count
+## S6 - Make Query Count Independent of Row Count
 
 `A06:2025` · `API4:2023` · ASVS V4/V15 · `CWE-400`, `CWE-772`
 
@@ -213,7 +213,7 @@ round trip. Pool formula: with a 300-connection database limit, 60 reserved, and
 set at most `(300 - 60) / 12 = 20` connections per replica, then load-test acquisition time. Do not
 eager-load large collections not used by the response.
 
-## S7 — Put a Dependency Budget Ahead of Autoscaling
+## S7 - Put a Dependency Budget Ahead of Autoscaling
 
 `A02:2025` · `A06:2025` · `A10:2025` · ASVS V13/V15/V16 · `CWE-400`
 
@@ -244,7 +244,7 @@ is healthy. Measure total connections, pool wait, completion rate, circuit state
 DB latency. Do not autoscale a service whose bottleneck is a saturated singleton; shed load or raise
 that dependency's capacity first.
 
-## S8 — Bound Retries and Cache Fills
+## S8 - Bound Retries and Cache Fills
 
 `A06:2025` · `A10:2025` · ASVS V15/V16 · `CWE-400`, `CWE-772`
 

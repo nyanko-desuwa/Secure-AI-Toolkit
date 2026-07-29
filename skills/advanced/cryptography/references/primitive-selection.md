@@ -28,7 +28,7 @@ Legacy (L, compatibility only), or Disallowed (D, considered broken). Verified 2
 Minimum strength: ASVS 5.0.0 V11 requires "all cryptographic primitives utilize a minimum of
 128-bits of security", notes that "RSA requires a 3072-bit key to achieve 128 bits of security",
 and sets collision-resistant hash output at "at least 256 bits". AES-128 is Legacy in Appendix C,
-not disallowed — prefer AES-256 for new work.
+not disallowed - prefer AES-256 for new work.
 
 ## Signature or MAC
 
@@ -71,7 +71,7 @@ where code fails.
 
 Random 96-bit nonces are safe by the birthday bound only while the message count per key stays well
 below 2^32. Either bound the count and rotate the key, or use a 192-bit nonce. Never mix a counter
-and a random source under one key — that collides by construction.
+and a random source under one key - that collides by construction.
 
 ASVS 5.0.0 V11.3 states a single-use value must be "not used for more than one encryption key and
 data-element pair" and that "the method of generation must be appropriate for the algorithm being
@@ -81,7 +81,7 @@ used".
 
 ASVS 5.0.0 V11.5 requires values to be "generated using a cryptographically secure pseudo-random
 number generator (CSPRNG) and have at least 128 bits of entropy", and adds: "Note that UUIDs do not
-respect this condition." A UUIDv4 carries 122 random bits — fine for a correlation ID, short of the
+respect this condition." A UUIDv4 carries 122 random bits - fine for a correlation ID, short of the
 bar for a password reset token. UUIDv1 and UUIDv7 embed a timestamp and are guessable.
 
 Appendix C approves `/dev/random`, `/dev/urandom`, `getentropy()`, and the SP 800-90A DRBGs
@@ -106,11 +106,11 @@ triggers.
 
 ## Sources
 
-- OWASP ASVS 5.0.0, V11 Cryptography —
+- OWASP ASVS 5.0.0, V11 Cryptography -
   <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x20-V11-Cryptography.md> (checked 2026-07-28)
-- OWASP ASVS 5.0.0, Appendix C Cryptography —
+- OWASP ASVS 5.0.0, Appendix C Cryptography -
   <https://github.com/OWASP/ASVS/blob/master/5.0/en/0x92-Appendix-C_Cryptography.md> (checked
   2026-07-28)
-- RFC 5869 (HKDF) — <https://www.rfc-editor.org/rfc/rfc5869.html>
-- OWASP Cryptographic Storage Cheat Sheet —
+- RFC 5869 (HKDF) - <https://www.rfc-editor.org/rfc/rfc5869.html>
+- OWASP Cryptographic Storage Cheat Sheet -
   <https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html>

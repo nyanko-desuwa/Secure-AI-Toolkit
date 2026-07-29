@@ -55,7 +55,7 @@ severity, and who leads. Two minutes of writing beats re-deriving it in a thread
 `RS.AN-06` · `RS.AN-07` · RFC 3227 order of volatility
 
 Volatile state dies in a predictable order: CPU and memory, network state, running processes,
-then disk. Containment changes all four. Capture first, then contain — unless the attacker is
+then disk. Containment changes all four. Capture first, then contain - unless the attacker is
 actively destroying data, which is the one case where containment wins and you say so in the
 decision log.
 
@@ -115,7 +115,7 @@ log "collector done"
 
 Why it works: output lands off-host so the collection does not overwrite unallocated space on
 the volume you are investigating, order follows volatility, and the failure to capture memory
-is recorded instead of hidden. `set -e` is omitted on purpose — one missing tool must not stop
+is recorded instead of hidden. `set -e` is omitted on purpose - one missing tool must not stop
 the rest of the collection.
 
 Cloud and container equivalents, before any restart or delete:
@@ -280,8 +280,8 @@ delivering password resets long after the password is rotated, and a changed web
 keeps receiving payloads after every credential in the account is new.
 
 Rotation itself, including who owns which secret and how a rotation is verified, is
-`skills/core/secrets-management/`. Repeated-guessing entry paths — the password spray or OTP
-brute force that started this — are `skills/core/brute-force-defense/`.
+`skills/core/secrets-management/`. Repeated-guessing entry paths - the password spray or OTP
+brute force that started this - are `skills/core/brute-force-defense/`.
 
 ### A secret in git history
 
@@ -301,7 +301,7 @@ git grep -I 'AKIAEXAMPLE' $(git rev-list --all) -- . | head
 ```
 
 Treat the exposure window as starting at the first commit that contained it and ending at
-rotation — not at the removal commit. If the repository was ever public, or has forks, assume
+rotation - not at the removal commit. If the repository was ever public, or has forks, assume
 disclosure and scope accordingly.
 
 ## Blast radius assessment
@@ -341,7 +341,7 @@ Two habits that change the answer:
 
 - Search backwards past the earliest hit. The first thing you find is the first thing that was
   logged, which is rarely the first thing that happened.
-- Correlate two independent sources before writing "confirmed" — application log plus provider
+- Correlate two independent sources before writing "confirmed" - application log plus provider
   audit trail, or auth log plus network flow.
 
 Superficial magnitude estimation is called out in r3 as letting the incident continue on other
@@ -355,7 +355,7 @@ Four things per update, nothing else: what we know, what we do not know, what we
 the next update lands.
 
 ```markdown
-INC-2026-014 update 3 — 2026-07-28T16:00Z
+INC-2026-014 update 3 - 2026-07-28T16:00Z
 
 Known:    One contractor PAT was valid and used from 203.0.113.10 between 13:47Z and 14:15Z.
           40 private repositories were cloned. Token revoked 14:15Z, verified 14:18Z.
@@ -380,7 +380,7 @@ On notification obligations, plainly: statutory breach-notification deadlines an
 vary by jurisdiction, sector, and contract, and they change. This skill does not give legal
 advice and does not list deadlines. Bring legal in at declaration when personal data is
 plausibly in scope, and let them own the clock. Contractual and insurance notification windows
-are often tighter than statutory ones and are commonly missed for that reason — the runbook
+are often tighter than statutory ones and are commonly missed for that reason - the runbook
 should carry them because someone verified them, not because a model recalled them.
 
 ## Recovery validation
@@ -445,7 +445,7 @@ holes.
     action: "Confirm with the actor out of band. Do not revoke before capturing recent activity."
 ```
 
-Anything found in a log that should not have been there — a token, a password, a session ID —
+Anything found in a log that should not have been there - a token, a password, a session ID -
 is its own incident: rotate, then remediate the log line (CWE-532). Do not treat "the secret was
 only in our logs" as containment.
 

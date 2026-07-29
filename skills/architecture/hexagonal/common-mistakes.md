@@ -12,7 +12,7 @@ router.post("/documents/:id/publish", requireOwner, async (req, res) => {
   res.sendStatus(204);
 });
 
-// adapters/queue/retry-consumer.ts — added later
+// adapters/queue/retry-consumer.ts - added later
 export async function onMessage(m: Message) {
   await publish(m.documentId);           // no owner, no tenant, no audit subject
 }
@@ -61,7 +61,7 @@ export async function publish(documentId: string) {
 ```
 
 Two failures in one line. The core now imports an adapter, and the value is empty on any path
-that is not an HTTP request — so a cron run either crashes or, worse, gets a partially filled
+that is not an HTTP request - so a cron run either crashes or, worse, gets a partially filled
 object and passes the check. `A01:2025`, `CWE-488`, `CWE-653`.
 
 Fix: the actor is a parameter.
@@ -118,7 +118,7 @@ for (const d of docs) {
 ```
 
 The ports are correct in isolation. Together they are 1 + N round trips, and the port abstraction
-is precisely why nobody notices — the call site looks like a property access. `API4:2023`.
+is precisely why nobody notices - the call site looks like a property access. `API4:2023`.
 
 Fix: a port method that states the shape the core actually needs, `listForTenantWithAuthors`, or a
 batch `byIds` call. Keep the tenant argument on both. Assert the query count in a test; a count
@@ -138,7 +138,7 @@ Four interfaces, four implementations, four mocks, and not one of them is a boun
 opens eight files to follow one call. No security property was gained, and the navigation cost is
 paid on every future change.
 
-Fix: delete the interface unless it satisfies one of these — a second implementation exists or is
+Fix: delete the interface unless it satisfies one of these - a second implementation exists or is
 scheduled, the dependency cannot run in a test, the signature pins a security predicate such as
 tenant plus actor, or the core would otherwise have to import infrastructure to compile. A port
 that exists only to hold a check is legitimate; say so in a comment so the next person does not
@@ -169,7 +169,7 @@ result set is retained forever. `CWE-772`.
 Fix: register anything that touches request state at request scope, or keep the state out of
 fields and pass it as a parameter. For a singleton worker, open one scope per message and dispose
 it. Turn on the container's captive-dependency validation in CI. Residual gap: validation sees
-constructor injection, not a factory delegate or a static — draw those by hand.
+constructor injection, not a factory delegate or a static - draw those by hand.
 
 ## A client is created inside the adapter method
 
@@ -255,7 +255,7 @@ Each `start` adds a handler that captures the service and its whole dependency g
 hot reloads, and per-request registration all multiply handlers, so one event triggers N calls and
 the retained graph grows linearly. `CWE-401`, `CWE-400`.
 
-Fix: the adapter returns its own teardown and the composition root owns it — subscribe in `start`,
+Fix: the adapter returns its own teardown and the composition root owns it - subscribe in `start`,
 unsubscribe in `stop`, drain in-flight work after unsubscribing, and wire `stop` to SIGTERM. Why
 it works: registration and removal are the same object's responsibility, so the pair is reviewable
 in one file.
@@ -340,7 +340,7 @@ src/
 The hexagon is a directory listing. Nothing is enforced, so the second adapter will bypass
 whatever the first one did. `A06:2025`, `CWE-653`.
 
-Fix: enforce direction mechanically — project references, `import-linter` contracts, ESLint
+Fix: enforce direction mechanically - project references, `import-linter` contracts, ESLint
 `no-restricted-imports`, Go package boundaries, or a build target that compiles the core with no
 framework on the path. Then add one test that fails when a forbidden import returns. A diagram
 without an enforcement mechanism is a wish.

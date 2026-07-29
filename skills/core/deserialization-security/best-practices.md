@@ -1,6 +1,6 @@
 # Deserialization Best Practices
 
-## Replace pickle with data — CWE-502
+## Replace pickle with data - CWE-502
 
 ```python
 # Vulnerable: input bytes can carry Python object behavior
@@ -12,7 +12,7 @@ value = pickle.loads(request.body)
 value = InvoiceInput.model_validate_json(request.body)
 ```
 
-## Do not deserialize Java objects from a socket — CWE-502
+## Do not deserialize Java objects from a socket - CWE-502
 
 ```java
 // Vulnerable: ObjectInputStream reads untrusted object graph
@@ -24,7 +24,7 @@ Object value = new ObjectInputStream(socket.getInputStream()).readObject();
 Invoice value = jsonMapper.readValue(boundedBody, Invoice.class);
 ```
 
-## Use safe YAML loading — CWE-502
+## Use safe YAML loading - CWE-502
 
 ```python
 # Vulnerable: YAML loader may construct tagged objects
@@ -36,7 +36,7 @@ data = yaml.load(text, Loader=yaml.Loader)
 data = yaml.safe_load(text)
 ```
 
-## Disable XML external entities — CWE-611
+## Disable XML external entities - CWE-611
 
 ```python
 # Vulnerable: default XML parser configuration processes untrusted document
@@ -49,7 +49,7 @@ parser = etree.XMLParser(resolve_entities=False, no_network=True)
 root = etree.fromstring(xml, parser)
 ```
 
-## Retire BinaryFormatter — CWE-502
+## Retire BinaryFormatter - CWE-502
 
 ```text
 Vulnerable: BinaryFormatter deserializes a client-provided blob.

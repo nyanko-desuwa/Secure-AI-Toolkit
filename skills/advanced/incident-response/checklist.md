@@ -1,7 +1,7 @@
 # Incident Response Checklist
 
 Run the phase you are in. Mark each item pass, fail, or not applicable, and give a one-line
-reason for every "not applicable" — an unexplained skip during an incident is indistinguishable
+reason for every "not applicable" - an unexplained skip during an incident is indistinguishable
 from a step nobody did.
 
 Order matters here in a way it does not in a code review checklist. The preservation section
@@ -36,7 +36,7 @@ containment already happened, jump to `troubleshooting.md#containment-already-ha
 - [ ] Credential revocation covers every artefact derived from it: sessions, refresh tokens, API keys, PATs, app passwords, device tokens
 - [ ] Revocation verified by attempting to use the credential, not by trusting the console
 - [ ] Network isolation preserves the host's running state rather than powering it off
-- [ ] Blast radius of the containment action itself assessed — who else loses access
+- [ ] Blast radius of the containment action itself assessed - who else loses access
 - [ ] Decision to observe rather than contain, if taken, is time-boxed and approved by legal (RS.MA-05)
 - [ ] Attacker-controlled channels not used to coordinate the response
 - [ ] Containment actions logged in the working record with UTC times, so the timeline can separate attacker activity from ours
@@ -63,7 +63,7 @@ containment already happened, jump to `troubleshooting.md#containment-already-ha
 
 ## Recovery (RS.MA-05 · RC.RP-02 · RC.RP-03 · RC.RP-05 · RC.RP-06)
 
-- [ ] Recovery criteria met before recovery starts — eradication done, not in progress
+- [ ] Recovery criteria met before recovery starts - eradication done, not in progress
 - [ ] Backup integrity verified, and the backup predates the earliest evidence of access
 - [ ] Backup checked for reachability from the compromised identity before it is trusted
 - [ ] Restored assets scanned for indicators before they take production traffic

@@ -34,7 +34,7 @@ RUN pip install -r requirements.txt        # permission denied on site-packages
 COPY . /app                                # copied as root anyway
 ```
 
-`COPY` ignores `USER` — it copies as root unless told otherwise. Meanwhile `RUN` after `USER` loses
+`COPY` ignores `USER` - it copies as root unless told otherwise. Meanwhile `RUN` after `USER` loses
 the ability to install anything system-wide, so people revert the `USER` line and forget to put it
 back.
 
@@ -52,7 +52,7 @@ services:
 ```
 
 The image is correct and the container runs as root. This is how a hardened image ends up running as
-root in production — someone hit an `EACCES` on a mounted volume and took the shortest path.
+root in production - someone hit an `EACCES` on a mounted volume and took the shortest path.
 
 Fix: `chown` the volume on the host or in an init container to match the container UID, and keep
 `user: "10001:10001"` in compose so the intent is stated at both layers. Why it works: the ownership
@@ -71,10 +71,10 @@ public endpoint, may be worse than everything above it.
 Fix: triage in this order.
 
 1. Is the vulnerable package reachable from your process at all, or is it a binary nothing executes?
-2. Is there a fix available? `--ignore-unfixed` / `--only-fixed` for the gate — no patch means no
+2. Is there a fix available? `--ignore-unfixed` / `--only-fixed` for the gate - no patch means no
    action, so blocking on it just trains people to bypass the gate.
 3. Does the vulnerable code path take untrusted input in your usage?
-4. Is there a mitigating control already — read-only filesystem, dropped capabilities, no network
+4. Is there a mitigating control already - read-only filesystem, dropped capabilities, no network
    egress?
 
 Then gate on fixable CRITICAL and HIGH only, report everything, and re-triage on a schedule.
@@ -131,8 +131,8 @@ If nothing narrower works, the workload probably wants a VM. Say that instead of
 Added to reach a service on the host, or because port mapping was fiddly.
 
 The container now has no network namespace. It sees every host interface, `-p` and `EXPOSE` stop
-applying, and any service bound to `127.0.0.1` on the host — often a database or an admin port that is
-unauthenticated precisely because it is loopback-only — is reachable from the container.
+applying, and any service bound to `127.0.0.1` on the host - often a database or an admin port that is
+unauthenticated precisely because it is loopback-only - is reachable from the container.
 
 Fix: use a user-defined bridge network and, on Linux, `host.docker.internal` via
 `--add-host=host.docker.internal:host-gateway` when the host really must be reached. Why it works:
@@ -147,7 +147,7 @@ On Linux, Docker inserts DNAT rules into its own `DOCKER` iptables chain, traver
 `ufw`/`firewalld` INPUT rules. The firewall is not consulted for the published port. People find this
 out from a scan report.
 
-Fix: bind to loopback — `-p 127.0.0.1:5432:5432` — and reach it through an SSH tunnel or a reverse
+Fix: bind to loopback - `-p 127.0.0.1:5432:5432` - and reach it through an SSH tunnel or a reverse
 proxy. For containers that only talk to each other, publish nothing and use a shared user-defined
 network. Why it works: the DNAT rule now targets `127.0.0.1`, so there is no path from an external
 interface regardless of firewall configuration.
@@ -161,7 +161,7 @@ services:
 ```
 
 `expose` is documentation. It publishes nothing to the host, which is fine, but it also restricts
-nothing between containers — every container on the same network can reach every port on `db`,
+nothing between containers - every container on the same network can reach every port on `db`,
 `expose` or not.
 
 Fix: separate networks. Put the database on an internal network the public-facing service joins and
@@ -223,7 +223,7 @@ during boot and the team disables the healthcheck entirely.
 ```
 
 `ARG` values are recorded in image metadata and visible in `docker history`. The CI log masking gives
-false comfort — the secret is masked in the log and present in the artefact.
+false comfort - the secret is masked in the log and present in the artefact.
 
 Fix: `--secret id=aws,env=AWS_SECRET_ACCESS_KEY` with a matching `--mount=type=secret` in the
 Dockerfile. Why it works: BuildKit keeps the value out of layers, metadata, and the build cache, so
@@ -237,7 +237,7 @@ volumes:
 ```
 
 Files the container creates are owned by host UID 0. If the mounted path is anywhere the host
-executes from — a web root, a scripts directory, a systemd unit path — a compromised container writes
+executes from - a web root, a scripts directory, a systemd unit path - a compromised container writes
 files the host will run as root.
 
 Fix: run as a non-root UID, `chown` the host directory to that UID, and mount `:ro` where the
@@ -286,7 +286,7 @@ Fix: pin both flags to your workflow identity and issuer. Why it works: verifica
 
 The monitoring agent needs container names. Someone mounts the socket `:ro` and moves on.
 
-`:ro` on a socket restricts nothing meaningful — the API is request/response over that socket, and
+`:ro` on a socket restricts nothing meaningful - the API is request/response over that socket, and
 `POST /containers/create` works fine. Any RCE in the monitoring agent is host root.
 
 Fix: a socket proxy with an explicit endpoint allowlist, or an agent that reads from the container
@@ -323,7 +323,7 @@ cached `latest` pulls nothing while a different host pulls something newer. Roll
 because the previous `latest` is unnamed.
 
 Fix: deploy by digest, or by an immutable tag your CI never reuses (the commit SHA). Configure the
-registry to reject tag overwrites where it supports that — ECR tag immutability, GCR/Artifact
+registry to reject tag overwrites where it supports that - ECR tag immutability, GCR/Artifact
 Registry equivalents. Why it works: the running artefact becomes identifiable, and rollback is
 pulling a digest you still have.
 

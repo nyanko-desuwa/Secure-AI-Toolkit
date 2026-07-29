@@ -41,7 +41,7 @@ def lines(items: list[dict[str, Any]]) -> str:
     if not items:
         return "- None"
     return "\n".join(
-        "- `{url}` — {state}: {detail} (sources: {sources})".format(
+        "- `{url}` - {state}: {detail} (sources: {sources})".format(
             url=item["url"],
             state=item["state"],
             detail=item.get("status", item.get("detail", "unknown")),

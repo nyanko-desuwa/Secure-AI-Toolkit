@@ -157,7 +157,7 @@ Why this works: lookup and limiting use the same canonical form, so `User@Exampl
 `user@example.com` spend the same budget. Unicode policy is product-specific. NFKC can collapse
 characters a project intentionally distinguishes, and lowercasing an arbitrary email local part
 is not universally valid. The invariant is one canonical identity function shared by account
-lookup, uniqueness, audit, and limiting — not this exact function copied blindly.
+lookup, uniqueness, audit, and limiting - not this exact function copied blindly.
 
 ## Graduated friction, not binary lockout
 

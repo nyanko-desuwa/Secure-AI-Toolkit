@@ -1,6 +1,6 @@
 # Review Verification Checklist
 
-Run this before returning a review. It checks the review, not the code — the code checklist
+Run this before returning a review. It checks the review, not the code - the code checklist
 lives in `core/owasp/checklist.md`.
 
 Mark each item pass, fail, or not applicable. "Not applicable" needs a one-line reason.
@@ -17,7 +17,7 @@ Mark each item pass, fail, or not applicable. "Not applicable" needs a one-line 
 
 - [ ] Every request entry point in scope is listed: routes, consumers, cron, webhooks
 - [ ] Where actor identity is established is identified
-- [ ] Where each authorization decision is made is identified — route, service, or query
+- [ ] Where each authorization decision is made is identified - route, service, or query
 - [ ] Egress points listed: outbound HTTP, DB writes, file writes, shell, logs
 - [ ] Source → sink pairs written down before findings were drafted
 
