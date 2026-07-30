@@ -4,6 +4,8 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+## [1.2.2] - 2026-07-30
+
 ### Added
 
 - The `core/ai-security` skill now cites OWASP AISVS 1.0 (AI Security Verification Standard). A new
@@ -245,7 +247,8 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
   from A03 to A05. Guidance written against 2021 category IDs will mis-map.
 - No breaking changes, no migration steps: this is the initial content.
 
-[Unreleased]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.2.2...HEAD
+[1.2.2]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.0.1...v1.1.0
