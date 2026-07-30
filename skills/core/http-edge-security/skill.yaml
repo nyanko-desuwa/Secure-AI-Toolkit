@@ -8,7 +8,7 @@ category: core
 path: skills/core/http-edge-security
 status: Ready
 priority: 100
-estimated_tokens: 2232
+estimated_tokens: 2306
 owns: []
 requires:
   - owasp

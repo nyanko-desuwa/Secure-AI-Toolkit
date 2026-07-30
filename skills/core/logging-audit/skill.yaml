@@ -8,7 +8,7 @@ category: core
 path: skills/core/logging-audit
 status: Ready
 priority: 100
-estimated_tokens: 2966
+estimated_tokens: 3181
 owns: []
 requires:
   - owasp

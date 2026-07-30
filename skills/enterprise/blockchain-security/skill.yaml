@@ -8,7 +8,7 @@ category: enterprise
 path: skills/enterprise/blockchain-security
 status: Ready
 priority: 50
-estimated_tokens: 3545
+estimated_tokens: 3795
 owns: []
 requires:
   - owasp

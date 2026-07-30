@@ -8,7 +8,7 @@ category: architecture
 path: skills/architecture/modular-monolith
 status: Ready
 priority: 40
-estimated_tokens: 2265
+estimated_tokens: 2379
 owns: []
 requires: []
 suggests:

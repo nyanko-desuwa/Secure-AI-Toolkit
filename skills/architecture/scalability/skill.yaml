@@ -8,7 +8,7 @@ category: architecture
 path: skills/architecture/scalability
 status: Ready
 priority: 40
-estimated_tokens: 3904
+estimated_tokens: 4144
 owns: []
 requires:
   - performance

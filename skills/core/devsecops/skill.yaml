@@ -8,7 +8,7 @@ category: core
 path: skills/core/devsecops
 status: Ready
 priority: 100
-estimated_tokens: 3296
+estimated_tokens: 3510
 owns: []
 requires:
   - secrets-management

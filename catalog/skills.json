@@ -64,7 +64,7 @@
         "Passes untrusted text to a model or tool"
       ],
       "priority": 100,
-      "estimated_tokens": 3315,
+      "estimated_tokens": 3507,
       "ownership": {
         "owner_boundary": "Untrusted model input, agent authority, tool execution, and AI data-exfiltration boundary.",
         "protected_assets": [
@@ -155,7 +155,7 @@
         "Fetches a user-supplied URL"
       ],
       "priority": 100,
-      "estimated_tokens": 3438,
+      "estimated_tokens": 3716,
       "ownership": {
         "owner_boundary": "Server-facing API request, object, function, field, and webhook authorization boundary.",
         "protected_assets": [
@@ -242,7 +242,7 @@
         "Issues, verifies, or stores a token"
       ],
       "priority": 100,
-      "estimated_tokens": 3233,
+      "estimated_tokens": 3422,
       "ownership": {
         "owner_boundary": "Identity proof, session, token, credential, and authorization-lifecycle boundary.",
         "protected_assets": [
@@ -317,7 +317,7 @@
         "Service worker, PWA, browser extension, manifest, or runtime message"
       ],
       "priority": 100,
-      "estimated_tokens": 1083
+      "estimated_tokens": 1129
     },
     {
       "name": "brute-force-defense",
@@ -379,7 +379,7 @@
         "Accepts a guessable secret: password, OTP, reset token, invite or coupon code"
       ],
       "priority": 100,
-      "estimated_tokens": 3406
+      "estimated_tokens": 3618
     },
     {
       "name": "cloud-security",
@@ -437,7 +437,7 @@
         "Provisions cloud infrastructure or IAM"
       ],
       "priority": 100,
-      "estimated_tokens": 3392
+      "estimated_tokens": 3602
     },
     {
       "name": "common-pitfalls",
@@ -496,7 +496,7 @@
       },
       "routing_hints": [],
       "priority": 100,
-      "estimated_tokens": 3445
+      "estimated_tokens": 3658
     },
     {
       "name": "database-security",
@@ -555,7 +555,7 @@
         "Builds a database query"
       ],
       "priority": 100,
-      "estimated_tokens": 2496
+      "estimated_tokens": 2641
     },
     {
       "name": "deserialization-security",
@@ -607,7 +607,7 @@
         "pickle, ObjectInputStream, BinaryFormatter, unsafe YAML/XML, or unserialize"
       ],
       "priority": 100,
-      "estimated_tokens": 1055
+      "estimated_tokens": 1093
     },
     {
       "name": "devsecops",
@@ -660,7 +660,7 @@
         "Adds or bumps a dependency"
       ],
       "priority": 100,
-      "estimated_tokens": 3296
+      "estimated_tokens": 3510
     },
     {
       "name": "docker-security",
@@ -713,7 +713,7 @@
         "Builds or runs a container"
       ],
       "priority": 100,
-      "estimated_tokens": 2895
+      "estimated_tokens": 3102
     },
     {
       "name": "file-upload-security",
@@ -771,7 +771,7 @@
         "Accepts a file path or upload"
       ],
       "priority": 100,
-      "estimated_tokens": 2631
+      "estimated_tokens": 2750
     },
     {
       "name": "frontend-security",
@@ -820,7 +820,7 @@
         "Renders untrusted data into a page"
       ],
       "priority": 100,
-      "estimated_tokens": 3102
+      "estimated_tokens": 3303
     },
     {
       "name": "http-edge-security",
@@ -874,7 +874,7 @@
         "Reverse proxy, CDN, forwarded headers, Host, cache keys, or HTTP framing"
       ],
       "priority": 100,
-      "estimated_tokens": 2232
+      "estimated_tokens": 2306
     },
     {
       "name": "logging-audit",
@@ -932,7 +932,7 @@
         "Writes a log line containing user data"
       ],
       "priority": 100,
-      "estimated_tokens": 2966
+      "estimated_tokens": 3181
     },
     {
       "name": "mvc-security",
@@ -985,7 +985,7 @@
         "Renders untrusted data into a page"
       ],
       "priority": 100,
-      "estimated_tokens": 3458
+      "estimated_tokens": 3660
     },
     {
       "name": "owasp",
@@ -1034,7 +1034,7 @@
         "Handles an error inside a security check"
       ],
       "priority": 100,
-      "estimated_tokens": 1927
+      "estimated_tokens": 2084
     },
     {
       "name": "publish-safety",
@@ -1092,7 +1092,7 @@
         "Pushes, publishes, deploys, or changes repository visibility"
       ],
       "priority": 100,
-      "estimated_tokens": 4129
+      "estimated_tokens": 4305
     },
     {
       "name": "redis-security",
@@ -1171,7 +1171,7 @@
         "Uses Redis/Valkey for sessions, cache, queue, Streams, rate limits, OTPs, token revocation, or idempotency"
       ],
       "priority": 100,
-      "estimated_tokens": 3179,
+      "estimated_tokens": 3289,
       "ownership": {
         "owner_boundary": "Redis/Valkey service configuration, data protection, and operational-state boundary.",
         "protected_assets": [
@@ -1255,7 +1255,7 @@
         "WebSocket, SSE, Socket.IO, or WebRTC signaling handler"
       ],
       "priority": 100,
-      "estimated_tokens": 3287
+      "estimated_tokens": 3474
     },
     {
       "name": "secrets-management",
@@ -1314,7 +1314,7 @@
         "Reads a credential or config value"
       ],
       "priority": 100,
-      "estimated_tokens": 3611
+      "estimated_tokens": 3887
     },
     {
       "name": "secure-code-review",
@@ -1364,7 +1364,7 @@
       },
       "routing_hints": [],
       "priority": 100,
-      "estimated_tokens": 3567
+      "estimated_tokens": 3734
     },
     {
       "name": "ssh-server",
@@ -1419,7 +1419,7 @@
         "Configures a server, TLS, or a deploy"
       ],
       "priority": 100,
-      "estimated_tokens": 3696
+      "estimated_tokens": 3962
     },
     {
       "name": "sso-federation",
@@ -1470,7 +1470,7 @@
         "SAML, IdP, service provider metadata, ACS, or assertion validation"
       ],
       "priority": 100,
-      "estimated_tokens": 1250
+      "estimated_tokens": 1299
     },
     {
       "name": "cryptography",
@@ -1536,7 +1536,7 @@
       },
       "routing_hints": [],
       "priority": 70,
-      "estimated_tokens": 3481
+      "estimated_tokens": 3690
     },
     {
       "name": "incident-response",
@@ -1588,7 +1588,7 @@
       },
       "routing_hints": [],
       "priority": 70,
-      "estimated_tokens": 3568
+      "estimated_tokens": 3786
     },
     {
       "name": "network-security",
@@ -1644,7 +1644,7 @@
       },
       "routing_hints": [],
       "priority": 70,
-      "estimated_tokens": 2889
+      "estimated_tokens": 3060
     },
     {
       "name": "secure-architecture",
@@ -1692,7 +1692,7 @@
       },
       "routing_hints": [],
       "priority": 70,
-      "estimated_tokens": 2971
+      "estimated_tokens": 3150
     },
     {
       "name": "security-testing",
@@ -1736,7 +1736,7 @@
       },
       "routing_hints": [],
       "priority": 70,
-      "estimated_tokens": 3392
+      "estimated_tokens": 3547
     },
     {
       "name": "supply-chain-security",
@@ -1789,7 +1789,7 @@
       },
       "routing_hints": [],
       "priority": 70,
-      "estimated_tokens": 3470
+      "estimated_tokens": 3656
     },
     {
       "name": "blockchain-security",
@@ -1842,7 +1842,7 @@
       },
       "routing_hints": [],
       "priority": 50,
-      "estimated_tokens": 3545
+      "estimated_tokens": 3795
     },
     {
       "name": "compliance",
@@ -1902,7 +1902,7 @@
       },
       "routing_hints": [],
       "priority": 50,
-      "estimated_tokens": 3320
+      "estimated_tokens": 3513
     },
     {
       "name": "kubernetes-security",
@@ -1953,7 +1953,7 @@
       },
       "routing_hints": [],
       "priority": 50,
-      "estimated_tokens": 3860
+      "estimated_tokens": 4166
     },
     {
       "name": "mobile-security",
@@ -2020,7 +2020,7 @@
       },
       "routing_hints": [],
       "priority": 50,
-      "estimated_tokens": 3387
+      "estimated_tokens": 3617
     },
     {
       "name": "windows-security",
@@ -2077,7 +2077,7 @@
       },
       "routing_hints": [],
       "priority": 50,
-      "estimated_tokens": 4511
+      "estimated_tokens": 4796
     },
     {
       "name": "clean-architecture",
@@ -2131,7 +2131,7 @@
       },
       "routing_hints": [],
       "priority": 40,
-      "estimated_tokens": 3316
+      "estimated_tokens": 3517
     },
     {
       "name": "cqrs",
@@ -2190,7 +2190,7 @@
       },
       "routing_hints": [],
       "priority": 40,
-      "estimated_tokens": 3695
+      "estimated_tokens": 3941
     },
     {
       "name": "ddd",
@@ -2238,7 +2238,7 @@
       },
       "routing_hints": [],
       "priority": 40,
-      "estimated_tokens": 3250
+      "estimated_tokens": 3418
     },
     {
       "name": "design-patterns",
@@ -2283,7 +2283,7 @@
       },
       "routing_hints": [],
       "priority": 40,
-      "estimated_tokens": 3031
+      "estimated_tokens": 3172
     },
     {
       "name": "event-driven",
@@ -2343,7 +2343,7 @@
       },
       "routing_hints": [],
       "priority": 40,
-      "estimated_tokens": 4208
+      "estimated_tokens": 4487
     },
     {
       "name": "hexagonal",
@@ -2387,7 +2387,7 @@
       },
       "routing_hints": [],
       "priority": 40,
-      "estimated_tokens": 4327
+      "estimated_tokens": 4549
     },
     {
       "name": "microservices",
@@ -2437,7 +2437,7 @@
       },
       "routing_hints": [],
       "priority": 40,
-      "estimated_tokens": 2606
+      "estimated_tokens": 2710
     },
     {
       "name": "modular-monolith",
@@ -2485,7 +2485,7 @@
       },
       "routing_hints": [],
       "priority": 40,
-      "estimated_tokens": 2265
+      "estimated_tokens": 2379
     },
     {
       "name": "performance",
@@ -2550,7 +2550,7 @@
         "Allocates, caches, subscribes, or opens a handle"
       ],
       "priority": 40,
-      "estimated_tokens": 3021
+      "estimated_tokens": 3260
     },
     {
       "name": "scalability",
@@ -2601,7 +2601,7 @@
       },
       "routing_hints": [],
       "priority": 40,
-      "estimated_tokens": 3904
+      "estimated_tokens": 4144
     },
     {
       "name": "email-security",
@@ -2685,7 +2685,7 @@
         "Configures SMTP/provider API, sender domain, SPF, DKIM, or DMARC"
       ],
       "priority": 100,
-      "estimated_tokens": 1706,
+      "estimated_tokens": 1746,
       "ownership": {
         "owner_boundary": "Application-to-mail-provider and recipient-mailbox delivery, sender identity, and message safety boundary.",
         "protected_assets": [
@@ -2798,7 +2798,7 @@
         "Configures redirects, proxy, TLS verification, timeout, retry, connection pool, or response limit"
       ],
       "priority": 100,
-      "estimated_tokens": 1212,
+      "estimated_tokens": 1247,
       "ownership": {
         "owner_boundary": "Application workload to DNS, proxy, network, and outbound HTTP(S) destination transport boundary.",
         "protected_assets": [

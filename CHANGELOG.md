@@ -6,6 +6,12 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ### Added
 
+- Checklist tiering. Every `checklist.md` verification item now carries a leading tier tag -
+  `[critical]`, `[recommended]`, or `[optional]` - so the router can load critical checks first
+  when context is tight (ties to `priority`/`estimated_tokens`). The scaffold template documents
+  the convention and `scripts/validate_repository.py` fails any Ready skill whose checklist has an
+  untagged `- [ ]` / `- [x]` item. All 47 production checklists were retrofitted. Offline
+  `unittest` coverage added for the tier check.
 - Typed relationship edges in the skill graph. `catalog/skills.json` now accepts an optional
   `conflicts` array alongside `depends_on` (→ `requires`) and `related` (→ `suggests`), and each
   edge type is projected into `skill.yaml`. `scripts/validate_repository.py` gained a graph pass

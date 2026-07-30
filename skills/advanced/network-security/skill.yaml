@@ -8,7 +8,7 @@ category: advanced
 path: skills/advanced/network-security
 status: Ready
 priority: 70
-estimated_tokens: 2889
+estimated_tokens: 3060
 owns: []
 requires:
   - owasp

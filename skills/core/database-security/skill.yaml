@@ -8,7 +8,7 @@ category: core
 path: skills/core/database-security
 status: Ready
 priority: 100
-estimated_tokens: 2496
+estimated_tokens: 2641
 owns: []
 requires:
   - owasp

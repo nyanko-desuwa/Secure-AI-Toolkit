@@ -5,7 +5,7 @@ validation, install, and release orchestration.
 
 | Script | Purpose |
 |---|---|
-| `validate_repository.py` | Canonical validator (catalog, ownership, generated graph, skill manifests, skill shape, frontmatter, internal links, changelog extract) |
+| `validate_repository.py` | Canonical validator (catalog, ownership, generated graph, skill manifests, checklist tiers, skill shape, frontmatter, internal links, changelog extract) |
 | `generate_skill_manifests.py` | Projects `catalog/skills.json` into a `skill.yaml` next to each `SKILL.md`; `--check` fails on drift |
 | `check_external_links.py` | Advisory external Markdown-link monitor for scheduled CI; never a release gate |
 | `render_link_issue.py` | Renders the advisory external-link issue body and state files for CI |

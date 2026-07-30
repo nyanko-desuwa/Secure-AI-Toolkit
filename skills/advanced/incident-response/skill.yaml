@@ -8,7 +8,7 @@ category: advanced
 path: skills/advanced/incident-response
 status: Ready
 priority: 70
-estimated_tokens: 3568
+estimated_tokens: 3786
 owns: []
 requires:
   - logging-audit

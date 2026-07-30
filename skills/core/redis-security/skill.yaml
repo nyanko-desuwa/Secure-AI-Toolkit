@@ -8,7 +8,7 @@ category: core
 path: skills/core/redis-security
 status: Ready
 priority: 100
-estimated_tokens: 3179
+estimated_tokens: 3289
 owns:
   - "Redis/Valkey data, ACL identities, and transport credentials"
   - "Session, revocation, limiter, queue, and cache state stored in Redis/Valkey"

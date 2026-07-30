@@ -8,7 +8,7 @@ category: core
 path: skills/core/ssh-server
 status: Ready
 priority: 100
-estimated_tokens: 3696
+estimated_tokens: 3962
 owns: []
 requires:
   - secrets-management

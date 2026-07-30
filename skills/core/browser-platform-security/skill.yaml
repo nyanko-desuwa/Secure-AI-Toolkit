@@ -8,7 +8,7 @@ category: core
 path: skills/core/browser-platform-security
 status: Ready
 priority: 100
-estimated_tokens: 1083
+estimated_tokens: 1129
 owns: []
 requires:
   - owasp

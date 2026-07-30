@@ -8,97 +8,97 @@ supply chain section.
 
 ## The Trifecta (LLM01 · LLM06)
 
-- [ ] Every content source reaching the context is listed, and each marked trusted or untrusted
-- [ ] Every tool is listed, and each marked as reading private data, sending outward, or neither
-- [ ] No single context holds all three legs: private data, untrusted content, outbound channel
-- [ ] Where all three are unavoidable, the outbound leg requires human approval on resolved arguments
-- [ ] The reading context (untrusted content) has no write, send, or execute tools
+- [ ] [recommended] Every content source reaching the context is listed, and each marked trusted or untrusted
+- [ ] [recommended] Every tool is listed, and each marked as reading private data, sending outward, or neither
+- [ ] [critical] No single context holds all three legs: private data, untrusted content, outbound channel
+- [ ] [critical] Where all three are unavoidable, the outbound leg requires human approval on resolved arguments
+- [ ] [critical] The reading context (untrusted content) has no write, send, or execute tools
 
 ## Tool Design (LLM06 · A01, A06 · ASVS V2, V8)
 
-- [ ] No shell-exec, arbitrary-eval, or arbitrary-SQL tool exists
-- [ ] Each tool answers one question or performs one action; none accepts a free-form command
-- [ ] Every parameter is validated in the tool function, not only in `input_schema`
-- [ ] Actor identity comes from the session - never a user ID, tenant ID, or role from the model
-- [ ] Every object access is scoped by the actor inside the query
-- [ ] Outward destinations (hosts, recipients, paths) come from an allowlist the model cannot extend
-- [ ] Irreversible and outward-facing actions require human approval showing real arguments
-- [ ] Tool errors return a message that does not leak internal state or other users' data
+- [ ] [critical] No shell-exec, arbitrary-eval, or arbitrary-SQL tool exists
+- [ ] [critical] Each tool answers one question or performs one action; none accepts a free-form command
+- [ ] [critical] Every parameter is validated in the tool function, not only in `input_schema`
+- [ ] [critical] Actor identity comes from the session - never a user ID, tenant ID, or role from the model
+- [ ] [critical] Every object access is scoped by the actor inside the query
+- [ ] [critical] Outward destinations (hosts, recipients, paths) come from an allowlist the model cannot extend
+- [ ] [critical] Irreversible and outward-facing actions require human approval showing real arguments
+- [ ] [recommended] Tool errors return a message that does not leak internal state or other users' data
 
 ## Identity and Credentials (A01, A07 · ASVS V8, V10 · CWE-441)
 
-- [ ] The agent acts with the user's authority, not a broad service credential
-- [ ] Where a shared credential is unavoidable, the reason is documented and scope is minimal
-- [ ] Downstream systems perform their own authorization against the acting identity
-- [ ] Tokens are not passed through to a different audience than the one they were issued for
+- [ ] [critical] The agent acts with the user's authority, not a broad service credential
+- [ ] [recommended] Where a shared credential is unavoidable, the reason is documented and scope is minimal
+- [ ] [critical] Downstream systems perform their own authorization against the acting identity
+- [ ] [critical] Tokens are not passed through to a different audience than the one they were issued for
 
 ## Output Handling (LLM05 · A05 · ASVS V1 · CWE-1426)
 
-- [ ] Model output never reaches `eval`, `exec`, or a code-capable deserializer
-- [ ] Shell invocations use an argument array with `shell=False` and an allowlisted executable
-- [ ] SQL from or influenced by model output is parameterized; identifiers go through an allowlist
-- [ ] Model output rendered as HTML is escaped, or sanitized with an allowlist library
-- [ ] Model-supplied URLs are parsed and allowlisted before use or display
-- [ ] Model-supplied paths are mapped from an ID server-side, or resolved and confirmed contained
-- [ ] Newlines and control characters are escaped before model output is logged
+- [ ] [critical] Model output never reaches `eval`, `exec`, or a code-capable deserializer
+- [ ] [critical] Shell invocations use an argument array with `shell=False` and an allowlisted executable
+- [ ] [critical] SQL from or influenced by model output is parameterized; identifiers go through an allowlist
+- [ ] [critical] Model output rendered as HTML is escaped, or sanitized with an allowlist library
+- [ ] [critical] Model-supplied URLs are parsed and allowlisted before use or display
+- [ ] [critical] Model-supplied paths are mapped from an ID server-side, or resolved and confirmed contained
+- [ ] [recommended] Newlines and control characters are escaped before model output is logged
 
 ## Exfiltration (LLM02 · A01 · CWE-918)
 
-- [ ] Markdown images from model output are not auto-rendered, or the host is allowlisted and query strings rejected
-- [ ] Surfaces rendering model output set a CSP restricting `img-src` and `connect-src`
-- [ ] Any tool fetching a model-supplied URL allowlists scheme and host, rejects private ranges, and disables redirects
-- [ ] Agent egress goes through a proxy with a host allowlist (this is the only DNS control)
-- [ ] Write tools that publish where an attacker can read are counted as outbound channels
+- [ ] [critical] Markdown images from model output are not auto-rendered, or the host is allowlisted and query strings rejected
+- [ ] [recommended] Surfaces rendering model output set a CSP restricting `img-src` and `connect-src`
+- [ ] [critical] Any tool fetching a model-supplied URL allowlists scheme and host, rejects private ranges, and disables redirects
+- [ ] [critical] Agent egress goes through a proxy with a host allowlist (this is the only DNS control)
+- [ ] [recommended] Write tools that publish where an attacker can read are counted as outbound channels
 
 ## MCP (LLM03, LLM01 · A03, A08 · ASVS V15)
 
-- [ ] Every third-party server was reviewed before install: source, reachable capability, what it sends home
-- [ ] Server version is pinned and integrity-verified
-- [ ] Tool names, descriptions, and schemas are diffed against the approved set on each connection; any change forces re-approval
-- [ ] Tool descriptions were read for embedded instructions to the model
-- [ ] Tool results are handled as untrusted content
-- [ ] HTTP-transport servers require an auth token or a restricted IPC mechanism; local servers are not open on localhost
-- [ ] OAuth scopes are minimal; the server validates that tokens were issued for it and does not forward them downstream
-- [ ] Filesystem access and outbound network access are not combined in one context
+- [ ] [critical] Every third-party server was reviewed before install: source, reachable capability, what it sends home
+- [ ] [critical] Server version is pinned and integrity-verified
+- [ ] [critical] Tool names, descriptions, and schemas are diffed against the approved set on each connection; any change forces re-approval
+- [ ] [recommended] Tool descriptions were read for embedded instructions to the model
+- [ ] [critical] Tool results are handled as untrusted content
+- [ ] [critical] HTTP-transport servers require an auth token or a restricted IPC mechanism; local servers are not open on localhost
+- [ ] [critical] OAuth scopes are minimal; the server validates that tokens were issued for it and does not forward them downstream
+- [ ] [critical] Filesystem access and outbound network access are not combined in one context
 
 ## RAG and Vector Stores (LLM08 · A01 · ASVS V8 · CWE-639)
 
-- [ ] Retrieval is filtered by tenant and ACL inside the query, not after
-- [ ] The filter is built server-side from the session; not sent by the client, not generated by the model
-- [ ] Authorization is re-checked at answer time if grants can be revoked
-- [ ] Retrieved content is labelled untrusted and does not reach a context with write tools
-- [ ] The embedding store is access-controlled and encrypted like the source text
-- [ ] No secrets or credentials are embedded
+- [ ] [critical] Retrieval is filtered by tenant and ACL inside the query, not after
+- [ ] [critical] The filter is built server-side from the session; not sent by the client, not generated by the model
+- [ ] [critical] Authorization is re-checked at answer time if grants can be revoked
+- [ ] [critical] Retrieved content is labelled untrusted and does not reach a context with write tools
+- [ ] [recommended] The embedding store is access-controlled and encrypted like the source text
+- [ ] [critical] No secrets or credentials are embedded
 
 ## Agent Loops and Cost (LLM10 · A06 · CWE-770)
 
-- [ ] Iteration count is capped
-- [ ] Output tokens are capped per run and per user, and the budget check fails closed
-- [ ] There is a wall-clock deadline
-- [ ] Recursive or self-invoking tools have a depth limit
-- [ ] Rate limits are per authenticated user, not only per IP
-- [ ] Persistent memory is scoped per user and cannot carry one user's content into another's context
+- [ ] [recommended] Iteration count is capped
+- [ ] [recommended] Output tokens are capped per run and per user, and the budget check fails closed
+- [ ] [recommended] There is a wall-clock deadline
+- [ ] [recommended] Recursive or self-invoking tools have a depth limit
+- [ ] [recommended] Rate limits are per authenticated user, not only per IP
+- [ ] [critical] Persistent memory is scoped per user and cannot carry one user's content into another's context
 
 ## Secrets and Logs (LLM02, LLM07 · A04, A09 · ASVS V14, V16 · CWE-532)
 
-- [ ] No API keys, tokens, or credentials in system prompts or tool descriptions
-- [ ] No secrets in tool arguments; the model gets an opaque handle instead
-- [ ] Tool calls are logged with actor, tool name, resolved arguments, outcome, and approver
-- [ ] Masking happens inside arguments and results, before the log pipeline
-- [ ] Conversation transcripts are access-controlled, encrypted at rest, and have a retention policy
-- [ ] Provider data-retention terms were checked against the project's obligations
+- [ ] [critical] No API keys, tokens, or credentials in system prompts or tool descriptions
+- [ ] [critical] No secrets in tool arguments; the model gets an opaque handle instead
+- [ ] [recommended] Tool calls are logged with actor, tool name, resolved arguments, outcome, and approver
+- [ ] [recommended] Masking happens inside arguments and results, before the log pipeline
+- [ ] [recommended] Conversation transcripts are access-controlled, encrypted at rest, and have a retention policy
+- [ ] [recommended] Provider data-retention terms were checked against the project's obligations
 
 ## Model Supply Chain (LLM03, LLM04 · A03, A08 · CWE-502)
 
-- [ ] No pickle-based checkpoint (`.bin`, `.pt`, `.ckpt`) is loaded from an untrusted source
-- [ ] Weights use safetensors, or are loaded from a publisher whose integrity you verify
-- [ ] Model and dataset versions are pinned with a hash
-- [ ] Fine-tuning data provenance is known
+- [ ] [critical] No pickle-based checkpoint (`.bin`, `.pt`, `.ckpt`) is loaded from an untrusted source
+- [ ] [critical] Weights use safetensors, or are loaded from a publisher whose integrity you verify
+- [ ] [recommended] Model and dataset versions are pinned with a hash
+- [ ] [recommended] Fine-tuning data provenance is known
 
 ## Before Returning
 
-- [ ] Build or type-check run
-- [ ] Relevant tests run, with output reported honestly
-- [ ] Each control stated as either removing capability or reducing rate - not conflated
-- [ ] Anything unverifiable stated plainly rather than implied to be fine
-- [ ] No claim that prompt injection has been prevented
+- [ ] [critical] Build or type-check run
+- [ ] [critical] Relevant tests run, with output reported honestly
+- [ ] [recommended] Each control stated as either removing capability or reducing rate - not conflated
+- [ ] [critical] Anything unverifiable stated plainly rather than implied to be fine
+- [ ] [critical] No claim that prompt injection has been prevented

@@ -8,7 +8,7 @@ category: core
 path: skills/core/docker-security
 status: Ready
 priority: 100
-estimated_tokens: 2895
+estimated_tokens: 3102
 owns: []
 requires:
   - secrets-management

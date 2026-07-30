@@ -9,106 +9,106 @@ isolation section.
 
 ## Resolution (A03 · ASVS 15.2.4)
 
-- [ ] One index or registry per ecosystem, with no fallback that an outsider can publish to
-- [ ] Internal packages are scoped or namespaced, not bare names that exist publicly
-- [ ] Every new package name checked against the real project it resembles - spelling, scope,
+- [ ] [critical] One index or registry per ecosystem, with no fallback that an outsider can publish to
+- [ ] [critical] Internal packages are scoped or namespaced, not bare names that exist publicly
+- [ ] [critical] Every new package name checked against the real project it resembles - spelling, scope,
       hyphenation, and the repository URL it declares
-- [ ] LLM-suggested package names are treated as unverified until confirmed in upstream
+- [ ] [critical] LLM-suggested package names are treated as unverified until confirmed in upstream
       documentation; slopsquatting was considered explicitly
-- [ ] New package's declared source repository actually contains the published code
-- [ ] Private module paths excluded from public proxies and checksum databases where the
+- [ ] [recommended] New package's declared source repository actually contains the published code
+- [ ] [recommended] Private module paths excluded from public proxies and checksum databases where the
       ecosystem uses them (`GOPRIVATE`, mirror allowlists)
 
 ## Retrieval (A03 · A08 · ASVS 15.1.2)
 
-- [ ] Exact versions, no ranges, in anything that reaches a build
-- [ ] Lockfile updated and committed in the same change as the manifest
-- [ ] Install command is the frozen one (`npm ci`, `pip install --require-hashes`,
+- [ ] [recommended] Exact versions, no ranges, in anything that reaches a build
+- [ ] [recommended] Lockfile updated and committed in the same change as the manifest
+- [ ] [critical] Install command is the frozen one (`npm ci`, `pip install --require-hashes`,
       Go commands with `GOFLAGS=-mod=readonly`, `mvn --strict-checksums`), not the resolving one
-- [ ] Hashes present for every requirement, including transitive, where the ecosystem supports
+- [ ] [critical] Hashes present for every requirement, including transitive, where the ecosystem supports
       it
-- [ ] Lockfile is generated from the package manager's frozen/controlled registry, not a
+- [ ] [critical] Lockfile is generated from the package manager's frozen/controlled registry, not a
       developer's fallback to a public index
-- [ ] Full transitive graph reviewed; direct-dependency audit alone is not accepted as coverage
-- [ ] Base images, CI actions, IaC modules, and Helm charts referenced by digest or commit SHA,
+- [ ] [recommended] Full transitive graph reviewed; direct-dependency audit alone is not accepted as coverage
+- [ ] [critical] Base images, CI actions, IaC modules, and Helm charts referenced by digest or commit SHA,
       not by tag or branch
 
 ## Install-Time Execution (A03 · CWE-829)
 
-- [ ] Lifecycle scripts disabled by default in CI and in developer install docs
-- [ ] Any package allowed to run scripts is named explicitly and justified
-- [ ] Source distributions refused where a wheel or prebuilt artefact exists
-- [ ] No `curl | sh`, `iwr | iex`, or equivalent unverified bootstrap in any pipeline step
-- [ ] Package manager caches disabled in release builds
+- [ ] [critical] Lifecycle scripts disabled by default in CI and in developer install docs
+- [ ] [recommended] Any package allowed to run scripts is named explicitly and justified
+- [ ] [recommended] Source distributions refused where a wheel or prebuilt artefact exists
+- [ ] [critical] No `curl | sh`, `iwr | iex`, or equivalent unverified bootstrap in any pipeline step
+- [ ] [recommended] Package manager caches disabled in release builds
 
 ## Build Isolation (A03 · ASVS V13 · SLSA Build L2/L3)
 
-- [ ] Untrusted code - fork PRs, unreviewed branches - never runs with secrets or a write token
-- [ ] No `pull_request_target` (or equivalent) checking out attacker-controlled refs
-- [ ] Token permissions declared per job and default to read
-- [ ] Publishing runs in a separate job or workflow from testing
-- [ ] Signing keys unreachable from any user-defined build step; prefer OIDC over stored tokens
-- [ ] Build steps do not write to a shared cache that another build reads unauthenticated
-- [ ] Every build input is pinned and declared; compile/package stages make no unplanned network
+- [ ] [critical] Untrusted code - fork PRs, unreviewed branches - never runs with secrets or a write token
+- [ ] [critical] No `pull_request_target` (or equivalent) checking out attacker-controlled refs
+- [ ] [critical] Token permissions declared per job and default to read
+- [ ] [recommended] Publishing runs in a separate job or workflow from testing
+- [ ] [critical] Signing keys unreachable from any user-defined build step; prefer OIDC over stored tokens
+- [ ] [recommended] Build steps do not write to a shared cache that another build reads unauthenticated
+- [ ] [recommended] Every build input is pinned and declared; compile/package stages make no unplanned network
       requests (hermetic where the toolchain supports it)
-- [ ] Reproducibility checked for release artefacts, or known nondeterminism recorded explicitly
+- [ ] [optional] Reproducibility checked for release artefacts, or known nondeterminism recorded explicitly
 
 ## Provenance and SBOM (A08 · SSDF PS.3.2)
 
-- [ ] Provenance generated by the build platform, not by a script the build controls
-- [ ] SBOM produced at build time from the lockfile or build graph, not by scanning a running
+- [ ] [recommended] Provenance generated by the build platform, not by a script the build controls
+- [ ] [recommended] SBOM produced at build time from the lockfile or build graph, not by scanning a running
       container
-- [ ] SBOM and provenance attached to the artefact digest, not to a tag or a release page
-- [ ] SBOM regenerated on every build, so the version in the registry matches what shipped
-- [ ] SBOM inventory is actually consumed: vulnerability/licence/policy query fails or opens an
+- [ ] [recommended] SBOM and provenance attached to the artefact digest, not to a tag or a release page
+- [ ] [recommended] SBOM regenerated on every build, so the version in the registry matches what shipped
+- [ ] [recommended] SBOM inventory is actually consumed: vulnerability/licence/policy query fails or opens an
       owned finding; generation alone is not marked pass
-- [ ] Build-time graph and artefact scan reconciled so vendored, static, and OS components are not
+- [ ] [recommended] Build-time graph and artefact scan reconciled so vendored, static, and OS components are not
       silently omitted
 
 ## Distribution and Consumption (A08 · CWE-347, CWE-494)
 
-- [ ] Artefact signing/provenance uses an attestation subject bound to the same immutable digest
-- [ ] Artefacts signed, and the signature verified at the point of consumption
-- [ ] Verification names the expected identity and issuer - no wildcard, no regex that matches
+- [ ] [critical] Artefact signing/provenance uses an attestation subject bound to the same immutable digest
+- [ ] [critical] Artefacts signed, and the signature verified at the point of consumption
+- [ ] [critical] Verification names the expected identity and issuer - no wildcard, no regex that matches
       everything
-- [ ] Verification failure fails the pipeline or blocks admission; it does not warn
-- [ ] Verification is by digest, not by tag
-- [ ] Registry credentials scoped to publish-only where they publish, read-only where they pull
+- [ ] [critical] Verification failure fails the pipeline or blocks admission; it does not warn
+- [ ] [critical] Verification is by digest, not by tag
+- [ ] [critical] Registry credentials scoped to publish-only where they publish, read-only where they pull
 
 ## Promotion (A08 · CWE-345)
 
-- [ ] One build per commit, promoted between environments by digest
-- [ ] Production runs the same digest that passed testing
-- [ ] Artefact storage immutable - tags cannot be repointed, versions cannot be republished
-- [ ] Rollback targets a previously published digest, not a rebuild of an old tag
+- [ ] [critical] One build per commit, promoted between environments by digest
+- [ ] [critical] Production runs the same digest that passed testing
+- [ ] [critical] Artefact storage immutable - tags cannot be repointed, versions cannot be republished
+- [ ] [recommended] Rollback targets a previously published digest, not a rebuild of an old tag
 
 ## Update Path (A03 · CWE-1357)
 
-- [ ] Cooldown before adopting a new release of anything that executes in CI or production
-- [ ] No automerge on production dependencies, CI actions, or base images
-- [ ] Security advisory updates have a faster, separate path from routine bumps
-- [ ] Rollout is staged or canaried, not all environments at once
+- [ ] [recommended] Cooldown before adopting a new release of anything that executes in CI or production
+- [ ] [recommended] No automerge on production dependencies, CI actions, or base images
+- [ ] [recommended] Security advisory updates have a faster, separate path from routine bumps
+- [ ] [recommended] Rollout is staged or canaried, not all environments at once
 
 ## Vendoring (A03 · ASVS 15.1.2 · CWE-1104)
 
-- [ ] Every vendored component records upstream URL, exact version or commit, and source hash
-- [ ] Vendored components appear in the SBOM and advisory monitoring despite leaving the package
+- [ ] [recommended] Every vendored component records upstream URL, exact version or commit, and source hash
+- [ ] [recommended] Vendored components appear in the SBOM and advisory monitoring despite leaving the package
       manager graph
-- [ ] Local patches are stored as reviewable diffs and rebased against upstream deliberately
-- [ ] A named owner tracks upstream security releases; vendoring is not treated as "no dependency"
+- [ ] [recommended] Local patches are stored as reviewable diffs and rebased against upstream deliberately
+- [ ] [recommended] A named owner tracks upstream security releases; vendoring is not treated as "no dependency"
 
 ## Triage (A03 · ASVS 15.1.1, 15.2.1)
 
-- [ ] Remediation windows written down and risk-based, not per-CVSS-number
-- [ ] No component in the build is past its documented window
-- [ ] Reachability judgement recorded with its reasoning for every deferred finding
-- [ ] Unmaintained or end-of-life components identified, with a migration plan or a stated
+- [ ] [recommended] Remediation windows written down and risk-based, not per-CVSS-number
+- [ ] [recommended] No component in the build is past its documented window
+- [ ] [recommended] Reachability judgement recorded with its reasoning for every deferred finding
+- [ ] [recommended] Unmaintained or end-of-life components identified, with a migration plan or a stated
       accepted risk and an owner
-- [ ] Exceptions have an expiry date, not "until we upgrade"
+- [ ] [recommended] Exceptions have an expiry date, not "until we upgrade"
 
 ## Before Returning
 
-- [ ] Build run with the frozen install command, from a clean state
-- [ ] Relevant tests run, output reported honestly
-- [ ] Lockfile diff read, not just regenerated - an unexpected transitive change is the finding
-- [ ] Anything unverifiable stated plainly, not implied to be fine
+- [ ] [critical] Build run with the frozen install command, from a clean state
+- [ ] [critical] Relevant tests run, output reported honestly
+- [ ] [recommended] Lockfile diff read, not just regenerated - an unexpected transitive change is the finding
+- [ ] [critical] Anything unverifiable stated plainly, not implied to be fine

@@ -8,7 +8,7 @@ category: core
 path: skills/core/authentication
 status: Ready
 priority: 100
-estimated_tokens: 3233
+estimated_tokens: 3422
 owns:
   - "Account identities, credentials, second factors, and recovery state"
   - "Session identifiers, access tokens, refresh tokens, and authorization grants"
