@@ -226,7 +226,8 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
   from A03 to A05. Guidance written against 2021 category IDs will mis-map.
 - No breaking changes, no migration steps: this is the initial content.
 
-[Unreleased]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/releases/tag/v1.0.0
