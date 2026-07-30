@@ -32,7 +32,7 @@ provider event turns recovery and notification into account takeover, spoofing, 
 
 ## Ownership Boundary
 
-**Owns:** Application ↔ SMTP/provider API ↔ recipient mailbox delivery, sender identity, message
+**Owns:** Application <-> SMTP/provider API <-> recipient mailbox delivery, sender identity, message
 safety, provider events, bounce handling, and email privacy evidence.
 
 **Does not own:**

@@ -221,7 +221,7 @@ explicitly:
 _CONTROL = re.compile(r"[\x00-\x1f\x7f]")
 
 def sanitize(value: str, limit: int = 256) -> str:
-    return _CONTROL.sub("�", str(value))[:limit]
+    return _CONTROL.sub("\ufffd", str(value))[:limit]
 ```
 
 The tempting wrong fix is replacing `\n` alone. That leaves `\r` (many viewers treat a bare

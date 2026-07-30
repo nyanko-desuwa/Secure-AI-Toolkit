@@ -6,7 +6,7 @@ Use p99 service time, burst duration, dependency quota, and reserved headroom fr
 ## Concurrency
 
 ```text
-Little's Law: in-flight work ≈ arrival rate × average service time
+Little's Law: in-flight work ~ arrival rate × average service time
 safe dependency concurrency = dependency quota - reserve
 per-replica concurrency <= floor(safe dependency concurrency / maximum replicas)
 ```

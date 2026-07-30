@@ -128,8 +128,8 @@ Digital signatures:
 | A | EdDSA (Ed25519, Ed448), XEdDSA (Curve25519, Curve448), ECDSA (P-256, P-384, P-521), RSA-SSA-PSS |
 | D | RSA-SSA-PKCS#1 v1.5, DSA at any key size |
 
-Key exchange: minimum 112-bit security strength. FFDH with L ≥ 3072 and N ≥ 256 (A, forward
-secret), ECDH with f ≥ 256-383 (A, forward secret), RSA-PKCS#1 v1.5 key transport (D, no forward
+Key exchange: minimum 112-bit security strength. FFDH with L >= 3072 and N >= 256 (A, forward
+secret), ECDH with f >= 256-383 (A, forward secret), RSA-PKCS#1 v1.5 key transport (D, no forward
 secrecy). New implementations must conform to SP 800-56A/B and SP 800-77, and "IKEv1 MUST NOT be
 used in production". Approved groups include Curve25519, Curve448, the NIST P-curves, MODP-2048
 through MODP-8192, and ffdhe2048 through ffdhe8192.
@@ -149,12 +149,12 @@ See [password-storage-parameters.md](password-storage-parameters.md) for the com
 
 | Algorithm | Required parameters | Level |
 |---|---|:-:|
-| argon2id | t=1: m ≥ 47104 (46 MiB), p=1 · t=2: m ≥ 19456 (19 MiB), p=1 · t ≥ 3: m ≥ 12288 (12 MiB), p=1 | A |
-| scrypt | p=1: N ≥ 2^17 (128 MiB), r=8 · p=2: N ≥ 2^16, r=8 · p ≥ 3: N ≥ 2^15, r=8 | A |
-| bcrypt | cost ≥ 10 | A |
-| PBKDF2-HMAC-SHA-512 | ≥ 210,000 iterations | A |
-| PBKDF2-HMAC-SHA-256 | ≥ 600,000 iterations | A |
-| PBKDF2-HMAC-SHA-1 | ≥ 1,300,000 iterations | L |
+| argon2id | t=1: m >= 47104 (46 MiB), p=1 · t=2: m >= 19456 (19 MiB), p=1 · t >= 3: m >= 12288 (12 MiB), p=1 | A |
+| scrypt | p=1: N >= 2^17 (128 MiB), r=8 · p=2: N >= 2^16, r=8 · p >= 3: N >= 2^15, r=8 | A |
+| bcrypt | cost >= 10 | A |
+| PBKDF2-HMAC-SHA-512 | >= 210,000 iterations | A |
+| PBKDF2-HMAC-SHA-256 | >= 600,000 iterations | A |
+| PBKDF2-HMAC-SHA-1 | >= 1,300,000 iterations | L |
 
 ## Equivalent strengths
 
@@ -163,7 +163,7 @@ exists.
 
 | Security strength | Symmetric | Finite field | Integer factorization | Elliptic curve |
 |---|---|---|---|---|
-| ≤ 80 | 2TDEA | L=1024, N=160 | k=1024 | f=160-223 |
+| <= 80 | 2TDEA | L=1024, N=160 | k=1024 | f=160-223 |
 | 112 | 3TDEA | L=2048, N=224 | k=2048 | f=224-255 |
 | 128 | AES-128 | L=3072, N=256 | k=3072 | f=256-383 |
 | 192 | AES-192 | L=7680, N=384 | k=7680 | f=384-511 |

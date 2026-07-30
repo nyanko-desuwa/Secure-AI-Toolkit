@@ -4,6 +4,8 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-07-30
+
 ### Added
 
 - `AGENTS.md` and `CLAUDE.md` contributor instruction files at the repo root. `AGENTS.md` holds
@@ -14,6 +16,23 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
   and what must never be committed. `CLAUDE.md` is the short Claude Code companion: the commands
   and workflow, pointing at `AGENTS.md` for the substance. Both are distinct from the consumer-
   facing `AI_INSTRUCTIONS.md` and link to it rather than restating its routing.
+- Glyph guard in `scripts/validate_repository.py`. A new validation pass fails any committed text
+  file that contains a character a Windows cp1252 console cannot encode (arrows, box-drawing,
+  math operators such as the >= glyph, the replacement character). Such a glyph raises
+  `UnicodeEncodeError` when the validator prints committed text via `--extract-changelog` on a
+  cp1252 terminal, which is the failure that motivated the ASCII-only convention. Letters
+  (Vietnamese diacritics and other scripts used in trigger keywords) and cp1252-safe symbols (the
+  section sign, middot, multiplication sign) are allowed. `--skip-glyphs` opts out. Offline
+  `unittest` coverage added for the classifier and the file scan.
+
+### Changed
+
+- Swept the remaining non-cp1252 glyphs out of tracked files so the new glyph guard passes: the
+  `>=`/`<=` math operators in `skills/advanced/cryptography/references/`, the box-drawing tree
+  diagrams in `README.md` and a few skill `README.md`/reference files rewritten with ASCII
+  `+--`/`\--`, the `<->` boundary arrows in `email-security`/`http-client-security` `SKILL.md`, the
+  double-vertical-line and almost-equal glyphs in crypto/architecture references, and the
+  replacement character in `logging-audit/best-practices.md`. Content unchanged; only the glyphs.
 
 ## [1.1.0] - 2026-07-30
 

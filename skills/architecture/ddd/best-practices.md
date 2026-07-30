@@ -54,7 +54,7 @@ Draw the aggregate from the invariant, not from the data shape. The question is 
 ```mermaid
 graph TB
   subgraph AGG["Order aggregate - one transaction, one lock"]
-    R[Order · root<br/>enforces: total ≤ creditLimit<br/>enforces: no lines after submit]
+    R[Order · root<br/>enforces: total <= creditLimit<br/>enforces: no lines after submit]
     L1[OrderLine]
     L2[OrderLine]
     R --> L1

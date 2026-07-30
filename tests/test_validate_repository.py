@@ -253,6 +253,49 @@ class ValidateRepositoryTests(unittest.TestCase):
             self.assertIn("not tiered", messages)
             self.assertNotIn("checklist.md:3", messages)
 
+    # Glyph literals are written as \u escapes so this .py file itself stays
+    # ASCII-clean and passes the glyph guard it is testing.
+    def test_forbidden_glyph_flags_non_cp1252_symbols(self):
+        forbidden = self.validator._is_forbidden_glyph
+        self.assertTrue(forbidden(chr(0x2192)))  # arrow ->
+        self.assertTrue(forbidden(chr(0x2500)))  # box drawing U+2500
+        self.assertTrue(forbidden(chr(0xFFFD)))  # replacement character
+        self.assertTrue(forbidden(chr(0x2265)))  # >= math operator
+
+    def test_forbidden_glyph_allows_ascii_vietnamese_and_cp1252(self):
+        forbidden = self.validator._is_forbidden_glyph
+        self.assertFalse(forbidden("a"))
+        self.assertFalse(forbidden("="))
+        self.assertFalse(forbidden(chr(0x1EEB)))  # Vietnamese u with horn+hook (letter)
+        self.assertFalse(forbidden(chr(0x00A7)))  # section sign (cp1252-safe)
+        self.assertFalse(forbidden(chr(0x00D7)))  # multiplication sign (cp1252-safe)
+        self.assertFalse(forbidden(chr(0x00B7)))  # middot (cp1252-safe)
+
+    def test_validate_glyphs_flags_forbidden_and_ignores_allowed(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "docs").mkdir(parents=True)
+            (root / "docs" / "bad.md").write_text(
+                "line one\nan arrow \u2192 here\n", encoding="utf-8"
+            )
+            (root / "docs" / "ok.md").write_text(
+                "cp1252 fine: \u00a7 \u00d7 and Vietnamese t\u1eeb kho\u00e1\n",
+                encoding="utf-8",
+            )
+            original_root = self.validator.ROOT
+            self.validator.ROOT = root
+            try:
+                report = self.validator.Report()
+                self.validator.validate_glyphs(report)
+            finally:
+                self.validator.ROOT = original_root
+            messages = "\n".join(report.errors)
+            self.assertIn("bad.md:2", messages)
+            self.assertIn("U+2192", messages)
+            self.assertNotIn("ok.md", messages)
+
     def test_catalog_budget_matches_computed_values(self):
         catalog = self.validator.load_json(self.validator.CATALOG_PATH)
         generator = self.validator.load_manifest_generator()

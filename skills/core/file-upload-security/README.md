@@ -36,18 +36,18 @@ the business need justifies the extra attack surface.
 
 ```text
 file-upload-security/
-├── SKILL.md
-├── README.md
-├── checklist.md
-├── best-practices.md
-├── common-mistakes.md
-├── troubleshooting.md
-├── prompts.md
-├── references/
-│   ├── asvs-v5-file-handling.md
-│   └── file-type-detection.md
-└── examples/
-    └── README.md
++-- SKILL.md
++-- README.md
++-- checklist.md
++-- best-practices.md
++-- common-mistakes.md
++-- troubleshooting.md
++-- prompts.md
++-- references/
+|   +-- asvs-v5-file-handling.md
+|   \-- file-type-detection.md
+\-- examples/
+    \-- README.md
 ```
 
 ## Standards

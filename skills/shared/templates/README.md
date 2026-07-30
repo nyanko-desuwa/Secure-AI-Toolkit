@@ -13,15 +13,15 @@ Eleven files. Seven at the top level, plus `references/` and `examples/`:
 
 ```text
 skills/<category>/<skill-name>/
-├── SKILL.md              entry point: frontmatter, workflow, severity rules
-├── README.md             purpose, how it works, configuration, limitations
-├── checklist.md          pre-return verification, grouped by category
-├── best-practices.md     patterns, each with a vulnerable/fixed pair
-├── common-mistakes.md    what goes wrong, and why the fix works
-├── troubleshooting.md    what to do when the guidance conflicts
-├── prompts.md            prompts that produce findings, and anti-patterns
-├── references/           standard summaries, version-pinned with a check date
-└── examples/             vulnerable and fixed code side by side
++-- SKILL.md              entry point: frontmatter, workflow, severity rules
++-- README.md             purpose, how it works, configuration, limitations
++-- checklist.md          pre-return verification, grouped by category
++-- best-practices.md     patterns, each with a vulnerable/fixed pair
++-- common-mistakes.md    what goes wrong, and why the fix works
++-- troubleshooting.md    what to do when the guidance conflicts
++-- prompts.md            prompts that produce findings, and anti-patterns
++-- references/           standard summaries, version-pinned with a check date
+\-- examples/             vulnerable and fixed code side by side
 ```
 
 Eleven is the floor, not the target. `references/` holds one file per standard plus its own

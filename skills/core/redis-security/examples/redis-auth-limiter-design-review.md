@@ -27,7 +27,7 @@ policy.
 
 ```text
 Internet => login/OTP/reset verifier => limiter atomic operation => Redis security-state instance
-                                  └=> identity verifier => session store => Redis session namespace
+                                  \=> identity verifier => session store => Redis session namespace
 Application events => redaction boundary => audit/metrics pipeline
 Operator/break-glass identity => separate administrative Redis path
 ```

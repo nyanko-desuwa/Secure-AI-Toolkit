@@ -2798,7 +2798,7 @@
         "Configures redirects, proxy, TLS verification, timeout, retry, connection pool, or response limit"
       ],
       "priority": 100,
-      "estimated_tokens": 1247,
+      "estimated_tokens": 1248,
       "ownership": {
         "owner_boundary": "Application workload to DNS, proxy, network, and outbound HTTP(S) destination transport boundary.",
         "protected_assets": [

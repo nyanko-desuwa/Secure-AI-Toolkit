@@ -3,7 +3,7 @@
 Ten-minute path from clone to a useful security review, then how to roll the pack
 out to a team.
 
-## 1. First successful review (≈10 minutes)
+## 1. First successful review (~10 minutes)
 
 ```bash
 git clone https://github.com/nyanko-desuwa/Secure-AI-Toolkit.git

@@ -111,7 +111,7 @@ A request to build a login form:
 
 ```text
 authentication            primary
-  └── owasp               depends_on
+  \-- owasp               depends_on
 brute-force-defense       related - the endpoint accepts a guessable secret
 database-security         related - credentials are stored and queried
 secrets-management        related - a signing key exists
@@ -123,7 +123,7 @@ A request to publish a package:
 
 ```text
 publish-safety            primary
-  └── secrets-management  depends_on
+  \-- secrets-management  depends_on
 devsecops                 related - if CI does the publishing
 ```
 

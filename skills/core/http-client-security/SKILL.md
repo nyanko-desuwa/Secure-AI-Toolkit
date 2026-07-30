@@ -29,7 +29,7 @@ response body decide where the workload can act and what it can disclose.
 
 ## Ownership Boundary
 
-**Owns:** Application workload ↔ DNS/proxy/network ↔ outbound HTTP(S) destination selection,
+**Owns:** Application workload <-> DNS/proxy/network <-> outbound HTTP(S) destination selection,
 transport behavior, credentials, response bounds, and safe telemetry.
 
 **Does not own:**

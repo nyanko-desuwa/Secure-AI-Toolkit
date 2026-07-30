@@ -10,6 +10,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
@@ -57,6 +58,69 @@ CHECKLIST_TIERS = ("critical", "recommended", "optional")
 CHECKLIST_ITEM_RE = re.compile(r"^\s*- \[[ xX]\]\s+(.*)$")
 # A tiered item leads with one of the three tags: "- [ ] [critical] ...".
 CHECKLIST_TIER_RE = re.compile(r"^\[(critical|recommended|optional)\]\s+\S")
+
+# Glyph guard. The validator prints committed text to stdout (--extract-changelog),
+# and a character a Windows cp1252 console cannot encode raises UnicodeEncodeError
+# there. Scan committed text files for such glyphs, but allow letters (Vietnamese
+# diacritics and other scripts used in trigger keywords) and cp1252-safe symbols
+# (section sign, middot, multiplication sign). Flags arrows, box-drawing, math
+# operators, and replacement characters.
+GLYPH_TEXT_SUFFIXES = {
+    ".md", ".py", ".json", ".yaml", ".yml", ".txt", ".sh", ".ps1", ".toml",
+    ".cfg", ".ini",
+}
+GLYPH_SKIP_DIRS = {".git", ".authoring", "node_modules", "__pycache__", ".venv", "venv"}
+GLYPH_SKIP_FILES = {"huong dan.md"}
+
+
+def _is_forbidden_glyph(ch: str) -> bool:
+    """A glyph is forbidden if a cp1252 console cannot encode it and it is not a
+    letter or combining mark. This flags arrows, box-drawing, and math operators
+    while allowing Vietnamese diacritics (letters) and cp1252-safe symbols such as
+    the section sign, middot, and multiplication sign."""
+    if ch in "\t\n\r":
+        return False
+    try:
+        ch.encode("cp1252")
+    except UnicodeEncodeError:
+        return unicodedata.category(ch)[0] not in ("L", "M")
+    return False
+
+
+def _glyph_candidate_files() -> list[Path]:
+    files: list[Path] = []
+    for path in ROOT.rglob("*"):
+        if not path.is_file() or path.suffix.lower() not in GLYPH_TEXT_SUFFIXES:
+            continue
+        if path.name in GLYPH_SKIP_FILES:
+            continue
+        if set(path.relative_to(ROOT).parts) & GLYPH_SKIP_DIRS:
+            continue
+        files.append(path)
+    return files
+
+
+def validate_glyphs(report: Report) -> None:
+    """Fail on any committed text file that contains a glyph a Windows cp1252
+    console cannot encode (arrows, box-drawing, math operators, replacement
+    characters). Such a glyph raises UnicodeEncodeError when the validator prints
+    committed text via --extract-changelog on a cp1252 terminal. Vietnamese
+    diacritics and cp1252-safe symbols are allowed; see _is_forbidden_glyph."""
+    for path in _glyph_candidate_files():
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        seen: dict[str, int] = {}
+        for lineno, line in enumerate(text.splitlines(), 1):
+            for ch in line:
+                if _is_forbidden_glyph(ch):
+                    seen.setdefault(f"U+{ord(ch):04X}", lineno)
+        for code, lineno in sorted(seen.items(), key=lambda kv: kv[1]):
+            report.err(
+                f"{path.relative_to(ROOT)}:{lineno}: non-cp1252 glyph {code} "
+                "(use an ASCII equivalent)"
+            )
 
 
 def catalog_ref(ref: str) -> str:
@@ -891,6 +955,11 @@ def main(argv: list[str] | None = None) -> int:
         help="Skip internal markdown link checks",
     )
     parser.add_argument(
+        "--skip-glyphs",
+        action="store_true",
+        help="Skip the non-cp1252 glyph guard",
+    )
+    parser.add_argument(
         "--write-skill-graph",
         action="store_true",
         help="Regenerate the marked skill-graph region from catalog relationships",
@@ -956,6 +1025,8 @@ def main(argv: list[str] | None = None) -> int:
     validate_scaffold_tools(catalog, report)
     if not args.skip_links:
         validate_internal_links(report)
+    if not args.skip_glyphs:
+        validate_glyphs(report)
 
     print_summary(catalog)
     if args.report_boundaries:

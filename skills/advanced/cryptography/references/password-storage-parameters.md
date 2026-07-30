@@ -35,7 +35,7 @@ described as giving "an equal level of defense", trading CPU against RAM:
 | 7168 KiB (7 MiB) | 5 | 1 | |
 
 ASVS Appendix C states the same requirement as inequalities, which is the more useful form for a
-review: `t=1` needs `m ≥ 47104`, `t=2` needs `m ≥ 19456`, and `t ≥ 3` needs `m ≥ 12288`, all with
+review: `t=1` needs `m >= 47104`, `t=2` needs `m >= 19456`, and `t >= 3` needs `m >= 12288`, all with
 `p=1`. So `t=4, m=12288` passes ASVS and `t=4, m=9216` passes the cheat sheet. Where the two differ,
 cite the one you followed. Memory is the parameter a GPU attacker feels most, so trade iterations
 down before memory.
@@ -52,7 +52,7 @@ Cheat sheet floor: N = 2^17, r = 8, p = 1. Described as "a similar minimal level
 | 2^14 (16 MiB) | 8 | 5 |
 | 2^13 (8 MiB) | 8 | 10 |
 
-ASVS expresses it as `p=1: N ≥ 2^17`, `p=2: N ≥ 2^16`, `p ≥ 3: N ≥ 2^15`.
+ASVS expresses it as `p=1: N >= 2^17`, `p=2: N >= 2^16`, `p >= 3: N >= 2^15`.
 
 ## bcrypt - legacy only
 
@@ -87,9 +87,9 @@ take the higher one if you want to satisfy both.
 
 | Variant | Cheat sheet | ASVS Appendix C |
 |---|---|---|
-| PBKDF2-HMAC-SHA256 | 600,000 | ≥ 600,000 (A) |
-| PBKDF2-HMAC-SHA512 | 220,000 | ≥ 210,000 (A) |
-| PBKDF2-HMAC-SHA1 | 1,400,000 - legacy only | ≥ 1,300,000 (L) |
+| PBKDF2-HMAC-SHA256 | 600,000 | >= 600,000 (A) |
+| PBKDF2-HMAC-SHA512 | 220,000 | >= 210,000 (A) |
+| PBKDF2-HMAC-SHA1 | 1,400,000 - legacy only | >= 1,300,000 (L) |
 
 SHA-1 is disallowed for new use after 2030 per NIST SP 800-131A Rev. 2, cited on the cheat sheet.
 Do not select it for a new system regardless of iteration count.

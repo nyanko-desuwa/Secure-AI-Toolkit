@@ -380,7 +380,7 @@ If in-memory state is genuinely needed for throughput, bound it explicitly:
 
 ```typescript
 // Bounded: an LRU with a size cap and a TTL, plus a documented basis for the number.
-// 20 000 entries x ~120 bytes ≈ 2.4 MB, against a 512 MB container budget.
+// 20 000 entries x ~120 bytes ~ 2.4 MB, against a 512 MB container budget.
 const hot = new LRUCache<string, number>({ max: 20_000, ttl: 5 * 60_000 });
 ```
 

@@ -14,12 +14,12 @@ Legacy (L, compatibility only), or Disallowed (D, considered broken). Verified 2
 |---|---|---|---|
 | Encrypt data at rest | AES-256-GCM, ChaCha20-Poly1305, XChaCha20-Poly1305 | ECB (D), CBC/CTR/CFB/OFB without a verified MAC | No integrity: ciphertext is malleable, ECB leaks structure |
 | Encrypt data in transit | TLS 1.3, TLS 1.2 with ECDHE + AEAD | application-layer crypto over plain TCP, "encrypted" payload inside HTTP | No key agreement, no identity, no replay protection |
-| Authenticate a message (shared secret) | HMAC-SHA-256, AES-CMAC, Poly1305, KMAC | `hash(secret ‖ message)`, HMAC-MD5 (D) | Length-extension and a broken hash. Both are forgery, not weakness |
+| Authenticate a message (shared secret) | HMAC-SHA-256, AES-CMAC, Poly1305, KMAC | `hash(secret || message)`, HMAC-MD5 (D) | Length-extension and a broken hash. Both are forgery, not weakness |
 | Hash a password | Argon2id, then scrypt, bcrypt, PBKDF2-HMAC-SHA-256 | SHA-256/512, SHA-3, MD5 (D), HMAC, a hand-written loop | Fast by design. A GPU tries billions per second; a salt does not slow that down |
-| Derive a key from a key | HKDF-SHA-256 (RFC 5869) | `sha256(key ‖ "purpose")`, truncating a key, reusing one key for two purposes | Not a KDF. No domain separation guarantee, no extract step for non-uniform input |
+| Derive a key from a key | HKDF-SHA-256 (RFC 5869) | `sha256(key || "purpose")`, truncating a key, reusing one key for two purposes | Not a KDF. No domain separation guarantee, no extract step for non-uniform input |
 | Derive a key from a password | Argon2id, output used as the key | HKDF, PBKDF2 at a low iteration count | HKDF is fast: the password's low entropy is the whole attack surface |
 | Generate a token, session ID, salt, nonce | CSPRNG: `secrets`, `crypto.randomBytes`, `crypto/rand`, `getentropy()` | `Math.random`, `random.random`, `rand()`, `mt_rand`, timestamps, counters, UUIDv1 | State recoverable from prior output, or no secret state at all |
-| Sign a document for third parties | Ed25519, ECDSA P-256/P-384, RSA-PSS ≥ 3072-bit | RSA PKCS#1 v1.5 signatures (D), DSA (D), MD5/SHA-1 digests (D for signatures) | Padding forgery and collision attacks; DSA is removed from modern stacks |
+| Sign a document for third parties | Ed25519, ECDSA P-256/P-384, RSA-PSS >= 3072-bit | RSA PKCS#1 v1.5 signatures (D), DSA (D), MD5/SHA-1 digests (D for signatures) | Padding forgery and collision attacks; DSA is removed from modern stacks |
 | Encrypt to a public key | Hybrid: KEM/ECDH to a symmetric key, then AEAD. Or libsodium sealed boxes | RSA-OAEP for bulk data, RSA PKCS#1 v1.5 encryption (D) | RSA encrypts one small block; v1.5 padding is padding-oracle prone |
 | Wrap a key | AES-256-KW or KWP (SP 800-38F), or a KMS `Encrypt`/`GenerateDataKey` | your own AEAD-over-key scheme with an ad hoc header | KW is specified for this; a home-made wrapper has no rotation or context binding |
 | Compare two secrets | Constant-time comparison | `==`, `===`, `equals`, `strcmp`, `Arrays.equals` | Early return on the first differing byte is a prefix oracle |

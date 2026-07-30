@@ -47,15 +47,15 @@ Each skill follows the same shape:
 
 ```text
 skills/core/owasp/
-├── SKILL.md              entry point: frontmatter, workflow, severity rules
-├── README.md             purpose, configuration, limitations, security notes
-├── checklist.md          pre-return verification, grouped by Top 10 category
-├── best-practices.md     patterns, each with a vulnerable/fixed pair
-├── common-mistakes.md    what goes wrong, and why the fix works
-├── troubleshooting.md    what to do when the guidance conflicts
-├── prompts.md            prompts that produce findings instead of recitals
-├── references/           standard summaries, version-pinned with a check date
-└── examples/             vulnerable and fixed code side by side
++-- SKILL.md              entry point: frontmatter, workflow, severity rules
++-- README.md             purpose, configuration, limitations, security notes
++-- checklist.md          pre-return verification, grouped by Top 10 category
++-- best-practices.md     patterns, each with a vulnerable/fixed pair
++-- common-mistakes.md    what goes wrong, and why the fix works
++-- troubleshooting.md    what to do when the guidance conflicts
++-- prompts.md            prompts that produce findings instead of recitals
++-- references/           standard summaries, version-pinned with a check date
+\-- examples/             vulnerable and fixed code side by side
 ```
 
 The workflow inside `SKILL.md` is five steps - scope, map, apply, verify, report - and the
@@ -227,27 +227,27 @@ More, including the anti-patterns worth avoiding, in
 
 ```text
 .
-├── AI_INSTRUCTIONS.md    entry point for AI assistants: registry, rules, output contract
-├── README.md             this file
-├── CHANGELOG.md
-├── LICENSE
-└── skills/
-    ├── core/             common-pitfalls · owasp · secure-code-review · api-security
-    │                     mvc-security · authentication · database-security
-    │                     secrets-management · file-upload-security · logging-audit
-    │                     frontend-security · docker-security · cloud-security
-    │                     ssh-server · devsecops · ai-security · publish-safety
-    │                     http-edge-security · realtime-security · sso-federation
-    │                     browser-platform-security · deserialization-security · redis-security
-    │                     email-security · http-client-security
-    ├── advanced/         security-testing · incident-response · network-security
-    │                     supply-chain-security · cryptography · secure-architecture
-    ├── enterprise/       kubernetes-security · compliance · windows-security
-    │                     mobile-security · blockchain-security
-    ├── architecture/     clean-architecture · ddd · hexagonal · cqrs · event-driven
-    │                     modular-monolith · microservices · design-patterns
-    │                     scalability · performance
-    └── shared/           checklists · prompts · references · templates
++-- AI_INSTRUCTIONS.md    entry point for AI assistants: registry, rules, output contract
++-- README.md             this file
++-- CHANGELOG.md
++-- LICENSE
+\-- skills/
+    +-- core/             common-pitfalls · owasp · secure-code-review · api-security
+    |                     mvc-security · authentication · database-security
+    |                     secrets-management · file-upload-security · logging-audit
+    |                     frontend-security · docker-security · cloud-security
+    |                     ssh-server · devsecops · ai-security · publish-safety
+    |                     http-edge-security · realtime-security · sso-federation
+    |                     browser-platform-security · deserialization-security · redis-security
+    |                     email-security · http-client-security
+    +-- advanced/         security-testing · incident-response · network-security
+    |                     supply-chain-security · cryptography · secure-architecture
+    +-- enterprise/       kubernetes-security · compliance · windows-security
+    |                     mobile-security · blockchain-security
+    +-- architecture/     clean-architecture · ddd · hexagonal · cqrs · event-driven
+    |                     modular-monolith · microservices · design-patterns
+    |                     scalability · performance
+    \-- shared/           checklists · prompts · references · templates
 ```
 
 The split between `README.md` and `AI_INSTRUCTIONS.md` is deliberate. Humans want to know

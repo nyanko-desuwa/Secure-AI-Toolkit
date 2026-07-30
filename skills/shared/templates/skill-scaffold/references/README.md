@@ -5,8 +5,8 @@ full text.
 
 ```text
 references/
-├── README.md            this file
-└── <standard>-<ver>.md  one per standard
++-- README.md            this file
+\-- <standard>-<ver>.md  one per standard
 ```
 
 ## What each reference file needs
