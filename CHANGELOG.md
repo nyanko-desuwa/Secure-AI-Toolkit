@@ -6,6 +6,14 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ### Added
 
+- Context-budget metadata (`priority` and `estimated_tokens`) is now a required field on every
+  catalog skill and is projected into each `skill.yaml`. `priority` is a category-derived load-order
+  weight (core 100, advanced 70, enterprise 50, architecture 40); `estimated_tokens` measures the
+  skill's `SKILL.md` + `checklist.md` size. `python scripts/validate_repository.py --write-budget`
+  computes both from disk and writes them back into `catalog/skills.json`, keeping the catalog the
+  single source of truth. The `AI_INSTRUCTIONS.md` loading-budget section now tells the router to
+  pick highest-priority owners until an approximate token budget is reached, then name what was
+  skipped. The JSON schema, generator, and offline `unittest` coverage were updated to match.
 - Machine-readable `skill.yaml` manifest next to every skill's `SKILL.md`, generated from
   `catalog/skills.json` by `scripts/generate_skill_manifests.py`. Each manifest is a flat, router-
   readable projection of the catalog: `id`, `name`, `version`, `category`, `path`, `status`,

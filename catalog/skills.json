@@ -63,6 +63,8 @@
       "routing_hints": [
         "Passes untrusted text to a model or tool"
       ],
+      "priority": 100,
+      "estimated_tokens": 3315,
       "ownership": {
         "owner_boundary": "Untrusted model input, agent authority, tool execution, and AI data-exfiltration boundary.",
         "protected_assets": [
@@ -152,6 +154,8 @@
         "Loads an object by ID from a request",
         "Fetches a user-supplied URL"
       ],
+      "priority": 100,
+      "estimated_tokens": 3438,
       "ownership": {
         "owner_boundary": "Server-facing API request, object, function, field, and webhook authorization boundary.",
         "protected_assets": [
@@ -237,6 +241,8 @@
       "routing_hints": [
         "Issues, verifies, or stores a token"
       ],
+      "priority": 100,
+      "estimated_tokens": 3233,
       "ownership": {
         "owner_boundary": "Identity proof, session, token, credential, and authorization-lifecycle boundary.",
         "protected_assets": [
@@ -309,7 +315,9 @@
       },
       "routing_hints": [
         "Service worker, PWA, browser extension, manifest, or runtime message"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 1083
     },
     {
       "name": "brute-force-defense",
@@ -369,7 +377,9 @@
       },
       "routing_hints": [
         "Accepts a guessable secret: password, OTP, reset token, invite or coupon code"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 3406
     },
     {
       "name": "cloud-security",
@@ -425,7 +435,9 @@
       },
       "routing_hints": [
         "Provisions cloud infrastructure or IAM"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 3392
     },
     {
       "name": "common-pitfalls",
@@ -482,7 +494,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 100,
+      "estimated_tokens": 3445
     },
     {
       "name": "database-security",
@@ -539,7 +553,9 @@
       },
       "routing_hints": [
         "Builds a database query"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 2496
     },
     {
       "name": "deserialization-security",
@@ -589,7 +605,9 @@
       },
       "routing_hints": [
         "pickle, ObjectInputStream, BinaryFormatter, unsafe YAML/XML, or unserialize"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 1055
     },
     {
       "name": "devsecops",
@@ -640,7 +658,9 @@
       },
       "routing_hints": [
         "Adds or bumps a dependency"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 3296
     },
     {
       "name": "docker-security",
@@ -691,7 +711,9 @@
       },
       "routing_hints": [
         "Builds or runs a container"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 2895
     },
     {
       "name": "file-upload-security",
@@ -747,7 +769,9 @@
       },
       "routing_hints": [
         "Accepts a file path or upload"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 2631
     },
     {
       "name": "frontend-security",
@@ -794,7 +818,9 @@
       },
       "routing_hints": [
         "Renders untrusted data into a page"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 3102
     },
     {
       "name": "http-edge-security",
@@ -846,7 +872,9 @@
       },
       "routing_hints": [
         "Reverse proxy, CDN, forwarded headers, Host, cache keys, or HTTP framing"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 2232
     },
     {
       "name": "logging-audit",
@@ -902,7 +930,9 @@
       },
       "routing_hints": [
         "Writes a log line containing user data"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 2966
     },
     {
       "name": "mvc-security",
@@ -953,7 +983,9 @@
       "routing_hints": [
         "Binds request data onto a model",
         "Renders untrusted data into a page"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 3458
     },
     {
       "name": "owasp",
@@ -1000,7 +1032,9 @@
       "routing_hints": [
         "Loads an object by ID from a request",
         "Handles an error inside a security check"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 1927
     },
     {
       "name": "publish-safety",
@@ -1056,7 +1090,9 @@
       },
       "routing_hints": [
         "Pushes, publishes, deploys, or changes repository visibility"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 4129
     },
     {
       "name": "redis-security",
@@ -1134,6 +1170,8 @@
         "Configures Redis/Valkey listener, ACL, TLS, persistence, Sentinel, Cluster, or module",
         "Uses Redis/Valkey for sessions, cache, queue, Streams, rate limits, OTPs, token revocation, or idempotency"
       ],
+      "priority": 100,
+      "estimated_tokens": 3179,
       "ownership": {
         "owner_boundary": "Redis/Valkey service configuration, data protection, and operational-state boundary.",
         "protected_assets": [
@@ -1215,7 +1253,9 @@
       },
       "routing_hints": [
         "WebSocket, SSE, Socket.IO, or WebRTC signaling handler"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 3287
     },
     {
       "name": "secrets-management",
@@ -1272,7 +1312,9 @@
       },
       "routing_hints": [
         "Reads a credential or config value"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 3611
     },
     {
       "name": "secure-code-review",
@@ -1320,7 +1362,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 100,
+      "estimated_tokens": 3567
     },
     {
       "name": "ssh-server",
@@ -1373,7 +1417,9 @@
       },
       "routing_hints": [
         "Configures a server, TLS, or a deploy"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 3696
     },
     {
       "name": "sso-federation",
@@ -1422,7 +1468,9 @@
       },
       "routing_hints": [
         "SAML, IdP, service provider metadata, ACS, or assertion validation"
-      ]
+      ],
+      "priority": 100,
+      "estimated_tokens": 1250
     },
     {
       "name": "cryptography",
@@ -1486,7 +1534,9 @@
           "800-131A"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 70,
+      "estimated_tokens": 3481
     },
     {
       "name": "incident-response",
@@ -1536,7 +1586,9 @@
           "800-184; NIST CSF; OWASP LLM Top 10"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 70,
+      "estimated_tokens": 3568
     },
     {
       "name": "network-security",
@@ -1590,7 +1642,9 @@
           "NIST SP 800-207"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 70,
+      "estimated_tokens": 2889
     },
     {
       "name": "secure-architecture",
@@ -1636,7 +1690,9 @@
           "800-218A; SLSA; STRIDE; ISO 27001; SOC 2; GDPR"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 70,
+      "estimated_tokens": 2971
     },
     {
       "name": "security-testing",
@@ -1678,7 +1734,9 @@
           "OWASP MASTG"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 70,
+      "estimated_tokens": 3392
     },
     {
       "name": "supply-chain-security",
@@ -1729,7 +1787,9 @@
           "800-218A"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 70,
+      "estimated_tokens": 3470
     },
     {
       "name": "blockchain-security",
@@ -1780,7 +1840,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 50,
+      "estimated_tokens": 3545
     },
     {
       "name": "compliance",
@@ -1838,7 +1900,9 @@
           "SOC 2"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 50,
+      "estimated_tokens": 3320
     },
     {
       "name": "kubernetes-security",
@@ -1887,7 +1951,9 @@
           "CIS Kubernetes Benchmark"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 50,
+      "estimated_tokens": 3860
     },
     {
       "name": "mobile-security",
@@ -1952,7 +2018,9 @@
           "MASTG"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 50,
+      "estimated_tokens": 3387
     },
     {
       "name": "windows-security",
@@ -2007,7 +2075,9 @@
           "NIST SP 800-53"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 50,
+      "estimated_tokens": 4511
     },
     {
       "name": "clean-architecture",
@@ -2059,7 +2129,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 40,
+      "estimated_tokens": 3316
     },
     {
       "name": "cqrs",
@@ -2116,7 +2188,9 @@
           "GDPR"
         ]
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 40,
+      "estimated_tokens": 3695
     },
     {
       "name": "ddd",
@@ -2162,7 +2236,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 40,
+      "estimated_tokens": 3250
     },
     {
       "name": "design-patterns",
@@ -2205,7 +2281,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 40,
+      "estimated_tokens": 3031
     },
     {
       "name": "event-driven",
@@ -2263,7 +2341,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 40,
+      "estimated_tokens": 4208
     },
     {
       "name": "hexagonal",
@@ -2305,7 +2385,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 40,
+      "estimated_tokens": 4327
     },
     {
       "name": "microservices",
@@ -2353,7 +2435,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 40,
+      "estimated_tokens": 2606
     },
     {
       "name": "modular-monolith",
@@ -2399,7 +2483,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 40,
+      "estimated_tokens": 2265
     },
     {
       "name": "performance",
@@ -2462,7 +2548,9 @@
       },
       "routing_hints": [
         "Allocates, caches, subscribes, or opens a handle"
-      ]
+      ],
+      "priority": 40,
+      "estimated_tokens": 3021
     },
     {
       "name": "scalability",
@@ -2511,7 +2599,9 @@
         ],
         "other": []
       },
-      "routing_hints": []
+      "routing_hints": [],
+      "priority": 40,
+      "estimated_tokens": 3904
     },
     {
       "name": "email-security",
@@ -2594,6 +2684,8 @@
         "Sends transactional email, reset/verification/invite links, or mail-provider events",
         "Configures SMTP/provider API, sender domain, SPF, DKIM, or DMARC"
       ],
+      "priority": 100,
+      "estimated_tokens": 1706,
       "ownership": {
         "owner_boundary": "Application-to-mail-provider and recipient-mailbox delivery, sender identity, and message safety boundary.",
         "protected_assets": [
@@ -2705,6 +2797,8 @@
         "Creates an outbound HTTP client or fetches a URL",
         "Configures redirects, proxy, TLS verification, timeout, retry, connection pool, or response limit"
       ],
+      "priority": 100,
+      "estimated_tokens": 1212,
       "ownership": {
         "owner_boundary": "Application workload to DNS, proxy, network, and outbound HTTP(S) destination transport boundary.",
         "protected_assets": [

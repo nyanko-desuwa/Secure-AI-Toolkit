@@ -271,6 +271,26 @@ the repository, which is what the budget exists to prevent.
 If the chain would exceed the budget, load the primary skill plus its direct `depends_on`, then
 name what you did not load and why. A stated omission is reviewable; a silent one is not.
 
+### Reasoning about cost with `priority` and `estimated_tokens`
+
+Each catalog entry (and its generated `skill.yaml`) carries two advisory numbers:
+
+- **`priority`** - load-order weight when a budget forces a choice. Higher wins. It tracks the
+  category tiers above (`core` 100, `advanced` 70, `enterprise` 50, `architecture` 40), so a core
+  owner outranks an architecture skill for the same task.
+- **`estimated_tokens`** - the approximate context cost of the skill's `SKILL.md` + `checklist.md`,
+  measured as characters over four. Treat it as a rough size, not an exact count.
+
+When a task names more candidate skills than the per-category caps allow, reason in this order:
+sort the candidates by `priority` (owners first), then walk down the list adding skills while an
+approximate token budget of **~15,000 tokens** of skill context holds. Stop when the next skill
+would blow the budget, and **name what you skipped and its `estimated_tokens`** so the omission is
+reviewable. A skill that owns the boundary in play is never skipped for a merely related one, even
+if the related one is cheaper.
+
+These numbers are advisory routing aids, not a scheduler. The per-category caps above still bind;
+the token estimate only breaks ties and forces you to state what fell off the list.
+
 ## Before you return
 
 In this order, because each step can invalidate the one before it:

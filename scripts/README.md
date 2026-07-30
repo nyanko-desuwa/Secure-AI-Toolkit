@@ -19,6 +19,7 @@ validation, install, and release orchestration.
 python scripts/validate_repository.py
 python scripts/validate_repository.py --write-frontmatter   # align allowed-tools
 python scripts/validate_repository.py --write-skill-graph   # regenerate catalog-derived graph tables
+python scripts/validate_repository.py --write-budget         # measure + write priority/estimated_tokens into the catalog
 python scripts/generate_skill_manifests.py                  # regenerate every skill.yaml from the catalog
 python scripts/generate_skill_manifests.py --check          # fail if any skill.yaml drifted
 python scripts/validate_repository.py --report-boundaries   # print ownership and hand-offs

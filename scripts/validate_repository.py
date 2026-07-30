@@ -288,6 +288,16 @@ def validate_skill_manifests(catalog: dict[str, Any], report: Report) -> None:
             if required_key not in data:
                 report.err(f"{name}: skill.yaml missing {required_key}")
 
+        # The catalog is the single source for budget metadata; the manifest
+        # must project it verbatim (parse_simple_yaml returns scalars as str).
+        for budget_key in ("priority", "estimated_tokens"):
+            catalog_value = skill.get(budget_key)
+            if isinstance(catalog_value, int) and data.get(budget_key) != str(catalog_value):
+                report.err(
+                    f"{name}: skill.yaml {budget_key} {data.get(budget_key)!r} "
+                    f"!= catalog {catalog_value}"
+                )
+
         if generator is not None:
             expected = generator.render_manifest(skill)
             if text != expected:
@@ -321,6 +331,8 @@ def validate_schema_lite(catalog: dict[str, Any], report: Report) -> None:
         "loads",
         "standards",
         "routing_hints",
+        "priority",
+        "estimated_tokens",
     }
     seen: set[str] = set()
     for i, skill in enumerate(skills):
@@ -346,6 +358,12 @@ def validate_schema_lite(catalog: dict[str, Any], report: Report) -> None:
         profile = skill.get("allowed_tools_profile")
         if profile not in (profiles or {}):
             report.err(f"{name}: unknown allowed_tools_profile {profile!r}")
+        priority = skill.get("priority")
+        if not isinstance(priority, int) or isinstance(priority, bool) or priority < 0:
+            report.err(f"{name}: priority must be a non-negative integer, got {priority!r}")
+        est = skill.get("estimated_tokens")
+        if not isinstance(est, int) or isinstance(est, bool) or est < 1:
+            report.err(f"{name}: estimated_tokens must be a positive integer, got {est!r}")
         standards = skill.get("standards")
         if not isinstance(standards, dict):
             report.err(f"{name}: standards must be an object")
@@ -732,6 +750,46 @@ def apply_frontmatter_profiles(catalog: dict[str, Any], report: Report, write: b
             scaffold.write_text(new_text, encoding="utf-8", newline="\n")
 
 
+def write_budget_metadata(report: Report) -> None:
+    """Compute priority + estimated_tokens for each catalog skill and write them
+    back into catalog/skills.json, preserving key order and formatting. The
+    generator and manifests derive these values from the catalog, so the catalog
+    stays the single source of truth."""
+    generator = load_manifest_generator()
+    catalog = load_json(CATALOG_PATH)
+    changed = 0
+    for skill in catalog["skills"]:
+        path = ROOT / skill["path"]
+        if not path.is_dir():
+            report.warn(f"{skill['name']}: path missing on disk, budget not written")
+            continue
+        priority = generator.compute_priority(skill)
+        tokens = generator.compute_estimated_tokens(skill)
+        if skill.get("priority") != priority or skill.get("estimated_tokens") != tokens:
+            changed += 1
+        # Insert budget keys after routing_hints, before ownership, so the JSON
+        # reads in the same order the schema lists them.
+        rebuilt: dict[str, Any] = {}
+        for key, value in skill.items():
+            if key in ("priority", "estimated_tokens"):
+                continue
+            rebuilt[key] = value
+            if key == "routing_hints":
+                rebuilt["priority"] = priority
+                rebuilt["estimated_tokens"] = tokens
+        if "priority" not in rebuilt:
+            rebuilt["priority"] = priority
+            rebuilt["estimated_tokens"] = tokens
+        skill.clear()
+        skill.update(rebuilt)
+    CATALOG_PATH.write_text(
+        json.dumps(catalog, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    print(f"Wrote budget metadata for {changed} skill(s) into {CATALOG_PATH.relative_to(ROOT)}")
+
+
 def print_summary(catalog: dict[str, Any]) -> None:
     by_cat = Counter(s["category"] for s in catalog["skills"])
     print(f"catalog skills: {len(catalog['skills'])}")
@@ -765,6 +823,11 @@ def main(argv: list[str] | None = None) -> int:
         "--write-skill-graph",
         action="store_true",
         help="Regenerate the marked skill-graph region from catalog relationships",
+    )
+    parser.add_argument(
+        "--write-budget",
+        action="store_true",
+        help="Compute priority + estimated_tokens and write them into catalog/skills.json",
     )
     parser.add_argument(
         "--report-boundaries",
@@ -804,6 +867,14 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"ERROR: {e}", file=sys.stderr)
             return 1
         print("Wrote generated skill graph from catalog relationships")
+    if args.write_budget:
+        write_budget_metadata(report)
+        if report.errors:
+            for e in report.errors:
+                print(f"ERROR: {e}", file=sys.stderr)
+            return 1
+        # Re-load so the rest of the validation sees the freshly written values.
+        catalog = load_json(CATALOG_PATH)
 
     skills = validate_filesystem(catalog, report)
     validate_graph_edges(skills, report)
