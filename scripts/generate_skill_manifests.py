@@ -79,6 +79,27 @@ def estimate_tokens(skill_dir: Path) -> int:
     return max(1, round(chars / 4))
 
 
+def compute_priority(skill: dict[str, Any]) -> int:
+    """Load-order weight derived from the skill's category."""
+    return CATEGORY_PRIORITY.get(skill["category"], 10)
+
+
+def compute_estimated_tokens(skill: dict[str, Any]) -> int:
+    """Freshly measured token estimate for the skill on disk."""
+    return estimate_tokens(ROOT / skill["path"])
+
+
+def manifest_priority(skill: dict[str, Any]) -> int:
+    """Prefer the catalog value (single source); fall back to computing it."""
+    value = skill.get("priority")
+    return value if isinstance(value, int) else compute_priority(skill)
+
+
+def manifest_estimated_tokens(skill: dict[str, Any]) -> int:
+    value = skill.get("estimated_tokens")
+    return value if isinstance(value, int) else compute_estimated_tokens(skill)
+
+
 def owns_tokens(skill: dict[str, Any]) -> list[str]:
     ownership = skill.get("ownership")
     if isinstance(ownership, dict):
@@ -102,8 +123,8 @@ def manifest_lines(skill: dict[str, Any]) -> list[str]:
     lines.append(f"category: {category}")
     lines.append(f"path: {skill['path']}")
     lines.append(f"status: {skill['status']}")
-    lines.append(f"priority: {CATEGORY_PRIORITY.get(category, 10)}")
-    lines.append(f"estimated_tokens: {estimate_tokens(skill_dir)}")
+    lines.append(f"priority: {manifest_priority(skill)}")
+    lines.append(f"estimated_tokens: {manifest_estimated_tokens(skill)}")
     lines.extend(emit_list("owns", owns_tokens(skill)))
     lines.extend(emit_list("requires", requires))
     lines.extend(emit_list("suggests", suggests))
