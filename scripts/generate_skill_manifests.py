@@ -115,6 +115,7 @@ def manifest_lines(skill: dict[str, Any]) -> list[str]:
     skill_dir = ROOT / skill["path"]
     requires = [bare_name(d) for d in skill.get("depends_on", [])]
     suggests = [bare_name(r) for r in skill.get("related", [])]
+    conflicts = [bare_name(c) for c in skill.get("conflicts", [])]
 
     lines: list[str] = [GENERATED_HEADER.rstrip("\n")]
     lines.append(f"id: {name}")
@@ -128,7 +129,7 @@ def manifest_lines(skill: dict[str, Any]) -> list[str]:
     lines.extend(emit_list("owns", owns_tokens(skill)))
     lines.extend(emit_list("requires", requires))
     lines.extend(emit_list("suggests", suggests))
-    lines.extend(emit_list("conflicts", []))
+    lines.extend(emit_list("conflicts", conflicts))
     lines.extend(emit_list("frameworks", []))
     return lines
 
