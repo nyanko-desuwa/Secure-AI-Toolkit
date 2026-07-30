@@ -43,7 +43,7 @@ before you use this as a coverage claim:
 | `cloud-security` | A01, A02, A04, A06, A08, A09 | - | V2, V8, V11, V12, V13, V14, V15, V16 | - |
 | `ssh-server` | A02, A04, A07, A08, A09 | - | V6, V7, V8, V12, V13, V16 | CIS NGINX Benchmark |
 | `devsecops` | A03, A08 | - | V13, V15 | SLSA, NIST SP 800-218 |
-| `ai-security` | all ten | - | V1, V2, V5, V8, V10, V11, V13, V14, V15, V16 | OWASP LLM Top 10, NIST AI RMF, EU AI Act |
+| `ai-security` | all ten | - | V1, V2, V5, V8, V10, V11, V13, V14, V15, V16 | OWASP LLM Top 10, OWASP AISVS 1.0, NIST AI RMF, EU AI Act |
 | `http-edge-security` | A02, A04, A05, A06 | - | V4, V11, V13, V14 | HTTP RFC 9110-9114 |
 | `realtime-security` | A01, A04, A05, A07 | API1, API2, API4, API5 | V4, V6, V7, V8, V13 | RFC 6455, WebRTC |
 | `redis-security` | A01, A02, A03, A04, A06, A08, A09, A10 | API4 | V2, V6, V7, V8, V11, V12, V13, V14, V15, V16 | Redis OSS, Valkey, MITRE CWE |
@@ -117,6 +117,7 @@ from all of them.
 | OWASP API Security Top 10 2023 | `core/api-security` |
 | OWASP ASVS 5.0.0 | `core/owasp`, with chapter subsets in most skills |
 | OWASP LLM Top 10 | `core/ai-security` |
+| OWASP AISVS 1.0 | `core/ai-security` |
 | OWASP MASVS / MASTG | `enterprise/mobile-security` |
 | NIST SP 800-63B | `core/authentication`, `core/brute-force-defense` |
 | NIST SP 800-57 | `core/secrets-management`, `advanced/cryptography` |

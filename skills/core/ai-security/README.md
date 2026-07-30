@@ -33,6 +33,7 @@ references/
   injection-taxonomy.md         direct vs indirect, channels, exfil paths, controls
   owasp-top10-2025.md           general OWASP category map
   asvs-5.0.md                   ASVS 5.0 chapter map
+  aisvs-1.0.md                  AISVS 1.0 chapter map
   mcp-security.md               MCP 2025-11-25 security requirements
 examples/
   README.md                     eight vulnerable/fixed pairs with category + CWE
@@ -45,6 +46,7 @@ examples/
 | OWASP Top 10 for LLM Applications | 2025 | 2026-07-28, against `genai.owasp.org/llm-top-10/` |
 | OWASP Top 10 | 2025 (A01, A05, A06 mainly) | 2026-07-28, pinned by this repository |
 | OWASP ASVS | 5.0.0 (released 2025-05-30) | 2026-07-28, pinned by this repository |
+| OWASP AISVS | 1.0 | 2026-07-30, against `github.com/OWASP/AISVS` |
 | CWE | CWE-1427, CWE-1426, CWE-441 and others | 2026-07-28, against `cwe.mitre.org` |
 | MCP specification | 2025-11-25 revision | 2026-07-28, against `modelcontextprotocol.io` |
 
@@ -129,6 +131,7 @@ All values are placeholders. There are no real credentials, hostnames, or person
 - OWASP Agentic Security Initiative - <https://genai.owasp.org/initiatives/agentic-security-initiative/>
 - OWASP Top 10 2025 - <https://owasp.org/Top10/2025/>
 - OWASP ASVS - <https://owasp.org/www-project-application-security-verification-standard/>
+- OWASP AISVS 1.0 - <https://github.com/OWASP/AISVS>
 - MCP security best practices - <https://modelcontextprotocol.io/specification/2025-11-25/basic/security_best_practices>
 - MCP authorization - <https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization>
 - CWE-1427, Improper Neutralization of Input Used for LLM Prompting - <https://cwe.mitre.org/data/definitions/1427.html>

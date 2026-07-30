@@ -121,6 +121,7 @@ list, not a second copy of the pins.
 | OWASP MASVS / MASTG, Mobile Top 10 | `enterprise/mobile-security` |
 | OWASP Smart Contract Top 10 | `enterprise/blockchain-security` |
 | OWASP LLM Top 10 | `core/ai-security` |
+| OWASP AISVS 1.0 | `core/ai-security` |
 
 Some of these are deliberately incomplete. Where a document sits behind registration or returned
 an error, the skill says what it could not extract instead of filling the gap from memory -

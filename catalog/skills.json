@@ -56,6 +56,7 @@
         ],
         "other": [
           "OWASP LLM Top 10",
+          "OWASP AISVS 1.0",
           "NIST AI RMF",
           "EU AI Act"
         ]
@@ -64,7 +65,7 @@
         "Passes untrusted text to a model or tool"
       ],
       "priority": 100,
-      "estimated_tokens": 3507,
+      "estimated_tokens": 3527,
       "ownership": {
         "owner_boundary": "Untrusted model input, agent authority, tool execution, and AI data-exfiltration boundary.",
         "protected_assets": [

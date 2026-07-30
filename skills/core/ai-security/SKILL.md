@@ -143,5 +143,6 @@ must not appear in a severity argument.
 - [references/injection-taxonomy.md](references/injection-taxonomy.md) - injection channels and controls
 - [references/owasp-top10-2025.md](references/owasp-top10-2025.md) - general OWASP categories used here
 - [references/asvs-5.0.md](references/asvs-5.0.md) - ASVS chapter mapping
+- [references/aisvs-1.0.md](references/aisvs-1.0.md) - AISVS 1.0 chapter mapping
 - [references/mcp-security.md](references/mcp-security.md) - MCP 2025-11-25 security requirements
 - [examples/README.md](examples/README.md) - eight vulnerable/fixed pairs

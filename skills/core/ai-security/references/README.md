@@ -8,6 +8,7 @@ and carry the check date.
 | OWASP Top 10 for LLM Applications | 2025 | [llm-top10.md](llm-top10.md) |
 | OWASP Top 10 | 2025 | [owasp-top10-2025.md](owasp-top10-2025.md) |
 | OWASP ASVS | 5.0.0 | [asvs-5.0.md](asvs-5.0.md) |
+| OWASP AISVS | 1.0 | [aisvs-1.0.md](aisvs-1.0.md) |
 | Model Context Protocol | 2025-11-25 | [mcp-security.md](mcp-security.md) |
 | CWE | Current entries checked 2026-07-28 | `llm-top10.md` and the source links within it |
 

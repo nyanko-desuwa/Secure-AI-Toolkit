@@ -8,7 +8,7 @@ category: core
 path: skills/core/ai-security
 status: Ready
 priority: 100
-estimated_tokens: 3507
+estimated_tokens: 3527
 owns:
   - "Private data and credentials exposed to model contexts"
   - "Tool authority, side effects, and outbound channels available to agents"

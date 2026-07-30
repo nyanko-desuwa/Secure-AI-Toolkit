@@ -4,6 +4,15 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+### Added
+
+- The `core/ai-security` skill now cites OWASP AISVS 1.0 (AI Security Verification Standard). A new
+  version-pinned `skills/core/ai-security/references/aisvs-1.0.md` maps all 12 AISVS chapters to
+  this skill's boundary and, where natural, to the LLM Top 10 category each reinforces (chapter-level
+  citation only, matching how the skill already treats ASVS). Wired through the catalog
+  (`standards.other`), the skill `SKILL.md`/`README.md`, the skill and shared references indexes, and
+  `skills/shared/references/standards-matrix.md`.
+
 ## [1.2.1] - 2026-07-30
 
 ### Changed
