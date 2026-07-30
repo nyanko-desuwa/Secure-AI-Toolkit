@@ -4,6 +4,17 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+### Added
+
+- `AGENTS.md` and `CLAUDE.md` contributor instruction files at the repo root. `AGENTS.md` holds
+  vendor-neutral rules for any agent editing this repository (Codex, Aider, Amp, Cursor, Claude
+  Code): the one-boundary-per-skill architecture, the "extend the owner, do not add a duplicate
+  directory" rule and the four-of-five test for a new skill, the ASCII-only convention, the
+  `catalog/skills.json` source-of-truth and generated-`skill.yaml` rules, the verification trio,
+  and what must never be committed. `CLAUDE.md` is the short Claude Code companion: the commands
+  and workflow, pointing at `AGENTS.md` for the substance. Both are distinct from the consumer-
+  facing `AI_INSTRUCTIONS.md` and link to it rather than restating its routing.
+
 ## [1.1.0] - 2026-07-30
 
 ### Added
