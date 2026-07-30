@@ -4,6 +4,16 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-07-30
+
+### Changed
+
+- Bumped the pinned GitHub Actions to current major versions (Dependabot PRs #1-#4), each still
+  pinned to a commit SHA verified against the tag: `actions/checkout` 4.2.2 => 7.0.1,
+  `actions/setup-python` 5.6.0 => 7.0.0, `actions/upload-artifact` 4.6.2 => 7.0.1, and
+  `softprops/action-gh-release` 2.3.2 => 3.0.2 across the validate, secret-scan, release, and
+  external-link-check workflows. CI-only; no change to repository content or routing.
+
 ## [1.2.0] - 2026-07-30
 
 ### Added
@@ -226,7 +236,8 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
   from A03 to A05. Guidance written against 2021 category IDs will mis-map.
 - No breaking changes, no migration steps: this is the initial content.
 
-[Unreleased]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/nyanko-desuwa/Secure-AI-Toolkit/compare/v1.0.0...v1.0.1
