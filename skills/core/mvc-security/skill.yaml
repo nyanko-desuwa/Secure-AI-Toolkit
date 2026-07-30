@@ -1,0 +1,21 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: mvc-security
+name: mvc-security
+version: 1.0.0
+category: core
+path: skills/core/mvc-security
+status: Ready
+priority: 100
+estimated_tokens: 3458
+owns: []
+requires:
+  - owasp
+suggests:
+  - api-security
+  - frontend-security
+  - database-security
+  - secure-code-review
+conflicts: []
+frameworks: []

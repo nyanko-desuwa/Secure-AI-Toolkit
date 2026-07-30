@@ -166,6 +166,137 @@ def bare_name(ref: str) -> str:
     return ref.strip().strip("`").split("/")[-1]
 
 
+def _unquote_manifest_scalar(token: str) -> str:
+    """Reverse the double-quote escaping emitted by generate_skill_manifests."""
+    if not (len(token) >= 2 and token[0] == '"' and token[-1] == '"'):
+        return token
+    body = token[1:-1]
+    out: list[str] = []
+    i = 0
+    while i < len(body):
+        ch = body[i]
+        if ch == "\\" and i + 1 < len(body):
+            out.append(body[i + 1])
+            i += 2
+        else:
+            out.append(ch)
+            i += 1
+    return "".join(out)
+
+
+def parse_simple_yaml(text: str) -> dict[str, Any]:
+    """Parse the constrained flat manifest format that skill.yaml uses.
+
+    Deliberately not a general YAML parser. It accepts only what
+    generate_skill_manifests.py emits: comment lines, `key: scalar`,
+    `key: []`, and block lists (`key:` followed by `  - item` entries).
+    Anything else raises ValueError so a hand-edited or malformed manifest
+    fails validation instead of parsing to a surprising shape.
+    """
+    data: dict[str, Any] = {}
+    current_key: str | None = None
+    for raw in text.splitlines():
+        if not raw.strip() or raw.lstrip().startswith("#"):
+            continue
+        if raw.startswith("  - "):
+            if current_key is None or not isinstance(data.get(current_key), list):
+                raise ValueError(f"list item without an open list key: {raw!r}")
+            data[current_key].append(_unquote_manifest_scalar(raw[4:].strip()))
+            continue
+        if raw[:1] == " ":
+            raise ValueError(f"unexpected indentation: {raw!r}")
+        if ":" not in raw:
+            raise ValueError(f"not a key line: {raw!r}")
+        key, _, rest = raw.partition(":")
+        key = key.strip()
+        rest = rest.strip()
+        if not key:
+            raise ValueError(f"empty key: {raw!r}")
+        if rest == "":
+            data[key] = []
+            current_key = key
+        elif rest == "[]":
+            data[key] = []
+            current_key = None
+        else:
+            data[key] = _unquote_manifest_scalar(rest)
+            current_key = None
+    return data
+
+
+def load_manifest_generator() -> Any:
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "generate_skill_manifests", ROOT / "scripts" / "generate_skill_manifests.py"
+    )
+    if not spec or not spec.loader:
+        raise ImportError("cannot locate generate_skill_manifests.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def validate_skill_manifests(catalog: dict[str, Any], report: Report) -> None:
+    """Every Ready skill needs a well-formed skill.yaml whose id/path/category
+    and typed edges match the catalog, and which is not stale versus the
+    generator. The catalog stays the single source of truth."""
+    try:
+        generator = load_manifest_generator()
+    except Exception as exc:  # noqa: BLE001 - surfaced as a validation error
+        report.err(f"cannot load manifest generator: {exc}")
+        generator = None
+
+    for skill in catalog["skills"]:
+        name = skill["name"]
+        path = ROOT / skill["path"]
+        if not path.is_dir():
+            continue
+        manifest_path = path / "skill.yaml"
+        if not manifest_path.is_file():
+            report.err(f"{name}: missing skill.yaml manifest")
+            continue
+        text = manifest_path.read_text(encoding="utf-8")
+        try:
+            data = parse_simple_yaml(text)
+        except ValueError as exc:
+            report.err(f"{name}: skill.yaml not well-formed: {exc}")
+            continue
+
+        if data.get("id") != name:
+            report.err(f"{name}: skill.yaml id {data.get('id')!r} must match skill name")
+        if data.get("name") != name:
+            report.err(f"{name}: skill.yaml name {data.get('name')!r} must match skill name")
+        if data.get("path") != skill["path"]:
+            report.err(f"{name}: skill.yaml path {data.get('path')!r} != {skill['path']}")
+        if data.get("category") != skill["category"]:
+            report.err(f"{name}: skill.yaml category {data.get('category')!r} != {skill['category']}")
+        if data.get("status") != skill["status"]:
+            report.err(f"{name}: skill.yaml status {data.get('status')!r} != {skill['status']}")
+
+        expected_requires = [bare_name(d) for d in skill.get("depends_on", [])]
+        if data.get("requires") != expected_requires:
+            report.err(
+                f"{name}: skill.yaml requires {data.get('requires')!r} != depends_on {expected_requires}"
+            )
+        expected_suggests = [bare_name(r) for r in skill.get("related", [])]
+        if data.get("suggests") != expected_suggests:
+            report.err(
+                f"{name}: skill.yaml suggests {data.get('suggests')!r} != related {expected_suggests}"
+            )
+        for required_key in ("version", "priority", "estimated_tokens", "owns", "conflicts", "frameworks"):
+            if required_key not in data:
+                report.err(f"{name}: skill.yaml missing {required_key}")
+
+        if generator is not None:
+            expected = generator.render_manifest(skill)
+            if text != expected:
+                report.err(
+                    f"{name}: skill.yaml is stale; regenerate with "
+                    "python scripts/generate_skill_manifests.py"
+                )
+
+
 def validate_schema_lite(catalog: dict[str, Any], report: Report) -> None:
     """Minimal schema checks without external jsonschema dependency."""
     if catalog.get("version") != 1 and not isinstance(catalog.get("version"), int):
@@ -676,6 +807,7 @@ def main(argv: list[str] | None = None) -> int:
 
     skills = validate_filesystem(catalog, report)
     validate_graph_edges(skills, report)
+    validate_skill_manifests(catalog, report)
     validate_skill_graph(catalog, report)
     validate_counts_in_docs(catalog, report)
     validate_scaffold_tools(catalog, report)

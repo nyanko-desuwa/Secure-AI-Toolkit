@@ -1,0 +1,19 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: owasp
+name: owasp
+version: 1.0.0
+category: core
+path: skills/core/owasp
+status: Ready
+priority: 100
+estimated_tokens: 1927
+owns: []
+requires: []
+suggests:
+  - secure-code-review
+  - api-security
+  - authentication
+conflicts: []
+frameworks: []

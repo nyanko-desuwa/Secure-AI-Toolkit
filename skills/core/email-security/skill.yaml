@@ -1,0 +1,31 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: email-security
+name: email-security
+version: 1.0.0
+category: core
+path: skills/core/email-security
+status: Ready
+priority: 100
+estimated_tokens: 1706
+owns:
+  - "Sender-domain identity and reputation"
+  - "Recipient addresses, message content, and security links"
+  - "Provider delivery events, bounce state, and message privacy"
+requires:
+  - owasp
+suggests:
+  - authentication
+  - brute-force-defense
+  - api-security
+  - http-client-security
+  - http-edge-security
+  - secrets-management
+  - logging-audit
+  - file-upload-security
+  - deserialization-security
+  - event-driven
+  - ai-security
+conflicts: []
+frameworks: []

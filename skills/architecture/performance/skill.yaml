@@ -1,0 +1,22 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: performance
+name: performance
+version: 1.0.0
+category: architecture
+path: skills/architecture/performance
+status: Ready
+priority: 40
+estimated_tokens: 3021
+owns: []
+requires: []
+suggests:
+  - owasp
+  - database-security
+  - scalability
+  - api-security
+  - common-pitfalls
+  - http-client-security
+conflicts: []
+frameworks: []

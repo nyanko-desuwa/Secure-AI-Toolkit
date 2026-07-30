@@ -6,6 +6,14 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ### Added
 
+- Machine-readable `skill.yaml` manifest next to every skill's `SKILL.md`, generated from
+  `catalog/skills.json` by `scripts/generate_skill_manifests.py`. Each manifest is a flat, router-
+  readable projection of the catalog: `id`, `name`, `version`, `category`, `path`, `status`,
+  `priority`, `estimated_tokens`, and the typed edges `owns` / `requires` / `suggests` / `conflicts`
+  / `frameworks`. The catalog stays the single source of truth; manifests are regenerated, not hand-
+  edited. `scripts/validate_repository.py` now parses each manifest with a constrained reader (not a
+  general YAML parser) and fails if any is missing, malformed, or drifted from the catalog. Offline
+  `unittest` coverage added for the manifest reader and catalog-consistency.
 - `requirements.txt` documents that repository Python validation and maintenance scripts currently use only the standard library, while giving Dependabot a Python dependency surface to monitor.
 - `scripts/render_link_issue.py` - renders the advisory external-link issue body and its state files
   from the link report, replacing the inline workflow heredoc.

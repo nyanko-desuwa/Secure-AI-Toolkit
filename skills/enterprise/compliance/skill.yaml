@@ -1,0 +1,23 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: compliance
+name: compliance
+version: 1.0.0
+category: enterprise
+path: skills/enterprise/compliance
+status: Ready
+priority: 50
+estimated_tokens: 3320
+owns: []
+requires:
+  - logging-audit
+suggests:
+  - incident-response
+  - secrets-management
+  - database-security
+  - cloud-security
+  - owasp
+  - ai-security
+conflicts: []
+frameworks: []

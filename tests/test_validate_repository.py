@@ -120,6 +120,54 @@ class ValidateRepositoryTests(unittest.TestCase):
         finally:
             self.validator.changelog_text = original
 
+    def test_parse_simple_yaml_round_trips_scalars_and_lists(self):
+        text = (
+            "# comment line, ignored\n"
+            "id: alpha\n"
+            "priority: 100\n"
+            'owns:\n  - "Quoted, with comma"\n  - plain-token\n'
+            "requires: []\n"
+        )
+        data = self.validator.parse_simple_yaml(text)
+        self.assertEqual(data["id"], "alpha")
+        self.assertEqual(data["priority"], "100")
+        self.assertEqual(data["owns"], ["Quoted, with comma", "plain-token"])
+        self.assertEqual(data["requires"], [])
+
+    def test_parse_simple_yaml_unescapes_embedded_quotes(self):
+        data = self.validator.parse_simple_yaml('name: "a \\"q\\" b"\n')
+        self.assertEqual(data["name"], 'a "q" b')
+
+    def test_parse_simple_yaml_rejects_dangling_list_item(self):
+        with self.assertRaises(ValueError):
+            self.validator.parse_simple_yaml("id: alpha\n  - orphan\n")
+
+    def test_parse_simple_yaml_rejects_stray_indentation(self):
+        with self.assertRaises(ValueError):
+            self.validator.parse_simple_yaml("  unexpected: indent\n")
+
+    def test_manifest_matches_generator_output_for_catalog(self):
+        catalog = self.validator.load_json(self.validator.CATALOG_PATH)
+        generator = self.validator.load_manifest_generator()
+        for skill in catalog["skills"]:
+            manifest_path = self.validator.ROOT / skill["path"] / "skill.yaml"
+            self.assertTrue(
+                manifest_path.is_file(), f"{skill['name']}: skill.yaml is missing"
+            )
+            expected = generator.render_manifest(skill)
+            self.assertEqual(
+                manifest_path.read_text(encoding="utf-8"),
+                expected,
+                f"{skill['name']}: skill.yaml drifted from the catalog",
+            )
+            parsed = self.validator.parse_simple_yaml(expected)
+            self.assertEqual(parsed["id"], skill["name"])
+            self.assertEqual(parsed["path"], skill["path"])
+            self.assertEqual(
+                parsed["requires"],
+                [self.validator.bare_name(d) for d in skill["depends_on"]],
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
