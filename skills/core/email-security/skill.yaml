@@ -8,7 +8,7 @@ category: core
 path: skills/core/email-security
 status: Ready
 priority: 100
-estimated_tokens: 1706
+estimated_tokens: 1746
 owns:
   - "Sender-domain identity and reputation"
   - "Recipient addresses, message content, and security links"

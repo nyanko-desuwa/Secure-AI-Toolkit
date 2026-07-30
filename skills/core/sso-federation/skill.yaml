@@ -8,7 +8,7 @@ category: core
 path: skills/core/sso-federation
 status: Ready
 priority: 100
-estimated_tokens: 1250
+estimated_tokens: 1299
 owns: []
 requires:
   - authentication

@@ -8,7 +8,7 @@ category: core
 path: skills/core/cloud-security
 status: Ready
 priority: 100
-estimated_tokens: 3392
+estimated_tokens: 3602
 owns: []
 requires:
   - secrets-management

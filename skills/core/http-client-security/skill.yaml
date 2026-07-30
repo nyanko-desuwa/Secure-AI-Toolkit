@@ -8,7 +8,7 @@ category: core
 path: skills/core/http-client-security
 status: Ready
 priority: 100
-estimated_tokens: 1212
+estimated_tokens: 1247
 owns:
   - "Cloud and workload credentials reachable through outbound paths"
   - "Internal and metadata-service reachability"

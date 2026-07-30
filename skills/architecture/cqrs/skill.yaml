@@ -8,7 +8,7 @@ category: architecture
 path: skills/architecture/cqrs
 status: Ready
 priority: 40
-estimated_tokens: 3695
+estimated_tokens: 3941
 owns: []
 requires:
   - ddd

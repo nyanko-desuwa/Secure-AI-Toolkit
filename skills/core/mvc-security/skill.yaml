@@ -8,7 +8,7 @@ category: core
 path: skills/core/mvc-security
 status: Ready
 priority: 100
-estimated_tokens: 3458
+estimated_tokens: 3660
 owns: []
 requires:
   - owasp

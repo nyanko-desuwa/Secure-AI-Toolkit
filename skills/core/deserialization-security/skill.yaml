@@ -8,7 +8,7 @@ category: core
 path: skills/core/deserialization-security
 status: Ready
 priority: 100
-estimated_tokens: 1055
+estimated_tokens: 1093
 owns: []
 requires:
   - owasp

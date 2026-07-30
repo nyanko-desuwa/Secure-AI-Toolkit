@@ -103,6 +103,22 @@ A new skill needs all three mandatory conditions - a clear owner boundary, routi
 non-goals - plus at least three of: distinct assets, attack surface, verifiable workflow, primary
 standards, or lifecycle. Otherwise expand an existing owner skill instead of adding a directory.
 
+### `checklist.md` - tier every item
+
+Every verification item (`- [ ]` / `- [x]`) leads with a tier tag: `[critical]`,
+`[recommended]`, or `[optional]`. The router loads critical checks first when context is tight,
+so the tag is what makes a checklist usable under a token budget, not just readable.
+
+- `[critical]` - skipping it leaves an exploitable vulnerability or a broken security control
+  (access control, injection, secrets, crypto correctness, authentication).
+- `[recommended]` - defense-in-depth or hardening most applications should have; its absence is a
+  weakness, not usually a direct exploit.
+- `[optional]` - context-dependent or a refinement; apply when the situation calls for it.
+
+If everything looks `[critical]`, the tiers are not being used - reserve it for checks whose
+failure is a real vulnerability. The validator fails a Ready skill whose checklist has an untiered
+item.
+
 ### Framework and platform coverage, named
 
 State which stacks the guidance was written against and which it only reaches by analogy. A reader
@@ -150,6 +166,7 @@ trigger words alongside English ones. After editing frontmatter, run
 ## Checklist for a new skill
 
 - [ ] All eleven files present, no placeholder text left behind
+- [ ] Every `checklist.md` item tiered `[critical]` / `[recommended]` / `[optional]`
 - [ ] Frontmatter `name` matches the directory name
 - [ ] Every control names a standard and, where applicable, a CWE
 - [ ] `examples/README.md` has at least three vulnerable/fixed pairs, one of them a real-world shape

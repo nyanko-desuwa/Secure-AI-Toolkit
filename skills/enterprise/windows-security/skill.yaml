@@ -8,7 +8,7 @@ category: enterprise
 path: skills/enterprise/windows-security
 status: Ready
 priority: 50
-estimated_tokens: 4511
+estimated_tokens: 4796
 owns: []
 requires:
   - owasp

@@ -8,7 +8,7 @@ category: enterprise
 path: skills/enterprise/mobile-security
 status: Ready
 priority: 50
-estimated_tokens: 3387
+estimated_tokens: 3617
 owns: []
 requires:
   - owasp

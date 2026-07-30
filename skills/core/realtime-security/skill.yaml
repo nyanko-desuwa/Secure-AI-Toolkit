@@ -8,7 +8,7 @@ category: core
 path: skills/core/realtime-security
 status: Ready
 priority: 100
-estimated_tokens: 3287
+estimated_tokens: 3474
 owns: []
 requires:
   - owasp

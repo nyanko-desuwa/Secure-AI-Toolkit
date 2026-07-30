@@ -8,7 +8,7 @@ category: core
 path: skills/core/owasp
 status: Ready
 priority: 100
-estimated_tokens: 1927
+estimated_tokens: 2084
 owns: []
 requires: []
 suggests:

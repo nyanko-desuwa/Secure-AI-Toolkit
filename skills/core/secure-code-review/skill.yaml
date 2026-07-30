@@ -8,7 +8,7 @@ category: core
 path: skills/core/secure-code-review
 status: Ready
 priority: 100
-estimated_tokens: 3567
+estimated_tokens: 3734
 owns: []
 requires:
   - owasp

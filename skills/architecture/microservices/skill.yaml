@@ -8,7 +8,7 @@ category: architecture
 path: skills/architecture/microservices
 status: Ready
 priority: 40
-estimated_tokens: 2606
+estimated_tokens: 2710
 owns: []
 requires: []
 suggests:

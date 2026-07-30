@@ -217,6 +217,42 @@ class ValidateRepositoryTests(unittest.TestCase):
         self.assertEqual(generator.compute_priority({"category": "enterprise"}), 50)
         self.assertEqual(generator.compute_priority({"category": "architecture"}), 40)
 
+    def test_checklist_tier_regex_accepts_only_leading_tags(self):
+        accept = self.validator.CHECKLIST_TIER_RE
+        self.assertTrue(accept.match("[critical] Every object read is scoped"))
+        self.assertTrue(accept.match("[recommended] Rate limiting on sensitive flows"))
+        self.assertTrue(accept.match("[optional] Consider a WAF rule"))
+        self.assertIsNone(accept.match("Every object read is scoped"))
+        self.assertIsNone(accept.match("[urgent] not a real tier"))
+        self.assertIsNone(accept.match("[critical]"))  # tag but no item text
+
+    def test_validate_checklist_tiers_flags_untiered_item(self):
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "skills" / "core" / "alpha").mkdir(parents=True)
+            checklist = root / "skills" / "core" / "alpha" / "checklist.md"
+            checklist.write_text(
+                "## Section\n\n"
+                "- [ ] [critical] A tiered check the reviewer can answer\n"
+                "- [ ] An untiered check that should be flagged\n",
+                encoding="utf-8",
+            )
+            skill = copy.deepcopy(sample_catalog()["skills"][0])
+            skill["path"] = "skills/core/alpha"
+            original_root = self.validator.ROOT
+            self.validator.ROOT = root
+            try:
+                report = self.validator.Report()
+                self.validator.validate_checklist_tiers({"alpha": skill}, report)
+            finally:
+                self.validator.ROOT = original_root
+            messages = "\n".join(report.errors)
+            self.assertIn("checklist.md:4", messages)
+            self.assertIn("not tiered", messages)
+            self.assertNotIn("checklist.md:3", messages)
+
     def test_catalog_budget_matches_computed_values(self):
         catalog = self.validator.load_json(self.validator.CATALOG_PATH)
         generator = self.validator.load_manifest_generator()

@@ -8,7 +8,7 @@ category: core
 path: skills/core/file-upload-security
 status: Ready
 priority: 100
-estimated_tokens: 2631
+estimated_tokens: 2750
 owns: []
 requires:
   - owasp

@@ -5,93 +5,93 @@ Run before returning pipeline code or policy. Mark each item pass, fail, or not 
 
 ## Gate Design (A03:2025 · ASVS V15 · NIST SSDF PW)
 
-- [ ] Every blocking check has a documented failure condition, not just a scanner exit code
-- [ ] Blocking checks run in under ten minutes on a normal PR
-- [ ] Each blocking rule has a tested false positive rate near zero
-- [ ] Findings outside the blocking set create alerts or tickets instead of failing all builds
-- [ ] New tools are baselined; only new or changed findings block the first rollout
-- [ ] The baseline has an owner and a burn-down date. It is not a permanent ignore file
-- [ ] `continue-on-error`, `|| true`, and soft-fail flags are intentional and documented
+- [ ] [recommended] Every blocking check has a documented failure condition, not just a scanner exit code
+- [ ] [recommended] Blocking checks run in under ten minutes on a normal PR
+- [ ] [recommended] Each blocking rule has a tested false positive rate near zero
+- [ ] [recommended] Findings outside the blocking set create alerts or tickets instead of failing all builds
+- [ ] [recommended] New tools are baselined; only new or changed findings block the first rollout
+- [ ] [recommended] The baseline has an owner and a burn-down date. It is not a permanent ignore file
+- [ ] [recommended] `continue-on-error`, `|| true`, and soft-fail flags are intentional and documented
 
 ## Stage Placement (A03:2025 · ASVS V15 · NIST SSDF PW.5)
 
-- [ ] Secret scanning on changed content runs pre-commit and again on the server
-- [ ] Fast SAST rules run on changed files before commit or on the PR
-- [ ] SCA runs when a manifest or lockfile changes and periodically for new advisories
-- [ ] IaC scanning runs on changed Terraform, Kubernetes, and cloud templates at PR time
-- [ ] Container scanning runs on the built image by digest, not only on the Dockerfile
-- [ ] DAST runs against an isolated deployed target, normally nightly or before release
-- [ ] Licence policy runs when the dependency graph changes and before release
+- [ ] [critical] Secret scanning on changed content runs pre-commit and again on the server
+- [ ] [recommended] Fast SAST rules run on changed files before commit or on the PR
+- [ ] [recommended] SCA runs when a manifest or lockfile changes and periodically for new advisories
+- [ ] [recommended] IaC scanning runs on changed Terraform, Kubernetes, and cloud templates at PR time
+- [ ] [recommended] Container scanning runs on the built image by digest, not only on the Dockerfile
+- [ ] [recommended] DAST runs against an isolated deployed target, normally nightly or before release
+- [ ] [recommended] Licence policy runs when the dependency graph changes and before release
 
 ## GitHub Actions Permissions (A08:2025 · ASVS V13, V15 · CWE-829)
 
-- [ ] Top-level `permissions: {}` or a minimal read default is present
-- [ ] Each job grants only the `GITHUB_TOKEN` scopes it needs
-- [ ] Only the OIDC job has `id-token: write`
-- [ ] Only the publishing job has `contents: write` or `packages: write`
-- [ ] Workflows triggered by fork PRs do not receive secrets or a write token
-- [ ] `pull_request_target` never checks out or executes code controlled by the PR
-- [ ] `workflow_run` jobs treat downloaded artifacts as untrusted data and never execute them
-- [ ] Third-party actions are pinned to full 40-character commit SHAs with a version comment
-- [ ] Action updates are reviewed as executable code changes
+- [ ] [recommended] Top-level `permissions: {}` or a minimal read default is present
+- [ ] [recommended] Each job grants only the `GITHUB_TOKEN` scopes it needs
+- [ ] [recommended] Only the OIDC job has `id-token: write`
+- [ ] [recommended] Only the publishing job has `contents: write` or `packages: write`
+- [ ] [critical] Workflows triggered by fork PRs do not receive secrets or a write token
+- [ ] [critical] `pull_request_target` never checks out or executes code controlled by the PR
+- [ ] [critical] `workflow_run` jobs treat downloaded artifacts as untrusted data and never execute them
+- [ ] [critical] Third-party actions are pinned to full 40-character commit SHAs with a version comment
+- [ ] [recommended] Action updates are reviewed as executable code changes
 
 ## CI Secrets (A03:2025 · A08:2025 · ASVS V13 · CWE-829)
 
-- [ ] No long-lived cloud access key is stored in repository, organization, or runner variables
-- [ ] Cloud authentication uses OIDC with repository, branch/tag, and environment conditions
-- [ ] Secret values are passed only to the exact step that needs them
-- [ ] No `echo`, `printenv`, `set -x`, `ACTIONS_STEP_DEBUG`, or verbose SDK logging can print secrets
-- [ ] Error handling does not serialize request headers, environment variables, or credentials
-- [ ] Logs, artifacts, test reports, and caches are checked as possible exfiltration channels
-- [ ] Any secret previously printed or committed is rotated, not merely masked or deleted
+- [ ] [critical] No long-lived cloud access key is stored in repository, organization, or runner variables
+- [ ] [critical] Cloud authentication uses OIDC with repository, branch/tag, and environment conditions
+- [ ] [recommended] Secret values are passed only to the exact step that needs them
+- [ ] [critical] No `echo`, `printenv`, `set -x`, `ACTIONS_STEP_DEBUG`, or verbose SDK logging can print secrets
+- [ ] [critical] Error handling does not serialize request headers, environment variables, or credentials
+- [ ] [recommended] Logs, artifacts, test reports, and caches are checked as possible exfiltration channels
+- [ ] [critical] Any secret previously printed or committed is rotated, not merely masked or deleted
 
 ## Dependencies and Licences (A03:2025 · ASVS V15 · CWE-1104, CWE-829)
 
-- [ ] Exact lockfiles are committed and CI installs from them without re-resolving
-- [ ] Build tools, actions, base images, and dependencies are pinned to immutable identifiers
-- [ ] New dependency names are checked for typosquatting and ownership changes
-- [ ] Install scripts and build plugins in updates are reviewed as executable code
-- [ ] Automatic merge is limited to patch updates of development dependencies
-- [ ] Required checks and branch protection still apply to automated updates
-- [ ] Production, major, action, image, and digest updates require review
-- [ ] Licence allow/deny/review policy includes transitive dependencies and dual licences
+- [ ] [recommended] Exact lockfiles are committed and CI installs from them without re-resolving
+- [ ] [recommended] Build tools, actions, base images, and dependencies are pinned to immutable identifiers
+- [ ] [critical] New dependency names are checked for typosquatting and ownership changes
+- [ ] [critical] Install scripts and build plugins in updates are reviewed as executable code
+- [ ] [recommended] Automatic merge is limited to patch updates of development dependencies
+- [ ] [recommended] Required checks and branch protection still apply to automated updates
+- [ ] [recommended] Production, major, action, image, and digest updates require review
+- [ ] [recommended] Licence allow/deny/review policy includes transitive dependencies and dual licences
 
 ## SBOM and Artifact Integrity (A03:2025 · A08:2025 · ASVS V15 · SLSA 1.2)
 
-- [ ] CycloneDX or SPDX SBOM is generated during the build from the resolved dependency graph
-- [ ] SBOM describes the shipped artifact, including bundled and transitive components
-- [ ] SBOM is stored beside the immutable artifact and bound by digest or attestation
-- [ ] Artifact digest is passed between jobs and verified before use
-- [ ] Build provenance is generated by the build platform, not handcrafted by the build script
-- [ ] Release artifacts or images are signed with cosign or an equivalent system
-- [ ] Deployment or admission policy verifies issuer, identity, signature, digest, and provenance
-- [ ] Reproducible build inputs are pinned where the ecosystem supports it
+- [ ] [recommended] CycloneDX or SPDX SBOM is generated during the build from the resolved dependency graph
+- [ ] [recommended] SBOM describes the shipped artifact, including bundled and transitive components
+- [ ] [recommended] SBOM is stored beside the immutable artifact and bound by digest or attestation
+- [ ] [critical] Artifact digest is passed between jobs and verified before use
+- [ ] [recommended] Build provenance is generated by the build platform, not handcrafted by the build script
+- [ ] [recommended] Release artifacts or images are signed with cosign or an equivalent system
+- [ ] [critical] Deployment or admission policy verifies issuer, identity, signature, digest, and provenance
+- [ ] [recommended] Reproducible build inputs are pinned where the ecosystem supports it
 
 ## Runner and Deployment Boundary (A08:2025 · ASVS V13 · SLSA Build L3)
 
-- [ ] Public fork code runs only on GitHub-hosted or single-use isolated runners
-- [ ] Self-hosted runners are ephemeral, network-restricted, and have no ambient credentials
-- [ ] Runner groups restrict which repositories and workflows may use privileged runners
-- [ ] Caches cannot be poisoned across trusted and untrusted refs
-- [ ] Deployment environments require reviewer approval for sensitive targets
-- [ ] Branch protection/rulesets require reviews, status checks, and conversation resolution
-- [ ] Administrators and service accounts cannot silently bypass protections without audit
+- [ ] [critical] Public fork code runs only on GitHub-hosted or single-use isolated runners
+- [ ] [critical] Self-hosted runners are ephemeral, network-restricted, and have no ambient credentials
+- [ ] [recommended] Runner groups restrict which repositories and workflows may use privileged runners
+- [ ] [critical] Caches cannot be poisoned across trusted and untrusted refs
+- [ ] [recommended] Deployment environments require reviewer approval for sensitive targets
+- [ ] [recommended] Branch protection/rulesets require reviews, status checks, and conversation resolution
+- [ ] [critical] Administrators and service accounts cannot silently bypass protections without audit
 
 ## Vulnerability Management (A03:2025 · ASVS V15 · NIST SSDF RV)
 
-- [ ] Findings are deduplicated and assigned to an owner
-- [ ] Severity accounts for reachability, exposure, exploit maturity, privilege, and blast radius
-- [ ] Remediation SLAs are defined by the organization and measured
-- [ ] Exceptions record risk, compensating control, approver, owner, and expiry date
-- [ ] Expired exceptions reopen automatically or block according to policy
-- [ ] Fixes include a regression test, rule, or detection improvement where practical
-- [ ] Security champions have a short escalation path for ambiguous findings
+- [ ] [recommended] Findings are deduplicated and assigned to an owner
+- [ ] [recommended] Severity accounts for reachability, exposure, exploit maturity, privilege, and blast radius
+- [ ] [recommended] Remediation SLAs are defined by the organization and measured
+- [ ] [recommended] Exceptions record risk, compensating control, approver, owner, and expiry date
+- [ ] [recommended] Expired exceptions reopen automatically or block according to policy
+- [ ] [recommended] Fixes include a regression test, rule, or detection improvement where practical
+- [ ] [recommended] Security champions have a short escalation path for ambiguous findings
 
 ## Before Returning
 
-- [ ] YAML and scanner configuration parse successfully
-- [ ] Vulnerable and fixed test fixtures exercise each custom rule
-- [ ] Required job names match branch protection configuration
-- [ ] No example secret or production account identifier was introduced
-- [ ] Tool versions, action SHAs, and standard versions are stated honestly
-- [ ] Anything not tested in a live CI run is identified as unverified
+- [ ] [critical] YAML and scanner configuration parse successfully
+- [ ] [critical] Vulnerable and fixed test fixtures exercise each custom rule
+- [ ] [recommended] Required job names match branch protection configuration
+- [ ] [recommended] No example secret or production account identifier was introduced
+- [ ] [critical] Tool versions, action SHAs, and standard versions are stated honestly
+- [ ] [critical] Anything not tested in a live CI run is identified as unverified

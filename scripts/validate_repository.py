@@ -52,6 +52,12 @@ OWNERSHIP_HEADING = "## Ownership Boundary"
 GRAPH_START = "<!-- GENERATED SKILL GRAPH: START -->"
 GRAPH_END = "<!-- GENERATED SKILL GRAPH: END -->"
 
+CHECKLIST_TIERS = ("critical", "recommended", "optional")
+# A checklist verification item: "- [ ] ..." (unchecked) or "- [x] ..." (checked).
+CHECKLIST_ITEM_RE = re.compile(r"^\s*- \[[ xX]\]\s+(.*)$")
+# A tiered item leads with one of the three tags: "- [ ] [critical] ...".
+CHECKLIST_TIER_RE = re.compile(r"^\[(critical|recommended|optional)\]\s+\S")
+
 
 def catalog_ref(ref: str) -> str:
     """Return the canonical catalog name from a human-readable graph reference."""
@@ -518,6 +524,30 @@ def validate_filesystem(catalog: dict[str, Any], report: Report) -> dict[str, di
     return skills
 
 
+def validate_checklist_tiers(skills: dict[str, dict[str, Any]], report: Report) -> None:
+    """Every checklist verification item must carry a leading tier tag.
+
+    The tag (`[critical]`, `[recommended]`, `[optional]`) lets the router load the
+    critical checks first when context is tight (ties to priority/estimated_tokens).
+    Only `- [ ]` / `- [x]` items are checked; prose bullets are ignored.
+    """
+    for name, skill in skills.items():
+        if skill.get("status") != "Ready":
+            continue
+        checklist = ROOT / skill["path"] / "checklist.md"
+        if not checklist.is_file():
+            continue
+        for lineno, line in enumerate(checklist.read_text(encoding="utf-8").splitlines(), 1):
+            item = CHECKLIST_ITEM_RE.match(line)
+            if not item:
+                continue
+            if not CHECKLIST_TIER_RE.match(item.group(1)):
+                report.err(
+                    f"{name}: checklist.md:{lineno} item is not tiered "
+                    "(prefix with [critical], [recommended], or [optional])"
+                )
+
+
 def validate_graph_edges(skills: dict[str, dict[str, Any]], report: Report) -> None:
     names = set(skills)
     for name, skill in skills.items():
@@ -919,6 +949,7 @@ def main(argv: list[str] | None = None) -> int:
 
     skills = validate_filesystem(catalog, report)
     validate_graph_edges(skills, report)
+    validate_checklist_tiers(skills, report)
     validate_skill_manifests(catalog, report)
     validate_skill_graph(catalog, report)
     validate_counts_in_docs(catalog, report)

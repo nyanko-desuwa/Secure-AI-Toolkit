@@ -8,7 +8,7 @@ category: core
 path: skills/core/brute-force-defense
 status: Ready
 priority: 100
-estimated_tokens: 3406
+estimated_tokens: 3618
 owns: []
 requires:
   - authentication

@@ -8,7 +8,7 @@ category: enterprise
 path: skills/enterprise/kubernetes-security
 status: Ready
 priority: 50
-estimated_tokens: 3860
+estimated_tokens: 4166
 owns: []
 requires:
   - docker-security

@@ -8,7 +8,7 @@ category: advanced
 path: skills/advanced/supply-chain-security
 status: Ready
 priority: 70
-estimated_tokens: 3470
+estimated_tokens: 3656
 owns: []
 requires:
   - devsecops
