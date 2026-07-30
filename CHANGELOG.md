@@ -43,6 +43,7 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
   contained a triple-quoted string starting at column 0, which terminated the block scalar and
   made the whole workflow file invalid - GitHub reported the run by file path instead of workflow
   name and every run failed. The body rendering now lives in `scripts/render_link_issue.py`.
+- Pinned GitHub Actions bumped to their latest majors (all runners are GitHub-hosted `ubuntu-latest`, which support the Node 24 runtime these majors require): `actions/checkout` 4.2.2 to 7.0.1, `actions/setup-python` 5.6.0 to 7.0.0, `actions/upload-artifact` 4.6.2 to 7.0.1, and `softprops/action-gh-release` 2.3.2 to 3.0.2. No workflow relies on the inputs removed or changed in these majors (`setup-python`'s `pip-install`, `upload-artifact`'s `archive`, or `checkout`'s fork-PR default).
 - `.github/dependabot.yml` adds a weekly `pip` ecosystem alongside `github-actions`.
 - Catalog ownership is now the routing source for pilot boundaries: each states protected assets
   and explicit hand-offs. The validator reports legacy coverage as warnings, blocks malformed pilot
