@@ -1,0 +1,19 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: blockchain-security
+name: blockchain-security
+version: 1.0.0
+category: enterprise
+path: skills/enterprise/blockchain-security
+status: Ready
+priority: 50
+estimated_tokens: 3545
+owns: []
+requires:
+  - owasp
+suggests:
+  - api-security
+  - secrets-management
+conflicts: []
+frameworks: []

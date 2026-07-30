@@ -1,0 +1,25 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: ai-security
+name: ai-security
+version: 1.0.0
+category: core
+path: skills/core/ai-security
+status: Ready
+priority: 100
+estimated_tokens: 3315
+owns:
+  - "Private data and credentials exposed to model contexts"
+  - "Tool authority, side effects, and outbound channels available to agents"
+  - "Retrieval content, model instructions, and AI workflow availability budget"
+requires:
+  - owasp
+suggests:
+  - api-security
+  - secrets-management
+  - supply-chain-security
+  - email-security
+  - http-client-security
+conflicts: []
+frameworks: []

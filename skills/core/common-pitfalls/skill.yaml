@@ -1,0 +1,22 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: common-pitfalls
+name: common-pitfalls
+version: 1.0.0
+category: core
+path: skills/core/common-pitfalls
+status: Ready
+priority: 100
+estimated_tokens: 3445
+owns: []
+requires: []
+suggests:
+  - secrets-management
+  - frontend-security
+  - api-security
+  - database-security
+  - logging-audit
+  - performance
+conflicts: []
+frameworks: []

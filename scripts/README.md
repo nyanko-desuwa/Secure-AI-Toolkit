@@ -5,7 +5,8 @@ validation, install, and release orchestration.
 
 | Script | Purpose |
 |---|---|
-| `validate_repository.py` | Canonical validator (catalog, ownership, generated graph, skill shape, frontmatter, internal links, changelog extract) |
+| `validate_repository.py` | Canonical validator (catalog, ownership, generated graph, skill manifests, skill shape, frontmatter, internal links, changelog extract) |
+| `generate_skill_manifests.py` | Projects `catalog/skills.json` into a `skill.yaml` next to each `SKILL.md`; `--check` fails on drift |
 | `check_external_links.py` | Advisory external Markdown-link monitor for scheduled CI; never a release gate |
 | `render_link_issue.py` | Renders the advisory external-link issue body and state files for CI |
 | `validate-repository.sh` / `Validate-Repository.ps1` | Launchers |
@@ -18,6 +19,8 @@ validation, install, and release orchestration.
 python scripts/validate_repository.py
 python scripts/validate_repository.py --write-frontmatter   # align allowed-tools
 python scripts/validate_repository.py --write-skill-graph   # regenerate catalog-derived graph tables
+python scripts/generate_skill_manifests.py                  # regenerate every skill.yaml from the catalog
+python scripts/generate_skill_manifests.py --check          # fail if any skill.yaml drifted
 python scripts/validate_repository.py --report-boundaries   # print ownership and hand-offs
 python scripts/validate_repository.py --extract-changelog 1.0.1
 python -m unittest discover -s tests -t . -v

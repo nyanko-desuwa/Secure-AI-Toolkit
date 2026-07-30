@@ -1,0 +1,22 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: ddd
+name: ddd
+version: 1.0.0
+category: architecture
+path: skills/architecture/ddd
+status: Ready
+priority: 40
+estimated_tokens: 3250
+owns: []
+requires: []
+suggests:
+  - owasp
+  - secure-architecture
+  - cqrs
+  - performance
+  - database-security
+  - event-driven
+conflicts: []
+frameworks: []

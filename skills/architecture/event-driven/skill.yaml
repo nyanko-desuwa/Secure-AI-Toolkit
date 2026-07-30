@@ -1,0 +1,23 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: event-driven
+name: event-driven
+version: 1.0.0
+category: architecture
+path: skills/architecture/event-driven
+status: Ready
+priority: 40
+estimated_tokens: 4208
+owns: []
+requires: []
+suggests:
+  - owasp
+  - api-security
+  - performance
+  - scalability
+  - secure-architecture
+  - email-security
+  - http-client-security
+conflicts: []
+frameworks: []

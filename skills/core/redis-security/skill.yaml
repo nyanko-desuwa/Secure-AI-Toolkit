@@ -1,0 +1,30 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: redis-security
+name: redis-security
+version: 1.0.0
+category: core
+path: skills/core/redis-security
+status: Ready
+priority: 100
+estimated_tokens: 3179
+owns:
+  - "Redis/Valkey data, ACL identities, and transport credentials"
+  - "Session, revocation, limiter, queue, and cache state stored in Redis/Valkey"
+  - "Persistence files, replicas, backups, and administrative control surfaces"
+requires: []
+suggests:
+  - authentication
+  - brute-force-defense
+  - secrets-management
+  - logging-audit
+  - database-security
+  - docker-security
+  - cloud-security
+  - network-security
+  - incident-response
+  - scalability
+  - event-driven
+conflicts: []
+frameworks: []

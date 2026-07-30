@@ -1,0 +1,27 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: api-security
+name: api-security
+version: 1.0.0
+category: core
+path: skills/core/api-security
+status: Ready
+priority: 100
+estimated_tokens: 3438
+owns:
+  - "API-exposed objects, functions, fields, and tenant-scoped data"
+  - "Webhook events and idempotent API state transitions"
+  - "API availability budget and response data"
+requires:
+  - owasp
+suggests:
+  - authentication
+  - logging-audit
+  - secure-code-review
+  - brute-force-defense
+  - performance
+  - email-security
+  - http-client-security
+conflicts: []
+frameworks: []

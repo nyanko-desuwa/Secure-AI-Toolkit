@@ -1,0 +1,23 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: windows-security
+name: windows-security
+version: 1.0.0
+category: enterprise
+path: skills/enterprise/windows-security
+status: Ready
+priority: 50
+estimated_tokens: 4511
+owns: []
+requires:
+  - owasp
+suggests:
+  - ssh-server
+  - logging-audit
+  - secrets-management
+  - mvc-security
+  - network-security
+  - compliance
+conflicts: []
+frameworks: []
