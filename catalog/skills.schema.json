@@ -73,6 +73,10 @@
           "type": "array",
           "items": { "type": "string", "minLength": 1 }
         },
+        "conflicts": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
         "loads": {
           "type": "array",
           "items": { "type": "string" }

@@ -7,7 +7,14 @@ relationships:
 |---|---|
 | `depends_on` | Load this first. The skill assumes its guidance and does not restate it. Skipping it produces a partial review. |
 | `related` | Load when the change also touches that boundary. Useful, not assumed. |
+| `conflicts` | Do not load both for the same decision; they give opposing guidance. Must be symmetric. |
 | `loads` | Supporting files the skill's workflow points at directly. |
+
+The machine-readable form of these edges lives in each skill's `skill.yaml` (`requires` =
+`depends_on`, `suggests` = `related`, plus `conflicts`), generated from the catalog. This table is
+the human-readable view of the same graph. The validator enforces: no `depends_on` cycle, no
+dangling edge to a non-existent skill, and symmetric `conflicts`; a one-directional `related`
+without its reverse is reported as an advisory count, not a failure.
 
 `depends_on` is the column that matters. A `docker-security` review that never loaded
 `secrets-management` will miss the build-arg credential, because `docker-security` treats that

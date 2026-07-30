@@ -102,6 +102,46 @@ class ValidateRepositoryTests(unittest.TestCase):
         self.assertIn("must not route to itself", messages)
         self.assertIn("depends_on cycle", messages)
 
+    def test_graph_rejects_dangling_conflict_edge(self):
+        first = copy.deepcopy(sample_catalog()["skills"][0])
+        first["conflicts"] = ["ghost"]
+        report = self.validator.Report()
+        self.validator.validate_graph_edges({"alpha": first}, report)
+        self.assertIn("conflicts unknown skill", "\n".join(report.errors))
+
+    def test_graph_rejects_asymmetric_conflict(self):
+        first = copy.deepcopy(sample_catalog()["skills"][0])
+        second = copy.deepcopy(first)
+        second["name"] = "beta"
+        second["path"] = "skills/core/beta"
+        first["conflicts"] = ["beta"]
+        second["conflicts"] = []
+        report = self.validator.Report()
+        self.validator.validate_graph_edges({"alpha": first, "beta": second}, report)
+        self.assertIn("conflicts must be symmetric", "\n".join(report.errors))
+
+    def test_graph_accepts_symmetric_conflict(self):
+        first = copy.deepcopy(sample_catalog()["skills"][0])
+        second = copy.deepcopy(first)
+        second["name"] = "beta"
+        second["path"] = "skills/core/beta"
+        first["conflicts"] = ["beta"]
+        second["conflicts"] = ["alpha"]
+        report = self.validator.Report()
+        self.validator.validate_graph_edges({"alpha": first, "beta": second}, report)
+        self.assertNotIn("conflicts must be symmetric", "\n".join(report.errors))
+
+    def test_graph_warns_on_one_directional_related(self):
+        first = copy.deepcopy(sample_catalog()["skills"][0])
+        second = copy.deepcopy(first)
+        second["name"] = "beta"
+        second["path"] = "skills/core/beta"
+        first["related"] = ["beta"]
+        second["related"] = []
+        report = self.validator.Report()
+        self.validator.validate_graph_edges({"alpha": first, "beta": second}, report)
+        self.assertIn("one-directional related edge", "\n".join(report.warnings))
+
     def test_generated_graph_changes_when_relationship_changes(self):
         catalog = sample_catalog()
         text = "before\n<!-- GENERATED SKILL GRAPH: START -->\nstale\n<!-- GENERATED SKILL GRAPH: END -->\nafter\n"

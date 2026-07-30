@@ -6,6 +6,14 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ### Added
 
+- Typed relationship edges in the skill graph. `catalog/skills.json` now accepts an optional
+  `conflicts` array alongside `depends_on` (→ `requires`) and `related` (→ `suggests`), and each
+  edge type is projected into `skill.yaml`. `scripts/validate_repository.py` gained a graph pass
+  that fails on a `depends_on`/`requires` cycle, a dangling edge to a non-existent skill (across
+  `depends_on`, `related`, and `conflicts`), and an asymmetric `conflicts` edge (A conflicts with B
+  but B does not list A). One-directional `related` edges are surfaced as an advisory count rather
+  than a hard failure, since related is authored directionally today. Offline `unittest` coverage
+  added for each failure mode.
 - Context-budget metadata (`priority` and `estimated_tokens`) is now a required field on every
   catalog skill and is projected into each `skill.yaml`. `priority` is a category-derived load-order
   weight (core 100, advanced 70, enterprise 50, architecture 40); `estimated_tokens` measures the

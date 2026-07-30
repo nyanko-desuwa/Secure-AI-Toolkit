@@ -533,6 +533,12 @@ def validate_graph_edges(skills: dict[str, dict[str, Any]], report: Report) -> N
                 report.err(f"{name}: related unknown skill {rel!r}")
             if b == name:
                 report.err(f"{name}: related self")
+        for con in skill.get("conflicts", []):
+            b = bare_name(con)
+            if b not in names:
+                report.err(f"{name}: conflicts unknown skill {con!r}")
+            if b == name:
+                report.err(f"{name}: conflicts self")
 
         ownership = skill.get("ownership")
         if isinstance(ownership, dict):
@@ -564,6 +570,41 @@ def validate_graph_edges(skills: dict[str, dict[str, Any]], report: Report) -> N
 
     for name in skills:
         visit(name)
+
+    # conflicts must be symmetric: if A conflicts with B, B conflicts with A.
+    # This is a hard error because conflicts are authored fresh (no legacy backlog)
+    # and an asymmetric conflict is a routing bug - one side would load the other.
+    for name, skill in skills.items():
+        for con in skill.get("conflicts", []):
+            other = bare_name(con)
+            if other not in skills:
+                continue
+            other_conflicts = {bare_name(c) for c in skills[other].get("conflicts", [])}
+            if name not in other_conflicts:
+                report.err(
+                    f"{name}: conflicts {other!r} but {other} does not list {name} back "
+                    "(conflicts must be symmetric)"
+                )
+
+    # related is directionally authored today (159 of 245 edges are one-directional),
+    # so a missing reverse is advisory, not a hard failure. Surfacing the count keeps
+    # the author's "a one-directional relationship is usually an oversight" note honest
+    # without forcing a mass-symmetrization that would bloat every skill's related list
+    # and break the loading budget. Enforce symmetry only for conflicts (above).
+    one_directional = 0
+    for name, skill in skills.items():
+        for rel in skill.get("related", []):
+            other = bare_name(rel)
+            if other not in skills:
+                continue
+            back = {bare_name(r) for r in skills[other].get("related", [])}
+            if name not in back:
+                one_directional += 1
+    if one_directional:
+        report.warn(
+            f"{one_directional} one-directional related edge(s) have no reverse; "
+            "add the reverse edge where the relationship is mutual"
+        )
 
     for name, skill in skills.items():
         ownership = skill.get("ownership")
