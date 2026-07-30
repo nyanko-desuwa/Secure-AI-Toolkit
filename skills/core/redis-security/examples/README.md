@@ -111,7 +111,7 @@ const script = "return redis.call('GET', KEYS[1])";
 await client.eval(script, 1, `cache:${allowlistedId}`);
 ```
 
-The fixed form prevents input from changing the program. The ACL still restricts the script’s user to its intended key namespace.
+The fixed form prevents input from changing the program. The ACL still restricts the script's user to its intended key namespace.
 
 ## Sensitive Redis observability exported raw
 

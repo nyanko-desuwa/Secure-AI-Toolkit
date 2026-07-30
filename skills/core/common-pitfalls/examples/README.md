@@ -389,7 +389,7 @@ export async function getProfile(handle: string): Promise<Profile> {
 }
 ```
 
-`GET /profile/aaaa1`, `aaaa2`, `aaaa3`… each one adds an entry forever. Caching the `null` result
+`GET /profile/aaaa1`, `aaaa2`, `aaaa3`... each one adds an entry forever. Caching the `null` result
 means invalid handles are the cheapest way to fill it.
 
 Fixed - bounded size, TTL, and do not cache misses:

@@ -161,7 +161,7 @@ Enable on the remote host - required for both modes:
 
 ```
 Computer Configuration\Administrative Templates\System\Credentials Delegation
-  → "Remote host allows delegation of nonexportable credentials" = Enabled
+  => "Remote host allows delegation of nonexportable credentials" = Enabled
 ```
 
 Registry equivalent: `HKLM\SYSTEM\CurrentControlSet\Control\Lsa`, `DisableRestrictedAdmin`
@@ -171,7 +171,7 @@ Enforce on the client:
 
 ```
 Computer Configuration\Administrative Templates\System\Credentials Delegation
-  → "Restrict delegation of credentials to remote servers" = Enabled
+  => "Restrict delegation of credentials to remote servers" = Enabled
      "Restrict Credential Delegation"  (prefers RCG, falls back to Restricted Admin)
      or "Require Remote Credential Guard"
 ```

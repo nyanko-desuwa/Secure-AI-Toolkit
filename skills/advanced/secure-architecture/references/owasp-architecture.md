@@ -24,7 +24,7 @@ canonical example.
 
 Design questions:
 
-- Where is the single point that resolves subject → permitted resources? If there are several,
+- Where is the single point that resolves subject => permitted resources? If there are several,
   they will drift.
 - Can a request reach the data store without passing that point? Internal callers, batch jobs,
   admin tools, and replicas all count.

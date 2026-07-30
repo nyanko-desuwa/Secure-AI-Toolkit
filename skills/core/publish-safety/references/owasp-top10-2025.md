@@ -4,7 +4,7 @@ Source: <https://owasp.org/Top10/2025/> · verified 2026-07-28
 
 The 2025 edition is not a renumbering of 2021. A03 and A10 are new, and Injection moved from A03
 to A05. If a project's tooling still emits 2021 IDs, map them rather than renumbering silently.
-The full category list and the 2021 → 2025 mapping live in
+The full category list and the 2021 => 2025 mapping live in
 [owasp/references/owasp-top10-2025.md](../../owasp/references/owasp-top10-2025.md); this file only
 covers the four categories a publish decision lands on.
 

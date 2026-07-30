@@ -6,7 +6,7 @@ Secure application-initiated HTTP(S), from destination construction to response 
 
 Named stacks: Node fetch/undici, Python requests/httpx, Java HttpClient/Spring WebClient, .NET
 HttpClient/IHttpClientFactory, and Go net/http. Their defaults and option names are
-version-sensitive; use this skill’s boundary controls, then verify the deployed library docs.
+version-sensitive; use this skill's boundary controls, then verify the deployed library docs.
 
 ## Limitations
 

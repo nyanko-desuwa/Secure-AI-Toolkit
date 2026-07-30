@@ -4,7 +4,7 @@ Source: <https://genai.owasp.org/llm-top-10/>
 Verified: 2026-07-28, fetched from the OWASP GenAI Security Project site.
 
 This list is maintained by the OWASP GenAI Security Project (formerly the OWASP Top 10 for
-LLM Applications project). The IDs changed between the 2023–24 edition and 2025 - do not
+LLM Applications project). The IDs changed between the 2023-24 edition and 2025 - do not
 carry an ID over from an older document without re-checking it.
 
 ## Categories
@@ -60,9 +60,9 @@ The same project runs an Agentic Security Initiative
 as of 2026-07-28:
 
 - *OWASP Top 10 for Agentic Applications for 2026* (posted 2025-12-09)
-- *Agentic AI – Threats and Mitigations* (threat taxonomy, with sample implementations in the project's GitHub repo)
+- *Agentic AI - Threats and Mitigations* (threat taxonomy, with sample implementations in the project's GitHub repo)
 - *A Practical Guide for Secure MCP Server Development* (2026-02)
-- *CheatSheet – A Practical Guide for Securely Using Third-Party MCP Servers 1.0* (2025-11)
+- *CheatSheet - A Practical Guide for Securely Using Third-Party MCP Servers 1.0* (2025-11)
 - *State of Agentic AI Security and Governance 2.01* (2026-06)
 
 Honest limitation: the category IDs and names inside the Agentic Top 10, and the

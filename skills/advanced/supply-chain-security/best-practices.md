@@ -355,7 +355,7 @@ packages you decided to trust with code execution, instead of trying to predict 
 
 ## Isolate the Build
 
-`A03:2025` · ASVS V13 · SLSA Build L2 → L3
+`A03:2025` · ASVS V13 · SLSA Build L2 => L3
 
 Two properties define a trustworthy build: the provenance is produced by the platform rather
 than the build script, and one build cannot reach another or reach the signing key.

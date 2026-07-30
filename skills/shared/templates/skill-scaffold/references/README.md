@@ -29,7 +29,7 @@ So every reference file opens with:
 ```
 
 Fetch the source when you write it. Do not reconstruct a category list from memory: the
-2021→2025 Top 10 renumbering is exactly the kind of change that looks plausible either way.
+2021=>2025 Top 10 renumbering is exactly the kind of change that looks plausible either way.
 
 ## Worked example
 

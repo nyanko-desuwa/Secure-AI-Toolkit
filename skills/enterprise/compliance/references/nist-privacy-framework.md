@@ -4,8 +4,8 @@ Checked: 2026-07-28
 
 Primary source fetched: <https://www.nist.gov/privacy-framework/privacy-framework>
 
-The page identifies the published framework as Version 1.0 (January 2020), titled “The NIST
-Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management.” The site
+The page identifies the published framework as Version 1.0 (January 2020), titled "The NIST
+Privacy Framework: A Tool for Improving Privacy through Enterprise Risk Management." The site
 also lists Version 1.1 as a new project/working effort; this skill does not treat that as a final
 published edition.
 

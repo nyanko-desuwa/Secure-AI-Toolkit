@@ -24,8 +24,8 @@ CWE-538, CWE-798, CWE-615, CWE-532 - each verified against its source, with the 
 ## How It Works
 
 Plain Markdown. Nothing executes. An assistant reads `SKILL.md`, follows the six-step workflow
-(inventory what ships → scan history → scan the built artifact → check the packaging manifest →
-check the human channels → verify and report), and pulls in the supporting file it needs at each
+(inventory what ships => scan history => scan the built artifact => check the packaging manifest =>
+check the human channels => verify and report), and pulls in the supporting file it needs at each
 step.
 
 ```text

@@ -88,7 +88,7 @@ the exfiltration channel.
 
 ## The standard has moved
 
-The LLM Top 10 renumbered and renamed categories between the 2023–24 and 2025 editions, and
+The LLM Top 10 renumbered and renamed categories between the 2023-24 and 2025 editions, and
 the Agentic Security Initiative publishes separately on its own cadence. Category IDs here
 were verified on 2026-07-28 - see [references/llm-top10.md](references/llm-top10.md) for the
 URLs and what could not be verified.

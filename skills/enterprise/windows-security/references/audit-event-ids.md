@@ -86,7 +86,7 @@ Stop basic audit policy from overwriting the advanced configuration:
 
 - Computer Configuration > Windows Settings > Security Settings > Local Policies > Security
   Options > "Audit: Force audit policy subcategory settings (Windows Vista or later) to override
-  audit policy category settings" → Enabled.
+  audit policy category settings" => Enabled.
 
 Then verify what is actually effective on the host, not what the GPO says:
 

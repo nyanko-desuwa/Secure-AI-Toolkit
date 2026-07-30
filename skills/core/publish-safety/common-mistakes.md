@@ -44,7 +44,7 @@ gets closed.
 # Vulnerable: this is cleanup presented as a fix
 git filter-repo --path .env --invert-paths
 git push --force
-# → "removed the leaked key"
+# => "removed the leaked key"
 ```
 
 Why it survives review: the value genuinely is absent from what you can now see, which is the only

@@ -8,7 +8,7 @@ allowed-tools: Read, Glob, Grep, WebSearch, WebFetch
 
 A service split that leaves one database, one credential, and one broad network allow-list is not a security boundary. It is a distributed monolith with more places to make an authorization mistake.
 
-The useful question is not “how many services?” It is: what does each service own, which principal may perform each operation on each object, and what resource budget remains when replicas and retries multiply?
+The useful question is not "how many services?" It is: what does each service own, which principal may perform each operation on each object, and what resource budget remains when replicas and retries multiply?
 
 ```mermaid
 flowchart LR
@@ -43,7 +43,7 @@ flowchart LR
 ## Workflow
 
 ### 1. State the boundary and failure
-Write the owned objects, commands, queries, events, callers, and data that must not cross. Lead with a failure: “gateway authorizes tenant A, but service B trusts a caller-supplied object ID.” Map it to A01:2025 or A06:2025 and a verified CWE.
+Write the owned objects, commands, queries, events, callers, and data that must not cross. Lead with a failure: "gateway authorizes tenant A, but service B trusts a caller-supplied object ID." Map it to A01:2025 or A06:2025 and a verified CWE.
 
 ### 2. Inventory the surface
 Search routes, RPC registrations, consumers, health/admin endpoints, discovery clients, outbound URL construction, database credentials, and shared schemas. Record undocumented endpoints as findings, not assumptions.
@@ -81,7 +81,7 @@ For every boundary, report location, attacker capability, impact, fix, cost, res
 - The proposed split requires synchronous calls across nearly every request. The network adds latency and failure without decoupling.
 - Services share tables, transactions, or a single release train. Extract a module first; do not call the seam a boundary.
 - The workload has one scaling shape and no independent availability or compliance boundary.
-- The only stated benefit is “cleaner folders” or “use mTLS.” Neither is an architectural boundary.
+- The only stated benefit is "cleaner folders" or "use mTLS." Neither is an architectural boundary.
 - A distributed saga would retain sensitive context longer than a local transaction can, and no expiry or recovery owner exists.
 - You cannot inventory or observe the APIs, dependencies, queues, and rollback path. Do not split what you cannot operate.
 

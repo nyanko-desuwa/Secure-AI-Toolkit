@@ -271,7 +271,7 @@ Each serves a different purpose, and the skill says which to reach for:
 - **Top 10** - risk triage, and talking to people who are not security specialists
 - **API Security Top 10** - anything with an API surface, where object-level authorization
   dominates
-- **ASVS** - verification. Concrete, testable requirements, organised in chapters V1–V17
+- **ASVS** - verification. Concrete, testable requirements, organised in chapters V1-V17
 
 Top 10 tells you what usually goes wrong. ASVS tells you what to check.
 
@@ -287,7 +287,7 @@ Worth being direct about, because a security tool that oversells itself is a lia
   tracking will be missed. Pair this with SAST, do not replace it.
 - **Reading code cannot confirm runtime configuration.** A correct control that is disabled in
   production still reads as correct here.
-- **ASVS mapping is chapter-level** (V1–V17), not individual requirement IDs. Formal ASVS
+- **ASVS mapping is chapter-level** (V1-V17), not individual requirement IDs. Formal ASVS
   verification needs the official CSV.
 - **Compliance mapping is engineering guidance, not certification.** The
   `enterprise/compliance` skill maps technical controls to evidence for ISO 27001, SOC 2,

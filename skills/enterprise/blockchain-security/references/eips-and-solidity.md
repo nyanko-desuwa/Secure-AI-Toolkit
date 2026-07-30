@@ -25,7 +25,7 @@ Sources:
 
 ## EIP-712
 
-EIP-712, “Typed structured data hashing and signing,” is Final. It defines typed structured
+EIP-712, "Typed structured data hashing and signing," is Final. It defines typed structured
 data hashing, a domain separator, and the `\x19\x01` typed-data digest convention. It explicitly
 does not itself provide replay protection. Bind chain and contract in the domain and consume a
 nonce in the protocol.
@@ -34,7 +34,7 @@ Source: <https://eips.ethereum.org/EIPS/eip-712>
 
 ## EIP-155
 
-EIP-155, “Simple replay attack protection,” is Final. It binds Ethereum transaction signatures
+EIP-155, "Simple replay attack protection," is Final. It binds Ethereum transaction signatures
 to a chain ID. This concerns transaction signatures; application-level typed-data signatures
 still need their own domain and nonce policy.
 
@@ -42,12 +42,12 @@ Source: <https://eips.ethereum.org/EIPS/eip-155>
 
 ## ERC-1967 and ERC-1822
 
-ERC-1967, “Proxy Storage Slots,” is Final. It defines fixed implementation, beacon, and admin
+ERC-1967, "Proxy Storage Slots," is Final. It defines fixed implementation, beacon, and admin
 slots for proxy tooling and collision avoidance.
 
 Source: <https://eips.ethereum.org/EIPS/eip-1967>
 
-ERC-1822, “Universal Upgradeable Proxy Standard (UUPS),” is Stagnant. It defines a UUPS
+ERC-1822, "Universal Upgradeable Proxy Standard (UUPS)," is Stagnant. It defines a UUPS
 compatibility slot and a `proxiableUUID` check. A standard slot does not authorize upgrades;
 the authorization hook still needs protection.
 
@@ -55,7 +55,7 @@ Source: <https://eips.ethereum.org/EIPS/eip-1822>
 
 ## ERC-777 and hooks
 
-ERC-777, “Token Standard,” is Final. It defines `tokensToSend` and `tokensReceived` hooks via
+ERC-777, "Token Standard," is Final. It defines `tokensToSend` and `tokensReceived` hooks via
 the ERC-1820 registry. The hooks can be called for transfer and transferFrom, so token movement
 is an external-call boundary and a reentrancy surface.
 
@@ -63,7 +63,7 @@ Source: <https://eips.ethereum.org/EIPS/eip-777>
 
 ## ERC-2612
 
-ERC-2612, “Permit Extension for EIP-20 Signed Approvals,” is Final. It adds signature-based
+ERC-2612, "Permit Extension for EIP-20 Signed Approvals," is Final. It adds signature-based
 approval through `permit`; implementations still need EIP-712 domain separation, a nonce, and
 deadline handling.
 
@@ -71,7 +71,7 @@ Source: <https://eips.ethereum.org/EIPS/eip-2612>
 
 ## ERC-1271
 
-ERC-1271, “Standard Signature Validation Method for Contracts,” is Final. It defines how a
+ERC-1271, "Standard Signature Validation Method for Contracts," is Final. It defines how a
 contract signer validates a signature for a hash on its own behalf. Support it where smart
 contract wallets or multisigs can be signers; `ecrecover` covers EOAs only.
 
@@ -79,7 +79,7 @@ Source: <https://eips.ethereum.org/EIPS/eip-1271>
 
 ## EIP-1153
 
-EIP-1153, “Transient storage opcodes,” is Final. `TLOAD` and `TSTORE` provide transaction-scoped
+EIP-1153, "Transient storage opcodes," is Final. `TLOAD` and `TSTORE` provide transaction-scoped
 storage, which can support a reentrancy lock. A transient lock changes storage cost, not the
 need for effects-before-interactions or cross-contract review.
 

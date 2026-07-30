@@ -21,7 +21,7 @@ exploit against a third party. Revoke or rotate first when a real secret is invo
 then report.
 
 Preferred channel: open a **private** security advisory on the GitHub repository
-(Security → Advisories → New draft advisory), or contact the maintainer through
+(Security => Advisories => New draft advisory), or contact the maintainer through
 the GitHub profile listed on the repository if advisories are unavailable.
 
 ### Expectations

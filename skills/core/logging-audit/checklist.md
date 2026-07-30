@@ -3,7 +3,7 @@
 Run the sections that match the change. Mark every item pass, fail, or not applicable. A
 not-applicable mark needs a reason. Do not mark a runtime item pass from source code alone.
 
-## Inventory and schema (`A09:2025` · ASVS 16.1.1, 16.2.1–16.2.4)
+## Inventory and schema (`A09:2025` · ASVS 16.1.1, 16.2.1-16.2.4)
 
 - [ ] [recommended] The logging inventory names every layer, stream, format, destination, reader, and retention period
 - [ ] [recommended] Every security entry has actor, action, target, outcome, timestamp, source IP, request ID, and user agent
@@ -14,7 +14,7 @@ not-applicable mark needs a reason. Do not mark a runtime item pass from source 
 - [ ] [recommended] The application writes only to documented destinations
 - [ ] [recommended] The SIEM parses the entry and can correlate it with events from another service
 
-## Events (`A09:2025` · ASVS 16.3.1–16.3.4 · CWE-778, CWE-223)
+## Events (`A09:2025` · ASVS 16.3.1-16.3.4 · CWE-778, CWE-223)
 
 - [ ] [recommended] Authentication successes and failures are emitted, including factor or authentication method
 - [ ] [recommended] Every authorization denial is emitted with actor and target
@@ -45,7 +45,7 @@ not-applicable mark needs a reason. Do not mark a runtime item pass from source 
 - [ ] [recommended] Tests send newline, carriage return, NUL, ANSI escape, and delimiter payloads
 - [ ] [recommended] A log viewer cannot render a user value as terminal control sequences
 
-## Audit integrity (`A09:2025` · ASVS 16.4.2–16.4.3)
+## Audit integrity (`A09:2025` · ASVS 16.4.2-16.4.3)
 
 - [ ] [recommended] The audit trail is separate from the application log, with its own retention, readers, and controls
 - [ ] [critical] Audit storage is append-only to the application principal: no `UPDATE`, `DELETE`, or `TRUNCATE`
@@ -67,7 +67,7 @@ not-applicable mark needs a reason. Do not mark a runtime item pass from source 
 - [ ] [recommended] A staging DAST run (ZAP or Burp) produces the expected security alert
 - [ ] [recommended] Alert volume and false positives are reviewed; rules are not silently muted
 
-## Runtime resilience (`A09:2025` · ASVS 16.5.1–16.5.4)
+## Runtime resilience (`A09:2025` · ASVS 16.5.1-16.5.4)
 
 - [ ] [critical] A remote sink failure does not block the request path or grant access
 - [ ] [recommended] Queues are bounded; drops increment a metric and page when the threshold is exceeded

@@ -57,7 +57,7 @@ the application it builds" is an SSDF gap as well as an A03 exposure condition.
 | Component inventory | A03 | 15.1.2 | PS.3.2 | - |
 | Trusted source, no confusion | A03 | 15.2.4 | PW group | - |
 | Build environment integrity | A03 | V13 configuration | PO.5 | Build L3 |
-| Provenance generation | A08 | - | PS.3.2 | Build L1–L3 |
+| Provenance generation | A08 | - | PS.3.2 | Build L1-L3 |
 | Signature verification on consume | A08 | - | PS group | Verifying artifacts |
 | Remediation windows | A03 | 15.1.1, 15.2.1 | RV group | - |
 

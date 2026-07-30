@@ -90,13 +90,13 @@ boundary, runtime cost, residual gap, and tests run.
 
 | Prompt | Why it fails | Better request |
 |---|---|---|
-| “Make it scalable” | No workload, resource, or target | Name p99, offered rate, dependency, and budget |
-| “Add caching” | Creates S3/S4 without key or expiry | Ask which measured call is slow and bound key, bytes, TTL |
-| “Add a queue” | Hides overload in retained memory | Ask max depth, bytes, full behavior, and caller semantics |
-| “Add rate limiting” | Misses actor, operation, replicas, and proxy trust | Test aggregate allowance across replicas |
-| “Increase the pool” | Can exhaust the database faster | Do connection arithmetic at maximum replicas |
-| “Add retries” | Creates multiplicative outage load | One retry owner, deadline, cap, jitter, idempotency |
-| “Turn on autoscaling” | A control loop can amplify dependency failure | Scale on useful work with downstream caps |
-| “Use UUIDs for security” | Obscurity does not authorize access | Scope every lookup by tenant/actor policy |
-| “Warm every cache” | Cold-start burst and stale/private data | Warm only measured, non-sensitive keys with a budget |
-| “Optimize without measuring” | Adds indirection and hides the real bottleneck | Define baseline, workload, metric, and result |
+| "Make it scalable" | No workload, resource, or target | Name p99, offered rate, dependency, and budget |
+| "Add caching" | Creates S3/S4 without key or expiry | Ask which measured call is slow and bound key, bytes, TTL |
+| "Add a queue" | Hides overload in retained memory | Ask max depth, bytes, full behavior, and caller semantics |
+| "Add rate limiting" | Misses actor, operation, replicas, and proxy trust | Test aggregate allowance across replicas |
+| "Increase the pool" | Can exhaust the database faster | Do connection arithmetic at maximum replicas |
+| "Add retries" | Creates multiplicative outage load | One retry owner, deadline, cap, jitter, idempotency |
+| "Turn on autoscaling" | A control loop can amplify dependency failure | Scale on useful work with downstream caps |
+| "Use UUIDs for security" | Obscurity does not authorize access | Scope every lookup by tenant/actor policy |
+| "Warm every cache" | Cold-start burst and stale/private data | Warm only measured, non-sensitive keys with a budget |
+| "Optimize without measuring" | Adds indirection and hides the real bottleneck | Define baseline, workload, metric, and result |

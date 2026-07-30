@@ -42,8 +42,8 @@ IaC policy result, deployed-resource export, review metadata, immutable logs, an
 
 ## Running the mapping backwards
 
-Starting with ISO, PCI, or SOC 2 and filling a checklist encourages weak equivalence: “we need
-logging, therefore our application log meets it.” It may be mutable, incomplete, or outside the
+Starting with ISO, PCI, or SOC 2 and filling a checklist encourages weak equivalence: "we need
+logging, therefore our application log meets it." It may be mutable, incomplete, or outside the
 reviewed system.
 
 Fix: begin with the concrete control. Locate enforcement, tests, owner, and output. Then map its
@@ -54,7 +54,7 @@ actual behavior and scope to framework language.
 A passing TLS scan can support cryptography and transmission-security requirements. It cannot
 show key governance, access control, retention, incident handling, or effectiveness over time.
 
-Fix: say “supports” or “provides evidence for,” identify the period and assets covered, and list
+Fix: say "supports" or "provides evidence for," identify the period and assets covered, and list
 residual evidence the requirement needs.
 
 ## Screenshots collected every quarter
@@ -92,7 +92,7 @@ ISO A.8.15/A.8.16, HIPAA 164.312(b), PCI Requirement 10, and SOC 2 CC7.
 ## Access review exports include everyone but review nothing
 
 A user-role dump is inventory, not a review. It does not show who assessed each grant, what
-“appropriate” meant, or whether removals completed.
+"appropriate" meant, or whether removals completed.
 
 Fix: export grant source, last use, owner, reviewer decision, decision reason, timestamp, removal
 status, and exception expiry. Verify dormant and orphaned identities with negative checks.
@@ -143,7 +143,7 @@ SOC 2 criterion IDs and PCI sub-requirement IDs because fetched sources did not 
 
 ## Scope is omitted from the evidence
 
-“Encryption enabled” is meaningless without account, region, resource type, environment, and
+"Encryption enabled" is meaningless without account, region, resource type, environment, and
 time. Evidence from staging does not establish production operation.
 
 Fix: every artifact states population, exclusions, collection method, period, and freshness. Use

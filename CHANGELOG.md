@@ -15,7 +15,7 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
   untagged `- [ ]` / `- [x]` item. All 47 production checklists were retrofitted. Offline
   `unittest` coverage added for the tier check.
 - Typed relationship edges in the skill graph. `catalog/skills.json` now accepts an optional
-  `conflicts` array alongside `depends_on` (→ `requires`) and `related` (→ `suggests`), and each
+  `conflicts` array alongside `depends_on` (=> `requires`) and `related` (=> `suggests`), and each
   edge type is projected into `skill.yaml`. `scripts/validate_repository.py` gained a graph pass
   that fails on a `depends_on`/`requires` cycle, a dangling edge to a non-existent skill (across
   `depends_on`, `related`, and `conflicts`), and an asymmetric `conflicts` edge (A conflicts with B
@@ -122,7 +122,7 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 ### Changed
 
 - `AI_INSTRUCTIONS.md` - registry row and routing row for `publish-safety`.
-- Root `README.md` - 38 skills → 39, `core/*` 17 → 18, and `publish-safety` in the layout tree.
+- Root `README.md` - 38 skills => 39, `core/*` 17 => 18, and `publish-safety` in the layout tree.
 - `skills/shared/checklists/README.md` - routing row for a publish-shaped change, and a
   publish-gate line in the universal pre-return checks.
 - `skills/shared/references/README.md` - pointers to the two new shared reference tables.

@@ -44,7 +44,7 @@ names the defect class.
 | Proxy trust | App treats every peer as a trusted proxy | ASVS 4.1.3 · CWE-441 |
 | Forwarded client IP | Client-set `X-Forwarded-For` becomes identity or rate-limit key | ASVS 4.1.3 · CWE-290 · A02 |
 | Host header trust | `Host` drives redirects, reset links, virtual hosts, or cache keys | CWE-644 · A02/A05 |
-| Request smuggling / desync | Two hops disagree on where one request ends | ASVS 4.2.1–4.2.4 · CWE-444 |
+| Request smuggling / desync | Two hops disagree on where one request ends | ASVS 4.2.1-4.2.4 · CWE-444 |
 | Cache poisoning | Unkeyed attacker input enters a shared cache entry | CWE-444 · A02/A06 |
 | Cache deception | Private response cached under a public-looking URL | CWE-525 · A01/A02 |
 | Method / header normalization | Override headers or absolute-form change the effective verb or target | ASVS 4.1.4 · CWE-20 |

@@ -153,7 +153,7 @@ when losing the value is acceptable and the key's lifetime is the intended lifet
 ### "A garbage-collected language cannot leak"
 
 GC reclaims unreachable objects. A leak is a reachable object nobody wants. Managed
-runtimes change a dangling pointer into unbounded growth; they do not remove L1–L8.
+runtimes change a dangling pointer into unbounded growth; they do not remove L1-L8.
 
 ### One snapshot, one conclusion
 

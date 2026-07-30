@@ -67,7 +67,7 @@ publishes ten months of history at once, not today's files.
 ```bash
 # Vulnerable: the working tree is clean, so the repo is assumed clean
 git status                     # nothing to commit
-# → flip to public in the repository settings
+# => flip to public in the repository settings
 ```
 
 The current tree has no secrets. The `config.py` from March, deleted in April, has the database
@@ -102,7 +102,7 @@ The reflex, and the one that costs the most time while fixing the least.
 # Vulnerable: treats making the value invisible as making it useless
 git filter-repo --path .env --invert-paths
 git push --force
-# → report "secret removed"
+# => report "secret removed"
 ```
 
 The key still authenticates. GitHub's own guidance is that a rewrite plus force-push leaves the

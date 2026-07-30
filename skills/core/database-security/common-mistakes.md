@@ -2,7 +2,7 @@
 
 The failure, why it happens, and the fix. Mappings use OWASP Top 10 2025, ASVS 5.0, and CWE.
 
-## “The values are parameterized, so the query is safe”
+## "The values are parameterized, so the query is safe"
 
 `A05:2025` · ASVS V1 · `CWE-89`
 
@@ -15,7 +15,7 @@ Placeholders cannot represent an identifier. An attacker can inject a second exp
 secret-bearing sort. Fix with an allowlist map for columns and direction, then interpolate only
 the server-selected strings. A regex denylist is not an allowlist.
 
-## “We escaped the string”
+## "We escaped the string"
 
 `A05:2025` · ASVS V1 · `CWE-89`
 
@@ -24,7 +24,7 @@ Escaping is driver-, encoding-, and SQL-mode-dependent. It also cannot solve `OR
 identifiers from fixed maps. Escaping a value by hand is a compatibility assumption disguised
 as a control.
 
-## “The ORM handles injection”
+## "The ORM handles injection"
 
 `A05:2025` · ASVS V1 · `CWE-89`, `CWE-564`
 
@@ -37,7 +37,7 @@ Audit `.raw`, `.extra`, `text`, `RawSQL`, `$queryRawUnsafe`, and `whereRaw`. Use
 bind arguments. The wrong fix is banning every raw query: some valid SQL needs one. Make raw
 SQL reviewable, parameterized, and identifier-allowlisted.
 
-## “It was safely inserted, so stored data is trusted”
+## "It was safely inserted, so stored data is trusted"
 
 `A05:2025` · ASVS V1 · `CWE-89`
 
@@ -46,7 +46,7 @@ That is second-order injection. Validate at write and at the later sink, because
 imports, and another service may bypass the first validator. A database row is data, not a
 trusted code fragment.
 
-## “A UUID prevents IDOR”
+## "A UUID prevents IDOR"
 
 `A01:2025` · ASVS V8 · `CWE-566`
 
@@ -54,15 +54,15 @@ Opaque IDs reduce guessing. They do not enforce ownership. An attacker gets an I
 log, notification, or timing side channel and calls the endpoint. Put tenant and actor scope in
 the query, or enforce it with RLS. Test a known ID belonging to another tenant.
 
-## “Every handler adds `WHERE tenant_id = ?`”
+## "Every handler adds `WHERE tenant_id = ?`"
 
 `A01:2025` · ASVS V8 · `CWE-566`
 
 The next handler will forget it, and a background job may never have had a tenant in its API.
 Make the repository require a tenant context and use RLS as an engine-level backstop. Do not
-make `tenant_id` optional “for internal callers”; create a separate, reviewed maintenance role.
+make `tenant_id` optional "for internal callers"; create a separate, reviewed maintenance role.
 
-## “We strip `$` keys from Mongo input”
+## "We strip `$` keys from Mongo input"
 
 `A05:2025` · ASVS V2 · `CWE-943`
 
@@ -71,7 +71,7 @@ new operators defeat a partial sanitizer. Parse a closed schema and construct th
 typed fields. In particular, never query a password field with user input; verify a password hash
 in application code.
 
-## “One database user is simpler”
+## "One database user is simpler"
 
 `A02:2025` · ASVS V13 · `CWE-250`
 
@@ -79,16 +79,16 @@ The migration owner becomes the web process. SQL injection can then alter schema
 and erase audit rows. Use a NOLOGIN owner, a migration role, and a runtime role with named DML
 grants. The runtime account must not have DDL, `FILE`, or superuser rights.
 
-## “Disk encryption protects the database”
+## "Disk encryption protects the database"
 
 `A04:2025` · ASVS V11, V14 · `CWE-311`
 
 TDE protects a stolen disk or snapshot. It does not protect rows returned through a valid
 connection, a SQL injection, a DBA session, a replica, or an unencrypted dump. Choose
 application-level AEAD when the database itself is in the threat model. State the gap instead of
-calling all encryption “at rest.”
+calling all encryption "at rest."
 
-## “Deterministic encryption hides the value”
+## "Deterministic encryption hides the value"
 
 `A04:2025` · ASVS V11, V14 · `CWE-311`
 
@@ -96,7 +96,7 @@ Equal plaintext produces equal ciphertext. On country, status, or boolean column
 analysis often identifies every value. Use randomized AEAD and a keyed HMAC lookup column if
 equality search is required. That index still leaks equality; document the tradeoff.
 
-## “The pool makes RLS context global”
+## "The pool makes RLS context global"
 
 `A01:2025` · ASVS V8 · `CWE-566`
 
@@ -105,7 +105,7 @@ tenant receives the previous context. Set it transaction-locally (`set_config(..
 commit/rollback every request, and test connection reuse. Run the app as a role subject to RLS;
 the owner bypasses it unless `FORCE ROW LEVEL SECURITY` is enabled.
 
-## “N+1 is only a performance bug”
+## "N+1 is only a performance bug"
 
 `A06:2025` · ASVS V2 · `CWE-770`
 
@@ -114,7 +114,7 @@ queries per request. An attacker repeats it and exhausts the pool, causing an av
 incident. Eager-load deliberately, cap page size, and enforce query-count tests. Do not blindly
 eager-load every relation - that can create a larger Cartesian result and a different DoS.
 
-## “Backups are internal”
+## "Backups are internal"
 
 `A04:2025`, `A09:2025` · ASVS V14, V16 · `CWE-311`, `CWE-778`
 
@@ -122,7 +122,7 @@ Object storage, restore environments, replicas, and dump operators are all exfil
 Encrypt backups, separate key access, restrict restore, redact non-production copies, test
 restores, and log backup/restore events outside the database credential's control.
 
-## “Audit every statement”
+## "Audit every statement"
 
 `A09:2025` · ASVS V16 · `CWE-778`
 
@@ -131,7 +131,7 @@ and application audit to sensitive reads, exports, DDL, grants, and logins; set 
 alert thresholds. Say what it cannot answer: database-native audit may know the role but not the
 end-user unless the application propagates that context.
 
-## “The migration is just deployment plumbing”
+## "The migration is just deployment plumbing"
 
 `A08:2025` · ASVS V13, V15
 

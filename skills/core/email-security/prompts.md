@@ -33,6 +33,6 @@ handling, and residual risks. Cite standards and mark unverified live DNS/provid
 
 | Prompt | Why it fails |
 |---|---|
-| “Is email secure?” | Produces generic reassurance |
-| “Just enable SPF” | Ignores DKIM/DMARC alignment, links, webhooks, and privacy |
-| “Disable TLS verification for SMTP” | Removes a control rather than fixing trust |
+| "Is email secure?" | Produces generic reassurance |
+| "Just enable SPF" | Ignores DKIM/DMARC alignment, links, webhooks, and privacy |
+| "Disable TLS verification for SMTP" | Removes a control rather than fixing trust |

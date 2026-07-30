@@ -117,7 +117,7 @@ Nobody reviews ten months of commits by eye, so the scan is the gate.
 # Vulnerable: the pre-publish check people actually run
 git status          # clean
 ls -la              # no .env
-# → make public
+# => make public
 ```
 
 Both commands describe the present tense. A key committed in March and deleted in April is

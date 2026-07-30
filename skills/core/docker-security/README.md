@@ -44,7 +44,7 @@ examples/
 |---|---|---|
 | OWASP Top 10 | 2025 - A02 Security Misconfiguration, A03 Software Supply Chain Failures | 2026-07-28 |
 | OWASP ASVS | 5.0.0 - V13 Configuration, V15 Secure Coding and Architecture | 2026-07-28 |
-| CIS Docker Benchmark | control IDs read from `docker/docker-bench-security` sections 1–5 | 2026-07-28 |
+| CIS Docker Benchmark | control IDs read from `docker/docker-bench-security` sections 1-5 | 2026-07-28 |
 | CWE | CWE-250, CWE-269, CWE-1104, CWE-522, CWE-732, CWE-798 | 2026-07-28 |
 
 CIS control numbers are quoted only where the ID and title were read from source. The benchmark

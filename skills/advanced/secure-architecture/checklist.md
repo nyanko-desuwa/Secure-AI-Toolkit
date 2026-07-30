@@ -8,7 +8,7 @@ need the privacy section.
 
 ## Trust Boundaries (A01 · ASVS V8)
 
-- [ ] [recommended] Every boundary crossing is listed, including build system → production and operator → data
+- [ ] [recommended] Every boundary crossing is listed, including build system => production and operator => data
 - [ ] [critical] Each crossing names what is authenticated, what is authorized, and the failure behaviour
 - [ ] [critical] No crossing is authenticated by network position, source IP, or an unsigned header
 - [ ] [critical] No component trusts a claim it received from a component it does not control

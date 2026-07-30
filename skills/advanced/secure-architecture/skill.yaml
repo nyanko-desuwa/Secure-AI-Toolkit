@@ -8,7 +8,7 @@ category: advanced
 path: skills/advanced/secure-architecture
 status: Ready
 priority: 70
-estimated_tokens: 3150
+estimated_tokens: 3153
 owns: []
 requires:
   - owasp

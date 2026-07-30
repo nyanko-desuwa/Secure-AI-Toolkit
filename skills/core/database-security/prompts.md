@@ -23,7 +23,7 @@ this diff. For each, say whether the value is a bind, identifier allowlist, or s
 fragment. Flag an empty or unbounded IN list and wildcard searches that can force a scan.
 ```
 
-Why it works: “are queries parameterized?” invites a yes even when identifiers are interpolated.
+Why it works: "are queries parameterized?" invites a yes even when identifiers are interpolated.
 
 ## Review ORM escape hatches and mass assignment
 
@@ -100,11 +100,11 @@ the runtime role cannot CREATE TABLE. Report which tests need a real database.
 
 | Prompt | Problem |
 |---|---|
-| “Is the database secure?” | No scope or threat; produces a checklist recital |
-| “Parameterize all queries” | Misses identifiers, sort, list arity, query objects, and second-order sinks |
-| “Ban raw SQL” | Not enforceable and hides necessary raw uses instead of reviewing them |
-| “Add tenant_id to every query” | Leaves the boundary as a rule each caller must remember |
-| “Encrypt the database” | Does not say whether the threat is stolen disks, DBAs, injection, or backups |
-| “Make Mongo safe from SQL injection” | Wrong interpreter and wrong fix; operator injection needs type checks |
-| “Turn on full audit” | Ignores cost, retention, alerting, and who can delete the log |
-| “Make the migration reversible” | A down migration cannot resurrect dropped or overwritten data |
+| "Is the database secure?" | No scope or threat; produces a checklist recital |
+| "Parameterize all queries" | Misses identifiers, sort, list arity, query objects, and second-order sinks |
+| "Ban raw SQL" | Not enforceable and hides necessary raw uses instead of reviewing them |
+| "Add tenant_id to every query" | Leaves the boundary as a rule each caller must remember |
+| "Encrypt the database" | Does not say whether the threat is stolen disks, DBAs, injection, or backups |
+| "Make Mongo safe from SQL injection" | Wrong interpreter and wrong fix; operator injection needs type checks |
+| "Turn on full audit" | Ignores cost, retention, alerting, and who can delete the log |
+| "Make the migration reversible" | A down migration cannot resurrect dropped or overwritten data |

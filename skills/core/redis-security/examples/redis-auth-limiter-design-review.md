@@ -26,21 +26,21 @@ policy.
 ## Data flow and trust boundaries
 
 ```text
-Internet → login/OTP/reset verifier → limiter atomic operation → Redis security-state instance
-                                  └→ identity verifier → session store → Redis session namespace
-Application events → redaction boundary → audit/metrics pipeline
-Operator/break-glass identity → separate administrative Redis path
+Internet => login/OTP/reset verifier => limiter atomic operation => Redis security-state instance
+                                  └=> identity verifier => session store => Redis session namespace
+Application events => redaction boundary => audit/metrics pipeline
+Operator/break-glass identity => separate administrative Redis path
 ```
 
 | Crossing | Threat | Required control | Owner | Evidence |
 |---|---|---|---|---|
-| Internet → verifier | Credential stuffing, enumeration, distributed spraying | Account, network, device-risk, and global dimensions; uniform responses | `brute-force-defense`, `authentication` | Route inventory and negative tests |
-| Verifier → Redis | Runtime identity reads sessions or administers Redis | Named ACL users, exact prefixes, minimal commands, deny `@admin`, `@dangerous`, `CONFIG`, `ACL`, `MONITOR`, `FLUSH*` | `redis-security` | ACL review and deployed `ACL DRYRUN` evidence |
-| App network → Redis | Intercepted state/credentials or an untrusted client reaches Redis | Private reachability and verified TLS across hosts | `redis-security`, platform owner | Network and certificate evidence |
-| Concurrent verifiers → limiter state | GET-then-SET race loses an attempt or omits expiry | Reviewed atomic increment-plus-initial-expiry operation | `brute-force-defense` | Concurrent multi-instance test |
-| Redis failover/outage → login | Timeout silently removes throttling | Short timeout, generic fail-closed result, alert, recovery runbook | identity platform owner | Fault-injection test |
-| Cache capacity → security keys | Cache churn evicts session/limiter/revocation state | Separate instance or protected non-evicting resource domain | platform owner, `redis-security` | `maxmemory` and eviction-alert evidence |
-| App → telemetry | Redis URLs, `AUTH`, session IDs, or command values leak | Structured redacted events and aggregate metrics only | `logging-audit` | Redaction test and alert rule IDs |
+| Internet => verifier | Credential stuffing, enumeration, distributed spraying | Account, network, device-risk, and global dimensions; uniform responses | `brute-force-defense`, `authentication` | Route inventory and negative tests |
+| Verifier => Redis | Runtime identity reads sessions or administers Redis | Named ACL users, exact prefixes, minimal commands, deny `@admin`, `@dangerous`, `CONFIG`, `ACL`, `MONITOR`, `FLUSH*` | `redis-security` | ACL review and deployed `ACL DRYRUN` evidence |
+| App network => Redis | Intercepted state/credentials or an untrusted client reaches Redis | Private reachability and verified TLS across hosts | `redis-security`, platform owner | Network and certificate evidence |
+| Concurrent verifiers => limiter state | GET-then-SET race loses an attempt or omits expiry | Reviewed atomic increment-plus-initial-expiry operation | `brute-force-defense` | Concurrent multi-instance test |
+| Redis failover/outage => login | Timeout silently removes throttling | Short timeout, generic fail-closed result, alert, recovery runbook | identity platform owner | Fault-injection test |
+| Cache capacity => security keys | Cache churn evicts session/limiter/revocation state | Separate instance or protected non-evicting resource domain | platform owner, `redis-security` | `maxmemory` and eviction-alert evidence |
+| App => telemetry | Redis URLs, `AUTH`, session IDs, or command values leak | Structured redacted events and aggregate metrics only | `logging-audit` | Redaction test and alert rule IDs |
 | Alternate verifier routes | GraphQL/mobile/legacy route bypasses limiter | One shared policy and atomic consume path | route owners | Route and integration tests |
 
 ## Security decisions

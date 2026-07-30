@@ -11,7 +11,7 @@ Nothing here replaces a skill checklist. If you are touching a database query, r
 
 Read the diff, not the ticket title. Take every row that matches.
 
-| The change… | Run |
+| The change... | Run |
 |---|---|
 | Builds or edits a query | `core/database-security` |
 | Loads or mutates an object identified by a request value | `core/api-security`, `core/owasp` |

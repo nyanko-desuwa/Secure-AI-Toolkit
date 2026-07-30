@@ -42,12 +42,12 @@ and what it actually reads and writes locally. Most answers collapse.
 
 The decision tree is short:
 
-- Needs no domain resources → a virtual account (`NT SERVICE\<ServiceName>`) or, for IIS,
+- Needs no domain resources => a virtual account (`NT SERVICE\<ServiceName>`) or, for IIS,
   `ApplicationPoolIdentity`. No password exists to steal.
-- Needs domain resources from one host → a standalone MSA (`-RestrictToSingleComputer`).
-- Needs domain resources from several hosts, or is behind a load balancer → a gMSA, with
+- Needs domain resources from one host => a standalone MSA (`-RestrictToSingleComputer`).
+- Needs domain resources from several hosts, or is behind a load balancer => a gMSA, with
   `PrincipalsAllowedToRetrieveManagedPassword` naming only those hosts.
-- Needs a real interactive user account → almost certainly a design problem. Say so.
+- Needs a real interactive user account => almost certainly a design problem. Say so.
 
 Details and cmdlets in [references/service-account-types.md](references/service-account-types.md).
 

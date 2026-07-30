@@ -40,16 +40,16 @@ examples/README.md       paired examples and incidents
 
 ## Framework Integration
 
-These are integration patterns, not a substitute for the framework’s current documentation.
+These are integration patterns, not a substitute for the framework's current documentation.
 
 | Stack | Use securely | Do not assume |
 |---|---|---|
-| Laravel | Separate `default`/`cache` connections, unique prefixes, env-backed username/password, `scheme: tls`, bounded retry/backoff; use ACLs that match each driver’s keys | Database-number separation is authorization; dynamic `Redis` facade calls are safe by default |
+| Laravel | Separate `default`/`cache` connections, unique prefixes, env-backed username/password, `scheme: tls`, bounded retry/backoff; use ACLs that match each driver's keys | Database-number separation is authorization; dynamic `Redis` facade calls are safe by default |
 | ASP.NET Core | Configure `IDistributedCache`/session with a TLS-verified, ACL-scoped connection; treat cache contents as untrusted serialization input and keep session lifecycle in `authentication` | A distributed cache is appropriate for all security state or provides durable failover semantics |
 | Spring Boot | Configure the current Lettuce/Jedis client with TLS verification, ACL credentials, timeouts, bounded pooling/retries; scope `RedisTemplate` keys by tenant/role | A single `RedisTemplate` identity should reach cache, session, queue, and admin keys |
 | NestJS | Use a maintained Redis store/queue adapter with `rediss` or TLS options, ACL-scoped credentials, prefixes, timeout/retry caps, and explicit cache TTLs | `cache-manager` itself selects a secure Redis store or validates TLS automatically |
 
-Laravel documents username/password, separate connections, prefixes, TLS schemes, and bounded client retry/backoff. Its facade can dispatch Redis commands dynamically, so ACLs must constrain the runtime user. The NestJS cache page is generic; verify the chosen adapter’s current TLS and credential options before implementation.
+Laravel documents username/password, separate connections, prefixes, TLS schemes, and bounded client retry/backoff. Its facade can dispatch Redis commands dynamically, so ACLs must constrain the runtime user. The NestJS cache page is generic; verify the chosen adapter's current TLS and credential options before implementation.
 
 ## Real Incidents and Failure Shapes
 

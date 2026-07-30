@@ -36,12 +36,12 @@ Three tests for whether a finding is architectural:
 A trust boundary is any place where data or control crosses between components that trust each
 other differently. Not every arrow is a boundary. The ones that are:
 
-- Internet → your edge
-- Your edge → your services
-- One tenant's data → another tenant's request path
-- Your service → a third party you do not control
-- Application → build system, and build system → production
-- Human operator → production data
+- Internet => your edge
+- Your edge => your services
+- One tenant's data => another tenant's request path
+- Your service => a third party you do not control
+- Application => build system, and build system => production
+- Human operator => production data
 
 For each boundary, name three things: what is authenticated, what is authorized, and what
 happens when the check fails. If you cannot name all three, that is the finding.

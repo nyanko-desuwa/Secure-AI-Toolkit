@@ -94,13 +94,13 @@ and dashboards. Mark assumptions and unverified runtime facts.
 
 | Vague prompt | Likely weak result | Better constraint |
 |---|---|---|
-| “Make it microservices” | Many deployables with no owner or rollback | Ask which independent boundary earns the split |
-| “Add mTLS” | Transport encryption presented as authorization | Require peer identity, endpoint policy, and object policy separately |
-| “Secure internal APIs” | Gateway or network trust | Inventory every route and owner-side deny path |
-| “Use service discovery” | Arbitrary URL or registry trust | Require finite identities, destination validation, and egress limits |
-| “Split the database” | Tables copied with no authority | Name one writer, reconciliation, and retention |
-| “Add retries” | Uncapped retry storm | Supply deadline, jitter, budget, idempotency, and permanent-failure route |
-| “Make it scalable” | More replicas and multiplied pools | Calculate pools, fan-out, queues, traces, caches, and breaker keys |
-| “Plan migration” | Big-bang rewrite | Require cohorts, stop thresholds, reconciliation, and tested rollback |
-| “Add observability” | High-cardinality logs and traces | Give limits for spans, labels, queues, and retained attributes |
-| “Is this architecture secure?” | General reassurance | Name one service boundary, one object action, and one failure path |
+| "Make it microservices" | Many deployables with no owner or rollback | Ask which independent boundary earns the split |
+| "Add mTLS" | Transport encryption presented as authorization | Require peer identity, endpoint policy, and object policy separately |
+| "Secure internal APIs" | Gateway or network trust | Inventory every route and owner-side deny path |
+| "Use service discovery" | Arbitrary URL or registry trust | Require finite identities, destination validation, and egress limits |
+| "Split the database" | Tables copied with no authority | Name one writer, reconciliation, and retention |
+| "Add retries" | Uncapped retry storm | Supply deadline, jitter, budget, idempotency, and permanent-failure route |
+| "Make it scalable" | More replicas and multiplied pools | Calculate pools, fan-out, queues, traces, caches, and breaker keys |
+| "Plan migration" | Big-bang rewrite | Require cohorts, stop thresholds, reconciliation, and tested rollback |
+| "Add observability" | High-cardinality logs and traces | Give limits for spans, labels, queues, and retained attributes |
+| "Is this architecture secure?" | General reassurance | Name one service boundary, one object action, and one failure path |

@@ -30,7 +30,7 @@ by the core. They differ in who implements them.
 | Declared by | The core | The core |
 | Implemented by | The core | An adapter |
 | Called by | A driving adapter | The core |
-| Dependency arrow | Adapter → core | Adapter → core (inverted at runtime) |
+| Dependency arrow | Adapter => core | Adapter => core (inverted at runtime) |
 | Examples | `DocumentService`, `PlaceOrder` | `DocumentRepository`, `URLFetcher`, `Clock`, `Config` |
 | Adapters | HTTP handler, queue consumer, CLI, cron job, test harness | Postgres, S3, egress-guarded HTTP client, secret manager |
 | Security role | The choke point where every actor is authorized | The choke point where outside data is made to conform |

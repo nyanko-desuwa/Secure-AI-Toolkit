@@ -14,7 +14,7 @@ the control actually enforces. Return:
 4. systems, data, environments, and period covered;
 5. framework requirements this evidence supports, with verified edition, ID, and title;
 6. residual evidence and limitations.
-Use “supports” or “evidences,” never “proves compliance.” If an ID cannot be fetched, omit it and
+Use "supports" or "evidences," never "proves compliance." If an ID cannot be fetched, omit it and
 write unverified prose. Do not give legal advice.
 ```
 
@@ -146,16 +146,16 @@ For every finding return:
 
 | Prompt | Why it fails | Better direction |
 |---|---|---|
-| “Make us compliant with ISO and SOC 2” | No scope; asks for an impossible certification claim | Name a deployed control and map its evidence |
-| “Give me every requirement ID” | Encourages recalled or invented identifiers | Fetch only requirements touched by observed controls |
-| “Fill this compliance checklist” | Runs framework-to-assertion and hides missing enforcement | Trace code/config to tests and artifacts first |
-| “Take screenshots for the audit” | Point-in-time, manual, weak provenance | Export machine-readable state through CI or a scheduled job |
-| “Say encryption is enabled” | Omits boundary, algorithm, keys, assets, and runtime drift | Verify IaC plus deployed state and negative TLS tests |
-| “Prove our backups work” | Backup success is not recovery | Perform isolated restore, integrity check, and objective measurement |
-| “Show the secret was rotated” | May leak values and ignores revocation | Export metadata and prove the prior version fails |
-| “Map this policy to PCI” | Policy is not technical operation | Locate enforcement and operating evidence, then map |
-| “Use the most likely control number” | A wrong ID is worse than omission | Mark prose unverified until the publisher source is fetched |
-| “The audit passed, close the issue” | Audit sampling can miss an exploitable gap | Test the prohibited action and fix enforcement |
+| "Make us compliant with ISO and SOC 2" | No scope; asks for an impossible certification claim | Name a deployed control and map its evidence |
+| "Give me every requirement ID" | Encourages recalled or invented identifiers | Fetch only requirements touched by observed controls |
+| "Fill this compliance checklist" | Runs framework-to-assertion and hides missing enforcement | Trace code/config to tests and artifacts first |
+| "Take screenshots for the audit" | Point-in-time, manual, weak provenance | Export machine-readable state through CI or a scheduled job |
+| "Say encryption is enabled" | Omits boundary, algorithm, keys, assets, and runtime drift | Verify IaC plus deployed state and negative TLS tests |
+| "Prove our backups work" | Backup success is not recovery | Perform isolated restore, integrity check, and objective measurement |
+| "Show the secret was rotated" | May leak values and ignores revocation | Export metadata and prove the prior version fails |
+| "Map this policy to PCI" | Policy is not technical operation | Locate enforcement and operating evidence, then map |
+| "Use the most likely control number" | A wrong ID is worse than omission | Mark prose unverified until the publisher source is fetched |
+| "The audit passed, close the issue" | Audit sampling can miss an exploitable gap | Test the prohibited action and fix enforcement |
 
 ## Guardrail suffix
 

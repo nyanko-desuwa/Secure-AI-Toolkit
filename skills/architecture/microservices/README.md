@@ -6,7 +6,7 @@ A service boundary is useful only when ownership, authorization, and operations 
 
 ## How it works
 
-Read `SKILL.md` first. It gives a boundary-first workflow, a runtime cost ledger, and a hard “when NOT to use this” section. Use `best-practices.md` for implementation shapes, `checklist.md` before returning a design, and `troubleshooting.md` when the split conflicts with latency, data ownership, or operations. Code blocks labelled Vulnerable are intentionally unsafe.
+Read `SKILL.md` first. It gives a boundary-first workflow, a runtime cost ledger, and a hard "when NOT to use this" section. Use `best-practices.md` for implementation shapes, `checklist.md` before returning a design, and `troubleshooting.md` when the split conflicts with latency, data ownership, or operations. Code blocks labelled Vulnerable are intentionally unsafe.
 
 ## File layout
 

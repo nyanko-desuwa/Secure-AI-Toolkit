@@ -19,7 +19,7 @@ Mark each item pass, fail, or not applicable. "Not applicable" needs a one-line 
 - [ ] [critical] Where actor identity is established is identified
 - [ ] [critical] Where each authorization decision is made is identified - route, service, or query
 - [ ] [recommended] Egress points listed: outbound HTTP, DB writes, file writes, shell, logs
-- [ ] [recommended] Source → sink pairs written down before findings were drafted
+- [ ] [recommended] Source => sink pairs written down before findings were drafted
 
 ## Sinks Were Hunted, Not Guessed
 

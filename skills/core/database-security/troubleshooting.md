@@ -2,7 +2,7 @@
 
 What to do when the secure data-layer pattern does not fit cleanly.
 
-## The driver’s placeholder syntax is unclear
+## The driver's placeholder syntax is unclear
 
 Do not guess. `%s`, `$1`, `?`, `:name`, and `@name` are not interchangeable.
 
@@ -35,14 +35,14 @@ Use raw SQL, but preserve the guarantees:
 4. Add a test with quotes, comments, wildcard characters, and an overlong list.
 5. Scope tenant access inside that function.
 
-“Never use raw SQL” is not a workable policy. “Every raw sink is reviewed” is. `A05:2025`, ASVS
+"Never use raw SQL" is not a workable policy. "Every raw sink is reviewed" is. `A05:2025`, ASVS
 V1, `CWE-89` / `CWE-564`.
 
 ## An empty `IN` list breaks the query
 
 `IN ()` is invalid in many engines. Decide the semantics before building SQL. For
 `WHERE id IN (...)`, an empty list usually means return no rows, so return `[]` without querying.
-It must not mean “omit the predicate,” because omitting it turns an empty request into a full-table
+It must not mean "omit the predicate," because omitting it turns an empty request into a full-table
 read. Bound the list size too. `A05:2025`, `A06:2025`, ASVS V1/V2, `CWE-89`, `CWE-770`.
 
 ## Users need wildcard search
@@ -68,7 +68,7 @@ weaker because one bypass can omit it. `A01:2025`, ASVS V8, `CWE-566`.
 
 ## RLS breaks migrations or background jobs
 
-Do not weaken the runtime policy or make an optional tenant mean “all tenants.” Use a separate,
+Do not weaken the runtime policy or make an optional tenant mean "all tenants." Use a separate,
 short-lived maintenance role and make the cross-tenant operation explicit. For PostgreSQL,
 remember that owners and `BYPASSRLS` roles evade policies; a background worker using either has
 an unrestricted credential. Audit its use. `A01:2025`, `A02:2025`, ASVS V8/V13, `CWE-250`.
@@ -122,7 +122,7 @@ Never claim deterministic encryption is semantically secure. It reveals equality
 Measure statement volume, storage, and latency; then scope. Keep DDL, grants, authentication,
 bulk exports, and reads of regulated tables. Sample only events whose loss is accepted and
 explicit. Native audit lacks end-user context unless you propagate it; application audit can be
-bypassed by raw database access. Use both where “who read what” is a requirement. `A09:2025`,
+bypassed by raw database access. Use both where "who read what" is a requirement. `A09:2025`,
 ASVS V16, `CWE-778`.
 
 ## A destructive migration is already merged

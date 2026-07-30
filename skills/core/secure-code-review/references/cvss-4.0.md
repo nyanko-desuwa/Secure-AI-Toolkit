@@ -88,8 +88,8 @@ Publish the vector and let the reader run it through the official calculator at
 
 ## Qualitative rating scale
 
-The spec maps scores to ratings: None 0.0 · Low 0.1–3.9 · Medium 4.0–6.9 · High 7.0–8.9 ·
-Critical 9.0–10.0.
+The spec maps scores to ratings: None 0.0 · Low 0.1-3.9 · Medium 4.0-6.9 · High 7.0-8.9 ·
+Critical 9.0-10.0.
 
 Where this and your own severity disagree, report both and explain the gap. Usually the gap is
 information CVSS-B cannot hold: the endpoint is internal only, or the data is public, or the

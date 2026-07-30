@@ -71,7 +71,7 @@ The attacker assumption prevents the answer from collapsing API6 back into API4.
 ## GraphQL review
 
 ```text
-Review schema.graphql and all resolvers against API1, API3, API4, API5, and ASVS 4.3.1–4.3.2.
+Review schema.graphql and all resolvers against API1, API3, API4, API5, and ASVS 4.3.1-4.3.2.
 Trace authorization through nested fields, test list amount caps, aliases and batched operations,
 query depth and complexity, introspection, and error suggestions. Show one query for each exploitable
 path and name the resolver where the check belongs.

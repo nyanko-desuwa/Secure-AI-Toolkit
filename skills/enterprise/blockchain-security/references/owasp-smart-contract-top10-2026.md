@@ -14,7 +14,7 @@ This 2026 list is forward-looking and uses 2025 incident and survey data. Do not
 | SC01:2026 | Access Control Vulnerabilities | Who can initialize, upgrade, pause, mint, withdraw, or invoke this hook? |
 | SC02:2026 | Business Logic Vulnerabilities | What profitable action sequence violates the intended workflow? |
 | SC03:2026 | Price Oracle Manipulation | Can the value source be moved in the same transaction or become stale? |
-| SC04:2026 | Flash Loan–Facilitated Attacks | Does borrowed same-transaction capital defeat a presumed cost barrier? |
+| SC04:2026 | Flash Loan-Facilitated Attacks | Does borrowed same-transaction capital defeat a presumed cost barrier? |
 | SC05:2026 | Lack of Input Validation | Are addresses, amounts, array lengths, and callback data constrained on-chain? |
 | SC06:2026 | Unchecked External Calls | What if the callee fails, re-enters, lies, or consumes the forwarded gas? |
 | SC07:2026 | Arithmetic Errors | Where does truncation, scaling, or repeated rounding create value? |

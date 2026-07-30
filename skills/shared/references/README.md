@@ -48,7 +48,7 @@ A08 Software or Data Integrity Failures · A09 Security Logging and Alerting Fai
 A10 Mishandling of Exceptional Conditions
 
 Not a renumbering of 2021. A03 and A10 are new; Injection moved from A03 to A05. Detail and the
-2021 → 2025 mapping: `skills/core/owasp/references/owasp-top10-2025.md`.
+2021 => 2025 mapping: `skills/core/owasp/references/owasp-top10-2025.md`.
 
 ### OWASP API Security Top 10 2023
 

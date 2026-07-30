@@ -13,7 +13,7 @@ and verification mail.
 ## Forwarding breaks SPF
 
 Use DKIM alignment and DMARC policy appropriate to the domain. Do not disable authentication checks
-to make a mailing list “work”.
+to make a mailing list "work".
 
 ## Local development needs fake mail
 

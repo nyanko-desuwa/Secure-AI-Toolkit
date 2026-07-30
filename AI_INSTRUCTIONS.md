@@ -65,7 +65,7 @@ exist yet.
 Match on what the code touches, not on what the user called it. Most changes hit more than one
 row - take every row that applies.
 
-| The code… | Load | Category |
+| The code... | Load | Category |
 |---|---|---|
 | Builds a database query | `database-security` | A05 Injection |
 | Configures Redis/Valkey or uses it for session, cache, limiter, queue, Stream, OTP, revocation, or idempotency state | `redis-security` plus the role owner | A01, A02, A04, A06, A09, A10 |
@@ -362,13 +362,13 @@ A05. Guidance recalled from 2021 will mis-map. Details in
 
 Documentation is part of the change. Before finishing:
 
-- New or modified skill → update its `README.md`, `checklist.md`, and `examples/`
-- New skill → update `catalog/skills.json`, then add a row to the registry above, the routing table,
+- New or modified skill => update its `README.md`, `checklist.md`, and `examples/`
+- New skill => update `catalog/skills.json`, then add a row to the registry above, the routing table,
   the `README.md` status table, `skills/shared/references/skill-graph.md`, and
   `skills/shared/references/standards-matrix.md`; run `python scripts/validate_repository.py`
-- New skill → add the reverse edge in the graph, too. A one-directional `related` is an oversight
-- Any change → add a `CHANGELOG.md` entry under Unreleased
-- Standard re-verified → update the version and date in the reference file, the table above,
+- New skill => add the reverse edge in the graph, too. A one-directional `related` is an oversight
+- Any change => add a `CHANGELOG.md` entry under Unreleased
+- Standard re-verified => update the version and date in the reference file, the table above,
   and `README.md` together
 
 Every new skill matches the file shape and meets the bar in

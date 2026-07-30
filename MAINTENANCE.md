@@ -29,7 +29,7 @@ metadata. The scaffold under `skills/shared/templates/` is **not** a production 
 It is required for new skills and the current pilot skills; legacy skills receive warnings until
 changed substantively. The human-readable `## Ownership Boundary` table mirrors owner IDs only.
 
-`depends_on` must remain acyclic because it means “load this first.” Reciprocal `related`, `loads`,
+`depends_on` must remain acyclic because it means "load this first." Reciprocal `related`, `loads`,
 or non-goal hand-offs can be valid for task-specific co-loading; treat them as a context-budget
 review signal, not an automatic error.
 

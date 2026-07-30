@@ -122,7 +122,7 @@ has an object to scope and query.
 
 ## Privileged user can edit the audit trail
 
-`A09:2025` · ASVS 16.4.2–16.4.3 · `CWE-778`
+`A09:2025` · ASVS 16.4.2-16.4.3 · `CWE-778`
 
 ```sql
 -- Vulnerable: the app role owns its own evidence

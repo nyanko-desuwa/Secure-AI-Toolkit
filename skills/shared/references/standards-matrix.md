@@ -29,7 +29,7 @@ before you use this as a coverage claim:
 | `common-pitfalls` | all ten | API3, API4 | V2, V3, V4, V5, V6, V8, V9, V11, V12, V13, V14, V15, V16 | - |
 | `owasp` | all ten | all ten | all seventeen | ISO 27001, PCI DSS, SOC 2 |
 | `secure-code-review` | A01, A02, A03, A05, A06, A08, A10 | API1, API3 | all seventeen | - |
-| `api-security` | - (maps to the API list) | API1–API7, API9, API10 | V1, V2, V4, V5, V6, V7, V8, V9, V10, V12, V13, V16 | - |
+| `api-security` | - (maps to the API list) | API1-API7, API9, API10 | V1, V2, V4, V5, V6, V7, V8, V9, V10, V12, V13, V16 | - |
 | `mvc-security` | A01, A02, A05, A06 | - | V1, V2, V3, V8, V13, V16 | - |
 | `database-security` | A01, A02, A04, A05, A06, A08, A09 | API4 | V1, V2, V8, V11, V12, V13, V14, V15, V16 | - |
 | `authentication` | A01, A07 | - | V2, V3, V6, V7, V8, V9, V10, V11, V14, V16 | NIST SP 800-63, 800-63B |
@@ -44,7 +44,7 @@ before you use this as a coverage claim:
 | `ssh-server` | A02, A04, A07, A08, A09 | - | V6, V7, V8, V12, V13, V16 | CIS NGINX Benchmark |
 | `devsecops` | A03, A08 | - | V13, V15 | SLSA, NIST SP 800-218 |
 | `ai-security` | all ten | - | V1, V2, V5, V8, V10, V11, V13, V14, V15, V16 | OWASP LLM Top 10, NIST AI RMF, EU AI Act |
-| `http-edge-security` | A02, A04, A05, A06 | - | V4, V11, V13, V14 | HTTP RFC 9110–9114 |
+| `http-edge-security` | A02, A04, A05, A06 | - | V4, V11, V13, V14 | HTTP RFC 9110-9114 |
 | `realtime-security` | A01, A04, A05, A07 | API1, API2, API4, API5 | V4, V6, V7, V8, V13 | RFC 6455, WebRTC |
 | `redis-security` | A01, A02, A03, A04, A06, A08, A09, A10 | API4 | V2, V6, V7, V8, V11, V12, V13, V14, V15, V16 | Redis OSS, Valkey, MITRE CWE |
 | `sso-federation` | A01, A07, A08 | - | V2, V3, V6, V7, V8 | SAML 2.0 |
@@ -93,7 +93,7 @@ covers A01".
 | `performance` | A01, A02, A06, A09, A10 | API1, API4, API6 | V2, V4, V5, V8, V13, V15, V16 | ISO 27001, PCI DSS, SOC 2 |
 | `scalability` | A01, A02, A06, A09, A10 | API4 | V4, V8, V13, V15, V16 | - |
 
-## Category → skill
+## Category => skill
 
 The direction you usually want. Primary owner first, then the skills that carry part of it.
 Aggregators (`owasp`, `secure-code-review`, `security-testing`) cover every row and are omitted

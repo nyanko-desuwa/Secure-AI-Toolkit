@@ -15,7 +15,7 @@ Run these checks before returning a design or review. Record evidence or mark th
 - [ ] [critical] Verify each workload has a distinct identity and least-privilege credentials.
 - [ ] [critical] Verify the owner service authenticates the caller and authorizes every object/action/tenant combination.
 - [ ] [critical] Confirm object lookup is scoped by the authorized subject or tenant; do not authorize an ID before loading its object.
-- [ ] [critical] Check that no `role`, `isAdmin`, `tenantId`, or “authorized” payload field is treated as authority.
+- [ ] [critical] Check that no `role`, `isAdmin`, `tenantId`, or "authorized" payload field is treated as authority.
 - [ ] [recommended] State the confused-deputy consequence when a service acts with its own privilege for another caller.
 - [ ] [critical] Record whether end-user context is signed, audience-bound, expiry-checked, and still re-authorized at the owner.
 

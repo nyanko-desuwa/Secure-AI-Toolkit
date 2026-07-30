@@ -8,7 +8,7 @@ category: core
 path: skills/core/publish-safety
 status: Ready
 priority: 100
-estimated_tokens: 4305
+estimated_tokens: 4306
 owns: []
 requires:
   - secrets-management

@@ -11,7 +11,7 @@ validation, install, and release orchestration.
 | `render_link_issue.py` | Renders the advisory external-link issue body and state files for CI |
 | `validate-repository.sh` / `Validate-Repository.ps1` | Launchers |
 | `install-skills.sh` / `Install-Skills.ps1` | Install production skills into Claude Code dirs |
-| `release.sh` / `Release.ps1` | Maintainer release guard (validate → scan → optional tag/push) |
+| `release.sh` / `Release.ps1` | Maintainer release guard (validate => scan => optional tag/push) |
 
 ## Validate
 

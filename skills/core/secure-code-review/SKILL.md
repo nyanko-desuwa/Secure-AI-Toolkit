@@ -56,7 +56,7 @@ Build the map before hunting. You are looking for the places where data changes 
 | Trust downgrade | Where internal code treats external data as trusted |
 | Egress | Outbound HTTP, DB writes, file writes, shell, logs |
 
-The useful output is a list of pairs: source → sink. Anything with no path from an untrusted
+The useful output is a list of pairs: source => sink. Anything with no path from an untrusted
 source to a sink is not a vulnerability, however ugly it looks.
 
 See [references/review-process.md](references/review-process.md) for the longer version and

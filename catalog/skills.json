@@ -130,7 +130,7 @@
       "standards": {
         "owasp_top10_2025": [],
         "owasp_api_top10_2023": [
-          "API1–API7",
+          "API1-API7",
           "API9",
           "API10"
         ],
@@ -1092,7 +1092,7 @@
         "Pushes, publishes, deploys, or changes repository visibility"
       ],
       "priority": 100,
-      "estimated_tokens": 4305
+      "estimated_tokens": 4306
     },
     {
       "name": "redis-security",
@@ -1692,7 +1692,7 @@
       },
       "routing_hints": [],
       "priority": 70,
-      "estimated_tokens": 3150
+      "estimated_tokens": 3153
     },
     {
       "name": "security-testing",
@@ -2077,7 +2077,7 @@
       },
       "routing_hints": [],
       "priority": 50,
-      "estimated_tokens": 4796
+      "estimated_tokens": 4797
     },
     {
       "name": "clean-architecture",
@@ -2387,7 +2387,7 @@
       },
       "routing_hints": [],
       "priority": 40,
-      "estimated_tokens": 4549
+      "estimated_tokens": 4550
     },
     {
       "name": "microservices",

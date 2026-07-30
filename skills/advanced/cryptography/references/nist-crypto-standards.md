@@ -71,7 +71,7 @@ random nonce with a key rotated on message count. Do not mix the two.
 
 ## Key management
 
-NIST SP 800-57 Part 1 Revision 5, "Recommendation for Key Management: Part 1 – General", May 2020
+NIST SP 800-57 Part 1 Revision 5, "Recommendation for Key Management: Part 1 - General", May 2020
 (draft 2019-10-08, final posted 2020-05-04). Supersedes Revision 4 of 2016-01-28.
 
 The publication defines originator-usage period and recipient-usage period, and specifies the

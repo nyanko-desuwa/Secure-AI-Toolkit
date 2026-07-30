@@ -53,7 +53,7 @@ What each action actually publishes, and what un-publishing does not undo.
 | Action | Readable afterwards by | What reverting undoes |
 |---|---|---|
 | `git push` to a public repo | Anyone, plus code-search indexes and scanning bots within minutes | The tip. Not history, not forks, not clones, not PR refs |
-| Private repo → public | Anyone, for the whole history, not just today's files | Visibility. Anything already cloned or indexed stays out |
+| Private repo => public | Anyone, for the whole history, not just today's files | Visibility. Anything already cloned or indexed stays out |
 | `npm publish` / `pip upload` | Anyone; the tarball is permanent even after unpublish/yank | The listing. Mirrors and lockfile caches keep the artifact |
 | `docker push` | Anyone with pull access to the registry; every layer, including deleted files | The tag. The digest and pulled copies remain |
 | Deploy build output | Every visitor, via view-source and the network tab | The next deploy. CDN caches and archives lag |

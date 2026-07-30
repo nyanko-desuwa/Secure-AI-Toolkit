@@ -33,6 +33,6 @@ that source code cannot prove.
 
 | Prompt | Why it fails |
 |---|---|
-| “Block localhost” | Misses IPv6, metadata, redirects, DNS, and private ranges |
-| “Turn off TLS verification for internal APIs” | Converts a trust problem into interception risk |
-| “Add retries” | Omits idempotency, budget, backoff, and failure semantics |
+| "Block localhost" | Misses IPv6, metadata, redirects, DNS, and private ranges |
+| "Turn off TLS verification for internal APIs" | Converts a trust problem into interception risk |
+| "Add retries" | Omits idempotency, budget, backoff, and failure semantics |

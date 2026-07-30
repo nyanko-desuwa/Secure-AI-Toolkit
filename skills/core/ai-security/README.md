@@ -48,7 +48,7 @@ examples/
 | CWE | CWE-1427, CWE-1426, CWE-441 and others | 2026-07-28, against `cwe.mitre.org` |
 | MCP specification | 2025-11-25 revision | 2026-07-28, against `modelcontextprotocol.io` |
 
-The LLM Top 10 changed between the 2023–24 and 2025 editions - categories were added,
+The LLM Top 10 changed between the 2023-24 and 2025 editions - categories were added,
 renamed, and renumbered. Quote IDs from `references/llm-top10.md` or re-fetch; do not quote
 them from memory.
 
