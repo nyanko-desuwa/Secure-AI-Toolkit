@@ -41,6 +41,8 @@ def sample_catalog():
                     "other": [],
                 },
                 "routing_hints": ["Alpha surface"],
+                "priority": 100,
+                "estimated_tokens": 1234,
             }
         ],
     }
@@ -166,6 +168,28 @@ class ValidateRepositoryTests(unittest.TestCase):
             self.assertEqual(
                 parsed["requires"],
                 [self.validator.bare_name(d) for d in skill["depends_on"]],
+            )
+
+    def test_compute_priority_maps_category_to_weight(self):
+        generator = self.validator.load_manifest_generator()
+        self.assertEqual(generator.compute_priority({"category": "core"}), 100)
+        self.assertEqual(generator.compute_priority({"category": "advanced"}), 70)
+        self.assertEqual(generator.compute_priority({"category": "enterprise"}), 50)
+        self.assertEqual(generator.compute_priority({"category": "architecture"}), 40)
+
+    def test_catalog_budget_matches_computed_values(self):
+        catalog = self.validator.load_json(self.validator.CATALOG_PATH)
+        generator = self.validator.load_manifest_generator()
+        for skill in catalog["skills"]:
+            self.assertEqual(
+                skill.get("priority"),
+                generator.compute_priority(skill),
+                f"{skill['name']}: catalog priority drifted from computed value",
+            )
+            self.assertEqual(
+                skill.get("estimated_tokens"),
+                generator.compute_estimated_tokens(skill),
+                f"{skill['name']}: catalog estimated_tokens drifted; run --write-budget",
             )
 
 
