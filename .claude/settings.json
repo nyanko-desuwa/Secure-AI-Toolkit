@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python*)",
+      "Bash(git status)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(git add*)",
+      "Bash(git commit*)",
+      "Bash(git push*)",
+      "Bash(git ls-remote*)",
+      "Bash(gh run*)",
+      "Bash(gh release*)",
+      "WebSearch",
+      "WebFetch(*)"
+    ],
+    "deny": []
+  }
+}

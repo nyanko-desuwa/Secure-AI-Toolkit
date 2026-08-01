@@ -3,9 +3,9 @@ huongdan.md
 huong dan.md
 huong-dan.md
 
-# Claude Code local state
+# Claude Code local state (settings.json is committed; these two are local-only)
 .claude/settings.local.json
-.claude/local/
+.claude/worktrees/
 
 # Editor / OS
 .DS_Store
