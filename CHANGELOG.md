@@ -4,6 +4,8 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-08-01
+
 ### Added
 
 - `.ai/rules/` directory with portable Markdown rules for any AI tool that loads
