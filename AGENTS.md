@@ -126,7 +126,7 @@ registry, or standards matrix.
 
 ## Never commit
 
-- `huong dan.md` and the `.authoring/` tracker are local-only and gitignored.
+- Local-only notes, private prompts, and scratch directories are gitignored.
   Never stage them, never quote them in a commit message, never cite them in a
   committed file.
 - Stage named paths. Never `git add -A` or `git add .`.

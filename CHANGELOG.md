@@ -4,6 +4,16 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-08-01
+
+### Changed
+
+- Removed references to specific local-only filenames from all committed files
+  (AGENTS.md, CLAUDE.md, CURSOR.md, .ai/rules/contributor.md,
+  .cursor/rules/cursor-contributor.mdc). The never-commit rule now reads
+  "local-only notes and scratch directories (gitignored)" without naming any
+  private file.
+
 ## [1.4.0] - 2026-08-01
 
 ### Added

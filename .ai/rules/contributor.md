@@ -46,6 +46,6 @@ keywords are the one exception.
 
 ## Never commit
 
-- `huong dan.md`, `.authoring/`, temp files, scratch files.
-- Use `git add -A` or `git add .` -- stage named paths only.
+- Local-only notes, temp files, and scratch files (gitignored).
+- Never use `git add -A` or `git add .` -- stage named paths only.
 - Non-ASCII characters outside Vietnamese trigger keywords.

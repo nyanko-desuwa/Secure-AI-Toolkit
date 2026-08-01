@@ -37,4 +37,4 @@ python scripts/validate_repository.py --report-boundaries    # ownership + hand-
 - `skill.yaml` files are generated - never hand-edit them. Change `catalog/skills.json` and regenerate.
 - Honor the publish gate in `AI_INSTRUCTIONS.md` before any commit, push, or share.
   Stage named paths, never `git add -A`.
-- Never commit `huong dan.md` or the `.authoring/` tracker (local-only, gitignored).
+- Never commit local-only notes or the `.authoring/` scratch directory (gitignored).
