@@ -4,6 +4,16 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+### Added
+
+- `.ai/rules/` directory with portable Markdown rules for any AI tool that loads
+  `.ai/rules/`: `security-routing.md` (quick routing table mapping code patterns
+  to the correct skill) and `contributor.md` (contributor rules summary derived
+  from AGENTS.md). No tool-specific frontmatter -- works with Windsurf, Amp,
+  Copilot, and any other agent that respects the `.ai/rules/` convention.
+- Updated `AGENTS.md` to mention the `.ai/rules/` files alongside the existing
+  `CLAUDE.md` and `CURSOR.md` companion files.
+
 ## [1.3.0] - 2026-08-01
 
 ### Added

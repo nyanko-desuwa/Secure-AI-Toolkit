@@ -3,6 +3,11 @@
 Rules for any AI agent editing this repository. Vendor-neutral: Codex, Aider,
 Amp, Cursor, and Claude Code (which also reads `CLAUDE.md`) all read this file.
 
+IDE-specific companion files: `CLAUDE.md` (Claude Code), `CURSOR.md` (Cursor).
+Portable Markdown rules for any tool that loads `.ai/rules/`:
+- `.ai/rules/security-routing.md` - which skill to open for each code pattern.
+- `.ai/rules/contributor.md` - contributor rules summary (derived from this file).
+
 To *use* the security skills inside another project, read
 [AI_INSTRUCTIONS.md](AI_INSTRUCTIONS.md) instead. That is the consumer entry
 point (skill registry, routing, output contract). This file is for *editing this
