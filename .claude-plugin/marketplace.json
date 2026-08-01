@@ -2,20 +2,20 @@
   "name": "secure-ai-toolkit",
   "id": "secure-ai-toolkit",
   "owner": {
-    "name": "Nyanko-Neko"
+    "name": "nyanko-desuwa"
   },
   "metadata": {
     "description": "47 security skills for AI coding assistants covering OWASP Top 10 2025, ASVS 5.0, and 16 security domains",
-    "version": "1.4.2"
+    "version": "1.4.3"
   },
   "plugins": [
     {
       "name": "secure-ai-toolkit",
       "source": "./",
       "description": "Security skills for AI coding assistants. 26 core skills, 6 advanced, 5 enterprise, and 10 architecture skills. Every control cites OWASP Top 10 2025, ASVS 5.0, and a CWE. Covers authentication, secrets management, API security, AI/LLM security, cloud, containers, supply chain, and more.",
-      "version": "1.4.2",
+      "version": "1.4.3",
       "author": {
-        "name": "Nyanko-Neko"
+        "name": "nyanko-desuwa"
       },
       "keywords": [
         "security",

@@ -4,6 +4,12 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+## [1.4.3] - 2026-08-01
+
+### Changed
+
+- Updated author handle in skill manifests.
+
 ## [1.4.2] - 2026-08-01
 
 ### Added
