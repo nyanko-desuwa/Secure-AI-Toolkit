@@ -4,6 +4,30 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+### Added
+
+- New `enterprise/payments-security` skill (48th skill, 6th enterprise skill). Owns the boundary
+  where cardholder data enters, moves through, and exits an application: PAN/CVC2/expiry tokenization
+  correctness, PCI scope reduction, payment-webhook integrity verification (Stripe stripe-signature,
+  Adyen HMAC, Braintree bt_signature), ACS/3DS return handler hardening, and idempotency scoping.
+  Supported gateways named explicitly: Stripe, Adyen, Braintree. Full 11-file set including seven
+  vulnerable/fixed code pairs in examples/, four version-pinned references (PCI DSS 4.0, ASVS 5.0
+  V3/V4/V11-V16, Stripe Payments API 2024-12-18, 3DS 2.3.1), and tiered checklist (critical/recommended).
+  Wired through catalog/skills.json, AI_INSTRUCTIONS.md (registry row + routing row), README.md
+  (skill count 47 => 48, enterprise count 5 => 6), skills/shared/references/skill-graph.md, and
+  skills/shared/references/standards-matrix.md. Reverse edges added to compliance, secrets-management,
+  api-security, logging-audit, kubernetes-security SKILL.md Related Skills sections.
+
+- Added `.cursor/rules/` directory with Cursor IDE routing rules (cursor-security-routing.mdc)
+  and contributor rules (cursor-contributor.mdc) derived from AGENTS.md and AI_INSTRUCTIONS.md.
+  Added `CURSOR.md` companion file (analogous to CLAUDE.md) with Cursor-specific commands.
+  Added `.claude-plugin` JSON file listing the skill catalog for Claude Code workspace integration.
+
+- Fixed `.gitleaks.toml` allowlist: added per-file allowlist entries for the nine example-code
+  findings (curl-auth-header in incident-response docs, synthetic API keys in secrets-management
+  and owasp examples, sk_live_placeholder in docker-security example). All are inside labelled
+  Vulnerable: blocks with no real credential value; the weekly full-history scan was surfacing them.
+
 ## [1.2.2] - 2026-07-30
 
 ### Added

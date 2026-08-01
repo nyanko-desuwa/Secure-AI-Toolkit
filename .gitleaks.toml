@@ -8,19 +8,60 @@ title = "Secure AI Toolkit"
 [extend]
 useDefault = true
 
-# Global path ignores that never hold live secrets in this pack.
-[allowlist]
+# Global path ignores and didactic allowlists.
+# Each [[allowlists]] entry covers the smallest possible match with a rationale.
+
+[[allowlists]]
 description = "Non-secret path noise"
 paths = [
   '''(?i)\.git/''',
   '''(?i)LICENSE$''',
 ]
 
-# Add didactic allowlist entries below only after review.
-# Example shape (disabled until needed):
-#
-# [[allowlists]]
-# description = "Synthetic AWS example key in labelled Vulnerable block"
-# paths = ['''skills/core/secrets-management/examples/''']
-# regexTarget = "match"
-# regexes = ['''AKIAEXAMPLEONLY0000''']
+[[allowlists]]
+description = "Synthetic curl Bearer token in incident-response common-mistakes Vulnerable block"
+paths = ['''skills/advanced/incident-response/common-mistakes\.md''']
+regexTarget = "match"
+regexes = ['''Authorization: Bearer ghp_EXAMPLE''']
+
+[[allowlists]]
+description = "Synthetic curl Bearer token in incident-response examples Vulnerable block"
+paths = ['''skills/advanced/incident-response/examples/README\.md''']
+regexTarget = "match"
+regexes = ['''Authorization: Bearer ghp_EXAMPLE''']
+
+[[allowlists]]
+description = "Synthetic curl Bearer tokens in incident-response best-practices Vulnerable blocks"
+paths = ['''skills/advanced/incident-response/best-practices\.md''']
+regexTarget = "match"
+regexes = ['''Authorization: Bearer ghp_EXAMPLE''']
+
+[[allowlists]]
+description = "Synthetic sk_live_placeholder in docker-security best-practices Vulnerable block"
+paths = ['''skills/core/docker-security/best-practices\.md''']
+regexTarget = "match"
+regexes = ['''sk_live_placeholder''']
+
+[[allowlists]]
+description = "Synthetic API_KEY in owasp common-mistakes Vulnerable block"
+paths = ['''skills/core/owasp/common-mistakes\.md''']
+regexTarget = "match"
+regexes = ['''sk-live-4eC39H''']
+
+[[allowlists]]
+description = "Synthetic DATABASE_PASSWORD in secrets-management common-mistakes Vulnerable block"
+paths = ['''skills/core/secrets-management/common-mistakes\.md''']
+regexTarget = "match"
+regexes = ['''DATABASE_PASSWORD=hunter2-placeholder''']
+
+[[allowlists]]
+description = "Synthetic base64 password in secrets-management examples Vulnerable block"
+paths = ['''skills/core/secrets-management/examples/README\.md''']
+regexTarget = "match"
+regexes = ['''placeholder-password''']
+
+[[allowlists]]
+description = "Synthetic api_key and PLACEHOLDER_KEY in secrets-management examples Vulnerable block"
+paths = ['''skills/core/secrets-management/examples/README\.md''']
+regexTarget = "match"
+regexes = ['''PLACEHOLDER_KEY_123|PLACEHOLDER\.TOKEN\.VALUE''']

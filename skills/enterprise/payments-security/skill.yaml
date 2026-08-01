@@ -1,0 +1,28 @@
+# Generated from catalog/skills.json by scripts/generate_skill_manifests.py
+# Machine-readable manifest for the skill router. Edit the catalog, then
+# regenerate; do not hand-edit this file.
+id: payments-security
+name: payments-security
+version: 1.0.0
+category: enterprise
+path: skills/enterprise/payments-security
+status: Ready
+priority: 90
+estimated_tokens: 3800
+owns:
+  - "Primary Account Number (PAN)"
+  - "Sensitive Authentication Data (CVC2/CVV, expiry, magnetic-stripe)"
+  - "Payment gateway API secret key"
+  - "Webhook signing secret (WH_SECRET)"
+requires:
+  - owasp
+suggests:
+  - secrets-management
+  - logging-audit
+  - api-security
+  - brute-force-defense
+  - compliance
+  - publish-safety
+  - kubernetes-security
+conflicts: []
+frameworks: []

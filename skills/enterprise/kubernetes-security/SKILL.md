@@ -133,6 +133,7 @@ State the reasoning. "Runs as root, therefore critical" is wrong if the namespac
   duplicate image scanning guidance here.
 - `owasp-security` - the application inside the container
 - `compliance` - CIS Benchmark and control-framework mapping
+- `payments-security` - CDE pod/namespace isolation in-cluster when payment workloads run in Kubernetes
 
 ## Supporting Files
 

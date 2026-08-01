@@ -50,6 +50,7 @@ Reading eleven files when the task needs two wastes context that the actual code
 | Deserialization Security | `skills/core/deserialization-security/` | Ready | pickle, ObjectInputStream, BinaryFormatter, unsafe YAML/XML, XXE |
 | Email Security | `skills/core/email-security/` | Ready | SMTP, sender domains, SPF/DKIM/DMARC, reset/verification mail, provider events |
 | HTTP Client Security | `skills/core/http-client-security/` | Ready | Outbound HTTP, SSRF, redirects, proxies, client TLS, timeouts, retries |
+| Payments Security | `skills/enterprise/payments-security/` | Ready | Stripe/Adyen/Braintree integration, card tokenization, webhook signature, 3DS, PAN/CVC2 handling, PCI scope |
 
 All skills under `advanced/`, `enterprise/`, and `architecture/` are Ready. Check the full
 file set and the skill's checklist before relying on a future addition.
@@ -93,6 +94,7 @@ row - take every row that applies.
 | Uses SAML, IdP/SP metadata, ACS, or federation assertions | `sso-federation`, `authentication` | A07, CWE-347 |
 | Uses a service worker, PWA shell, browser extension, or runtime message | `browser-platform-security` | A02, A08 |
 | Uses pickle, ObjectInputStream, BinaryFormatter, unsafe YAML/XML, XXE, or unserialize | `deserialization-security` | A08, CWE-502/CWE-611 |
+| Integrates Stripe, Adyen, Braintree, or another payment gateway; receives webhook events; handles card tokenization, 3DS, or PAN/CVC2 | `payments-security` | A01, A02, A04, A08, PCI DSS |
 
 A single file-upload endpoint typically lands on four rows: upload validation, object
 authorization, storage configuration, and audit logging. Stopping at the first match is how

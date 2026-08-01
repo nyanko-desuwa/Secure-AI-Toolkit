@@ -107,6 +107,7 @@ Missing logs on the admin role-grant endpoint is high. Say which and why.
 - `api-security` - per-endpoint event coverage
 - `cloud-security` - log sink IAM, retention policy, WORM storage
 - `redis-security` - redact Redis URLs, credentials, command arguments, `MONITOR`, and slow-log data; monitor ACL and persistence events
+- `payments-security` - cardholder data must never appear in logs; PCI DSS Req 10 audit trail
 
 ## Supporting Files
 

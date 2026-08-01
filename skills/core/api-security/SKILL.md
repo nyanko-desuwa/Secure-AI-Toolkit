@@ -115,6 +115,7 @@ fans out to a per-record paid API call is High, because it spends money.
 - `authentication` - password, MFA, session, and OAuth flows in depth
 - `logging-audit` - audit trails for authorization denials
 - `secure-code-review` - reviewing an existing codebase end to end
+- `payments-security` - payment webhook authorization, order BOLA, idempotency belong here
 
 ## Supporting Files
 

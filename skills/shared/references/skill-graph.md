@@ -87,6 +87,7 @@ prevent.
 | `kubernetes-security` | `docker-security`, `secrets-management` | `owasp`, `compliance`, `cloud-security` | - |
 | `mobile-security` | `owasp` | `authentication`, `api-security`, `publish-safety` | own MASVS reference |
 | `windows-security` | `owasp` | `ssh-server`, `logging-audit`, `secrets-management`, `mvc-security`, `network-security`, `compliance` | - |
+| `payments-security` | `owasp` | `secrets-management`, `logging-audit`, `api-security`, `brute-force-defense`, `compliance`, `publish-safety`, `kubernetes-security` | own references/ (PCI DSS 4.0, 3DS 2.x) |
 
 ## Architecture
 

@@ -112,6 +112,7 @@ is unencrypted, the job does not exist, the log contains the email address.
 - `core/cloud-security` - bucket retention policy, object lock, data residency
 - `core/owasp-security` - the wider Top 10 and ASVS mapping
 - `core/ai-security` - prompts and training data as a new PII sink
+- `enterprise/payments-security` - PCI DSS technical controls; compliance owns the scope and evidence layer
 
 ## Supporting Files
 

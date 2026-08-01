@@ -64,14 +64,14 @@ into "here is some code, and here is what I checked and what I could not."
 
 ## Status
 
-All 47 skills are written end to end. Every skill includes its workflow, checklist, real
+All 48 skills are written end to end. Every skill includes its workflow, checklist, real
 vulnerable/fixed code, limitations, and version-pinned references.
 
 | Area | State |
 |---|---|
 | `core/*` (26) | Complete |
 | `advanced/*` (6) | Complete |
-| `enterprise/*` (5) | Complete |
+| `enterprise/*` (6) | Complete |
 | `architecture/*` (10) | Complete |
 | `shared/checklists`, `shared/prompts`, `shared/references` | Ready |
 | `shared/templates` | Skill scaffold, ready to copy |

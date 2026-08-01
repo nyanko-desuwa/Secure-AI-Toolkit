@@ -73,6 +73,7 @@ before you use this as a coverage claim:
 | `mobile-security` | A01, A02, A03, A04, A06, A07 | - | V1, V2, V4, V5, V6, V7, V8, V9, V10, V11, V12, V13, V14, V15, V16 | OWASP MASVS, MASTG |
 | `blockchain-security` | A01, A04, A06, A08, A10 | - | V1, V2, V4, V8, V11, V13, V14, V15, V16, V17 | - |
 | `compliance` | all ten | - | V8, V11, V12, V13, V14, V15, V16 | GDPR, HIPAA, PCI DSS, ISO/IEC 27001, SOC 2 |
+| `payments-security` | A01, A02, A04, A08 | API1, API5 | V3, V4, V11, V12, V14, V15, V16 | PCI DSS 4.0 |
 
 ## Architecture
 

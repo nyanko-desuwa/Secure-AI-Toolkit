@@ -1,0 +1,41 @@
+---
+description: "Secure AI Toolkit: contributor rules for Cursor when editing this repository"
+globs: ["skills/**", "catalog/**", "scripts/**", "AI_INSTRUCTIONS.md", "README.md"]
+alwaysApply: false
+---
+
+# Contributor Rules (Cursor)
+
+Full rules are in AGENTS.md. This file is the Cursor-specific summary.
+
+## Before making any change
+
+- Read AGENTS.md and CLAUDE.md for the authoritative contributor rules.
+- Run the verification trio:
+  ```
+  python -m unittest discover -s tests -t . -v
+  python scripts/validate_repository.py
+  python scripts/generate_skill_manifests.py --check
+  ```
+
+## Architecture rules
+
+- One boundary per skill. Do not duplicate policy, checklists, or review workflow across skills.
+- A new skill must pass 4 of 5: (1) distinct trust boundary, (2) different threat model,
+  (3) no existing skill that owns it, (4) full 11-file set feasible, (5) real, common failure mode.
+- `skill.yaml` files are GENERATED. Change `catalog/skills.json` and run
+  `python scripts/generate_skill_manifests.py`.
+
+## What to update when adding or changing a skill
+
+- New skill => `catalog/skills.json` + `AI_INSTRUCTIONS.md` registry row + routing row
+  + `README.md` count + `skills/shared/references/skill-graph.md`
+  + `skills/shared/references/standards-matrix.md` + `CHANGELOG.md`
+- Any change => `CHANGELOG.md` entry under ## [Unreleased]
+- Standard re-verified => update version and check-date in the reference file AND in README.md
+
+## Never commit
+
+- `huong dan.md`, `.authoring/`, temp files, scratch files.
+- `git add -A` or `git add .` -- stage named paths only.
+- Non-ASCII characters outside Vietnamese trigger keywords (use => not ->, straight quotes only).

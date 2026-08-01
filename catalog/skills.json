@@ -2081,6 +2081,96 @@
       "estimated_tokens": 4797
     },
     {
+      "name": "payments-security",
+      "category": "enterprise",
+      "path": "skills/enterprise/payments-security",
+      "status": "Ready",
+      "description": "Secure payment flows and cardholder data - tokenization, PCI scope reduction, payment-webhook integrity, ACS interface protection, fraud hygiene, 3DS, Stripe/Adyen/Braintree. Triggers: \"payment\", \"Stripe\", \"Adyen\", \"Braintree\", \"card data\", \"PCI\", \"tokenization\", \"webhook signature\", \"CVC2\", \"CVV\", \"PAN\", \"payment intent\", \"PCI DSS\", \"PCI SAQ\", \"thanh toán\", \"thẻ thanh toán\".",
+      "triggers": [
+        "payment",
+        "Stripe",
+        "Adyen",
+        "Braintree",
+        "card data",
+        "PCI",
+        "tokenization",
+        "webhook signature",
+        "CVC2",
+        "CVV",
+        "PAN",
+        "payment intent",
+        "PCI DSS",
+        "PCI SAQ",
+        "thanh toán",
+        "thẻ thanh toán"
+      ],
+      "allowed_tools_profile": "research-only",
+      "depends_on": [
+        "owasp"
+      ],
+      "related": [
+        "secrets-management",
+        "logging-audit",
+        "api-security",
+        "brute-force-defense",
+        "compliance",
+        "publish-safety",
+        "kubernetes-security"
+      ],
+      "loads": [
+        "own references/ (PCI DSS 4.0, 3DS 2.x)"
+      ],
+      "ownership": {
+        "owner_boundary": "Code paths that touch, derive, or forward PAN, CVC2/CVV, expiry, or magnetic-stripe equivalent. If the variable could appear in an assessor's CDE diagram, this skill owns it.",
+        "protected_assets": [
+          "Primary Account Number (PAN)",
+          "Sensitive Authentication Data (CVC2/CVV, expiry, magnetic-stripe)",
+          "Payment gateway API secret key",
+          "Webhook signing secret (WH_SECRET)"
+        ],
+        "non_goals": [
+          {"concern": "PCI DSS audit scoping and evidence", "owner": "compliance"},
+          {"concern": "Webhook signing-key storage and rotation", "owner": "secrets-management"},
+          {"concern": "Cardholder data leaked to logs", "owner": "logging-audit"},
+          {"concern": "Payment endpoint authorization (BOLA)", "owner": "api-security"},
+          {"concern": "Brute-force and rate-limit on payment endpoints", "owner": "brute-force-defense"}
+        ]
+      },
+      "standards": {
+        "owasp_top10_2025": [
+          "A01",
+          "A02",
+          "A04",
+          "A08"
+        ],
+        "owasp_api_top10_2023": [
+          "API1",
+          "API5"
+        ],
+        "asvs_5_0": [
+          "V3",
+          "V4",
+          "V11",
+          "V12",
+          "V14",
+          "V15",
+          "V16"
+        ],
+        "other": [
+          "PCI DSS 4.0"
+        ]
+      },
+      "routing_hints": [
+        "Stripe, Adyen, Braintree, PayPal, Square integration",
+        "PAN, CVC2, CVV, expiry in code",
+        "webhook signature verification",
+        "payment_method, client_secret, payment_intent",
+        "3DS, 3D Secure, ACS redirect"
+      ],
+      "priority": 90,
+      "estimated_tokens": 3800
+    },
+    {
       "name": "clean-architecture",
       "category": "architecture",
       "path": "skills/architecture/clean-architecture",

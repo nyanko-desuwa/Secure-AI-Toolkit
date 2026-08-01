@@ -115,6 +115,7 @@ the customer database is a breach.
 - `incident-response` - the wider process around the revoke/rotate/investigate loop
 - `logging-audit` - redaction pipelines and what belongs in an audit trail
 - `publish-safety` - the check before a push, a package, or a visibility flip makes a value public
+- `payments-security` - webhook signing keys and payment API secrets are in scope here
 
 ## Supporting Files
 
