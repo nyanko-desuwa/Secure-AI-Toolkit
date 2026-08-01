@@ -4,6 +4,8 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-08-01
+
 ### Added
 
 - New `enterprise/payments-security` skill (48th skill, 6th enterprise skill). Owns the boundary
