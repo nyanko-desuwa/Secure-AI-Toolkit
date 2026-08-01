@@ -4,6 +4,18 @@ Notable changes to this repository. Format follows [Keep a Changelog](https://ke
 
 ## [Unreleased]
 
+## [1.4.2] - 2026-08-01
+
+### Added
+
+- `skill.json` at repo root: distributable skill manifest listing all platforms
+  (Claude, Cursor, Windsurf, Copilot, Kiro, RooCode, Kilocode, Codex, Gemini,
+  Trae, OpenCode, Continue, CodeBuddy, Droid, Warp, Augment).
+- `.claude-plugin/plugin.json`: Claude plugin manifest pointing skills directory.
+- `.claude-plugin/marketplace.json`: marketplace registry entry for the toolkit.
+- Converted `.claude-plugin` from a flat JSON file to a directory with the
+  standard two-file layout used by the Claude plugin ecosystem.
+
 ## [1.4.1] - 2026-08-01
 
 ### Changed

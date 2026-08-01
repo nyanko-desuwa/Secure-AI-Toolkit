@@ -1,0 +1,42 @@
+{
+  "name": "secure-ai-toolkit",
+  "displayName": "Secure AI Toolkit",
+  "description": "47 security skills for AI coding assistants. Covers OWASP Top 10 2025, ASVS 5.0, authentication, secrets management, cloud, container, supply chain, and AI/LLM security. Every control cites the standard it enforces.",
+  "version": "1.4.2",
+  "author": "Nyanko-Neko",
+  "license": "MIT",
+  "homepage": "https://github.com/nyanko-desuwa/Secure-AI-Toolkit",
+  "repository": "https://github.com/nyanko-desuwa/Secure-AI-Toolkit",
+  "keywords": [
+    "security",
+    "owasp",
+    "asvs",
+    "appsec",
+    "devsecops",
+    "ai-skill",
+    "authentication",
+    "secrets",
+    "cloud-security",
+    "container-security",
+    "ai-security"
+  ],
+  "platforms": [
+    "claude",
+    "cursor",
+    "windsurf",
+    "copilot",
+    "kiro",
+    "roocode",
+    "kilocode",
+    "codex",
+    "gemini",
+    "trae",
+    "opencode",
+    "continue",
+    "codebuddy",
+    "droid",
+    "warp",
+    "augment"
+  ],
+  "install": "bash <(curl -fsSL https://raw.githubusercontent.com/nyanko-desuwa/Secure-AI-Toolkit/main/scripts/install-skills.sh) --all"
+}

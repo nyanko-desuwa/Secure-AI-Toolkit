@@ -188,10 +188,33 @@ it is watched.
 
 ### Other assistants
 
-Cursor, Copilot, Codex CLI, Gemini CLI, Continue, Cline, Roo Code, and Kiro read Markdown from
-their own rules or context directories. Point the tool at `AI_INSTRUCTIONS.md` and copy or
-reference the skill directories from wherever it loads context. The Markdown works anywhere;
-only the YAML frontmatter is Claude Code specific, and it is ignored elsewhere.
+The Markdown works anywhere. The YAML frontmatter (`allowed-tools`, `name`, `description`) is
+Claude Code specific and is silently ignored by every other tool.
+
+**One-liner install (any platform that supports bash):**
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/nyanko-desuwa/Secure-AI-Toolkit/main/scripts/install-skills.sh) --all
+```
+
+**Per-platform setup:**
+
+| Platform | Where to put the skills | How |
+|---|---|---|
+| Cursor | `.cursor/rules/` | Copy each `SKILL.md` as `<name>.mdc`, or add `AI_INSTRUCTIONS.md` as a global rule |
+| Windsurf | `.windsurf/rules/` | Same as Cursor - one `.md` file per skill |
+| GitHub Copilot | `.github/copilot-instructions.md` | Paste the routing table from `AI_INSTRUCTIONS.md` |
+| Kiro | `.kiro/steering/` | Copy `AI_INSTRUCTIONS.md` as `security.md`; add skill files as needed |
+| Roo Code / Kilocode | `.roo/rules/` or `.kilocode/rules/` | Copy `AI_INSTRUCTIONS.md` as a rule file |
+| Codex CLI | `AGENTS.md` in project root | Append the registry section from `AI_INSTRUCTIONS.md` |
+| Gemini CLI | `GEMINI.md` in project root | Same approach as Codex |
+| Continue | `.continue/rules/` | One Markdown file per skill, or a single combined file |
+| Warp | `.warp/` agent rules | Reference `AI_INSTRUCTIONS.md` as context |
+| Augment | Project context settings | Add `AI_INSTRUCTIONS.md` as a context source |
+
+For any tool not listed: point it at `AI_INSTRUCTIONS.md` first. That file is the routing table
+and output contract. Load individual `SKILL.md` files on demand - loading all 47 at once will
+saturate the context window of most tools.
 
 ## Using it
 
@@ -227,10 +250,14 @@ More, including the anti-patterns worth avoiding, in
 
 ```text
 .
++-- skill.json            distributable skill manifest (multi-platform: Claude, Cursor, Kiro...)
 +-- AI_INSTRUCTIONS.md    entry point for AI assistants: registry, rules, output contract
 +-- README.md             this file
 +-- CHANGELOG.md
 +-- LICENSE
++-- .claude-plugin/
+|   +-- plugin.json       Claude plugin manifest (points at skills/)
+|   \-- marketplace.json  Claude Marketplace registry entry
 \-- skills/
     +-- core/             common-pitfalls · owasp · secure-code-review · api-security
     |                     mvc-security · authentication · database-security

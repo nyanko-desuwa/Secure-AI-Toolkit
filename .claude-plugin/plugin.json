@@ -1,0 +1,22 @@
+{
+  "name": "secure-ai-toolkit",
+  "description": "47 security skills for AI coding assistants. OWASP Top 10 2025, ASVS 5.0, authentication, secrets, cloud, container, supply chain, and AI/LLM security. Each skill owns one trust boundary and cites the standard it enforces.",
+  "version": "1.4.2",
+  "author": {
+    "name": "Nyanko-Neko"
+  },
+  "license": "MIT",
+  "keywords": [
+    "security",
+    "owasp",
+    "asvs",
+    "appsec",
+    "devsecops",
+    "authentication",
+    "secrets-management",
+    "cloud-security",
+    "container-security",
+    "ai-security"
+  ],
+  "skills": "./skills/"
+}
