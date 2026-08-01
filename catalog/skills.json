@@ -156,7 +156,7 @@
         "Fetches a user-supplied URL"
       ],
       "priority": 100,
-      "estimated_tokens": 3716,
+      "estimated_tokens": 3739,
       "ownership": {
         "owner_boundary": "Server-facing API request, object, function, field, and webhook authorization boundary.",
         "protected_assets": [
@@ -933,7 +933,7 @@
         "Writes a log line containing user data"
       ],
       "priority": 100,
-      "estimated_tokens": 3181
+      "estimated_tokens": 3204
     },
     {
       "name": "mvc-security",
@@ -1315,7 +1315,7 @@
         "Reads a credential or config value"
       ],
       "priority": 100,
-      "estimated_tokens": 3887
+      "estimated_tokens": 3909
     },
     {
       "name": "secure-code-review",
@@ -1903,7 +1903,7 @@
       },
       "routing_hints": [],
       "priority": 50,
-      "estimated_tokens": 3513
+      "estimated_tokens": 3540
     },
     {
       "name": "kubernetes-security",
@@ -1954,7 +1954,7 @@
       },
       "routing_hints": [],
       "priority": 50,
-      "estimated_tokens": 4166
+      "estimated_tokens": 4192
     },
     {
       "name": "mobile-security",
@@ -2129,11 +2129,26 @@
           "Webhook signing secret (WH_SECRET)"
         ],
         "non_goals": [
-          {"concern": "PCI DSS audit scoping and evidence", "owner": "compliance"},
-          {"concern": "Webhook signing-key storage and rotation", "owner": "secrets-management"},
-          {"concern": "Cardholder data leaked to logs", "owner": "logging-audit"},
-          {"concern": "Payment endpoint authorization (BOLA)", "owner": "api-security"},
-          {"concern": "Brute-force and rate-limit on payment endpoints", "owner": "brute-force-defense"}
+          {
+            "concern": "PCI DSS audit scoping and evidence",
+            "owner": "compliance"
+          },
+          {
+            "concern": "Webhook signing-key storage and rotation",
+            "owner": "secrets-management"
+          },
+          {
+            "concern": "Cardholder data leaked to logs",
+            "owner": "logging-audit"
+          },
+          {
+            "concern": "Payment endpoint authorization (BOLA)",
+            "owner": "api-security"
+          },
+          {
+            "concern": "Brute-force and rate-limit on payment endpoints",
+            "owner": "brute-force-defense"
+          }
         ]
       },
       "standards": {
@@ -2167,8 +2182,8 @@
         "payment_method, client_secret, payment_intent",
         "3DS, 3D Secure, ACS redirect"
       ],
-      "priority": 90,
-      "estimated_tokens": 3800
+      "priority": 50,
+      "estimated_tokens": 2090
     },
     {
       "name": "clean-architecture",

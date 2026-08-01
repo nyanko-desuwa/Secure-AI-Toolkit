@@ -8,7 +8,7 @@ category: core
 path: skills/core/secrets-management
 status: Ready
 priority: 100
-estimated_tokens: 3887
+estimated_tokens: 3909
 owns: []
 requires: []
 suggests:

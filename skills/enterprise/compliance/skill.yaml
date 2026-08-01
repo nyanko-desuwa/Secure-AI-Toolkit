@@ -8,7 +8,7 @@ category: enterprise
 path: skills/enterprise/compliance
 status: Ready
 priority: 50
-estimated_tokens: 3513
+estimated_tokens: 3540
 owns: []
 requires:
   - logging-audit

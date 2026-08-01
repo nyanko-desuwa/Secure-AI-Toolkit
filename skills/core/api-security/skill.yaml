@@ -8,7 +8,7 @@ category: core
 path: skills/core/api-security
 status: Ready
 priority: 100
-estimated_tokens: 3716
+estimated_tokens: 3739
 owns:
   - "API-exposed objects, functions, fields, and tenant-scoped data"
   - "Webhook events and idempotent API state transitions"

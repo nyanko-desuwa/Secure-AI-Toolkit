@@ -7,8 +7,8 @@ version: 1.0.0
 category: enterprise
 path: skills/enterprise/payments-security
 status: Ready
-priority: 90
-estimated_tokens: 3800
+priority: 50
+estimated_tokens: 2090
 owns:
   - "Primary Account Number (PAN)"
   - "Sensitive Authentication Data (CVC2/CVV, expiry, magnetic-stripe)"
